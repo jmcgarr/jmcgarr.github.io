@@ -1,0 +1,22 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'me.champeau.gradle:jbake-gradle-plugin:0.1-SNAPSHOT' 
+        classpath 'org.asciidoctor:asciidoctor-java-integration:0.1.4'  
+        classpath 'org.freemarker:freemarker:2.3.19'
+    }
+}
+
+apply plugin: 'groovy'
+apply plugin: 'jbake'
+apply plugin: 'idea'
+
+task publish(type: GradleBuild) {           
+	description = 'Publishes the build output to gh-pages.'
+    buildFile = 'publish.gradle'
+    tasks = ['publishGhPages']
+}
