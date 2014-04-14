@@ -1,0 +1,10 @@
+language: java
+branches: 
+  only:
+    - source
+script: 
+  - "./gradlew clean jbake"
+  - "./gradlew publish"
+env:
+  global:
+  -  secure: "gontfJiIqQNEQ3IYMls6H99joCfVo6sd+Vdf0B2cW5uRbnSuIgSDdY0Ecgmd36Du8A5aUe5HIWvQSmcKE3bTINzj/D3PRG7cKLH8o4DLb3rZoSSgRABkUnvXZBCSrfxIA403VGJq+WE8XJXARB1m71sFy7y2RJa1fjp5oNVnEq0="

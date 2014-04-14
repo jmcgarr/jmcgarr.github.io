@@ -18,4 +18,8 @@ githubPages {
      	into '.'                                    
      }
   }
+  credentials {
+    username = System.getenv('GH_TOKEN')
+    password = ''
+  }
 }
