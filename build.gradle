@@ -15,7 +15,7 @@ apply plugin: 'groovy'
 apply plugin: 'jbake'
 apply plugin: 'idea'
 
-task publish(type: GradleBuild) {           
+task publish( type: GradleBuild ) {           
 	description = 'Publishes the build output to gh-pages.'
     buildFile = 'publish.gradle'
     tasks = ['publishGhPages']
