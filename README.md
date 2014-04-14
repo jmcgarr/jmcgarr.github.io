@@ -24,10 +24,6 @@ Nice to haves:
 Conversion Tasks:
 -----------------
 - Add links to previous blog post at bottom
-- youtube embedded links - fix
-- slideshare embedded links - fix
-- code snippets - fix
-- lateral images - improve layout
 - internal links convert to new blog
 - all links should open in new tab
 

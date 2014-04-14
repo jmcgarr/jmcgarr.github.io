@@ -10,9 +10,8 @@
             <a class="brand" href="/">Mike McGarr's Blog</a>
             <div class="nav-collapse collapse">
               <ul class="nav">
-                <li><a href="/index.html">Home</a></li>
-                <li><a href="/archive.html">Archive</a></li>
                 <li><a href="/about.html">About</a></li>
+                <li><a href="/archive.html">Blog</a></li>
                 <li><a href="/${config.feed_file}">Subscribe</a></li>
               </ul>
             </div><!--/.nav-collapse -->
