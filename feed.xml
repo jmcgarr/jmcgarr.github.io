@@ -6,8 +6,8 @@
     <atom:link href="http://jmcgarr.github.io/feed.xml" rel="self" type="application/rss+xml" />
     <description>JBake Bootstrap Template</description>
     <language>en-gb</language>
-    <pubDate>Sun, 13 Apr 2014 23:22:35 -0700</pubDate>
-    <lastBuildDate>Sun, 13 Apr 2014 23:22:35 -0700</lastBuildDate>
+    <pubDate>Sun, 13 Apr 2014 23:41:58 -0700</pubDate>
+    <lastBuildDate>Sun, 13 Apr 2014 23:41:58 -0700</lastBuildDate>
 
     <item>
       <title>On acceptance test architecture, lifecycles and responsibilities</title>
