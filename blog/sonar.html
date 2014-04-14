@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Assessing Code Quality with Sonar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="generator" content"JBake">
+
+    <!-- Le styles -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/asciidoctor.css" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
+    <link rel="shortcut icon" href="favicon.ico">
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49980771-1', 'mikemcgarr.com');
+  ga('send', 'pageview');
+
+</script>
+  </head>
+  <body>
+    <div id="wrap">
+	
+	<!-- Fixed navbar -->
+      <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="/">Mike McGarr's Blog</a>
+            <div class="nav-collapse collapse">
+              <ul class="nav">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/archive.html">Archive</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/feed.xml">Subscribe</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </div>
+      </div>
+      <div class="container">	
+	<div class="page-header">
+		<h1>Assessing Code Quality with Sonar</h1>
+	</div>
+
+	<p><em>01 May 2012</em></p>
+
+	<p><p>I recently joined a development team where I was asked to help improve the team’s code quality and engineering practices.  Soon after joining the team, I noticed numerous code quality issues that needed to be addressed.  In order to justify the effort to improve code quality to non-technical decision makers, I needed a quantitative method for measuring the quality of the source code and possibly the technical debt.  I had heard a lot about a tool called <a title="Sonar" href="http://www.sonarsource.org/" target="_blank">Sonar</a>, so I decided to give a try.  It proved to be more than up to challenge and helped me quickly demonstrate the risk due to code quality the team had incurred.<br />
+<strong><br />
+What is Sonar?<img class="alignleft" title="Sonar" src="http://www.sonarsource.org/wp-content/themes/sonarsource.org/images/sonar.png" alt="" width="100" height="54" /><br />
+</strong>Sonar is a Java-based open source server product that centrally hosts your organization’s source code quality rules and metrics.  It provides a hub for managing, viewing and comparing code quality throughout an organization.  Code quality metrics are neatly displayed in easy to read dashboards and charts.<br />
+<strong><br />
+</strong>Sonar provides a number of features that make managing code quality a snap.<br />
+<strong><br />
+Simple Project Integration<br />
+</strong>Sonar makes it easy to integrate a new project.  All you have to do is point your build tool (<a title="Ant" href="http://ant.apache.org/" target="_blank">Ant</a>, <a title="Maven" href="http://maven.apache.org/" target="_blank">Maven</a> or <a title="Gradle" href="http://gradle.org/" target="_blank">Gradle</a>) at the Sonar server and run a build.  And that’s it.  The Sonar build integration will connect to the Sonar server, download any plugins or configurations and run them locally against your project’s source code.  It will then publish the results back to Sonar.  Sonar also provides a stand-alone publisher that you can run against source code if you aren’t using a build tool (although you really should be).<br />
+<strong><br />
+</strong>Traditionally, you would have to configure individual static code analysis tools inside your build script.  This build configuration would have to replicated to each project’s build script.  Sonar vastly reduces the need for this type of duplication.<br />
+<strong><br />
+Centralized Rules Management<br />
+</strong>All static code analysis plugin configuration happens on the Sonar server.  Sonar allows you to define which plugins a project should use, as well as the rules to apply.  As you change the configurations on the server, every project will automatically download and run with these new plugins or configurations.  It is that simple!<br />
+<strong><br />
+Dashboards<br />
+</strong>One of the best parts of Sonar is its dashboarding capability.  There is a variety of plugins and out of the box visualizations that you can add to a project’s dashboard.  These dashboards can be focused on a particular project, a module of a project or all of the projects within an organization.  Most of the information is presented to help you quickly find problem areas and address it.<br />
+<strong><br />
+<a href="https://earlyandoften.files.wordpress.com/2012/04/technical-debt.png"><img class="wp-image-1038 alignright" title="technical-debt" src="https://earlyandoften.files.wordpress.com/2012/04/technical-debt.png" alt="" width="380" height="123" /></a>Technical Debt Calculator<br />
+</strong>One of the most compelling features of Sonar the build in Technical Debt Calculator.  For me, this is what single handedly caught the attention of my clients.  Sonar’s Technical Debt Calculator puts a dollar value on how much it will cost to fix the various code quality issues and defects.  Technical debt is calculated based on duplicated code, static code analysis violations, code comments, unit test coverage and cyclomatic complexity.   I recommend reading about how <a title="Technical Debt Calculator in Sonar" href="http://www.sonarsource.org/evaluate-your-technical-debt-with-sonar/" target="_blank">technical debt is calculated</a> on Sonar’s <a title="Sonar Blog" href="http://www.sonarsource.org/category/blog/" target="_blank">blog</a>.<br />
+<strong><br />
+Code Reviews<br />
+</strong>I was pleasantly surprised to find that there was a code review tool built into Sonar.  In the past, I have hunted for a simple tool to enable asynchronous code reviews on a development team.  Sonar provides a Github like code commenting feature.  In addition, I can turn these comments into tasks and assign them to a developer to work on.  You can read more about Sonar’s code review features <a title="Code Reviews with Sonar" href="http://www.sonarsource.org/effective-code-review-with-sonar/" target="_blank">here</a>.<br />
+<strong><br />
+Cross-Language<br />
+</strong>While Sonar provides first class support for Java, it also supports numerous other programming languages including C#, VB6, Groovy, PL/SQL, Cobol and more.  This makes Sonar an even more compelling code quality platform for an organization that has multiple technology platforms.</p>
+<p>In my opinion, Sonar is an amazing compliment to any organization’s existing suite of development support tools.  It is simple, easy to setup and provides value almost immediately.  A great place to start is Sonar's documentation, which can be found <a title="Sonar Documentation" href="http://www.sonarsource.org/support/documentation/" target="_blank">here</a>.</p>
+</p>
+
+	<hr>
+
+	<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'mikemcgarr'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	
+		</div>
+		<div id="push"></div>
+    </div>
+    
+    <div id="footer">
+      <div class="container">
+        <p class="muted credit">&copy; 2013 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.0-SNAPSHOT</a></p>
+      </div>
+    </div>
+    
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/js/jquery-1.9.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/run_prettify.js"></script>
+    
+  </body>
+</html>

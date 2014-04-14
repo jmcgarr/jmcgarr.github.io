@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Exploring Test Method Names</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="generator" content"JBake">
+
+    <!-- Le styles -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/asciidoctor.css" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
+    <link rel="shortcut icon" href="favicon.ico">
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49980771-1', 'mikemcgarr.com');
+  ga('send', 'pageview');
+
+</script>
+  </head>
+  <body>
+    <div id="wrap">
+	
+	<!-- Fixed navbar -->
+      <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="/">Mike McGarr's Blog</a>
+            <div class="nav-collapse collapse">
+              <ul class="nav">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/archive.html">Archive</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/feed.xml">Subscribe</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </div>
+      </div>
+      <div class="container">	
+	<div class="page-header">
+		<h1>Exploring Test Method Names</h1>
+	</div>
+
+	<p><em>10 November 2011</em></p>
+
+	<p><p>When coaching individuals on how to name unit test methods, I have struggled to come up with a standard that I like.  I have read numerous posts and books on the subject with a wide variety of results and standards.  In this blog I will explore the various standards for naming unit test methods and present my perspective on the subject.</p>
+<p>Prior to discussing unit test methods, I want to mention that the naming conventions for unit test <em>classes</em> are fairly well solidified.  I will assume that everybody will using the following naming convention for their unit test classes:</p>
+<blockquote><p>[NameOfClassUnderTest" frameborder="0" allowfullscreen></iframe>Test</p></blockquote>
+<p>Some conventions specify that the 'Test' postfix be 'Tests'.  I personally don't care about the difference between the two, so long as your team uses one or the other and not both.</p>
+<p><strong>JUnit</strong></p>
+<p><a title="JUnit" href="http://www.junit.org/" target="_blank">JUnit</a> is one of the first unit testing frameworks and one could argue is responsible for the explosion of unit testing over the past ten years.  In previous versions of JUnit, it was necessary that the name of the unit test method be prefixed with <strong>test</strong>.  This was how the JUnit runner identified unit test methods.  So a unit test method name might look like this:</p>
+<pre class="prettyprint language-groovy">
+public void testAddingTwoNumbers();
+</pre>
+<p>This framework limitation unit test method name was overcome in JUnit 4.  In JUnit 4, it is possible to use <a title="Java 5 Annotations" href="http://download.oracle.com/javase/1,5.0/docs/guide/language/annotations.html" target="_blank">Java 5's annotations</a> to tag a method as a test method.</p>
+<pre class="prettyprint language-groovy">
+@Test public void addingTwoNumbers();
+</pre>
+<p>Most modern test frameworks no longer force developers to prefix the test method name with the word test.  I prefer to avoid frameworks that impose this convention, but there are <a title="Grails unit testing" href="http://grails.org/doc/latest/guide/9.%20Testing.html" target="_blank">exceptions</a>.</p>
+<p><strong>The Art of Unit Testing</strong></p>
+<p><a title="Roy Osherove" href="http://osherove.com/blog" target="_blank">Roy Osherove</a> wrote a great book on unit testing called <a title="The Art of Unit Testing" href="http://artofunittesting.com/" target="_blank">the Art of Unit Testing</a>.  While this book was focused on <a title="Microsoft .NET" href="http://en.wikipedia.org/wiki/.NET_Framework" target="_blank">.NET</a> testing approaches, there is a lot of good recommendations there applicable to all developers, and I would recommend it.</p>
+<p>In this book (as well as his <a title="Roy's Naming standards" href="http://osherove.com/blog/2005/4/3/naming-standards-for-unit-tests.html" target="_blank">blog</a>), Roy recommends a unit test method naming convention that uses the following pattern:</p>
+<blockquote><p>[MethodName_StateUnderTest_ExpectedBehavior" frameborder="0" allowfullscreen></iframe></p></blockquote>
+<p>While I appreciate how comprehensive this standard is, I don't personally subscribe to this approach.  I find that this approach doesn't put enough emphasis on the overall behavior of the class under test, but rather inputs and outputs of methods on the class.  When applying TDD, I find that I think more about behavior than I do inputs/outputs.</p>
+<p><strong>Introducing BDD</strong></p>
+<p>Dan North introduced Behavior Driven Development, or BDD in 2006 with an article in Better Software magazine (which you can read <a title="Dan North introducing BDD" href="http://dannorth.net/introducing-bdd/" target="_blank">here</a>).  In this article, Dan discusses the series of revelations he had regarding unit test naming conventions before he came across BDD's Given When Then convention.  I am not going to go over BDD here, but I definitely recommend reading this article.</p>
+<p>While I personally love BDD and feel it is extremely valuable in defining human readable tests, I feel it aligns much better with acceptance testing than unit testing.  What peaked my interest in this article was some of the intermediate steps Dan made on his way to BDD, namely "test method names should be sentences".  He references a friend's open source project <a title="AgileDox" href="http://agiledox.sourceforge.net/" target="_blank">agiledox</a> that turned a unit test class into a document describing what the class does.  For instance, given this unit test class:</p>
+<pre class="prettyprint language-groovy">
+ public class CalculatorTest {
+     @Test public void addsTwoNumbers () {...}
+     @Test public void subtractNumberFromAnother () {...}
+     @Test public void multipliesTwoNumbers () {...}
+     @Test public void dividesTwoNumbers () {...}
+ }
+</pre>
+<p>Agiledox would produce documentation for the class that would look like this:</p>
+<blockquote><p>Calculator</p>
+<p>- adds two numbers</p>
+<p>- subtracts number from another</p>
+<p>- multiplies two numbers</p>
+<p>- divides two numbers</p></blockquote>
+<p><strong></strong>This was an aha moment for me.  While I have never used agiledox, I found this convention and approach to be extremely simple and easy.  The unit test names now provide a description of the behavior of the class under test.  When I write unit test methods, I imagine these agiledox style sentences being laid out, as a sanity check.</p>
+<p><strong>Focus on Behavior</strong></p>
+<p>For me, the best unit test name should be focused on a particular behavior of the class under test.  How you word the test name is up to you, so long as you focus on behavior.  You should make sure to include exception cases in this definition of the behavior as well.</p>
+<p>Another nice side effect of this focus on behavior is it makes it easier to assess whether or not the class under test is violating the <a title="SRP Wikipedia page" href="http://en.wikipedia.org/wiki/Single_responsibility_principle" target="_blank">Single Responsibility Principle (SRP)</a>.  By quickly looking through the feature list, provided by unit test names, you can determine whether or not the class is doing too much and should be broken up into collaborating objects.</p>
+<p><strong>Side Note: Method Names in Groovy</strong></p>
+<p>Since Groovy allows method names to be strings, this allows you to write a unit test method that looks like this:</p>
+<pre class="prettyprint language-groovy">
+class CalculatorTest {
+   @Test void &quot;adds two numbers&quot;() {...}
+   @Test void &quot;subtracts a number from another&quot;() {...}
+   @Test void &quot;multiplies two numbers&quot;() {...}
+   @Test void &quot;divides two numbers&quot;() {...}
+}
+</pre>
+<p>This allows you to write true sentences without the need for a tool like agiledox to break up the camel case. Another compelling reason to use Groovy for unit testing Java.</p>
+</p>
+
+	<hr>
+
+	<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'mikemcgarr'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	
+		</div>
+		<div id="push"></div>
+    </div>
+    
+    <div id="footer">
+      <div class="container">
+        <p class="muted credit">&copy; 2013 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.0-SNAPSHOT</a></p>
+      </div>
+    </div>
+    
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/js/jquery-1.9.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/run_prettify.js"></script>
+    
+  </body>
+</html>

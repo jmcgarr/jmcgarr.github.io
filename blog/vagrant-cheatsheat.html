@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Vagrant Cheatsheat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="generator" content"JBake">
+
+    <!-- Le styles -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/asciidoctor.css" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
+    <link rel="shortcut icon" href="favicon.ico">
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49980771-1', 'mikemcgarr.com');
+  ga('send', 'pageview');
+
+</script>
+  </head>
+  <body>
+    <div id="wrap">
+	
+	<!-- Fixed navbar -->
+      <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="/">Mike McGarr's Blog</a>
+            <div class="nav-collapse collapse">
+              <ul class="nav">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/archive.html">Archive</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/feed.xml">Subscribe</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </div>
+      </div>
+      <div class="container">	
+	<div class="page-header">
+		<h1>Vagrant Cheatsheat</h1>
+	</div>
+
+	<p><em>06 September 2012</em></p>
+
+	<p><p>I have been using Vagrant on and off for a while and I find myself forgetting some of the commands.  Instead of looking through Vagrant documentation to find the specific commands that I was looking for, I decided to capture the commands here.  I hope that this reference helps somebody out.</p>
+<ul>
+<li><a title="Installing a Box" href="http://vagrantup.com/v1/docs/boxes.html#installing_a_box" target="_blank">vagrant box add</a> - allows you to install a box (or VM) to the local machine</li>
+<li><a title="Removing Boxes" href="http://vagrantup.com/v1/docs/getting-started/boxes.html#removing_boxes" target="_blank">vagrant box remove</a> - removes a box from the local machine</li>
+<li><a title="List Vagrant Boxes" href="http://vagrantup.com/v1/docs/boxes.html#listing_installed_boxes" target="_blank">vagrant box list</a> - lists the locally installed Vagrant boxes</li>
+<li><a title="Vagrant Project Setup" href="http://vagrantup.com/v1/docs/getting-started/setup.html#vagrant_project_setup" target="_blank">vagrant init</a> - initializes a project to use Vagrant</li>
+<li><a title="Your First Vagrant Environment" href="http://vagrantup.com/v1/docs/getting-started/index.html#your_first_vagrant_virtual_environment" target="_blank">vagrant up</a> - starts up the vagrant VM</li>
+<li><a title="Suspend Vagrant" href="http://vagrantup.com/v1/docs/getting-started/teardown.html#suspending_the_environment" target="_blank">vagrant suspend</a> - saves the state of the current VM.</li>
+<li><a title="Resume the VM" href="http://vagrantup.com/v1/docs/getting-started/teardown.html#suspending_the_environment" target="_blank">vagrant resume</a> - will load up the suspended VM.</li>
+<li><a title="Halting a Vagrant VM" href="http://vagrantup.com/v1/docs/getting-started/teardown.html#halting_the_environment" target="_blank">vagrant halt</a> - will shut down the VM, saving configuration. (restart with 'up' command)</li>
+<li><a title="Destroy the VM" href="http://vagrantup.com/v1/docs/getting-started/teardown.html#destroying_the_environment" target="_blank">vagrant destroy</a> - will destroy the VM with all config changes.</li>
+<li><a title="Apply Port Forwarding" href="http://vagrantup.com/v1/docs/getting-started/ports.html#applying_forwarded_ports" target="_blank">vagrant reload</a> - apply Vagrant configuration changes (like port forwarding) without rebuilding the VM.</li>
+<li>vagrant status - tells you the current state of the Vagrant project's VM</li>
+<li><a title="Vagrant Plugins" href="http://vagrantup.com/v1/docs/plugins.html" target="_blank">vagrant gem</a> - install Vagrant plugins via RubyGems</li>
+<li><a title="Vagrant SSH" href="http://vagrantup.com/v1/docs/getting-started/ssh.html" target="_blank">vagrant ssh</a> - short cut to SSH into the running VM</li>
+<li><a title="Packaging a Vagrant Project" href="http://vagrantup.com/v1/docs/getting-started/packaging.html#packaging_the_project" target="_blank">vagrant package</a> - create a distribution of the VM you have running.</li>
+<li><a title="Vagrant Help" href="http://vagrantup.com/v1/docs/commands.html#builtin_help" target="_blank">vagrant &lt;command&gt; --help</a> - Command that will provide man pages for a vagrant command.</li>
+</ul>
+<p>There is extensive documentation on the Vagrant website.  I hope this helps!</p>
+</p>
+
+	<hr>
+
+	<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'mikemcgarr'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	
+		</div>
+		<div id="push"></div>
+    </div>
+    
+    <div id="footer">
+      <div class="container">
+        <p class="muted credit">&copy; 2013 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.0-SNAPSHOT</a></p>
+      </div>
+    </div>
+    
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/js/jquery-1.9.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/run_prettify.js"></script>
+    
+  </body>
+</html>

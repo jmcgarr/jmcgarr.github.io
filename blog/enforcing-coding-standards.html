@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Enforcing Coding Standards</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="generator" content"JBake">
+
+    <!-- Le styles -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/asciidoctor.css" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
+    <link rel="shortcut icon" href="favicon.ico">
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49980771-1', 'mikemcgarr.com');
+  ga('send', 'pageview');
+
+</script>
+  </head>
+  <body>
+    <div id="wrap">
+	
+	<!-- Fixed navbar -->
+      <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="/">Mike McGarr's Blog</a>
+            <div class="nav-collapse collapse">
+              <ul class="nav">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/archive.html">Archive</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/feed.xml">Subscribe</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </div>
+      </div>
+      <div class="container">	
+	<div class="page-header">
+		<h1>Enforcing Coding Standards</h1>
+	</div>
+
+	<p><em>10 February 2010</em></p>
+
+	<p><p>While most teams recognize the importance of coding standards, I have witnessed too many development teams who define a set of coding standards, yet do not enforce them.  If you are not enforcing the coding standard, then you have no way of knowing your team's compliance with the standard and its effectiveness is negated.  In this article, I hope to share some of my experiences with enforcing coding standards on software development projects.</p>
+<p><strong>Why are Coding Standards Important?</strong></p>
+<p>Convincing management of the importance of  implementing coding standards is one of the first steps to successfully adoption.  You will need to justify the time you will spend defining, documenting, communicating, fostering adoption and enforcing your coding standards.  Your project manager will likely ask you the question, "So what are the benefits of implementing coding standards on our project?".  Here are a few of the benefits of coding standards:</p>
+<ul>
+<li><span style="text-decoration:underline;">Increased maintainable</span> - developers can quickly look at another developer's code and easily read it</li>
+<li><span style="text-decoration:underline;">Increased staffing flexibility</span> - developers can move between modules in the application and not have to adjust to a team members coding styles</li>
+<li><span style="text-decoration:underline;">Facilitates better designs</span> - for instance, limiting all methods to 40 lines forces developers to think about the functionality of the method</li>
+<li><span style="text-decoration:underline;">Coding standards can improve documentation</span> - one of my favorite rules is to enforce strict Javadocs throughout the code</li>
+</ul>
+<p>Great, you management is on board and you have clearance to define and implement coding standards...what's next?<br />
+<strong> </strong></p>
+<p><strong>Defining the Standard</strong></p>
+<p><strong> </strong>In my opinion, this is where most teams go wrong (including myself).  They want to collect all the various standards that are publicly defined, meet with the whole development team and then discuss in detail each of the standards one by one.  This process can be time consuming, taking hours or even days, and you likely walk away without a team wide consensus.</p>
+<p>I recommend taking an Agile approach to defining your coding standards: define your standards as early as possible and evolve them often (early and often).  Instead of building a consensus within the team by deliberating for days on the standards, start with an existing publicly available standard that you mostly agree with (like <a href="http://java.sun.com/docs/codeconv/" target="_blank">Sun's Java Coding Standards</a>) and adopt that. <a href="http://checkstyle.sourceforge.net/" target="_blank">Checkstyle</a>, a code standard enforcement tool, can enforce this standard out of the box with a standard definition file.  Check in a copy of the Checkstyle file into your source code.  When you apply this standard against your team's current source code, members of the team will begin the complain about certain violations being reported.  This is good.  They can make changes directly to the Checkstyle configuration file to change the standard.  The team should feel like their coding standard is theirs to change and update as they wish, so give them the opportunity to own it and change it, within reason of course.</p>
+<p>It is also important to make sure that team knows what the standard is so they can start using it.  Part of this process is making sure that the coding standard is documented.  I personally do not recommend that you go out and create a lengthy Word document detailing every coding standard (I have done this before and it is painful and useless).  If you must document the standard, use a Wiki page which is easily accessible to the team and easy to maintain.  Your wiki page should merely point to the publicly available standard you previously chose and possibly provide a link to the Checkstyle definition file in source control.  Remember, you are defining a standard for developers, who prefer something functioning (like Checkstyle) over the written word.</p>
+<p><strong>Adopting the Standard</strong></p>
+<p>In order to facilitate the adoption process, there are a number of tools you should provide your team that will make it easy for them to migrate to the new coding standard.  We already mentioned using Checkstyle to define the standard.  Checkstyle is a command line tool that can be integrated with common build tools such as <a href="http://ant.apache.org/" target="_blank">Ant</a> or <a href="http://maven.apache.org/" target="_blank">Maven</a>.  While build time analysis of the coding standard is useful for reporting, developers need immediate feedback on their compliance as they write code.  To achieve this, I recommend using Checkstyle integration directly in your IDE.  Checkstyle has plugins for <a href="http://www.eclipse.org/" target="_blank">Eclipse</a>, <a href="http://netbeans.org/" target="_blank">Netbeans</a>, <a href="http://www.jetbrains.com/idea/" target="_blank">IntelliJ</a> and more.  This integration allows the developers to see the violation as they type and address it immediately, preventing new violations from entering the code.</p>
+<p>In addition to Checkstyle integration, IDE like Eclipse provide out of the box code formatters that can format your code to a given standard.  Unfortunately, Eclipse's formatter definition is decoupled from a Checkstyle definition so as your Checkstyle definition file changes, you will also have to make changes to your Eclipse formatter definition, but it is worth the effort.</p>
+<p>Once your standard is well defined, you can use a bulk formatting tool like <a href="http://jalopy.sourceforge.net/" target="_blank">Jalopy</a> to format all of your source code in one sweep.  I am hesitant to recommend this approach due to the possibility of introducing bugs due to formatting changes (this is possible).  If you have a lot of unit tests, then the risk of using this tool decreases significantly.  If you do want to use Jalopy, make a separate branch of your source code first, this will reduce the risk to the mainline of development, especially if you are working on legacy code.</p>
+<p><strong>Enforcing the Standard</strong></p>
+<p>Great, so now you have a code standard defined.  You need to start enforcing it.  After doing this on multiple projects, the most useful method of enforcing coding standards is to integrate Checkstyle into your Continuous Integration (CI) builds.  If you aren't using a CI server like <a href="http://hudson-ci.org/" target="_blank">Hudson</a>, consider adding this to your list of reasons why you need to add a build server to your infrastructure.  I have been using Hudson successfully for a while and I am huge fan of its simplicity.</p>
+<p><img class=" " title="Checkstyle Trends" src="http://wiki.hudson-ci.org/download/attachments/31457291/graph-priority.png?version=1&amp;modificationDate=1242230697000" alt="Checkstyle Trends" width="410" height="170" /></p>
+<p>Every night, our Hudson server runs Checkstyle against the code base to determine how many code standard violations exist in the code.  Hudson trends the number of violations over consecutive builds, which is useful for tracking the team's progress during a lengthy adoption effort.  Hudson's dashboarding capabilities allow the team easy access to the details of violations drilling down to the exact line of code.  Hudson can also be set up to define thresholds, which can mark the build as unstable or even fail the build if too many Checkstyle violations are introduced into a build.  This ability coupled with Hudson's multiple feedback mechanisms provides the team will daily reminders that the application code is in violation of the standard.</p>
+<p>Another tool I utilize to help encourage adoption of the coding standard was a cool Hudson plugin called the <a href="http://wiki.hudson-ci.org/display/HUDSON/The+Continuous+Integration+Game+plugin" target="_blank">Continuous Integration game</a>.  This plugin assigns positive and negative point values to successful and failed builds, as well as Checkstyle violations.  It then provides the team with a Leaderboard showing how many points are assigned to each developer.  This may sound a bit sophomoric, but I saw a profound difference in each developer's attitude towards resolving coding standards.  This plugin taps into everybody's competitive spirit, but it should be used with some <a href="http://www.chillisoft.co.za/blog/?p=244" target="_blank">caution</a>.</p>
+<p>In summary, if you want your team to quickly adopt a coding standard,  you need define the standard early, make the it easily available to the team and integrate standard checks with your continuous integration server.  The key to making this successful is ensuring that the whole process is inexpensive to setup and maintain.  Enjoy and good luck!</p>
+</p>
+
+	<hr>
+
+	<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'mikemcgarr'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	
+		</div>
+		<div id="push"></div>
+    </div>
+    
+    <div id="footer">
+      <div class="container">
+        <p class="muted credit">&copy; 2013 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.0-SNAPSHOT</a></p>
+      </div>
+    </div>
+    
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/js/jquery-1.9.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/run_prettify.js"></script>
+    
+  </body>
+</html>

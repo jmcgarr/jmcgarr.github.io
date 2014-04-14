@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>JMeter Crash Course</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="generator" content"JBake">
+
+    <!-- Le styles -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/asciidoctor.css" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
+    <link rel="shortcut icon" href="favicon.ico">
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49980771-1', 'mikemcgarr.com');
+  ga('send', 'pageview');
+
+</script>
+  </head>
+  <body>
+    <div id="wrap">
+	
+	<!-- Fixed navbar -->
+      <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="/">Mike McGarr's Blog</a>
+            <div class="nav-collapse collapse">
+              <ul class="nav">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/archive.html">Archive</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/feed.xml">Subscribe</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </div>
+      </div>
+      <div class="container">	
+	<div class="page-header">
+		<h1>JMeter Crash Course</h1>
+	</div>
+
+	<p><em>07 May 2012</em></p>
+
+	<p><p>I have had a lot of success using <a title="JMeter" href="http://jmeter.apache.org/index.html" target="_blank">JMeter</a> to provide quick performance tests, and this guide will help you get started with JMeter.  I have used JMeter with success on web applications, web services and databases, and I find that it works extremely well.  I have even used JMeter on .NET projects.  This doesn't cover performance testing best practices.  I will save those for another post.</p>
+<h3>Download and install the Java SDK</h3>
+<ol>
+<li>Download the SDK from Oracle <a title="Java SE Development Kit 6 Update 27" href="http://www.oracle.com/technetwork/java/javasebusiness/downloads/java-archive-downloads-javase6-419409.html#jdk-6u27-oth-JPR" target="_blank">here </a>(Note: Recommend Java SE 6 update 27.  I've had issues with update 29)</li>
+<li>Run the installer.  Take note of the install location</li>
+<li>Add $java_install_dir/bin/ to your system path</li>
+</ol>
+<h3>Install JMeter</h3>
+<ol>
+<li>Download JMeter from Apache's website: <a title="JMeter Downloads" href="http://jmeter.apache.org/download_jmeter.cgi" target="_blank">http://jmeter.apache.org/download_jmeter.cgi</a></li>
+<li>Unzip to a location on your machine.</li>
+<li>Add $jmeter_install_dir/bin to your path (Note: if you are using Windows, then I recommend just creating a shortcut to $jmeter_install_dir/bin/jmeter.bat)</li>
+<li>Run the bin/jmeter command and you should see JMeter open a window.</li>
+</ol>
+<div><a href="https://earlyandoften.files.wordpress.com/2012/05/jmeter-window.png"><img class=" wp-image-1166" title="jmeter-window" src="https://earlyandoften.files.wordpress.com/2012/05/jmeter-window.png?w=1024" alt="" width="614" height="402" /></a></div>
+<h3>Recording a Script</h3>
+<p>The following instructions will setup JMeter to record a performance script that you can use for replay.  This is the fastest way of setting up a performance test script.</p>
+<ol>
+<li>Right-click on Test Plan and then select Add &gt; Threads (Users) &gt;  and Create a ThreadGroup</li>
+<li>Right-click on the Workbench then select Add &gt; Non-Test Elements &gt; HTTP Proxy Server
+<ol>
+<li>Set the Target Controller to "Test Plan &gt;  Thread Group"</li>
+<li>Set the Grouping to "Store 1st sampler of each group only"</li>
+<li>Add Exclusions</li>
+<li>Change Port (Optional)</li>
+<li>Start the Proxy Server</li>
+</ol>
+</li>
+<li>Click the Start button on the Http Proxy Server</li>
+<li>Update IE to use a Proxy Server
+<ol>
+<li>Internet Options</li>
+<li>Connections Tab</li>
+<li>LAN Settings</li>
+<li>Click 'User Proxy Server'</li>
+<li>Enter localhost and port.</li>
+<li>Click OK and OK.</li>
+</ol>
+</li>
+<li>Start clicking through your application (make sure JMeter is recording your clicks)</li>
+<li>Save the recording.</li>
+</ol>
+<h3>Adding Listeners</h3>
+<p>JMeter uses listeners to record the results of the performance test.  Take a look at the various types of listeners <a title="JMeter Listeners" href="http://jmeter.apache.org/usermanual/listeners.html" target="_blank">here</a> and add one by right clicking on the Thread Group and adding a Listener there.</p>
+<h3>Running a Performance Test</h3>
+<p>Once your script is recorded and you have added listeners, make sure you save your script.  Now you can run it!</p>
+<ol>
+<li>Open up the ThreadGroup node and make the following changes:
+<ol>
+<li>Change the Number of Threads to the number of concurrent users you would like to run in the performance test.</li>
+<li>Change the Ramp-up Period to the number of seconds it takes for all the users to start.</li>
+</ol>
+</li>
+<li>In the menu, click Run, Start.</li>
+<li>Sit back and watch JMeter ramp up!</li>
+</ol>
+<h3>Final Thoughts</h3>
+<p>This post is intended to get you started with a simple JMeter performance test.  I also only focused on using JMeter to performance test a web application.  JMeter can performance test web apps, databases, JMS servers, email servers, LDAP servers, web services, and much more.  I recommend taking a look at JMeter's manual, available <a title="JMeter Manual" href="http://jmeter.apache.org/usermanual/index.html" target="_blank">here</a>.</p>
+</p>
+
+	<hr>
+
+	<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'mikemcgarr'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	
+		</div>
+		<div id="push"></div>
+    </div>
+    
+    <div id="footer">
+      <div class="container">
+        <p class="muted credit">&copy; 2013 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.0-SNAPSHOT</a></p>
+      </div>
+    </div>
+    
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/js/jquery-1.9.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/run_prettify.js"></script>
+    
+  </body>
+</html>

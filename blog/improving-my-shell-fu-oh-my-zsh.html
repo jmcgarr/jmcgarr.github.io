@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Improving my Shell-fu: Oh My Zsh</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="generator" content"JBake">
+
+    <!-- Le styles -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/asciidoctor.css" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
+    <link rel="shortcut icon" href="favicon.ico">
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49980771-1', 'mikemcgarr.com');
+  ga('send', 'pageview');
+
+</script>
+  </head>
+  <body>
+    <div id="wrap">
+	
+	<!-- Fixed navbar -->
+      <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="/">Mike McGarr's Blog</a>
+            <div class="nav-collapse collapse">
+              <ul class="nav">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/archive.html">Archive</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/feed.xml">Subscribe</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </div>
+      </div>
+      <div class="container">	
+	<div class="page-header">
+		<h1>Improving my Shell-fu: Oh My Zsh</h1>
+	</div>
+
+	<p><em>19 March 2013</em></p>
+
+	<p><p>I have been recently diving head first into the wonderful world of the shell.  Having spent a fair amount of my career on Windows machines at work (even though I have been using Mac's at home for 6+ years), it's only in the past year that I have made the full switch to 100% Mac for work and home.  I have found that this has enabled me to focus on learning more about the shell.  (no more cmd for me!)</p>
+<p>As part of this experience, I have also picked up a bunch of tips and tools from a bunch of my co-workers here at <a title="Blackboard" href="http://www.blackboard.com/" target="_blank">Blackboard</a>.  I also have been picking up some tips from various other sources, most notably the <a title="Changelog podcast" href="http://thechangelog.com/podcast/" target="_blank">Changelog podcast</a>.  I wanted to start sharing of these tools, setups and experiences since I am excited about them.  Rather than one giant blog, I will release them in a series of blogs called <a title="Shell-fu series of blogs" href="http://earlyandoften.wordpress.com/tag/shell-fu/" target="_blank">Shell-fu</a>.  The first Shell-fu blog is on <a title="Oh my Zsh" href="https://github.com/robbyrussell/oh-my-zsh" target="_blank">Oh My Zsh</a> (OMZ).</p>
+<h2>Oh My Zsh</h2>
+<p>I have heard about <a title="Zsh" href="http://www.zsh.org/" target="_blank">zsh</a> for a while and I knew people were switching over in droves.  It wasn't until I heard the Changelog podcast <a title="Changelog podcast on Oh My Zsh" href="http://thechangelog.com/episode-0-6-1-oh-my-zsh-with-robby-russell/" target="_blank">episode on Oh My Zsh</a> that I decided to give it a try.  I was impressed with how simple it was to install and setup (Note: make sure you backup all your dot files from your home directory first, just in case):</p>
+<pre class="prettyprint linenums language-bash">
+curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+</pre>
+<p>These are the OMZ killer features.</p>
+<h2>Zsh</h2>
+<p>The best feature of Oh My Zsh is Zsh itself.  I am just learning Zsh, but so far there are immediately two things it does much better than bash.</p>
+<h4>Autocomplete</h4>
+<p>Zsh is built with an autocomplete feature that is awesome.  When I type 'vi &lt;tab&gt;', zsh will present me with a list of the files in my current directory.  If I press &lt;tab&gt; a second time though, it highlights the first one in the list.  At which point I can just cycle through the files with my arrow keys and select the one I want.  Pretty cool huh?  the autocomplete can also help you see what commands are in your path.  Type 'v &lt;tab&gt;' and I can see all the commands that start with v.</p>
+<p>The autocomplete is very much command aware as well.  <a title="Mike Grouchy" href="http://mikegrouchy.com/" target="_blank">Mike Grouchy's</a> <a title="Zsh is your friend" href="http://mikegrouchy.com/blog/2012/01/zsh-is-your-friend.html" target="_blank">Zsh blog</a> shows how when you type 'kill &lt;tab&gt;', you get a list of the available processes you can kill.  Now that is awesome!</p>
+<p>I also stumbled upon this feature recently.  The autocomplete works with your history to combine into an awesome feature.  If I type 'ssh &lt;up arrow&gt;' it will go back into my history to the last ssh command I ran.  Wow!</p>
+<h4>Autocorrect</h4>
+<p>If you type a command, Zsh will help you out.  For instance, if I type 'vargant up &lt;enter&gt;', Zsh stops me and says are you sure this command is right.  Looks like you are trying to type 'vagrant'.  It gives you four options: (n)o, (y)es, (a)bort, and (e)dit.  (n)o will run the uncorrected command, (y) runs the autocorrected command, (a) exits to a blank prompt and (e) exits to a prompt with the command you wrote written out.</p>
+<pre>
+mmcgarr@mmcgarrmbp:~/Code » vargant up
+zsh: correct 'vargant' to 'vagrant' [nyae" frameborder="0" allowfullscreen></iframe>?
+mmcgarr@mmcgarrmbp:~/Code » vargant up
+</pre>
+<h2>Themes</h2>
+<p>At first, I wanted to try OMZ because I wanted to checkout all of the themes.  This sounds dumb, but I was curious how if there were any good shell themes out there.  I had been previously using <a title="dotfiles" href="https://github.com/jmcgarr/dotfiles" target="_blank">dotfiles</a> on Bash and aware of some the things you can add to your prompt.  OMZ has over 60 themes you can try out and are easily configured via the ~/.zshrc file.  I tried the 'random' feature at first which shows a new theme for every prompt you open.  This is a great way to explore the themes.  I have currently settled on 'dpoggi' theme (see screenshot below).  Check out all the themes <a title="Oh my Zsh themes" href="https://github.com/robbyrussell/oh-my-zsh/wiki/themes" target="_blank">here</a>.</p>
+<p>Additionally, you will note in the below screenshot, that my prompt says '(master)' with a lightning bolt.  Most of the themes have built in git awareness.  Which means when you are in the directory of a git project, it will show you which branch you are in, as well as whether or not you uncommitted changes (the lightning bolt).  Each of them does this a bit different.  Worth exploring.</p>
+<h2>Plugins</h2>
+<p>The next thing I checked out were the plugins.  OMZ comes with a bunch of plugins.  These plugins add shell magic for specific frameworks, like auto-complete and additional context information.  Of course you can see that these plugins are building upon Zsh's awesome auto-complete features.  For example, I added the vagrant OMZ plugin and when I type 'vagrant &lt;tab&gt;', it presents me with a list of the available commands for vagrant.</p>
+<p><a href="http://earlyandoften.files.wordpress.com/2013/03/ohmyzsh-vagrant.png"><img class="aligncenter size-large" alt="ohmyzsh-vagrant" src="http://earlyandoften.files.wordpress.com/2013/03/ohmyzsh-vagrant.png?w=594" width="594" height="256" /></p>
+<p></a>Enabling/disabling a plugin is as simple as editing the ~/.zshrc file and updating the following line.  As you can see, I enabled the vagrant, knife and gradle plugins (git enabled by default).</p>
+<pre class="prettyprint linenums">
+plugins=(git vagrant knife gradle)
+</pre>
+<p>For a list of all the plugins, check out <a title="Oh My Zsh Plugins" href="https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins" target="_blank">this wiki page</a>.</p>
+<h2>Conclusion</h2>
+<p><span style="font-size:13px;">OMZ and Zsh have a ton of other features that I will not get into in this blog post.  You should definitely check out their <a title="Oh My Zsh Cheatsheet" href="https://github.com/robbyrussell/oh-my-zsh/wiki/Cheatsheet" target="_blank">cheatsheet</a> as well.  If you are on a Mac and just using bash, I highly recommend trying Oh My Zsh.  It is awesome and worth it!</span></p>
+</p>
+
+	<hr>
+
+	<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'mikemcgarr'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	
+		</div>
+		<div id="push"></div>
+    </div>
+    
+    <div id="footer">
+      <div class="container">
+        <p class="muted credit">&copy; 2013 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.0-SNAPSHOT</a></p>
+      </div>
+    </div>
+    
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/js/jquery-1.9.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/run_prettify.js"></script>
+    
+  </body>
+</html>

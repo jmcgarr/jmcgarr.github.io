@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Git Crash Course</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="generator" content"JBake">
+
+    <!-- Le styles -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/asciidoctor.css" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
+    <link rel="shortcut icon" href="favicon.ico">
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49980771-1', 'mikemcgarr.com');
+  ga('send', 'pageview');
+
+</script>
+  </head>
+  <body>
+    <div id="wrap">
+	
+	<!-- Fixed navbar -->
+      <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="/">Mike McGarr's Blog</a>
+            <div class="nav-collapse collapse">
+              <ul class="nav">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/archive.html">Archive</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/feed.xml">Subscribe</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </div>
+      </div>
+      <div class="container">	
+	<div class="page-header">
+		<h1>Git Crash Course</h1>
+	</div>
+
+	<p><em>03 May 2012</em></p>
+
+	<p><p>Our current team has decided to adopt Git and some members aren't familiar with it.  I wanted to put together a short introduction to the <a title="Git" href="http://git-scm.com/" target="_blank">Git</a> command line for these team members.  The goal is to make team members productive immediately, while learning the nuances of Git over time.  My introduction assumes that you have Git installed and setup.  For installation instructions, go to <a href="http://git-scm.com/">http://git-scm.com/</a>.  For instructions on configuring Git, I recommend <a title="GitHub" href="https://github.com/" target="_blank">Github</a>'s tutorials for <a title="Setup Github (Windows)" href="http://help.github.com/win-set-up-git/" target="_blank">Windows</a>, <a title="Setup GitHub (Mac)" href="http://help.github.com/mac-set-up-git/" target="_blank">OS X</a> and <a title="Setup GitHub (Linux)" href="http://help.github.com/linux-set-up-git/" target="_blank">Linux</a>.</p>
+<h3>Cloning a Repository</h3>
+<p>First, you need to get a copy of the source code on your machine from a repository.  With Git, you do this by cloning the repository locally.  Since Git is a distributed version control system (DVCS), it will copy the whole source code repository locally.  For more on DVCS, check out <a title="Not so quick guide to DVCS" href="http://www.infoq.com/articles/dvcs-guide" target="_blank">this</a>.</p>
+<p>To clone a remote repository, you will need to use the Git <a title="Git clone Man Page" href="http://schacon.github.com/git/git-clone.html" target="_blank">clone</a> command.  The following is example of clone a public GitHub repository:</p>
+<pre>
+$&gt; git clone git@github.com:jmcgarr/java-bdd-examples.git
+</pre>
+<h3>Checking in Code</h3>
+<p>Now that you have the code, you can begin making changes.  Once you are ready to check in these changes, there are a few steps you need to take to get the changes into a remote repository:</p>
+<pre>
+$&gt; git status -S
+$&gt; git add . -A
+$&gt; git commit -m &quot;Add a commit message here&quot;
+$&gt; git push origin master
+</pre>
+<p>Line 1 issues a <a title="Git status man page" href="http://schacon.github.com/git/git-status.html" target="_blank"><em>status</em></a> command, telling you which files have changed locally.  The <a title="Git add man page" href="http://schacon.github.com/git/git-add.html" target="_blank">add</a> command on line 2 tells Git to stage all changed files so that they can be committed to your local repository.  The <a title="Git commit Man Page" href="http://schacon.github.com/git/git-commit.html" target="_blank">commit</a> command on line 3 will commit the changes you added to your local repository.  Line 4 is where you will <a title="Git push Man Page" href="http://schacon.github.com/git/git-push.html" target="_blank">push</a> the changes in your local repository to the remote repository.</p>
+<blockquote><p>Note: Your fellow team members will not see your changes until you push them to the remote repository.  When you commit, you are only commit the change to your local copy of the repository</p></blockquote>
+<h3>Getting the Latest Version</h3>
+<p>Prior to pushing your changes to a remote repository, you may want to grab the latest code from the repository.  To get the latest remote changes, use the following commands:</p>
+<pre>
+$&gt; git fetch origin
+$&gt; git merge master
+</pre>
+<p>Line 1 will sync your local Git repository with the remote Git repository.  Your working copy of the code will not be updated until you issue a merge command (line 2).  Git provides a way of combining these two commands into one, by using the <a title="Git pull Man Page" href="http://schacon.github.com/git/git-pull.html" target="_blank">pull</a> command:</p>
+<pre>
+$&gt; git pull origin master
+</pre>
+<p>This command will fetch the remote repository changes, and merge them into the master branch.</p>
+<h3>Learn More</h3>
+<p>Git is a powerful version control tool and it is extremely useful.  This tutorial should get you started immediately.  But be warned, that you should take the time to learn more about Git and how it works.  Here are some useful resources for learning more about Git:</p>
+<ul>
+<li><a title="Git Reference" href="http://gitref.org/" target="_blank">http://gitref.org/</a></li>
+<li><a title="Git Visual Guide" href="http://marklodato.github.com/visual-git-guide/index-en.html" target="_blank">http://marklodato.github.com/visual-git-guide/index-en.html</a></li>
+<li><a title="GitHub Help" href="http://help.github.com/remotes/" target="_blank">http://help.github.com/remotes/</a></li>
+<li><a title="Scott Chacon on Git" href="http://www.youtube.com/watch?v=ZDR433b0HJY" target="_blank">http://www.youtube.com/watch?v=ZDR433b0HJY</a></li>
+</ul>
+</p>
+
+	<hr>
+
+	<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'mikemcgarr'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	
+		</div>
+		<div id="push"></div>
+    </div>
+    
+    <div id="footer">
+      <div class="container">
+        <p class="muted credit">&copy; 2013 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.0-SNAPSHOT</a></p>
+      </div>
+    </div>
+    
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/js/jquery-1.9.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/run_prettify.js"></script>
+    
+  </body>
+</html>

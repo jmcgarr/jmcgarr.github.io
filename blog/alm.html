@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Thoughts on Application Lifecycle Management (ALM)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="generator" content"JBake">
+
+    <!-- Le styles -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/asciidoctor.css" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
+    <link rel="shortcut icon" href="favicon.ico">
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49980771-1', 'mikemcgarr.com');
+  ga('send', 'pageview');
+
+</script>
+  </head>
+  <body>
+    <div id="wrap">
+	
+	<!-- Fixed navbar -->
+      <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="/">Mike McGarr's Blog</a>
+            <div class="nav-collapse collapse">
+              <ul class="nav">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/archive.html">Archive</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/feed.xml">Subscribe</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </div>
+      </div>
+      <div class="container">	
+	<div class="page-header">
+		<h1>Thoughts on Application Lifecycle Management (ALM)</h1>
+	</div>
+
+	<p><em>04 March 2011</em></p>
+
+	<p><p>Last week, I was asked to give my opinion on Application Lifecycle Management or ALM.  Specifically, I was asked how can teams effectively manage their design, development, test and deploy processes as well as pick the right tools for the job.  Here is the answer I gave:</p>
+<div>
+<blockquote><p><span style="font-family:tahoma;">The cornerstone of a strong ALM<a></a> process is based in <a title="The Agile Manifesto" href="http://agilemanifesto.org/" target="_blank">Agile</a> practices  and <a title="Agile Principles" href="http://agilemanifesto.org/principles.html" target="_blank">principles</a>.  Iterative software development is useful for breaking work up  into small chunks that provides fast and frequent feedback to both the team and  the customer.  Developing software using <a title="Test Driven Development" href="http://www.agiledata.org/essays/tdd.html" target="_blank">test driven development</a> (with an  emphasis on <a title="Behavior Driven Development" href="http://dannorth.net/introducing-bdd/" target="_blank">behavior driven development</a>) allows developers to focus on behavior  first as well as quality.  Developers will iteratively <a title="Evolutionary Design" href="http://martinfowler.com/articles/designDead.html" target="_blank">evolve the design</a> of the  software based on the tests, and will limit the amount of up front design.   Automated tests are executed as part of an automated build process that is in  turn executed by a <a title="Continuous Integration" href="http://martinfowler.com/articles/continuousIntegration.html" target="_blank">continuous integration</a> server monitoring version control.   Developers should be checking in their changes frequently, triggering multiple  builds, resulting in multiple feedback cycles.  All development should take  place on the trunk in version control and branching should be  limited.</span></p><br/>
+<p><span style="font-family:tahoma;">Taking ALM<a></a> a step further lies the <a title="Continuous Delivery" href="http://continuousdelivery.com/2010/02/continuous-delivery/" target="_blank">continuous delivery</a> practice of  <a title="Deployment Pipelines" href="http://www.scribd.com/doc/196739/The-Deployment-Pipeline-by-Dave-Farley-2007" target="_blank">deployment pipelines</a>.  Like with standard continuous integration, each change to  source triggers a new build on the CI server.  With deployment pipelines, you  are chaining together a series of builds, each responsible for validating a  certain condition or set of conditions (like acceptance tests or coding style).   Each build should expand on the previous with an increasingly rigorous  criteria<a></a>.  The goal of deployment pipelines is validate a change to  source to see if it is production worthy, i.e.<a></a> a release candidate.  In  some environments, deployment pipelines are <a title="Continuous Deployment" href="http://timothyfitz.wordpress.com/2009/02/08/continuous-deployment/" target="_blank">automated all the way to production</a>,  where a change from a developer can go to production without a single person  touching it.  To achieve this, automation and feedback are essential.  Unit,  Integration, Acceptance and Performance Tests must all be phases of the  deployment pipelines with rigorous criteria to keep a build out of production  that doesn't meet the standard.  Managing code is also an essential part of the pipeline, which is achieved using static code analysis tools.  In addition, automating the deployment of the  application from source to the Dev, Test, Staging and Production is also an  essential practice.</span></p><br/>
+<p><span style="font-family:tahoma;">In regards to tools to enable this process, it is hard to  come up with a list without assuming certain technologies and biases for/against  open source.  For the sake of this discussion, I will assume a Java application  where open source is king.  For version control, Subversion gets the job done,  but distributed version control systems (git<a></a> and mercurial) are extremely popular and gaining  ground.  For Agile project management, unless you are on a distributed team, I  recommend sticking with cards and a scrumboard<a></a> and avoid complex tools.  For testing, there are  a multitude<a></a> of tools available, <a title="JUnit" href="http://www.junit.org/" target="_blank">JUnit</a><a></a> being the core of the testing world.  <a title="Mockito" href="http://mockito.org/" target="_blank">Mockito</a><a></a> is an excellent and  simple mocking framework, but <a title="JMock" href="http://www.jmock.org/" target="_blank">JMock</a><a></a> provides some valuable features not found in Mockito<a></a>.  <a title="Selenium" href="http://seleniumhq.org/" target="_blank">Selenium</a> is a  great web application testing tool (but avoid <a title="Selenium IDE" href="http://seleniumhq.org/projects/ide/" target="_blank">recording</a> and use <a title="Page Objects Pattern" href="http://code.google.com/p/selenium/wiki/PageObjects" target="_blank">page objects</a>),  especially when coupled with a BDD<a></a> framework like <a title="easyb" href="http://www.easyb.org/" target="_blank">easyb</a><a></a> or <a title="JBehave" href="http://jbehave.org/" target="_blank">JBehave</a><a></a>.  <a title="JMeter" href="http://jakarta.apache.org/jmeter/" target="_blank">JMeter</a><a></a> is a great tool for performance testing.  For build  tools, I feel that <a title="Gradle" href="http://www.gradle.org/" target="_blank">Gradle</a><a></a> or <a title="Buildr" href="http://buildr.apache.org/" target="_blank">Buildr</a><a></a> are better than <a title="Maven" href="http://maven.apache.org/" target="_blank">Maven</a>, which is better than <a title="Ant" href="http://ant.apache.org/" target="_blank">Ant</a>.   Gradle<a></a>/Buildr<a></a> build on the legacy  of Maven and Ant and improve on them in different ways.  For continuous  integration, I highly recommend using <a title="Hudson" href="http://java.net/projects/hudson/" target="_blank">Hudson</a>/<a title="Jenkins" href="http://jenkins-ci.org/" target="_blank">Jenkins</a> for most environments, but  it lacks some of the advanced deployment pipeline features you can find in <a title="ThoughtWorks" href="http://www.thoughtworks.com/" target="_blank">ThoughtWorks</a><a></a> <a title="Go" href="http://www.thoughtworks-studios.com/go-agile-release-management/" target="_blank">Go</a> product  (not <a title="FOSS" href="http://en.wikipedia.org/wiki/Free_and_open_source_software" target="_blank">FOSS</a>).  For measuring code quality, I recommend <a title="Checkstyle" href="http://checkstyle.sourceforge.net/" target="_blank">Checkstyle</a>, <a title="PMD/CPD" href="http://pmd.sourceforge.net/">PMD/CPD</a>, <a title="Findbugs" href="http://findbugs.sourceforge.net/" target="_blank">Findbugs</a>, <a title="Crap4j" href="http://www.crap4j.org/" target="_blank">Crap4j</a> and <a title="Cobertura" href="http://cobertura.sourceforge.net/" target="_blank">Cobertura</a> for measuring code coverage.  I also highly recommend Liquibase<a></a> for database management and a tool like <a title="Puppet" href="http://www.puppetlabs.com/puppet/puppet-platform/" target="_blank">Puppet</a> or  <a title="Chef" href="http://www.opscode.com/chef/" target="_blank">Chef</a> to manage your infrastructure.  In addition, I also recommend using <a title="Nexus" href="http://nexus.sonatype.org/" target="_blank">Nexus</a> as a binary repository for build artifacts produced in the  pipeline.</span></p></blockquote>
+</div>
+<p>My thoughts were somewhat off the cuff and could likely be more comprehensive given time, but I still found them valuable.  I would to hear what you think of this answer and if you have differing opinions.  Enjoy!</p>
+</p>
+
+	<hr>
+
+	<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'mikemcgarr'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	
+		</div>
+		<div id="push"></div>
+    </div>
+    
+    <div id="footer">
+      <div class="container">
+        <p class="muted credit">&copy; 2013 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.0-SNAPSHOT</a></p>
+      </div>
+    </div>
+    
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/js/jquery-1.9.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/run_prettify.js"></script>
+    
+  </body>
+</html>

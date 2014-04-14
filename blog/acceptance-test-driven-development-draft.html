@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Acceptance Test Driven Development</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="generator" content"JBake">
+
+    <!-- Le styles -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/asciidoctor.css" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
+    <link rel="shortcut icon" href="favicon.ico">
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49980771-1', 'mikemcgarr.com');
+  ga('send', 'pageview');
+
+</script>
+  </head>
+  <body>
+    <div id="wrap">
+	
+	<!-- Fixed navbar -->
+      <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="/">Mike McGarr's Blog</a>
+            <div class="nav-collapse collapse">
+              <ul class="nav">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/archive.html">Archive</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/feed.xml">Subscribe</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </div>
+      </div>
+      <div class="container">	
+	<div class="page-header">
+		<h1>Acceptance Test Driven Development</h1>
+	</div>
+
+	<p><em>11 November 2011</em></p>
+
+	<p><p>I recently got the opportunity to showcase our development environment off to our client.  Our team was rather proud of our setup, which centers on our <a title="Continuous Integration" href="http://www.martinfowler.com/articles/continuousIntegration.html" target="_blank">continuous integration</a> server, <a title="Hudson" href="http://hudson-ci.org/" target="_blank">Hudson</a>.  Hudson will execute a build after each check-in, run all unit tests, run all integration tests, deploy to an development server, run performance tests, run a suite of static code analysis tools (<a title="Checkstyle" href="http://checkstyle.sourceforge.net/" target="_blank">CheckStyle</a>, <a title="Findbugs" href="http://findbugs.sourceforge.net/" target="_blank">FindBugs</a>, <a title="PMD" href="http://pmd.sourceforge.net/" target="_blank">PMD</a>, <a title="Cobertura" href="http://cobertura.sourceforge.net/" target="_blank">Cobertura</a>), update <a title="JIRA" href="http://www.atlassian.com/software/jira/" target="_blank">JIRA</a> and lastly update our <a title="Nexus" href="http://nexus.sonatype.org/" target="_blank">Nexus</a> repository.  If you are currently doing continuous integration, then that may not seem impressive, but you would be amazed at how many teams don't do this.  During the course of the presentation, the question was asked, "Well this is great, all the unit and integration testing is great, but how do I know the code you wrote is satisfying a business requirement".  It was a great question and a gap in our current process, one which we needed to rectify.</p>
+<p>In the past, the way would have handled this would be to call up IBM, tell them we want to purchase the Rational suite so that we can provide complete traceability between requirements, design, code, and test.  Well, if anybody is currently doing this, you already know how cumbersome those tools are and how they never seem to deliver on any promises.  I knew we needed something that was fast, lightweight, simple to implement and easy to maintain over time.  It had to provide a non-technical view into our requirements while providing traceability to test cases that validate our code.  I did some hunting on the internet and came across an approach that I thought could solve our problem, Acceptance Test Driven Development (ATDD).</p>
+<p><strong>What is ATDD?</strong></p>
+<p><span style="font-size:13.3333px;">The easiest way to look at ATDD is to think of your requirements as an executable test.  If you are familiar with or have done any Test Driven Development, then you merely need to take the same concept and scale it up to a system level.  In TDD, developers write unit tests first, that define the expected behavior of piece of code they are about to write.  Once the behavior is defined (and the test fails), the developer then goes about writing the code to satisfy the test.  His goal is to make the test pass in the simplest approach possible.  Once the test has passed, then the developer can go back and refactor the code with confidence since he now has a test to ensure the behavior of the class doesn't change. </span></p>
+<p><span style="font-size:13.3333px;">[might want to add an example here" frameborder="0" allowfullscreen></iframe></span></p>
+<p><span style="font-size:13.3333px;">With ATDD, you apply this same general approach as you do with TDD.  First, a requirement (any format would work, but user stories are recommended) is defined and agreed upon by the product owner, the business analyst, the tester and hopefully the developer.  The specific text of the requirement should makes sense to team as a whole, but will likely be written in the domain language of the system.  Each requirement should be accompanied by acceptance criteria, which defines what the system being developed needs to do in order for this requirements to be satisfied.  These </span></p>
+<p><span style="font-size:13.3333px;"><strong>What is the difference between TDD, BDD and ATDD?</strong></span></p>
+<p>This was my next question.  I am familiar with TDD (Test Driven Development), and I had been moving towards using BDD (Behaviour Driven Development), so how do these two relate to ATDD?</p>
+<p><strong>ATDD Tools</strong></p>
+<p>I quickly compiled a list of tools that I thought could be used to satisfy</p>
+</p>
+
+	<hr>
+
+	<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'mikemcgarr'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	
+		</div>
+		<div id="push"></div>
+    </div>
+    
+    <div id="footer">
+      <div class="container">
+        <p class="muted credit">&copy; 2013 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.0-SNAPSHOT</a></p>
+      </div>
+    </div>
+    
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/js/jquery-1.9.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/run_prettify.js"></script>
+    
+  </body>
+</html>

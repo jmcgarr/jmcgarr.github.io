@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>A roadmap for unit testing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="generator" content"JBake">
+
+    <!-- Le styles -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/asciidoctor.css" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
+    <link rel="shortcut icon" href="favicon.ico">
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49980771-1', 'mikemcgarr.com');
+  ga('send', 'pageview');
+
+</script>
+  </head>
+  <body>
+    <div id="wrap">
+	
+	<!-- Fixed navbar -->
+      <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="/">Mike McGarr's Blog</a>
+            <div class="nav-collapse collapse">
+              <ul class="nav">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/archive.html">Archive</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/feed.xml">Subscribe</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </div>
+      </div>
+      <div class="container">	
+	<div class="page-header">
+		<h1>A roadmap for unit testing</h1>
+	</div>
+
+	<p><em>04 December 2012</em></p>
+
+	<p><p>I was recently asked by an old friend how they can get started writing unit tests on their existing application.  He was looking for guidance and more or less a roadmap of how to get started.  I decided to share what I sent him here.</p>
+<p>So, if there is already code written for an application that you want to add unit tests to, this is harder, but not impossible.  Essentially, the problem you will run into is the code you are trying to unit test isn't testable.</p>
+<p><b>Working Effectively with Legacy Code</b><br />
+Production code without unit tests is considered legacy code.  More than likely it will no small task adding unit tests to your existing application.  Most legacy applications were not designed to be testable.  The code has concrete dependencies that make it hard externalize during unit testing to isolate the class.</p>
+<p>I would consider reading up on how to unit test legacy code.  The seminal tome on this topic is Michael Feather's "<a href="http://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052">Working Effectively with Legacy Code</a>".  The title doesn't sound sexy, but it is essentially a guide for how to write unit tests for a legacy application.  If you don't have time for the book, you can get a preview of his thoughts and techniques in <a title="Working Effectively with Legacy Code (Presentation)" href="http://www.slideshare.net/nashjain/working-effectively-with-legacy-code-presentation" target="_blank">this presentation</a> of his and in this prebook article of his thoughts.</p>
+<p><b>Roadmap</b><br />
+You can follow these steps to add unit tests to your code.  You may progress through them over the course of days or weeks.  I make assumptions that you are working on a Java application, but most of the guidance can be applied generally.</p>
+<ol>
+<li><span style="text-decoration:underline;">Setting up the code</span>
+<ol>
+<li>Add JUnit, Mockito and PowerMock (optional) to your project's build script tool
+<ol>
+<li>Use dependency management like Maven, Gradle, or Ivy.</li>
+<li>If you aren't using a build tool, stop and add one now!</li>
+</ol>
+</li>
+<li>Run the build tool's eclipse setup (mvn eclipse:eclipse or gradle cleanEclipse eclipse)
+<ol>
+<li>I prefer using the build tool to manage IDE project files.</li>
+</ol>
+</li>
+<li>Open Eclipse/IntelliJ and you should be able to create unit tests</li>
+</ol>
+</li>
+<li><span style="text-decoration:underline;">Learning to write good unit tests</span>
+<ol>
+<li>Learn <a href="https://github.com/kentbeck/junit/wiki">JUnit</a> syntax</li>
+<li>A unit test should fit into <a href="http://pragprog.com/magazines/2012-01/unit-tests-are-first">this criteria</a>.</li>
+<li>Write each test in the <a href="http://c2.com/cgi/wiki?ArrangeActAssert">Arrange Act Assert</a> format
+<ol>
+<li>FYI, this is the same as Given When Then, which is <a href="http://dannorth.net/introducing-bdd/">Behavior Driven Development</a>.</li>
+</ol>
+</li>
+<li><a href="http://earlyandoften.wordpress.com/2010/05/07/practical-unit-testing/">Use this guide</a> as well to figure out which code to start testing:
+<ol>
+<li>I wouldn't move on to the next step until you feel comfortable</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><span style="text-decoration:underline;">Using Test Doubles</span>
+<ol>
+<li>First, learn what <a href="http://www.martinfowler.com/bliki/TestDouble.html">Test Doubles</a> are.</li>
+<li><a href="http://www.markhneedham.com/blog/2009/12/13/tdd-only-mock-types-you-own/">Mock Roles, Not Objects</a></li>
+<li><a href="https://code.google.com/p/mockito/">Mockito has some great documentation</a>.</li>
+<li>The best place to learn how to use Mock object properly is by reading this book: <a href="http://www.amazon.com/Growing-Object-Oriented-Software-Guided-Tests/dp/0321503627">Growing Object Oriented Code, Guided by Tests</a></li>
+</ol>
+</li>
+<li><span style="text-decoration:underline;">Learning TDD</span>
+<ol>
+<li>The best way to learn, is to practice.</li>
+<li>Learn from <a href="http://butunclebob.com/ArticleS.UncleBob.TheBowlingGameKata">Uncle Bob's Bowling Game Kata</a>
+<ol>
+<li><a href="http://butunclebob.com/files/downloads/Bowling%20Game%20Kata.ppt">Download his Powerpoint</a> and follow along.  Pretty good.</li>
+<li>Try to solve this particular problem on your own.  Just write code and throw it away.  The experience is important</li>
+</ol>
+</li>
+<li><a href="http://www.meetup.com/DC-Software-Craftsmanship/">DC Software Craftsmanship User Group</a> - all they do is do TDD.  It's awesome!</li>
+<li>Try these <a href="http://codingdojo.org/cgi-bin/wiki.pl?KataCatalogue">other code katas</a></li>
+</ol>
+</li>
+</ol>
+<p>The process of learning to write good unit tests, how use Test Doubles, how to do TDD and finally how it all fits together can a long time to set in, but it is well worth it.</p>
+</p>
+
+	<hr>
+
+	<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'mikemcgarr'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	
+		</div>
+		<div id="push"></div>
+    </div>
+    
+    <div id="footer">
+      <div class="container">
+        <p class="muted credit">&copy; 2013 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.0-SNAPSHOT</a></p>
+      </div>
+    </div>
+    
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/js/jquery-1.9.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/run_prettify.js"></script>
+    
+  </body>
+</html>

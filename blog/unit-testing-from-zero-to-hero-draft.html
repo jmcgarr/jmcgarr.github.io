@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Unit Testing, From Zero to Hero</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="generator" content"JBake">
+
+    <!-- Le styles -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/asciidoctor.css" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
+    <link rel="shortcut icon" href="favicon.ico">
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49980771-1', 'mikemcgarr.com');
+  ga('send', 'pageview');
+
+</script>
+  </head>
+  <body>
+    <div id="wrap">
+	
+	<!-- Fixed navbar -->
+      <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="/">Mike McGarr's Blog</a>
+            <div class="nav-collapse collapse">
+              <ul class="nav">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/archive.html">Archive</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/feed.xml">Subscribe</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </div>
+      </div>
+      <div class="container">	
+	<div class="page-header">
+		<h1>Unit Testing, From Zero to Hero</h1>
+	</div>
+
+	<p><em>04 December 2010</em></p>
+
+	<p><p><strong>&lt;Is this a duplication of my previous post: http://earlyandoften.wordpress.com/2010/05/07/practical-unit-testing/&gt;</strong></p>
+<p>When I first decided that to learn how to write unit tests, I remember being very confused on a number of topics and stumbling a lot before I finally got the hang of it.  While this process is typical when it comes to learning, I decided that it would be nice to provide some hints and tips for a unit testing newbie.  This post is a collection of tips for somebody just jumping into unit testing.  If you familiar with unit testing, then feel free to comment on this post, adding your personal tips.</p>
+<p><strong>Start with JUnit</strong></p>
+<p>This is not to say that JUnit is the best framework available, cause there are others, but it is the first, and is still extremely popular.  You will be able to get the most assistance with using it.  I am not going to provide a tutorial on how to write your first unit test, mainly because there are so many out there.  ...Provide links to tutorials...</p>
+<p><strong>Running the Tests</strong></p>
+<p>Where most tutorials fall short is how to run the tests.  I do not recommend just straight javac and java command line calls unless you are a complete Java newb.  I am going to assume that you have some code you would like to test.  Starting out, I would try running your tests inside your IDE.  Eclipse has a great interface for this and it will help you get your feet wet.  The other advantage of IDE based execution is the speed of execution.  If I am writing a JUnit class in Eclipse, I can press Ctrl-F11 to run the unit test.  Keeping your hands on the keyboard is important for maintaining flow.</p>
+<p>I also recommend wiring your execution up to a build tool.  You are going to want to execute your tests whenever you build your application.  If your application is built from the IDE, then stop learning JUnit and go and learn Ant or Maven.  I believe they add more critical to a project's success than unit testing, but that is just me.</p>
+<p><strong>What to Test First</strong></p>
+<p>...Start testing your static or isolated utility classes, avoid classes with external dependencies</p>
+<p><strong>Don't Map Test Methods to Class Methods</strong></p>
+<p>...Don't try mapping a test method to a class method</p>
+<p><strong>Long method names are your friends</strong></p>
+<p>...Don't be afraid of long test method names, in fact the longer the better</p>
+<p><strong>One Assert Per Test</strong></p>
+<p>The more you read about writing unit tests, you will see people talk about how you should only have a single assertion per test method.  When I first started, this seemed daunting, but the most experienced I got, I started to see the reason why you want this and how it is done.  &gt;&gt;&gt;MORE&gt;&gt;&gt;</p>
+<p><strong>Test-First, But not Now</strong></p>
+<p>Don't try test first right away...you should focus on familiarizing yourself with testing frameworks and how to write a good test.  Once you have gotten used to this, then you can try test first.  I think learning test-first development if you don't know how to write unit tests is like learning how to play hockey if you can't ice skate.  I would argue that you should try test first development at some point, even if you don't think that it is for you.  If you are interested, watching James Shore's Let Play series on Test Driven Development is one of the best ways to get started.</p>
+</p>
+
+	<hr>
+
+	<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'mikemcgarr'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	
+		</div>
+		<div id="push"></div>
+    </div>
+    
+    <div id="footer">
+      <div class="container">
+        <p class="muted credit">&copy; 2013 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.0-SNAPSHOT</a></p>
+      </div>
+    </div>
+    
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/js/jquery-1.9.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/run_prettify.js"></script>
+    
+  </body>
+</html>
