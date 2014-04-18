@@ -1,14 +1,148 @@
 <?xml version="1.0"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>JBake</title>
+    <title>Mike McGarr's Blog</title>
     <link>http://jmcgarr.github.io</link>
     <atom:link href="http://jmcgarr.github.io/feed.xml" rel="self" type="application/rss+xml" />
-    <description>JBake Bootstrap Template</description>
+    <description>Mike McGarr's Personal Blog</description>
     <language>en-gb</language>
-    <pubDate>Mon, 14 Apr 2014 00:01:20 -0700</pubDate>
-    <lastBuildDate>Mon, 14 Apr 2014 00:01:20 -0700</lastBuildDate>
+    <pubDate>Thu, 17 Apr 2014 22:39:10 -0700</pubDate>
+    <lastBuildDate>Thu, 17 Apr 2014 22:39:10 -0700</lastBuildDate>
 
+    <item>
+      <title>Git commands for a &apos;forked&apos; up world</title>
+      <link>http://jmcgarr.github.io/blog/git-for-fork-pullrequest.html</link>
+      <pubDate>Thu, 17 Apr 2014 00:00:00 -0700</pubDate>
+      <guid isPermaLink="false">/blog/git-for-fork-pullrequest.html</guid>
+      	<description>
+	&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;If you are working on a team or open source project that uses Git, it is likely that you have been introduced to the fork/pull-request model of collaboration for Git (and Mercurial).  The &lt;a href=&quot;https://help.github.com/articles/using-pull-requests&quot;&gt;fork/pull-request&lt;/a&gt; concepts are not a part of git, but were popularized by Github.  You find most DVCS server products incorporate some variation of them.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;If you find yourself forking a repository and contributing back, I found the following git commands useful.  Before we dive each of them, let&amp;#8217;s define a few terms:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;upstream repository&lt;/strong&gt; - this is the original git repository that you would like the changes to eventually end up&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;origin repository&lt;/strong&gt; - this is the forked git repository.  It is your personal copy on the server.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;local repository&lt;/strong&gt; - this is the local git repository on your machine.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;I am not going to discuss the fork/pull-request model much here.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_add_a_upstream_remote&quot;&gt;Add a upstream remote&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Once you fork the &lt;strong&gt;upstream&lt;/strong&gt; repository, you will then clone the forked repository locally.  You will make your changes locally, push to &lt;strong&gt;origin&lt;/strong&gt; and make your pull request.  At some point you will want to pull in the latest changes from the &lt;strong&gt;upstream&lt;/strong&gt; repository.  In order to do this, you need to define &lt;strong&gt;upstream&lt;/strong&gt; as a remote repository.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;git remote add upstream &amp;lt;original repo url&amp;gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_fetch_all_remotes&quot;&gt;Fetch all remotes&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Now that you have multiple remotes, you will want to grab the latest changes from not just &lt;strong&gt;origin&lt;/strong&gt;, but from &lt;strong&gt;upstream&lt;/strong&gt; as well.  You can do this with a single command that fetches changes for &lt;em&gt;all&lt;/em&gt; remote repositories:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$&amp;gt; git fetch --all
+Fetching origin
+Fetching upstream
+...&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_what_remote_repository_changes_need_to_be_merged&quot;&gt;What remote repository changes need to be merged?&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Now that you fetched your changes from all remote repositories, you need to know which changes from your remote repositories need to be merged.  Once again, there&amp;#8217;s a git command for that.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$&amp;gt; git branch -a --no-merge
+remotes/upstream/master&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This will list all the branches that have changes that need to be merged into you current branch.  The -a command ensures that you display the remote repository branches as well.  This only works after a fetch command.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_push_to_same_branch_on_remote&quot;&gt;Push to same branch on remote&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;When you are ready to push your changes to your origin remote repo, you may find yourself typing out a long command, like this:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;git push origin feature/create-an-awesome-feature&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Rather that do this, you can just type the following:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;git push origin HEAD&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This will push the current branch to origin with the same branch name.  Handy.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_purge_remote_branches&quot;&gt;Purge Remote Branches&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;In a forked world, your changes to origin will likely be contributed back to the upstream project via a pull request.  Tools like Github and Stash allow you to delete the pull request branch once it has been merged into upstream/master.  Once this happens, you may want to clean out the branch locally as well.  You could delete the branch, but you will still need to fetch/merge from upstream.  Why not do them both at the same time?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;$&amp;gt; git branch -a
+  heartbleed_fix
+* master
+  remotes/origin/HEAD -&amp;gt; origin/master
+  remotes/origin/heartbleed_fix
+  remotes/origin/master
+$&amp;gt; git fetch -p --all
+Fetching origin
+ x [deleted]         (none)     -&amp;gt; origin/heartbleed_fix
+$&amp;gt; git branch -a
+  heartbleed_fix
+* master
+  remotes/origin/HEAD -&amp;gt; origin/master
+  remotes/origin/master&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The &lt;em&gt;-p&lt;/em&gt; flag will prune any branches from your local Git repository that don&amp;#8217;t exist on your remote repository.  Now this will only remove the local instance of the remote repository.  You will still have your own copy of the branch, as you can see from the second &lt;em&gt;git branch -a&lt;/em&gt; command.  To get rid of the local branch, you have to delete it:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre&gt;git branch -d heartbleed_fix&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+	</description>
+    </item>
     <item>
       <title>On acceptance test architecture, lifecycles and responsibilities</title>
       <link>http://jmcgarr.github.io/blog/on-acceptance-test-architecture-lifecycles-and-responsibilities.html</link>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Git commands for a &apos;forked&apos; up world</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="generator" content"JBake">
+
+    <!-- Le styles -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/asciidoctor.css" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
+    <link rel="shortcut icon" href="favicon.ico">
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-49993013-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+  </head>
+  <body>
+    <div id="wrap">
+	
+	<!-- Fixed navbar -->
+      <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="/">Mike McGarr's Blog</a>
+            <div class="nav-collapse collapse">
+              <ul class="nav">
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/archive.html">Blog</a></li>
+                <li><a href="/feed.xml">Subscribe</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </div>
+      </div>
+      <div class="container">	
+	<div class="page-header">
+		<h1>Git commands for a &apos;forked&apos; up world</h1>
+	</div>
+
+	<p><em>17 April 2014</em></p>
+
+	<p><div class="paragraph">
+<p>If you are working on a team or open source project that uses Git, it is likely that you have been introduced to the fork/pull-request model of collaboration for Git (and Mercurial).  The <a href="https://help.github.com/articles/using-pull-requests">fork/pull-request</a> concepts are not a part of git, but were popularized by Github.  You find most DVCS server products incorporate some variation of them.</p>
+</div>
+<div class="paragraph">
+<p>If you find yourself forking a repository and contributing back, I found the following git commands useful.  Before we dive each of them, let&#8217;s define a few terms:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>upstream repository</strong> - this is the original git repository that you would like the changes to eventually end up</p>
+</li>
+<li>
+<p><strong>origin repository</strong> - this is the forked git repository.  It is your personal copy on the server.</p>
+</li>
+<li>
+<p><strong>local repository</strong> - this is the local git repository on your machine.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>I am not going to discuss the fork/pull-request model much here.</p>
+</div>
+<div class="sect1">
+<h2 id="_add_a_upstream_remote">Add a upstream remote</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Once you fork the <strong>upstream</strong> repository, you will then clone the forked repository locally.  You will make your changes locally, push to <strong>origin</strong> and make your pull request.  At some point you will want to pull in the latest changes from the <strong>upstream</strong> repository.  In order to do this, you need to define <strong>upstream</strong> as a remote repository.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>git remote add upstream &lt;original repo url&gt;</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_fetch_all_remotes">Fetch all remotes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now that you have multiple remotes, you will want to grab the latest changes from not just <strong>origin</strong>, but from <strong>upstream</strong> as well.  You can do this with a single command that fetches changes for <em>all</em> remote repositories:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$&gt; git fetch --all
+Fetching origin
+Fetching upstream
+...</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_remote_repository_changes_need_to_be_merged">What remote repository changes need to be merged?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now that you fetched your changes from all remote repositories, you need to know which changes from your remote repositories need to be merged.  Once again, there&#8217;s a git command for that.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$&gt; git branch -a --no-merge
+remotes/upstream/master</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will list all the branches that have changes that need to be merged into you current branch.  The -a command ensures that you display the remote repository branches as well.  This only works after a fetch command.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_push_to_same_branch_on_remote">Push to same branch on remote</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When you are ready to push your changes to your origin remote repo, you may find yourself typing out a long command, like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>git push origin feature/create-an-awesome-feature</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Rather that do this, you can just type the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>git push origin HEAD</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will push the current branch to origin with the same branch name.  Handy.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_purge_remote_branches">Purge Remote Branches</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In a forked world, your changes to origin will likely be contributed back to the upstream project via a pull request.  Tools like Github and Stash allow you to delete the pull request branch once it has been merged into upstream/master.  Once this happens, you may want to clean out the branch locally as well.  You could delete the branch, but you will still need to fetch/merge from upstream.  Why not do them both at the same time?</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$&gt; git branch -a
+  heartbleed_fix
+* master
+  remotes/origin/HEAD -&gt; origin/master
+  remotes/origin/heartbleed_fix
+  remotes/origin/master
+$&gt; git fetch -p --all
+Fetching origin
+ x [deleted]         (none)     -&gt; origin/heartbleed_fix
+$&gt; git branch -a
+  heartbleed_fix
+* master
+  remotes/origin/HEAD -&gt; origin/master
+  remotes/origin/master</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <em>-p</em> flag will prune any branches from your local Git repository that don&#8217;t exist on your remote repository.  Now this will only remove the local instance of the remote repository.  You will still have your own copy of the branch, as you can see from the second <em>git branch -a</em> command.  To get rid of the local branch, you have to delete it:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>git branch -d heartbleed_fix</pre>
+</div>
+</div>
+</div>
+</div></p>
+
+	<hr>
+
+	<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'mikemcgarr'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	
+		</div>
+		<div id="push"></div>
+    </div>
+    
+    <div id="footer">
+      <div class="container">
+        <p class="muted credit">&copy; 2013 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.0-SNAPSHOT</a></p>
+      </div>
+    </div>
+    
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/js/jquery-1.9.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/run_prettify.js"></script>
+    
+  </body>
+</html>
