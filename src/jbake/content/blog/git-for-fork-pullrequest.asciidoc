@@ -3,6 +3,7 @@ date=2014-04-17
 type=post
 tags=git
 status=published
+summary=If you are working on a team or open source project that uses Git, it is likely that you have been introduced to the fork/pull-request model of collaboration for Git (and Mercurial).
 ~~~~~~
 If you are working on a team or open source project that uses Git, it is likely that you have been introduced to the fork/pull-request model of collaboration for Git (and Mercurial).  The https://help.github.com/articles/using-pull-requests[fork/pull-request] concepts are not a part of git, but were popularized by Github.  You find most DVCS server products incorporate some variation of them.  
 
