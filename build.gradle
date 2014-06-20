@@ -5,14 +5,13 @@ buildscript {
     }
 
     dependencies {
-        classpath 'me.champeau.gradle:jbake-gradle-plugin:0.1-SNAPSHOT' 
+        classpath 'me.champeau.gradle:jbake-gradle-plugin:0.2.2-SNAPSHOT' 
         classpath 'org.asciidoctor:asciidoctor-java-integration:0.1.4'  
         classpath 'org.freemarker:freemarker:2.3.19'
     }
 }
 
-apply plugin: 'groovy'
-apply plugin: 'jbake'
+apply plugin: 'me.champeau.jbake'
 apply plugin: 'idea'
 
 task publish( type: GradleBuild ) {           

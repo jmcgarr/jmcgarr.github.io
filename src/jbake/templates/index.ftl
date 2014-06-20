@@ -4,11 +4,10 @@
 
 	<div class="row-fluid">
 
-		<div class="span3">
-			left Menu
+		<div class="span2">
 		</div>
 
-		<div class="span7">
+		<div class="span8">
 			<div class="page-header">
 				<h1>Blog</h1>
 			</div>
