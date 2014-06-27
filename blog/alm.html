@@ -4,8 +4,8 @@
     <meta charset="utf-8"/>
     <title>Thoughts on Application Lifecycle Management (ALM)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="The personal blog of J. Michael McGarr, professional automation rant monger.  Passionate about #devops #continuousDelivery #lean #agile">
+    <meta name="author" content="https://twitter.com/jmichaelmcgarr">
     <meta name="keywords" content="">
     <meta name="generator" content"JBake">
 
@@ -14,6 +14,7 @@
     <link href="/css/asciidoctor.css" rel="stylesheet">
     <link href="/css/base.css" rel="stylesheet">
     <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="/css/extra.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -52,25 +53,30 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="brand" href="/">Mike McGarr's Blog</a>
+            <a class="brand" href="/">Mike McGarr</a>
             <div class="nav-collapse collapse">
               <ul class="nav">
                 <li><a href="/about.html">About</a></li>
-                <li><a href="/archive.html">Blog</a></li>
+                <li><a href="/archive.html">Posts</a></li>
+                <li><a href="#">Talks</a></li>
                 <li><a href="/feed.xml">Subscribe</a></li>
               </ul>
             </div><!--/.nav-collapse -->
           </div>
         </div>
       </div>
-      <div class="container">	
-	<div class="page-header">
-		<h1>Thoughts on Application Lifecycle Management (ALM)</h1>
-	</div>
+      <div class="container-fluid">
+    <div class="row-fluid">
+    
+        <div class="span8 offset2">
+	
+        	<div class="page-header">
+        		<h1>Thoughts on Application Lifecycle Management (ALM)</h1>
+        	</div>
 
-	<p><em>04 March 2011</em></p>
+        	<p><em>04 March 2011</em></p>
 
-	<p><p>Last week, I was asked to give my opinion on Application Lifecycle Management or ALM.  Specifically, I was asked how can teams effectively manage their design, development, test and deploy processes as well as pick the right tools for the job.  Here is the answer I gave:</p>
+        	<p><p>Last week, I was asked to give my opinion on Application Lifecycle Management or ALM.  Specifically, I was asked how can teams effectively manage their design, development, test and deploy processes as well as pick the right tools for the job.  Here is the answer I gave:</p>
 <div>
 <blockquote><p><span style="font-family:tahoma;">The cornerstone of a strong ALM<a></a> process is based in <a title="The Agile Manifesto" href="http://agilemanifesto.org/" target="_blank">Agile</a> practices  and <a title="Agile Principles" href="http://agilemanifesto.org/principles.html" target="_blank">principles</a>.  Iterative software development is useful for breaking work up  into small chunks that provides fast and frequent feedback to both the team and  the customer.  Developing software using <a title="Test Driven Development" href="http://www.agiledata.org/essays/tdd.html" target="_blank">test driven development</a> (with an  emphasis on <a title="Behavior Driven Development" href="http://dannorth.net/introducing-bdd/" target="_blank">behavior driven development</a>) allows developers to focus on behavior  first as well as quality.  Developers will iteratively <a title="Evolutionary Design" href="http://martinfowler.com/articles/designDead.html" target="_blank">evolve the design</a> of the  software based on the tests, and will limit the amount of up front design.   Automated tests are executed as part of an automated build process that is in  turn executed by a <a title="Continuous Integration" href="http://martinfowler.com/articles/continuousIntegration.html" target="_blank">continuous integration</a> server monitoring version control.   Developers should be checking in their changes frequently, triggering multiple  builds, resulting in multiple feedback cycles.  All development should take  place on the trunk in version control and branching should be  limited.</span></p><br/>
 <p><span style="font-family:tahoma;">Taking ALM<a></a> a step further lies the <a title="Continuous Delivery" href="http://continuousdelivery.com/2010/02/continuous-delivery/" target="_blank">continuous delivery</a> practice of  <a title="Deployment Pipelines" href="http://www.scribd.com/doc/196739/The-Deployment-Pipeline-by-Dave-Farley-2007" target="_blank">deployment pipelines</a>.  Like with standard continuous integration, each change to  source triggers a new build on the CI server.  With deployment pipelines, you  are chaining together a series of builds, each responsible for validating a  certain condition or set of conditions (like acceptance tests or coding style).   Each build should expand on the previous with an increasingly rigorous  criteria<a></a>.  The goal of deployment pipelines is validate a change to  source to see if it is production worthy, i.e.<a></a> a release candidate.  In  some environments, deployment pipelines are <a title="Continuous Deployment" href="http://timothyfitz.wordpress.com/2009/02/08/continuous-deployment/" target="_blank">automated all the way to production</a>,  where a change from a developer can go to production without a single person  touching it.  To achieve this, automation and feedback are essential.  Unit,  Integration, Acceptance and Performance Tests must all be phases of the  deployment pipelines with rigorous criteria to keep a build out of production  that doesn't meet the standard.  Managing code is also an essential part of the pipeline, which is achieved using static code analysis tools.  In addition, automating the deployment of the  application from source to the Dev, Test, Staging and Production is also an  essential practice.</span></p><br/>
@@ -78,6 +84,8 @@
 </div>
 <p>My thoughts were somewhat off the cuff and could likely be more comprehensive given time, but I still found them valuable.  I would to hear what you think of this answer and if you have differing opinions.  Enjoy!</p>
 </p>
+        </div>
+    </div>
 
 	<hr>
 
@@ -102,7 +110,7 @@
     
     <div id="footer">
       <div class="container">
-        <p class="muted credit">&copy; 2013 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.0-SNAPSHOT</a></p>
+        <p class="muted credit">&copy; 2013 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.0</a></p>
       </div>
     </div>
     

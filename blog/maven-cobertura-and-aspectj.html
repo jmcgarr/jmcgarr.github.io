@@ -4,8 +4,8 @@
     <meta charset="utf-8"/>
     <title>Maven, Cobertura and AspectJ</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="The personal blog of J. Michael McGarr, professional automation rant monger.  Passionate about #devops #continuousDelivery #lean #agile">
+    <meta name="author" content="https://twitter.com/jmichaelmcgarr">
     <meta name="keywords" content="">
     <meta name="generator" content"JBake">
 
@@ -14,6 +14,7 @@
     <link href="/css/asciidoctor.css" rel="stylesheet">
     <link href="/css/base.css" rel="stylesheet">
     <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="/css/extra.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -52,25 +53,30 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="brand" href="/">Mike McGarr's Blog</a>
+            <a class="brand" href="/">Mike McGarr</a>
             <div class="nav-collapse collapse">
               <ul class="nav">
                 <li><a href="/about.html">About</a></li>
-                <li><a href="/archive.html">Blog</a></li>
+                <li><a href="/archive.html">Posts</a></li>
+                <li><a href="#">Talks</a></li>
                 <li><a href="/feed.xml">Subscribe</a></li>
               </ul>
             </div><!--/.nav-collapse -->
           </div>
         </div>
       </div>
-      <div class="container">	
-	<div class="page-header">
-		<h1>Maven, Cobertura and AspectJ</h1>
-	</div>
+      <div class="container-fluid">
+    <div class="row-fluid">
+    
+        <div class="span8 offset2">
+	
+        	<div class="page-header">
+        		<h1>Maven, Cobertura and AspectJ</h1>
+        	</div>
 
-	<p><em>04 January 2010</em></p>
+        	<p><em>04 January 2010</em></p>
 
-	<p><p>I recently ran into an issue running Cobertura code coverage reports on my Maven2 project.  It appears that Cobertura is not being run, since the code coverage reports always showed 0% code coverage in spite of the existence of numerous unit tests.  This problem had appeared early in the project and seemed to disappear magically, so I wrote it off.  Now that it is back, I was determined to find the answer, and I have.</p>
+        	<p><p>I recently ran into an issue running Cobertura code coverage reports on my Maven2 project.  It appears that Cobertura is not being run, since the code coverage reports always showed 0% code coverage in spite of the existence of numerous unit tests.  This problem had appeared early in the project and seemed to disappear magically, so I wrote it off.  Now that it is back, I was determined to find the answer, and I have.</p>
 <p>Cobertura is a code coverage tool that measures the amount of code exercised by your unit tests.  Cobertura works by instrumenting your application's byte code, which occurs after compilation.  When the instrumented code is called by your unit tests, Cobertura records which packages, files, lines, methods and even conditions are covered by your unit tests.</p>
 <p>When the problem started to occurred, I spent some time analyzing Maven build outputs from successful Cobertura executions and Cobertura executions that resulted in 0% coverage (thanks to Hudson for storing all of this historical information).  Here is the output from the failing Maven build:</p>
 <pre>
@@ -137,6 +143,8 @@ T E S T S
 15. test</p></blockquote>
 <p>Hmmm, this doesn't seem right, cause according to the default phases, cobertura should have been the last to fire.  Well, it looks like the problem was in my build script, where I had hibernate3:hbm2ddl attached to the process-test-resources phase.  Ok, so now why is hibernate3:hbm2ddl triggering aspectj:compile to run a second time?  This part is still a mystery to me.  I plan on researching this topic further and when I find an answer, I will post an update to this blog entry.  If anybody has any additional insight, please feel free to leave a comment.</p>
 </p>
+        </div>
+    </div>
 
 	<hr>
 
@@ -161,7 +169,7 @@ T E S T S
     
     <div id="footer">
       <div class="container">
-        <p class="muted credit">&copy; 2013 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.0-SNAPSHOT</a></p>
+        <p class="muted credit">&copy; 2013 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.0</a></p>
       </div>
     </div>
     

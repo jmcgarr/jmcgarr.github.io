@@ -4,8 +4,8 @@
     <meta charset="utf-8"/>
     <title>A roadmap for unit testing</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="The personal blog of J. Michael McGarr, professional automation rant monger.  Passionate about #devops #continuousDelivery #lean #agile">
+    <meta name="author" content="https://twitter.com/jmichaelmcgarr">
     <meta name="keywords" content="">
     <meta name="generator" content"JBake">
 
@@ -14,6 +14,7 @@
     <link href="/css/asciidoctor.css" rel="stylesheet">
     <link href="/css/base.css" rel="stylesheet">
     <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="/css/extra.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -52,25 +53,30 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="brand" href="/">Mike McGarr's Blog</a>
+            <a class="brand" href="/">Mike McGarr</a>
             <div class="nav-collapse collapse">
               <ul class="nav">
                 <li><a href="/about.html">About</a></li>
-                <li><a href="/archive.html">Blog</a></li>
+                <li><a href="/archive.html">Posts</a></li>
+                <li><a href="#">Talks</a></li>
                 <li><a href="/feed.xml">Subscribe</a></li>
               </ul>
             </div><!--/.nav-collapse -->
           </div>
         </div>
       </div>
-      <div class="container">	
-	<div class="page-header">
-		<h1>A roadmap for unit testing</h1>
-	</div>
+      <div class="container-fluid">
+    <div class="row-fluid">
+    
+        <div class="span8 offset2">
+	
+        	<div class="page-header">
+        		<h1>A roadmap for unit testing</h1>
+        	</div>
 
-	<p><em>04 December 2012</em></p>
+        	<p><em>04 December 2012</em></p>
 
-	<p><p>I was recently asked by an old friend how they can get started writing unit tests on their existing application.  He was looking for guidance and more or less a roadmap of how to get started.  I decided to share what I sent him here.</p>
+        	<p><p>I was recently asked by an old friend how they can get started writing unit tests on their existing application.  He was looking for guidance and more or less a roadmap of how to get started.  I decided to share what I sent him here.</p>
 <p>So, if there is already code written for an application that you want to add unit tests to, this is harder, but not impossible.  Essentially, the problem you will run into is the code you are trying to unit test isn't testable.</p>
 <p><b>Working Effectively with Legacy Code</b><br />
 Production code without unit tests is considered legacy code.  More than likely it will no small task adding unit tests to your existing application.  Most legacy applications were not designed to be testable.  The code has concrete dependencies that make it hard externalize during unit testing to isolate the class.</p>
@@ -134,6 +140,8 @@ You can follow these steps to add unit tests to your code.  You may progress th
 </ol>
 <p>The process of learning to write good unit tests, how use Test Doubles, how to do TDD and finally how it all fits together can a long time to set in, but it is well worth it.</p>
 </p>
+        </div>
+    </div>
 
 	<hr>
 
@@ -158,7 +166,7 @@ You can follow these steps to add unit tests to your code.  You may progress th
     
     <div id="footer">
       <div class="container">
-        <p class="muted credit">&copy; 2013 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.0-SNAPSHOT</a></p>
+        <p class="muted credit">&copy; 2013 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.0</a></p>
       </div>
     </div>
     
