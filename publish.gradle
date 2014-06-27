@@ -1,10 +1,11 @@
 buildscript {
   repositories {
-      jcenter()
+    mavenLocal()
+    jcenter()
   }
 
   dependencies {
-    classpath 'org.ajoberstar:gradle-git:0.8.0'     
+    classpath 'org.ajoberstar:gradle-git:0.8.0'
   }
 }
 
@@ -14,9 +15,9 @@ githubPages {
   repoUri = 'git@github.com:jmcgarr/jmcgarr.github.io.git'
   targetBranch = 'master'
   pages {
-     from(file('build/jbake')) {
+    from(file('build/jbake')) {
      	into '.'                                    
-     }
+    }
   }
   credentials {
     username = System.getenv('GH_TOKEN')
