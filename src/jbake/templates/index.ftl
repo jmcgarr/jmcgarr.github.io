@@ -9,7 +9,7 @@
 
 		<div class="span8">
 			<div class="page-header">
-				<h1>Blog</h1>
+				<h1>Recent Posts</h1>
 			</div>
 
 			<#list posts as post>
