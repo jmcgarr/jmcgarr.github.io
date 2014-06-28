@@ -87,25 +87,26 @@
 <p>This will only work for one repository.  GitHub requires that your Deploy Keys be unique among your repositories.  Ideally, you should be able to create multiple SSH keys on your Jenkins server, but I had trouble getting this to work.  What I ended up doing instead was <a title="Git Setup" href="http://help.github.com/mac-set-up-git/" target="_blank">adding the SSH public key</a> to my <a title="Mike McGarr's GitHub account" href="https://github.com/jmcgarr" target="_blank">GitHub user account</a>.  This allows Jenkins build access to any of the private repositories I create.</p>
 <p>I would ideally like to get the<a title="Jenkins GitHub Plugin" href="https://wiki.jenkins-ci.org/display/JENKINS/Github+Plugin" target="_blank"> Jenkins GitHub plugin</a> working, but after a 10 minute test, I stuck with my current setup so that I can move on to the next problem.</p>
 </p>
+
+            <hr>
+
+            <div id="disqus_thread">
+            <script type="text/javascript">
+                /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                var disqus_shortname = 'mikemcgarr'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            </div>
         </div>
     </div>
-
-	<hr>
-
-	<div id="disqus_thread"></div>
-    <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'mikemcgarr'; // required: replace example with your forum shortname
-
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 	
 		</div>
 		<div id="push"></div>

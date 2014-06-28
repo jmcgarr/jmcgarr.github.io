@@ -89,25 +89,26 @@
 <p>Lastly, if I call the <em>compile</em> phase, don't fail the build if I am missing a dependency needed for the <em>deploy</em> phase.  I should only see a warning if I am trying to execute the task.  I may want to write a build script that requires secure access to a username and password on the continuous integration server, but developers will never execute this phase.  I don't want them to have to setup a username and password for something they will never execute.</p>
 <p>Gradle makes this very easy to do.  Gradle has three phases of build execution: initialization, configuration and execution.  The initialization phase is to build a project graph (for multi-module projects), the configuration phase builds a task graph and the execute phase executes the project tasks.  You can write code that checks the contents of the task graph and conditionally executes logic.  For information on how to do this in Gradle, <a title="Gradle: Configuring the DAG" href="http://www.gradle.org/docs/current/userguide/userguide_single.html#configure-by-dag" target="_blank">read the f*cking manual</a>.</p>
 </p>
+
+            <hr>
+
+            <div id="disqus_thread">
+            <script type="text/javascript">
+                /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                var disqus_shortname = 'mikemcgarr'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            </div>
         </div>
     </div>
-
-	<hr>
-
-	<div id="disqus_thread"></div>
-    <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'mikemcgarr'; // required: replace example with your forum shortname
-
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 	
 		</div>
 		<div id="push"></div>
