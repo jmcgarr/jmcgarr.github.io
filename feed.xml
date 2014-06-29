@@ -6,8 +6,8 @@
     <atom:link href="http://jmcgarr.github.io/feed.xml" rel="self" type="application/rss+xml" />
     <description>Mike McGarr's Personal Blog</description>
     <language>en-gb</language>
-    <pubDate>Sat, 28 Jun 2014 19:07:25 -0700</pubDate>
-    <lastBuildDate>Sat, 28 Jun 2014 19:07:25 -0700</lastBuildDate>
+    <pubDate>Sat, 28 Jun 2014 19:15:47 -0700</pubDate>
+    <lastBuildDate>Sat, 28 Jun 2014 19:15:47 -0700</lastBuildDate>
 
     <item>
       <title>DevOps in the Federal Government</title>
@@ -16,7 +16,7 @@
       <guid isPermaLink="false">blog/devops-in-the-federal-government.html</guid>
       	<description>
 	&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Yesterday marked the first day of DevOpsDays Silicon Valley, and my first DevOpsDays.  The conference has been quite impressive so far and well worth the ticket price ($150).  The speakers are amazing, but the true value is the ‘hallway track’ and the open spaces.  There was one open space in particular that I wanted to talk about here.  This open space focused on DevOps in the Government.&lt;/p&gt;
+&lt;p&gt;Yesterday marked the first day of &lt;a href=&quot;http://devopsdays.org/events/2014-siliconvalley/&quot;&gt;DevOpsDays Silicon Valley&lt;/a&gt;, and my first DevOpsDays.  The conference has been quite impressive so far and well worth the ticket price ($150).  The speakers are amazing, but the true value is the ‘hallway track’ and the open spaces.  There was one open space in particular that I wanted to talk about here.  This open space focused on DevOps in the Government.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;The first thing that struck me was that nobody in this open space currently worked for the federal government.  One person was a former government IT manager, myself (a former government contractor), a scientist on federal grants,&amp;#8230;and then a room of devops-minded ops guys.  So the conversation was definitely biased, but was interesting to say the least.&lt;/p&gt;
