@@ -17,11 +17,7 @@ apply plugin: 'idea'
 apply plugin: 'github-pages'                        
 //apply from: 'publish.gradle'
 
-//task publish( type: GradleBuild ) {           
-//	description = 'Publishes the build output to gh-pages.'
-//    buildFile = 'publish.gradle'
-//    tasks = ['publishGhPages']
-//}
+
 
 githubPages {
   repoUri = 'git@github.com:jmcgarr/jmcgarr.github.io.git'
@@ -35,4 +31,12 @@ githubPages {
     username = System.getenv('GH_TOKEN')
     password = ''
   }
+}
+
+publishGhPages.dependsOn jbake
+
+task publish( type: GradleBuild ) {           
+  description = 'Publishes the build output to gh-pages.'
+  //buildFile = 'publish.gradle'
+  tasks = ['publishGhPages']
 }
