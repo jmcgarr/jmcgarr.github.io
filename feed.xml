@@ -6,9 +6,73 @@
     <atom:link href="http://jmcgarr.github.io/feed.xml" rel="self" type="application/rss+xml" />
     <description>Mike McGarr's Personal Blog</description>
     <language>en-gb</language>
-    <pubDate>Sat, 28 Jun 2014 07:30:37 -0700</pubDate>
-    <lastBuildDate>Sat, 28 Jun 2014 07:30:37 -0700</lastBuildDate>
+    <pubDate>Sat, 28 Jun 2014 19:07:25 -0700</pubDate>
+    <lastBuildDate>Sat, 28 Jun 2014 19:07:25 -0700</lastBuildDate>
 
+    <item>
+      <title>DevOps in the Federal Government</title>
+      <link>http://jmcgarr.github.ioblog/devops-in-the-federal-government.html</link>
+      <pubDate>Sat, 28 Jun 2014 00:00:00 -0700</pubDate>
+      <guid isPermaLink="false">blog/devops-in-the-federal-government.html</guid>
+      	<description>
+	&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Yesterday marked the first day of DevOpsDays Silicon Valley, and my first DevOpsDays.  The conference has been quite impressive so far and well worth the ticket price ($150).  The speakers are amazing, but the true value is the ‘hallway track’ and the open spaces.  There was one open space in particular that I wanted to talk about here.  This open space focused on DevOps in the Government.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The first thing that struck me was that nobody in this open space currently worked for the federal government.  One person was a former government IT manager, myself (a former government contractor), a scientist on federal grants,&amp;#8230;and then a room of devops-minded ops guys.  So the conversation was definitely biased, but was interesting to say the least.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;One point raised during this open space is that the government has been quick to adopt Agile best practices.  This is true.  Most statements of work I saw required providing evidence of Agile proficiency.  Most contractors in the beltway will tell you that they know Agile (my experience says that most don’t really know Agile).  So if Agile can work in the government, can DevOps?  Yes, it can, but there is a significant obstacle.  Culture.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_culture&quot;&gt;Culture&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;My assertion is that Agile adoption in government has been well received, because the Agile (as executed in the government) doesn’t require cultural changes.  Agile can be pushed down on an individual contractor or development team, with little change to rest of the agency’s operations.  Government project managers can demand Agile be executed, without knowing whether the team is truly doing it.  Outside of the contractors, the way the government operates pretty much stays the same in an Agile world.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;In order to adopt DevOps, the first word out of any DevOps practitioner’s mouth will be ‘Culture’.  And not the culture of your contractors, but of the whole agency.  In order to adopt DevOps, government agencies will have to look at how developers interact with operations.  Agencies will have to come to terms with the complete value stream that delivers software to their customers.  Agencies will have to look at how their own employees contribute to or hinder the value stream.  Agencies will have to learn to build trusting relationships with IT.  DevOps adoption (done right) will force this very difficult analysis.  The federal government will have to call into question some well established practices in order to implement DevOps.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_the_danger&quot;&gt;The danger&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;My fear is that the government will be quick to adopt DevOps the way they adopted Agile….push it down and outsource it.  It will be way to easy to just buy a DevOps tool, and tell operations to be more “devops”.  Trust me, this will happen.  There will be software firms that will want to sell you DevOps in a box (or in the cloud).  This path will come packaged by slick salesmen and will be extremely attractive.  It will allow agency management to maintain their fiefdoms.  It will allow them to ignore the real problem (culture) and still be get a pat on their back for moving the needle towards DevOps.
+That being said, I am optimistic that DevOps in the government can be successful.  There is federal interest in adopting IT practices that will develop reliable software solutions quickly for less.  Having worked for a contracting firm that believed in Agile and pushed hard for it’s adoption in the government, I know there is interest on the contractor side as well.  Agencies able to achieve devops would be able to attract top talent, and possibly retain them.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_recommendations&quot;&gt;Recommendations&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The road to a federal DevOps culture is a long one.  I was recently made aware of 18F Digital Services, which was founded in the hopes of building Bay Area class solutions for the federal government.  I think that this is a good start.  I have some additional advice for agencies interested in DevOps.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Build a bridge&lt;/strong&gt; - Government agency leaders need to ask for help, and be willing to make changes to how their organization operates (DevOps = reorg).  Engineers in Silicon Valley can’t fathom some of the issues and problems that came to light during the HealthCare.gov debacle.  There is a vast divide in thinking between Silicon Valley and DC, but I guarantee there is interest.  Federal CIO’s need to engage the Valley’s tech community and understand what makes them tick.  Not everything here can be applied to the government, but it’s a start.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Ask why?&lt;/strong&gt; - The government really needs to get good at 5 Why’s.  There are number of practices, rules and even regulations that inhibit government IT evolution.  Government agencies need to continually ask “why do I really need to follow this rule?” (and keep asking).  Get to the core goal of these restrictions, and propose a better way to solve this problem.  These policies are likely well intentioned, but may not&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Start small&lt;/strong&gt; - In another open space about organizational change management, the idea of demonstrating value with a small project kept coming up time and time again.  These projects can be quick wins for the agency and be held up as shining examples that it is possible.  At the same time, don’t stop there.  Sometimes some guerilla changes might be needed to further disprove the neigh sayers.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Top down and bottom up&lt;/strong&gt; - It is important that change happens at both at the executive level as well as at the bottom.  Grassroot efforts can be great for creating a stir, but in order to be truly successful, at some point the executives need to buy-in (or get out of the way).  Change agents (you!) need to consider this when executing change.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;I hope to explore this topic more in the future.  I would love to get some comments and feedback on those who agree with me or feel I missed something.  And thank you to the organizers and sponsors of DevOpsDays Silicon Valley for a great conference.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+	</description>
+    </item>
     <item>
       <title>Git commands for a &apos;forked&apos; up world</title>
       <link>http://jmcgarr.github.ioblog/git-for-fork-pullrequest.html</link>

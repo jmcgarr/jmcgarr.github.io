@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>DevOps in the Federal Government</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The personal blog of J. Michael McGarr, professional automation rant monger.  Passionate about #devops #continuousDelivery #lean #agile">
+    <meta name="author" content="https://twitter.com/jmichaelmcgarr">
+    <meta name="keywords" content="">
+    <meta name="generator" content"JBake">
+
+    <!-- Le styles -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/asciidoctor.css" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="/css/extra.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
+    <link rel="shortcut icon" href="favicon.ico">
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-49993013-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+  </head>
+  <body>
+    <div id="wrap">
+	
+	<!-- Fixed navbar -->
+      <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="/">Mike McGarr</a>
+            <div class="nav-collapse collapse">
+              <ul class="nav">
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/archive.html">Posts</a></li>
+                <li><a href="#">Talks</a></li>
+                <li><a href="/feed.xml">Subscribe</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid">
+    <div class="row-fluid">
+    
+        <div class="span8 offset2">
+	
+        	<div class="page-header">
+        		<h1>DevOps in the Federal Government</h1>
+        	</div>
+
+        	<p><em>28 June 2014</em></p>
+
+        	<p><div class="paragraph">
+<p>Yesterday marked the first day of DevOpsDays Silicon Valley, and my first DevOpsDays.  The conference has been quite impressive so far and well worth the ticket price ($150).  The speakers are amazing, but the true value is the ‘hallway track’ and the open spaces.  There was one open space in particular that I wanted to talk about here.  This open space focused on DevOps in the Government.</p>
+</div>
+<div class="paragraph">
+<p>The first thing that struck me was that nobody in this open space currently worked for the federal government.  One person was a former government IT manager, myself (a former government contractor), a scientist on federal grants,&#8230;and then a room of devops-minded ops guys.  So the conversation was definitely biased, but was interesting to say the least.</p>
+</div>
+<div class="paragraph">
+<p>One point raised during this open space is that the government has been quick to adopt Agile best practices.  This is true.  Most statements of work I saw required providing evidence of Agile proficiency.  Most contractors in the beltway will tell you that they know Agile (my experience says that most don’t really know Agile).  So if Agile can work in the government, can DevOps?  Yes, it can, but there is a significant obstacle.  Culture.</p>
+</div>
+<div class="sect1">
+<h2 id="_culture">Culture</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>My assertion is that Agile adoption in government has been well received, because the Agile (as executed in the government) doesn’t require cultural changes.  Agile can be pushed down on an individual contractor or development team, with little change to rest of the agency’s operations.  Government project managers can demand Agile be executed, without knowing whether the team is truly doing it.  Outside of the contractors, the way the government operates pretty much stays the same in an Agile world.</p>
+</div>
+<div class="paragraph">
+<p>In order to adopt DevOps, the first word out of any DevOps practitioner’s mouth will be ‘Culture’.  And not the culture of your contractors, but of the whole agency.  In order to adopt DevOps, government agencies will have to look at how developers interact with operations.  Agencies will have to come to terms with the complete value stream that delivers software to their customers.  Agencies will have to look at how their own employees contribute to or hinder the value stream.  Agencies will have to learn to build trusting relationships with IT.  DevOps adoption (done right) will force this very difficult analysis.  The federal government will have to call into question some well established practices in order to implement DevOps.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_danger">The danger</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>My fear is that the government will be quick to adopt DevOps the way they adopted Agile….push it down and outsource it.  It will be way to easy to just buy a DevOps tool, and tell operations to be more “devops”.  Trust me, this will happen.  There will be software firms that will want to sell you DevOps in a box (or in the cloud).  This path will come packaged by slick salesmen and will be extremely attractive.  It will allow agency management to maintain their fiefdoms.  It will allow them to ignore the real problem (culture) and still be get a pat on their back for moving the needle towards DevOps.
+That being said, I am optimistic that DevOps in the government can be successful.  There is federal interest in adopting IT practices that will develop reliable software solutions quickly for less.  Having worked for a contracting firm that believed in Agile and pushed hard for it’s adoption in the government, I know there is interest on the contractor side as well.  Agencies able to achieve devops would be able to attract top talent, and possibly retain them.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_recommendations">Recommendations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The road to a federal DevOps culture is a long one.  I was recently made aware of 18F Digital Services, which was founded in the hopes of building Bay Area class solutions for the federal government.  I think that this is a good start.  I have some additional advice for agencies interested in DevOps.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Build a bridge</strong> - Government agency leaders need to ask for help, and be willing to make changes to how their organization operates (DevOps = reorg).  Engineers in Silicon Valley can’t fathom some of the issues and problems that came to light during the HealthCare.gov debacle.  There is a vast divide in thinking between Silicon Valley and DC, but I guarantee there is interest.  Federal CIO’s need to engage the Valley’s tech community and understand what makes them tick.  Not everything here can be applied to the government, but it’s a start.</p>
+</li>
+<li>
+<p><strong>Ask why?</strong> - The government really needs to get good at 5 Why’s.  There are number of practices, rules and even regulations that inhibit government IT evolution.  Government agencies need to continually ask “why do I really need to follow this rule?” (and keep asking).  Get to the core goal of these restrictions, and propose a better way to solve this problem.  These policies are likely well intentioned, but may not</p>
+</li>
+<li>
+<p><strong>Start small</strong> - In another open space about organizational change management, the idea of demonstrating value with a small project kept coming up time and time again.  These projects can be quick wins for the agency and be held up as shining examples that it is possible.  At the same time, don’t stop there.  Sometimes some guerilla changes might be needed to further disprove the neigh sayers.</p>
+</li>
+<li>
+<p><strong>Top down and bottom up</strong> - It is important that change happens at both at the executive level as well as at the bottom.  Grassroot efforts can be great for creating a stir, but in order to be truly successful, at some point the executives need to buy-in (or get out of the way).  Change agents (you!) need to consider this when executing change.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>I hope to explore this topic more in the future.  I would love to get some comments and feedback on those who agree with me or feel I missed something.  And thank you to the organizers and sponsors of DevOpsDays Silicon Valley for a great conference.</p>
+</div>
+</div>
+</div></p>
+
+            <hr>
+
+            <div id="disqus_thread">
+            <script type="text/javascript">
+                /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                var disqus_shortname = 'mikemcgarr'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            </div>
+        </div>
+    </div>
+	
+		</div>
+		<div id="push"></div>
+    </div>
+    
+    <div id="footer">
+      <div class="container">
+        <p class="muted credit">&copy; 2013 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.0</a></p>
+      </div>
+    </div>
+    
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/js/jquery-1.9.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/run_prettify.js"></script>
+    
+  </body>
+</html>
