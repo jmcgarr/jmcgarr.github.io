@@ -75,6 +75,25 @@
         	</div>
 
         	<p><em>08 September 2012</em></p>
+            <p><em>Tags: </em>
+                <a href="/tags/apt-get.html">apt-get</a> 
+            </em>
+                <a href="/tags/debian.html"> debian</a> 
+            </em>
+                <a href="/tags/openjdk.html"> openjdk</a> 
+            </em>
+                <a href="/tags/puppet.html"> puppet</a> 
+            </em>
+                <a href="/tags/ubuntu.html"> ubuntu</a> 
+            </em>
+                <a href="/tags/vagrant.html"> vagrant</a> 
+            </p>
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.mikemcgarr.com/blog/blog/openjdk-6-install-lucid.html" data-via="jMichaelMcGarr" data-lang="fr">Tweeter</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            <div class="g-plusone" data-size="medium" data-href="http://www.mikemcgarr.com/blog/blog/openjdk-6-install-lucid.html"></div>
+            <script id='fbvpgng'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//api.flattr.com/button/view/?uid=jMichaelMcGarr&button=compact&url='+encodeURIComponent('http://www.mikemcgarr.com/blog/blog/openjdk-6-install-lucid.html');f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbvpgng');</script>
+            <script type="IN/Share" data-url="http://www.mikemcgarr.com/blog/blog/openjdk-6-install-lucid.html" data-counter="right"></script>
+            <div class="fb-like" data-href="http://www.mikemcgarr.com/blog/blog/openjdk-6-install-lucid.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
 
         	<p><p>I have been playing with <a title="Vagrant" href="http://vagrantup.com/" target="_blank">Vagrant</a> and <a title="Puppet" href="http://puppetlabs.com/puppet/puppet-open-source/" target="_blank">Puppet</a> a lot recently and I had some trouble getting <a title="OpenJDK 6" href="http://openjdk.java.net/projects/jdk6/" target="_blank">OpenJDK 6</a> to install on <a title="Ubuntu 10.04" href="http://releases.ubuntu.com/lucid/" target="_blank">Ubuntu 10.04 (Lucid Lynx)</a>. &nbsp;Since I had so much trouble finding the consolidated answer, I've decided to post my solution here.</p>
 <p>The problem stems from the fact I want to install OpenJDK via a <a title="Debian package" href="http://www.debian.org/distrib/packages" target="_blank">Debian package</a>. &nbsp;Lucid Lynx's default <a title="AptGet" href="https://help.ubuntu.com/community/AptGet/Howto" target="_blank">apt</a> setup doesn't include the correct repositories needed to install OpenJDK. &nbsp;To get this to work, you need to add the correct repository to apt. &nbsp;I accomplished this by using the 'add-apt-repository' python library, like so:<br />

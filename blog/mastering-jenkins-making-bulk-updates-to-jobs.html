@@ -75,6 +75,17 @@
         	</div>
 
         	<p><em>11 March 2013</em></p>
+            <p><em>Tags: </em>
+                <a href="/tags/jenkins.html">jenkins</a> 
+            </em>
+                <a href="/tags/groovy.html"> groovy</a> 
+            </p>
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.mikemcgarr.com/blog/blog/mastering-jenkins-making-bulk-updates-to-jobs.html" data-via="jMichaelMcGarr" data-lang="fr">Tweeter</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            <div class="g-plusone" data-size="medium" data-href="http://www.mikemcgarr.com/blog/blog/mastering-jenkins-making-bulk-updates-to-jobs.html"></div>
+            <script id='fbvpgng'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//api.flattr.com/button/view/?uid=jMichaelMcGarr&button=compact&url='+encodeURIComponent('http://www.mikemcgarr.com/blog/blog/mastering-jenkins-making-bulk-updates-to-jobs.html');f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbvpgng');</script>
+            <script type="IN/Share" data-url="http://www.mikemcgarr.com/blog/blog/mastering-jenkins-making-bulk-updates-to-jobs.html" data-counter="right"></script>
+            <div class="fb-like" data-href="http://www.mikemcgarr.com/blog/blog/mastering-jenkins-making-bulk-updates-to-jobs.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
 
         	<p><p>I recently needed to make the same update to a large number of Jenkins jobs.  Essentially, we decided to change our naming convention for our jobs.  A simple change.  In order to achieve this, I took advantage of the Jenkins Script Console.</p>
 <p>The Jenkins Script Console allows you to run Groovy code against Jenkins to execute a task.  The Script Console provides access to Jenkins' underlying API's, which allows you to conduct almost any task.  The Script Console is available to any running Jenkins instance at '/script' or through the menus by navigating to 'Manage Jenkins &gt; Script Console'.  In order to effectively use the Script Console, you will likely need to become familiar with <a title="Jenkins JavaDocs" href="http://javadoc.jenkins-ci.org/" target="_blank">Jenkins' API's</a>.</p>

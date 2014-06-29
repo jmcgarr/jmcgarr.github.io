@@ -75,6 +75,21 @@
         	</div>
 
         	<p><em>04 January 2010</em></p>
+            <p><em>Tags: </em>
+                <a href="/tags/aspectj.html">aspectj</a> 
+            </em>
+                <a href="/tags/cobertura.html"> cobertura</a> 
+            </em>
+                <a href="/tags/Java.html"> Java</a> 
+            </em>
+                <a href="/tags/maven.html"> maven</a> 
+            </p>
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.mikemcgarr.com/blog/blog/maven-cobertura-and-aspectj.html" data-via="jMichaelMcGarr" data-lang="fr">Tweeter</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            <div class="g-plusone" data-size="medium" data-href="http://www.mikemcgarr.com/blog/blog/maven-cobertura-and-aspectj.html"></div>
+            <script id='fbvpgng'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//api.flattr.com/button/view/?uid=jMichaelMcGarr&button=compact&url='+encodeURIComponent('http://www.mikemcgarr.com/blog/blog/maven-cobertura-and-aspectj.html');f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbvpgng');</script>
+            <script type="IN/Share" data-url="http://www.mikemcgarr.com/blog/blog/maven-cobertura-and-aspectj.html" data-counter="right"></script>
+            <div class="fb-like" data-href="http://www.mikemcgarr.com/blog/blog/maven-cobertura-and-aspectj.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
 
         	<p><p>I recently ran into an issue running Cobertura code coverage reports on my Maven2 project.  It appears that Cobertura is not being run, since the code coverage reports always showed 0% code coverage in spite of the existence of numerous unit tests.  This problem had appeared early in the project and seemed to disappear magically, so I wrote it off.  Now that it is back, I was determined to find the answer, and I have.</p>
 <p>Cobertura is a code coverage tool that measures the amount of code exercised by your unit tests.  Cobertura works by instrumenting your application's byte code, which occurs after compilation.  When the instrumented code is called by your unit tests, Cobertura records which packages, files, lines, methods and even conditions are covered by your unit tests.</p>

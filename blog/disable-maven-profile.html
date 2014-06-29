@@ -75,6 +75,25 @@
         	</div>
 
         	<p><em>09 February 2011</em></p>
+            <p><em>Tags: </em>
+                <a href="/tags/build.html">build</a> 
+            </em>
+                <a href="/tags/Java.html"> Java</a> 
+            </em>
+                <a href="/tags/liquibase.html"> liquibase</a> 
+            </em>
+                <a href="/tags/maven.html"> maven</a> 
+            </em>
+                <a href="/tags/maven-profiles.html"> maven profiles</a> 
+            </em>
+                <a href="/tags/unit-testing.html"> unit testing</a> 
+            </p>
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.mikemcgarr.com/blog/blog/disable-maven-profile.html" data-via="jMichaelMcGarr" data-lang="fr">Tweeter</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            <div class="g-plusone" data-size="medium" data-href="http://www.mikemcgarr.com/blog/blog/disable-maven-profile.html"></div>
+            <script id='fbvpgng'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//api.flattr.com/button/view/?uid=jMichaelMcGarr&button=compact&url='+encodeURIComponent('http://www.mikemcgarr.com/blog/blog/disable-maven-profile.html');f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbvpgng');</script>
+            <script type="IN/Share" data-url="http://www.mikemcgarr.com/blog/blog/disable-maven-profile.html" data-counter="right"></script>
+            <div class="fb-like" data-href="http://www.mikemcgarr.com/blog/blog/disable-maven-profile.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
 
         	<p><p>I wanted to share a method for enabling a <a title="Maven" href="http://maven.apache.org/" target="_blank">Maven</a> <a title="Maven Profiles" href="http://maven.apache.org/guides/introduction/introduction-to-profiles.html" target="_blank">Build Profile</a> in the absense of a system property.  I did not see this approach documented in the current version of the Maven Build Profile documentation, so I thought I would share it.</p>
 <p>I find this approach particularly useful for turning off build features whenever you are disabling tests.  In Maven, there are two properties that will <a title="Skipping tests" href="http://maven.apache.org/plugins/maven-surefire-plugin/examples/skipping-test.html" target="_blank">skip the execution of all tests</a>, but I prefer the "skipTests" property.</p>

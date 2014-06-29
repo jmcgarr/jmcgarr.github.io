@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Mike McGarr</title>
-    <link>http://jmcgarr.github.io</link>
-    <atom:link href="http://jmcgarr.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    <link>http://www.mikemcgarr.com</link>
+    <atom:link href="http://www.mikemcgarr.com/feed.xml" rel="self" type="application/rss+xml" />
     <description>Mike McGarr's Personal Blog</description>
     <language>en-gb</language>
-    <pubDate>Sat, 28 Jun 2014 22:31:03 -0700</pubDate>
-    <lastBuildDate>Sat, 28 Jun 2014 22:31:03 -0700</lastBuildDate>
+    <pubDate>Sun, 29 Jun 2014 11:02:56 -0700</pubDate>
+    <lastBuildDate>Sun, 29 Jun 2014 11:02:56 -0700</lastBuildDate>
 
     <item>
       <title>DevOps in the Federal Government</title>
-      <link>http://jmcgarr.github.ioblog/devops-in-the-federal-government.html</link>
+      <link>http://www.mikemcgarr.comblog/devops-in-the-federal-government.html</link>
       <pubDate>Sat, 28 Jun 2014 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/devops-in-the-federal-government.html</guid>
       	<description>
@@ -75,7 +75,7 @@ That being said, I am optimistic that DevOps in the government can be successful
     </item>
     <item>
       <title>Git commands for a &apos;forked&apos; up world</title>
-      <link>http://jmcgarr.github.ioblog/git-for-fork-pullrequest.html</link>
+      <link>http://www.mikemcgarr.comblog/git-for-fork-pullrequest.html</link>
       <pubDate>Thu, 17 Apr 2014 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/git-for-fork-pullrequest.html</guid>
       	<description>
@@ -209,7 +209,7 @@ $&amp;gt; git branch -a
     </item>
     <item>
       <title>On acceptance test architecture, lifecycles and responsibilities</title>
-      <link>http://jmcgarr.github.ioblog/on-acceptance-test-architecture-lifecycles-and-responsibilities.html</link>
+      <link>http://www.mikemcgarr.comblog/on-acceptance-test-architecture-lifecycles-and-responsibilities.html</link>
       <pubDate>Wed, 18 Dec 2013 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/on-acceptance-test-architecture-lifecycles-and-responsibilities.html</guid>
       	<description>
@@ -247,7 +247,7 @@ I would also like to comment on who should do what.&lt;/p&gt;
     </item>
     <item>
       <title>2013 Six Month Check-point</title>
-      <link>http://jmcgarr.github.ioblog/2013-six-month-check-point.html</link>
+      <link>http://www.mikemcgarr.comblog/2013-six-month-check-point.html</link>
       <pubDate>Mon, 1 Jul 2013 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/2013-six-month-check-point.html</guid>
       	<description>
@@ -288,7 +288,7 @@ I would also like to comment on who should do what.&lt;/p&gt;
     </item>
     <item>
       <title>Improving my Shell-fu: Oh My Zsh</title>
-      <link>http://jmcgarr.github.ioblog/improving-my-shell-fu-oh-my-zsh.html</link>
+      <link>http://www.mikemcgarr.comblog/improving-my-shell-fu-oh-my-zsh.html</link>
       <pubDate>Tue, 19 Mar 2013 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/improving-my-shell-fu-oh-my-zsh.html</guid>
       	<description>
@@ -331,7 +331,7 @@ plugins=(git vagrant knife gradle)
     </item>
     <item>
       <title>Mastering Jenkins: Making Bulk Updates to Jobs</title>
-      <link>http://jmcgarr.github.ioblog/mastering-jenkins-making-bulk-updates-to-jobs.html</link>
+      <link>http://www.mikemcgarr.comblog/mastering-jenkins-making-bulk-updates-to-jobs.html</link>
       <pubDate>Mon, 11 Mar 2013 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/mastering-jenkins-making-bulk-updates-to-jobs.html</guid>
       	<description>
@@ -367,7 +367,7 @@ for (item in Hudson.instance.items) {
     </item>
     <item>
       <title>DC Tech Ops Meetup Alliance (aka the Super Friends)</title>
-      <link>http://jmcgarr.github.ioblog/dc-tech-ops-meetup.html</link>
+      <link>http://www.mikemcgarr.comblog/dc-tech-ops-meetup.html</link>
       <pubDate>Thu, 21 Feb 2013 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/dc-tech-ops-meetup.html</guid>
       	<description>
@@ -385,7 +385,7 @@ for (item in Hudson.instance.items) {
     </item>
     <item>
       <title>Book Review: The Phoenix Project</title>
-      <link>http://jmcgarr.github.ioblog/the-phoenix-project.html</link>
+      <link>http://www.mikemcgarr.comblog/the-phoenix-project.html</link>
       <pubDate>Thu, 21 Feb 2013 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/the-phoenix-project.html</guid>
       	<description>
@@ -410,7 +410,7 @@ for (item in Hudson.instance.items) {
     </item>
     <item>
       <title>Boyds Law of Iteration</title>
-      <link>http://jmcgarr.github.ioblog/boyds-law-of-iteration.html</link>
+      <link>http://www.mikemcgarr.comblog/boyds-law-of-iteration.html</link>
       <pubDate>Fri, 15 Feb 2013 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/boyds-law-of-iteration.html</guid>
       	<description>
@@ -428,7 +428,7 @@ for (item in Hudson.instance.items) {
     </item>
     <item>
       <title>Build Scripts and External Dependencies</title>
-      <link>http://jmcgarr.github.ioblog/build-script-best-practice.html</link>
+      <link>http://www.mikemcgarr.comblog/build-script-best-practice.html</link>
       <pubDate>Fri, 15 Feb 2013 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/build-script-best-practice.html</guid>
       	<description>
@@ -449,7 +449,7 @@ for (item in Hudson.instance.items) {
     </item>
     <item>
       <title>Continuous Delivery Applied @ DC Agile Engineering Conference</title>
-      <link>http://jmcgarr.github.ioblog/continuous-delivery-applied-dc-agile-engineering-conference.html</link>
+      <link>http://www.mikemcgarr.comblog/continuous-delivery-applied-dc-agile-engineering-conference.html</link>
       <pubDate>Thu, 7 Feb 2013 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/continuous-delivery-applied-dc-agile-engineering-conference.html</guid>
       	<description>
@@ -462,7 +462,7 @@ for (item in Hudson.instance.items) {
     </item>
     <item>
       <title>Improving Designs through TDD</title>
-      <link>http://jmcgarr.github.ioblog/improving-designs-through-tdd.html</link>
+      <link>http://www.mikemcgarr.comblog/improving-designs-through-tdd.html</link>
       <pubDate>Wed, 6 Feb 2013 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/improving-designs-through-tdd.html</guid>
       	<description>
@@ -476,7 +476,7 @@ for (item in Hudson.instance.items) {
     </item>
     <item>
       <title>Goals for 2013</title>
-      <link>http://jmcgarr.github.ioblog/goals-for-2013.html</link>
+      <link>http://www.mikemcgarr.comblog/goals-for-2013.html</link>
       <pubDate>Tue, 5 Feb 2013 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/goals-for-2013.html</guid>
       	<description>
@@ -534,7 +534,7 @@ for (item in Hudson.instance.items) {
     </item>
     <item>
       <title>Looking back on 2012</title>
-      <link>http://jmcgarr.github.ioblog/looking-back-on-2012.html</link>
+      <link>http://www.mikemcgarr.comblog/looking-back-on-2012.html</link>
       <pubDate>Mon, 4 Feb 2013 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/looking-back-on-2012.html</guid>
       	<description>
@@ -572,7 +572,7 @@ for (item in Hudson.instance.items) {
     </item>
     <item>
       <title>A roadmap for unit testing</title>
-      <link>http://jmcgarr.github.ioblog/a-roadmap-unit-testing.html</link>
+      <link>http://www.mikemcgarr.comblog/a-roadmap-unit-testing.html</link>
       <pubDate>Tue, 4 Dec 2012 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/a-roadmap-unit-testing.html</guid>
       	<description>
@@ -644,7 +644,7 @@ You can follow these steps to add unit tests to your code.  You may progress th
     </item>
     <item>
       <title>A new adventure begins</title>
-      <link>http://jmcgarr.github.ioblog/a-new-adventure-begins.html</link>
+      <link>http://www.mikemcgarr.comblog/a-new-adventure-begins.html</link>
       <pubDate>Sun, 2 Dec 2012 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/a-new-adventure-begins.html</guid>
       	<description>
@@ -654,7 +654,7 @@ You can follow these steps to add unit tests to your code.  You may progress th
     </item>
     <item>
       <title>Upcoming Talks</title>
-      <link>http://jmcgarr.github.ioblog/upcoming-talks.html</link>
+      <link>http://www.mikemcgarr.comblog/upcoming-talks.html</link>
       <pubDate>Mon, 22 Oct 2012 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/upcoming-talks.html</guid>
       	<description>
@@ -668,7 +668,7 @@ You can follow these steps to add unit tests to your code.  You may progress th
     </item>
     <item>
       <title>How to install OpenJDK 6 on Ubuntu 10.04 (Lucid Lynx)</title>
-      <link>http://jmcgarr.github.ioblog/openjdk-6-install-lucid.html</link>
+      <link>http://www.mikemcgarr.comblog/openjdk-6-install-lucid.html</link>
       <pubDate>Sat, 8 Sep 2012 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/openjdk-6-install-lucid.html</guid>
       	<description>
@@ -692,7 +692,7 @@ I hope this helps!&lt;/p&gt;
     </item>
     <item>
       <title>My Continuous Delivery talk at ALN DC</title>
-      <link>http://jmcgarr.github.ioblog/my-continuous-delivery-talk-at-aln-dc.html</link>
+      <link>http://www.mikemcgarr.comblog/my-continuous-delivery-talk-at-aln-dc.html</link>
       <pubDate>Fri, 7 Sep 2012 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/my-continuous-delivery-talk-at-aln-dc.html</guid>
       	<description>
@@ -705,7 +705,7 @@ I hope this helps!&lt;/p&gt;
     </item>
     <item>
       <title>Vagrant Cheatsheat</title>
-      <link>http://jmcgarr.github.ioblog/vagrant-cheatsheat.html</link>
+      <link>http://www.mikemcgarr.comblog/vagrant-cheatsheat.html</link>
       <pubDate>Thu, 6 Sep 2012 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/vagrant-cheatsheat.html</guid>
       	<description>
@@ -733,7 +733,7 @@ I hope this helps!&lt;/p&gt;
     </item>
     <item>
       <title>Git Tip: Branch your previous commit</title>
-      <link>http://jmcgarr.github.ioblog/git-tip-branch-your-previous-commit.html</link>
+      <link>http://www.mikemcgarr.comblog/git-tip-branch-your-previous-commit.html</link>
       <pubDate>Tue, 21 Aug 2012 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/git-tip-branch-your-previous-commit.html</guid>
       	<description>
@@ -780,7 +780,7 @@ C:\code\project&amp;gt;git lg
     </item>
     <item>
       <title>Vim Syntax Highlighting</title>
-      <link>http://jmcgarr.github.ioblog/vim-syntax-highlighting.html</link>
+      <link>http://www.mikemcgarr.comblog/vim-syntax-highlighting.html</link>
       <pubDate>Sun, 27 May 2012 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/vim-syntax-highlighting.html</guid>
       	<description>
@@ -798,7 +798,7 @@ $ echo &amp;quot;:syntax on&amp;quot; &amp;gt;&amp;gt; ~./vimrc
     </item>
     <item>
       <title>JMeter Crash Course</title>
-      <link>http://jmcgarr.github.ioblog/jmeter-crash-course.html</link>
+      <link>http://www.mikemcgarr.comblog/jmeter-crash-course.html</link>
       <pubDate>Mon, 7 May 2012 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/jmeter-crash-course.html</guid>
       	<description>
@@ -865,7 +865,7 @@ $ echo &amp;quot;:syntax on&amp;quot; &amp;gt;&amp;gt; ~./vimrc
     </item>
     <item>
       <title>Ruby Broke my $PATH</title>
-      <link>http://jmcgarr.github.ioblog/ruby-broke-my-path.html</link>
+      <link>http://www.mikemcgarr.comblog/ruby-broke-my-path.html</link>
       <pubDate>Sun, 6 May 2012 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/ruby-broke-my-path.html</guid>
       	<description>
@@ -896,7 +896,7 @@ Once this was added and I reloaded Terminal, my Grails path entries were back an
     </item>
     <item>
       <title>Octopress on OS X</title>
-      <link>http://jmcgarr.github.ioblog/octopress-on-os.html</link>
+      <link>http://www.mikemcgarr.comblog/octopress-on-os.html</link>
       <pubDate>Sat, 5 May 2012 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/octopress-on-os.html</guid>
       	<description>
@@ -922,7 +922,7 @@ $ rake install rake aborted! You have already activated rake 0.9.2.2, but your G
     </item>
     <item>
       <title>Writing User Stories</title>
-      <link>http://jmcgarr.github.ioblog/writing-user-stories.html</link>
+      <link>http://www.mikemcgarr.comblog/writing-user-stories.html</link>
       <pubDate>Fri, 4 May 2012 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/writing-user-stories.html</guid>
       	<description>
@@ -971,7 +971,7 @@ I want &amp;lt;some feature&amp;gt;&lt;/p&gt;&lt;/blockquote&gt;
     </item>
     <item>
       <title>Git Crash Course</title>
-      <link>http://jmcgarr.github.ioblog/git-crashcourse.html</link>
+      <link>http://www.mikemcgarr.comblog/git-crashcourse.html</link>
       <pubDate>Thu, 3 May 2012 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/git-crashcourse.html</guid>
       	<description>
@@ -1016,7 +1016,7 @@ $&amp;gt; git pull origin master
     </item>
     <item>
       <title>Simple Git Aliases</title>
-      <link>http://jmcgarr.github.ioblog/simple-git-aliases.html</link>
+      <link>http://www.mikemcgarr.comblog/simple-git-aliases.html</link>
       <pubDate>Wed, 2 May 2012 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/simple-git-aliases.html</guid>
       	<description>
@@ -1048,7 +1048,7 @@ $&amp;gt; git config --global alias.rm &amp;quot;remote -v&amp;quot;
     </item>
     <item>
       <title>Assessing Code Quality with Sonar</title>
-      <link>http://jmcgarr.github.ioblog/sonar.html</link>
+      <link>http://www.mikemcgarr.comblog/sonar.html</link>
       <pubDate>Tue, 1 May 2012 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/sonar.html</guid>
       	<description>
@@ -1084,7 +1084,7 @@ Cross-Language&lt;br /&gt;
     </item>
     <item>
       <title>Avoid Code Freezes</title>
-      <link>http://jmcgarr.github.ioblog/avoid-code-freezes.html</link>
+      <link>http://www.mikemcgarr.comblog/avoid-code-freezes.html</link>
       <pubDate>Mon, 30 Apr 2012 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/avoid-code-freezes.html</guid>
       	<description>
@@ -1098,7 +1098,7 @@ Cross-Language&lt;br /&gt;
     </item>
     <item>
       <title>We arent failing fast enough...</title>
-      <link>http://jmcgarr.github.ioblog/we-arent-failing-fast-enough.html</link>
+      <link>http://www.mikemcgarr.comblog/we-arent-failing-fast-enough.html</link>
       <pubDate>Fri, 30 Mar 2012 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/we-arent-failing-fast-enough.html</guid>
       	<description>
@@ -1112,7 +1112,7 @@ Cross-Language&lt;br /&gt;
     </item>
     <item>
       <title>A Developers Reading List</title>
-      <link>http://jmcgarr.github.ioblog/developer-reading-lis.html</link>
+      <link>http://www.mikemcgarr.comblog/developer-reading-lis.html</link>
       <pubDate>Mon, 20 Feb 2012 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/developer-reading-lis.html</guid>
       	<description>
@@ -1133,7 +1133,7 @@ Cross-Language&lt;br /&gt;
     </item>
     <item>
       <title>My Return Visit to the Montgomery County Java Users Group</title>
-      <link>http://jmcgarr.github.ioblog/mcjug-return.html</link>
+      <link>http://www.mikemcgarr.comblog/mcjug-return.html</link>
       <pubDate>Fri, 17 Feb 2012 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/mcjug-return.html</guid>
       	<description>
@@ -1160,7 +1160,7 @@ Cross-Language&lt;br /&gt;
     </item>
     <item>
       <title>Interactive presentations with impress.js + GitHub Pages</title>
-      <link>http://jmcgarr.github.ioblog/impress_js_github.html</link>
+      <link>http://www.mikemcgarr.comblog/impress_js_github.html</link>
       <pubDate>Mon, 16 Jan 2012 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/impress_js_github.html</guid>
       	<description>
@@ -1184,7 +1184,7 @@ Cross-Language&lt;br /&gt;
     </item>
     <item>
       <title>Jenkins and GitHub: Integration</title>
-      <link>http://jmcgarr.github.ioblog/jenkins-github-int.html</link>
+      <link>http://www.mikemcgarr.comblog/jenkins-github-int.html</link>
       <pubDate>Fri, 30 Dec 2011 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/jenkins-github-int.html</guid>
       	<description>
@@ -1203,7 +1203,7 @@ Cross-Language&lt;br /&gt;
     </item>
     <item>
       <title>Dependency Management in .NET</title>
-      <link>http://jmcgarr.github.ioblog/dependency-management-in-net.html</link>
+      <link>http://www.mikemcgarr.comblog/dependency-management-in-net.html</link>
       <pubDate>Sat, 17 Dec 2011 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/dependency-management-in-net.html</guid>
       	<description>
@@ -1218,7 +1218,7 @@ Cross-Language&lt;br /&gt;
     </item>
     <item>
       <title>Gotcha when changing TeamCity&apos;s default port</title>
-      <link>http://jmcgarr.github.ioblog/teamcity-port.html</link>
+      <link>http://www.mikemcgarr.comblog/teamcity-port.html</link>
       <pubDate>Thu, 17 Nov 2011 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/teamcity-port.html</guid>
       	<description>
@@ -1233,7 +1233,7 @@ serverUrl=http:\://localhost\:8080
     </item>
     <item>
       <title>Exploring Test Method Names</title>
-      <link>http://jmcgarr.github.ioblog/test-method-names.html</link>
+      <link>http://www.mikemcgarr.comblog/test-method-names.html</link>
       <pubDate>Thu, 10 Nov 2011 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/test-method-names.html</guid>
       	<description>
@@ -1293,7 +1293,7 @@ class CalculatorTest {
     </item>
     <item>
       <title>Grails Best Practice Resources</title>
-      <link>http://jmcgarr.github.ioblog/grails-best-practice-resources.html</link>
+      <link>http://www.mikemcgarr.comblog/grails-best-practice-resources.html</link>
       <pubDate>Tue, 11 Oct 2011 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/grails-best-practice-resources.html</guid>
       	<description>
@@ -1311,7 +1311,7 @@ class CalculatorTest {
     </item>
     <item>
       <title>GitFlow and Continuous Integration</title>
-      <link>http://jmcgarr.github.ioblog/dvcs-ci.html</link>
+      <link>http://www.mikemcgarr.comblog/dvcs-ci.html</link>
       <pubDate>Wed, 14 Sep 2011 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/dvcs-ci.html</guid>
       	<description>
@@ -1332,7 +1332,7 @@ class CalculatorTest {
     </item>
     <item>
       <title>Unit vs. Integration Tests</title>
-      <link>http://jmcgarr.github.ioblog/ut-vs-it.html</link>
+      <link>http://www.mikemcgarr.comblog/ut-vs-it.html</link>
       <pubDate>Fri, 24 Jun 2011 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/ut-vs-it.html</guid>
       	<description>
@@ -1360,7 +1360,7 @@ I feel very strongly that developers should focus on achieving &amp;gt;80%  cod
     </item>
     <item>
       <title>Continuous Delivery Presentation at the MC Java Users Group</title>
-      <link>http://jmcgarr.github.ioblog/cd-at-mcjug.html</link>
+      <link>http://www.mikemcgarr.comblog/cd-at-mcjug.html</link>
       <pubDate>Fri, 17 Jun 2011 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/cd-at-mcjug.html</guid>
       	<description>
@@ -1381,7 +1381,7 @@ I feel very strongly that developers should focus on achieving &amp;gt;80%  cod
     </item>
     <item>
       <title>Java EE Interview for the SD Times</title>
-      <link>http://jmcgarr.github.ioblog/java-ee-interview.html</link>
+      <link>http://www.mikemcgarr.comblog/java-ee-interview.html</link>
       <pubDate>Wed, 15 Jun 2011 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/java-ee-interview.html</guid>
       	<description>
@@ -1392,7 +1392,7 @@ I feel very strongly that developers should focus on achieving &amp;gt;80%  cod
     </item>
     <item>
       <title>Honorable Mention in Top 200 Agile Blogs</title>
-      <link>http://jmcgarr.github.ioblog/top-200-agile-hm.html</link>
+      <link>http://www.mikemcgarr.comblog/top-200-agile-hm.html</link>
       <pubDate>Wed, 8 Jun 2011 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/top-200-agile-hm.html</guid>
       	<description>
@@ -1403,7 +1403,7 @@ I feel very strongly that developers should focus on achieving &amp;gt;80%  cod
     </item>
     <item>
       <title>Dojos, Katas and Software Craftsmanship at Excella</title>
-      <link>http://jmcgarr.github.ioblog/excella-craftsmanship.html</link>
+      <link>http://www.mikemcgarr.comblog/excella-craftsmanship.html</link>
       <pubDate>Thu, 21 Apr 2011 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/excella-craftsmanship.html</guid>
       	<description>
@@ -1418,7 +1418,7 @@ I feel very strongly that developers should focus on achieving &amp;gt;80%  cod
     </item>
     <item>
       <title>Thoughts on Application Lifecycle Management (ALM)</title>
-      <link>http://jmcgarr.github.ioblog/alm.html</link>
+      <link>http://www.mikemcgarr.comblog/alm.html</link>
       <pubDate>Fri, 4 Mar 2011 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/alm.html</guid>
       	<description>
@@ -1434,7 +1434,7 @@ I feel very strongly that developers should focus on achieving &amp;gt;80%  cod
     </item>
     <item>
       <title>Why I Love eBooks</title>
-      <link>http://jmcgarr.github.ioblog/ebooks.html</link>
+      <link>http://www.mikemcgarr.comblog/ebooks.html</link>
       <pubDate>Thu, 24 Feb 2011 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/ebooks.html</guid>
       	<description>
@@ -1473,7 +1473,7 @@ I feel very strongly that developers should focus on achieving &amp;gt;80%  cod
     </item>
     <item>
       <title>Maven Tip: Disabling Profiles when a Property Does Not Exist</title>
-      <link>http://jmcgarr.github.ioblog/disable-maven-profile.html</link>
+      <link>http://www.mikemcgarr.comblog/disable-maven-profile.html</link>
       <pubDate>Wed, 9 Feb 2011 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/disable-maven-profile.html</guid>
       	<description>
@@ -1510,7 +1510,7 @@ mvn clean install -DskipTests -P !update-database
     </item>
     <item>
       <title>Article Published in Linux Insider...Java Lives</title>
-      <link>http://jmcgarr.github.ioblog/java-live.html</link>
+      <link>http://www.mikemcgarr.comblog/java-live.html</link>
       <pubDate>Tue, 28 Dec 2010 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/java-live.html</guid>
       	<description>
@@ -1521,7 +1521,7 @@ mvn clean install -DskipTests -P !update-database
     </item>
     <item>
       <title>Scrum Boards: Physical or Virtual</title>
-      <link>http://jmcgarr.github.ioblog/scrum-walls.html</link>
+      <link>http://www.mikemcgarr.comblog/scrum-walls.html</link>
       <pubDate>Tue, 7 Dec 2010 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/scrum-walls.html</guid>
       	<description>
@@ -1542,7 +1542,7 @@ mvn clean install -DskipTests -P !update-database
     </item>
     <item>
       <title>Continuous Integration Interview with SD Times</title>
-      <link>http://jmcgarr.github.ioblog/ci-interview.html</link>
+      <link>http://www.mikemcgarr.comblog/ci-interview.html</link>
       <pubDate>Wed, 3 Nov 2010 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/ci-interview.html</guid>
       	<description>
@@ -1553,7 +1553,7 @@ mvn clean install -DskipTests -P !update-database
     </item>
     <item>
       <title>Shortcuts to Productivity</title>
-      <link>http://jmcgarr.github.ioblog/shortcuts-to-productivity.html</link>
+      <link>http://www.mikemcgarr.comblog/shortcuts-to-productivity.html</link>
       <pubDate>Tue, 2 Nov 2010 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/shortcuts-to-productivity.html</guid>
       	<description>
@@ -1567,7 +1567,7 @@ mvn clean install -DskipTests -P !update-database
     </item>
     <item>
       <title>Build Once, Deploy Many</title>
-      <link>http://jmcgarr.github.ioblog/build-once-deploy-many.html</link>
+      <link>http://www.mikemcgarr.comblog/build-once-deploy-many.html</link>
       <pubDate>Thu, 9 Sep 2010 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/build-once-deploy-many.html</guid>
       	<description>
@@ -1593,7 +1593,7 @@ mvn clean install -DskipTests -P !update-database
     </item>
     <item>
       <title>Manage Database Changes with Liquibase</title>
-      <link>http://jmcgarr.github.ioblog/intro-to-liquibase.html</link>
+      <link>http://www.mikemcgarr.comblog/intro-to-liquibase.html</link>
       <pubDate>Mon, 28 Jun 2010 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/intro-to-liquibase.html</guid>
       	<description>
@@ -1641,7 +1641,7 @@ mvn clean install -DskipTests -P !update-database
     </item>
     <item>
       <title>Interview for the SD Times</title>
-      <link>http://jmcgarr.github.ioblog/interview-for-sd-times.html</link>
+      <link>http://www.mikemcgarr.comblog/interview-for-sd-times.html</link>
       <pubDate>Fri, 18 Jun 2010 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/interview-for-sd-times.html</guid>
       	<description>
@@ -1651,7 +1651,7 @@ mvn clean install -DskipTests -P !update-database
     </item>
     <item>
       <title>A Practical Approach to Unit Testing</title>
-      <link>http://jmcgarr.github.ioblog/practical-unit-testing.html</link>
+      <link>http://www.mikemcgarr.comblog/practical-unit-testing.html</link>
       <pubDate>Fri, 7 May 2010 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/practical-unit-testing.html</guid>
       	<description>
@@ -1725,7 +1725,7 @@ public class TemperatureUtilTest
     </item>
     <item>
       <title>Follow the Leaders</title>
-      <link>http://jmcgarr.github.ioblog/follow-the-leaders.html</link>
+      <link>http://www.mikemcgarr.comblog/follow-the-leaders.html</link>
       <pubDate>Mon, 19 Apr 2010 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/follow-the-leaders.html</guid>
       	<description>
@@ -1753,7 +1753,7 @@ public class TemperatureUtilTest
     </item>
     <item>
       <title>Getting back into the swing of things</title>
-      <link>http://jmcgarr.github.ioblog/getting-back-into-the-swing-of-things.html</link>
+      <link>http://www.mikemcgarr.comblog/getting-back-into-the-swing-of-things.html</link>
       <pubDate>Sun, 18 Apr 2010 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/getting-back-into-the-swing-of-things.html</guid>
       	<description>
@@ -1764,7 +1764,7 @@ public class TemperatureUtilTest
     </item>
     <item>
       <title>Branching Problems with a Multi-Module Maven Project</title>
-      <link>http://jmcgarr.github.ioblog/branching-a-multi-module-maven-project-in-eclipse.html</link>
+      <link>http://www.mikemcgarr.comblog/branching-a-multi-module-maven-project-in-eclipse.html</link>
       <pubDate>Tue, 16 Feb 2010 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/branching-a-multi-module-maven-project-in-eclipse.html</guid>
       	<description>
@@ -1781,7 +1781,7 @@ public class TemperatureUtilTest
     </item>
     <item>
       <title>Why I Hate Ant</title>
-      <link>http://jmcgarr.github.ioblog/why-i-hate-ant.html</link>
+      <link>http://www.mikemcgarr.comblog/why-i-hate-ant.html</link>
       <pubDate>Mon, 15 Feb 2010 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/why-i-hate-ant.html</guid>
       	<description>
@@ -1795,7 +1795,7 @@ public class TemperatureUtilTest
     </item>
     <item>
       <title>Enforcing Coding Standards</title>
-      <link>http://jmcgarr.github.ioblog/enforcing-coding-standards.html</link>
+      <link>http://www.mikemcgarr.comblog/enforcing-coding-standards.html</link>
       <pubDate>Wed, 10 Feb 2010 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/enforcing-coding-standards.html</guid>
       	<description>
@@ -1829,7 +1829,7 @@ public class TemperatureUtilTest
     </item>
     <item>
       <title>Maven, Cobertura and AspectJ</title>
-      <link>http://jmcgarr.github.ioblog/maven-cobertura-and-aspectj.html</link>
+      <link>http://www.mikemcgarr.comblog/maven-cobertura-and-aspectj.html</link>
       <pubDate>Mon, 4 Jan 2010 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/maven-cobertura-and-aspectj.html</guid>
       	<description>
@@ -1904,7 +1904,7 @@ T E S T S
     </item>
     <item>
       <title>Justifying Dual Monitors</title>
-      <link>http://jmcgarr.github.ioblog/justifying-dual-monitors.html</link>
+      <link>http://www.mikemcgarr.comblog/justifying-dual-monitors.html</link>
       <pubDate>Fri, 4 Dec 2009 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/justifying-dual-monitors.html</guid>
       	<description>
@@ -1924,7 +1924,7 @@ With the crashing prices of LCDs and the ubiquity of dual-output video cards, yo
     </item>
     <item>
       <title>A Hack to Syncing Multiple Google Calenders with your iPhone</title>
-      <link>http://jmcgarr.github.ioblog/a-hack-to-syncing-multiple-google-calenders-with-your-iphone.html</link>
+      <link>http://www.mikemcgarr.comblog/a-hack-to-syncing-multiple-google-calenders-with-your-iphone.html</link>
       <pubDate>Thu, 24 Sep 2009 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/a-hack-to-syncing-multiple-google-calenders-with-your-iphone.html</guid>
       	<description>

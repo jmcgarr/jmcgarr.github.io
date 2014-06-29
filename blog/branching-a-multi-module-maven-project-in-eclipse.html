@@ -75,6 +75,19 @@
         	</div>
 
         	<p><em>16 February 2010</em></p>
+            <p><em>Tags: </em>
+                <a href="/tags/eclipse.html">eclipse</a> 
+            </em>
+                <a href="/tags/maven.html"> maven</a> 
+            </em>
+                <a href="/tags/subversion.html"> subversion</a> 
+            </p>
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.mikemcgarr.com/blog/blog/branching-a-multi-module-maven-project-in-eclipse.html" data-via="jMichaelMcGarr" data-lang="fr">Tweeter</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            <div class="g-plusone" data-size="medium" data-href="http://www.mikemcgarr.com/blog/blog/branching-a-multi-module-maven-project-in-eclipse.html"></div>
+            <script id='fbvpgng'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//api.flattr.com/button/view/?uid=jMichaelMcGarr&button=compact&url='+encodeURIComponent('http://www.mikemcgarr.com/blog/blog/branching-a-multi-module-maven-project-in-eclipse.html');f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbvpgng');</script>
+            <script type="IN/Share" data-url="http://www.mikemcgarr.com/blog/blog/branching-a-multi-module-maven-project-in-eclipse.html" data-counter="right"></script>
+            <div class="fb-like" data-href="http://www.mikemcgarr.com/blog/blog/branching-a-multi-module-maven-project-in-eclipse.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
 
         	<p><p>I was impressed last year when I found that the <a href="http://m2eclipse.sonatype.org/" target="_blank">M2eclipse</a> <a href="http://www.eclipse.org/" target="_blank">Eclipse</a> plugin handled multi-module projects checked out of <a href="http://subversion.tigris.org/" target="_blank">Subversion</a> using <a href="http://subclipse.tigris.org/" target="_blank">Subclipse</a> with ease.  Eclipse does <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=35973" target="_blank">not natively support</a> a nested multi-module project structure <a href="http://maven.apache.org/guides/getting-started/index.html#How_do_I_build_more_than_one_project_at_once" target="_blank">recommended by Maven</a>, and getting the two to work well together has historically been a pain.  M2eclipse has solved this by "mapping" the child modules of the project you are importing to sibling projects in your Eclipse workspace.  For example, lets take the following multi-module Maven project:</p>
 <p style="text-align:center;"><a href="http://earlyandoften.files.wordpress.com/2010/02/multimodelproject.png"></a><a href="http://earlyandoften.files.wordpress.com/2010/02/finder-view.png"></a><a href="http://earlyandoften.files.wordpress.com/2010/02/finder-view1.png"><img class="size-full wp-image-226 aligncenter" title="Project Structure." src="http://earlyandoften.files.wordpress.com/2010/02/finder-view1.png" alt="" width="164" height="154" /></a></p>
