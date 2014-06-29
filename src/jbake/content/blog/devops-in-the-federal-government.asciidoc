@@ -3,9 +3,9 @@ date=2014-06-28
 type=post
 tags=devops, government, devopsdays, change management
 status=published
-summary=This is the summary
+summary=Yesterday marked the first day of DevOpsDays Silicon Valley, and my first DevOpsDays.  The conference has been quite impressive so far and well worth the ticket price ($150).  The speakers are amazing, but the true value is the ‘hallway track’ and the open spaces.  There was one open space in particular that I wanted to talk about here.  This open space focused on DevOps in the Government.
 ~~~~~~
-Yesterday marked the first day of DevOpsDays Silicon Valley, and my first DevOpsDays.  The conference has been quite impressive so far and well worth the ticket price ($150).  The speakers are amazing, but the true value is the ‘hallway track’ and the open spaces.  There was one open space in particular that I wanted to talk about here.  This open space focused on DevOps in the Government.
+Yesterday marked the first day of http://devopsdays.org/events/2014-siliconvalley/[DevOpsDays Silicon Valley], and my first DevOpsDays.  The conference has been quite impressive so far and well worth the ticket price ($150).  The speakers are amazing, but the true value is the ‘hallway track’ and the open spaces.  There was one open space in particular that I wanted to talk about here.  This open space focused on DevOps in the Government.
 
 The first thing that struck me was that nobody in this open space currently worked for the federal government.  One person was a former government IT manager, myself (a former government contractor), a scientist on federal grants,...and then a room of devops-minded ops guys.  So the conversation was definitely biased, but was interesting to say the least.
 
