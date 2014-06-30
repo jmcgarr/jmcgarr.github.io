@@ -42,6 +42,17 @@
 </script>
   </head>
   <body>
+    <div id="fb-root"></div>
+      <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <script src="//platform.linkedin.com/in.js" type="text/javascript">
+     lang: en_US
+    </script>
     <div id="wrap">
 	
 	<!-- Fixed navbar -->
@@ -98,12 +109,14 @@
             </em>
                 <a href="/tags/subversion.html"> subversion</a> 
             </p>
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.mikemcgarr.com/blog/blog/build-once-deploy-many.html" data-via="jMichaelMcGarr" data-lang="fr">Tweeter</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-            <div class="g-plusone" data-size="medium" data-href="http://www.mikemcgarr.com/blog/blog/build-once-deploy-many.html"></div>
-            <script id='fbvpgng'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//api.flattr.com/button/view/?uid=jMichaelMcGarr&button=compact&url='+encodeURIComponent('http://www.mikemcgarr.com/blog/blog/build-once-deploy-many.html');f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbvpgng');</script>
-            <script type="IN/Share" data-url="http://www.mikemcgarr.com/blog/blog/build-once-deploy-many.html" data-counter="right"></script>
-            <div class="fb-like" data-href="http://www.mikemcgarr.com/blog/blog/build-once-deploy-many.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+            <p style="float:left">
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.mikemcgarr.com/blog/blog/build-once-deploy-many.html" data-via="jMichaelMcGarr" data-lang="fr">Tweeter</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                <div class="g-plusone" data-size="medium" data-href="http://www.mikemcgarr.com/blog/blog/build-once-deploy-many.html"></div>
+                <script id='fbvpgng'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//api.flattr.com/button/view/?uid=jMichaelMcGarr&button=compact&url='+encodeURIComponent('http://www.mikemcgarr.com/blog/blog/build-once-deploy-many.html');f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbvpgng');</script>
+                <script type="IN/Share" data-url="http://www.mikemcgarr.com/blog/blog/build-once-deploy-many.html" data-counter="right"></script>
+                <div class="fb-like" data-href="http://www.mikemcgarr.com/blog/blog/build-once-deploy-many.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+            </p>
 
         	<p><p>It is not uncommon to find a development team building their application binary from source every time they deploy a new version of their application to an environment.  While this approach works (and depending on the technology, may be necessary), it introduces significant opportunities for errors and makes debugging a failed deployment increasingly difficult.  By migrating to a <strong><em>Build Once, Deploy Many</em></strong> approach, your team can simplify their deployment process, by making it repeatable and easier to debug.</p>
 <p style="text-align:center;"><img class="aligncenter" title="Build Once Deploy Many" src="https://docs.google.com/drawings/pub?id=1DWlh5PbduUlPMwlWVYxLH3YQbUtPbntXeNpfMO2MqZ4&amp;w=791&amp;h=383" alt="" width="487" height="235" /></p>
@@ -123,6 +136,14 @@
 <p>I would be remiss if I did not mention <span style="text-decoration:underline;"><em>automated testing</em></span>.  You could implement a Build Once Deploy Many approach without implementing any automated tests, but you that your confidence in your builds increases significantly if you automate your tests and integrate them into your build process.  If you are able to achieve test coverage of 80% or higher, you will find you are able to make changes faster and deploy more often with less headaches.</p>
 <p>What you will find once you implement this process is that it enables a variety of other process improvements.   One of these processes is <em><span style="text-decoration:underline;">automated deployments</span></em>, which your continuous integration server can easily orchestrate this whole process and provide you with nightly and/or push button deployments.</p>
 </p>
+
+            <p style="float:left">
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.mikemcgarr.com/blog/blog/build-once-deploy-many.html" data-via="jMichaelMcGarr" data-lang="fr">Tweeter</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                <div class="g-plusone" data-size="medium" data-href="http://www.mikemcgarr.com/blog/blog/build-once-deploy-many.html"></div>
+                <script type="IN/Share" data-url="http://www.mikemcgarr.com/blog/blog/build-once-deploy-many.html" data-counter="right"></script>
+                <div class="fb-like" data-href="http://www.mikemcgarr.com/blog/blog/build-once-deploy-many.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+            </p>
 
             <hr>
 
@@ -150,6 +171,7 @@
     
     <div id="footer">
       <div class="container">
+        <p class="muted credit">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
         <p class="muted credit">&copy; 2013 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.0</a></p>
       </div>
     </div>
@@ -160,6 +182,12 @@
     <script src="/js/jquery-1.9.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/run_prettify.js"></script>
-    
+    <script type="text/javascript">
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/platform.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    </script>
   </body>
 </html>

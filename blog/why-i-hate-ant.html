@@ -42,6 +42,17 @@
 </script>
   </head>
   <body>
+    <div id="fb-root"></div>
+      <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <script src="//platform.linkedin.com/in.js" type="text/javascript">
+     lang: en_US
+    </script>
     <div id="wrap">
 	
 	<!-- Fixed navbar -->
@@ -82,12 +93,14 @@
             </em>
                 <a href="/tags/maven.html"> maven</a> 
             </p>
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.mikemcgarr.com/blog/blog/why-i-hate-ant.html" data-via="jMichaelMcGarr" data-lang="fr">Tweeter</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-            <div class="g-plusone" data-size="medium" data-href="http://www.mikemcgarr.com/blog/blog/why-i-hate-ant.html"></div>
-            <script id='fbvpgng'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//api.flattr.com/button/view/?uid=jMichaelMcGarr&button=compact&url='+encodeURIComponent('http://www.mikemcgarr.com/blog/blog/why-i-hate-ant.html');f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbvpgng');</script>
-            <script type="IN/Share" data-url="http://www.mikemcgarr.com/blog/blog/why-i-hate-ant.html" data-counter="right"></script>
-            <div class="fb-like" data-href="http://www.mikemcgarr.com/blog/blog/why-i-hate-ant.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+            <p style="float:left">
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.mikemcgarr.com/blog/blog/why-i-hate-ant.html" data-via="jMichaelMcGarr" data-lang="fr">Tweeter</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                <div class="g-plusone" data-size="medium" data-href="http://www.mikemcgarr.com/blog/blog/why-i-hate-ant.html"></div>
+                <script id='fbvpgng'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//api.flattr.com/button/view/?uid=jMichaelMcGarr&button=compact&url='+encodeURIComponent('http://www.mikemcgarr.com/blog/blog/why-i-hate-ant.html');f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbvpgng');</script>
+                <script type="IN/Share" data-url="http://www.mikemcgarr.com/blog/blog/why-i-hate-ant.html" data-counter="right"></script>
+                <div class="fb-like" data-href="http://www.mikemcgarr.com/blog/blog/why-i-hate-ant.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+            </p>
 
         	<p><p>OK, let me address the title of this blog before the whole Java open source community jumps down my throat.  I do not really hate Ant, in fact Ant is a great and invaluable tool.  Ant helps simplify building and deploying Java applications.  It is extremely powerful and flexible and allows you to do pretty much anything you want as part of your build process.  Ant's flexibility is what has helped it gain popularity in the Java community, and this flexibility is at the core of my Ant critique.</p>
 <p>I came to this realization recently when I recommended to a colleague that I help him convert his open source project from Ant to Maven.  I have spent the last three years evangelizing the tenants of Maven over Ant and how it solves many of Ant's problems (conventions over convenience, dependency management).  I also enumerated some of the issues I have experienced with using Maven, such as dependency bloat, steeper learning curve, and decreased build transparency to name a few.  In spite of this, I still felt that Maven was a better solution for most open source projects and can help projects integrate quicker.</p>
@@ -95,6 +108,14 @@
 <p>The biggest problem with Ant is the complexity of the builds scripts.  A new developer has no way of knowing what the build steps are until he literally walks through the call stack of the Ant targets.  This can take a while and can be complex, especially if the Ant script was written by a pro.  Now this process may sound similar to following the call stack of any application you are new to, and it is.  But Java applications have Javadocs (or they should) to provide a simple way of understanding the code and most applications utilize design patterns as a common language for how the code is organized.  Ant doesn't have a documentation standard and it doesn't utilize design patterns for organizing targets.  An Ant script is essentially a functional program for your build process.</p>
 <p>There are other reasons why I prefer Maven over Ant, some of which I mention above, but in the end, this reason far outweighs all the others.  Maven's convention over configuration approach makes understanding build scripts exponentially easier than it does in the Ant world.</p>
 </p>
+
+            <p style="float:left">
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.mikemcgarr.com/blog/blog/why-i-hate-ant.html" data-via="jMichaelMcGarr" data-lang="fr">Tweeter</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                <div class="g-plusone" data-size="medium" data-href="http://www.mikemcgarr.com/blog/blog/why-i-hate-ant.html"></div>
+                <script type="IN/Share" data-url="http://www.mikemcgarr.com/blog/blog/why-i-hate-ant.html" data-counter="right"></script>
+                <div class="fb-like" data-href="http://www.mikemcgarr.com/blog/blog/why-i-hate-ant.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+            </p>
 
             <hr>
 
@@ -122,6 +143,7 @@
     
     <div id="footer">
       <div class="container">
+        <p class="muted credit">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
         <p class="muted credit">&copy; 2013 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.0</a></p>
       </div>
     </div>
@@ -132,6 +154,12 @@
     <script src="/js/jquery-1.9.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/run_prettify.js"></script>
-    
+    <script type="text/javascript">
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/platform.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    </script>
   </body>
 </html>

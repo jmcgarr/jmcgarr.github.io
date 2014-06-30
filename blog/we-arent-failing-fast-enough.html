@@ -42,6 +42,17 @@
 </script>
   </head>
   <body>
+    <div id="fb-root"></div>
+      <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <script src="//platform.linkedin.com/in.js" type="text/javascript">
+     lang: en_US
+    </script>
     <div id="wrap">
 	
 	<!-- Fixed navbar -->
@@ -86,12 +97,14 @@
             </em>
                 <a href="/tags/infinitest.html"> infinitest</a> 
             </p>
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.mikemcgarr.com/blog/blog/we-arent-failing-fast-enough.html" data-via="jMichaelMcGarr" data-lang="fr">Tweeter</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-            <div class="g-plusone" data-size="medium" data-href="http://www.mikemcgarr.com/blog/blog/we-arent-failing-fast-enough.html"></div>
-            <script id='fbvpgng'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//api.flattr.com/button/view/?uid=jMichaelMcGarr&button=compact&url='+encodeURIComponent('http://www.mikemcgarr.com/blog/blog/we-arent-failing-fast-enough.html');f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbvpgng');</script>
-            <script type="IN/Share" data-url="http://www.mikemcgarr.com/blog/blog/we-arent-failing-fast-enough.html" data-counter="right"></script>
-            <div class="fb-like" data-href="http://www.mikemcgarr.com/blog/blog/we-arent-failing-fast-enough.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+            <p style="float:left">
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.mikemcgarr.com/blog/blog/we-arent-failing-fast-enough.html" data-via="jMichaelMcGarr" data-lang="fr">Tweeter</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                <div class="g-plusone" data-size="medium" data-href="http://www.mikemcgarr.com/blog/blog/we-arent-failing-fast-enough.html"></div>
+                <script id='fbvpgng'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//api.flattr.com/button/view/?uid=jMichaelMcGarr&button=compact&url='+encodeURIComponent('http://www.mikemcgarr.com/blog/blog/we-arent-failing-fast-enough.html');f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbvpgng');</script>
+                <script type="IN/Share" data-url="http://www.mikemcgarr.com/blog/blog/we-arent-failing-fast-enough.html" data-counter="right"></script>
+                <div class="fb-like" data-href="http://www.mikemcgarr.com/blog/blog/we-arent-failing-fast-enough.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+            </p>
 
         	<p><p>I am sure many of you have read <a title="Jeff Atwood at CodingHorror.com" href="http://www.codinghorror.com/blog/" target="_blank">Jeff Atwood</a>s' last two blog posts regarding <a title="Coding Horror - What you can't see you can't get" href="http://www.codinghorror.com/blog/2012/03/what-you-cant-see-you-cant-get.html" target="_blank">WYSIWIG</a> and <a title="Coding Horror - Visualizing Code to fail faster" href="http://www.codinghorror.com/blog/2012/03/visualizing-code-to-fail-faster.html" target="_blank">visualizing failing faster</a>.  If you haven't, I definitely recommend reading both, playing with <a title="The Glimpse Project" href="http://www.aviz.fr/gliimpse/" target="_blank">Glimpse</a>, and watching <a title="Bret Victor" href="http://worrydream.com/" target="_blank">Bret Victor</a>'s video on <a title="Bret Victor - Inventing on Principle" href="http://vimeo.com/36579366" target="_blank">Inventing on Principle</a>.</p>
 <p>Both of Jeff's posts focus on how you can and should be striving for a faster feedback loop for code/markup.  Glimpse provides a nice animation for rendering markup results with just a key press.  Glimpse still requires you to switch back and forth between the two views.  Bret Victor takes this a step further by allowing you to showing the results of your changes immediately and contiguously.  His tools also added features like slides to change values and get feedback on those you wouldn't be able to achieve otherwise.  Amazingly powerful and the further of IDE's in my opinion.</p>
@@ -99,6 +112,14 @@
 <p>As I reflected on this more, I realized that Bret's vision fits in perfectly, so long as you could add another feature to his IDE.  The feedback Bret's IDE provides allows his to essentially define and run tests very quickly.  What is missing from this is capturing of the inputs and expected output into a repeatable test.  If the IDE was extended to capture various "tests" as unit tests, then you have the best of both worlds.  Now I can write code (and tests) rapidly, get my feedback and move on.</p>
 <p>I am inspired by both of these posts and tools to find ways of improving my personal feedback loop and productivity.  There are slight improvements to my personal productivity that I can apply today.  <a title="InfiniTest" href="http://infinitest.github.com/" target="_blank">InifiniTest</a> is a great <a title="Eclipse IDE" href="http://www.eclipse.org/" target="_blank">Eclipse</a> plugin for automatically running unit tests as you change code.  <a title="Grails" href="http://grails.org/" target="_blank">Grails</a> (a <a title="Groovy" href="http://groovy.codehaus.org/" target="_blank">Groovy</a> web framework) is an example of a framework that dynamically recompile code that is deployed.  This allows developers to edit, save, refresh to see changes, as opposed to the edit, save, compile, package, deploy, refresh feedback loop of traditional Java web frameworks.  I look at my current project's Ant/Ivy build script that takes 10+ minutes to compile and run unit tests and I lament that it fails the <a title="Paul Julius - Cup of Coffee Metric" href="http://pauljulius.com/blog/2009/09/14/cup-of-coffee-metric-for-continuous-integration/" target="_blank">cup of coffee test</a>, but should I look further.  The faster the feedback, the faster you find bugs, the faster you develop.  How fast do you fail?</p>
 </p>
+
+            <p style="float:left">
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.mikemcgarr.com/blog/blog/we-arent-failing-fast-enough.html" data-via="jMichaelMcGarr" data-lang="fr">Tweeter</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                <div class="g-plusone" data-size="medium" data-href="http://www.mikemcgarr.com/blog/blog/we-arent-failing-fast-enough.html"></div>
+                <script type="IN/Share" data-url="http://www.mikemcgarr.com/blog/blog/we-arent-failing-fast-enough.html" data-counter="right"></script>
+                <div class="fb-like" data-href="http://www.mikemcgarr.com/blog/blog/we-arent-failing-fast-enough.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+            </p>
 
             <hr>
 
@@ -126,6 +147,7 @@
     
     <div id="footer">
       <div class="container">
+        <p class="muted credit">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
         <p class="muted credit">&copy; 2013 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.0</a></p>
       </div>
     </div>
@@ -136,6 +158,12 @@
     <script src="/js/jquery-1.9.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/run_prettify.js"></script>
-    
+    <script type="text/javascript">
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/platform.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    </script>
   </body>
 </html>

@@ -42,6 +42,17 @@
 </script>
   </head>
   <body>
+    <div id="fb-root"></div>
+      <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <script src="//platform.linkedin.com/in.js" type="text/javascript">
+     lang: en_US
+    </script>
     <div id="wrap">
 	
 	<!-- Fixed navbar -->
@@ -88,12 +99,14 @@
             </em>
                 <a href="/tags/vagrant.html"> vagrant</a> 
             </p>
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.mikemcgarr.com/blog/blog/openjdk-6-install-lucid.html" data-via="jMichaelMcGarr" data-lang="fr">Tweeter</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-            <div class="g-plusone" data-size="medium" data-href="http://www.mikemcgarr.com/blog/blog/openjdk-6-install-lucid.html"></div>
-            <script id='fbvpgng'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//api.flattr.com/button/view/?uid=jMichaelMcGarr&button=compact&url='+encodeURIComponent('http://www.mikemcgarr.com/blog/blog/openjdk-6-install-lucid.html');f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbvpgng');</script>
-            <script type="IN/Share" data-url="http://www.mikemcgarr.com/blog/blog/openjdk-6-install-lucid.html" data-counter="right"></script>
-            <div class="fb-like" data-href="http://www.mikemcgarr.com/blog/blog/openjdk-6-install-lucid.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+            <p style="float:left">
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.mikemcgarr.com/blog/blog/openjdk-6-install-lucid.html" data-via="jMichaelMcGarr" data-lang="fr">Tweeter</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                <div class="g-plusone" data-size="medium" data-href="http://www.mikemcgarr.com/blog/blog/openjdk-6-install-lucid.html"></div>
+                <script id='fbvpgng'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//api.flattr.com/button/view/?uid=jMichaelMcGarr&button=compact&url='+encodeURIComponent('http://www.mikemcgarr.com/blog/blog/openjdk-6-install-lucid.html');f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbvpgng');</script>
+                <script type="IN/Share" data-url="http://www.mikemcgarr.com/blog/blog/openjdk-6-install-lucid.html" data-counter="right"></script>
+                <div class="fb-like" data-href="http://www.mikemcgarr.com/blog/blog/openjdk-6-install-lucid.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+            </p>
 
         	<p><p>I have been playing with <a title="Vagrant" href="http://vagrantup.com/" target="_blank">Vagrant</a> and <a title="Puppet" href="http://puppetlabs.com/puppet/puppet-open-source/" target="_blank">Puppet</a> a lot recently and I had some trouble getting <a title="OpenJDK 6" href="http://openjdk.java.net/projects/jdk6/" target="_blank">OpenJDK 6</a> to install on <a title="Ubuntu 10.04" href="http://releases.ubuntu.com/lucid/" target="_blank">Ubuntu 10.04 (Lucid Lynx)</a>. &nbsp;Since I had so much trouble finding the consolidated answer, I've decided to post my solution here.</p>
 <p>The problem stems from the fact I want to install OpenJDK via a <a title="Debian package" href="http://www.debian.org/distrib/packages" target="_blank">Debian package</a>. &nbsp;Lucid Lynx's default <a title="AptGet" href="https://help.ubuntu.com/community/AptGet/Howto" target="_blank">apt</a> setup doesn't include the correct repositories needed to install OpenJDK. &nbsp;To get this to work, you need to add the correct repository to apt. &nbsp;I accomplished this by using the 'add-apt-repository' python library, like so:<br />
@@ -111,6 +124,14 @@ $&gt; sudo apt-get install openjdk-6-jdk
 </pre>
 I hope this helps!</p>
 </p>
+
+            <p style="float:left">
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.mikemcgarr.com/blog/blog/openjdk-6-install-lucid.html" data-via="jMichaelMcGarr" data-lang="fr">Tweeter</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                <div class="g-plusone" data-size="medium" data-href="http://www.mikemcgarr.com/blog/blog/openjdk-6-install-lucid.html"></div>
+                <script type="IN/Share" data-url="http://www.mikemcgarr.com/blog/blog/openjdk-6-install-lucid.html" data-counter="right"></script>
+                <div class="fb-like" data-href="http://www.mikemcgarr.com/blog/blog/openjdk-6-install-lucid.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+            </p>
 
             <hr>
 
@@ -138,6 +159,7 @@ I hope this helps!</p>
     
     <div id="footer">
       <div class="container">
+        <p class="muted credit">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
         <p class="muted credit">&copy; 2013 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.0</a></p>
       </div>
     </div>
@@ -148,6 +170,12 @@ I hope this helps!</p>
     <script src="/js/jquery-1.9.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/run_prettify.js"></script>
-    
+    <script type="text/javascript">
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/platform.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    </script>
   </body>
 </html>

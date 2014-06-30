@@ -42,6 +42,17 @@
 </script>
   </head>
   <body>
+    <div id="fb-root"></div>
+      <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <script src="//platform.linkedin.com/in.js" type="text/javascript">
+     lang: en_US
+    </script>
     <div id="wrap">
 	
 	<!-- Fixed navbar -->
@@ -84,12 +95,14 @@
             </em>
                 <a href="/tags/maven.html"> maven</a> 
             </p>
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.mikemcgarr.com/blog/blog/build-script-best-practice.html" data-via="jMichaelMcGarr" data-lang="fr">Tweeter</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-            <div class="g-plusone" data-size="medium" data-href="http://www.mikemcgarr.com/blog/blog/build-script-best-practice.html"></div>
-            <script id='fbvpgng'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//api.flattr.com/button/view/?uid=jMichaelMcGarr&button=compact&url='+encodeURIComponent('http://www.mikemcgarr.com/blog/blog/build-script-best-practice.html');f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbvpgng');</script>
-            <script type="IN/Share" data-url="http://www.mikemcgarr.com/blog/blog/build-script-best-practice.html" data-counter="right"></script>
-            <div class="fb-like" data-href="http://www.mikemcgarr.com/blog/blog/build-script-best-practice.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+            <p style="float:left">
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.mikemcgarr.com/blog/blog/build-script-best-practice.html" data-via="jMichaelMcGarr" data-lang="fr">Tweeter</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                <div class="g-plusone" data-size="medium" data-href="http://www.mikemcgarr.com/blog/blog/build-script-best-practice.html"></div>
+                <script id='fbvpgng'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//api.flattr.com/button/view/?uid=jMichaelMcGarr&button=compact&url='+encodeURIComponent('http://www.mikemcgarr.com/blog/blog/build-script-best-practice.html');f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbvpgng');</script>
+                <script type="IN/Share" data-url="http://www.mikemcgarr.com/blog/blog/build-script-best-practice.html" data-counter="right"></script>
+                <div class="fb-like" data-href="http://www.mikemcgarr.com/blog/blog/build-script-best-practice.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+            </p>
 
         	<p><p><a href="http://xkcd.com/293/"><img align="right" alt="" src="http://imgs.xkcd.com/comics/rtfm.png" width="245" height="304" /></a> I recently ran across some project code that when checked out of version control, failed with an obscure warning.  After some digging around in the code, I realized the script made a reference to an external plugin library.  I had no clue where to acquire this library or setup this build.  I had to reach out to other developers to find out what was causing the failure.  The dependency turned out that a second project needed to be checked out from source control and added to the PATH.  I was also told that I should have <a title="Read the Fucking Manual" href="http://en.wikipedia.org/wiki/RTFM" target="_blank">RTFM</a>.</p>
 <p><strong>No External Dependencies</strong></p>
@@ -104,6 +117,14 @@
 <p>Lastly, if I call the <em>compile</em> phase, don't fail the build if I am missing a dependency needed for the <em>deploy</em> phase.  I should only see a warning if I am trying to execute the task.  I may want to write a build script that requires secure access to a username and password on the continuous integration server, but developers will never execute this phase.  I don't want them to have to setup a username and password for something they will never execute.</p>
 <p>Gradle makes this very easy to do.  Gradle has three phases of build execution: initialization, configuration and execution.  The initialization phase is to build a project graph (for multi-module projects), the configuration phase builds a task graph and the execute phase executes the project tasks.  You can write code that checks the contents of the task graph and conditionally executes logic.  For information on how to do this in Gradle, <a title="Gradle: Configuring the DAG" href="http://www.gradle.org/docs/current/userguide/userguide_single.html#configure-by-dag" target="_blank">read the f*cking manual</a>.</p>
 </p>
+
+            <p style="float:left">
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.mikemcgarr.com/blog/blog/build-script-best-practice.html" data-via="jMichaelMcGarr" data-lang="fr">Tweeter</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                <div class="g-plusone" data-size="medium" data-href="http://www.mikemcgarr.com/blog/blog/build-script-best-practice.html"></div>
+                <script type="IN/Share" data-url="http://www.mikemcgarr.com/blog/blog/build-script-best-practice.html" data-counter="right"></script>
+                <div class="fb-like" data-href="http://www.mikemcgarr.com/blog/blog/build-script-best-practice.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+            </p>
 
             <hr>
 
@@ -131,6 +152,7 @@
     
     <div id="footer">
       <div class="container">
+        <p class="muted credit">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
         <p class="muted credit">&copy; 2013 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.3.0</a></p>
       </div>
     </div>
@@ -141,6 +163,12 @@
     <script src="/js/jquery-1.9.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/run_prettify.js"></script>
-    
+    <script type="text/javascript">
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/platform.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    </script>
   </body>
 </html>
