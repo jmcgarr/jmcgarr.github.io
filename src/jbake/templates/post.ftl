@@ -10,7 +10,7 @@
         		<h1><#escape x as x?xml>${content.title}</#escape></h1>
         	</div>
 
-        	<p><em>${content.date?string("dd MMMM yyyy")}</em></p>
+        	<p><em>${content.date?string("MMMM dd yyyy")}</em></p>
             <p><em>Tags: <#list content.tags as tag></em>
                 <a href="/tags/${tag?trim?replace(' ','-')}.html">${tag}</a> 
             </#list></p>
