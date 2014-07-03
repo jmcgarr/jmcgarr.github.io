@@ -6,8 +6,8 @@
     <atom:link href="http://www.mikemcgarr.com/feed.xml" rel="self" type="application/rss+xml" />
     <description>Mike McGarr's Personal Blog</description>
     <language>en-gb</language>
-    <pubDate>Sun, 29 Jun 2014 20:52:05 -0700</pubDate>
-    <lastBuildDate>Sun, 29 Jun 2014 20:52:05 -0700</lastBuildDate>
+    <pubDate>Thu, 3 Jul 2014 07:43:07 -0700</pubDate>
+    <lastBuildDate>Thu, 3 Jul 2014 07:43:07 -0700</lastBuildDate>
 
     <item>
       <title>DevOps in the Federal Government</title>
@@ -325,7 +325,7 @@ plugins=(git vagrant knife gradle)
 &lt;/pre&gt;
 &lt;p&gt;For a list of all the plugins, check out &lt;a title=&quot;Oh My Zsh Plugins&quot; href=&quot;https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins&quot; target=&quot;_blank&quot;&gt;this wiki page&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;&lt;span style=&quot;font-size:13px;&quot;&gt;OMZ and Zsh have a ton of other features that I will not get into in this blog post.  You should definitely check out their &lt;a title=&quot;Oh My Zsh Cheatsheet&quot; href=&quot;https://github.com/robbyrussell/oh-my-zsh/wiki/Cheatsheet&quot; target=&quot;_blank&quot;&gt;cheatsheet&lt;/a&gt; as well.  If you are on a Mac and just using bash, I highly recommend trying Oh My Zsh.  It is awesome and worth it!&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;OMZ and Zsh have a ton of other features that I will not get into in this blog post.  You should definitely check out their &lt;a title=&quot;Oh My Zsh Cheatsheet&quot; href=&quot;https://github.com/robbyrussell/oh-my-zsh/wiki/Cheatsheet&quot; target=&quot;_blank&quot;&gt;cheatsheet&lt;/a&gt; as well.  If you are on a Mac and just using bash, I highly recommend trying Oh My Zsh.  It is awesome and worth it!&lt;/p&gt;
 
 	</description>
     </item>
