@@ -2,10 +2,10 @@ language: java
 branches: 
   only:
     - source
+env:
+  -  secure: "BTdy0s42L125EQMcyPrjRH6Sf7mTtiq9+4kh/jzK/Jk3s6IWZFWeNk3PHZ8MJkcotFIzRbTycZoxAyVKL/C7UNvXF46E9towCv8U81OHmQQLiynNJaEIL2vLRWwSOXFb4YGgzQv5VWmXP9oJvmOZ4Y5vW1IIlKcKX+hXSHLTu7U="
 install: ./gradlew -b ci.gradle tasks
 script: 
   - "./gradlew -b ci.gradle jbake --info --stacktrace"
+  - "echo $GH_TOKEN"
   - "./gradlew -b ci.gradle publishGhPages --info --stacktrace"
-env:
-  global:
-  -  secure: "BTdy0s42L125EQMcyPrjRH6Sf7mTtiq9+4kh/jzK/Jk3s6IWZFWeNk3PHZ8MJkcotFIzRbTycZoxAyVKL/C7UNvXF46E9towCv8U81OHmQQLiynNJaEIL2vLRWwSOXFb4YGgzQv5VWmXP9oJvmOZ4Y5vW1IIlKcKX+hXSHLTu7U="
