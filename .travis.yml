@@ -2,6 +2,7 @@ language: java
 branches: 
   only:
     - source
+install: ./gradlew -b ci.gradle tasks
 script: 
   - "./gradlew -b ci.gradle jbake"
   - "./gradlew -b ci.gradle publishGhPages"
