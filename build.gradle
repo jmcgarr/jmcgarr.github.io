@@ -32,6 +32,7 @@ githubPages {
   }
 }
 
+jbakePreview.dependsOn jbake
 publishGhPages.dependsOn jbake
 
 task publish( type: GradleBuild ) {           
