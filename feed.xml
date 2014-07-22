@@ -6,8 +6,8 @@
     <atom:link href="http://www.mikemcgarr.com/feed.xml" rel="self" type="application/rss+xml" />
     <description>Mike McGarr's Personal Blog</description>
     <language>en-gb</language>
-    <pubDate>Sun, 20 Jul 2014 18:18:07 -0700</pubDate>
-    <lastBuildDate>Sun, 20 Jul 2014 18:18:07 -0700</lastBuildDate>
+    <pubDate>Mon, 21 Jul 2014 21:13:43 -0700</pubDate>
+    <lastBuildDate>Mon, 21 Jul 2014 21:13:43 -0700</lastBuildDate>
 
     <item>
       <title>Building a modern resume</title>
@@ -24,7 +24,7 @@
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Since going through this process, I have talked to a number of friends who are looking to make a career change.  I wanted to provide some recommendations for those who don&amp;#8217;t have a strong online presence.  Beefing up your online presence will help not only get you noticed, but help companies find out if you are the right fit.  If your lucky, people will be lining out the door to have you work at their company.&lt;/p&gt;
+&lt;p&gt;Since going through this process, I have talked to a number of friends who are looking to make a career change.  I wanted to provide some recommendations for those who don&amp;#8217;t have a strong online presence.  Beefing up your online presence will help not only get you noticed, but help companies find out if you are the right fit.  If you&amp;#8217;re lucky, people will be lining out the door to have you work at their company.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;sect1&quot;&gt;
 &lt;h2 id=&quot;_linkedin&quot;&gt;LinkedIn&lt;/h2&gt;
@@ -44,16 +44,16 @@
 &lt;p&gt;&lt;strong&gt;Employment history&lt;/strong&gt; - List your previous employment history, dates, and title.  Also add a description of the work you did there.  You can be a bit more verbose here.  Bulleted lists help people like me who scan.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Skills&lt;/strong&gt; - Add skills that you currently have, and want to continue using.  Don&amp;#8217;t add &lt;em&gt;assembly programming&lt;/em&gt; if you took a class in college.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Skills&lt;/strong&gt; - Add skills that you currently have, and want to continue using.  Don&amp;#8217;t add &lt;em&gt;assembly programming&lt;/em&gt; if you just took a class in college.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Recommendations&lt;/strong&gt; - Having a strong collection of recommendations is a nice touch.  Asking for a recommendation from others might be hard to do.  Best bet is, if you want to get a recommendation, give one.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Recommendations&lt;/strong&gt; - Having a strong collection of recommendations is a nice touch.  Asking for a recommendation from others might be hard for you to do.  Best bet is, if you want to get a recommendation, give one.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Link your accounts&lt;/strong&gt; - Make sure you list your twitter account, blog and any other account on your LinkedIn profile.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Picture Optional&lt;/strong&gt; - Don&amp;#8217;t feel like you need to add a picture.  If you are concerned about privacy, then don&amp;#8217;t add it.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Picture optional&lt;/strong&gt; - Don&amp;#8217;t feel like you need to add a picture.  If you are concerned about privacy, then don&amp;#8217;t add it.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
@@ -80,7 +80,7 @@
 &lt;p&gt;&lt;strong&gt;Don&amp;#8217;t sweat your handle, yet&lt;/strong&gt; - Make sure you give it a simple, short, handle.  Twitter allows you to change the name, but it’s better to get something simple early and stick with it.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Keep it professional&lt;/strong&gt; - I don&amp;#8217;t always follow this rule and my tweets are sometimes more politically charged then my office presence, but I recommend keeping it professional.  Always ask, do I want this tweet on the front page of the New York Times.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Keep it professional&lt;/strong&gt; - I don&amp;#8217;t always follow this rule and my tweets are sometimes more politically charged than my office presence, but I recommend keeping it professional.  Always ask, would I want this tweet on the front page of the New York Times.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Tweet regularly&lt;/strong&gt; - Make sure you tweet fairly regularly.  Tweeting twice a week is just 104 tweets in a year&amp;#8230;not a whole lot.&lt;/p&gt;
@@ -97,7 +97,7 @@
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Getting a good Twitter account can be a long road, so just start one tweet at a time.&lt;/p&gt;
+&lt;p&gt;Building a good Twitter account can be a long road, so just start one tweet at a time.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -128,7 +128,7 @@
 &lt;p&gt;&lt;strong&gt;Find the right project&lt;/strong&gt; - Find a project that you are passionate about and you might use daily.  Ideally, this project also isn&amp;#8217;t that popular.  Smaller projects are likely to be receptive to new commiters.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Build&lt;/strong&gt; - You know that silly manual task that&amp;#8217;s been annoying you for a week now.  Carve out a morning to automate it and open source the code.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Build&lt;/strong&gt; - You know that silly manual task that&amp;#8217;s been annoying you for a week now?  Carve out a morning to automate it and open source the code.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
@@ -141,7 +141,7 @@
 &lt;h2 id=&quot;_blogging&quot;&gt;Blogging&lt;/h2&gt;
 &lt;div class=&quot;sectionbody&quot;&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Almost every engineer I know falls into one of three camps: those who have a blog, those who don&amp;#8217;t and those who talk about starting a blog.  A large majority of those with blogs haven&amp;#8217;t posted anything new in over a year.  Of those who talk about starting a blog, seem to always have a reason why they haven&amp;#8217;t started.  What does that say?  Blogging is hard work.  But it is well worth the effort.  It proves that you can compose your thoughts and write compelling prose.  It is a great way to sell your ideas.  It is a great way to get noticed.&lt;/p&gt;
+&lt;p&gt;Almost every engineer I know falls into one of three camps: those who have a blog, those who don&amp;#8217;t, and those who talk about starting a blog.  A large majority of those with blogs haven&amp;#8217;t posted anything new in over a year.  Of those who talk about starting a blog, they seem to always have a reason why they haven&amp;#8217;t started.  What does that say?  Blogging is hard work.  But it is well worth the effort.  It proves that you can compose your thoughts and write compelling prose.  It is a great way to sell your ideas.  It is a great way to get noticed.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Getting started isn&amp;#8217;t easy, but here are some pointers:&lt;/p&gt;
@@ -152,7 +152,7 @@
 &lt;p&gt;&lt;strong&gt;Pick a domain name&lt;/strong&gt; - You have two options: be creative or choose your name.  Either works great, but buy the domain name.  Give yourself 24 hours to pick a name, and then just go with it.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Use a service&lt;/strong&gt; - You may be tempted to use a blogging tool like &lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt;, &lt;a href=&quot;http://octopress.org/&quot;&gt;Octopress&lt;/a&gt; or &lt;a href=&quot;http://jbake.org/&quot;&gt;JBake&lt;/a&gt;, and yes they are awesome (I am loving JBake).  You may even want to stand up your own Wordpress server.  Don&amp;#8217;t. They are an obstacle to getting started.  Use a service like Wordpress.com, Blogger or Tumblr.  The only setup you will need is assigning your domain name to the service.  Once that&amp;#8217;s done&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Use a service&lt;/strong&gt; - You may be tempted to use a blogging tool like &lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt;, &lt;a href=&quot;http://octopress.org/&quot;&gt;Octopress&lt;/a&gt; or &lt;a href=&quot;http://jbake.org/&quot;&gt;JBake&lt;/a&gt;, and yes they are awesome (I am loving JBake).  You may even want to stand up your own Wordpress server.  Don&amp;#8217;t. They are an obstacle to getting started.  Use a service like Wordpress.com, Blogger or Tumblr.  The only setup you will need is assigning your domain name to the service.  Once that&amp;#8217;s done, you can start blogging.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Fight the urge to make it pretty&lt;/strong&gt; - Your first job is to build content.  Don&amp;#8217;t worry about fonts, designs, and content layout.  They matter eventually, but a pretty blog with no content is worthless.&lt;/p&gt;
@@ -167,7 +167,7 @@
 &lt;p&gt;&lt;strong&gt;Share posts everywhere&lt;/strong&gt; - When you write a blog, make sure you tweet about it, share on Facebook, share on LinkedIn, share on Google+&amp;#8230;everywhere.  The more places you share, the more traffic you will recieve.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Don&amp;#8217;t email it, blog it&lt;/strong&gt; - Years ago, I asked my boss for two monitors.  He said, why do you need it.  He asked me to justify it.  So rather than sending him an email explanation, I wrote a &lt;a href=&quot;http://www.mikemcgarr.com/blog/justifying-dual-monitors.html&quot;&gt;blog entry justification&lt;/a&gt; and sent him that.  This turned out to be one of my most popular blog entries, because so many people needed to make the same justification (unfortunately).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Don&amp;#8217;t email it, blog it&lt;/strong&gt; - Years ago, I asked my boss for two monitors.  He said, &quot;Why do you need it?&quot;.  He asked me to justify it.  So rather than sending him an email explanation, I wrote a &lt;a href=&quot;http://www.mikemcgarr.com/blog/justifying-dual-monitors.html&quot;&gt;blog entry justification&lt;/a&gt; and sent him that.  This turned out to be one of my most popular blog entries, because so many people needed to make the same justification (unfortunately).&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Quick, short posts&lt;/strong&gt; - A good way to create content is to write a blog entry on that small problem you just solved.  These kinds of posts are great for generating traffic, are easy to write, and people love reading then.  Another reason I like them is that they can also serve as your long term memory.  I constantly refer back to my blog entry on how &lt;a href=&quot;http://www.mikemcgarr.com/blog/git-tip-branch-your-previous-commit.html&quot;&gt;branch my previous commit in Git&lt;/a&gt;.&lt;/p&gt;
