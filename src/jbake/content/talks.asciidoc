@@ -1,0 +1,39 @@
+title=Talks
+date=2014-09-01
+type=page
+status=published
+~~~~~~
+
+== June 2014 - Implementing DevOps
+I was asked by the CIO of USPTO to give a presentation on adopting DevOps.  The talk is intended for a federal government audience.  
+
+===
+++++
+<iframe src="//www.slideshare.net/slideshow/embed_code/38581512" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="https://www.slideshare.net/jmcgarr/implementing-devops" title="Implementing DevOps" target="_blank">Implementing DevOps</a> </strong> from <strong><a href="http://www.slideshare.net/jmcgarr" target="_blank">Mike McGarr</a></strong> </div>
+++++
+
+== June 2013 - BBWorld/DevCon
+
+This is fun!...
+
+=== Introduction to Continuous Delivery
+
+=== Infrastructure as Code
+
+== March 2013 - Richmond JUG
+
+=== Continuous Delivery Applied
+
+== February 2013 - DC Agile Engineering Conference
+
+=== Continuous Delivery Applied
+
+=== Improving Design through TDD
+
+== November 2012 - Agile Richmond
+
+=== Continuous Delivery Applied
+
+++++
+<iframe src="//www.slideshare.net/slideshow/embed_code/15200632" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="https://www.slideshare.net/jmcgarr/continuous-delivery-applied-agile-richmond" title="Continuous Delivery Applied (Agile Richmond)" target="_blank">Continuous Delivery Applied (Agile Richmond)</a> </strong> from <strong><a href="http://www.slideshare.net/jmcgarr" target="_blank">Mike McGarr</a></strong> </div>
+++++
