@@ -6,9 +6,177 @@
     <atom:link href="http://www.mikemcgarr.com/feed.xml" rel="self" type="application/rss+xml" />
     <description>Mike McGarr's Personal Blog</description>
     <language>en-gb</language>
-    <pubDate>Sun, 24 Aug 2014 10:02:15 -0700</pubDate>
-    <lastBuildDate>Sun, 24 Aug 2014 10:02:15 -0700</lastBuildDate>
+    <pubDate>Sun, 26 Oct 2014 15:23:09 -0700</pubDate>
+    <lastBuildDate>Sun, 26 Oct 2014 15:23:09 -0700</lastBuildDate>
 
+    <item>
+      <title>How I Kanban (with Trello)</title>
+      <link>http://www.mikemcgarr.comblog/how-i-kanban.html</link>
+      <pubDate>Sun, 26 Oct 2014 00:00:00 -0700</pubDate>
+      <guid isPermaLink="false">blog/how-i-kanban.html</guid>
+      	<description>
+	&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;For years I have been trying to find the perfect personal task management process that is easy, intuitive and effective.  My friends and colleagues have witnessed the various techniques I have adopted over the years.  “Hey Mike, why are carrying a stack of notecards?” they would ask.  I have tried various &lt;a href=&quot;http://gettingthingsdone.com/&quot;&gt;GTD (Getting things done)&lt;/a&gt; apps, to stacks of notecards, to Scrum boards at home, to giant lists&amp;#8230;&amp;#8203;all of them failed.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Eventually, I settled on an implementation of &lt;a href=&quot;http://www.personalkanban.com/pk/&quot;&gt;Personal Kanban&lt;/a&gt; using &lt;a href=&quot;https://trello.com/&quot;&gt;Trello&lt;/a&gt;.  The beauty of this approach is it’s simple, free and easy to take with you.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Rather than share my actual personal kanban board (what, I like my privacy), I decided to create &lt;a href=&quot;https://trello.com/b/KloBf6xB/example-personal-kanban&quot;&gt;an example one to share&lt;/a&gt;.  Here’s a screenshot.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;imageblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;/img/trello-personal-kanban.png&quot; alt=&quot;My Personal Kanban Board&quot;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_visualize_flow&quot;&gt;Visualize Flow&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;My Trello board represents the steps I take to complete work.  Work flows from left to right  until it hits is complete.  Work I have completed is moved to the Done column.  I try never to move a card left.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;When you first create a Trello board, you get three columns: To Do, Doing and Done.  Simple, but I found that my workflow is more complex than that.  In order to properly represent my workflow, I have the following columns:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Personal Backlog&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Work Backlog&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Priority&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Today&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Waiting&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Doing&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Done&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;I will discuss my two backlog columns more in a &lt;a href=&quot;#_context&quot;&gt;later section&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;As work in my backlog becomes important, I will move it into my &lt;em&gt;Priority&lt;/em&gt; column.  This is curated list of things that I need to or should do in the near future.  Ideally this is a fairly short list.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The &lt;em&gt;Today&lt;/em&gt; column is my way setting the goals for the day.  My day generally consists of a lot of meetings and context switching.  I reassess my list before I start each day.  Unfortunately, I don’t always get through my cards.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;My &lt;em&gt;Waiting&lt;/em&gt; column is something I added recently.  Tasks that I did all the work for, but are waiting on some other event get stuck here.  An example is when I schedule a meeting with somebody.  I may have talking points in the Trello card for my meeting, so I want the card easily available during my meeting.  I keep the card in waiting til the meeting happens.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The Doing column should be fairly straight forward.  A card in this column is what I am currently focusing on.  I only allow one card in the Doing column at a time.  I will discuss &lt;a href=&quot;#_wip_limits&quot;&gt;why I limit work in progress later&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_priority&quot;&gt;Priority&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;I denote priority of cards within a column based on their vertical position within the column.  Cards on the top have the highest priority (and should in theory be done first).  Interestingly enough, cards on the right of the board also have higher priority than cards on the left.  If I am doing this right, I am always working on only the highest priority item at the time.  Low priority items stay left and move down, and are eventually forgotten.  (and this is ok)&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_capture&quot;&gt;Capture&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;One of the best features of Trello is the mobile app.  It allows me to quickly capture new tasks (as cards) that I don&amp;#8217;t want to forget.  The mobile app is fast and stays pretty true to the web interface.  Capturing tasks first, and then prioritizing them later is my approach.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;When I capture a task, I should add it to the backlog first.  Of course that doesn&amp;#8217;t always happen.  I will sometimes throw a new card right into &lt;em&gt;Today&lt;/em&gt; or &lt;em&gt;Priority&lt;/em&gt;.  There is nothing wrong with doing that.  Interrupt priorities are a common occurance for me, and I imagine I am not alone.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_prune&quot;&gt;Prune&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Periodically, I will go through my &lt;em&gt;Priority&lt;/em&gt; and &lt;em&gt;Backlogs&lt;/em&gt; columns to prune old cards.  I will look at each card and ask myself:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Do I still need to do this work?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If so, is this work a higher or lower priority?&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;If the card is no longer relevant, then I will use Trello&amp;#8217;s archive feature.  This essentially makes the card invisible, yet in theory still available.  Effectively, it&amp;#8217;s out of the way.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;If the card is still relevant, what is the priority of this card.  I will move it to the top or the bottom of the column depending on how I feel it&amp;#8217;s priority has changed.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_context&quot;&gt;Context&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;From the begining, I wanted to apply the concept of &lt;a href=&quot;http://hamberg.no/gtd/#contexts&quot;&gt;context from GTD&lt;/a&gt; to my Personal Kanban Trello board.  While with GTD, you can have a lot of contexts.  For me, I only use two contexts: personal and work.  I apply a context to a card through two methods: backlogs and &lt;a href=&quot;http://help.trello.com/customer/portal/articles/935748-adding-labels-to-cards&quot;&gt;Trello Labels&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;In my Trello board, I have two backlogs, personal and work.  I like using separate backlogs beause I prefer prioritizing my personal and work cards separately.  When I am at work, the cards in the work backlog have a higher priority than the cards in the personal backlog.  When I am home, the inverse is true.  This approach may not appeal to everybody.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;imageblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;/img/trello-pk-backlogs.png&quot; alt=&quot;Multiple backlogs for context&quot;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Once a card moves out of the backlog into &lt;em&gt;Priority&lt;/em&gt;, &lt;em&gt;Today&lt;/em&gt;, &lt;em&gt;Waiting&lt;/em&gt;, or &lt;em&gt;Doing&lt;/em&gt;, work and personal cards are mixed up in the same column.  I still want to be able to &lt;em&gt;switch contexts&lt;/em&gt; and filter out cards that don&amp;#8217;t apply at present.  This is where the Trello labels come in.  I use labels to denote whether a card is personal or work.  Labels are redundant while a card is in a backlog, but I am ok with thath.  As it moves throug_ th_ flow, it is valuable to see this context.  I chose red and green for contrast only.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;imageblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;/img/trello-pk-context.png&quot; alt=&quot;Labels for filtering&quot;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Trello labels enable me to quickly filter out personal or work cards.  I can filter out the personal cards by pressing &apos;F&apos; and then selecting the work label.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_wip_limits&quot;&gt;WIP Limits&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;I have decided to apply &lt;a href=&quot;https://www.atlassian.com/agile/kanban#!wip-limit&quot;&gt;Work in Progress (WIP) limits&lt;/a&gt; to my Personal Kanban board.  My &lt;em&gt;Today&lt;/em&gt;, &lt;em&gt;Waiting&lt;/em&gt; and &lt;em&gt;Doing&lt;/em&gt; columns all have limits.  I limit the number of concurrent cards in each of these columns.  Why?  Because while my Mac has quad core, I only have a single processor.  I can only effectively do one thing at a time (hence a WIP limit of one for &lt;em&gt;Doing&lt;/em&gt;).  Since I have lots of meetings (lots), I usually only target 3 or 4 cards per day_  _
+I am not going to dive too deep into this, but I definitely recommend further reading on limiting WIP.  It is an important part of an effective Kanban process.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_reporting_status&quot;&gt;Reporting status&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;It is kind of hard to avoid an environment you don&amp;#8217;t have to periodically report status.  What I like about my Trello based Personal Kanban process is that it makes this easy.  Whenever I need to report status, I just scan through my &lt;em&gt;Done&lt;/em&gt; column.  Once my status report is complete, I use Trello&amp;#8217;s card archival feature to clean out all the cards in the &lt;em&gt;Done&lt;/em&gt; column.  This provides me with a simple method for denoting all the cards I completed in a given reporting cycle (assuming I capture everything).  This works beautifully.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_would_love_feedback&quot;&gt;Would love feedback&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;There are numerous other features of Trello that I use, but didn’t touch on.  I wanted this to be more about how Trello enables my Personal Kanban approach, rather than a full feature report.  If you have any feedback for me on my process, I would love to hear it.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+	</description>
+    </item>
     <item>
       <title>Building a modern resume</title>
       <link>http://www.mikemcgarr.comblog/the-modern-tech-resume.html</link>
@@ -44,7 +212,7 @@
 &lt;p&gt;&lt;strong&gt;Employment history&lt;/strong&gt; - List your previous employment history, dates, and title.  Also add a description of the work you did there.  You can be a bit more verbose here.  Bulleted lists help people like me who scan.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Skills&lt;/strong&gt; - Add skills that you currently have, and want to continue using.  Don&amp;#8217;t add &lt;em&gt;assembly programming&lt;/em&gt; if you just took a class in college.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Skills&lt;/strong&gt; - Add skills that you currently have, and want to continue using.  Don&amp;#8217;t add &apos;assembly programming&apos; if you just took a class in college.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Recommendations&lt;/strong&gt; - Having a strong collection of recommendations is a nice touch.  Asking for a recommendation from others might be hard for you to do.  Best bet is, if you want to get a recommendation, give one.&lt;/p&gt;
@@ -83,7 +251,7 @@
 &lt;p&gt;&lt;strong&gt;Keep it professional&lt;/strong&gt; - I don&amp;#8217;t always follow this rule and my tweets are sometimes more politically charged than my office presence, but I recommend keeping it professional.  Always ask, would I want this tweet on the front page of the New York Times.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Tweet regularly&lt;/strong&gt; - Make sure you tweet fairly regularly.  Tweeting twice a week is just 104 tweets in a year&amp;#8230;not a whole lot.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Tweet regularly&lt;/strong&gt; - Make sure you tweet fairly regularly.  Tweeting twice a week is just 104 tweets in a year&amp;#8230;&amp;#8203;not a whole lot.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Be mundane&lt;/strong&gt; - Not every tweet has to be ground breaking.  If you hit a problem at work, tweet about it.  When you discover something new and cool, tweet about it.  When you find something you hate, tweet about it.&lt;/p&gt;
@@ -164,7 +332,7 @@
 &lt;p&gt;&lt;strong&gt;Post regularly&lt;/strong&gt; - Keep some simple goals.  Once a month.  Once you achieve that, double it to twice a month.  Then once a week.  The more you write, the easier it will be.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Share posts everywhere&lt;/strong&gt; - When you write a blog, make sure you tweet about it, share on Facebook, share on LinkedIn, share on Google+&amp;#8230;everywhere.  The more places you share, the more traffic you will recieve.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Share posts everywhere&lt;/strong&gt; - When you write a blog, make sure you tweet about it, share on Facebook, share on LinkedIn, share on Google+&amp;#8230;&amp;#8203;everywhere.  The more places you share, the more traffic you will recieve.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Don&amp;#8217;t email it, blog it&lt;/strong&gt; - Years ago, I asked my boss for two monitors.  He said, &quot;Why do you need it?&quot;.  He asked me to justify it.  So rather than sending him an email explanation, I wrote a &lt;a href=&quot;http://www.mikemcgarr.com/blog/justifying-dual-monitors.html&quot;&gt;blog entry justification&lt;/a&gt; and sent him that.  This turned out to be one of my most popular blog entries, because so many people needed to make the same justification (unfortunately).&lt;/p&gt;
@@ -261,7 +429,7 @@
 &lt;p&gt;Yesterday marked the first day of &lt;a href=&quot;http://devopsdays.org/events/2014-siliconvalley/&quot;&gt;DevOpsDays Silicon Valley&lt;/a&gt;, and my first DevOpsDays.  The conference has been quite impressive so far and well worth the ticket price ($150).  The speakers are amazing, but the true value is the ‘hallway track’ and the open spaces.  There was one open space in particular that I wanted to talk about here.  This open space focused on DevOps in the Government.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The first thing that struck me was that nobody in this open space currently worked for the federal government.  One person was a former government IT manager, myself (a former government contractor), a scientist on federal grants,&amp;#8230;and then a room of devops-minded ops guys.  So the conversation was definitely biased, but was interesting to say the least.&lt;/p&gt;
+&lt;p&gt;The first thing that struck me was that nobody in this open space currently worked for the federal government.  One person was a former government IT manager, myself (a former government contractor), a scientist on federal grants,&amp;#8230;&amp;#8203;and then a room of devops-minded ops guys.  So the conversation was definitely biased, but was interesting to say the least.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;One point raised during this open space is that the government has been quick to adopt Agile best practices.  This is true.  Most statements of work I saw required providing evidence of Agile proficiency.  Most contractors in the beltway will tell you that they know Agile (my experience says that most don’t really know Agile).  So if Agile can work in the government, can DevOps?  Yes, it can, but there is a significant obstacle.  Culture.&lt;/p&gt;
@@ -438,7 +606,7 @@ $&amp;gt; git branch -a
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The &lt;em&gt;-p&lt;/em&gt; flag will prune any branches from your local Git repository that don&amp;#8217;t exist on your remote repository.  Now this will only remove the local instance of the remote repository.  You will still have your own copy of the branch, as you can see from the second &lt;em&gt;git branch -a&lt;/em&gt; command.  To get rid of the local branch, you have to delete it:&lt;/p&gt;
+&lt;p&gt;The &apos;-p&apos; flag will prune any branches from your local Git repository that don&amp;#8217;t exist on your remote repository.  Now this will only remove the local instance of the remote repository.  You will still have your own copy of the branch, as you can see from the second &apos;git branch -a&apos; command.  To get rid of the local branch, you have to delete it:&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;listingblock&quot;&gt;
 &lt;div class=&quot;content&quot;&gt;
