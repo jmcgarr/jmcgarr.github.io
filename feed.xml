@@ -6,8 +6,8 @@
     <atom:link href="http://www.mikemcgarr.com/feed.xml" rel="self" type="application/rss+xml" />
     <description>Mike McGarr's Personal Blog</description>
     <language>en-gb</language>
-    <pubDate>Sun, 26 Oct 2014 15:23:09 -0700</pubDate>
-    <lastBuildDate>Sun, 26 Oct 2014 15:23:09 -0700</lastBuildDate>
+    <pubDate>Sun, 26 Oct 2014 16:41:36 -0700</pubDate>
+    <lastBuildDate>Sun, 26 Oct 2014 16:41:36 -0700</lastBuildDate>
 
     <item>
       <title>How I Kanban (with Trello)</title>
@@ -16,7 +16,7 @@
       <guid isPermaLink="false">blog/how-i-kanban.html</guid>
       	<description>
 	&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;For years I have been trying to find the perfect personal task management process that is easy, intuitive and effective.  My friends and colleagues have witnessed the various techniques I have adopted over the years.  “Hey Mike, why are carrying a stack of notecards?” they would ask.  I have tried various &lt;a href=&quot;http://gettingthingsdone.com/&quot;&gt;GTD (Getting things done)&lt;/a&gt; apps, to stacks of notecards, to Scrum boards at home, to giant lists&amp;#8230;&amp;#8203;all of them failed.&lt;/p&gt;
+&lt;p&gt;For years I have been trying to find the perfect personal task management process that is easy, intuitive and effective.  My friends and colleagues have witnessed the various techniques I have adopted over the years.  “Hey Mike, why are carrying a stack of notecards?” they would ask.  I have tried various &lt;a href=&quot;http://gettingthingsdone.com/&quot;&gt;GTD (Getting Things Done)&lt;/a&gt; apps, to stacks of notecards, to Scrum boards at home, to giant lists&amp;#8230;&amp;#8203;all of them failed.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;Eventually, I settled on an implementation of &lt;a href=&quot;http://www.personalkanban.com/pk/&quot;&gt;Personal Kanban&lt;/a&gt; using &lt;a href=&quot;https://trello.com/&quot;&gt;Trello&lt;/a&gt;.  The beauty of this approach is it’s simple, free and easy to take with you.&lt;/p&gt;
