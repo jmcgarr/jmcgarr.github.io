@@ -2,13 +2,17 @@ buildscript {
     repositories {
         mavenLocal()
         jcenter()
+        maven { url 'http://dl.bintray.com/vermeulen-mp/gradle-plugins' }
+
     }
 
     dependencies {
         classpath 'me.champeau.gradle:jbake-gradle-plugin:0.2.2-SNAPSHOT' 
         classpath 'org.ajoberstar:gradle-git:0.8.0'
-        classpath 'org.asciidoctor:asciidoctor-java-integration:0.1.4'  
+        classpath 'org.asciidoctor:asciidoctorj:1.5.0'  
         classpath 'org.freemarker:freemarker:2.3.19'
+        classpath 'org.pegdown:pegdown:1.4.2'
+        classpath 'com.wiredforcode:gradle-spawn-plugin:0.5.1'
     }
 }
 
