@@ -4,36 +4,70 @@ type=page
 status=published
 ~~~~~~
 
-== June 2014 - Implementing DevOps
-I was asked by the CIO of USPTO to give a presentation on adopting DevOps.  The talk is intended for a federal government audience.  
-
-===
+== Shepherding Change: Leading your DevOps transformation
 ++++
-<iframe src="//www.slideshare.net/slideshow/embed_code/38581512" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="https://www.slideshare.net/jmcgarr/implementing-devops" title="Implementing DevOps" target="_blank">Implementing DevOps</a> </strong> from <strong><a href="http://www.slideshare.net/jmcgarr" target="_blank">Mike McGarr</a></strong> </div>
+<iframe src="//www.slideshare.net/slideshow/embed_code/41736337" width="390" height="260" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
+++++
+In this presentation, I cover the field of organizational change management and how the practices from this field can be used to drive a DevOps transformation.  The marriage of these two fields has been a growing passion of mine.
+
+Presented at:
+
+- http://www.meetup.com/DevOpsDC/events/217434472/[DevOpsDC, November 18, 2014]
+
+== Zero to the Cloud with @NetflixOSS
+++++
+<iframe src="//www.slideshare.net/slideshow/embed_code/41684570" width="390" height="260" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
+++++
+In this presentation, I provide survey of the NetflixOSS tools.  In addition to cover a wide variety of tools, I also dive into the patterns and approaches that Netflix uses to effectively deploy, scale and maintain a resilient cloud presence.
+
+Presented at:
+
+- http://www.meetup.com/AWS-Washington-DC-Meet-Up/events/217681072/[AWS DC Meetup - November 17, 2014]
+
+== Engineering Tools at Netflix: Enabling Continuous Delivery
+++++
+<iframe src="//www.slideshare.net/slideshow/embed_code/40130240" width="390" height="260" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
+++++
+The Engineering Tools team is a responsible for building tools that support Netflix's cloud deployment infrastructure.  This talk covers Netflix's approach to building, baking and deploying software to AWS, and the tools we use to make this possible.
+
+Presented at:
+
+- http://www.meetup.com/Bay-Area-Infracoders/events/210267462/[Bay Area Infracoders - October 9, 2014]
+
+== Implementing DevOps
+++++
+<iframe src="//www.slideshare.net/slideshow/embed_code/38581512" width="330" height="290" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
+++++
+I was asked by the CIO of USPTO to give a presentation on adopting DevOps.  The talk is intended for a federal government audience in mind, but is applicable to anybody interested in getting started.  I cover the basics of DevOps, anchored in Gene Kim's Three Ways.  I also provide a series of DevOps prescriptions for organizations interested in getting started.
+
+Presented at:
+
+- USPTO (internal) - June 9, 2014
+
+== Infrastructure as Code
+++++
+<iframe src="//www.slideshare.net/slideshow/embed_code/24144601" width="330" height="290" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
+++++
+I gave this talk at Blackboard's 2013 DevCon conference in Las Vegas.  I used to talk to introduce Blackboard's customers to better ways to manage their server infrastructure.  This talk cover the core concepts for automating your servers, as well provides some examples using Chef and Jenkins.
+
+Presented at:
+
+- Blackboard DevCon 2013
+
+== Introduction to Continuous Delivery
+++++
+<iframe src="//www.slideshare.net/slideshow/embed_code/24144779" width="330" height="290" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
+++++
+In conjunction with my Infrastructure as Code talk, I also presented an introduction to Continuous Delivery at Blackboard's 2013 DevCon conference.  
+
+Presented at:
+
+- Blackboard DevCon 2013
+
+== Continuous Delivery Applied
+++++
+<iframe src="//www.slideshare.net/slideshow/embed_code/15200632" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
 ++++
 
-== June 2013 - BBWorld/DevCon
+== Improving Design through TDD
 
-This is fun!...
-
-=== Introduction to Continuous Delivery
-
-=== Infrastructure as Code
-
-== March 2013 - Richmond JUG
-
-=== Continuous Delivery Applied
-
-== February 2013 - DC Agile Engineering Conference
-
-=== Continuous Delivery Applied
-
-=== Improving Design through TDD
-
-== November 2012 - Agile Richmond
-
-=== Continuous Delivery Applied
-
-++++
-<iframe src="//www.slideshare.net/slideshow/embed_code/15200632" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="https://www.slideshare.net/jmcgarr/continuous-delivery-applied-agile-richmond" title="Continuous Delivery Applied (Agile Richmond)" target="_blank">Continuous Delivery Applied (Agile Richmond)</a> </strong> from <strong><a href="http://www.slideshare.net/jmcgarr" target="_blank">Mike McGarr</a></strong> </div>
-++++
