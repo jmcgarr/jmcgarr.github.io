@@ -48,26 +48,55 @@ Presented at:
 ++++
 <iframe src="//www.slideshare.net/slideshow/embed_code/24144601" width="330" height="290" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
 ++++
-I gave this talk at Blackboard's 2013 DevCon conference in Las Vegas.  I used to talk to introduce Blackboard's customers to better ways to manage their server infrastructure.  This talk cover the core concepts for automating your servers, as well provides some examples using Chef and Jenkins.
+I gave this talk at Blackboard's 2013 DevCon conference in Las Vegas.  I used to talk to introduce Blackboard's customers to better ways to manage their server infrastructure.  This talk cover the core concepts for automating your servers, as well provides some examples using Chef and Jenkins.  I plan on striping the DevCon branding and making this a more generic talk in the future. 
 
 Presented at:
 
-- Blackboard DevCon 2013
+- http://blog.blackboard.com/devcon-2013-a-new-hope/[Blackboard DevCon 2013] - June 8/9, 2013
 
 == Introduction to Continuous Delivery
 ++++
-<iframe src="//www.slideshare.net/slideshow/embed_code/24144779" width="330" height="290" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
+<iframe src="//www.slideshare.net/slideshow/embed_code/17452976" width="330" height="290" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
 ++++
-In conjunction with my Infrastructure as Code talk, I also presented an introduction to Continuous Delivery at Blackboard's 2013 DevCon conference.  
+I have given a variety of talks on the subject of Continuous Delivery.  This talk has evolved over time, but it is also based on the premise of teaching others about implementing Continuous Delivery.  
+
+My go to talk in the past has been an introduction to Continuous Delivery.  This talk has evolved over the years, but essentially provides tips and advice for how to get started with Continuous Delivery.  It covers a variety of techniques and tools available for engineers to start playing with immediately.  
+
+**Introduction to Continuous Delivery:**
+
+- http://blog.blackboard.com/devcon-2013-a-new-hope/[Blackboard DevCon 2013] - June 8/9, 2013 - http://www.slideshare.net/jmcgarr/introduction-to-continuous-delivery-bbworlddevcon-2013[(Slides)]
+- http://www.eventbrite.com/e/mcjug-06152011-meeting-tickets-1790267739[Montgomery County JUG] June 15, 2011 - http://www.slideshare.net/jmcgarr/continuous-delivery-8341276[(Slides)]
+
+**Continuous Delivery: Tools and Techniques:**
+
+- http://www.eventbrite.com/e/mcjug-02152012-meeting-tickets-2882149587[Montgomery Country JUG] - February 15, 2012 - http://www.slideshare.net/jmcgarr/continuous-delivery-tools-and-techniques[(Slides)]
+
+**Continuous Delivery Applied:**
+
+- AOL (internal) - May 31, 2013 - https://dl.dropboxusercontent.com/u/3118373/talks/Continuous%20Delivery%20Applied-AOL.pptx[(Slides)]
+- http://www.meetup.com/Richmond-Java-Users-Group/[Richmond JUG] - March 20, 2013 - http://www.slideshare.net/jmcgarr/continuous-delivery-applied-richmond-j[(Slides)]
+- http://www.agilerichmond.com[Agile Richmond] - November 14, 2012 - http://www.slideshare.net/jmcgarr/continuous-delivery-applied-agile-richmond[(Slides)]
+- http://agiledc.org/[AgileDC 2012] - October 23, 2012 - http://www.slideshare.net/jmcgarr/continuous-delivery-applied-agiledc[(Slides)]
+- http://www.meetup.com/DC-continuous-delivery/events/80979862/[DC Continuous Delivery Meetup] - September 19, 2012 - http://www.slideshare.net/jmcgarr/continuous-delivery-applied-dc-ci-user-group[(Slides)]
+
+== Improving Design through TDD
+++++
+<iframe src="//www.slideshare.net/slideshow/embed_code/15574515" width="330" height="290" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
+++++
+In late 2012, I was invited to speak at the first annual DC Agile Engineering Conference.  For this conference, I collaborated with a former colleague of mine, Sam Brown on one of my talks.  Sam and I are both proponents of Test Driven Development and practiced it together on projects, so it made sense for us to talk about TDD.
+
+The focus of our talk was on how Test Driven Development improves the design of an application.  We were lucky enough that our talk was https://www.youtube.com/watch?v=5-K8RH0WLXg[recorded].
 
 Presented at:
 
-- Blackboard DevCon 2013
+- http://www.eventbrite.com/e/2012-dc-agile-engineering-conference-and-global-day-of-coderetreat-registration-4384492134[DC Agile Engineering] - December 7, 2012 - https://www.youtube.com/watch?v=5-K8RH0WLXg[(Video)]
 
-== Continuous Delivery Applied
+== ATDD with Concordian (Lightning Talk)
 ++++
-<iframe src="//www.slideshare.net/slideshow/embed_code/15200632" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
+<iframe src="//www.slideshare.net/slideshow/embed_code/8341499" width="330" height="290" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
 ++++
+This is the first bit of public speaking I did was a lightning talk at a local meetup in the DC area.  Our team had been building an acceptance testing infrastructure using Concordion and I thought this was a great venue to start speaking.  I hope to expand on the topic in a larger presentation soon.
 
-== Improving Design through TDD
+Presented at:
 
+- http://www.meetup.com/D-CAST/events/17021962/[DC Agile Software Testing Group] - April 26, 2011
