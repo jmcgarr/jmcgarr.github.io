@@ -103,7 +103,7 @@
 
         	<p><p>I recently needed to make the same update to a large number of Jenkins jobs.  Essentially, we decided to change our naming convention for our jobs.  A simple change.  In order to achieve this, I took advantage of the Jenkins Script Console.</p>
 <p>The Jenkins Script Console allows you to run Groovy code against Jenkins to execute a task.  The Script Console provides access to Jenkins' underlying API's, which allows you to conduct almost any task.  The Script Console is available to any running Jenkins instance at '/script' or through the menus by navigating to 'Manage Jenkins &gt; Script Console'.  In order to effectively use the Script Console, you will likely need to become familiar with <a title="Jenkins JavaDocs" href="http://javadoc.jenkins-ci.org/" target="_blank">Jenkins' API's</a>.</p>
-<p><a href="http://earlyandoften.files.wordpress.com/2013/03/jenkins-script-console.png"><img class="aligncenter size-large wp-image-1402" alt="Jenkins Script Console" src="http://earlyandoften.files.wordpress.com/2013/03/jenkins-script-console.png?w=594" width="594" height="533" /></a></p>
+<p><img class="aligncenter size-large wp-image-1402" alt="Jenkins Script Console" src="/img/jenkins-script-console.png" width="594" height="533" /></p>
 <p>In my case, I wanted to execute a script that found all jobs matching a particular naming convention and rename them.  In our case, we had two naming conventions being used and we wanted them to all match.  We had jobs names that followed one of two formats:</p>
 <ul>
 <li>camel case, with underscores and dashes like:  'FUN-ArtifactName_Branch-Commit'</li>
