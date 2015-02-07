@@ -13,7 +13,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="row-fluid">
+	<div class="row-fluid" >
 
 		<div class="span2">
 		</div>
@@ -37,9 +37,9 @@
 
 		<div class="span3">
 
-			<img src="img/profile_pic-sq.jpg" style="width:300px;height:266px"/>
+			<img src="img/profile_pic-sq.jpg" class="img-rounded" style="width:300px;height:266px"/>
 			<p>
-			Passionate engineer seeking to optimize development teams and organizations
+			Build Tools Manager @Netflix. A software engineer with a passion for #lean, #tdd, #continuousDelivery, #devops, #automation and the #jvm.
 			</p>
 			<a href="http://www.mikemcgarr.com/feed.xml" target="_blank">
 			   <img src="img/webicon-rss.svg" alt="RSS Feed" style="width:42px;height:42px">
