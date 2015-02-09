@@ -1,0 +1,19 @@
+title=DevOps and Change Management
+date=2015-02-08
+type=post
+tags=devops,changemanagement
+status=draft
+summary=Write a summary
+~~~~~~
+
+DevOps is hard.  There is no disputing this fact.  You have to figure out whether you want to learn Chef, Puppet, Ansible or Salt?.  You have to learn about monitoring and how to gain visibility into your production environment.  You have to figure out what containers are, what's Docker, and do you need it?  You have to learn about microservices and the cloud.  It can be extremely overwhelming.
+
+And this is arguably the easy part.  When you decide it's time try implementing these things within your organization, you will quickly find that learning new technology is the easy part.  You can do that by yourself.  But rolling that technology out to the other people in your organization means introducing a change.  Whenever a change is introduced, the organization will either resist, or embrace your change, or both.  In either case, you will be confronting an important aspect of your organization.
+
+Culture.
+
+Culture is a huge part of the DevOps community.  If you are well versed in DevOps, you will know that the culture side is more important than the tools side.  This is an aspect of the DevOps movement that I love the most.  However, there is a lack of guidance from the DevOps community on how to take your traditional enterprise and make them a "unicorn".
+
+I previously wrote an article
+
+# Establish Alignment

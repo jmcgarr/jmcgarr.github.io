@@ -5,13 +5,14 @@ tags=devops
 status=draft
 summary=Write a summary
 ~~~~~~
-The DevOps community is adament in their belief that implementing DevOps is not about tools, but about culture.  If you are interested in converting your organization to DevOps, you will have to take a hard look at your organization's culture.  You will begin to see the silos and the organizational obstacles that stand in your way.  You will formulate plans to attack their cultural constructs and you will fight passionately against their existence.  You will hold brown bags and webinars.  You will make flyers and rant to anybody who would like to listen.  
 
-And at first, people will listen.  They like what they hear.  They have also heard of DevOps and they also want a piece of that.  Their agreement only fuels your fire for a DevOps culture.  You go to bed dreaming that of build pipelines, of your office litered with wall monitors filled with graphs.  You begin to believe that you can do it.  And then somebody asks you, "So what needs to change?".  You smile.  You know the answer.  It's so simple and every other DevOps enthusiast will agree with you.  You respond with "our culture".  
+The DevOps community is adament in their belief that implementing DevOps is not only about tools, but about culture.  If you are interested in converting your organization to DevOps, you will have to take a hard look at your organization's culture.  You will begin to see the silos and the organizational obstacles that stand in your way.  You will formulate plans to attack their cultural constructs and you will fight passionately against their existence.  You will hold brown bags and webinars.  You will make flyers and rant to anybody who would like to listen.
+
+And at first, people will listen.  They like what they hear.  They have also heard of DevOps and they also want a piece of that.  Their agreement only fuels your fire for a DevOps culture.  You go to bed dreaming that of build pipelines, of your office litered with wall monitors filled with graphs.  You begin to believe that you can do it.  And then somebody asks you, "So what needs to change?".  You smile.  You know the answer.  It's so simple and every other DevOps enthusiast will agree with you.  You respond with "our culture".
 
 And you will fail.
 
-The problem with the current DevOps party line of "it's all about culture" is that we think this is where we should start.  While it is true that a DevOps organization has a DevOps culture, it is extremely difficult to change and existing organizational culture.  If you begin your DevOps transformation by first changing culture, you are doomed to fail.  
+The problem with the current DevOps party line of "it's all about culture" is that we think this is where we should start.  While it is true that a DevOps organization has a DevOps culture, it is extremely difficult to change and existing organizational culture.  If you begin your DevOps transformation by first changing culture, you are doomed to fail.
 
 Cultural change should not be the goal, rather the outcome.
 
@@ -24,15 +25,12 @@ There are multiple ways to define and understand an organizations culture.  I am
 
 image::/img/culture.png[Organizational Culture]
 
-
-
-
-When implementing DevOps, your organization's culture will fight, kick and do it's best to stop your changes.  
+When implementing DevOps, your organization's culture will fight, kick and do it's best to stop you from changing anything.  Change is inherently hard because it involves people.  
 
 Manage change
 -------------
+This is a test
 
 
 Creating cultures
 -----------------
-
