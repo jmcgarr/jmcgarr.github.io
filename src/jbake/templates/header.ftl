@@ -5,7 +5,7 @@
     <title><#if (content.title)??><#escape x as x?xml>${content.title}</#escape><#else>Mike McGarr</#if></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="The personal blog of J. Michael McGarr, professional automation rant monger.  Passionate about #devops #continuousDelivery #lean #agile">
-    <meta name="author" content="https://twitter.com/jmichaelmcgarr">
+    <meta name="author" content="https://twitter.com/SonOfGarr">
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
 
@@ -55,4 +55,3 @@
      lang: en_US
     </script>
     <div id="wrap">
-   
