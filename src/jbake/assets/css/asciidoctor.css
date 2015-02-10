@@ -308,7 +308,7 @@ table.pyhltable .linenodiv { background-color: transparent !important; padding-r
 .quoteblock { margin: 0 0 1.25em; padding: 0.5625em 1.25em 0 1.1875em; border-left: 1px solid #dddddd; }
 .quoteblock blockquote { margin: 0 0 1.25em 0; padding: 0 0 0.5625em 0; border: 0; }
 .quoteblock blockquote > .paragraph:last-child p { margin-bottom: 0; }
-.quoteblock .attribution { margin-top: -.25em; padding-bottom: 0.5625em; font-size: inherit; color: #555555; }
+.quoteblock .attribution { margin-top: -.25em; padding-bottom: 0.5625em; color: #555555; font-size: 17.5px; font-weight: 300; text-align: right; }
 .quoteblock .attribution br { display: none; }
 .quoteblock .attribution cite { display: block; margin-bottom: 0.625em; }
 
