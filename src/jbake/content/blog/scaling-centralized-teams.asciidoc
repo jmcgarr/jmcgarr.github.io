@@ -1,0 +1,28 @@
+title=Centralized teams in a decentralized world
+date=2015-03-01
+type=post
+tags=agile,kanban,productivity,trello
+status=published
+summary=working on it...
+~~~~~~
+goal:
+
+- how nflx engtools team scales to support engineering innovation
+
+takeaways
+
+- a centralized team is not a devops team
+- not all customers are equal..so one size does not fit all
+- focus on customer service, by enabling self-service
+
+
+topics to cover:
+
+- we are not devops, the culture is devops
+- productizing innovations
+  - who owns innovation
+- tools to services (the spectrum)
+- customer service model
+- enabling self-service
+- consulting and coaching
+- change as a service
