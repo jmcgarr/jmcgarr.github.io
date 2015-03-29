@@ -6,9 +6,166 @@
     <atom:link href="http://www.mikemcgarr.com/feed.xml" rel="self" type="application/rss+xml" />
     <description>Mike McGarr's Personal Blog</description>
     <language>en-gb</language>
-    <pubDate>Sat, 21 Feb 2015 16:23:19 -0800</pubDate>
-    <lastBuildDate>Sat, 21 Feb 2015 16:23:19 -0800</lastBuildDate>
+    <pubDate>Sat, 28 Mar 2015 17:23:24 -0700</pubDate>
+    <lastBuildDate>Sat, 28 Mar 2015 17:23:24 -0700</lastBuildDate>
 
+    <item>
+      <title>Understanding culture</title>
+      <link>http://www.mikemcgarr.comblog/understanding-culture.html</link>
+      <pubDate>Sat, 28 Mar 2015 00:00:00 -0700</pubDate>
+      <guid isPermaLink="false">blog/understanding-culture.html</guid>
+      	<description>
+	&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;In my &lt;a href=&quot;/blog/the-phoenix-project.html&quot;&gt;review of the Phoenix Project&lt;/a&gt;, I mentioned that the organizational change that Parts Unlimited experienced seemed magical.  Many of my own attempts to lead organization-wide change had not been successful.  I had encountered resistance throughout the organization. I found success couldn’t be achieved overnight.  It was always frustrating to find the obviously better solution get shot down time and time again.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Reflecting back, I didn’t always grasp what the source of the resistance was, why obvious wins and good ideas were being ignored in favor of the status quo. Over time, I began to learn what was causing the resistance.  There was an invisible force at work.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Culture.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Since coming to this realization, I have been obsessed with learning about organizational culture and how to influence it.  In doing so, I have developed a model by which I use to understand culture.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_what_is_organizational_culture&quot;&gt;What is organizational culture?&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;There are a number of definitions for organizational culture in existence.  To get a sense for the diversity of viewpoints, I recommend this &lt;a href=&quot;https://hbr.org/2013/05/what-is-organizational-culture/&quot;&gt;HBR article&lt;/a&gt;.  For now, let me offer up a simple model that I’ve found useful for understanding organizational culture (from here on out, I will refer to it as just culture).&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;In it&amp;#8217;s simplest form, culture can be viewed as the &lt;strong&gt;expected and accepted behavior&lt;/strong&gt; of the people within an organization.  In other words, how people within an organization act, how they are expected to act, and what actions they are allowed to take defines a culture.  Culture is behavior.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;_visualizing_culture&quot;&gt;Visualizing culture&lt;/h3&gt;
+&lt;div class=&quot;imageblock&quot; style=&quot;text-align: center&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;/img/culture.png&quot; alt=&quot;Organizational Culture&quot; width=&quot;500&quot;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Being a visual learner, I had a strong desire to depict culture visually.  The picture above is my attempt to do so.  The green triangle on top represents the four elements of organizational culture: values, behavior, process and tools. The concepts lower on the pyramid are foundational to concepts higher on the pyramid.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Foundational to, yet separate from culture are it&amp;#8217;s people.  People are at the same time critical to shaping a culture, while possibly still being transient to that culture.  Meaning, you can remove or add people to a culture and it&amp;#8217;s values, behaviors, processes or tools need not change.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The rest of the post will dive deeper into each of these concepts.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_behavior&quot;&gt;Behavior&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;As I stated earlier, culture can be viewed as the &lt;strong&gt;expected and accepted behaviors&lt;/strong&gt; of the people within an organization.  Let&amp;#8217;s take a deeper look at what this means.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;strong&gt;Expected behaviors&lt;/strong&gt; are the actions an individual within a culture should conduct themselves.  Whether this is how they work, how they communicate or the hours they keep.  An organization evaluates individual performance based on expected behaviors.  Evaluating an organization&amp;#8217;s annual performance criteria can be a good indicator of their culture&amp;#8217;s expected behavior.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;strong&gt;Accepted behaviors&lt;/strong&gt; are the actions of an individual that the culture allows.  These behaviors are informally accepted.  You are unlikely to find accepted behaviors documented somewhere.  In my experience, accepted behaviors are often localized to a subgroup within the culture, like a project team or a division.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;It’s possible that accepted behaviors conflict with an organization&amp;#8217;s expected behaviors.  An unfortunate common example is a culture that expects individuals to treat each other with respect, but sexist jokes are tolerated and possibly even encouraged.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;There’s an interesting third type of behavior that I would like to mention.  &lt;strong&gt;Rewarded behaviors&lt;/strong&gt; are the actions individuals take that are praised, promoted and compensated.  Rewarded behaviors are the actions that are needed to get ahead in that culture.  Interestingly enough, rewarded behavior can be either expected (formal) or accepted (informal) behavior.  Rewarded behaviors are the most potent indicator of an organization&amp;#8217;s values, the foundation of culture.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_values&quot;&gt;Values&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;An organization’s &lt;strong&gt;values&lt;/strong&gt; define which behaviors are expected, accepted and rewarded.  Values are the bedrock by which a culture reinforces itself.  If an organization&amp;#8217;s values aren&amp;#8217;t well known, understood or communicated, it will be hard to understand how one should act.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Do you know what your company’s values are?  Prior to my joining &lt;a href=&quot;http://www.netflix.com&quot;&gt;Netflix&lt;/a&gt; I can honestly say I paid little attention to my company&amp;#8217;s values.  I might have seen them in a document a few times a year, but they seemed unimportant to me.  They felt like obvious social norms.  And they all looked the same to me.  But as I began to understand that culture was the source of my frustrations, I started to see how an organization&amp;#8217;s values were important.  I also realized that an organization&amp;#8217;s documented values don&amp;#8217;t always paint a complete picture.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect2&quot;&gt;
+&lt;h3 id=&quot;_stated_and_unstated_values&quot;&gt;Stated and Unstated Values&lt;/h3&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;There are two types of organizational values: stated and unstated values.  &lt;strong&gt;Stated values&lt;/strong&gt; are the documented organization values.  Everybody in the company should have access to a clear definition of each value.  Expected behaviors are generally based on stated values. &lt;strong&gt;Unstated values&lt;/strong&gt; emerge from the accepted (and rewarded) behavior that does not align with the organization&amp;#8217;s stated values.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;If unstated values conflict with stated values, this could represent a problem for the culture.  An organization that rewards behavior opposed to stated values indicates an unhealthy culture.  Hopefully this is obvious to everybody.  I will steal the example used in the &lt;a href=&quot;http://www.slideshare.net/reed2001/culture-1798664&quot;&gt;Netflix culture deck&lt;/a&gt; of &lt;a href=&quot;http://en.wikipedia.org/wiki/Enron&quot;&gt;Enron&lt;/a&gt;.  Nuff said.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;imageblock&quot; style=&quot;text-align: center&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;/img/netflix-culture-enron.png&quot; alt=&quot;Netflix Culture Deck on Enron&quot; width=&quot;500&quot;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Unstated values that don’t conflict with stated values can be fascinating.  Is this a sign that the company culture is evolving and stated organizational values haven’t caught up?  Is this an indicator of a potent subculture spreading it&amp;#8217;s values?  Or is the organization unaware or unwilling to accept this emergent cultural value?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect3&quot;&gt;
+&lt;h4 id=&quot;_deriving_values&quot;&gt;Deriving values&lt;/h4&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Values have little meaning until viewed through the lens of behavior within an organization.  In fact, you should be able to derive an organization&amp;#8217;s values based on the behavior witnessed within.  Does the organization say they value honesty, integrity and selflessness, yet the company’s VPs stab each other in the back to get ahead?  Are the most successful VPs the ones who lie, cheat and steal?.  It&amp;#8217;s obvious that this organization&amp;#8217;s has unstated values of dishonesty and selfishness.  Values not reinforced by any behaviors are just words.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_process_and_tools&quot;&gt;Process and Tools&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Organizational &lt;strong&gt;processes&lt;/strong&gt; are the expected behaviors that are critical enough to the organization&amp;#8217;s operations to be formalized and documented.  Processes can be viewed as a subset of expected behaviors that apply to individuals, teams and possibly even company assets.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Processes that are repeated and mission critical are candidates for automation via tools.  Tools are important to ensuring processes are repeatable.  Tools improve the efficiency of implementing processes.  Tools can also simplify a process by abstracting the details.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Tools codify critical organizational processes.  Processes are formalized expected behaviors that are critical to the organization&amp;#8217;s operations.  Behaviors are defined and reinforced by values.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Process and tools are likely the most well defined and understood aspect of an organization’s culture.  They are the easiest to grasp and widely discussed.  I will not dive into them any further in this post.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_people&quot;&gt;People&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;quoteblock&quot;&gt;
+&lt;blockquote&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The most important people to the culture are those who leave&lt;/p&gt;
+&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;div class=&quot;attribution&quot;&gt;
+&amp;#8212; Andy Dunn&lt;br&gt;
+&lt;cite&gt;&lt;a href=&quot;https://medium.com/@dunn/creating-culture-21a117803f80&quot;&gt;Creating Culture: An imperfect recipe&lt;/a&gt;&lt;/cite&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;People are the most important element to maintaining a strong organizational culture.  The people who make up your organization are responsible for continually reinforcing the culture.  It’s the people within the organization that define what’s accepted behavior.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;An individual joins an organization with personal values.  These personal values may or may not conflict with the organization&amp;#8217;s values.  Hopefully the hiring process ensures that an individual&amp;#8217;s values align with the organization&amp;#8217;s.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The strength of an organization&amp;#8217;s culture can be measured by its response to rogue individual behaviors.  A strong culture will provide swift feedback to the individual.  A strong culture will also prune its ranks based on how well an individual aligns with its values.  A great example of this is Netflix&amp;#8217;s response to brilliant jerks.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;imageblock&quot; style=&quot;text-align: center&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;img src=&quot;/img/netflix-culture-jerks.png&quot; alt=&quot;Netflix Culture Deck on Brilliant Jerks&quot; width=&quot;500&quot;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_the_whole_is_greater_than_the_sum_of_it_s_parts&quot;&gt;The whole is greater than the sum of it&amp;#8217;s parts&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;All of these concepts (people, values, behaviors, processes and tools) swirl and collide, conflict with and continually reinforce an organization&amp;#8217;s culture.  You can understand part of an organization by looking at it&amp;#8217;s tools, but it&amp;#8217;s an incomplete picture.  Understanding how to use these cultural concepts to change a culture is a topic for another time.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+	</description>
+    </item>
     <item>
       <title>How I Kanban (with Trello)</title>
       <link>http://www.mikemcgarr.comblog/how-i-kanban.html</link>
