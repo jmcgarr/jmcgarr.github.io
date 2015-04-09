@@ -1,0 +1,92 @@
+title=Understanding culture
+date=2015-03-28
+type=post
+tags=change management, culture, understanding culture, DevOps
+status=published
+summary=In my review of the Phoenix Project, I mentioned that the organizational change that Parts Unlimited experienced seemed magically.  Many of my own attempts to lead organization-wide change have not been as successful that quickly.  I would encounter resistance throughout the organization I found success couldn’t be achieved overnight.  It was always frustrating to find the obviously better solution get shot down time and time again.
+~~~~~~
+
+In my link:/blog/the-phoenix-project.html[review of the Phoenix Project], I mentioned that the organizational change that Parts Unlimited experienced seemed magical.  Many of my own attempts to lead organization-wide change had not been successful.  I had encountered resistance throughout the organization. I found success couldn’t be achieved overnight.  It was always frustrating to find the obviously better solution get shot down time and time again.
+
+Reflecting back, I didn’t always grasp what the source of the resistance was, why obvious wins and good ideas were being ignored in favor of the status quo. Over time, I began to learn what was causing the resistance.  There was an invisible force at work.
+
+Culture.
+
+Since coming to this realization, I have been obsessed with learning about organizational culture and how to influence it.  In doing so, I have developed a model by which I use to understand culture.
+
+== What is organizational culture?
+
+There are a number of definitions for organizational culture in existence.  To get a sense for the diversity of viewpoints, I recommend this https://hbr.org/2013/05/what-is-organizational-culture/[HBR article].  For now, let me offer up a simple model that I’ve found useful for understanding organizational culture (from here on out, I will refer to it as just culture).
+
+In it's simplest form, culture can be viewed as the *expected and accepted behavior* of the people within an organization.  In other words, how people within an organization act, how they are expected to act, and what actions they are allowed to take defines a culture.  Culture is behavior.
+
+=== Visualizing culture
+
+image::/img/culture.png[Organizational Culture,500,align="center"]
+
+Being a visual learner, I had a strong desire to depict culture visually.  The picture above is my attempt to do so.  The green triangle on top represents the four elements of organizational culture: values, behavior, process and tools. The concepts lower on the pyramid are foundational to concepts higher on the pyramid.
+
+Foundational to, yet separate from culture are it's people.  People are at the same time critical to shaping a culture, while possibly still being transient to that culture.  Meaning, you can remove or add people to a culture and it's values, behaviors, processes or tools need not change.
+
+The rest of the post will dive deeper into each of these concepts.
+
+== Behavior
+
+As I stated earlier, culture can be viewed as the *expected and accepted behaviors* of the people within an organization.  Let's take a deeper look at what this means.
+
+*Expected behaviors* are the actions an individual within a culture should conduct themselves.  Whether this is how they work, how they communicate or the hours they keep.  An organization evaluates individual performance based on expected behaviors.  Evaluating an organization's annual performance criteria can be a good indicator of their culture's expected behavior.
+
+*Accepted behaviors* are the actions of an individual that the culture allows.  These behaviors are informally accepted.  You are unlikely to find accepted behaviors documented somewhere.  In my experience, accepted behaviors are often localized to a subgroup within the culture, like a project team or a division.
+
+It’s possible that accepted behaviors conflict with an organization's expected behaviors.  An unfortunate common example is a culture that expects individuals to treat each other with respect, but sexist jokes are tolerated and possibly even encouraged.
+
+There’s an interesting third type of behavior that I would like to mention.  *Rewarded behaviors* are the actions individuals take that are praised, promoted and compensated.  Rewarded behaviors are the actions that are needed to get ahead in that culture.  Interestingly enough, rewarded behavior can be either expected (formal) or accepted (informal) behavior.  Rewarded behaviors are the most potent indicator of an organization's values, the foundation of culture.
+
+== Values
+
+An organization’s *values* define which behaviors are expected, accepted and rewarded.  Values are the bedrock by which a culture reinforces itself.  If an organization's values aren't well known, understood or communicated, it will be hard to understand how one should act.
+
+Do you know what your company’s values are?  Prior to my joining http://www.netflix.com[Netflix] I can honestly say I paid little attention to my company's values.  I might have seen them in a document a few times a year, but they seemed unimportant to me.  They felt like obvious social norms.  And they all looked the same to me.  But as I began to understand that culture was the source of my frustrations, I started to see how an organization's values were important.  I also realized that an organization's documented values don't always paint a complete picture.
+
+=== Stated and Unstated Values
+
+There are two types of organizational values: stated and unstated values.  *Stated values* are the documented organization values.  Everybody in the company should have access to a clear definition of each value.  Expected behaviors are generally based on stated values. *Unstated values* emerge from the accepted (and rewarded) behavior that does not align with the organization's stated values.
+
+If unstated values conflict with stated values, this could represent a problem for the culture.  An organization that rewards behavior opposed to stated values indicates an unhealthy culture.  Hopefully this is obvious to everybody.  I will steal the example used in the http://www.slideshare.net/reed2001/culture-1798664[Netflix culture deck] of http://en.wikipedia.org/wiki/Enron[Enron].  Nuff said.
+
+image::/img/netflix-culture-enron.png[Netflix Culture Deck on Enron,500,align="center"]
+
+Unstated values that don’t conflict with stated values can be fascinating.  Is this a sign that the company culture is evolving and stated organizational values haven’t caught up?  Is this an indicator of a potent subculture spreading it's values?  Or is the organization unaware or unwilling to accept this emergent cultural value?
+
+==== Deriving values
+
+Values have little meaning until viewed through the lens of behavior within an organization.  In fact, you should be able to derive an organization's values based on the behavior witnessed within.  Does the organization say they value honesty, integrity and selflessness, yet the company’s VPs stab each other in the back to get ahead?  Are the most successful VPs the ones who lie, cheat and steal?.  It's obvious that this organization's has unstated values of dishonesty and selfishness.  Values not reinforced by any behaviors are just words.
+
+== Process and Tools
+
+Organizational *processes* are the expected behaviors that are critical enough to the organization's operations to be formalized and documented.  Processes can be viewed as a subset of expected behaviors that apply to individuals, teams and possibly even company assets.
+
+Processes that are repeated and mission critical are candidates for automation via tools.  Tools are important to ensuring processes are repeatable.  Tools improve the efficiency of implementing processes.  Tools can also simplify a process by abstracting the details.
+
+Tools codify critical organizational processes.  Processes are formalized expected behaviors that are critical to the organization's operations.  Behaviors are defined and reinforced by values.
+
+Process and tools are likely the most well defined and understood aspect of an organization’s culture.  They are the easiest to grasp and widely discussed.  I will not dive into them any further in this post.
+
+== People
+
+[quote, Andy Dunn, 'https://medium.com/@dunn/creating-culture-21a117803f80[Creating Culture: An imperfect recipe]']
+_____
+The most important people to the culture are those who leave
+_____
+
+People are the most important element to maintaining a strong organizational culture.  The people who make up your organization are responsible for continually reinforcing the culture.  It’s the people within the organization that define what’s accepted behavior.
+
+An individual joins an organization with personal values.  These personal values may or may not conflict with the organization's values.  Hopefully the hiring process ensures that an individual's values align with the organization's.
+
+The strength of an organization's culture can be measured by its response to rogue individual behaviors.  A strong culture will provide swift feedback to the individual.  A strong culture will also prune its ranks based on how well an individual aligns with its values.  A great example of this is Netflix's response to brilliant jerks.
+
+image::/img/netflix-culture-jerks.png[Netflix Culture Deck on Brilliant Jerks,500,align="center"]
+
+== The whole is greater than the sum of it's parts
+
+All of these concepts (people, values, behaviors, processes and tools) swirl and collide, conflict with and continually reinforce an organization's culture.  You can understand part of an organization by looking at it's tools, but it's an incomplete picture.  Understanding how to use these cultural concepts to change a culture is a topic for another time.
