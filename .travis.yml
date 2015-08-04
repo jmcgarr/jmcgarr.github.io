@@ -3,8 +3,9 @@ branches:
   only:
     - source
 env:
-  secure: "fruRAPmWw94Koyh9K64L93jr7mWMDTBKVfqCpA+Qj169pa5W1XoChAsV7JYwAZJqpZNbplhr2Ux/1plLCu5Zq0ceWmYdfw9JnPH0Avw/pqSaPMMefNzFAyLgEXGcJx4I6R9mTF/axY2Oq2vXfqQjkqjio5iJi2f2epobRVGbrNc="
+  global:
+    secure: "HhCz/0z6IxqZuiOtWLpGnwCf4pW2YyvWVdbVWvcJhemKNdqzb1uBxF+lL9VUyfSTfVnFDjTF46FgRY4PuL9zRvlRbeJfjDRPXYAcp7osaBysKl+dVnf8usLx/MKJrBu4GZx4FnSaUcAC8GhVcLE2yomGcQKPqmYnBRGQGidbiBw="
 install: ./gradlew -b ci.gradle tasks
 script: 
   - "./gradlew -b ci.gradle jbake --info --stacktrace"
-  - "./gradlew -b ci.gradle publishGhPages --debug --stacktrace"
+  - "./gradlew -b ci.gradle publishGhPages --info --stacktrace"
