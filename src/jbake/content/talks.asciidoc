@@ -4,6 +4,28 @@ type=page
 status=published
 ~~~~~~
 
+== A centralized team in a decentralized world
+++++
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/HhLafNTYaBMGXF" width="390" height="260" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
+++++
+In this presentation, I discuss the various forces at play that create tension for centralized teams like Netflix's Engineering Tools team.  I share some of the challenges we face balancing out customer needs with support issues.  I also share how we remain innovative while throttling the rate of change we impose on our customers.
+
+Presented at:
+
+- http://www.oscon.com/open-source-2015/public/schedule/detail/42183[OSCON 2015]
+- http://gradlesummit.com/conference/santa_clara/2015/06/session?id=33638[Gradle Summit 2015]
+- http://www.alm-forum.com/s15/presenters#mikem[ALM Summit 2015]
+
+== Build and deploy to the cloud using Netflix OSS
+++++
+<iframe width="390" height="260" src="https://www.youtube.com/embed/y2VTnNnzrwk" frameborder="0" align="right" allowfullscreen></iframe>
+++++
+In this talk, I presented a survey of build and deploy tools Netflix has open sourced.  I discuss the patterns Netflix uses to manage deployments at scale, and the tools you can use to build your own Netflix OSS cloud.  I even do some live coding!
+
+Presented at:
+
+- https://www.twilio.com/signal/2015/videos?speaker=mike-mcgarr[Twilio Signal 2015]
+
 == Shepherding Change: Leading your DevOps transformation
 ++++
 <iframe src="//www.slideshare.net/slideshow/embed_code/41736337" width="390" height="260" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
