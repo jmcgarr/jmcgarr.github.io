@@ -9,10 +9,10 @@ buildscript {
     dependencies {
         classpath 'me.champeau.gradle:jbake-gradle-plugin:0.2.2-SNAPSHOT' 
         classpath 'org.ajoberstar:gradle-git:0.8.0'
-        classpath 'org.asciidoctor:asciidoctorj:1.5.0'  
+        classpath 'org.asciidoctor:asciidoctorj:1.5.1'  
         classpath 'org.freemarker:freemarker:2.3.19'
         classpath 'org.pegdown:pegdown:1.4.2'
-        classpath 'com.wiredforcode:gradle-spawn-plugin:0.5.1'
+        //classpath 'com.wiredforcode:gradle-spawn-plugin:0.5.1'
     }
 }
 
@@ -36,8 +36,9 @@ githubPages {
   }
 }
 
-jbakePreview.dependsOn jbake
-publishGhPages.dependsOn jbake
+
+jbakePreview.dependsOn tasks.find{ it.name == 'jbake' }
+publishGhPages.dependsOn tasks.find{ it.name == 'jbake' }
 
 task publish( type: GradleBuild ) {           
   description = 'Publishes the build output to gh-pages.'
