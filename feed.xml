@@ -6,13 +6,13 @@
     <atom:link href="http://www.mikemcgarr.com/feed.xml" rel="self" type="application/rss+xml" />
     <description>Mike McGarr's Personal Blog</description>
     <language>en-gb</language>
-    <pubDate>Tue, 4 Aug 2015 10:51:48 -0400</pubDate>
-    <lastBuildDate>Tue, 4 Aug 2015 10:51:48 -0400</lastBuildDate>
+    <pubDate>Wed, 9 Sep 2015 08:43:28 -0700</pubDate>
+    <lastBuildDate>Wed, 9 Sep 2015 08:43:28 -0700</lastBuildDate>
 
     <item>
       <title>Understanding culture</title>
       <link>http://www.mikemcgarr.comblog/understanding-culture.html</link>
-      <pubDate>Sat, 28 Mar 2015 00:00:00 -0400</pubDate>
+      <pubDate>Sat, 28 Mar 2015 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/understanding-culture.html</guid>
       	<description>
 	&lt;div class=&quot;paragraph&quot;&gt;
@@ -169,7 +169,7 @@
     <item>
       <title>How I Kanban (with Trello)</title>
       <link>http://www.mikemcgarr.comblog/how-i-kanban.html</link>
-      <pubDate>Sun, 26 Oct 2014 00:00:00 -0400</pubDate>
+      <pubDate>Sun, 26 Oct 2014 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/how-i-kanban.html</guid>
       	<description>
 	&lt;div class=&quot;paragraph&quot;&gt;
@@ -337,7 +337,7 @@ I am not going to dive too deep into this, but I definitely recommend further re
     <item>
       <title>Building a modern resume</title>
       <link>http://www.mikemcgarr.comblog/the-modern-tech-resume.html</link>
-      <pubDate>Sun, 20 Jul 2014 00:00:00 -0400</pubDate>
+      <pubDate>Sun, 20 Jul 2014 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/the-modern-tech-resume.html</guid>
       	<description>
 	&lt;div class=&quot;paragraph&quot;&gt;
@@ -579,7 +579,7 @@ I am not going to dive too deep into this, but I definitely recommend further re
     <item>
       <title>DevOps in the Federal Government</title>
       <link>http://www.mikemcgarr.comblog/devops-in-the-federal-government.html</link>
-      <pubDate>Sat, 28 Jun 2014 00:00:00 -0400</pubDate>
+      <pubDate>Sat, 28 Jun 2014 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/devops-in-the-federal-government.html</guid>
       	<description>
 	&lt;div class=&quot;paragraph&quot;&gt;
@@ -643,7 +643,7 @@ That being said, I am optimistic that DevOps in the government can be successful
     <item>
       <title>Git commands for a &apos;forked&apos; up world</title>
       <link>http://www.mikemcgarr.comblog/git-for-fork-pullrequest.html</link>
-      <pubDate>Thu, 17 Apr 2014 00:00:00 -0400</pubDate>
+      <pubDate>Thu, 17 Apr 2014 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/git-for-fork-pullrequest.html</guid>
       	<description>
 	&lt;div class=&quot;paragraph&quot;&gt;
@@ -777,7 +777,7 @@ $&amp;gt; git branch -a
     <item>
       <title>On acceptance test architecture, lifecycles and responsibilities</title>
       <link>http://www.mikemcgarr.comblog/on-acceptance-test-architecture-lifecycles-and-responsibilities.html</link>
-      <pubDate>Wed, 18 Dec 2013 00:00:00 -0500</pubDate>
+      <pubDate>Wed, 18 Dec 2013 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/on-acceptance-test-architecture-lifecycles-and-responsibilities.html</guid>
       	<description>
 	&lt;p&gt;I was recently in a conversation with testers about how acceptance tests should be structured.   As we revisit how Blackboard conducts test automation, we were looking at patterns and practices to employ.  I shared my following perspective on how to think about the architecture of your acceptance test infrastructure, the lifecycle of a specification, as well as who should conduct which step.  This post is really a teaser post, as I am merely smearing pretty pictures on the web, without much background.  Isn&apos;t that what follow-up blogs are for?&lt;/p&gt;
@@ -815,7 +815,7 @@ I would also like to comment on who should do what.&lt;/p&gt;
     <item>
       <title>2013 Six Month Check-point</title>
       <link>http://www.mikemcgarr.comblog/2013-six-month-check-point.html</link>
-      <pubDate>Mon, 1 Jul 2013 00:00:00 -0400</pubDate>
+      <pubDate>Mon, 1 Jul 2013 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/2013-six-month-check-point.html</guid>
       	<description>
 	&lt;p&gt;It has been far too long since &lt;a href=&quot;/blog/improving-my-shell-fu-oh-my-zsh.html&quot; target=&quot;_blank&quot;&gt;I last blogged&lt;/a&gt;.  There have been a number of reasons, most notably work, family and golf (yeah golf!).  But too much has happened since I last blogged…so I need to get back into it.&lt;/p&gt;
@@ -856,7 +856,7 @@ I would also like to comment on who should do what.&lt;/p&gt;
     <item>
       <title>Improving my Shell-fu: Oh My Zsh</title>
       <link>http://www.mikemcgarr.comblog/improving-my-shell-fu-oh-my-zsh.html</link>
-      <pubDate>Tue, 19 Mar 2013 00:00:00 -0400</pubDate>
+      <pubDate>Tue, 19 Mar 2013 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/improving-my-shell-fu-oh-my-zsh.html</guid>
       	<description>
 	&lt;p&gt;I have been recently diving head first into the wonderful world of the shell.  Having spent a fair amount of my career on Windows machines at work (even though I have been using Mac&apos;s at home for 6+ years), it&apos;s only in the past year that I have made the full switch to 100% Mac for work and home.  I have found that this has enabled me to focus on learning more about the shell.  (no more cmd for me!)&lt;/p&gt;
@@ -899,7 +899,7 @@ plugins=(git vagrant knife gradle)
     <item>
       <title>Mastering Jenkins: Making Bulk Updates to Jobs</title>
       <link>http://www.mikemcgarr.comblog/mastering-jenkins-making-bulk-updates-to-jobs.html</link>
-      <pubDate>Mon, 11 Mar 2013 00:00:00 -0400</pubDate>
+      <pubDate>Mon, 11 Mar 2013 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/mastering-jenkins-making-bulk-updates-to-jobs.html</guid>
       	<description>
 	&lt;p&gt;I recently needed to make the same update to a large number of Jenkins jobs.  Essentially, we decided to change our naming convention for our jobs.  A simple change.  In order to achieve this, I took advantage of the Jenkins Script Console.&lt;/p&gt;
@@ -935,7 +935,7 @@ for (item in Hudson.instance.items) {
     <item>
       <title>DC Tech Ops Meetup Alliance (aka the Super Friends)</title>
       <link>http://www.mikemcgarr.comblog/dc-tech-ops-meetup.html</link>
-      <pubDate>Thu, 21 Feb 2013 00:00:00 -0500</pubDate>
+      <pubDate>Thu, 21 Feb 2013 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/dc-tech-ops-meetup.html</guid>
       	<description>
 	&lt;p&gt;On Tuesday night, my meetup group (&lt;a title=&quot;DC Continuous Integration, Delivery, &amp;amp; Deployment Group&quot; href=&quot;http://www.meetup.com/DC-continuous-integration/&quot; target=&quot;_blank&quot;&gt;DC Continuous Integration, Delivery and Deployment Group&lt;/a&gt;) joined forces with a number of other groups to present the most awesome gathering we have ever known.  The meeting was the brainchild of &lt;a title=&quot;Nathen Harvey&quot; href=&quot;http://www.nathenharvey.com/&quot; target=&quot;_blank&quot;&gt;Nathen Harvey&lt;/a&gt;, who runs the &lt;a title=&quot;DevOpsDC&quot; href=&quot;http://www.meetup.com/DevOpsDC/&quot; target=&quot;_blank&quot;&gt;DevOpsDC&lt;/a&gt; and &lt;a title=&quot;MongoDC&quot; href=&quot;http://www.meetup.com/Washington-DC-MongoDB-Users-Group/&quot; target=&quot;_blank&quot;&gt;MongoDC&lt;/a&gt; user groups and works for &lt;a title=&quot;OpsCode&quot; href=&quot;http://www.opscode.com/&quot; target=&quot;_blank&quot;&gt;OpsCode&lt;/a&gt; as their Technical Community Manager.  Nathen sent an email with the subject of &apos;DC Tech Ops Meetup Alliance (aka the Super Friends)&apos;...how could I not be in.&lt;/p&gt;
@@ -953,7 +953,7 @@ for (item in Hudson.instance.items) {
     <item>
       <title>Book Review: The Phoenix Project</title>
       <link>http://www.mikemcgarr.comblog/the-phoenix-project.html</link>
-      <pubDate>Thu, 21 Feb 2013 00:00:00 -0500</pubDate>
+      <pubDate>Thu, 21 Feb 2013 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/the-phoenix-project.html</guid>
       	<description>
 	&lt;p&gt;&lt;img alt=&quot;&quot; src=&quot;https://pbs.twimg.com/media/BBQcthgCAAAlL8D.jpg:large&quot; width=&quot;1&quot; height=&quot;1&quot; /&gt;&lt;img align=&quot;left&quot; alt=&quot;thePhoenixProject&quot; src=&quot;/img/thephoenixproject.jpg&quot; width=&quot;300&quot; height=&quot;225&quot; /&gt;I recently completed &apos;&lt;a title=&quot;The Phoenix Project Book&quot; href=&quot;http://itrevolution.com/books/phoenix-project-devops-novel/&quot; target=&quot;_blank&quot;&gt;The Phoenix Project: A Novel About IT, DevOps, and Helping Your Business Win&lt;/a&gt;&apos; and thought I would write a review.  I mainly wanted to capture notes and thoughts about the book for myself.&lt;/p&gt;
@@ -978,7 +978,7 @@ for (item in Hudson.instance.items) {
     <item>
       <title>Boyds Law of Iteration</title>
       <link>http://www.mikemcgarr.comblog/boyds-law-of-iteration.html</link>
-      <pubDate>Fri, 15 Feb 2013 00:00:00 -0500</pubDate>
+      <pubDate>Fri, 15 Feb 2013 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/boyds-law-of-iteration.html</guid>
       	<description>
 	&lt;p&gt;My boss &lt;a title=&quot;Steve Feldman&quot; href=&quot;https://twitter.com/PerfForensics&quot; target=&quot;_blank&quot;&gt;Steve&lt;/a&gt; asked me the other day why I have never posted anything about Boyd&apos;s Law of Iteration.  &quot;Your blog&apos;s name is &apos;Early and Often&apos;, right?&quot;.  He&apos;s right, I have no excuse.&lt;/p&gt;
@@ -996,7 +996,7 @@ for (item in Hudson.instance.items) {
     <item>
       <title>Build Scripts and External Dependencies</title>
       <link>http://www.mikemcgarr.comblog/build-script-best-practice.html</link>
-      <pubDate>Fri, 15 Feb 2013 00:00:00 -0500</pubDate>
+      <pubDate>Fri, 15 Feb 2013 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/build-script-best-practice.html</guid>
       	<description>
 	&lt;p&gt;&lt;a href=&quot;http://xkcd.com/293/&quot;&gt;&lt;img align=&quot;right&quot; alt=&quot;&quot; src=&quot;http://imgs.xkcd.com/comics/rtfm.png&quot; width=&quot;245&quot; height=&quot;304&quot; /&gt;&lt;/a&gt; I recently ran across some project code that when checked out of version control, failed with an obscure warning.  After some digging around in the code, I realized the script made a reference to an external plugin library.  I had no clue where to acquire this library or setup this build.  I had to reach out to other developers to find out what was causing the failure.  The dependency turned out that a second project needed to be checked out from source control and added to the PATH.  I was also told that I should have &lt;a title=&quot;Read the Fucking Manual&quot; href=&quot;http://en.wikipedia.org/wiki/RTFM&quot; target=&quot;_blank&quot;&gt;RTFM&lt;/a&gt;.&lt;/p&gt;
@@ -1017,7 +1017,7 @@ for (item in Hudson.instance.items) {
     <item>
       <title>Continuous Delivery Applied @ DC Agile Engineering Conference</title>
       <link>http://www.mikemcgarr.comblog/continuous-delivery-applied-dc-agile-engineering-conference.html</link>
-      <pubDate>Thu, 7 Feb 2013 00:00:00 -0500</pubDate>
+      <pubDate>Thu, 7 Feb 2013 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/continuous-delivery-applied-dc-agile-engineering-conference.html</guid>
       	<description>
 	&lt;p&gt;Yesterday I posted a video of &lt;a title=&quot;Sam Brown&quot; href=&quot;https://twitter.com/SamuelBrownIV&quot; target=&quot;_blank&quot;&gt;Sam Brown&lt;/a&gt; and I giving a talk on &lt;a title=&quot;Improving Design through TDD&quot; href=&quot;/blog/improving-designs-through-tdd.html&quot; target=&quot;_blank&quot;&gt;Improving Design through TDD&lt;/a&gt;.  We gave this talk at the DC Agile Engineering Conference last December.  I was also lucky enough to give a second that day on Continuous Delivery Applied.  Like the previous talk, this one was also recorded and I am sharing it here.&lt;/p&gt;
@@ -1030,7 +1030,7 @@ for (item in Hudson.instance.items) {
     <item>
       <title>Improving Designs through TDD</title>
       <link>http://www.mikemcgarr.comblog/improving-designs-through-tdd.html</link>
-      <pubDate>Wed, 6 Feb 2013 00:00:00 -0500</pubDate>
+      <pubDate>Wed, 6 Feb 2013 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/improving-designs-through-tdd.html</guid>
       	<description>
 	&lt;p&gt;Last December, I was invited to speak at the first annual &lt;a title=&quot;DC Agile Engineering Conference&quot; href=&quot;http://dc-agile-engineering-conference.eventbrite.com/&quot; target=&quot;_blank&quot;&gt;DC Agile Engineering Conference&lt;/a&gt;.  For this conference, I collaborated with a former colleague of mine, &lt;a title=&quot;Sam Brown IV&quot; href=&quot;https://twitter.com/SamuelBrownIV&quot; target=&quot;_blank&quot;&gt;Sam Brown&lt;/a&gt; on one of my talks.  Sam and I are both proponents of Test Driven Development and practiced it together on projects, so it made sense for us to talk about TDD.&lt;/p&gt;
@@ -1044,7 +1044,7 @@ for (item in Hudson.instance.items) {
     <item>
       <title>Goals for 2013</title>
       <link>http://www.mikemcgarr.comblog/goals-for-2013.html</link>
-      <pubDate>Tue, 5 Feb 2013 00:00:00 -0500</pubDate>
+      <pubDate>Tue, 5 Feb 2013 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/goals-for-2013.html</guid>
       	<description>
 	&lt;p&gt;Yes, while it is already February 2013, I decided that I should provide myself a commitment device for the year.&lt;/p&gt;
@@ -1102,7 +1102,7 @@ for (item in Hudson.instance.items) {
     <item>
       <title>Looking back on 2012</title>
       <link>http://www.mikemcgarr.comblog/looking-back-on-2012.html</link>
-      <pubDate>Mon, 4 Feb 2013 00:00:00 -0500</pubDate>
+      <pubDate>Mon, 4 Feb 2013 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/looking-back-on-2012.html</guid>
       	<description>
 	&lt;p&gt;2012 has been an exciting year, full of change and merriment. Here&apos;s my retrospective.&lt;/p&gt;
@@ -1140,7 +1140,7 @@ for (item in Hudson.instance.items) {
     <item>
       <title>A roadmap for unit testing</title>
       <link>http://www.mikemcgarr.comblog/a-roadmap-unit-testing.html</link>
-      <pubDate>Tue, 4 Dec 2012 00:00:00 -0500</pubDate>
+      <pubDate>Tue, 4 Dec 2012 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/a-roadmap-unit-testing.html</guid>
       	<description>
 	&lt;p&gt;I was recently asked by an old friend how they can get started writing unit tests on their existing application.  He was looking for guidance and more or less a roadmap of how to get started.  I decided to share what I sent him here.&lt;/p&gt;
@@ -1212,7 +1212,7 @@ You can follow these steps to add unit tests to your code.  You may progress th
     <item>
       <title>A new adventure begins</title>
       <link>http://www.mikemcgarr.comblog/a-new-adventure-begins.html</link>
-      <pubDate>Sun, 2 Dec 2012 00:00:00 -0500</pubDate>
+      <pubDate>Sun, 2 Dec 2012 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/a-new-adventure-begins.html</guid>
       	<description>
 	&lt;p&gt;&lt;img align=&quot;right&quot; alt=&quot;Blackboard_Logo_235x227&quot; src=&quot;/img/blackboard_logo_235x227.gif&quot; height=&quot;227&quot; width=&quot;235&quot; /&gt;November 5th was my first day at &lt;a title=&quot;Blackboard&quot; href=&quot;http://www.blackboard.com/&quot; target=&quot;_blank&quot;&gt;Blackboard, Inc.&lt;/a&gt; as the Director for &lt;a title=&quot;Learn&quot; href=&quot;http://www.blackboard.com/Platforms/Learn/Overview.aspx&quot; target=&quot;_blank&quot;&gt;Learn&lt;/a&gt; DevOps, and I couldn&apos;t be more excited.  I joined a smart and energetic team that is interested in delivering high quality software to their customers.  My role will allow me to apply my knowledge and interests in continuous integration, test automation, deployment automation and more to a mature software product development team.  I look forward to posting more on this blog about my new experiences at Blackboard.&lt;/p&gt;
@@ -1222,7 +1222,7 @@ You can follow these steps to add unit tests to your code.  You may progress th
     <item>
       <title>Upcoming Talks</title>
       <link>http://www.mikemcgarr.comblog/upcoming-talks.html</link>
-      <pubDate>Mon, 22 Oct 2012 00:00:00 -0400</pubDate>
+      <pubDate>Mon, 22 Oct 2012 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/upcoming-talks.html</guid>
       	<description>
 	&lt;p&gt;I haven&apos;t posted in a while, but I wanted to share some upcoming talks I will be giving before the end of the new year.&lt;/p&gt;
@@ -1236,7 +1236,7 @@ You can follow these steps to add unit tests to your code.  You may progress th
     <item>
       <title>How to install OpenJDK 6 on Ubuntu 10.04 (Lucid Lynx)</title>
       <link>http://www.mikemcgarr.comblog/openjdk-6-install-lucid.html</link>
-      <pubDate>Sat, 8 Sep 2012 00:00:00 -0400</pubDate>
+      <pubDate>Sat, 8 Sep 2012 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/openjdk-6-install-lucid.html</guid>
       	<description>
 	&lt;p&gt;I have been playing with &lt;a title=&quot;Vagrant&quot; href=&quot;http://vagrantup.com/&quot; target=&quot;_blank&quot;&gt;Vagrant&lt;/a&gt; and &lt;a title=&quot;Puppet&quot; href=&quot;http://puppetlabs.com/puppet/puppet-open-source/&quot; target=&quot;_blank&quot;&gt;Puppet&lt;/a&gt; a lot recently and I had some trouble getting &lt;a title=&quot;OpenJDK 6&quot; href=&quot;http://openjdk.java.net/projects/jdk6/&quot; target=&quot;_blank&quot;&gt;OpenJDK 6&lt;/a&gt; to install on &lt;a title=&quot;Ubuntu 10.04&quot; href=&quot;http://releases.ubuntu.com/lucid/&quot; target=&quot;_blank&quot;&gt;Ubuntu 10.04 (Lucid Lynx)&lt;/a&gt;. &amp;nbsp;Since I had so much trouble finding the consolidated answer, I&apos;ve decided to post my solution here.&lt;/p&gt;
@@ -1260,7 +1260,7 @@ I hope this helps!&lt;/p&gt;
     <item>
       <title>My Continuous Delivery talk at ALN DC</title>
       <link>http://www.mikemcgarr.comblog/my-continuous-delivery-talk-at-aln-dc.html</link>
-      <pubDate>Fri, 7 Sep 2012 00:00:00 -0400</pubDate>
+      <pubDate>Fri, 7 Sep 2012 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/my-continuous-delivery-talk-at-aln-dc.html</guid>
       	<description>
 	&lt;p&gt;&lt;img align=&quot;right&quot; title=&quot;DC ALN Logo&quot; src=&quot;/img/alndc-logo.jpg&quot; alt=&quot;&quot; width=&quot;299&quot; height=&quot;143&quot; /&gt;Last night I gave the latest installment of my &lt;a title=&quot;Continuous Delivery at MCJUG&quot; href=&quot;/blog/cd-at-mcjug.html&quot; target=&quot;_blank&quot;&gt;ever&lt;/a&gt; &lt;a title=&quot;Second Continuous Delivery Talk at MCJUG&quot; href=&quot;/blog/mcjug-return.html&quot; target=&quot;_blank&quot;&gt;evolving&lt;/a&gt; Continuous Delivery talk to the DC Chapter of the &lt;a title=&quot;Agile Leadership Network (ALN)&quot; href=&quot;http://aplndc.com/&quot; target=&quot;_blank&quot;&gt;Agile Project Leadership&lt;/a&gt; (ALN) group last night.  It was a great group with an attentive audience and tons of great questions.  I thoroughly enjoyed the experience and I hope I can give more talk there in the future.&lt;/p&gt;
@@ -1273,7 +1273,7 @@ I hope this helps!&lt;/p&gt;
     <item>
       <title>Vagrant Cheatsheat</title>
       <link>http://www.mikemcgarr.comblog/vagrant-cheatsheat.html</link>
-      <pubDate>Thu, 6 Sep 2012 00:00:00 -0400</pubDate>
+      <pubDate>Thu, 6 Sep 2012 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/vagrant-cheatsheat.html</guid>
       	<description>
 	&lt;p&gt;I have been using Vagrant on and off for a while and I find myself forgetting some of the commands.  Instead of looking through Vagrant documentation to find the specific commands that I was looking for, I decided to capture the commands here.  I hope that this reference helps somebody out.&lt;/p&gt;
@@ -1301,7 +1301,7 @@ I hope this helps!&lt;/p&gt;
     <item>
       <title>Git Tip: Branch your previous commit</title>
       <link>http://www.mikemcgarr.comblog/git-tip-branch-your-previous-commit.html</link>
-      <pubDate>Tue, 21 Aug 2012 00:00:00 -0400</pubDate>
+      <pubDate>Tue, 21 Aug 2012 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/git-tip-branch-your-previous-commit.html</guid>
       	<description>
 	&lt;p&gt;I just made a commit (6452234) to master, but realized that is should have been committed to a branch and I want master pointing at a previous commit (bb5331e).  How do I resolve this?&lt;/p&gt;
@@ -1348,7 +1348,7 @@ C:\code\project&amp;gt;git lg
     <item>
       <title>Vim Syntax Highlighting</title>
       <link>http://www.mikemcgarr.comblog/vim-syntax-highlighting.html</link>
-      <pubDate>Sun, 27 May 2012 00:00:00 -0400</pubDate>
+      <pubDate>Sun, 27 May 2012 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/vim-syntax-highlighting.html</guid>
       	<description>
 	&lt;p&gt;I just discovered how to turn on syntax highlighting by default on Vim.  All you have to do is add the following line to your ~/.vimrc file:&lt;/p&gt;
@@ -1366,7 +1366,7 @@ $ echo &amp;quot;:syntax on&amp;quot; &amp;gt;&amp;gt; ~./vimrc
     <item>
       <title>JMeter Crash Course</title>
       <link>http://www.mikemcgarr.comblog/jmeter-crash-course.html</link>
-      <pubDate>Mon, 7 May 2012 00:00:00 -0400</pubDate>
+      <pubDate>Mon, 7 May 2012 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/jmeter-crash-course.html</guid>
       	<description>
 	&lt;p&gt;I have had a lot of success using &lt;a title=&quot;JMeter&quot; href=&quot;http://jmeter.apache.org/index.html&quot; target=&quot;_blank&quot;&gt;JMeter&lt;/a&gt; to provide quick performance tests, and this guide will help you get started with JMeter.  I have used JMeter with success on web applications, web services and databases, and I find that it works extremely well.  I have even used JMeter on .NET projects.  This doesn&apos;t cover performance testing best practices.  I will save those for another post.&lt;/p&gt;
@@ -1433,7 +1433,7 @@ $ echo &amp;quot;:syntax on&amp;quot; &amp;gt;&amp;gt; ~./vimrc
     <item>
       <title>Ruby Broke my $PATH</title>
       <link>http://www.mikemcgarr.comblog/ruby-broke-my-path.html</link>
-      <pubDate>Sun, 6 May 2012 00:00:00 -0400</pubDate>
+      <pubDate>Sun, 6 May 2012 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/ruby-broke-my-path.html</guid>
       	<description>
 	&lt;p&gt;Yesterday I spent some time &lt;a title=&quot;Octopress on OS X&quot; href=&quot;/blog/octopress-on-os.html&quot; target=&quot;_blank&quot;&gt;getting Ruby up and running on my Mac&lt;/a&gt;, with the intent of playing with &lt;a title=&quot;Octopress&quot; href=&quot;http://octopress.org/&quot; target=&quot;_blank&quot;&gt;Octopress&lt;/a&gt;.  Today, I wanted to go back to a &lt;a title=&quot;Grails&quot; href=&quot;http://grails.org/&quot; target=&quot;_blank&quot;&gt;Grails&lt;/a&gt; app I had been working on, when I realized that Grails was no longer in my PATH.  Somehow, my PATH variable had been &quot;hijacked&quot; by the &lt;a title=&quot;Ruby&quot; href=&quot;http://www.ruby-lang.org/en/&quot; target=&quot;_blank&quot;&gt;Ruby&lt;/a&gt; or &lt;a title=&quot;Ruby RVM&quot; href=&quot;https://rvm.io/&quot; target=&quot;_blank&quot;&gt;RVM&lt;/a&gt; installs.  I immediately started to investigate the issue.&lt;/p&gt;
@@ -1464,7 +1464,7 @@ Once this was added and I reloaded Terminal, my Grails path entries were back an
     <item>
       <title>Octopress on OS X</title>
       <link>http://www.mikemcgarr.comblog/octopress-on-os.html</link>
-      <pubDate>Sat, 5 May 2012 00:00:00 -0400</pubDate>
+      <pubDate>Sat, 5 May 2012 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/octopress-on-os.html</guid>
       	<description>
 	&lt;p&gt;I have been wanting to try &lt;a title=&quot;Octopress&quot; href=&quot;http://octopress.org/&quot; target=&quot;_blank&quot;&gt;Octopress&lt;/a&gt; for a while, so I decided to spent my Friday night setting it up.  Unfortunately, I ran into a few issues installing and getting my environment setup, and I figured I would share my setup issues with everybody else.  I started with the instructions from the Octopress website.&lt;/p&gt;
@@ -1490,7 +1490,7 @@ $ rake install rake aborted! You have already activated rake 0.9.2.2, but your G
     <item>
       <title>Writing User Stories</title>
       <link>http://www.mikemcgarr.comblog/writing-user-stories.html</link>
-      <pubDate>Fri, 4 May 2012 00:00:00 -0400</pubDate>
+      <pubDate>Fri, 4 May 2012 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/writing-user-stories.html</guid>
       	<description>
 	&lt;p&gt;A friend recently asked me if I had any advise on how to write &lt;a title=&quot;User Story (Wikipedia)&quot; href=&quot;http://en.wikipedia.org/wiki/User_story&quot; target=&quot;_blank&quot;&gt;user stories&lt;/a&gt;.  While I don&apos;t claim to be an expert on writing user stories, I knew enough to guide him.  Here&apos;s what I came up with.&lt;/p&gt;
@@ -1539,7 +1539,7 @@ I want &amp;lt;some feature&amp;gt;&lt;/p&gt;&lt;/blockquote&gt;
     <item>
       <title>Git Crash Course</title>
       <link>http://www.mikemcgarr.comblog/git-crashcourse.html</link>
-      <pubDate>Thu, 3 May 2012 00:00:00 -0400</pubDate>
+      <pubDate>Thu, 3 May 2012 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/git-crashcourse.html</guid>
       	<description>
 	&lt;p&gt;Our current team has decided to adopt Git and some members aren&apos;t familiar with it.  I wanted to put together a short introduction to the &lt;a title=&quot;Git&quot; href=&quot;http://git-scm.com/&quot; target=&quot;_blank&quot;&gt;Git&lt;/a&gt; command line for these team members.  The goal is to make team members productive immediately, while learning the nuances of Git over time.  My introduction assumes that you have Git installed and setup.  For installation instructions, go to &lt;a href=&quot;http://git-scm.com/&quot;&gt;http://git-scm.com/&lt;/a&gt;.  For instructions on configuring Git, I recommend &lt;a title=&quot;GitHub&quot; href=&quot;https://github.com/&quot; target=&quot;_blank&quot;&gt;Github&lt;/a&gt;&apos;s tutorials for &lt;a title=&quot;Setup Github (Windows)&quot; href=&quot;http://help.github.com/win-set-up-git/&quot; target=&quot;_blank&quot;&gt;Windows&lt;/a&gt;, &lt;a title=&quot;Setup GitHub (Mac)&quot; href=&quot;http://help.github.com/mac-set-up-git/&quot; target=&quot;_blank&quot;&gt;OS X&lt;/a&gt; and &lt;a title=&quot;Setup GitHub (Linux)&quot; href=&quot;http://help.github.com/linux-set-up-git/&quot; target=&quot;_blank&quot;&gt;Linux&lt;/a&gt;.&lt;/p&gt;
@@ -1584,7 +1584,7 @@ $&amp;gt; git pull origin master
     <item>
       <title>Simple Git Aliases</title>
       <link>http://www.mikemcgarr.comblog/simple-git-aliases.html</link>
-      <pubDate>Wed, 2 May 2012 00:00:00 -0400</pubDate>
+      <pubDate>Wed, 2 May 2012 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/simple-git-aliases.html</guid>
       	<description>
 	&lt;p&gt;I have been using &lt;a title=&quot;Git&quot; href=&quot;http://git-scm.com/&quot; target=&quot;_blank&quot;&gt;Git&lt;/a&gt; for a while now and in that time, I have learned the value of using aliases.  Whenever I setup a new machine with git, adding my favorite aliases is first on my list.  I wanted to capture some of my favorite aliases here.  This will serve as not only a reference for myself, but hopefully helpful for others.&lt;/p&gt;
@@ -1616,7 +1616,7 @@ $&amp;gt; git config --global alias.rm &amp;quot;remote -v&amp;quot;
     <item>
       <title>Assessing Code Quality with Sonar</title>
       <link>http://www.mikemcgarr.comblog/sonar.html</link>
-      <pubDate>Tue, 1 May 2012 00:00:00 -0400</pubDate>
+      <pubDate>Tue, 1 May 2012 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/sonar.html</guid>
       	<description>
 	&lt;p&gt;I recently joined a development team where I was asked to help improve the team’s code quality and engineering practices.  Soon after joining the team, I noticed numerous code quality issues that needed to be addressed.  In order to justify the effort to improve code quality to non-technical decision makers, I needed a quantitative method for measuring the quality of the source code and possibly the technical debt.  I had heard a lot about a tool called &lt;a title=&quot;Sonar&quot; href=&quot;http://www.sonarsource.org/&quot; target=&quot;_blank&quot;&gt;Sonar&lt;/a&gt;, so I decided to give a try.  It proved to be more than up to challenge and helped me quickly demonstrate the risk due to code quality the team had incurred.&lt;br /&gt;
@@ -1652,7 +1652,7 @@ Cross-Language&lt;br /&gt;
     <item>
       <title>Avoid Code Freezes</title>
       <link>http://www.mikemcgarr.comblog/avoid-code-freezes.html</link>
-      <pubDate>Mon, 30 Apr 2012 00:00:00 -0400</pubDate>
+      <pubDate>Mon, 30 Apr 2012 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/avoid-code-freezes.html</guid>
       	<description>
 	&lt;p&gt;A project manager recently told me that he wanted to implement a code freeze prior to user acceptance testing.  This request struck me as odd since I don’t recall having implemented a code freeze on a project in years.  My immediate response was that we do not need a code freeze.  All checked in code is tested for its production readiness via a deployment pipeline.&lt;/p&gt;
@@ -1666,7 +1666,7 @@ Cross-Language&lt;br /&gt;
     <item>
       <title>We arent failing fast enough...</title>
       <link>http://www.mikemcgarr.comblog/we-arent-failing-fast-enough.html</link>
-      <pubDate>Fri, 30 Mar 2012 00:00:00 -0400</pubDate>
+      <pubDate>Fri, 30 Mar 2012 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/we-arent-failing-fast-enough.html</guid>
       	<description>
 	&lt;p&gt;I am sure many of you have read &lt;a title=&quot;Jeff Atwood at CodingHorror.com&quot; href=&quot;http://www.codinghorror.com/blog/&quot; target=&quot;_blank&quot;&gt;Jeff Atwood&lt;/a&gt;s&apos; last two blog posts regarding &lt;a title=&quot;Coding Horror - What you can&apos;t see you can&apos;t get&quot; href=&quot;http://www.codinghorror.com/blog/2012/03/what-you-cant-see-you-cant-get.html&quot; target=&quot;_blank&quot;&gt;WYSIWIG&lt;/a&gt; and &lt;a title=&quot;Coding Horror - Visualizing Code to fail faster&quot; href=&quot;http://www.codinghorror.com/blog/2012/03/visualizing-code-to-fail-faster.html&quot; target=&quot;_blank&quot;&gt;visualizing failing faster&lt;/a&gt;.  If you haven&apos;t, I definitely recommend reading both, playing with &lt;a title=&quot;The Glimpse Project&quot; href=&quot;http://www.aviz.fr/gliimpse/&quot; target=&quot;_blank&quot;&gt;Glimpse&lt;/a&gt;, and watching &lt;a title=&quot;Bret Victor&quot; href=&quot;http://worrydream.com/&quot; target=&quot;_blank&quot;&gt;Bret Victor&lt;/a&gt;&apos;s video on &lt;a title=&quot;Bret Victor - Inventing on Principle&quot; href=&quot;http://vimeo.com/36579366&quot; target=&quot;_blank&quot;&gt;Inventing on Principle&lt;/a&gt;.&lt;/p&gt;
@@ -1680,7 +1680,7 @@ Cross-Language&lt;br /&gt;
     <item>
       <title>A Developers Reading List</title>
       <link>http://www.mikemcgarr.comblog/developer-reading-lis.html</link>
-      <pubDate>Mon, 20 Feb 2012 00:00:00 -0500</pubDate>
+      <pubDate>Mon, 20 Feb 2012 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/developer-reading-lis.html</guid>
       	<description>
 	&lt;p&gt;I recently had an interesting conversation with a developer about unit testing, object-oriented design and in general, how to write good code.  Our discussion went around in circles, and I found myself where I usually end up in conversations like this, quoting experts like &lt;a title=&quot;Martin Fowler&apos;s website&quot; href=&quot;http://martinfowler.com/&quot; target=&quot;_blank&quot;&gt;Martin Fowler&lt;/a&gt;, &lt;a title=&quot;Uncle Bob on Twitter&quot; href=&quot;https://twitter.com/#!/unclebobmartin&quot; target=&quot;_blank&quot;&gt;Uncle Bob&lt;/a&gt;, and numerous others.  Having had the conversation numerous times before, I decided it was about time I compile a list of my favorite books that all developer&apos;s should read.  This is not intended to be a comprehensive list of the greatest books ever, but merely books that I have found invaluable to contributing to better code and projects.&lt;/p&gt;
@@ -1701,7 +1701,7 @@ Cross-Language&lt;br /&gt;
     <item>
       <title>My Return Visit to the Montgomery County Java Users Group</title>
       <link>http://www.mikemcgarr.comblog/mcjug-return.html</link>
-      <pubDate>Fri, 17 Feb 2012 00:00:00 -0500</pubDate>
+      <pubDate>Fri, 17 Feb 2012 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/mcjug-return.html</guid>
       	<description>
 	&lt;p&gt;On Wednesday night, I returned to the &lt;a title=&quot;MCJUG&quot; href=&quot;http://www.mcjug.org/&quot; target=&quot;_blank&quot;&gt;Montgomery County Java User&apos;s Group (MCJUG)&lt;/a&gt; to give a follow-up to last year&apos;s &lt;a title=&quot;CD at MCJUG&quot; href=&quot;/blog/cd-at-mcjug.html&quot; target=&quot;_blank&quot;&gt;Continuous Delivery talk&lt;/a&gt;.  This week, I focused on the tools and techniques that a developer, team and organization can use to migrate to &lt;a title=&quot;Continuous Delivery website&quot; href=&quot;http://continuousdelivery.com/&quot; target=&quot;_blank&quot;&gt;Continuous Delivery&lt;/a&gt;.  The subject areas which I touch on are:&lt;/p&gt;
@@ -1728,7 +1728,7 @@ Cross-Language&lt;br /&gt;
     <item>
       <title>Interactive presentations with impress.js + GitHub Pages</title>
       <link>http://www.mikemcgarr.comblog/impress_js_github.html</link>
-      <pubDate>Mon, 16 Jan 2012 00:00:00 -0500</pubDate>
+      <pubDate>Mon, 16 Jan 2012 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/impress_js_github.html</guid>
       	<description>
 	&lt;p&gt;Next month, I am giving a follow-up of my &lt;a title=&quot;Continuous Delivery Talk&quot; href=&quot;/img/cd-at-mcjug.html&quot; target=&quot;_blank&quot;&gt;Continuous Delivery talk&lt;/a&gt; to the &lt;a title=&quot;MCJUG&quot; href=&quot;http://www.mcjug.org/&quot; target=&quot;_blank&quot;&gt;Montgomery County Java User&apos;s Group&lt;/a&gt;.  In preparing for this talk, I decided that challenge myself by using a presentation tool other than PowerPoint.  In fact, I decided to avoid any desktop variant and try some of the next generation web-based presentation tools.&lt;/p&gt;
@@ -1752,7 +1752,7 @@ Cross-Language&lt;br /&gt;
     <item>
       <title>Jenkins and GitHub: Integration</title>
       <link>http://www.mikemcgarr.comblog/jenkins-github-int.html</link>
-      <pubDate>Fri, 30 Dec 2011 00:00:00 -0500</pubDate>
+      <pubDate>Fri, 30 Dec 2011 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/jenkins-github-int.html</guid>
       	<description>
 	&lt;p&gt;I&apos;ve been trying to setup a &lt;a title=&quot;Jenkins CI Server&quot; href=&quot;http://jenkins-ci.org/&quot; target=&quot;_blank&quot;&gt;Jenkins&lt;/a&gt; build of a private &lt;a title=&quot;GitHub&quot; href=&quot;https://github.com/&quot; target=&quot;_blank&quot;&gt;GitHub&lt;/a&gt; project recently and found it wasn&apos;t as straight forward as I thought.  GitHub provides a feature called &lt;a title=&quot;Github&apos;s Deploy Keys&quot; href=&quot;http://help.github.com/deploy-keys/&quot; target=&quot;_blank&quot;&gt;Deploy Keys&lt;/a&gt;, which are SSH keys used to authenticate servers to your GitHub repository.  Here&apos;s how I set them up.&lt;/p&gt;
@@ -1771,7 +1771,7 @@ Cross-Language&lt;br /&gt;
     <item>
       <title>Dependency Management in .NET</title>
       <link>http://www.mikemcgarr.comblog/dependency-management-in-net.html</link>
-      <pubDate>Sat, 17 Dec 2011 00:00:00 -0500</pubDate>
+      <pubDate>Sat, 17 Dec 2011 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/dependency-management-in-net.html</guid>
       	<description>
 	&lt;p&gt;I have been a &lt;a title=&quot;Java&quot; href=&quot;http://www.oracle.com/technetwork/java/javase/overview/index.html&quot; target=&quot;_blank&quot;&gt;Java&lt;/a&gt; developer for over 10 years, during which I have used &lt;a title=&quot;Maven&quot; href=&quot;http://maven.apache.org/&quot; target=&quot;_blank&quot;&gt;Maven&lt;/a&gt; or one of it&apos;s successors (&lt;a title=&quot;Gradle&quot; href=&quot;http://gradle.org/&quot; target=&quot;_blank&quot;&gt;Gradle&lt;/a&gt; or &lt;a title=&quot;Ant&quot; href=&quot;http://ant.apache.org/&quot; target=&quot;_blank&quot;&gt;Ant&lt;/a&gt;+&lt;a title=&quot;Apache Ivy&quot; href=&quot;http://ant.apache.org/ivy/&quot; target=&quot;_blank&quot;&gt;Ivy&lt;/a&gt;) for build and dependency management.  It was obvious to me early on that Maven&apos;s &lt;a title=&quot;Dependency Management&quot; href=&quot;http://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html&quot; target=&quot;_blank&quot;&gt;dependency management&lt;/a&gt; was its killer feature.  I began evangelizing Maven and converting teams to use it.  The days of checking .jar files into version control were over, and I rejoiced!&lt;/p&gt;
@@ -1786,7 +1786,7 @@ Cross-Language&lt;br /&gt;
     <item>
       <title>Gotcha when changing TeamCity&apos;s default port</title>
       <link>http://www.mikemcgarr.comblog/teamcity-port.html</link>
-      <pubDate>Thu, 17 Nov 2011 00:00:00 -0500</pubDate>
+      <pubDate>Thu, 17 Nov 2011 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/teamcity-port.html</guid>
       	<description>
 	&lt;p&gt;I ran into an issue today where I changed my &lt;a title=&quot;StackOverflow on changing TeamCity&apos;s default port&quot; href=&quot;http://stackoverflow.com/questions/2387375/teamcity-change-port-for-web-server&quot; target=&quot;_blank&quot;&gt;TeamCity default port (from 8080)&lt;/a&gt; and found that my build agents were suddenly disconnected.  After some fiddling around, I discovered that I needed to manually change each Build Agent&apos;s configuration to point to the new master server port.&lt;/p&gt;
@@ -1801,7 +1801,7 @@ serverUrl=http:\://localhost\:8080
     <item>
       <title>Exploring Test Method Names</title>
       <link>http://www.mikemcgarr.comblog/test-method-names.html</link>
-      <pubDate>Thu, 10 Nov 2011 00:00:00 -0500</pubDate>
+      <pubDate>Thu, 10 Nov 2011 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/test-method-names.html</guid>
       	<description>
 	&lt;p&gt;When coaching individuals on how to name unit test methods, I have struggled to come up with a standard that I like.  I have read numerous posts and books on the subject with a wide variety of results and standards.  In this blog I will explore the various standards for naming unit test methods and present my perspective on the subject.&lt;/p&gt;
@@ -1861,7 +1861,7 @@ class CalculatorTest {
     <item>
       <title>Grails Best Practice Resources</title>
       <link>http://www.mikemcgarr.comblog/grails-best-practice-resources.html</link>
-      <pubDate>Tue, 11 Oct 2011 00:00:00 -0400</pubDate>
+      <pubDate>Tue, 11 Oct 2011 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/grails-best-practice-resources.html</guid>
       	<description>
 	&lt;p&gt;I have been spending some time learning &lt;a href=&quot;http://groovy.codehaus.org/&quot; target=&quot;_blank&quot;&gt;Groovy&lt;/a&gt; and &lt;a href=&quot;http://grails.org/&quot; target=&quot;_blank&quot;&gt;Grails&lt;/a&gt; recently.  As a Java developer, I find that they answer many of the problems that currently exist in the Java platform (and the .NET platform as well).  They provide an amazing, and Agile toolkit for developers to get started with.&lt;/p&gt;
@@ -1879,7 +1879,7 @@ class CalculatorTest {
     <item>
       <title>GitFlow and Continuous Integration</title>
       <link>http://www.mikemcgarr.comblog/dvcs-ci.html</link>
-      <pubDate>Wed, 14 Sep 2011 00:00:00 -0400</pubDate>
+      <pubDate>Wed, 14 Sep 2011 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/dvcs-ci.html</guid>
       	<description>
 	&lt;p&gt;I came across an &lt;a title=&quot;James Carr - My Current Java Workflow&quot; href=&quot;http://blog.james-carr.org/2011/09/09/my-current-java-workflow/&quot; target=&quot;_blank&quot;&gt;interesting blog post&lt;/a&gt; by James Carr discussing his workflow when building Java applications.  In general, I think that the stack and process he mentions is top notch.  I love &lt;a title=&quot;Gradle&quot; href=&quot;http://www.gradle.org/&quot; target=&quot;_blank&quot;&gt;Gradle&lt;/a&gt;, &lt;a title=&quot;Jenkins&quot; href=&quot;http://jenkins-ci.org/&quot; target=&quot;_blank&quot;&gt;Jenkins&lt;/a&gt;, &lt;a title=&quot;Artifactory&quot; href=&quot;http://www.jfrog.com/products.php&quot; target=&quot;_blank&quot;&gt;Artifactory&lt;/a&gt; and &lt;a title=&quot;Git&quot; href=&quot;http://git-scm.com/&quot; target=&quot;_blank&quot;&gt;Git&lt;/a&gt;/&lt;a title=&quot;GitHub&quot; href=&quot;https://github.com/&quot; target=&quot;_blank&quot;&gt;GitHub&lt;/a&gt;.  I have been playing with or using in production all of these tools and they are amazing.  I especially like how the article provides a tutorial on how to setup your project to look just like his, something I will definitely try.&lt;/p&gt;
@@ -1900,7 +1900,7 @@ class CalculatorTest {
     <item>
       <title>Unit vs. Integration Tests</title>
       <link>http://www.mikemcgarr.comblog/ut-vs-it.html</link>
-      <pubDate>Fri, 24 Jun 2011 00:00:00 -0400</pubDate>
+      <pubDate>Fri, 24 Jun 2011 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/ut-vs-it.html</guid>
       	<description>
 	&lt;p&gt;I have been doing more and more testing recently and I wanted to start capturing some of my thoughts on testing.  An important topic is the differences between a unit test and an integration test.  I feel like this is pretty straight forward, but is still worth clarifying, since I feel like it is done incorrectly way too often.  My definition of each breaks down as follows:&lt;/p&gt;
@@ -1928,7 +1928,7 @@ I feel very strongly that developers should focus on achieving &amp;gt;80%  cod
     <item>
       <title>Continuous Delivery Presentation at the MC Java Users Group</title>
       <link>http://www.mikemcgarr.comblog/cd-at-mcjug.html</link>
-      <pubDate>Fri, 17 Jun 2011 00:00:00 -0400</pubDate>
+      <pubDate>Fri, 17 Jun 2011 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/cd-at-mcjug.html</guid>
       	<description>
 	&lt;p&gt;&lt;a href=&quot;http://www.mcjug.org/&quot;&gt;&lt;img class=&quot;alignright&quot; title=&quot;MCJUG Logo&quot; src=&quot;http://www.mcjug.org/_/rsrc/1292297278055/home/mcjug_logo.png&quot; alt=&quot;Mo&quot; width=&quot;240&quot; height=&quot;120&quot; /&gt;&lt;/a&gt;This past Wednesday night, I gave a presentation to the &lt;a title=&quot;Montgomery County Java User&apos;s Group&quot; href=&quot;http://www.mcjug.org/&quot; target=&quot;_blank&quot;&gt;Montgomery Country Java User&apos;s Group&lt;/a&gt; on Continuous Delivery.  I was lucky enough to be given the opportunity to speak to a  smart and attentive audience, and I look forward to going back and giving another presentation in the future.  I want to thank &lt;a title=&quot;Victor Semenov at Twitter&quot; href=&quot;https://twitter.com/#!/victorsemenov&quot; target=&quot;_blank&quot;&gt;Victor Semenov&lt;/a&gt;, who organizes the MCJUG, for setting this up.&lt;/p&gt;
@@ -1949,7 +1949,7 @@ I feel very strongly that developers should focus on achieving &amp;gt;80%  cod
     <item>
       <title>Java EE Interview for the SD Times</title>
       <link>http://www.mikemcgarr.comblog/java-ee-interview.html</link>
-      <pubDate>Wed, 15 Jun 2011 00:00:00 -0400</pubDate>
+      <pubDate>Wed, 15 Jun 2011 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/java-ee-interview.html</guid>
       	<description>
 	&lt;p&gt;Last Friday, an article on&quot; &lt;a title=&quot;SD TImes Article&quot; href=&quot;http://www.sdtimes.com/content/article.aspx?ArticleID=35628&amp;amp;page=1&quot; target=&quot;_blank&quot;&gt;Java EE:  The state of the environment&lt;/a&gt;&quot; was published by the &lt;a title=&quot;SD Times&quot; href=&quot;http://www.sdtimes.com/&quot; target=&quot;_blank&quot;&gt;SD Times&lt;/a&gt;.  I was interviewed for this article and you can check my quotes in the article at the SD Times website.  Please note, that I was misquoted in the article.  Any reference to C++ should be a reference to C#.  Hope you enjoy it otherwise!&lt;/p&gt;
@@ -1960,7 +1960,7 @@ I feel very strongly that developers should focus on achieving &amp;gt;80%  cod
     <item>
       <title>Honorable Mention in Top 200 Agile Blogs</title>
       <link>http://www.mikemcgarr.comblog/top-200-agile-hm.html</link>
-      <pubDate>Wed, 8 Jun 2011 00:00:00 -0400</pubDate>
+      <pubDate>Wed, 8 Jun 2011 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/top-200-agile-hm.html</guid>
       	<description>
 	&lt;p&gt;&lt;a href=&quot;http://agilescout.com/top-agile-blogs-200/&quot;&gt;&lt;img class=&quot;alignright&quot; title=&quot;Top 200 Agile Blogs&quot; src=&quot;http://agilescout.com/wp-content/uploads/2011/06/agile-top-200-blogs.png&quot; alt=&quot;&quot; width=&quot;125&quot; height=&quot;125&quot; /&gt;&lt;/a&gt;I am happy to announce that my blog just received an honorable mention in &lt;a title=&quot;Agile Scout&quot; href=&quot;http://agilescout.com/&quot; target=&quot;_blank&quot;&gt;Agile Scout&apos;&lt;/a&gt;s &lt;a title=&quot;Top 200 Agile Blogs&quot; href=&quot;http://agilescout.com/top-agile-blogs-200/&quot; target=&quot;_blank&quot;&gt;Top 200 Agile Blogs&lt;/a&gt;.  I am humbled and inspired by this great honor, and it just means that I have to push harder and write more and more.  I would also like to congratulate my fellow Excellian Richard Cheng, who&apos;s blog, One More Agile Blog, has been ranked 162.  Nicely done Richard!&lt;/p&gt;
@@ -1971,7 +1971,7 @@ I feel very strongly that developers should focus on achieving &amp;gt;80%  cod
     <item>
       <title>Dojos, Katas and Software Craftsmanship at Excella</title>
       <link>http://www.mikemcgarr.comblog/excella-craftsmanship.html</link>
-      <pubDate>Thu, 21 Apr 2011 00:00:00 -0400</pubDate>
+      <pubDate>Thu, 21 Apr 2011 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/excella-craftsmanship.html</guid>
       	<description>
 	&lt;p&gt;&lt;img class=&quot;alignright&quot; title=&quot;Clean Code Logo&quot; src=&quot;http://butunclebob.com/files/images/clean_code_72_color.png&quot; alt=&quot;Clean Code&quot; width=&quot;200&quot; height=&quot;200&quot; /&gt;The &lt;a title=&quot;Manifest for Software Craftsmanship&quot; href=&quot;http://manifesto.softwarecraftsmanship.org/&quot; target=&quot;_blank&quot;&gt;Software Craftsmanship movement&lt;/a&gt; is creating quite a &lt;a title=&quot;Software Craftsmanship criticisms&quot; href=&quot;http://www.infoq.com/news/2011/02/north-craftsmanship-manifesto&quot; target=&quot;_blank&quot;&gt;stir&lt;/a&gt; in the software development community, with experts on both sides of the fence arguing its value.   At &lt;a title=&quot;Excella Consulting&quot; href=&quot;http://www.excella.com/&quot; target=&quot;_blank&quot;&gt;Excella Consulting&lt;/a&gt;, we have embraced the Software Craftsmanship movement and feel that the benefits of writing &lt;a title=&quot;Clean Code, the book&quot; href=&quot;http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882&quot; target=&quot;_blank&quot;&gt;clean code&lt;/a&gt; does not conflict with the needs of our customers.  Our desire to continuously learn and improve how we write code has led us to gather regularly for &lt;a title=&quot;What is a Code Dojo?&quot; href=&quot;http://codingdojo.org/&quot; target=&quot;_blank&quot;&gt;Coding Dojos&lt;/a&gt;.&lt;/p&gt;
@@ -1986,7 +1986,7 @@ I feel very strongly that developers should focus on achieving &amp;gt;80%  cod
     <item>
       <title>Thoughts on Application Lifecycle Management (ALM)</title>
       <link>http://www.mikemcgarr.comblog/alm.html</link>
-      <pubDate>Fri, 4 Mar 2011 00:00:00 -0500</pubDate>
+      <pubDate>Fri, 4 Mar 2011 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/alm.html</guid>
       	<description>
 	&lt;p&gt;Last week, I was asked to give my opinion on Application Lifecycle Management or ALM.  Specifically, I was asked how can teams effectively manage their design, development, test and deploy processes as well as pick the right tools for the job.  Here is the answer I gave:&lt;/p&gt;
@@ -2002,7 +2002,7 @@ I feel very strongly that developers should focus on achieving &amp;gt;80%  cod
     <item>
       <title>Why I Love eBooks</title>
       <link>http://www.mikemcgarr.comblog/ebooks.html</link>
-      <pubDate>Thu, 24 Feb 2011 00:00:00 -0500</pubDate>
+      <pubDate>Thu, 24 Feb 2011 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/ebooks.html</guid>
       	<description>
 	&lt;p&gt;&lt;img class=&quot;alignright size-full wp-image-712&quot; title=&quot;kindleapp&quot; src=&quot;/img/kindleapp.jpg&quot; alt=&quot;Amazon Kindle App&quot; width=&quot;175&quot; height=&quot;175&quot; /&gt;I&apos;ve recently fallen in love with reading books on my &lt;a title=&quot;Apple iPad&quot; href=&quot;http://www.apple.com/ipad/&quot; target=&quot;_blank&quot;&gt;iPad&lt;/a&gt;.  When I first bought my iPad, I was nervous about reading a book on it since in general I hate reading on a computer screen.  Plus, my friends rave about the &lt;a title=&quot;Amazon Kindle&quot; href=&quot;http://www.amazon.com/Kindle-Wireless-Reader-3G-Wifi-Graphite/dp/B002FQJT3Q/ref=amb_link_354886182_2&quot; target=&quot;_blank&quot;&gt;Amazon Kindle&lt;/a&gt; and the great reading experience it offers.  Eventually, I decided to take the plunge and ordered an eBook for the &lt;a title=&quot;Amazon Kindle iPad app&quot; href=&quot;http://www.amazon.com/gp/feature.html/ref=kcp_ipad_mkt_lnd?docId=1000490441&quot; target=&quot;_blank&quot;&gt;Amazon Kindle iPad app&lt;/a&gt;.  After reading a few chapters, I found myself falling completely in love with reading books this way.  Of course, there are disadvantages as well as advantages of this relatively new medium.&lt;/p&gt;
@@ -2041,7 +2041,7 @@ I feel very strongly that developers should focus on achieving &amp;gt;80%  cod
     <item>
       <title>Maven Tip: Disabling Profiles when a Property Does Not Exist</title>
       <link>http://www.mikemcgarr.comblog/disable-maven-profile.html</link>
-      <pubDate>Wed, 9 Feb 2011 00:00:00 -0500</pubDate>
+      <pubDate>Wed, 9 Feb 2011 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/disable-maven-profile.html</guid>
       	<description>
 	&lt;p&gt;I wanted to share a method for enabling a &lt;a title=&quot;Maven&quot; href=&quot;http://maven.apache.org/&quot; target=&quot;_blank&quot;&gt;Maven&lt;/a&gt; &lt;a title=&quot;Maven Profiles&quot; href=&quot;http://maven.apache.org/guides/introduction/introduction-to-profiles.html&quot; target=&quot;_blank&quot;&gt;Build Profile&lt;/a&gt; in the absense of a system property.  I did not see this approach documented in the current version of the Maven Build Profile documentation, so I thought I would share it.&lt;/p&gt;
@@ -2078,7 +2078,7 @@ mvn clean install -DskipTests -P !update-database
     <item>
       <title>Article Published in Linux Insider...Java Lives</title>
       <link>http://www.mikemcgarr.comblog/java-live.html</link>
-      <pubDate>Tue, 28 Dec 2010 00:00:00 -0500</pubDate>
+      <pubDate>Tue, 28 Dec 2010 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/java-live.html</guid>
       	<description>
 	&lt;p&gt;I was lucky enough to have an article published in Linux Insider today on the future of Java.  I do have to say that writing an article for a publication is not as easy as writing a blog post.  I would love to tell you what it is all about, but I would rather you go and check it out for yourself!&lt;/p&gt;
@@ -2089,7 +2089,7 @@ mvn clean install -DskipTests -P !update-database
     <item>
       <title>Scrum Boards: Physical or Virtual</title>
       <link>http://www.mikemcgarr.comblog/scrum-walls.html</link>
-      <pubDate>Tue, 7 Dec 2010 00:00:00 -0500</pubDate>
+      <pubDate>Tue, 7 Dec 2010 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/scrum-walls.html</guid>
       	<description>
 	&lt;div&gt;
@@ -2110,7 +2110,7 @@ mvn clean install -DskipTests -P !update-database
     <item>
       <title>Continuous Integration Interview with SD Times</title>
       <link>http://www.mikemcgarr.comblog/ci-interview.html</link>
-      <pubDate>Wed, 3 Nov 2010 00:00:00 -0400</pubDate>
+      <pubDate>Wed, 3 Nov 2010 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/ci-interview.html</guid>
       	<description>
 	&lt;p&gt;I was recently interviewed for the SD Times for an article on &lt;a href=&quot;http://martinfowler.com/articles/continuousIntegration.html&quot; target=&quot;_blank&quot;&gt;Continuous Integration&lt;/a&gt;.    The focus of the article is on using Continuous Integration on non-Agile projects.  It is a very good article and my name is mentioned on page 33.  I hope that you enjoy!&lt;/p&gt;
@@ -2121,7 +2121,7 @@ mvn clean install -DskipTests -P !update-database
     <item>
       <title>Shortcuts to Productivity</title>
       <link>http://www.mikemcgarr.comblog/shortcuts-to-productivity.html</link>
-      <pubDate>Tue, 2 Nov 2010 00:00:00 -0400</pubDate>
+      <pubDate>Tue, 2 Nov 2010 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/shortcuts-to-productivity.html</guid>
       	<description>
 	&lt;p&gt;Earlier this year, I read &lt;a href=&quot;http://www.nealford.com/&quot; target=&quot;_blank&quot;&gt;Neal Ford&lt;/a&gt;&apos;s book, &lt;a href=&quot;http://oreilly.com/catalog/9780596519544&quot; target=&quot;_blank&quot;&gt;The Productive Programmer&lt;/a&gt;.  It is a great book and a short read as well, so I highly recommend it.  In this book, Ford talks about ways to make yourself more productive and the book contains a wealth of useful tips.  This inspirational text got me thinking how I could increase my own productivity.  As a result, I made a few changes; one that has been extremely helpful is expanding my use of keyboard shortcuts, also known as hotkeys.&lt;/p&gt;
@@ -2135,7 +2135,7 @@ mvn clean install -DskipTests -P !update-database
     <item>
       <title>Build Once, Deploy Many</title>
       <link>http://www.mikemcgarr.comblog/build-once-deploy-many.html</link>
-      <pubDate>Thu, 9 Sep 2010 00:00:00 -0400</pubDate>
+      <pubDate>Thu, 9 Sep 2010 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/build-once-deploy-many.html</guid>
       	<description>
 	&lt;p&gt;It is not uncommon to find a development team building their application binary from source every time they deploy a new version of their application to an environment.  While this approach works (and depending on the technology, may be necessary), it introduces significant opportunities for errors and makes debugging a failed deployment increasingly difficult.  By migrating to a &lt;strong&gt;&lt;em&gt;Build Once, Deploy Many&lt;/em&gt;&lt;/strong&gt; approach, your team can simplify their deployment process, by making it repeatable and easier to debug.&lt;/p&gt;
@@ -2161,7 +2161,7 @@ mvn clean install -DskipTests -P !update-database
     <item>
       <title>Manage Database Changes with Liquibase</title>
       <link>http://www.mikemcgarr.comblog/intro-to-liquibase.html</link>
-      <pubDate>Mon, 28 Jun 2010 00:00:00 -0400</pubDate>
+      <pubDate>Mon, 28 Jun 2010 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/intro-to-liquibase.html</guid>
       	<description>
 	&lt;p&gt;I love discovering a new tool, especially when it completely changes the way you approach developing software.  &lt;a title=&quot;Liquibase&quot; href=&quot;http://www.liquibase.org/&quot; target=&quot;_blank&quot;&gt;Liquibase&lt;/a&gt; is one of those tools.  Once I came across their site and started reading more about it and how simple it was, I started to reflect back on all the failed production migrations I had in the past, and I shed a tear for all the weekend hours I lost.  No longer will that be the case!&lt;/p&gt;
@@ -2209,7 +2209,7 @@ mvn clean install -DskipTests -P !update-database
     <item>
       <title>Interview for the SD Times</title>
       <link>http://www.mikemcgarr.comblog/interview-for-sd-times.html</link>
-      <pubDate>Fri, 18 Jun 2010 00:00:00 -0400</pubDate>
+      <pubDate>Fri, 18 Jun 2010 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/interview-for-sd-times.html</guid>
       	<description>
 	&lt;p&gt;I was recently interviewed by the Software Development Times on my opinions Java 7, the OpenJDK, Java EE 7 and the future of Java.  The article was recently published in this month&apos;s issue of the SD Times.  If you are interested in viewing the article, check out the PDF version of the SD Times &lt;a href=&quot;http://www.sdtimes.com/content/SDTimesPDFEdition.aspx?File=sdtimes248.pdf&quot; target=&quot;_blank&quot;&gt;here&lt;/a&gt;, just flip to page 22.  You have to sign-up for an account, but that takes but a second.  Enjoy and let me know your thoughts!&lt;/p&gt;
@@ -2219,7 +2219,7 @@ mvn clean install -DskipTests -P !update-database
     <item>
       <title>A Practical Approach to Unit Testing</title>
       <link>http://www.mikemcgarr.comblog/practical-unit-testing.html</link>
-      <pubDate>Fri, 7 May 2010 00:00:00 -0400</pubDate>
+      <pubDate>Fri, 7 May 2010 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/practical-unit-testing.html</guid>
       	<description>
 	&lt;p&gt;Last year I was asked to give a one day workshop on how to write unit tests.  I put together a presentation and workshop format and it was a huge success.  The team quickly took to not only writing unit tests but was able to quickly utilize mock frameworks and other testing tools.  The team&apos;s code coverage for the application quickly increased and management was pleased.  I recently took another look at this presentation to see if I wanted to revise anything and I thought I would share some of the thoughts here.  These guidelines are intended to get somebody started with unit testing quickly, but could be a welcome refresher for somebody who has been writing tests for a while.&lt;/p&gt;
@@ -2293,7 +2293,7 @@ public class TemperatureUtilTest
     <item>
       <title>Follow the Leaders</title>
       <link>http://www.mikemcgarr.comblog/follow-the-leaders.html</link>
-      <pubDate>Mon, 19 Apr 2010 00:00:00 -0400</pubDate>
+      <pubDate>Mon, 19 Apr 2010 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/follow-the-leaders.html</guid>
       	<description>
 	&lt;p&gt;Do you want to get smarter on technology topics?  Me too!  In fact, in the software industry, there is way too much to learn and I am constantly adding to my &quot;Learn This&quot; list.  This list is useful (and sometimes daunting), and I try to work hard to widdle it down.  But my &quot;Learn This&quot; list is subjects and topics that I am aware of.  What about areas of software innovation that I am unaware of that might be useful for me to learn...how does one find out about the new and exciting?&lt;/p&gt;
@@ -2321,7 +2321,7 @@ public class TemperatureUtilTest
     <item>
       <title>Getting back into the swing of things</title>
       <link>http://www.mikemcgarr.comblog/getting-back-into-the-swing-of-things.html</link>
-      <pubDate>Sun, 18 Apr 2010 00:00:00 -0400</pubDate>
+      <pubDate>Sun, 18 Apr 2010 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/getting-back-into-the-swing-of-things.html</guid>
       	<description>
 	&lt;p&gt;After almost two months of digital silence, I am inching my way back online.  I took a brief hiatus to get married and go an awesome honeymoon, and I think that I am now just getting back to my blog, twitter feed and general nerding.  It is also golf season and I couldn&apos;t be more excited to get out there and play.&lt;/p&gt;
@@ -2332,7 +2332,7 @@ public class TemperatureUtilTest
     <item>
       <title>Branching Problems with a Multi-Module Maven Project</title>
       <link>http://www.mikemcgarr.comblog/branching-a-multi-module-maven-project-in-eclipse.html</link>
-      <pubDate>Tue, 16 Feb 2010 00:00:00 -0500</pubDate>
+      <pubDate>Tue, 16 Feb 2010 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/branching-a-multi-module-maven-project-in-eclipse.html</guid>
       	<description>
 	&lt;p&gt;I was impressed last year when I found that the &lt;a href=&quot;http://m2eclipse.sonatype.org/&quot; target=&quot;_blank&quot;&gt;M2eclipse&lt;/a&gt; &lt;a href=&quot;http://www.eclipse.org/&quot; target=&quot;_blank&quot;&gt;Eclipse&lt;/a&gt; plugin handled multi-module projects checked out of &lt;a href=&quot;http://subversion.tigris.org/&quot; target=&quot;_blank&quot;&gt;Subversion&lt;/a&gt; using &lt;a href=&quot;http://subclipse.tigris.org/&quot; target=&quot;_blank&quot;&gt;Subclipse&lt;/a&gt; with ease.  Eclipse does &lt;a href=&quot;https://bugs.eclipse.org/bugs/show_bug.cgi?id=35973&quot; target=&quot;_blank&quot;&gt;not natively support&lt;/a&gt; a nested multi-module project structure &lt;a href=&quot;http://maven.apache.org/guides/getting-started/index.html#How_do_I_build_more_than_one_project_at_once&quot; target=&quot;_blank&quot;&gt;recommended by Maven&lt;/a&gt;, and getting the two to work well together has historically been a pain.  M2eclipse has solved this by &quot;mapping&quot; the child modules of the project you are importing to sibling projects in your Eclipse workspace.  For example, lets take the following multi-module Maven project:&lt;/p&gt;
@@ -2349,7 +2349,7 @@ public class TemperatureUtilTest
     <item>
       <title>Why I Hate Ant</title>
       <link>http://www.mikemcgarr.comblog/why-i-hate-ant.html</link>
-      <pubDate>Mon, 15 Feb 2010 00:00:00 -0500</pubDate>
+      <pubDate>Mon, 15 Feb 2010 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/why-i-hate-ant.html</guid>
       	<description>
 	&lt;p&gt;OK, let me address the title of this blog before the whole Java open source community jumps down my throat.  I do not really hate Ant, in fact Ant is a great and invaluable tool.  Ant helps simplify building and deploying Java applications.  It is extremely powerful and flexible and allows you to do pretty much anything you want as part of your build process.  Ant&apos;s flexibility is what has helped it gain popularity in the Java community, and this flexibility is at the core of my Ant critique.&lt;/p&gt;
@@ -2363,7 +2363,7 @@ public class TemperatureUtilTest
     <item>
       <title>Enforcing Coding Standards</title>
       <link>http://www.mikemcgarr.comblog/enforcing-coding-standards.html</link>
-      <pubDate>Wed, 10 Feb 2010 00:00:00 -0500</pubDate>
+      <pubDate>Wed, 10 Feb 2010 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/enforcing-coding-standards.html</guid>
       	<description>
 	&lt;p&gt;While most teams recognize the importance of coding standards, I have witnessed too many development teams who define a set of coding standards, yet do not enforce them.  If you are not enforcing the coding standard, then you have no way of knowing your team&apos;s compliance with the standard and its effectiveness is negated.  In this article, I hope to share some of my experiences with enforcing coding standards on software development projects.&lt;/p&gt;
@@ -2397,7 +2397,7 @@ public class TemperatureUtilTest
     <item>
       <title>Maven, Cobertura and AspectJ</title>
       <link>http://www.mikemcgarr.comblog/maven-cobertura-and-aspectj.html</link>
-      <pubDate>Mon, 4 Jan 2010 00:00:00 -0500</pubDate>
+      <pubDate>Mon, 4 Jan 2010 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/maven-cobertura-and-aspectj.html</guid>
       	<description>
 	&lt;p&gt;I recently ran into an issue running Cobertura code coverage reports on my Maven2 project.  It appears that Cobertura is not being run, since the code coverage reports always showed 0% code coverage in spite of the existence of numerous unit tests.  This problem had appeared early in the project and seemed to disappear magically, so I wrote it off.  Now that it is back, I was determined to find the answer, and I have.&lt;/p&gt;
@@ -2472,7 +2472,7 @@ T E S T S
     <item>
       <title>Justifying Dual Monitors</title>
       <link>http://www.mikemcgarr.comblog/justifying-dual-monitors.html</link>
-      <pubDate>Fri, 4 Dec 2009 00:00:00 -0500</pubDate>
+      <pubDate>Fri, 4 Dec 2009 00:00:00 -0800</pubDate>
       <guid isPermaLink="false">blog/justifying-dual-monitors.html</guid>
       	<description>
 	&lt;p&gt;When I asked my management for dual monitors for our development team, I was promptly asked to provide justification for the request.  I hope the research I used for to support my case is helpful to others who may find themselves in the same boat.&lt;/p&gt;
@@ -2492,7 +2492,7 @@ With the crashing prices of LCDs and the ubiquity of dual-output video cards, yo
     <item>
       <title>A Hack to Syncing Multiple Google Calenders with your iPhone</title>
       <link>http://www.mikemcgarr.comblog/a-hack-to-syncing-multiple-google-calenders-with-your-iphone.html</link>
-      <pubDate>Thu, 24 Sep 2009 00:00:00 -0400</pubDate>
+      <pubDate>Thu, 24 Sep 2009 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">blog/a-hack-to-syncing-multiple-google-calenders-with-your-iphone.html</guid>
       	<description>
 	&lt;p&gt;As a proud iPhone owner, I have tried to integrate my phone with just about every aspect of my life, which of course includes all my calendars.  I also have been using Google Calendar for a long time and I love how easy it is to create multiple calendars and share them with friends and family.  I also have my work Outlook calendar I want to synchronize with my iPhone.  This sounds simple enough, right?&lt;/p&gt;
