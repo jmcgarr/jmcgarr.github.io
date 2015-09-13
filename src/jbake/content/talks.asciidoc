@@ -6,14 +6,16 @@ status=published
 
 == A centralized team in a decentralized world
 ++++
-<iframe src="//www.slideshare.net/slideshow/embed_code/key/HhLafNTYaBMGXF" width="390" height="260" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
+<iframe width="390" height="260" src="https://www.youtube.com/embed/mWwVLRALhaE" frameborder="0" align="right" allowfullscreen></iframe>
 ++++
 In this presentation, I discuss the various forces at play that create tension for centralized teams like Netflix's Engineering Tools team.  I share some of the challenges we face balancing out customer needs with support issues.  I also share how we remain innovative while throttling the rate of change we impose on our customers.
 
+http://www.slideshare.net/jmcgarr/centralized-team-in-a-decentralized-world-engineering-tools-at-netflix[Slides]
+
 Presented at:
 
-- http://www.oscon.com/open-source-2015/public/schedule/detail/42183[OSCON 2015]
-- http://gradlesummit.com/conference/santa_clara/2015/06/session?id=33638[Gradle Summit 2015]
+- http://www.oscon.com/open-source-2015/public/schedule/detail/42183[OSCON 2015] - https://www.youtube.com/watch?v=mWwVLRALhaE[(Video)]
+- http://gradlesummit.com/conference/santa_clara/2015/06/session?id=33638[Gradle Summit 2015] - https://www.youtube.com/watch?v=mRVZ3-qkfFg[(Video)]
 - http://www.alm-forum.com/s15/presenters#mikem[ALM Summit 2015]
 
 == Build and deploy to the cloud using Netflix OSS
@@ -70,7 +72,7 @@ Presented at:
 ++++
 <iframe src="//www.slideshare.net/slideshow/embed_code/24144601" width="330" height="290" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
 ++++
-I gave this talk at Blackboard's 2013 DevCon conference in Las Vegas.  I used to talk to introduce Blackboard's customers to better ways to manage their server infrastructure.  This talk cover the core concepts for automating your servers, as well provides some examples using Chef and Jenkins.  I plan on striping the DevCon branding and making this a more generic talk in the future. 
+I gave this talk at Blackboard's 2013 DevCon conference in Las Vegas.  I used to talk to introduce Blackboard's customers to better ways to manage their server infrastructure.  This talk cover the core concepts for automating your servers, as well provides some examples using Chef and Jenkins.  I plan on striping the DevCon branding and making this a more generic talk in the future.
 
 Presented at:
 
@@ -80,9 +82,9 @@ Presented at:
 ++++
 <iframe src="//www.slideshare.net/slideshow/embed_code/17452976" width="330" height="290" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
 ++++
-I have given a variety of talks on the subject of Continuous Delivery.  This talk has evolved over time, but it is also based on the premise of teaching others about implementing Continuous Delivery.  
+I have given a variety of talks on the subject of Continuous Delivery.  This talk has evolved over time, but it is also based on the premise of teaching others about implementing Continuous Delivery.
 
-My go to talk in the past has been an introduction to Continuous Delivery.  This talk has evolved over the years, but essentially provides tips and advice for how to get started with Continuous Delivery.  It covers a variety of techniques and tools available for engineers to start playing with immediately.  
+My go to talk in the past has been an introduction to Continuous Delivery.  This talk has evolved over the years, but essentially provides tips and advice for how to get started with Continuous Delivery.  It covers a variety of techniques and tools available for engineers to start playing with immediately.
 
 **Introduction to Continuous Delivery:**
 
