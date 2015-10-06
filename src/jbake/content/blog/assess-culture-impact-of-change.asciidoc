@@ -1,23 +1,35 @@
-title=Anticipate resistance
-date=2015-04-20
+title=Anticipating resistance to change
+date=2015-10-07
 type=post
 tags=change management, culture, understanding culture, DevOps
 status=published
 summary=...
 ~~~~~~
 
-When embarking on a DevOps transformation, anticipate resistance.  Not because DevOps is a bad idea, but because change is hard.  Changing your company to be more "devops" means you must embark on a journey to convince your colleagues (and possibly your superiors) that what you are doing now is not enough and change is needed.
+When embarking on a DevOps transformation, you should anticipate resistance. Making the jump to DevOps means changing portions of your organization's culture, and your culture will resist. Your culture will resist  because it's easier to maintain the existing culture than to change it. Change is a threat, even if the change is necesary for the continued success of the organization. This resistance to change can be strong or it can be subtle. If you plan on leading a cultural transformation, knowing how much resistance you will recieve can help you be more successful.
 
-Once you know that you want to lead a change in your organization, a critical first step is to understand cultural impact of the change.  How much of the organization's culture conflicts with the change you want to introduce?  Knowing and understanding the impact on the culture upfront will help you scope your change campaign.  
+In my experience, the *deeper* a proposed change, the more resistance you are likely to encounter. Using the link:/blog/understanding-culture.html[cultural model I introduced in my previous post], we can gauge the *depth* of a proposed change within an organization's culture. The lower on the cultural pyramid a change goes, the greater the resistance will be. Swapping out one tool for another similar tool is less likely to met with resistance than changing an organization's core values.
 
-Using the link:/blog/understanding-culture.html[cultural model I introduced in my previous post], we can classify the impact of a change with a given culture.  The lower the cultural element is on the pyramid, the more resistance you will encounter when introducing change.  
-
-For instance, if you want to switch a company from Bitbucket to Github, you should anticipate a low degree of resistance.  Why?  Because I am essentially swapping out one tool for another.  Yes there are differences (arguably great in many cases), but the process by which engineers operate is essentially the same.  They are still using git and collaborating through pull requests.  Yes, Github has a number of features that BitBucket doesn't (and likely vice versa), but the process of engineers use for development hasn't changed.
+For example, if you were to propose a switch from Bitbucket to Github, you should anticipate minimal resistance. Why? Because switching from Bitbucket to Github does not force engineers to change their behavior or their values. Yes there are differences between the two product. But you are still using Git, you can still do pull requests, you can still fork repositories, etc. They are essentially two flavors of the same tool. Switching between these two tools does not change any *processes* or *behavior* for versioning code.
 
 image::/img/culture-smallChange.png[Change only impacts tools portion of culture,500,align="center"]
 
-Let's take a look at another example.  Rather than switching Git service providers, what if you were going to propose a change from Perforce to Git.  You are still switching tools, but Perforce and Git are significantly different.  Switching to Git changes the way an engineer interacts with source control, as well as how the team integrates code changes.  The team's processes for conducting code reviews and integrating changes is different with Git (see pull requests, feature branches).  How an engineer interacts with Git is significantly different than with Perforce (think behavior).  Additionally, commands and tooling is different between Git and Perforce.  This change will impact the cultures tools, processes and behaviors.  When rolling out a change like this, anticipate resistance on a number of fronts.  
+Proposing a tooling change could have significant cultural impacts. We (Engineering Tools) are frequently upgrading, improving and swapping tools we support. In 2014 we switched from Perforce to Git and recognized (sometimes too late) that this change required engineers to alter how they thought about code integration. For engineers that had never used Github for open source development, the learning curve was steep. This slowed teams down and put a significant burden on us to educate, train and provide guidance on how to effectively use Git. This switch impacted not only the core version control system but also impacted any custom scripts engineers had written. Engineers needed to stop thinking about long lived dev/test/prod branches and start thinking in of short lived feature branches. They had to learn about how distributed version control differed from centralized version control. They had to learn to use pull requests for code reviews and integrating changes rather than leaning on Crucible. This change to our version control system impacted not only the *tool* engineers at Netflix used, but the *processes* they used for integration and the *behaviors* for saving code changes.
+
+====
+If you were propose a switch from Perforce to Github, the resistance you would experience is likely to be greater. Switching to Git changes the way an engineer interacts with version control. It always changes the way a team integrates their code changes. Code reviews can now be conducted via pull requests. Branching is now much cheaper and enables engineers to promiscuously branch their changes. Switching from Perforce to Git will impact an organization's processes as well as individual's behaviors. This change will impact the organization's  version control *tool*, version control *processes* and coding *behaviors*. When rolling out a change like this, you should anticipate strong resistance from a number of fronts.
+====
 
 image::/img/culture-largeChange.png[Change that alters more of the culture meets greater resistance,500,align="center"]
 
-Anticipating the impact of a change on a culture will help one scope the size of the change campaign.  How long will this change take?  How much communication, documentation and preparation will be needed for the change?
+When planning a change within your organization, you can gauge the resistance by asking your self simple questions. The more questions you answer yes to, the bigger the change is to the culture, and the more resistance you will encounter.
+
+* Will this change require we switch the *tools* we use?
+* Will this change require some of our *processes* to change?
+* Will this change require people to change any of their *behavior*?
+* Will this change require our organization to change our *values*?
+* Will this change require that we let go of some of the *people* from our organization?
+
+Knowing these answers to these questions will help you plan for a given change.
+
+
