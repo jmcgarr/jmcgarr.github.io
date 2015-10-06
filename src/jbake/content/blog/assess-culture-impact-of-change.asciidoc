@@ -30,6 +30,4 @@ When planning a change within your organization, you can gauge the resistance by
 * Will this change require our organization to change our *values*?
 * Will this change require that we let go of some of the *people* from our organization?
 
-Knowing these answers to these questions will help you plan for a given change.
-
-
+Resistance doesn't take the form of people saying no to your change. You can sometime think of resistance as friction to successfully rolling out a change. A good example of friction is training needed to successfully roll out a change. Knowing what form of resistance your change will recieve depends heavily on the culture and the nature of the change. While knowing the answers to the questions above will help you gauge resistance, the nature of the resistance may be unknown.
