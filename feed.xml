@@ -6,9 +6,77 @@
     <atom:link href="http://www.mikemcgarr.com/feed.xml" rel="self" type="application/rss+xml" />
     <description>Mike McGarr's Personal Blog</description>
     <language>en-gb</language>
-    <pubDate>Sat, 12 Sep 2015 17:58:29 -0700</pubDate>
-    <lastBuildDate>Sat, 12 Sep 2015 17:58:29 -0700</lastBuildDate>
+    <pubDate>Mon, 9 Nov 2015 20:32:50 -0800</pubDate>
+    <lastBuildDate>Mon, 9 Nov 2015 20:32:50 -0800</lastBuildDate>
 
+    <item>
+      <title>That&apos;s right. That&apos;s right.</title>
+      <link>http://www.mikemcgarr.comblog/thats-right.html</link>
+      <pubDate>Mon, 9 Nov 2015 00:00:00 -0800</pubDate>
+      <guid isPermaLink="false">blog/thats-right.html</guid>
+      	<description>
+	&lt;div class=&quot;quoteblock&quot;&gt;
+&lt;blockquote&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;strong&gt;&quot;That&amp;#8217;s right. That&amp;#8217;s right.&quot;&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Two simple words, repeated. I have come to appreciate how powerful these words are. They don&amp;#8217;t come naturally to me, but then again they aren&amp;#8217;t my words. Delivered correctly and with the appropriate tone, these two words encourage the recipient to continue asking questions. These words validating and yet they also encourage the recipient to be vulnerable, and to feel that it is okay to be uncertain. These words create a fertile environment for collaboration.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Let me tell you how I stumbled upon them.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;About a year ago, &lt;a href=&quot;https://twitter.com/jon_k_schneider&quot;&gt;Jon Schneider&lt;/a&gt; joined the Build Tools team at &lt;a href=&quot;http://www.netflix.com&quot;&gt;Netflix&lt;/a&gt;. Jon quickly ramped up on &lt;a href=&quot;http://github.com/nebula-plugins&quot;&gt;Nebula&lt;/a&gt;, our &lt;a href=&quot;http://www.gradle.org&quot;&gt;Gradle&lt;/a&gt; build system. Then he shifted his gaze to Astrid. Astrid is a internal tool that provides insight into the complete Java dependency graph at Netflix. This was the perfect place or Jon to apply his love of math and algorithms.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;As development progressed on Astrid, Jon and I would discuss his progress. He would share with me technical challenges and how he overcame them. Not being as deep in math as Jon, I would often struggle with some of the concepts. In order to ensure I understood, I would repeat back my understanding of what he said.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;quoteblock&quot;&gt;
+&lt;blockquote&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;strong&gt;me:&lt;/strong&gt; &quot;So let me get this straight, you are using Tinkerpop to store all the graph data in memory?&quot;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;strong&gt;Jon:&lt;/strong&gt; &quot;That&amp;#8217;s right. That&amp;#8217;s right&quot; &amp;lt;head nodding&amp;gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;After months of working together, I asked Jon if he noticed he said this. I enjoyed it and I thought it quirky and amusing. I went home and told my wife about how Jon says &lt;em&gt;&quot;that&amp;#8217;s right&quot;&lt;/em&gt;. She liked the phrase as well. At this point I found it a quirk of Jon&amp;#8217;s and nothing more. Then I had a conversation with my wife that made me realize the impact of these words.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;quoteblock&quot;&gt;
+&lt;blockquote&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;strong&gt;wife:&lt;/strong&gt; &quot;I think it&amp;#8217;s going to be a really nice day today.&quot;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;strong&gt;me:&lt;/strong&gt; &quot;Of course. It&amp;#8217;s always nice here.&quot;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;strong&gt;wife:&lt;/strong&gt; &quot;You mean, &lt;em&gt;&apos;that&amp;#8217;s right. That&amp;#8217;s right.&apos;&lt;/em&gt;&quot;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;strong&gt;me:&lt;/strong&gt; &quot;huh?&quot;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;My wife proceeded to tell me the impact of Jon&amp;#8217;s phrase, &lt;em&gt;&quot;that&amp;#8217;s right&quot;&lt;/em&gt;. She emphasized that saying &lt;em&gt;&quot;of course&quot;&lt;/em&gt; was validating what she was saying, it was at the same time distancing and condescending. It discouraged further interaction, forcing her to ask &quot;why did I even try and engage in this conversation&quot;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;She was right.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;I immediately started trying to replace &lt;em&gt;&quot;of course&quot;&lt;/em&gt; with &lt;em&gt;&quot;that&amp;#8217;s right&quot;&lt;/em&gt; in my conversations at both work and home. I also began catching others who said &lt;em&gt;&quot;of course&quot;&lt;/em&gt;, sometimes even sharing this story. I loved the impact it had on my conversations. It was a subtle, yet powerful change. I aspired to have deep, open conversations where people could be vulnerable and share, and this definitely pushed me in the right direction.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;My challenge to you is to give it a shot. The next time you are in a conversation with somebody, respond with &lt;em&gt;&quot;that&amp;#8217;s right&quot;&lt;/em&gt;. Catch yourself when you say &lt;em&gt;&quot;of course&quot;&lt;/em&gt;, or even worse, &quot;obviously&quot;. Incorporating these words will make you a better listener, a better team member, a better partner.&lt;/p&gt;
+&lt;/div&gt;
+	</description>
+    </item>
     <item>
       <title>Understanding culture</title>
       <link>http://www.mikemcgarr.comblog/understanding-culture.html</link>
