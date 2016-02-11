@@ -1,0 +1,19 @@
+title=Beyond the culture deck, part III
+date=2015-11-13
+type=post
+tags=culture, DevOps, Netflix, Beyond the Culture Deck
+status=draft
+summary=...
+~~~~~~
+
+This is the third post in a multi-part series on Beyond the Netflix Culture Deck. You can find part I and part II here.
+
+== Process
+
+
+
+== Communication
+
+== Waste
+
+== The RIGHT people

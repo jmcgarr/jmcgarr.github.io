@@ -1,0 +1,38 @@
+title=Beyond the culture deck, part II
+date=2015-11-12
+type=post
+tags=culture, DevOps, Netflix, Beyond the Culture Deck
+status=published
+summary=...
+~~~~~~
+
+This is the second post in a multi-part series on Beyond the Netflix Culture Deck. You can find part I here.
+
+== Context, not control
+
+Now you may be asking how does a company focused on freedom (and responsibility) build alignment between teams? How do you ensure that your engineers are driving to correct business goal? At Netflix, this is done through providing our engineers with context. It is the role of managers at Netflix to guide their teams via context and not through control.
+
+image::/img/nflx-context-not-control.png[Netflix Culture Deck - Context not Control,align="center"]
+
+While this sounded great to me when I joined Netflix, understanding how to properly implement this didn't come naturally. Like many others, I'd been indoctrinated into the corporate world of micromanagement. I admit that my personal style slanted heavily towards context, but was comfortable controlling individuals on my team that were under performing or inexperienced. Turns out this one of the keys to Netflix's culture, which I will touch on later.
+
+The mantra I adopted that allowed me to understand where to inject myself and how to inject was the following.
+
+----
+Managers focus on the "what"
+Engineers focus on the "how"
+----
+
+As a manager, my job is tell the team about business goals, what our strategy is, what problems are most important, which metrics we will use to measure ourselves and even the prioritization of the work we have ahead of us. I do not inject myself into the design of the solutions (unless asked for feedback). This is where engineers at Netflix have their freedom. They are hired to join a team, that has a strategy, to solve real problems in the manner of their choosing. Freedom is not total.
+
+In looking at how _'context, not control'_ might be applicable to your organization, I would ask yourself, "If I gave my employees the right business context, would I *trust* them to make the right decisions"? Trust is most important word in that sentence. Are your employees not self-motivated? Are they not passionate about the business or the problems they are solving? Are they not mature enough to focus on business problems?
+
+== Centralized teams
+
+In part one, I briefly talked about the Netflix Engineering Tools team, which I am a member of. The Engineering Tools team is a centralized team at Netflix. Centralized teams in most organizations are often chartered with owning a portion of the product's lifecycle like quality or operations. This tends to lead to silos, a classic problem DevOps strives to solve. At Netflix, centralized teams focus on *enabling* product teams.
+
+A typical centralized QA might be responsible for owning the quality of a product. So when a new release is ready to go, they (and not the engineers) are responsible for finding bugs. Engineers are not encouraged to develop a sense of responsibility for quality, since they are not held accountable. Engineering might be measured by features delivered while QA is measured by defects and Ops is measured by stability of code in production. You can see how these measurements might be opposed to each other.
+
+Centralized teams at Netflix are responsible for providing tools and/or services to enable product teams to deliver business value. For instance, the Build Tools team (a sub-team on Engineering Tools) is not responsible for a team's build scripts, Jenkins jobs or deployable artifacts, the product team is. The Build Tools team is responsible for providing a simple, fast build framework (Nebula), documentation and support for this tool. But we don't touch or own a team's build.gradle file...they do. This is true of all centralized teams at Netflix. The Security team isn't responsible for securing Netflix, they are responsible for enabling product teams to effectively secure their products. The Performance Engineering team isn't responsible for the performance of Netflix, they are responsible for enabling product teams to easily improve the performance of their services. And so on.
+
+When looking at your organization and how centralized teams are viewed, ask yourself "how coupled are your centralized teams to your product teams"? Do you see hand offs between engineering and QA, or engineering and Ops? This concept is very much related to F&R and the DevOps community focuses heavily on addressing this particular change in organizations. Breaking down silos and shifting responsibility appropriately is an area where Netflix is not unique.
