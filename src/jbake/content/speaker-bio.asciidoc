@@ -10,9 +10,12 @@ Mike McGarr is the Engineering Manager for the http://www.netflix.com/[Netflix] 
 
 === Alternative headshots:
 
-image:img/mike-oscon-1.png[Profile,300,300,role="left"]
-image:img/mike-oscoon-2.jpg[Profile,300,300,role="right"]
+image:img/mike-oscon-1.png[Profile,300,300]
+
+image:img/mike-oscoon-2.jpg[Profile,300,300]
 
 === Speaking photos:
 
-image:img/mike-gradle-meetup.jpg[Profile,400,400,role="center"]
+image:img/mike-gradle-meetup.jpg[Profile,400,400]
+
+image:img/jax-devops-speaking.jpg[Profile,400,400]
