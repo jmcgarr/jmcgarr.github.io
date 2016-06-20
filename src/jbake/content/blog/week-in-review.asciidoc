@@ -1,0 +1,19 @@
+title=Write a weekly context report
+date=2016-06-13
+type=post
+tags=
+status=published
+summary=...
+~~~~~~
+
+One of challenges I've 
+
+As an engineering manager at Netflix, my responsibilities roughly break down to are fairly straight forward:
+
+1. attract and retain top talent
+2. collect and share context to my team
+3. develop and drive product strategy
+
+
+
+For the past six months, I've been running a small weekly experiment. Every weekend, I will carve out an hour or two and write what I've been calling my Week in Review. The purpose of this document is to convey context that I've collected over the past 5 days.
