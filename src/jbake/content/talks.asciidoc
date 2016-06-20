@@ -1,0 +1,142 @@
+title=Talks
+date=2014-09-01
+type=page
+status=published
+~~~~~~
+
+== Beyond the culture deck: What you don't already know about Netflix's culture
+++++
+<iframe width="390" height="260" src="https://www.youtube.com/embed/3hULyTAESBE" frameborder="0" align="right" allowfullscreen></iframe>
+++++
+A significant chunk of DevOps rhetoric centers around “unicorn” companies like Netflix, Etsy, Facebook and many more. They are held up as the models enterprises should emulate. But what makes a place like Netflix so special? What does life inside a unicorn company look like? Is the famous Netflix culture deck true to life or just hype? Most importantly, what lessons can I take back to my employer?
+
+In this talk, I’ll share with you the reality of working at Netflix. I’ll share details about how people work at Netflix, how we communicate, how we are organized, how work is prioritized, how we manage risk, how we build teams and how our culture plays a central role in everything we do. Lastly, Mike will share what are the important lessons that every manager and executive should learn about Netflix’s culture.
+
+http://www.slideshare.net/jmcgarr/beyond-the-culture-deck-what-you-dont-already-know-about-netflix[Slides]
+
+Presented at:
+
+- http://devopsenterprise.io/sessions/beyond-the-culture-deck-what-you-dont-already-know-about-netflix/[DevOps Enterprise Summit 2015] - https://www.youtube.com/watch?v=3hULyTAESBE[(Video)]
+- https://niketechtalks-dec2015.splashthat.com/[Nike Tech Talks]
+
+
+== A centralized team in a decentralized world
+++++
+<iframe width="390" height="260" src="https://www.youtube.com/embed/mWwVLRALhaE" frameborder="0" align="right" allowfullscreen></iframe>
+++++
+In this presentation, I discuss the various forces at play that create tension for centralized teams like Netflix's Engineering Tools team.  I share some of the challenges we face balancing out customer needs with support issues.  I also share how we remain innovative while throttling the rate of change we impose on our customers.
+
+http://www.slideshare.net/jmcgarr/centralized-team-in-a-decentralized-world-engineering-tools-at-netflix[Slides]
+
+Presented at:
+
+- http://www.oscon.com/open-source-2015/public/schedule/detail/42183[OSCON 2015] - https://www.youtube.com/watch?v=mWwVLRALhaE[(Video)]
+- http://gradlesummit.com/conference/santa_clara/2015/06/session?id=33638[Gradle Summit 2015] - https://www.youtube.com/watch?v=mRVZ3-qkfFg[(Video)]
+- http://www.alm-forum.com/s15/presenters#mikem[ALM Summit 2015]
+
+== Build and deploy to the cloud using Netflix OSS
+++++
+<iframe width="390" height="260" src="https://www.youtube.com/embed/y2VTnNnzrwk" frameborder="0" align="right" allowfullscreen></iframe>
+++++
+In this talk, I presented a survey of build and deploy tools Netflix has open sourced.  I discuss the patterns Netflix uses to manage deployments at scale, and the tools you can use to build your own Netflix OSS cloud.  I even do some live coding!
+
+Presented at:
+
+- https://www.twilio.com/signal/2015/videos?speaker=mike-mcgarr[Twilio Signal 2015]
+
+== Shepherding Change: Leading your DevOps transformation
+++++
+<iframe src="//www.slideshare.net/slideshow/embed_code/41736337" width="390" height="260" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
+++++
+In this presentation, I cover the field of organizational change management and how the practices from this field can be used to drive a DevOps transformation.  The marriage of these two fields has been a growing passion of mine.
+
+Presented at:
+
+- http://www.meetup.com/DevOpsDC/events/217434472/[DevOpsDC, November 18, 2014]
+
+== Zero to the Cloud with @NetflixOSS
+++++
+<iframe src="//www.slideshare.net/slideshow/embed_code/41684570" width="390" height="260" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
+++++
+In this presentation, I provide survey of the NetflixOSS tools.  In addition to cover a wide variety of tools, I also dive into the patterns and approaches that Netflix uses to effectively deploy, scale and maintain a resilient cloud presence.
+
+Presented at:
+
+- http://www.meetup.com/AWS-Washington-DC-Meet-Up/events/217681072/[AWS DC Meetup - November 17, 2014]
+
+== Engineering Tools at Netflix: Enabling Continuous Delivery
+++++
+<iframe src="//www.slideshare.net/slideshow/embed_code/40130240" width="390" height="260" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
+++++
+The Engineering Tools team is a responsible for building tools that support Netflix's cloud deployment infrastructure.  This talk covers Netflix's approach to building, baking and deploying software to AWS, and the tools we use to make this possible.
+
+Presented at:
+
+- http://www.meetup.com/Bay-Area-Infracoders/events/210267462/[Bay Area Infracoders - October 9, 2014]
+
+== Implementing DevOps
+++++
+<iframe src="//www.slideshare.net/slideshow/embed_code/38581512" width="330" height="290" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
+++++
+I was asked by the CIO of USPTO to give a presentation on adopting DevOps.  The talk is intended for a federal government audience in mind, but is applicable to anybody interested in getting started.  I cover the basics of DevOps, anchored in Gene Kim's Three Ways.  I also provide a series of DevOps prescriptions for organizations interested in getting started.
+
+Presented at:
+
+- USPTO (internal) - June 9, 2014
+
+== Infrastructure as Code
+++++
+<iframe src="//www.slideshare.net/slideshow/embed_code/24144601" width="330" height="290" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
+++++
+I gave this talk at Blackboard's 2013 DevCon conference in Las Vegas.  I used to talk to introduce Blackboard's customers to better ways to manage their server infrastructure.  This talk cover the core concepts for automating your servers, as well provides some examples using Chef and Jenkins.  I plan on striping the DevCon branding and making this a more generic talk in the future.
+
+Presented at:
+
+- http://blog.blackboard.com/devcon-2013-a-new-hope/[Blackboard DevCon 2013] - June 8/9, 2013
+
+== Introduction to Continuous Delivery
+++++
+<iframe src="//www.slideshare.net/slideshow/embed_code/17452976" width="330" height="290" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
+++++
+I have given a variety of talks on the subject of Continuous Delivery.  This talk has evolved over time, but it is also based on the premise of teaching others about implementing Continuous Delivery.
+
+My go to talk in the past has been an introduction to Continuous Delivery.  This talk has evolved over the years, but essentially provides tips and advice for how to get started with Continuous Delivery.  It covers a variety of techniques and tools available for engineers to start playing with immediately.
+
+**Introduction to Continuous Delivery:**
+
+- http://blog.blackboard.com/devcon-2013-a-new-hope/[Blackboard DevCon 2013] - June 8/9, 2013 - http://www.slideshare.net/jmcgarr/introduction-to-continuous-delivery-bbworlddevcon-2013[(Slides)]
+- http://www.eventbrite.com/e/mcjug-06152011-meeting-tickets-1790267739[Montgomery County JUG] June 15, 2011 - http://www.slideshare.net/jmcgarr/continuous-delivery-8341276[(Slides)]
+
+**Continuous Delivery: Tools and Techniques:**
+
+- http://www.eventbrite.com/e/mcjug-02152012-meeting-tickets-2882149587[Montgomery Country JUG] - February 15, 2012 - http://www.slideshare.net/jmcgarr/continuous-delivery-tools-and-techniques[(Slides)]
+
+**Continuous Delivery Applied:**
+
+- AOL (internal) - May 31, 2013 - https://dl.dropboxusercontent.com/u/3118373/talks/Continuous%20Delivery%20Applied-AOL.pptx[(Slides)]
+- http://www.meetup.com/Richmond-Java-Users-Group/[Richmond JUG] - March 20, 2013 - http://www.slideshare.net/jmcgarr/continuous-delivery-applied-richmond-j[(Slides)]
+- http://www.agilerichmond.com[Agile Richmond] - November 14, 2012 - http://www.slideshare.net/jmcgarr/continuous-delivery-applied-agile-richmond[(Slides)]
+- http://agiledc.org/[AgileDC 2012] - October 23, 2012 - http://www.slideshare.net/jmcgarr/continuous-delivery-applied-agiledc[(Slides)]
+- http://www.meetup.com/DC-continuous-delivery/events/80979862/[DC Continuous Delivery Meetup] - September 19, 2012 - http://www.slideshare.net/jmcgarr/continuous-delivery-applied-dc-ci-user-group[(Slides)]
+
+== Improving Design through TDD
+++++
+<iframe src="//www.slideshare.net/slideshow/embed_code/15574515" width="330" height="290" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
+++++
+In late 2012, I was invited to speak at the first annual DC Agile Engineering Conference.  For this conference, I collaborated with a former colleague of mine, Sam Brown on one of my talks.  Sam and I are both proponents of Test Driven Development and practiced it together on projects, so it made sense for us to talk about TDD.
+
+The focus of our talk was on how Test Driven Development improves the design of an application.  We were lucky enough that our talk was https://www.youtube.com/watch?v=5-K8RH0WLXg[recorded].
+
+Presented at:
+
+- http://www.eventbrite.com/e/2012-dc-agile-engineering-conference-and-global-day-of-coderetreat-registration-4384492134[DC Agile Engineering] - December 7, 2012 - https://www.youtube.com/watch?v=5-K8RH0WLXg[(Video)]
+
+== ATDD with Concordian (Lightning Talk)
+++++
+<iframe src="//www.slideshare.net/slideshow/embed_code/8341499" width="330" height="290" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
+++++
+This is the first bit of public speaking I did was a lightning talk at a local meetup in the DC area.  Our team had been building an acceptance testing infrastructure using Concordion and I thought this was a great venue to start speaking.  I hope to expand on the topic in a larger presentation soon.
+
+Presented at:
+
+- http://www.meetup.com/D-CAST/events/17021962/[DC Agile Software Testing Group] - April 26, 2011

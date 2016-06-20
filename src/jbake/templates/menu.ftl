@@ -12,7 +12,7 @@
               <ul class="nav">
                 <li><a href="/about.html">About</a></li>
                 <li><a href="/archive.html">Posts</a></li>
-                <li><a href="#">Talks</a></li>
+                <li><a href="/talks.html">Talks</a></li>
                 <li><a href="/${config.feed_file}">Subscribe</a></li>
               </ul>
             </div><!--/.nav-collapse -->
