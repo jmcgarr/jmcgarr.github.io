@@ -1,19 +1,38 @@
-title=Write a weekly context report
+title=Sharing context
 date=2016-06-13
 type=post
-tags=
+tags=Netflix, meetings, context
 status=published
-summary=...
+summary=Late last year, I was managing an engineering team at Netflix consisting of 4 people. We all sat together and communicated frequently and informally. There was no need for a team meeting since we met informally daily. Over the course of the next three or four months I found the size of my team grow to 12 engineers. I quickly recognized that the informal nature of communication that worked for a small team no longer scaled to a team this big.
 ~~~~~~
+Late last year, I was managing an engineering team at Netflix consisting of 4 people. We all sat together and communicated frequently and informally. There was no need for a team meeting since we met informally daily. Over the course of the next three or four months I found the size of my team grow to 12 engineers. I quickly recognized that the informal nature of communication that worked for a small team no longer scaled to a team this big.
 
-One of challenges I've 
+For the past six months, I've been experimenting with an approach to sharing context with my team. Every week, I will carve out an hour or two and write a _Week in Review_. The purpose of this document is to convey context that I've collected over the past 5 days to members of my team. Each week ends up being about a page or two worth of content.
 
-As an engineering manager at Netflix, my responsibilities roughly break down to are fairly straight forward:
+== Why not a meeting?
+
+Now you might be asking yourself, "Why doesn't Mike just schedule a meeting with his team?". This is the most obvious solution to my problem, and something I considered. In fact, I don't have any standing meetings with my team other than a monthly team lunch.
+
+Meetings have the potential to be a gigantic waste of time. You are essentially applying a global lock on the productivity of the team. In order for a meeting to be worthwhile, it needs to be well planned with an agenda that is interesting and useful for all attendees.
+
+Meetings also break an engineer's flow. Every engineer is different and to some this doesn't pose an issue. But I know that for me, meetings were such a drag on my productivity. It always took me so long to get into flow and it never happened on a schedule. Unfortunately, meetings do happen on a schedule. So if an engineer on my team gets at 10:30 and we have an 11am meeting, they likely won't try and start coding until after the meeting ends at noon. Half the day is gone.
+
+Meetings are useful for bringing together people who aren't collocated or on the same team to discuss a particular topic or project. Like most teams at Netflix, my team is all collocated. They have ad hoc conversations throughout the day on the work they are doing.
+
+I don't abandon the concept of meetings all together, I just use them sparingly. My team is also large enough that we are usually working on four or more separate projects/products at any given time. These product or project teams are defined as separate squads and will have a weekly meeting to discuss the direction 
+
+squad meetings
+
+== Context?
+
+As an engineering manager at Netflix, my responsibilities roughly break down as follows:
 
 1. attract and retain top talent
 2. collect and share context to my team
 3. develop and drive product strategy
 
+A significant portion of my job centers on building a team, and I might write about how we do this another time. For now, I would like to talk about how I share context with my team.
 
+You can think of _context_ as information that is relevant to members of my team that may impact their day to day job. Not all information that I collect is context worth sharing to my team, so I have to make sure I filter it.
 
-For the past six months, I've been running a small weekly experiment. Every weekend, I will carve out an hour or two and write what I've been calling my Week in Review. The purpose of this document is to convey context that I've collected over the past 5 days.
+In order to share context with my team, I first have to collet context. A significant portion of my day is spent in meetings. I spent a fair amount of my meeting time in one on one meetings. I will setup one on ones with my peers, who are fellow managers in my organization. I will also have one on ones with my customers, some of which are managers and some are engineers.
