@@ -7,27 +7,32 @@ buildscript {
     }
 
     dependencies {
-        classpath 'me.champeau.gradle:jbake-gradle-plugin:0.2.2-SNAPSHOT' 
+        classpath 'me.champeau.gradle:jbake-gradle-plugin:0.3.0-SNAPSHOT'
         classpath 'org.ajoberstar:gradle-git:0.8.0'
-        classpath 'org.asciidoctor:asciidoctorj:1.5.1'  
-        classpath 'org.freemarker:freemarker:2.3.19'
-        classpath 'org.pegdown:pegdown:1.4.2'
+        classpath 'org.asciidoctor:asciidoctorj:1.5.1'
+        //classpath 'org.freemarker:freemarker:2.3.19'
+        //classpath 'org.pegdown:pegdown:1.4.2'
         //classpath 'com.wiredforcode:gradle-spawn-plugin:0.5.1'
     }
 }
 
 apply plugin: 'me.champeau.jbake'
 apply plugin: 'idea'
-apply plugin: 'github-pages'                        
+apply plugin: 'github-pages'
 //apply from: 'publish.gradle'
 
+repositories {
+    mavenLocal()
+    jcenter()
+}
 
+/*
 githubPages {
   repoUri = 'git@github.com:jmcgarr/jmcgarr.github.io.git'
   targetBranch = 'master'
   pages {
     from(file('build/jbake')) {
-     	into '.'                                    
+     	into '.'
     }
   }
   credentials {
@@ -40,8 +45,9 @@ githubPages {
 jbakePreview.dependsOn tasks.find{ it.name == 'jbake' }
 publishGhPages.dependsOn tasks.find{ it.name == 'jbake' }
 
-task publish( type: GradleBuild ) {           
+task publish( type: GradleBuild ) {
   description = 'Publishes the build output to gh-pages.'
   //buildFile = 'publish.gradle'
   tasks = ['publishGhPages']
 }
+*/
