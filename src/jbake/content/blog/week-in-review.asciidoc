@@ -1,38 +1,37 @@
-title=Sharing context
-date=2016-06-13
+title=How I share information with my team
+date=2016-11-07
 type=post
-tags=Netflix, meetings, context
+tags=management, leadership, productivity, writing
 status=published
 summary=Late last year, I was managing an engineering team at Netflix consisting of 4 people. We all sat together and communicated frequently and informally. There was no need for a team meeting since we met informally daily. Over the course of the next three or four months I found the size of my team grow to 12 engineers. I quickly recognized that the informal nature of communication that worked for a small team no longer scaled to a team this big.
 ~~~~~~
-Late last year, I was managing an engineering team at Netflix consisting of 4 people. We all sat together and communicated frequently and informally. There was no need for a team meeting since we met informally daily. Over the course of the next three or four months I found the size of my team grow to 12 engineers. I quickly recognized that the informal nature of communication that worked for a small team no longer scaled to a team this big.
+As a manager at Netflix, I spent most of my time in meetings and one-on-ones. During these meetings, I wind up collecting a lot of information that may be valuable to members of my engineering team. When the team was only four people, disseminating this information was quite easy and involved a quick hallway chat or it would come up in  our weekly one-on-one. But late last year my team more than doubled in size from four to nine. I quickly realized that I was not able to effectively scale communication to all team members effectively without some structure.
 
-For the past six months, I've been experimenting with an approach to sharing context with my team. Every week, I will carve out an hour or two and write a _Week in Review_. The purpose of this document is to convey context that I've collected over the past 5 days to members of my team. Each week ends up being about a page or two worth of content.
+My instinct was to establish a weekly team meeting where I would recall meeting notes from the week prior. I was reticent to establish a weekly ceremony just for my team to hear me talk. About this time, I happened to have a conversation with my colleague, Andy Glover. Andy manages another team in my organization of equivalent size and  recommended writing a weekly document called my Week-in-Review. I decided to give it a try and have been doing so effectively for the past nine months.
 
-== Why not a meeting?
+So how does it work?
 
-Now you might be asking yourself, "Why doesn't Mike just schedule a meeting with his team?". This is the most obvious solution to my problem, and something I considered. In fact, I don't have any standing meetings with my team other than a monthly team lunch.
+Every Friday, I carve out a couple hours to write my Week-in-Review (or WIR for short). It usually ends up being one to two pages long. I have chosen to author each WIR within a single Google Document, that is now over 50 pages long. Each WIR is a summary of the valuable meetings and conversations that I had over the course of the week. My goal is to have it waiting in everybody’s inbox no later than first thing Monday morning.
+Over the year, the layout for each week has evolved slowly. Initial versions were just a series of paragraphs, each tackling a particular meeting or topic. Slowly, I began to add sections to convey the various categories I wanted to share. My current format looks like this.
 
-Meetings have the potential to be a gigantic waste of time. You are essentially applying a global lock on the productivity of the team. In order for a meeting to be worthwhile, it needs to be well planned with an agenda that is interesting and useful for all attendees.
+image::/img/week-in-review.png[alt="Week in Review Example", link="https://docs.google.com/document/d/117EvvX8RwnYMC9HCMnbfUmIrB0oSvoRmLkjPBInFKfY"]
 
-Meetings also break an engineer's flow. Every engineer is different and to some this doesn't pose an issue. But I know that for me, meetings were such a drag on my productivity. It always took me so long to get into flow and it never happened on a schedule. Unfortunately, meetings do happen on a schedule. So if an engineer on my team gets at 10:30 and we have an 11am meeting, they likely won't try and start coding until after the meeting ends at noon. Half the day is gone.
+*_Click the image (or https://docs.google.com/document/d/117EvvX8RwnYMC9HCMnbfUmIrB0oSvoRmLkjPBInFKfY[here]) to view the full Google Doc._*
 
-Meetings are useful for bringing together people who aren't collocated or on the same team to discuss a particular topic or project. Like most teams at Netflix, my team is all collocated. They have ad hoc conversations throughout the day on the work they are doing.
+I try to keep it light and informal in the opening paragraphs. I have settled on four sections, but which is likely to evolve. The Planning and Roadmap section usually makes an appearance at the end of a quarter, coinciding with our quarterly planning cycle. Recruiting is a significant portion of my job as manager and my team is always interested in the pipeline and progress. My team also has a diverse portfolio of products, so the Product Updates section ensures everybody is on the same page. And I usually close out each WIR with a Meetings and Context section.
 
-I don't abandon the concept of meetings all together, I just use them sparingly. My team is also large enough that we are usually working on four or more separate projects/products at any given time. These product or project teams are defined as separate squads and will have a weekly meeting to discuss the direction 
+The first three sections are really for me to “swirl” information internally within the team. The Meetings and Context section is for information that originates external to the team.
 
-squad meetings
+It is possible to use a blogging platform or email for a WIR, but Google Docs provides a bunch of advantages. First, I can strictly control who I share the document with. By limiting access to just the team (and my manager), I can create a safe space for open communication. Google Docs commenting features creates a collaborative feel within the document. My team is comfortable correcting details, asking questions and merely punctuating sections they love. Also, by adding each WIR to the same document simplifies the search process. I now have a detailed log of every meeting and important conversation for the last year. I can easily search through it with Ctrl-F.
 
-== Context?
+At this point, some of you may be asking yourself, "Why doesn’t Mike just schedule a meeting with his team?". As I mentioned in the beginning, I considered this at first and dismissed it. I have a bias against having meetings for a number of reasons.
 
-As an engineering manager at Netflix, my responsibilities roughly break down as follows:
+Meetings have the potential to be a gigantic waste of time. You are applying a global lock on the productivity of the team. Meetings are extremely valuable when there is a discussion. A meeting where information transfer only occurs in one direction is less valuable.
 
-1. attract and retain top talent
-2. collect and share context to my team
-3. develop and drive product strategy
+Meetings also can break flow. Everybody’s schedule is different and when they are in flow is also different. For me, I am a morning person and want to be heads down early. For others, it’s the afternoon or evening. A meeting is likely to disrupt their flow, no matter when I schedule it. I don’t take that cost likely and I do my best as a manager to eliminate unnecessary meetings.
 
-A significant portion of my job centers on building a team, and I might write about how we do this another time. For now, I would like to talk about how I share context with my team.
+The WIR is asynchronous. Each member of my team has their own preferences for when, where and how often they read it. When a team member decides to use some of their unlimited vacation (yes, we actually do take vacations), it is easy for them to catch up on what they missed. I’ve also used it as a tool for helping onboard new team members. They can go back and read as much as they want about what our team has been doing.
 
-You can think of _context_ as information that is relevant to members of my team that may impact their day to day job. Not all information that I collect is context worth sharing to my team, so I have to make sure I filter it.
+There is also a hidden benefit to the WIR. I found that whenever I finish a WIR, I had this tremendous feeling of accomplishment. I used to look back upon my meeting packed calendar and this I didn’t get anything accomplished. The act of writing my WIR extracts the value from these meetings. I am always amazed at how much I “did” that week. For those new to management, writing a WIR can help fill the void of not being an individual contributor anymore.
 
-In order to share context with my team, I first have to collet context. A significant portion of my day is spent in meetings. I spent a fair amount of my meeting time in one on one meetings. I will setup one on ones with my peers, who are fellow managers in my organization. I will also have one on ones with my customers, some of which are managers and some are engineers.
+Authoring a Week-in-Review has been simple, yet powerful management tool. I will continue to use this approach for the rest of my career, although I expect some of the details may change over time. I highly recommend giving it a shot. Thanks again to Andy for sharing this with me.

@@ -8,13 +8,13 @@ image:img/profile_pic-sq.jpg[Profile,300,300,role="right"]
 
 Mike McGarr is the Engineering Manager for the http://www.netflix.com/[Netflix] Developer Productivity team.  He is also a co-host of http://theshipshow.com/[the Ship Show Podcast].  He has been developing Java/JVM-based applications for most of his career and been known to dabble in other languages as well.  He is passionate about building quality software through automation. Mike can frequently be found talking about link:/tags/agile.html[Agile], link:/tags/continuous-delivery.html[Continuous Delivery], link:/tags/devops.html[DevOps], or build and test automation. Prior to joining Netflix, Mike was the Director of DevOps at http://www.blackboard.com/[Blackboard] and the founder of the http://www.meetup.com/DC-continuous-delivery[DC Continuous Delivery meetup].
 
-=== Alternative headshots:
+== Alternative headshots:
 
 image:img/mike-oscon-1.png[Profile,300,300]
 
 image:img/mike-oscoon-2.jpg[Profile,300,300]
 
-=== Speaking photos:
+== Speaking photos:
 
 image:img/mike-gradle-meetup.jpg[Profile,400,400]
 
