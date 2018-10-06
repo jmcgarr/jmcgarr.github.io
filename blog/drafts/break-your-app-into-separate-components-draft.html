@@ -103,15 +103,24 @@
 
         <div class="span6">
 
-        	<p><p><a href="https://webmail.excella.com/owa/redir.aspx?C=5c92c19b6b224938b282d456d82eeec3&amp;URL=http%3a%2f%2fgoogletesting.blogspot.com%2f2011%2f06%2ftesting-at-speed-and-scale-of-google.html%3futm_source%3dfeedburner%26utm_medium%3dfeed%26utm_campaign%3dFeed%253A%2bblogspot%252FRLXA%2b%2528Google%2bTesting%2bBlog%2529" target="_blank">http://googletesting.blogspot.com/2011/06/testing-at-speed-and-scale-of-google.html</a></p>
-<p>Discuss why large componentized apps should break up component lifecycles</p>
-<p>------Draft Email</p>
-<div>It is more a question of code organization.  If I have an application that is comprised of two components and a web application, and I change one of the components, I should only have to run the build for the component I changed and the web application.  (assuming the two components aren't related)  If WebApp depends on ComponentA which in turn depends on ComponentB, and I change ComponentB, then I must build all three.</div>
-<div><span style="font-family:tahoma;">To clarify your point, if you build a component/app, you should run all it's tests for every build.  Breaking your application into seperate components with seperate build/release lifecycles can help speed/optimize your build time.  </span></div>
-<div><span style="font-family:tahoma;">It also can ensure that a change to a component isn't integrated until that change is fully vetted.  If I change ComponentB, but the change breaks the build, then ComponentA and the WebApp won't run their builds, which means they won't integrate with the broken code, which means in theory, they can still be deployed without waiting for ComponentB to be fixed (assuming their builds pass).  </span></div>
-<div><span style="font-family:tahoma;">The disadvantage is that unless you are smart about managing your source tree, you might have to check out multiple projects from source control seperately, whereas before in a large application, you had one checkout/checkin.</span></div>
-<div><span style="font-family:tahoma;">(I think I might write a blog entry about this...good stuff)</span></div>
-</p>
+        	<p><p><a href="https://webmail.excella.com/owa/redir.aspx?C=5c92c19b6b224938b282d456d82eeec3&amp;URL=http%3a%2f%2fgoogletesting.blogspot.com%2f2011%2f06%2ftesting-at-speed-and-scale-of-google.html%3futm_source%3dfeedburner%26utm_medium%3dfeed%26utm_campaign%3dFeed%253A%2bblogspot%252FRLXA%2b%2528Google%2bTesting%2bBlog%2529" target="_blank">http://googletesting.blogspot.com/2011/06/testing-at-speed-and-scale-of-google.html</a></p> 
+<p>Discuss why large componentized apps should break up component lifecycles</p> 
+<p>------Draft Email</p> 
+<div>
+ It is more a question of code organization.&nbsp; If I have an application that is comprised of two components and a web application, and I change one of the components, I should only have to run the build for the component I changed and the web application.&nbsp; (assuming the two components aren't related)&nbsp; If WebApp depends on ComponentA which in turn depends on ComponentB, and I change ComponentB, then I must build all three.
+</div> 
+<div>
+ <span style="font-family:tahoma;">To clarify your point, if you build a component/app, you should run all it's tests for every build.&nbsp; Breaking your application into seperate components with seperate build/release lifecycles can help speed/optimize&nbsp;your build time.&nbsp; </span>
+</div> 
+<div>
+ <span style="font-family:tahoma;">It also can ensure that a change to a component isn't integrated until that change is fully vetted.&nbsp; If I change ComponentB, but the change breaks the build, then ComponentA and the WebApp won't run their builds, which means they won't integrate with the broken code, which means in theory, they can still be deployed without waiting for ComponentB to be fixed (assuming their builds pass).&nbsp; </span>
+</div> 
+<div>
+ <span style="font-family:tahoma;">The disadvantage is that unless you are smart about managing your source tree, you might have to check out multiple projects from source control seperately, whereas before in a large application, you had one checkout/checkin.</span>
+</div> 
+<div>
+ <span style="font-family:tahoma;">(I think I might write a blog entry about this...good stuff)</span>
+</div></p>
 
 					<p><em>Share this:</em></p>
           <p style="float:left">
@@ -146,7 +155,7 @@
     <div id="footer">
       <div class="container">
         <p class="muted credit">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
-        <p class="muted credit">&copy; 2009-2016 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.5.1-SNAPSHOT</a></p>
+        <p class="muted credit">&copy; 2009-2016 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
       </div>
     </div>
 

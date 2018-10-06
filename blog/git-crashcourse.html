@@ -105,43 +105,44 @@
 
         <div class="span6">
 
-        	<p><p>Our current team has decided to adopt Git and some members aren't familiar with it.  I wanted to put together a short introduction to the <a title="Git" href="http://git-scm.com/" target="_blank">Git</a> command line for these team members.  The goal is to make team members productive immediately, while learning the nuances of Git over time.  My introduction assumes that you have Git installed and setup.  For installation instructions, go to <a href="http://git-scm.com/">http://git-scm.com/</a>.  For instructions on configuring Git, I recommend <a title="GitHub" href="https://github.com/" target="_blank">Github</a>'s tutorials for <a title="Setup Github (Windows)" href="http://help.github.com/win-set-up-git/" target="_blank">Windows</a>, <a title="Setup GitHub (Mac)" href="http://help.github.com/mac-set-up-git/" target="_blank">OS X</a> and <a title="Setup GitHub (Linux)" href="http://help.github.com/linux-set-up-git/" target="_blank">Linux</a>.</p>
-<h3>Cloning a Repository</h3>
-<p>First, you need to get a copy of the source code on your machine from a repository.  With Git, you do this by cloning the repository locally.  Since Git is a distributed version control system (DVCS), it will copy the whole source code repository locally.  For more on DVCS, check out <a title="Not so quick guide to DVCS" href="http://www.infoq.com/articles/dvcs-guide" target="_blank">this</a>.</p>
-<p>To clone a remote repository, you will need to use the Git <a title="Git clone Man Page" href="http://schacon.github.com/git/git-clone.html" target="_blank">clone</a> command.  The following is example of clone a public GitHub repository:</p>
+        	<p><p>Our current team has decided to adopt Git and some members aren't familiar with it. &nbsp;I wanted to put together a short introduction to the <a title="Git" href="http://git-scm.com/" target="_blank">Git</a> command line for these team members. &nbsp;The goal is to make team members productive immediately, while learning the nuances of Git over time. &nbsp;My introduction assumes that you have Git installed and setup. &nbsp;For installation instructions, go to&nbsp;<a href="http://git-scm.com/">http://git-scm.com/</a>. &nbsp;For instructions on configuring Git, I recommend&nbsp;<a title="GitHub" href="https://github.com/" target="_blank">Github</a>'s&nbsp;tutorials for <a title="Setup Github (Windows)" href="http://help.github.com/win-set-up-git/" target="_blank">Windows</a>, <a title="Setup GitHub (Mac)" href="http://help.github.com/mac-set-up-git/" target="_blank">OS X</a> and <a title="Setup GitHub (Linux)" href="http://help.github.com/linux-set-up-git/" target="_blank">Linux</a>.</p> 
+<h3>Cloning a Repository</h3> 
+<p>First, you need to get a copy of the source code on your machine from a repository. &nbsp;With Git, you do this by cloning the repository locally. &nbsp;Since Git is a&nbsp;distributed version control system (DVCS), it will copy the whole source code repository locally. &nbsp;For more on DVCS, check out&nbsp;<a title="Not so quick guide to DVCS" href="http://www.infoq.com/articles/dvcs-guide" target="_blank">this</a>.</p> 
+<p>To clone a remote repository, you will need to use the Git&nbsp;<a title="Git clone Man Page" href="http://schacon.github.com/git/git-clone.html" target="_blank">clone</a> command. &nbsp;The following is example of clone a public GitHub repository:</p> 
 <pre>
-$&gt; git clone git@github.com:jmcgarr/java-bdd-examples.git
-</pre>
-<h3>Checking in Code</h3>
-<p>Now that you have the code, you can begin making changes.  Once you are ready to check in these changes, there are a few steps you need to take to get the changes into a remote repository:</p>
+$&gt; git clone&nbsp;git@github.com:jmcgarr/java-bdd-examples.git
+</pre> 
+<h3>Checking in Code</h3> 
+<p>Now that you have the code, you can begin making changes. &nbsp;Once you are ready to check in these changes, there are a few steps you need to take to get the changes into a remote repository:</p> 
 <pre>
 $&gt; git status -S
 $&gt; git add . -A
-$&gt; git commit -m &quot;Add a commit message here&quot;
+$&gt; git commit -m "Add a commit message here"
 $&gt; git push origin master
-</pre>
-<p>Line 1 issues a <a title="Git status man page" href="http://schacon.github.com/git/git-status.html" target="_blank"><em>status</em></a> command, telling you which files have changed locally.  The <a title="Git add man page" href="http://schacon.github.com/git/git-add.html" target="_blank">add</a> command on line 2 tells Git to stage all changed files so that they can be committed to your local repository.  The <a title="Git commit Man Page" href="http://schacon.github.com/git/git-commit.html" target="_blank">commit</a> command on line 3 will commit the changes you added to your local repository.  Line 4 is where you will <a title="Git push Man Page" href="http://schacon.github.com/git/git-push.html" target="_blank">push</a> the changes in your local repository to the remote repository.</p>
-<blockquote><p>Note: Your fellow team members will not see your changes until you push them to the remote repository.  When you commit, you are only commit the change to your local copy of the repository</p></blockquote>
-<h3>Getting the Latest Version</h3>
-<p>Prior to pushing your changes to a remote repository, you may want to grab the latest code from the repository.  To get the latest remote changes, use the following commands:</p>
+</pre> 
+<p>Line 1 issues a <a title="Git status man page" href="http://schacon.github.com/git/git-status.html" target="_blank"><em>status</em></a> command, telling you which files have changed locally. &nbsp;The <a title="Git add man page" href="http://schacon.github.com/git/git-add.html" target="_blank">add</a> command on line 2 tells Git to stage all changed files so that they can be committed to your local repository. &nbsp;The <a title="Git commit Man Page" href="http://schacon.github.com/git/git-commit.html" target="_blank">commit</a> command on line 3 will commit the changes you added to your local repository. &nbsp;Line 4 is where you will <a title="Git push Man Page" href="http://schacon.github.com/git/git-push.html" target="_blank">push</a>&nbsp;the changes in your local repository to the remote repository.</p> 
+<blockquote>
+ <p>Note: Your fellow team members will not see your changes until you push them to the remote repository. &nbsp;When you commit, you are only commit the change to your local copy of the repository</p>
+</blockquote> 
+<h3>Getting the Latest Version</h3> 
+<p>Prior to pushing your changes to a remote repository, you may want to grab the latest code from the repository. &nbsp;To get the latest remote changes, use the following commands:</p> 
 <pre>
 $&gt; git fetch origin
 $&gt; git merge master
-</pre>
-<p>Line 1 will sync your local Git repository with the remote Git repository.  Your working copy of the code will not be updated until you issue a merge command (line 2).  Git provides a way of combining these two commands into one, by using the <a title="Git pull Man Page" href="http://schacon.github.com/git/git-pull.html" target="_blank">pull</a> command:</p>
+</pre> 
+<p>Line 1 will sync your local Git repository with the remote Git repository. &nbsp;Your working copy of the code will not be updated until you issue a merge command (line 2). &nbsp;Git provides a way of combining these two commands into one, by using the <a title="Git pull Man Page" href="http://schacon.github.com/git/git-pull.html" target="_blank">pull</a> command:</p> 
 <pre>
 $&gt; git pull origin master
-</pre>
-<p>This command will fetch the remote repository changes, and merge them into the master branch.</p>
-<h3>Learn More</h3>
-<p>Git is a powerful version control tool and it is extremely useful.  This tutorial should get you started immediately.  But be warned, that you should take the time to learn more about Git and how it works.  Here are some useful resources for learning more about Git:</p>
-<ul>
-<li><a title="Git Reference" href="http://gitref.org/" target="_blank">http://gitref.org/</a></li>
-<li><a title="Git Visual Guide" href="http://marklodato.github.com/visual-git-guide/index-en.html" target="_blank">http://marklodato.github.com/visual-git-guide/index-en.html</a></li>
-<li><a title="GitHub Help" href="http://help.github.com/remotes/" target="_blank">http://help.github.com/remotes/</a></li>
-<li><a title="Scott Chacon on Git" href="http://www.youtube.com/watch?v=ZDR433b0HJY" target="_blank">http://www.youtube.com/watch?v=ZDR433b0HJY</a></li>
-</ul>
-</p>
+</pre> 
+<p>This command will fetch the remote repository changes, and merge them into the master branch.</p> 
+<h3>Learn More</h3> 
+<p>Git is a powerful version control tool and it is extremely useful. &nbsp;This tutorial should get you started immediately. &nbsp;But be warned, that you should take the time to learn more about Git and how it works. &nbsp;Here are some useful resources for learning more about Git:</p> 
+<ul> 
+ <li><a title="Git Reference" href="http://gitref.org/" target="_blank">http://gitref.org/</a></li> 
+ <li><a title="Git Visual Guide" href="http://marklodato.github.com/visual-git-guide/index-en.html" target="_blank">http://marklodato.github.com/visual-git-guide/index-en.html</a></li> 
+ <li><a title="GitHub Help" href="http://help.github.com/remotes/" target="_blank">http://help.github.com/remotes/</a></li> 
+ <li><a title="Scott Chacon on Git" href="http://www.youtube.com/watch?v=ZDR433b0HJY" target="_blank">http://www.youtube.com/watch?v=ZDR433b0HJY</a></li> 
+</ul></p>
 
 					<p><em>Share this:</em></p>
           <p style="float:left">
@@ -176,7 +177,7 @@ $&gt; git pull origin master
     <div id="footer">
       <div class="container">
         <p class="muted credit">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
-        <p class="muted credit">&copy; 2009-2016 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.5.1-SNAPSHOT</a></p>
+        <p class="muted credit">&copy; 2009-2016 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
       </div>
     </div>
 

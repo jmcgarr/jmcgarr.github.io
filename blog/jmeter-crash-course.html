@@ -105,65 +105,63 @@
 
         <div class="span6">
 
-        	<p><p>I have had a lot of success using <a title="JMeter" href="http://jmeter.apache.org/index.html" target="_blank">JMeter</a> to provide quick performance tests, and this guide will help you get started with JMeter.  I have used JMeter with success on web applications, web services and databases, and I find that it works extremely well.  I have even used JMeter on .NET projects.  This doesn't cover performance testing best practices.  I will save those for another post.</p>
-<h3>Download and install the Java SDK</h3>
-<ol>
-<li>Download the SDK from Oracle <a title="Java SE Development Kit 6 Update 27" href="http://www.oracle.com/technetwork/java/javasebusiness/downloads/java-archive-downloads-javase6-419409.html#jdk-6u27-oth-JPR" target="_blank">here </a>(Note: Recommend Java SE 6 update 27.  I've had issues with update 29)</li>
-<li>Run the installer.  Take note of the install location</li>
-<li>Add $java_install_dir/bin/ to your system path</li>
-</ol>
-<h3>Install JMeter</h3>
-<ol>
-<li>Download JMeter from Apache's website: <a title="JMeter Downloads" href="http://jmeter.apache.org/download_jmeter.cgi" target="_blank">http://jmeter.apache.org/download_jmeter.cgi</a></li>
-<li>Unzip to a location on your machine.</li>
-<li>Add $jmeter_install_dir/bin to your path (Note: if you are using Windows, then I recommend just creating a shortcut to $jmeter_install_dir/bin/jmeter.bat)</li>
-<li>Run the bin/jmeter command and you should see JMeter open a window.</li>
-</ol>
-<div><img title="jmeter-window" src="/img/jmeter-window.png" alt="" width="614" height="402" /></div>
-<h3>Recording a Script</h3>
-<p>The following instructions will setup JMeter to record a performance script that you can use for replay.  This is the fastest way of setting up a performance test script.</p>
-<ol>
-<li>Right-click on Test Plan and then select Add &gt; Threads (Users) &gt;  and Create a ThreadGroup</li>
-<li>Right-click on the Workbench then select Add &gt; Non-Test Elements &gt; HTTP Proxy Server
-<ol>
-<li>Set the Target Controller to "Test Plan &gt;  Thread Group"</li>
-<li>Set the Grouping to "Store 1st sampler of each group only"</li>
-<li>Add Exclusions</li>
-<li>Change Port (Optional)</li>
-<li>Start the Proxy Server</li>
-</ol>
-</li>
-<li>Click the Start button on the Http Proxy Server</li>
-<li>Update IE to use a Proxy Server
-<ol>
-<li>Internet Options</li>
-<li>Connections Tab</li>
-<li>LAN Settings</li>
-<li>Click 'User Proxy Server'</li>
-<li>Enter localhost and port.</li>
-<li>Click OK and OK.</li>
-</ol>
-</li>
-<li>Start clicking through your application (make sure JMeter is recording your clicks)</li>
-<li>Save the recording.</li>
-</ol>
-<h3>Adding Listeners</h3>
-<p>JMeter uses listeners to record the results of the performance test.  Take a look at the various types of listeners <a title="JMeter Listeners" href="http://jmeter.apache.org/usermanual/listeners.html" target="_blank">here</a> and add one by right clicking on the Thread Group and adding a Listener there.</p>
-<h3>Running a Performance Test</h3>
-<p>Once your script is recorded and you have added listeners, make sure you save your script.  Now you can run it!</p>
-<ol>
-<li>Open up the ThreadGroup node and make the following changes:
-<ol>
-<li>Change the Number of Threads to the number of concurrent users you would like to run in the performance test.</li>
-<li>Change the Ramp-up Period to the number of seconds it takes for all the users to start.</li>
-</ol>
-</li>
-<li>In the menu, click Run, Start.</li>
-<li>Sit back and watch JMeter ramp up!</li>
-</ol>
-<h3>Final Thoughts</h3>
-<p>This post is intended to get you started with a simple JMeter performance test.  I also only focused on using JMeter to performance test a web application.  JMeter can performance test web apps, databases, JMS servers, email servers, LDAP servers, web services, and much more.  I recommend taking a look at JMeter's manual, available <a title="JMeter Manual" href="http://jmeter.apache.org/usermanual/index.html" target="_blank">here</a>.</p>
-</p>
+        	<p><p>I have had a lot of success using <a title="JMeter" href="http://jmeter.apache.org/index.html" target="_blank">JMeter</a> to provide quick performance tests, and this guide will help you get started with JMeter. &nbsp;I have used JMeter with success on web applications, web services and databases, and I find that it works extremely well. &nbsp;I have even used JMeter on .NET projects. &nbsp;This doesn't cover performance testing best practices. &nbsp;I will save those for another post.</p> 
+<h3>Download and install the Java SDK</h3> 
+<ol> 
+ <li>Download the SDK from Oracle <a title="Java SE Development Kit 6 Update 27" href="http://www.oracle.com/technetwork/java/javasebusiness/downloads/java-archive-downloads-javase6-419409.html#jdk-6u27-oth-JPR" target="_blank">here </a>(Note: Recommend Java SE 6 update 27. &nbsp;I've had issues with update 29)</li> 
+ <li>Run the installer. &nbsp;Take note of the install location</li> 
+ <li>Add $java_install_dir/bin/ to your system path</li> 
+</ol> 
+<h3>Install JMeter</h3> 
+<ol> 
+ <li>Download JMeter from Apache's website:&nbsp;<a title="JMeter Downloads" href="http://jmeter.apache.org/download_jmeter.cgi" target="_blank">http://jmeter.apache.org/download_jmeter.cgi</a></li> 
+ <li>Unzip to a location on your machine.</li> 
+ <li>Add $jmeter_install_dir/bin to your path (Note: if you are using Windows, then I recommend just creating a shortcut to $jmeter_install_dir/bin/jmeter.bat)</li> 
+ <li>Run the bin/jmeter command and you should see JMeter open a window.</li> 
+</ol> 
+<div>
+ <img title="jmeter-window" src="http://www.mikemcgarr.com/img/jmeter-window.png" alt="" width="614" height="402">
+</div> 
+<h3>Recording a Script</h3> 
+<p>The following instructions will setup JMeter to record a performance script that you can use for replay. &nbsp;This is the fastest way of setting up a performance test script.</p> 
+<ol> 
+ <li>Right-click on Test Plan and then select Add &gt; Threads (Users) &gt; &nbsp;and Create a ThreadGroup</li> 
+ <li>Right-click on the Workbench then select Add &gt; Non-Test Elements &gt; HTTP Proxy Server 
+  <ol> 
+   <li>Set the Target Controller to "Test Plan &gt; &nbsp;Thread Group"</li> 
+   <li>Set the Grouping to "Store 1st sampler of each group only"</li> 
+   <li>Add Exclusions</li> 
+   <li>Change Port (Optional)</li> 
+   <li>Start the Proxy Server</li> 
+  </ol> </li> 
+ <li>Click the Start button on the Http Proxy Server</li> 
+ <li>Update IE to use a Proxy Server 
+  <ol> 
+   <li>Internet Options</li> 
+   <li>Connections Tab</li> 
+   <li>LAN Settings</li> 
+   <li>Click 'User Proxy Server'</li> 
+   <li>Enter localhost and port.</li> 
+   <li>Click OK and OK.</li> 
+  </ol> </li> 
+ <li>Start clicking through your application (make sure JMeter is recording your clicks)</li> 
+ <li>Save the recording.</li> 
+</ol> 
+<h3>Adding Listeners</h3> 
+<p>JMeter uses listeners to record the results of the performance test. &nbsp;Take a look at the various types of listeners <a title="JMeter Listeners" href="http://jmeter.apache.org/usermanual/listeners.html" target="_blank">here</a> and add one by right clicking on the Thread Group and adding a Listener there.</p> 
+<h3>Running a Performance Test</h3> 
+<p>Once your script is recorded and you have added listeners, make sure you save your script. &nbsp;Now you can run it!</p> 
+<ol> 
+ <li>Open up the ThreadGroup node and make the following changes: 
+  <ol> 
+   <li>Change the Number of Threads to the number of concurrent users you would like to run in the performance test.</li> 
+   <li>Change the Ramp-up Period to the number of seconds it takes for all the users to start.</li> 
+  </ol> </li> 
+ <li>In the menu, click Run, Start.</li> 
+ <li>Sit back and watch JMeter ramp up!</li> 
+</ol> 
+<h3>Final Thoughts</h3> 
+<p>This post is intended to get you started with a simple JMeter performance test. &nbsp;I also only focused on using JMeter to performance test a web application. &nbsp;JMeter can performance test web apps, databases, JMS servers, email servers, LDAP servers, web services, and much more. &nbsp;I recommend taking a look at JMeter's manual, available <a title="JMeter Manual" href="http://jmeter.apache.org/usermanual/index.html" target="_blank">here</a>.</p></p>
 
 					<p><em>Share this:</em></p>
           <p style="float:left">
@@ -198,7 +196,7 @@
     <div id="footer">
       <div class="container">
         <p class="muted credit">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
-        <p class="muted credit">&copy; 2009-2016 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.5.1-SNAPSHOT</a></p>
+        <p class="muted credit">&copy; 2009-2016 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
       </div>
     </div>
 

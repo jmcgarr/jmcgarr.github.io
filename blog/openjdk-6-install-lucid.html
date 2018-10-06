@@ -113,22 +113,21 @@
 
         <div class="span6">
 
-        	<p><p>I have been playing with <a title="Vagrant" href="http://vagrantup.com/" target="_blank">Vagrant</a> and <a title="Puppet" href="http://puppetlabs.com/puppet/puppet-open-source/" target="_blank">Puppet</a> a lot recently and I had some trouble getting <a title="OpenJDK 6" href="http://openjdk.java.net/projects/jdk6/" target="_blank">OpenJDK 6</a> to install on <a title="Ubuntu 10.04" href="http://releases.ubuntu.com/lucid/" target="_blank">Ubuntu 10.04 (Lucid Lynx)</a>. &nbsp;Since I had so much trouble finding the consolidated answer, I've decided to post my solution here.</p>
-<p>The problem stems from the fact I want to install OpenJDK via a <a title="Debian package" href="http://www.debian.org/distrib/packages" target="_blank">Debian package</a>. &nbsp;Lucid Lynx's default <a title="AptGet" href="https://help.ubuntu.com/community/AptGet/Howto" target="_blank">apt</a> setup doesn't include the correct repositories needed to install OpenJDK. &nbsp;To get this to work, you need to add the correct repository to apt. &nbsp;I accomplished this by using the 'add-apt-repository' python library, like so:<br />
+        	<p><p>I have been playing with <a title="Vagrant" href="http://vagrantup.com/" target="_blank">Vagrant</a> and <a title="Puppet" href="http://puppetlabs.com/puppet/puppet-open-source/" target="_blank">Puppet</a> a lot recently and I had some trouble getting <a title="OpenJDK 6" href="http://openjdk.java.net/projects/jdk6/" target="_blank">OpenJDK 6</a> to install on <a title="Ubuntu 10.04" href="http://releases.ubuntu.com/lucid/" target="_blank">Ubuntu 10.04 (Lucid Lynx)</a>. &nbsp;Since I had so much trouble finding the consolidated answer, I've decided to post my solution here.</p> 
+<p>The problem stems from the fact I want to install OpenJDK via a <a title="Debian package" href="http://www.debian.org/distrib/packages" target="_blank">Debian package</a>. &nbsp;Lucid Lynx's default <a title="AptGet" href="https://help.ubuntu.com/community/AptGet/Howto" target="_blank">apt</a> setup doesn't include the correct repositories needed to install OpenJDK. &nbsp;To get this to work, you need to add the correct repository to apt. &nbsp;I accomplished this by using the 'add-apt-repository' python library, like so:<br> </p>
 <pre>
 $&gt; sudo apt-get install python-software-properties
-$&gt; sudo add-apt-repository &quot;deb http://archives.canonical.com/ lucid partner&quot;
-</pre>
-Once this is done, you need to update the the apt-get cache. &nbsp;You can do this with the following command:<br />
+$&gt; sudo add-apt-repository "deb http://archives.canonical.com/ lucid partner"
+</pre> Once this is done, you need to update the the apt-get cache. &nbsp;You can do this with the following command:
+<br> 
 <pre>
 $&gt; sudo apt-get update
-</pre>
-Now that apt-get is all up to date, you can finally install OpenJDK 6 JRE with the following command:<br />
+</pre> Now that apt-get is all up to date, you can finally install OpenJDK 6 JRE with the following command:
+<br> 
 <pre>
 $&gt; sudo apt-get install openjdk-6-jdk
-</pre>
-I hope this helps!</p>
-</p>
+</pre> I hope this helps!
+<p></p></p>
 
 					<p><em>Share this:</em></p>
           <p style="float:left">
@@ -163,7 +162,7 @@ I hope this helps!</p>
     <div id="footer">
       <div class="container">
         <p class="muted credit">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
-        <p class="muted credit">&copy; 2009-2016 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.5.1-SNAPSHOT</a></p>
+        <p class="muted credit">&copy; 2009-2016 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
       </div>
     </div>
 

@@ -111,29 +111,36 @@
 
         <div class="span6">
 
-        	<p><p>Yesterday I spent some time <a title="Octopress on OS X" href="/blog/octopress-on-os.html" target="_blank">getting Ruby up and running on my Mac</a>, with the intent of playing with <a title="Octopress" href="http://octopress.org/" target="_blank">Octopress</a>.  Today, I wanted to go back to a <a title="Grails" href="http://grails.org/" target="_blank">Grails</a> app I had been working on, when I realized that Grails was no longer in my PATH.  Somehow, my PATH variable had been "hijacked" by the <a title="Ruby" href="http://www.ruby-lang.org/en/" target="_blank">Ruby</a> or <a title="Ruby RVM" href="https://rvm.io/" target="_blank">RVM</a> installs.  I immediately started to investigate the issue.</p>
+        	<p><p>Yesterday I spent some time <a title="Octopress on OS X" href="/blog/octopress-on-os.html" target="_blank">getting Ruby up and running on my Mac</a>, with the intent of playing with <a title="Octopress" href="http://octopress.org/" target="_blank">Octopress</a>. &nbsp;Today, I wanted to go back to a <a title="Grails" href="http://grails.org/" target="_blank">Grails</a> app I had been working on, when I realized that Grails was no longer in my PATH. &nbsp;Somehow, my PATH variable had been "hijacked" by the&nbsp;<a title="Ruby" href="http://www.ruby-lang.org/en/" target="_blank">Ruby</a> or&nbsp;<a title="Ruby RVM" href="https://rvm.io/" target="_blank">RVM</a> installs. &nbsp;I immediately started to investigate the issue.</p> 
 <pre>
 $&gt; grails run-app
--bash: grails: command not found[/sourcecode" frameborder="0" allowfullscreen>
-</pre>
-First, I double checked my <em>~/.profile</em> file, where I added Grails to my PATH.  This was unchanged, but Grails was stil not being added to my PATH.<br />
+-bash: grails: command not found[/sourcecode" frameborder="0" allowfullscreen&gt;
+</pre> First, I double checked my 
+<em>~/.profile</em> file, where I added Grails to my PATH. &nbsp;This was unchanged, but Grails was stil not being added to my PATH.
+<br> 
 <pre>
 export GRAILS_HOME=~/Tools/grails-1.3.7
 export PATH=/opt/local/bin:/opt/local/sbin:$GRAILS_HOME/bin:$PATH
-</pre>
-Ok, so <em>.profile</em> was no longer being run when I opened Terminal.  Interesting.  Now if you are a Unix sys admin, the solution will seem immediately apparent.  I had a strong suspicion that the issue was that some <em>~/.bash*</em> files were being run instead of the <em>.profile</em>.  I Googled around and learned more about how about the differences between <em>~/.bash_profile</em>, <em>~/.bash_login</em>, <em>~/.bashrc</em>, and my <em>~/.profile</em>.</p>
-<p>Turns out my suspicion was correct.  The Ruby RVM installation had created a <em>.bashrc</em>, and now when my Bash shell logged in, it only ran the <em>.bash*</em> files and not my <em>.profile</em>.  In order to fix this, I had to tell Bash to load both my <em>.profile</em> and my <em>.bashrc</em>.  A simple way to do this was to add the following two lines to my <em>~/.bash_profile</em>:<br />
+</pre> Ok, so 
+<em>.profile</em> was no longer being run when I opened Terminal. &nbsp;Interesting. &nbsp;Now if you are a Unix sys admin, the solution will seem immediately apparent. &nbsp;I had a strong&nbsp;suspicion&nbsp;that the issue was that some 
+<em>~/.bash*</em> files were being run instead of the 
+<em>.profile</em>. &nbsp;I Googled around and learned more about how about the differences between 
+<em>~/.bash_profile</em>, 
+<em>~/.bash_login</em>, 
+<em>~/.bashrc</em>, and my 
+<em>~/.profile</em>.
+<p></p> 
+<p>Turns out my suspicion was correct. &nbsp;The Ruby RVM installation had created a <em>.bashrc</em>, and now when my Bash shell logged in, it only ran the <em>.bash*</em> files and not my <em>.profile</em>. &nbsp;In order to fix this, I had to tell Bash to load both my <em>.profile</em> and my <em>.bashrc</em>. &nbsp;A simple way to do this was to add the following two lines to my <em>~/.bash_profile</em>:<br> </p>
 <pre>
 . ~/.profile
 . ~/.bashrc
-</pre>
-Once this was added and I reloaded Terminal, my Grails path entries were back and Ruby was still working fine.  Success!</p>
-<p>For more on how Bash shell operates, check these useful resources out:</p>
-<ul>
-<li><a target="_blank">http://stefaanlippens.net/bashrc_and_others</a></li>
-<li><a href="http://www.joshstaiger.org/archives/2005/07/bash_profile_vs.html" target="_blank">http://www.joshstaiger.org/archives/2005/07/bash_profile_vs.html</a></li>
-</ul>
-</p>
+</pre> Once this was added and I reloaded Terminal, my Grails path entries were back and Ruby was still working fine. &nbsp;Success!
+<p></p> 
+<p>For more on how Bash shell operates, check these useful resources out:</p> 
+<ul> 
+ <li><a target="_blank">http://stefaanlippens.net/bashrc_and_others</a></li> 
+ <li><a href="http://www.joshstaiger.org/archives/2005/07/bash_profile_vs.html" target="_blank">http://www.joshstaiger.org/archives/2005/07/bash_profile_vs.html</a></li> 
+</ul></p>
 
 					<p><em>Share this:</em></p>
           <p style="float:left">
@@ -168,7 +175,7 @@ Once this was added and I reloaded Terminal, my Grails path entries were back an
     <div id="footer">
       <div class="container">
         <p class="muted credit">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
-        <p class="muted credit">&copy; 2009-2016 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.5.1-SNAPSHOT</a></p>
+        <p class="muted credit">&copy; 2009-2016 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
       </div>
     </div>
 

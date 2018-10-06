@@ -1,2 +1,0 @@
-jmcgarr.github.io
-=================

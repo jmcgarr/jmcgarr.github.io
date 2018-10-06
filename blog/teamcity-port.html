@@ -105,13 +105,12 @@
 
         <div class="span6">
 
-        	<p><p>I ran into an issue today where I changed my <a title="StackOverflow on changing TeamCity's default port" href="http://stackoverflow.com/questions/2387375/teamcity-change-port-for-web-server" target="_blank">TeamCity default port (from 8080)</a> and found that my build agents were suddenly disconnected.  After some fiddling around, I discovered that I needed to manually change each Build Agent's configuration to point to the new master server port.</p>
-<p>To make this change, open up the $TEAMCITY_HOME/buildAgent/conf/buildAgent.properties file and update the following value:</p>
+        	<p><p>I ran into an issue today where I changed my <a title="StackOverflow on changing TeamCity's default port" href="http://stackoverflow.com/questions/2387375/teamcity-change-port-for-web-server" target="_blank">TeamCity default port (from 8080)</a> and found that my build agents were suddenly disconnected. &nbsp;After some fiddling around, I discovered that I needed to manually change each Build Agent's configuration to point to the new master server port.</p> 
+<p>To make this change, open up the $TEAMCITY_HOME/buildAgent/conf/buildAgent.properties file and update the following value:</p> 
 <pre>
 serverUrl=http:\://localhost\:8080
-</pre>
-<p>In this case, the agent is running on the same server as the master server.  Once you restart the build agent, the master server recognizes the agent as back online.  Hope this helps.</p>
-</p>
+</pre> 
+<p>In this case, the agent is running on the same server as the master server. &nbsp;Once you restart the build agent, the master server recognizes the agent as back online. &nbsp;Hope this helps.</p></p>
 
 					<p><em>Share this:</em></p>
           <p style="float:left">
@@ -146,7 +145,7 @@ serverUrl=http:\://localhost\:8080
     <div id="footer">
       <div class="container">
         <p class="muted credit">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
-        <p class="muted credit">&copy; 2009-2016 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.5.1-SNAPSHOT</a></p>
+        <p class="muted credit">&copy; 2009-2016 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
       </div>
     </div>
 
