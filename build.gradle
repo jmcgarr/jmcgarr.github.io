@@ -1,53 +1,23 @@
-buildscript {
-    repositories {
-        mavenLocal()
-        jcenter()
-        maven { url 'http://dl.bintray.com/vermeulen-mp/gradle-plugins' }
 
-    }
-
-    dependencies {
-        classpath 'me.champeau.gradle:jbake-gradle-plugin:0.3.0-SNAPSHOT'
-        classpath 'org.ajoberstar:gradle-git:0.8.0'
-        classpath 'org.asciidoctor:asciidoctorj:1.5.1'
-        //classpath 'org.freemarker:freemarker:2.3.19'
-        //classpath 'org.pegdown:pegdown:1.4.2'
-        //classpath 'com.wiredforcode:gradle-spawn-plugin:0.5.1'
-    }
+plugins {
+    id 'org.jbake.site' version '1.3.1'
+    id "org.ajoberstar.git-publish" version "1.0.1"
 }
 
-apply plugin: 'me.champeau.jbake'
-apply plugin: 'idea'
-apply plugin: 'github-pages'
-//apply from: 'publish.gradle'
-
-repositories {
-    mavenLocal()
-    jcenter()
+bakePreview {
+    port = '8080'
 }
 
-/*
-githubPages {
+gitPublish {
   repoUri = 'git@github.com:jmcgarr/jmcgarr.github.io.git'
-  targetBranch = 'master'
-  pages {
-    from(file('build/jbake')) {
-     	into '.'
+  branch = 'master'
+  commitMessage = 'Publishing an update to my website'
+  contents {
+    from (file('build/jbake')) {
+      into '.'
     }
   }
-  credentials {
-    username = System.getenv('GH_TOKEN')
-    password = ''
-  }
 }
 
-
-jbakePreview.dependsOn tasks.find{ it.name == 'jbake' }
-publishGhPages.dependsOn tasks.find{ it.name == 'jbake' }
-
-task publish( type: GradleBuild ) {
-  description = 'Publishes the build output to gh-pages.'
-  //buildFile = 'publish.gradle'
-  tasks = ['publishGhPages']
-}
-*/
+bakePreview.dependsOn tasks.find{ it.name == 'bake' }
+gitPublishCommit.dependsOn tasks.find{ it.name == 'bake' }
