@@ -1,11 +1,8 @@
 language: java
-branches: 
+branches:
   only:
     - source
-env:
-  global:
-    secure: "HhCz/0z6IxqZuiOtWLpGnwCf4pW2YyvWVdbVWvcJhemKNdqzb1uBxF+lL9VUyfSTfVnFDjTF46FgRY4PuL9zRvlRbeJfjDRPXYAcp7osaBysKl+dVnf8usLx/MKJrBu4GZx4FnSaUcAC8GhVcLE2yomGcQKPqmYnBRGQGidbiBw="
-install: ./gradlew -b ci.gradle tasks
-script: 
-  - "./gradlew -b ci.gradle jbake --info --stacktrace"
-  - "./gradlew -b ci.gradle publishGhPages --info --stacktrace"
+install: ./gradlew tasks
+script:
+  - "./gradlew bake --info --stacktrace"
+  - "./gradlew gitPublishCommit --info --stacktrace"
