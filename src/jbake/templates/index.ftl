@@ -1,5 +1,5 @@
 <#include "header.ftl">
-	
+
 	<#include "menu.ftl">
 
 	<div class="row-fluid">
@@ -29,9 +29,9 @@
 		  		</#if>
 		  		<#if post_index = 5><#break></#if>
 		  	</#list>
-			
+
 			<hr />
-			
+
 			<p>Older posts are available in the <a href="/${config.archive_file}">archive</a>.</p>
 		</div>
 
@@ -50,11 +50,8 @@
 			<a href="http://github.com/jmcgarr" target="_blank">
 			   <img src="img/webicon-github.svg" alt="Github account" style="width:42px;height:42px">
 			</a>
-			<a href="https://www.linkedin.com/in/jmichaelmcgarr" target="_blank">
+			<a href="https://www.linkedin.com/in/jmcgarr" target="_blank">
 			   <img src="img/webicon-linkedin.svg" alt="LinkedIn Profile" style="width:42px;height:42px">
-			</a>
-			<a href="https://plus.google.com/114285658743725894223/posts/p/pub" target="_blank">
-			   <img src="img/webicon-googleplus.svg" alt="Google+ Profile" style="width:42px;height:42px">
 			</a>
 		</div>
 	</div>
