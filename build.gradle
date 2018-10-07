@@ -9,7 +9,7 @@ bakePreview {
 }
 
 gitPublish {
-  repoUri = 'git@github.com:jmcgarr/jmcgarr.github.io.git'
+  repoUri = 'https://github.com/jmcgarr/jmcgarr.github.io.git'
   branch = 'master'
   commitMessage = 'Publishing an update to my website'
   contents {
