@@ -6,14 +6,14 @@ To publish
 ==========
 Run
 ```
-./gradlew jbake publish
+./gradlew bake publish
 ```
 
 To preview
 ==========
 To preview
 ```
-./gradlew jbake jbakePreview
+./gradlew bake bakePreview
 ```
 
 Blog To Do:
