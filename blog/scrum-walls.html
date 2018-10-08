@@ -9,118 +9,122 @@
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
 
-    <!-- Le styles -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="/css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- previous styles -->
     <link href="/css/asciidoctor.css" rel="stylesheet">
-    <link href="/css/base.css" rel="stylesheet">
-    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="/css/extra.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,300,400' rel='stylesheet' type='text/css'>
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="/js/html5shiv.js"></script>
-    <![endif]-->
 
-    <!-- Fav and touch icons -->
-    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
     <link rel="shortcut icon" href="/favicon.ico">
-<script type="text/javascript">
+    <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-49993013-1']);
-  _gaq.push(['_trackPageview']);
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-49993013-1']);
+      _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
 
-</script>
+    </script>
   </head>
   <body>
-    <div id="fb-root"></div>
-      <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
     <script src="//platform.linkedin.com/in.js" type="text/javascript">
      lang: en_US
     </script>
     <div id="wrap">
 
-	<!-- Fixed navbar -->
-      <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-          <div class="container">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="brand" href="/">Mike McGarr</a>
-            <div class="nav-collapse collapse">
-              <ul class="nav">
-                <li><a href="/about.html">About</a></li>
-                <li><a href="/archive.html">Posts</a></li>
-                <li><a href="/talks.html">Talks</a></li>
-                <li><a href="/feed.xml">Subscribe</a></li>
-              </ul>
-            </div><!--/.nav-collapse -->
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+          <a class="navbar-brand" href="/">Mike McGarr</a>
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/about.html">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/archive.html">Blog</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/talks.html">Talks</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/feed.xml">Subscribe</a>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
-      <div class="container-fluid">
-    <div class="row-fluid">
+      </nav>
 
-				<div class="span6 offset3">
+      
+<!-- Grab masthead data -->
 
-					<div class="page-header">
-						<h1>Scrum Boards: Physical or Virtual</h1>
-					</div>
+      <!-- Page Header -->
+      <header class="masthead" style="background-image: url('/img/masthead/saocom-falcon-launch.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <div class="page-heading">
+                <h1>Scrum Boards: Physical or Virtual</h1>
+                  <span class="subheading"><em>December 07, 2010</em></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="">
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row justify-content-between">
+            <div class="col-4"></div>
+            <div class="col-4 text-right">
+              <p class="photo-credit">Photo credit:
+                  <a href="https://www.flickr.com/photos/spacex/44451125454/" target="_blank">https://www.flickr.com/photos/spacex/44451125454/</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </header>
 
-					<p><em>December 07, 2010</em></p>
+		<div class="container">
 
-				</div>
-		</div>
+        <div class="col-lg-8 col-md-10 mx-auto">
 
-
-		<div class="row-fluid">
-
-				<div class="span2 offset1">
-					<p/>
-					<p class="text-right"><em></em>
-								<a href="/tags/agile.html">agile</a><br/>
-</em>
-								<a href="/tags/jira.html">jira</a><br/>
-</em>
-								<a href="/tags/scrum.html">scrum</a><br/>
-</em>
-								<a href="/tags/scrum-walls.html">scrum walls</a><br/>
-					</p>
-				</div>
-
-        <div class="span6">
-
-        	<p><div> 
- <p>I'm lucky enough to have spent the last two years immersed in a culture that strongly endorses <a title="Manifesto for Agile Software Development" href="http://agilemanifesto.org/" target="_blank">Agile Software Development</a>. &nbsp;Not only does my employer, <a title="Excella Consulting" href="http://www.excella.com/" target="_blank">Excella Consulting</a>, strongly believe in Agile, we also have a number of strong Agile experts who are significant contributors to both the local and national Agile community. &nbsp;Most project teams at Excella implement some variation of Agile and the project I currently work on is no exception.</p> 
- <p>When our project started, there was some debate as to whether we should use a traditional physical Scrum Board or utilize a web based virtual solution. &nbsp;Our team's <a title="ScrumMaster" href="http://www.mountaingoatsoftware.com/scrum/scrummaster" target="_blank">ScrumMaster</a>, <a title="One More Agile Blog" href="http://www.onemoreagileblog.com/" target="_blank">Richard Cheng</a>, advocated using a traditional Scrum Board comprised of index cards for each user story or task posted on the board. &nbsp;The user stories and tasks would initially be captured and maintained in an Excel spreadsheet, then exported into a printable card format and posted to the Scrum Board. &nbsp;The spreadsheet would then be stored in version control for posterity. &nbsp;Whenever the team wanted to know what to work on next and determine the progress made over a sprint, then they would have to reference the Scrum Board.</p> 
- <p><img class="  " title="Scrum Board" src="http://farm6.static.flickr.com/5170/5231854212_7b304d02b8.jpg" alt="" width="500" height="374"></p> 
- <p>Concurrently, we were using <a title="Atlassian's JIRA" href="http://www.atlassian.com/software/jira/" target="_blank">JIRA</a> for defect tracking and I recommended&nbsp;that we store all of our user stories and tasks in JIRA. &nbsp;I advocated that this would provide a number of advantages over the physical Scrum Board, including remote accessibility, search and eliminating the need for printing the cards from Excel. &nbsp;The team agreed and I got to work adding custom workflows, fields and plugins to JIRA to support our Scrum process. &nbsp;After some work, our team was set up to use JIRA as our Agile Project Management tool, and without any incarnation of Scrum Board.</p> 
- <p><strong>Problems Arise</strong></p> 
- <p>One of the first problems we had was when we conducted&nbsp;<a title="Daily Stand-up Meetings" href="http://en.wikipedia.org/wiki/Scrum_(development)#Meetings" target="_blank">daily stand-up meetings</a>. &nbsp;For those who don't know, in <a title="Scrum" href="http://en.wikipedia.org/wiki/Scrum_(development)" target="_blank">Scrum</a>, the team meets daily for 15 minutes to talk about what they worked on yesterday, what they are working on today and if they have any impediments. &nbsp;During this meeting, the team stands in front of the Scrum Board talking to the cards and moving them through each of the status columns (open, in progress, ready for review and done). &nbsp;Since our team was using JIRA without any Scrum Board, our stand-ups lacked a central focal point. &nbsp;Team members had trouble remembering the work that was still open since it was back at their desks in JIRA. &nbsp;We considered projecting JIRA during stand-ups, but we&nbsp;were limited in space and resources, so we decided against that solution.</p> 
- <p>The second problem we encountered was our inability to evaluate our progress mid-sprint. &nbsp;When using a Scrum Board, all the work that needs to get done for a sprint is right in front of you. &nbsp;Work on the left of the board in the "open" column hasn't been started and work on the far right is complete. &nbsp;Additionally, if you use colors to denote priority of tasks, it makes it very easy to ensure your team is focusing on the high priority items first. &nbsp;A physical Scrum Board is a simple data&nbsp;visualization&nbsp;tool that makes it easy to gauge progress. &nbsp;Since we had eliminated the use of a Scrum Board, we had trouble getting JIRA to show us this same information on a single screen. &nbsp;While there were plugins for JIRA that allowed us to&nbsp;use similar features, we found that most out of box features lacked the same impact. &nbsp;The result of this problem was we began to find ourselves woefully behind schedule with only 2 days left in the sprint on a regular basis.</p> 
- <p><strong>Best of Both Worlds</strong></p> 
- <p>In an attempt to address these issues, we developed a hybrid approach. &nbsp;Our team conducted all sprint planning and closeout meetings in a conference room, where JIRA was projected and updated in real time based on conversations in the room. &nbsp;Once a planning meeting was complete and the stories for a sprint were set, the ScrumMaster would then use JIRA's built in export to Excel feature to create an Excel spreadsheet of the work for the upcoming sprint. &nbsp;Then, a Microsoft Word Mail Merge template was used to read the data from the spreadsheet and to create a card for each User Story, Task, Spike, etc. &nbsp;The stories were then printed out on colored paper, which we used to quickly denote priority (red for high priority, yellow for medium, green for low priority and blue for stretch tasks). &nbsp;Once printed, the ScrumMaster would then cut the cards out and post them to the Scrum Wall. &nbsp;It may seem like a lot of work to duplicate JIRA data on a physical board, but it only took one person less than an hour per sprint, an acceptance burden.</p> 
- <p>By using this hybrid approach, we were able to solve both our problems. &nbsp;The team now had a physical Scrum Board which they could interact with on a daily basis during meetings, which also reflected the work assigned to the sprint in JIRA. &nbsp;We also were able to access progress being made on a sprint in real time quickly by inspecting the physical Scrum Board. &nbsp;Team members still had their personal task lists in JIRA, and we could still (and do) search through old stories from previous sprints to find out what happened in the past. &nbsp;Using JIRA to record our project's complete history is extremely powerful, but having a physical Scrum Board makes managing work during a sprint critical. &nbsp;By marrying these two solutions, we were able to achieve the best of both worlds.</p> 
-</div></p>
+        	<p><div>
+<p>I'm lucky enough to have spent the last two years immersed in a culture that strongly endorses <a title="Manifesto for Agile Software Development" href="http://agilemanifesto.org/" target="_blank">Agile Software Development</a>.  Not only does my employer, <a title="Excella Consulting" href="http://www.excella.com/" target="_blank">Excella Consulting</a>, strongly believe in Agile, we also have a number of strong Agile experts who are significant contributors to both the local and national Agile community.  Most project teams at Excella implement some variation of Agile and the project I currently work on is no exception.</p>
+<p>When our project started, there was some debate as to whether we should use a traditional physical Scrum Board or utilize a web based virtual solution.  Our team's <a title="ScrumMaster" href="http://www.mountaingoatsoftware.com/scrum/scrummaster" target="_blank">ScrumMaster</a>, <a title="One More Agile Blog" href="http://www.onemoreagileblog.com/" target="_blank">Richard Cheng</a>, advocated using a traditional Scrum Board comprised of index cards for each user story or task posted on the board.  The user stories and tasks would initially be captured and maintained in an Excel spreadsheet, then exported into a printable card format and posted to the Scrum Board.  The spreadsheet would then be stored in version control for posterity.  Whenever the team wanted to know what to work on next and determine the progress made over a sprint, then they would have to reference the Scrum Board.</p>
+<p><img class="  " title="Scrum Board" src="http://farm6.static.flickr.com/5170/5231854212_7b304d02b8.jpg" alt="" width="500" height="374" /></p>
+<p>Concurrently, we were using <a title="Atlassian's JIRA" href="http://www.atlassian.com/software/jira/" target="_blank">JIRA</a> for defect tracking and I recommended that we store all of our user stories and tasks in JIRA.  I advocated that this would provide a number of advantages over the physical Scrum Board, including remote accessibility, search and eliminating the need for printing the cards from Excel.  The team agreed and I got to work adding custom workflows, fields and plugins to JIRA to support our Scrum process.  After some work, our team was set up to use JIRA as our Agile Project Management tool, and without any incarnation of Scrum Board.</p>
+<p><strong>Problems Arise</strong></p>
+<p>One of the first problems we had was when we conducted <a title="Daily Stand-up Meetings" href="http://en.wikipedia.org/wiki/Scrum_(development)#Meetings" target="_blank">daily stand-up meetings</a>.  For those who don't know, in <a title="Scrum" href="http://en.wikipedia.org/wiki/Scrum_(development)" target="_blank">Scrum</a>, the team meets daily for 15 minutes to talk about what they worked on yesterday, what they are working on today and if they have any impediments.  During this meeting, the team stands in front of the Scrum Board talking to the cards and moving them through each of the status columns (open, in progress, ready for review and done).  Since our team was using JIRA without any Scrum Board, our stand-ups lacked a central focal point.  Team members had trouble remembering the work that was still open since it was back at their desks in JIRA.  We considered projecting JIRA during stand-ups, but we were limited in space and resources, so we decided against that solution.</p>
+<p>The second problem we encountered was our inability to evaluate our progress mid-sprint.  When using a Scrum Board, all the work that needs to get done for a sprint is right in front of you.  Work on the left of the board in the "open" column hasn't been started and work on the far right is complete.  Additionally, if you use colors to denote priority of tasks, it makes it very easy to ensure your team is focusing on the high priority items first.  A physical Scrum Board is a simple data visualization tool that makes it easy to gauge progress.  Since we had eliminated the use of a Scrum Board, we had trouble getting JIRA to show us this same information on a single screen.  While there were plugins for JIRA that allowed us to use similar features, we found that most out of box features lacked the same impact.  The result of this problem was we began to find ourselves woefully behind schedule with only 2 days left in the sprint on a regular basis.</p>
+<p><strong>Best of Both Worlds</strong></p>
+<p>In an attempt to address these issues, we developed a hybrid approach.  Our team conducted all sprint planning and closeout meetings in a conference room, where JIRA was projected and updated in real time based on conversations in the room.  Once a planning meeting was complete and the stories for a sprint were set, the ScrumMaster would then use JIRA's built in export to Excel feature to create an Excel spreadsheet of the work for the upcoming sprint.  Then, a Microsoft Word Mail Merge template was used to read the data from the spreadsheet and to create a card for each User Story, Task, Spike, etc.  The stories were then printed out on colored paper, which we used to quickly denote priority (red for high priority, yellow for medium, green for low priority and blue for stretch tasks).  Once printed, the ScrumMaster would then cut the cards out and post them to the Scrum Wall.  It may seem like a lot of work to duplicate JIRA data on a physical board, but it only took one person less than an hour per sprint, an acceptance burden.</p>
+<p>By using this hybrid approach, we were able to solve both our problems.  The team now had a physical Scrum Board which they could interact with on a daily basis during meetings, which also reflected the work assigned to the sprint in JIRA.  We also were able to access progress being made on a sprint in real time quickly by inspecting the physical Scrum Board.  Team members still had their personal task lists in JIRA, and we could still (and do) search through old stories from previous sprints to find out what happened in the past.  Using JIRA to record our project's complete history is extremely powerful, but having a physical Scrum Board makes managing work during a sprint critical.  By marrying these two solutions, we were able to achieve the best of both worlds.</p>
+</div>
+</p>
 
 					<p><em>Share this:</em></p>
           <p style="float:left">
@@ -152,19 +156,52 @@
 		<div id="push"></div>
     </div>
 
-    <div id="footer">
+		<!-- Footer -->
+    <footer>
       <div class="container">
-        <p class="muted credit">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
-        <p class="muted credit">&copy; 2009-2016 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <li class="list-inline-item">
+                <a href="https://twitter.com/SonOfGarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://www.linkedin.com/in/jmcgarr/">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://github.com/jmcgarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+						<p class="copyright text-muted">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
+            <p class="copyright text-muted">Copyright &copy; Mike McGarr 2009-2018 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v4.1</a> | Generated with <a href="http://jbake.org">JBake v2.6.2</a></p>
+          </div>
+        </div>
       </div>
-    </div>
+    </footer>
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/js/jquery-1.9.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/run_prettify.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom scripts for the clean blog look and feel -->
+    <script src="/js/clean-blog.min.js"></script>
+
     <script type="text/javascript">
       (function() {
         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;

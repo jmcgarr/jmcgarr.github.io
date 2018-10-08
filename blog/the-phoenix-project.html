@@ -9,124 +9,126 @@
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
 
-    <!-- Le styles -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="/css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- previous styles -->
     <link href="/css/asciidoctor.css" rel="stylesheet">
-    <link href="/css/base.css" rel="stylesheet">
-    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="/css/extra.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,300,400' rel='stylesheet' type='text/css'>
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="/js/html5shiv.js"></script>
-    <![endif]-->
 
-    <!-- Fav and touch icons -->
-    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
     <link rel="shortcut icon" href="/favicon.ico">
-<script type="text/javascript">
+    <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-49993013-1']);
-  _gaq.push(['_trackPageview']);
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-49993013-1']);
+      _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
 
-</script>
+    </script>
   </head>
   <body>
-    <div id="fb-root"></div>
-      <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
     <script src="//platform.linkedin.com/in.js" type="text/javascript">
      lang: en_US
     </script>
     <div id="wrap">
 
-	<!-- Fixed navbar -->
-      <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-          <div class="container">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="brand" href="/">Mike McGarr</a>
-            <div class="nav-collapse collapse">
-              <ul class="nav">
-                <li><a href="/about.html">About</a></li>
-                <li><a href="/archive.html">Posts</a></li>
-                <li><a href="/talks.html">Talks</a></li>
-                <li><a href="/feed.xml">Subscribe</a></li>
-              </ul>
-            </div><!--/.nav-collapse -->
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+          <a class="navbar-brand" href="/">Mike McGarr</a>
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/about.html">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/archive.html">Blog</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/talks.html">Talks</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/feed.xml">Subscribe</a>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
-      <div class="container-fluid">
-    <div class="row-fluid">
+      </nav>
 
-				<div class="span6 offset3">
+      
+<!-- Grab masthead data -->
 
-					<div class="page-header">
-						<h1>Book Review: The Phoenix Project</h1>
-					</div>
+      <!-- Page Header -->
+      <header class="masthead" style="background-image: url('/img/masthead/saocom-falcon-launch.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <div class="page-heading">
+                <h1>Book Review: The Phoenix Project</h1>
+                  <span class="subheading"><em>February 21, 2013</em></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="">
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row justify-content-between">
+            <div class="col-4"></div>
+            <div class="col-4 text-right">
+              <p class="photo-credit">Photo credit:
+                  <a href="https://www.flickr.com/photos/spacex/44451125454/" target="_blank">https://www.flickr.com/photos/spacex/44451125454/</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </header>
 
-					<p><em>February 21, 2013</em></p>
+		<div class="container">
 
-				</div>
-		</div>
+        <div class="col-lg-8 col-md-10 mx-auto">
 
-
-		<div class="row-fluid">
-
-				<div class="span2 offset1">
-					<p/>
-					<p class="text-right"><em></em>
-								<a href="/tags/book-review.html">book review</a><br/>
-</em>
-								<a href="/tags/continuous-delivery.html">continuous delivery</a><br/>
-</em>
-								<a href="/tags/devops.html">devops</a><br/>
-</em>
-								<a href="/tags/lean.html">lean</a><br/>
-					</p>
-				</div>
-
-        <div class="span6">
-
-        	<p><p><img alt="" src="https://pbs.twimg.com/media/BBQcthgCAAAlL8D.jpg:large" width="1" height="1"><img align="left" alt="thePhoenixProject" src="http://www.mikemcgarr.com/img/thephoenixproject.jpg" width="300" height="225">I recently completed '<a title="The Phoenix Project Book" href="http://itrevolution.com/books/phoenix-project-devops-novel/" target="_blank">The Phoenix Project: A Novel About IT, DevOps, and Helping Your Business Win</a>' and thought I would write a review. &nbsp;I mainly wanted to capture notes and thoughts about the book for myself.</p> 
-<p><strong>The Story</strong></p> 
-<p>First off, hat's off to the authors (<a title="Gene Kim" href="http://itrevolution.com/authors/gene-kim/" target="_blank">Gene Kim</a>, <a title="Kevin Behr" href="http://itrevolution.com/authors/kevin-behr/" target="_blank">Kevin Behr</a>, and <a title="George Spafford" href="http://itrevolution.com/authors/george-spafford/" target="_blank">George Spafford</a>) for turning the world of IT, operations and DevOps into a riveting story. &nbsp;I could not tear myself away from the book and was genuinely interested. &nbsp;It was definitely a page turner. &nbsp;I found myself really hating certain characters which made the story that much better. &nbsp;The book moves at a frantic pace as problems and issues pile upon each other.</p> 
-<p>The book tells the fictional story of Bill Palmer, an IT manager at Parts Unlimited (also fictional). &nbsp;Bill is suddenly promoted to VP of IT Operations and the future of the company is quickly put on his shoulders. &nbsp;Bill finds himself in production outage after outage, trying to keep the business operational. &nbsp;His attempts to improve the operation's team success are filled with trials and challenges. &nbsp; Bill is guided towards the path of&nbsp;righteousness&nbsp;by Erik Reid, a potential board member and lean expert.</p> 
-<p>I found myself drawing parallels between Bill Palmer's (the book's main character) plight and some of the challenges I was facing at <a title="Blackboard, Inc." href="http://www.blackboard.com/">Blackboard</a>. &nbsp;Now I have to admit that my situation is very different (not nearly as hectic), but I definitely took a lot from this book.</p> 
-<p><strong>It's all about Culture</strong></p> 
-<p>If you read enough about the DevOps movement, you will hear this slogan beat into your skull. &nbsp;DevOps is not about a tool that you can install or a position on a team? &nbsp;DevOps is about how well your company can work together to break down functional silos to collectively achieve business goals. &nbsp;The Phoenix Project definitely stays true to this principle. &nbsp;As I read through the early chapters, I was so captivated by the story that I didn't even notice that '<a title="DevOps" href="http://en.wikipedia.org/wiki/DevOps" target="_blank">DevOps</a>', '<a title="Continuous Delivery" href="http://continuousdelivery.com/" target="_blank">continuous delivery</a>', '<a title="John Allspaw" href="https://twitter.com/allspaw" target="_blank">John Allspaw</a>', &nbsp;or '<a title="Deployment Pipeline" href="http://www.informit.com/articles/article.aspx?p=1621865" target="_blank">deployment pipeline</a>' didn't show up until page 294. &nbsp;When I finally read that portion of the book, it hit me. &nbsp;Everything Bill had done up to that point was slowly change the team's view of work and their role in the organization. &nbsp;Cultural changes.</p> 
-<p><strong>The Three Ways</strong></p> 
-<p>Throughout the book, Erik squires Bill in the &nbsp;"<a title="The Three Ways." href="http://itrevolution.com/the-three-ways-principles-underpinning-devops/" target="_blank">Three Ways</a>". &nbsp;The "Three Ways" are sprinkled throughout the book Bill tries to get a handle on his team's workload and figure out why they aren't producing work. &nbsp;As the character Erik puts it,</p> 
-<blockquote>
- <p>The First Way helps us understand how to create fast flow of work as it moves from Development into IT Operations, because that's what's between the business and the customer. &nbsp;The Second Way shows us how to shorten and amplify feedback loops, so we can fix quality at the source and avoid rework. &nbsp;And the Third Way shows us how to create a culture that simultaneously fosters experimentation, learning from failure, and understanding that repetition and practice are&nbsp;prerequisites&nbsp;to mastery.</p>
-</blockquote> 
-<p>If you have studied Agile or Lean, you will find these sound familiar. &nbsp;It's my understanding that Kevin, Gene and George's other book, <a title="The Visible Ops Handbook" href="http://www.amazon.com/The-Visible-Ops-Handbook-Implementing/dp/0975568612/ref=sr_1_1?ie=UTF8&amp;qid=1361375322&amp;sr=8-1&amp;keywords=the+visible+ops+handbook" target="_blank">the Visible Ops Handbook</a> goes into more depth on the "Three Ways". &nbsp;I have been told it's a nice companion to the Phoenix Project, and I plan on reading it.</p> 
-<p><strong><img align="left" alt="250px-ObiWanHS-SWE" src="http://www.mikemcgarr.com/img/250px-obiwanhs-swe.jpg" width="138" height="185">Realistic?</strong></p> 
-<p>There were definitely times that the book felt more fiction than realistic. &nbsp;When the sky was falling, Bill somehow stumbled upon the correct solution to the problem on the first go. &nbsp;Yes the process of improving Parts Unlimited was iterative, but Bill never seemed to be offtrack. &nbsp;And that was of course due to the help on his own personal <a title="Obi Wan Kenobi" href="http://en.wikipedia.org/wiki/Obi-Wan_Kenobi" target="_blank">Obi Wan Kenobi</a> (aka Erik). &nbsp;Erik played the role of the wise Jedi master beautifully, through his cryptic guidance of Bill towards the "Three Ways". &nbsp;I looked at Erik's guidance of Bill as a great lesson for individuals trying to transform your team by yourself. &nbsp;Seek help. &nbsp;You can do it on your own, but employing an expert will make your life much easier.</p> 
-<p>I am also not sure that one can avoid studying the art of <a title="Change management" href="http://en.wikipedia.org/wiki/Change_management" target="_blank">change management</a>. &nbsp;The book touches briefly on the topic indirectly, but it is much harder to change a culture than book leads you to believe. &nbsp;That's not to say the lessons in the book aren't valuable, but the timeline should be taken with a grain of salt. &nbsp;The book depicts a company on the edge of collapse. &nbsp;Not everybody will find themselves with such a motivating catalyst for change. &nbsp;More than likely you will find stern resistance to new ideas and approaches. &nbsp;Be prepared to fight.</p> 
-<p><strong>Conclusion</strong></p> 
-<p>I thoroughly enjoyed the book and highly recommend it to anybody interested in DevOps, who works in IT, or works in an organization that has a&nbsp;dysfunctional&nbsp;IT shop. &nbsp;It's a fast pace book that will leave with a long list of other books to read. &nbsp;I also recommend you check out <a title="Jez Humble" href="http://jezhumble.net/" target="_blank">Jez Humble's</a> <a title="Jez Humble reviews the Phoenix Project" href="http://continuousdelivery.com/2013/01/book-review-the-phoenix-project/" target="_blank">review of The Phoenix Project</a>. &nbsp;(Note: I didn't read any other reviews until I had written my own, I am happy with the&nbsp;similarities) Go out and buy it now!</p></p>
+        	<p><p><img alt="" src="https://pbs.twimg.com/media/BBQcthgCAAAlL8D.jpg:large" width="1" height="1" /><img align="left" alt="thePhoenixProject" src="/img/thephoenixproject.jpg" width="300" height="225" />I recently completed '<a title="The Phoenix Project Book" href="http://itrevolution.com/books/phoenix-project-devops-novel/" target="_blank">The Phoenix Project: A Novel About IT, DevOps, and Helping Your Business Win</a>' and thought I would write a review.  I mainly wanted to capture notes and thoughts about the book for myself.</p>
+<p><strong>The Story</strong></p>
+<p>First off, hat's off to the authors (<a title="Gene Kim" href="http://itrevolution.com/authors/gene-kim/" target="_blank">Gene Kim</a>, <a title="Kevin Behr" href="http://itrevolution.com/authors/kevin-behr/" target="_blank">Kevin Behr</a>, and <a title="George Spafford" href="http://itrevolution.com/authors/george-spafford/" target="_blank">George Spafford</a>) for turning the world of IT, operations and DevOps into a riveting story.  I could not tear myself away from the book and was genuinely interested.  It was definitely a page turner.  I found myself really hating certain characters which made the story that much better.  The book moves at a frantic pace as problems and issues pile upon each other.</p>
+<p>The book tells the fictional story of Bill Palmer, an IT manager at Parts Unlimited (also fictional).  Bill is suddenly promoted to VP of IT Operations and the future of the company is quickly put on his shoulders.  Bill finds himself in production outage after outage, trying to keep the business operational.  His attempts to improve the operation's team success are filled with trials and challenges.   Bill is guided towards the path of righteousness by Erik Reid, a potential board member and lean expert.</p>
+<p>I found myself drawing parallels between Bill Palmer's (the book's main character) plight and some of the challenges I was facing at <a title="Blackboard, Inc." href="http://www.blackboard.com/">Blackboard</a>.  Now I have to admit that my situation is very different (not nearly as hectic), but I definitely took a lot from this book.</p>
+<p><strong>It's all about Culture</strong></p>
+<p>If you read enough about the DevOps movement, you will hear this slogan beat into your skull.  DevOps is not about a tool that you can install or a position on a team?  DevOps is about how well your company can work together to break down functional silos to collectively achieve business goals.  The Phoenix Project definitely stays true to this principle.  As I read through the early chapters, I was so captivated by the story that I didn't even notice that '<a title="DevOps" href="http://en.wikipedia.org/wiki/DevOps" target="_blank">DevOps</a>', '<a title="Continuous Delivery" href="http://continuousdelivery.com/" target="_blank">continuous delivery</a>', '<a title="John Allspaw" href="https://twitter.com/allspaw" target="_blank">John Allspaw</a>',  or '<a title="Deployment Pipeline" href="http://www.informit.com/articles/article.aspx?p=1621865" target="_blank">deployment pipeline</a>' didn't show up until page 294.  When I finally read that portion of the book, it hit me.  Everything Bill had done up to that point was slowly change the team's view of work and their role in the organization.  Cultural changes.</p>
+<p><strong>The Three Ways</strong></p>
+<p>Throughout the book, Erik squires Bill in the  "<a title="The Three Ways." href="http://itrevolution.com/the-three-ways-principles-underpinning-devops/" target="_blank">Three Ways</a>".  The "Three Ways" are sprinkled throughout the book Bill tries to get a handle on his team's workload and figure out why they aren't producing work.  As the character Erik puts it,</p>
+<blockquote><p>The First Way helps us understand how to create fast flow of work as it moves from Development into IT Operations, because that's what's between the business and the customer.  The Second Way shows us how to shorten and amplify feedback loops, so we can fix quality at the source and avoid rework.  And the Third Way shows us how to create a culture that simultaneously fosters experimentation, learning from failure, and understanding that repetition and practice are prerequisites to mastery.</p></blockquote>
+<p>If you have studied Agile or Lean, you will find these sound familiar.  It's my understanding that Kevin, Gene and George's other book, <a title="The Visible Ops Handbook" href="http://www.amazon.com/The-Visible-Ops-Handbook-Implementing/dp/0975568612/ref=sr_1_1?ie=UTF8&amp;qid=1361375322&amp;sr=8-1&amp;keywords=the+visible+ops+handbook" target="_blank">the Visible Ops Handbook</a> goes into more depth on the "Three Ways".  I have been told it's a nice companion to the Phoenix Project, and I plan on reading it.</p>
+<p><strong><img align="left" alt="250px-ObiWanHS-SWE" src="/img/250px-obiwanhs-swe.jpg" width="138" height="185" />Realistic?</strong></p>
+<p>There were definitely times that the book felt more fiction than realistic.  When the sky was falling, Bill somehow stumbled upon the correct solution to the problem on the first go.  Yes the process of improving Parts Unlimited was iterative, but Bill never seemed to be offtrack.  And that was of course due to the help on his own personal <a title="Obi Wan Kenobi" href="http://en.wikipedia.org/wiki/Obi-Wan_Kenobi" target="_blank">Obi Wan Kenobi</a> (aka Erik).  Erik played the role of the wise Jedi master beautifully, through his cryptic guidance of Bill towards the "Three Ways".  I looked at Erik's guidance of Bill as a great lesson for individuals trying to transform your team by yourself.  Seek help.  You can do it on your own, but employing an expert will make your life much easier.</p>
+<p>I am also not sure that one can avoid studying the art of <a title="Change management" href="http://en.wikipedia.org/wiki/Change_management" target="_blank">change management</a>.  The book touches briefly on the topic indirectly, but it is much harder to change a culture than book leads you to believe.  That's not to say the lessons in the book aren't valuable, but the timeline should be taken with a grain of salt.  The book depicts a company on the edge of collapse.  Not everybody will find themselves with such a motivating catalyst for change.  More than likely you will find stern resistance to new ideas and approaches.  Be prepared to fight.</p>
+<p><strong>Conclusion</strong></p>
+<p>I thoroughly enjoyed the book and highly recommend it to anybody interested in DevOps, who works in IT, or works in an organization that has a dysfunctional IT shop.  It's a fast pace book that will leave with a long list of other books to read.  I also recommend you check out <a title="Jez Humble" href="http://jezhumble.net/" target="_blank">Jez Humble's</a> <a title="Jez Humble reviews the Phoenix Project" href="http://continuousdelivery.com/2013/01/book-review-the-phoenix-project/" target="_blank">review of The Phoenix Project</a>.  (Note: I didn't read any other reviews until I had written my own, I am happy with the similarities) Go out and buy it now!</p>
+</p>
 
 					<p><em>Share this:</em></p>
           <p style="float:left">
@@ -158,19 +160,52 @@
 		<div id="push"></div>
     </div>
 
-    <div id="footer">
+		<!-- Footer -->
+    <footer>
       <div class="container">
-        <p class="muted credit">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
-        <p class="muted credit">&copy; 2009-2016 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <li class="list-inline-item">
+                <a href="https://twitter.com/SonOfGarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://www.linkedin.com/in/jmcgarr/">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://github.com/jmcgarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+						<p class="copyright text-muted">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
+            <p class="copyright text-muted">Copyright &copy; Mike McGarr 2009-2018 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v4.1</a> | Generated with <a href="http://jbake.org">JBake v2.6.2</a></p>
+          </div>
+        </div>
       </div>
-    </div>
+    </footer>
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/js/jquery-1.9.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/run_prettify.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom scripts for the clean blog look and feel -->
+    <script src="/js/clean-blog.min.js"></script>
+
     <script type="text/javascript">
       (function() {
         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;

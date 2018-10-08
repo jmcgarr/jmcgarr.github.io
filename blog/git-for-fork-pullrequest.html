@@ -9,195 +9,210 @@
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
 
-    <!-- Le styles -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="/css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- previous styles -->
     <link href="/css/asciidoctor.css" rel="stylesheet">
-    <link href="/css/base.css" rel="stylesheet">
-    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="/css/extra.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,300,400' rel='stylesheet' type='text/css'>
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="/js/html5shiv.js"></script>
-    <![endif]-->
 
-    <!-- Fav and touch icons -->
-    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
     <link rel="shortcut icon" href="/favicon.ico">
-<script type="text/javascript">
+    <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-49993013-1']);
-  _gaq.push(['_trackPageview']);
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-49993013-1']);
+      _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
 
-</script>
+    </script>
   </head>
   <body>
-    <div id="fb-root"></div>
-      <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
     <script src="//platform.linkedin.com/in.js" type="text/javascript">
      lang: en_US
     </script>
     <div id="wrap">
 
-	<!-- Fixed navbar -->
-      <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-          <div class="container">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="brand" href="/">Mike McGarr</a>
-            <div class="nav-collapse collapse">
-              <ul class="nav">
-                <li><a href="/about.html">About</a></li>
-                <li><a href="/archive.html">Posts</a></li>
-                <li><a href="/talks.html">Talks</a></li>
-                <li><a href="/feed.xml">Subscribe</a></li>
-              </ul>
-            </div><!--/.nav-collapse -->
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+          <a class="navbar-brand" href="/">Mike McGarr</a>
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/about.html">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/archive.html">Blog</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/talks.html">Talks</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/feed.xml">Subscribe</a>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
-      <div class="container-fluid">
-    <div class="row-fluid">
+      </nav>
 
-				<div class="span6 offset3">
+      
+<!-- Grab masthead data -->
 
-					<div class="page-header">
-						<h1>Git commands for a &apos;forked&apos; up world</h1>
-					</div>
+      <!-- Page Header -->
+      <header class="masthead" style="background-image: url('/img/masthead/saocom-falcon-launch.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <div class="page-heading">
+                <h1>Git commands for a 'forked' up world</h1>
+                  <span class="subheading"><em>April 17, 2014</em></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="">
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row justify-content-between">
+            <div class="col-4"></div>
+            <div class="col-4 text-right">
+              <p class="photo-credit">Photo credit:
+                  <a href="https://www.flickr.com/photos/spacex/44451125454/" target="_blank">https://www.flickr.com/photos/spacex/44451125454/</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </header>
 
-					<p><em>April 17, 2014</em></p>
+		<div class="container">
 
-				</div>
-		</div>
+        <div class="col-lg-8 col-md-10 mx-auto">
 
-
-		<div class="row-fluid">
-
-				<div class="span2 offset1">
-					<p/>
-					<p class="text-right"><em></em>
-								<a href="/tags/git.html">git</a><br/>
-					</p>
-				</div>
-
-        <div class="span6">
-
-        	<p><div class="paragraph"> 
- <p>If you are working on a team or open source project that uses Git, it is likely that you have been introduced to the fork/pull-request model of collaboration for Git (and Mercurial). The <a href="https://help.github.com/articles/using-pull-requests">fork/pull-request</a> concepts are not a part of git, but were popularized by Github. You find most DVCS server products incorporate some variation of them.</p> 
-</div> 
-<div class="paragraph"> 
- <p>If you find yourself forking a repository and contributing back, I found the following git commands useful. Before we dive each of them, let’s define a few terms:</p> 
-</div> 
-<div class="ulist"> 
- <ul> 
-  <li> <p><strong>upstream repository</strong> - this is the original git repository that you would like the changes to eventually end up</p> </li> 
-  <li> <p><strong>origin repository</strong> - this is the forked git repository. It is your personal copy on the server.</p> </li> 
-  <li> <p><strong>local repository</strong> - this is the local git repository on your machine.</p> </li> 
- </ul> 
-</div> 
-<div class="paragraph"> 
- <p>I am not going to discuss the fork/pull-request model much here.</p> 
-</div> 
-<div class="sect1"> 
- <h2 id="_add_a_upstream_remote">Add a upstream remote</h2> 
- <div class="sectionbody"> 
-  <div class="paragraph"> 
-   <p>Once you fork the <strong>upstream</strong> repository, you will then clone the forked repository locally. You will make your changes locally, push to <strong>origin</strong> and make your pull request. At some point you will want to pull in the latest changes from the <strong>upstream</strong> repository. In order to do this, you need to define <strong>upstream</strong> as a remote repository.</p> 
-  </div> 
-  <div class="listingblock"> 
-   <div class="content"> 
-    <pre>git remote add upstream &lt;original repo url&gt;</pre> 
-   </div> 
-  </div> 
- </div> 
-</div> 
-<div class="sect1"> 
- <h2 id="_fetch_all_remotes">Fetch all remotes</h2> 
- <div class="sectionbody"> 
-  <div class="paragraph"> 
-   <p>Now that you have multiple remotes, you will want to grab the latest changes from not just <strong>origin</strong>, but from <strong>upstream</strong> as well. You can do this with a single command that fetches changes for <em>all</em> remote repositories:</p> 
-  </div> 
-  <div class="listingblock"> 
-   <div class="content"> 
-    <pre>$&gt; git fetch --all
+        	<p><div class="paragraph">
+<p>If you are working on a team or open source project that uses Git, it is likely that you have been introduced to the fork/pull-request model of collaboration for Git (and Mercurial).  The <a href="https://help.github.com/articles/using-pull-requests">fork/pull-request</a> concepts are not a part of git, but were popularized by Github.  You find most DVCS server products incorporate some variation of them.</p>
+</div>
+<div class="paragraph">
+<p>If you find yourself forking a repository and contributing back, I found the following git commands useful.  Before we dive each of them, let&#8217;s define a few terms:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>upstream repository</strong> - this is the original git repository that you would like the changes to eventually end up</p>
+</li>
+<li>
+<p><strong>origin repository</strong> - this is the forked git repository.  It is your personal copy on the server.</p>
+</li>
+<li>
+<p><strong>local repository</strong> - this is the local git repository on your machine.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>I am not going to discuss the fork/pull-request model much here.</p>
+</div>
+<div class="sect1">
+<h2 id="_add_a_upstream_remote">Add a upstream remote</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Once you fork the <strong>upstream</strong> repository, you will then clone the forked repository locally.  You will make your changes locally, push to <strong>origin</strong> and make your pull request.  At some point you will want to pull in the latest changes from the <strong>upstream</strong> repository.  In order to do this, you need to define <strong>upstream</strong> as a remote repository.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>git remote add upstream &lt;original repo url&gt;</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_fetch_all_remotes">Fetch all remotes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now that you have multiple remotes, you will want to grab the latest changes from not just <strong>origin</strong>, but from <strong>upstream</strong> as well.  You can do this with a single command that fetches changes for <em>all</em> remote repositories:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$&gt; git fetch --all
 Fetching origin
 Fetching upstream
-...</pre> 
-   </div> 
-  </div> 
- </div> 
-</div> 
-<div class="sect1"> 
- <h2 id="_what_remote_repository_changes_need_to_be_merged">What remote repository changes need to be merged?</h2> 
- <div class="sectionbody"> 
-  <div class="paragraph"> 
-   <p>Now that you fetched your changes from all remote repositories, you need to know which changes from your remote repositories need to be merged. Once again, there’s a git command for that.</p> 
-  </div> 
-  <div class="listingblock"> 
-   <div class="content"> 
-    <pre>$&gt; git branch -a --no-merge
-remotes/upstream/master</pre> 
-   </div> 
-  </div> 
-  <div class="paragraph"> 
-   <p>This will list all the branches that have changes that need to be merged into you current branch. The -a command ensures that you display the remote repository branches as well. This only works after a fetch command.</p> 
-  </div> 
- </div> 
-</div> 
-<div class="sect1"> 
- <h2 id="_push_to_same_branch_on_remote">Push to same branch on remote</h2> 
- <div class="sectionbody"> 
-  <div class="paragraph"> 
-   <p>When you are ready to push your changes to your origin remote repo, you may find yourself typing out a long command, like this:</p> 
-  </div> 
-  <div class="listingblock"> 
-   <div class="content"> 
-    <pre>git push origin feature/create-an-awesome-feature</pre> 
-   </div> 
-  </div> 
-  <div class="paragraph"> 
-   <p>Rather that do this, you can just type the following:</p> 
-  </div> 
-  <div class="listingblock"> 
-   <div class="content"> 
-    <pre>git push origin HEAD</pre> 
-   </div> 
-  </div> 
-  <div class="paragraph"> 
-   <p>This will push the current branch to origin with the same branch name. Handy.</p> 
-  </div> 
- </div> 
-</div> 
-<div class="sect1"> 
- <h2 id="_purge_remote_branches">Purge Remote Branches</h2> 
- <div class="sectionbody"> 
-  <div class="paragraph"> 
-   <p>In a forked world, your changes to origin will likely be contributed back to the upstream project via a pull request. Tools like Github and Stash allow you to delete the pull request branch once it has been merged into upstream/master. Once this happens, you may want to clean out the branch locally as well. You could delete the branch, but you will still need to fetch/merge from upstream. Why not do them both at the same time?</p> 
-  </div> 
-  <div class="listingblock"> 
-   <div class="content"> 
-    <pre>$&gt; git branch -a
+...</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_remote_repository_changes_need_to_be_merged">What remote repository changes need to be merged?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now that you fetched your changes from all remote repositories, you need to know which changes from your remote repositories need to be merged.  Once again, there&#8217;s a git command for that.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$&gt; git branch -a --no-merge
+remotes/upstream/master</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will list all the branches that have changes that need to be merged into you current branch.  The -a command ensures that you display the remote repository branches as well.  This only works after a fetch command.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_push_to_same_branch_on_remote">Push to same branch on remote</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When you are ready to push your changes to your origin remote repo, you may find yourself typing out a long command, like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>git push origin feature/create-an-awesome-feature</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Rather that do this, you can just type the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>git push origin HEAD</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will push the current branch to origin with the same branch name.  Handy.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_purge_remote_branches">Purge Remote Branches</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In a forked world, your changes to origin will likely be contributed back to the upstream project via a pull request.  Tools like Github and Stash allow you to delete the pull request branch once it has been merged into upstream/master.  Once this happens, you may want to clean out the branch locally as well.  You could delete the branch, but you will still need to fetch/merge from upstream.  Why not do them both at the same time?</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$&gt; git branch -a
   heartbleed_fix
 * master
   remotes/origin/HEAD -&gt; origin/master
@@ -210,18 +225,18 @@ $&gt; git branch -a
   heartbleed_fix
 * master
   remotes/origin/HEAD -&gt; origin/master
-  remotes/origin/master</pre> 
-   </div> 
-  </div> 
-  <div class="paragraph"> 
-   <p>The '-p' flag will prune any branches from your local Git repository that don’t exist on your remote repository. Now this will only remove the local instance of the remote repository. You will still have your own copy of the branch, as you can see from the second 'git branch -a' command. To get rid of the local branch, you have to delete it:</p> 
-  </div> 
-  <div class="listingblock"> 
-   <div class="content"> 
-    <pre>git branch -d heartbleed_fix</pre> 
-   </div> 
-  </div> 
- </div> 
+  remotes/origin/master</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The '-p' flag will prune any branches from your local Git repository that don&#8217;t exist on your remote repository.  Now this will only remove the local instance of the remote repository.  You will still have your own copy of the branch, as you can see from the second 'git branch -a' command.  To get rid of the local branch, you have to delete it:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>git branch -d heartbleed_fix</pre>
+</div>
+</div>
+</div>
 </div></p>
 
 					<p><em>Share this:</em></p>
@@ -254,19 +269,52 @@ $&gt; git branch -a
 		<div id="push"></div>
     </div>
 
-    <div id="footer">
+		<!-- Footer -->
+    <footer>
       <div class="container">
-        <p class="muted credit">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
-        <p class="muted credit">&copy; 2009-2016 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <li class="list-inline-item">
+                <a href="https://twitter.com/SonOfGarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://www.linkedin.com/in/jmcgarr/">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://github.com/jmcgarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+						<p class="copyright text-muted">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
+            <p class="copyright text-muted">Copyright &copy; Mike McGarr 2009-2018 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v4.1</a> | Generated with <a href="http://jbake.org">JBake v2.6.2</a></p>
+          </div>
+        </div>
       </div>
-    </div>
+    </footer>
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/js/jquery-1.9.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/run_prettify.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom scripts for the clean blog look and feel -->
+    <script src="/js/clean-blog.min.js"></script>
+
     <script type="text/javascript">
       (function() {
         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;

@@ -9,179 +9,117 @@
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
 
-    <!-- Le styles -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="/css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- previous styles -->
     <link href="/css/asciidoctor.css" rel="stylesheet">
-    <link href="/css/base.css" rel="stylesheet">
-    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="/css/extra.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,300,400' rel='stylesheet' type='text/css'>
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="/js/html5shiv.js"></script>
-    <![endif]-->
 
-    <!-- Fav and touch icons -->
-    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
     <link rel="shortcut icon" href="/favicon.ico">
-<script type="text/javascript">
+    <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-49993013-1']);
-  _gaq.push(['_trackPageview']);
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-49993013-1']);
+      _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
 
-</script>
+    </script>
   </head>
   <body>
-    <div id="fb-root"></div>
-      <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
     <script src="//platform.linkedin.com/in.js" type="text/javascript">
      lang: en_US
     </script>
     <div id="wrap">
 
-	<!-- Fixed navbar -->
-      <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-          <div class="container">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="brand" href="/">Mike McGarr</a>
-            <div class="nav-collapse collapse">
-              <ul class="nav">
-                <li><a href="/about.html">About</a></li>
-                <li><a href="/archive.html">Posts</a></li>
-                <li><a href="/talks.html">Talks</a></li>
-                <li><a href="/feed.xml">Subscribe</a></li>
-              </ul>
-            </div><!--/.nav-collapse -->
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+          <a class="navbar-brand" href="/">Mike McGarr</a>
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/about.html">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/archive.html">Blog</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/talks.html">Talks</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/feed.xml">Subscribe</a>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
-      <div class="container-fluid">
-    <div class="row-fluid">
+      </nav>
 
-				<div class="span6 offset3">
+      
+<!-- Grab masthead data -->
 
-					<div class="page-header">
-						<h1>Thoughts on Application Lifecycle Management (ALM)</h1>
-					</div>
+      <!-- Page Header -->
+      <header class="masthead" style="background-image: url('/img/masthead/saocom-falcon-launch.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <div class="page-heading">
+                <h1>Thoughts on Application Lifecycle Management (ALM)</h1>
+                  <span class="subheading"><em>March 04, 2011</em></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="">
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row justify-content-between">
+            <div class="col-4"></div>
+            <div class="col-4 text-right">
+              <p class="photo-credit">Photo credit:
+                  <a href="https://www.flickr.com/photos/spacex/44451125454/" target="_blank">https://www.flickr.com/photos/spacex/44451125454/</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </header>
 
-					<p><em>March 04, 2011</em></p>
+		<div class="container">
 
-				</div>
-		</div>
+        <div class="col-lg-8 col-md-10 mx-auto">
 
-
-		<div class="row-fluid">
-
-				<div class="span2 offset1">
-					<p/>
-					<p class="text-right"><em></em>
-								<a href="/tags/agile.html">agile</a><br/>
-</em>
-								<a href="/tags/alm.html">alm</a><br/>
-</em>
-								<a href="/tags/ant.html">ant</a><br/>
-</em>
-								<a href="/tags/bdd.html">bdd</a><br/>
-</em>
-								<a href="/tags/buildr.html">buildr</a><br/>
-</em>
-								<a href="/tags/checkstyle.html">checkstyle</a><br/>
-</em>
-								<a href="/tags/chef.html">chef</a><br/>
-</em>
-								<a href="/tags/cobertura.html">cobertura</a><br/>
-</em>
-								<a href="/tags/code-quality.html">code quality</a><br/>
-</em>
-								<a href="/tags/continuous-delivery.html">continuous delivery</a><br/>
-</em>
-								<a href="/tags/crap4j.html">crap4j</a><br/>
-</em>
-								<a href="/tags/deployment-pipelines.html">deployment pipelines</a><br/>
-</em>
-								<a href="/tags/easyb.html">easyb</a><br/>
-</em>
-								<a href="/tags/findbugs.html">findbugs</a><br/>
-</em>
-								<a href="/tags/foss.html">foss</a><br/>
-</em>
-								<a href="/tags/git.html">git</a><br/>
-</em>
-								<a href="/tags/go.html">go</a><br/>
-</em>
-								<a href="/tags/gradle.html">gradle</a><br/>
-</em>
-								<a href="/tags/hudson.html">hudson</a><br/>
-</em>
-								<a href="/tags/Java.html">Java</a><br/>
-</em>
-								<a href="/tags/jbehave.html">jbehave</a><br/>
-</em>
-								<a href="/tags/jenkins.html">jenkins</a><br/>
-</em>
-								<a href="/tags/jmeter.html">jmeter</a><br/>
-</em>
-								<a href="/tags/jmock.html">jmock</a><br/>
-</em>
-								<a href="/tags/junit.html">junit</a><br/>
-</em>
-								<a href="/tags/liquibase.html">liquibase</a><br/>
-</em>
-								<a href="/tags/maven.html">maven</a><br/>
-</em>
-								<a href="/tags/mercurial.html">mercurial</a><br/>
-</em>
-								<a href="/tags/mockito.html">mockito</a><br/>
-</em>
-								<a href="/tags/pmd.html">pmd</a><br/>
-</em>
-								<a href="/tags/puppet.html">puppet</a><br/>
-</em>
-								<a href="/tags/scrum.html">scrum</a><br/>
-</em>
-								<a href="/tags/selenium.html">selenium</a><br/>
-</em>
-								<a href="/tags/subversion.html">subversion</a><br/>
-</em>
-								<a href="/tags/tdd.html">tdd</a><br/>
-					</p>
-				</div>
-
-        <div class="span6">
-
-        	<p><p>Last week, I was asked to give my opinion on Application Lifecycle Management or ALM. &nbsp;Specifically, I was asked how can teams effectively manage their design, development, test and deploy processes as well as pick the right tools for the job. &nbsp;Here is the answer I gave:</p> 
-<div> 
- <blockquote>
-  <p><span style="font-family:tahoma;">The cornerstone of a strong&nbsp;ALM<a></a> process is based in <a title="The Agile Manifesto" href="http://agilemanifesto.org/" target="_blank">Agile</a> practices and <a title="Agile Principles" href="http://agilemanifesto.org/principles.html" target="_blank">principles</a>.&nbsp; Iterative software development is useful for breaking work up into small chunks that provides fast and frequent feedback to both the team and the customer.&nbsp; Developing software using <a title="Test Driven Development" href="http://www.agiledata.org/essays/tdd.html" target="_blank">test driven development</a> (with an emphasis on <a title="Behavior Driven Development" href="http://dannorth.net/introducing-bdd/" target="_blank">behavior driven development</a>) allows developers to focus on behavior first as well as quality.&nbsp; Developers will iteratively <a title="Evolutionary Design" href="http://martinfowler.com/articles/designDead.html" target="_blank">evolve the design</a> of the software based on the tests, and will limit the amount of up front design.&nbsp; Automated tests are executed as part of an automated build process that is in turn executed by a <a title="Continuous Integration" href="http://martinfowler.com/articles/continuousIntegration.html" target="_blank">continuous integration</a> server monitoring version control.&nbsp; Developers should be checking in their changes frequently, triggering multiple builds, resulting in multiple feedback cycles.&nbsp; All development should take place on the trunk in version control and branching should be limited.</span></p>
-  <br> 
-  <p><span style="font-family:tahoma;">Taking&nbsp;ALM<a></a> a step further lies the <a title="Continuous Delivery" href="http://continuousdelivery.com/2010/02/continuous-delivery/" target="_blank">continuous delivery</a> practice of <a title="Deployment Pipelines" href="http://www.scribd.com/doc/196739/The-Deployment-Pipeline-by-Dave-Farley-2007" target="_blank">deployment pipelines</a>.&nbsp; Like with standard continuous integration, each change to source triggers a new build on the CI server.&nbsp; With deployment pipelines, you are chaining together a series of builds, each responsible for validating a certain condition or set of conditions (like acceptance tests or coding style).&nbsp; Each build should expand on the previous with an increasingly rigorous criteria<a></a>.&nbsp; The goal of deployment pipelines is validate a change to source to see if it is production worthy,&nbsp;i.e.<a></a> a release candidate.&nbsp; In some environments, deployment pipelines are <a title="Continuous Deployment" href="http://timothyfitz.wordpress.com/2009/02/08/continuous-deployment/" target="_blank">automated all the way to production</a>, where a change from a developer can go to production without a single person touching it.&nbsp; To achieve this, automation and feedback are essential.&nbsp; Unit, Integration, Acceptance and Performance Tests must all be phases of the deployment pipelines with rigorous criteria to keep a build out of production that doesn't meet the standard.&nbsp; Managing code is also an essential part of the pipeline, which is achieved using static code analysis tools. In addition, automating the deployment of the application from source to the Dev, Test, Staging and Production is also an essential practice.</span></p>
-  <br> 
-  <p><span style="font-family:tahoma;">In regards to tools to enable this process, it is hard to come up with a list without assuming certain technologies and biases for/against open source.&nbsp; For the sake of this discussion, I will assume a Java application where open source is king.&nbsp; For version control, Subversion gets the job done, but distributed version control systems (git<a></a> and mercurial) are extremely popular and gaining ground.&nbsp; For Agile project management, unless you are on a distributed team, I recommend sticking with cards and a&nbsp;scrumboard<a></a> and avoid complex tools.&nbsp; For testing, there are a&nbsp;multitude<a></a> of tools available,&nbsp;<a title="JUnit" href="http://www.junit.org/" target="_blank">JUnit</a><a></a> being the core of the testing world.&nbsp;&nbsp;<a title="Mockito" href="http://mockito.org/" target="_blank">Mockito</a><a></a> is an excellent and simple mocking framework, but&nbsp;<a title="JMock" href="http://www.jmock.org/" target="_blank">JMock</a><a></a> provides some valuable features not found in Mockito<a></a>.&nbsp; <a title="Selenium" href="http://seleniumhq.org/" target="_blank">Selenium</a> is a great web application testing tool (but avoid <a title="Selenium IDE" href="http://seleniumhq.org/projects/ide/" target="_blank">recording</a> and use <a title="Page Objects Pattern" href="http://code.google.com/p/selenium/wiki/PageObjects" target="_blank">page objects</a>), especially when coupled with a&nbsp;BDD<a></a> framework like&nbsp;<a title="easyb" href="http://www.easyb.org/" target="_blank">easyb</a><a></a> or <a title="JBehave" href="http://jbehave.org/" target="_blank">JBehave</a><a></a>.&nbsp;&nbsp;<a title="JMeter" href="http://jakarta.apache.org/jmeter/" target="_blank">JMeter</a><a></a> is a great tool for performance testing.&nbsp; For build tools, I feel that&nbsp;<a title="Gradle" href="http://www.gradle.org/" target="_blank">Gradle</a><a></a> or&nbsp;<a title="Buildr" href="http://buildr.apache.org/" target="_blank">Buildr</a><a></a> are better than <a title="Maven" href="http://maven.apache.org/" target="_blank">Maven</a>, which is better than <a title="Ant" href="http://ant.apache.org/" target="_blank">Ant</a>.&nbsp; Gradle<a></a>/Buildr<a></a> build on the legacy of Maven and Ant and improve on them&nbsp;in different ways.&nbsp; For continuous integration, I highly recommend using <a title="Hudson" href="http://java.net/projects/hudson/" target="_blank">Hudson</a>/<a title="Jenkins" href="http://jenkins-ci.org/" target="_blank">Jenkins</a> for most environments, but it lacks some of the advanced deployment pipeline features you can find in&nbsp;<a title="ThoughtWorks" href="http://www.thoughtworks.com/" target="_blank">ThoughtWorks</a><a></a> <a title="Go" href="http://www.thoughtworks-studios.com/go-agile-release-management/" target="_blank">Go</a> product (not <a title="FOSS" href="http://en.wikipedia.org/wiki/Free_and_open_source_software" target="_blank">FOSS</a>).&nbsp; For measuring code quality, I recommend <a title="Checkstyle" href="http://checkstyle.sourceforge.net/" target="_blank">Checkstyle</a>, <a title="PMD/CPD" href="http://pmd.sourceforge.net/">PMD/CPD</a>, <a title="Findbugs" href="http://findbugs.sourceforge.net/" target="_blank">Findbugs</a>, <a title="Crap4j" href="http://www.crap4j.org/" target="_blank">Crap4j</a> and <a title="Cobertura" href="http://cobertura.sourceforge.net/" target="_blank">Cobertura</a> for measuring code coverage. I also highly recommend&nbsp;Liquibase<a></a> for database management and a tool like <a title="Puppet" href="http://www.puppetlabs.com/puppet/puppet-platform/" target="_blank">Puppet</a> or <a title="Chef" href="http://www.opscode.com/chef/" target="_blank">Chef</a> to manage your infrastructure.&nbsp; In addition, I also recommend using <a title="Nexus" href="http://nexus.sonatype.org/" target="_blank">Nexus</a> as a binary repository for build artifacts produced in the pipeline.</span></p>
- </blockquote> 
-</div> 
-<p>My thoughts were somewhat off the cuff and could likely be more comprehensive given time, but I still found them valuable. I would to hear what you think of this answer and if you have differing opinions. Enjoy!</p></p>
+        	<p><p>Last week, I was asked to give my opinion on Application Lifecycle Management or ALM.  Specifically, I was asked how can teams effectively manage their design, development, test and deploy processes as well as pick the right tools for the job.  Here is the answer I gave:</p>
+<div>
+<blockquote><p><span style="font-family:tahoma;">The cornerstone of a strong ALM<a></a> process is based in <a title="The Agile Manifesto" href="http://agilemanifesto.org/" target="_blank">Agile</a> practices  and <a title="Agile Principles" href="http://agilemanifesto.org/principles.html" target="_blank">principles</a>.  Iterative software development is useful for breaking work up  into small chunks that provides fast and frequent feedback to both the team and  the customer.  Developing software using <a title="Test Driven Development" href="http://www.agiledata.org/essays/tdd.html" target="_blank">test driven development</a> (with an  emphasis on <a title="Behavior Driven Development" href="http://dannorth.net/introducing-bdd/" target="_blank">behavior driven development</a>) allows developers to focus on behavior  first as well as quality.  Developers will iteratively <a title="Evolutionary Design" href="http://martinfowler.com/articles/designDead.html" target="_blank">evolve the design</a> of the  software based on the tests, and will limit the amount of up front design.   Automated tests are executed as part of an automated build process that is in  turn executed by a <a title="Continuous Integration" href="http://martinfowler.com/articles/continuousIntegration.html" target="_blank">continuous integration</a> server monitoring version control.   Developers should be checking in their changes frequently, triggering multiple  builds, resulting in multiple feedback cycles.  All development should take  place on the trunk in version control and branching should be  limited.</span></p><br/>
+<p><span style="font-family:tahoma;">Taking ALM<a></a> a step further lies the <a title="Continuous Delivery" href="http://continuousdelivery.com/2010/02/continuous-delivery/" target="_blank">continuous delivery</a> practice of  <a title="Deployment Pipelines" href="http://www.scribd.com/doc/196739/The-Deployment-Pipeline-by-Dave-Farley-2007" target="_blank">deployment pipelines</a>.  Like with standard continuous integration, each change to  source triggers a new build on the CI server.  With deployment pipelines, you  are chaining together a series of builds, each responsible for validating a  certain condition or set of conditions (like acceptance tests or coding style).   Each build should expand on the previous with an increasingly rigorous  criteria<a></a>.  The goal of deployment pipelines is validate a change to  source to see if it is production worthy, i.e.<a></a> a release candidate.  In  some environments, deployment pipelines are <a title="Continuous Deployment" href="http://timothyfitz.wordpress.com/2009/02/08/continuous-deployment/" target="_blank">automated all the way to production</a>,  where a change from a developer can go to production without a single person  touching it.  To achieve this, automation and feedback are essential.  Unit,  Integration, Acceptance and Performance Tests must all be phases of the  deployment pipelines with rigorous criteria to keep a build out of production  that doesn't meet the standard.  Managing code is also an essential part of the pipeline, which is achieved using static code analysis tools.  In addition, automating the deployment of the  application from source to the Dev, Test, Staging and Production is also an  essential practice.</span></p><br/>
+<p><span style="font-family:tahoma;">In regards to tools to enable this process, it is hard to  come up with a list without assuming certain technologies and biases for/against  open source.  For the sake of this discussion, I will assume a Java application  where open source is king.  For version control, Subversion gets the job done,  but distributed version control systems (git<a></a> and mercurial) are extremely popular and gaining  ground.  For Agile project management, unless you are on a distributed team, I  recommend sticking with cards and a scrumboard<a></a> and avoid complex tools.  For testing, there are  a multitude<a></a> of tools available, <a title="JUnit" href="http://www.junit.org/" target="_blank">JUnit</a><a></a> being the core of the testing world.  <a title="Mockito" href="http://mockito.org/" target="_blank">Mockito</a><a></a> is an excellent and  simple mocking framework, but <a title="JMock" href="http://www.jmock.org/" target="_blank">JMock</a><a></a> provides some valuable features not found in Mockito<a></a>.  <a title="Selenium" href="http://seleniumhq.org/" target="_blank">Selenium</a> is a  great web application testing tool (but avoid <a title="Selenium IDE" href="http://seleniumhq.org/projects/ide/" target="_blank">recording</a> and use <a title="Page Objects Pattern" href="http://code.google.com/p/selenium/wiki/PageObjects" target="_blank">page objects</a>),  especially when coupled with a BDD<a></a> framework like <a title="easyb" href="http://www.easyb.org/" target="_blank">easyb</a><a></a> or <a title="JBehave" href="http://jbehave.org/" target="_blank">JBehave</a><a></a>.  <a title="JMeter" href="http://jakarta.apache.org/jmeter/" target="_blank">JMeter</a><a></a> is a great tool for performance testing.  For build  tools, I feel that <a title="Gradle" href="http://www.gradle.org/" target="_blank">Gradle</a><a></a> or <a title="Buildr" href="http://buildr.apache.org/" target="_blank">Buildr</a><a></a> are better than <a title="Maven" href="http://maven.apache.org/" target="_blank">Maven</a>, which is better than <a title="Ant" href="http://ant.apache.org/" target="_blank">Ant</a>.   Gradle<a></a>/Buildr<a></a> build on the legacy  of Maven and Ant and improve on them in different ways.  For continuous  integration, I highly recommend using <a title="Hudson" href="http://java.net/projects/hudson/" target="_blank">Hudson</a>/<a title="Jenkins" href="http://jenkins-ci.org/" target="_blank">Jenkins</a> for most environments, but  it lacks some of the advanced deployment pipeline features you can find in <a title="ThoughtWorks" href="http://www.thoughtworks.com/" target="_blank">ThoughtWorks</a><a></a> <a title="Go" href="http://www.thoughtworks-studios.com/go-agile-release-management/" target="_blank">Go</a> product  (not <a title="FOSS" href="http://en.wikipedia.org/wiki/Free_and_open_source_software" target="_blank">FOSS</a>).  For measuring code quality, I recommend <a title="Checkstyle" href="http://checkstyle.sourceforge.net/" target="_blank">Checkstyle</a>, <a title="PMD/CPD" href="http://pmd.sourceforge.net/">PMD/CPD</a>, <a title="Findbugs" href="http://findbugs.sourceforge.net/" target="_blank">Findbugs</a>, <a title="Crap4j" href="http://www.crap4j.org/" target="_blank">Crap4j</a> and <a title="Cobertura" href="http://cobertura.sourceforge.net/" target="_blank">Cobertura</a> for measuring code coverage.  I also highly recommend Liquibase<a></a> for database management and a tool like <a title="Puppet" href="http://www.puppetlabs.com/puppet/puppet-platform/" target="_blank">Puppet</a> or  <a title="Chef" href="http://www.opscode.com/chef/" target="_blank">Chef</a> to manage your infrastructure.  In addition, I also recommend using <a title="Nexus" href="http://nexus.sonatype.org/" target="_blank">Nexus</a> as a binary repository for build artifacts produced in the  pipeline.</span></p></blockquote>
+</div>
+<p>My thoughts were somewhat off the cuff and could likely be more comprehensive given time, but I still found them valuable.  I would to hear what you think of this answer and if you have differing opinions.  Enjoy!</p>
+</p>
 
 					<p><em>Share this:</em></p>
           <p style="float:left">
@@ -213,19 +151,52 @@
 		<div id="push"></div>
     </div>
 
-    <div id="footer">
+		<!-- Footer -->
+    <footer>
       <div class="container">
-        <p class="muted credit">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
-        <p class="muted credit">&copy; 2009-2016 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <li class="list-inline-item">
+                <a href="https://twitter.com/SonOfGarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://www.linkedin.com/in/jmcgarr/">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://github.com/jmcgarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+						<p class="copyright text-muted">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
+            <p class="copyright text-muted">Copyright &copy; Mike McGarr 2009-2018 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v4.1</a> | Generated with <a href="http://jbake.org">JBake v2.6.2</a></p>
+          </div>
+        </div>
       </div>
-    </div>
+    </footer>
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/js/jquery-1.9.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/run_prettify.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom scripts for the clean blog look and feel -->
+    <script src="/js/clean-blog.min.js"></script>
+
     <script type="text/javascript">
       (function() {
         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;

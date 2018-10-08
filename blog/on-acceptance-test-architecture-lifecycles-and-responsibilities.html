@@ -9,143 +9,139 @@
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
 
-    <!-- Le styles -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="/css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- previous styles -->
     <link href="/css/asciidoctor.css" rel="stylesheet">
-    <link href="/css/base.css" rel="stylesheet">
-    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="/css/extra.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,300,400' rel='stylesheet' type='text/css'>
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="/js/html5shiv.js"></script>
-    <![endif]-->
 
-    <!-- Fav and touch icons -->
-    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
     <link rel="shortcut icon" href="/favicon.ico">
-<script type="text/javascript">
+    <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-49993013-1']);
-  _gaq.push(['_trackPageview']);
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-49993013-1']);
+      _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
 
-</script>
+    </script>
   </head>
   <body>
-    <div id="fb-root"></div>
-      <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
     <script src="//platform.linkedin.com/in.js" type="text/javascript">
      lang: en_US
     </script>
     <div id="wrap">
 
-	<!-- Fixed navbar -->
-      <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-          <div class="container">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="brand" href="/">Mike McGarr</a>
-            <div class="nav-collapse collapse">
-              <ul class="nav">
-                <li><a href="/about.html">About</a></li>
-                <li><a href="/archive.html">Posts</a></li>
-                <li><a href="/talks.html">Talks</a></li>
-                <li><a href="/feed.xml">Subscribe</a></li>
-              </ul>
-            </div><!--/.nav-collapse -->
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+          <a class="navbar-brand" href="/">Mike McGarr</a>
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/about.html">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/archive.html">Blog</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/talks.html">Talks</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/feed.xml">Subscribe</a>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
-      <div class="container-fluid">
-    <div class="row-fluid">
+      </nav>
 
-				<div class="span6 offset3">
+      
+<!-- Grab masthead data -->
 
-					<div class="page-header">
-						<h1>On acceptance test architecture, lifecycles and responsibilities</h1>
-					</div>
+      <!-- Page Header -->
+      <header class="masthead" style="background-image: url('/img/masthead/saocom-falcon-launch.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <div class="page-heading">
+                <h1>On acceptance test architecture, lifecycles and responsibilities</h1>
+                  <span class="subheading"><em>December 18, 2013</em></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="">
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row justify-content-between">
+            <div class="col-4"></div>
+            <div class="col-4 text-right">
+              <p class="photo-credit">Photo credit:
+                  <a href="https://www.flickr.com/photos/spacex/44451125454/" target="_blank">https://www.flickr.com/photos/spacex/44451125454/</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </header>
 
-					<p><em>December 18, 2013</em></p>
+		<div class="container">
 
-				</div>
-		</div>
+        <div class="col-lg-8 col-md-10 mx-auto">
 
-
-		<div class="row-fluid">
-
-				<div class="span2 offset1">
-					<p/>
-					<p class="text-right"><em></em>
-								<a href="/tags/acceptance-test.html">acceptance test</a><br/>
-</em>
-								<a href="/tags/atdd.html">atdd</a><br/>
-</em>
-								<a href="/tags/cucumber.html">cucumber</a><br/>
-</em>
-								<a href="/tags/fitnesse.html">fitnesse</a><br/>
-</em>
-								<a href="/tags/gherkin.html">gherkin</a><br/>
-</em>
-								<a href="/tags/SUT.html">SUT</a><br/>
-</em>
-								<a href="/tags/tdd.html">tdd</a><br/>
-</em>
-								<a href="/tags/test-automation.html">test automation</a><br/>
-</em>
-								<a href="/tags/test-fixture.html">test fixture</a><br/>
-					</p>
-				</div>
-
-        <div class="span6">
-
-        	<p><p>I was recently in a conversation with testers about how acceptance tests should be structured. &nbsp; As we revisit how Blackboard conducts test automation, we were looking at patterns and practices to employ. &nbsp;I shared my following perspective on how to think about the architecture of your acceptance test infrastructure, the lifecycle of a specification, as well as who should conduct which step. &nbsp;This post is really a teaser post, as I am merely smearing pretty pictures on the web, without much background. &nbsp;Isn't that what follow-up blogs are for?</p> 
-<h1>Acceptance Test Composition</h1> 
-<p><img alt="Acceptance Test Architecture" src="http://farm8.staticflickr.com/7386/11433880614_d8966527ab.jpg"></p> 
-<p>A well formed acceptance test architecture is composed of five core components:</p> 
-<ol> 
- <li><b><span style="text-decoration:underline;">Specification</span></b>&nbsp;- This is the document that describes what the system should be doing. The requirement that will be exercised by the application. &nbsp;In an automated testing framework, this is usually implemented in <a title="Gherkin " href="https://github.com/cucumber/cucumber/wiki/Gherkin" target="_blank">Gherkin</a> (<a title="Cucumber" href="https://github.com/cucumber/cucumber" target="_blank">Cucumber</a>) or a wiki (<a title="Fitnesse" href="http://fitnesse.org/" target="_blank">Fitnesse</a>). &nbsp;It should be easily read and understood by all members of the organization at any level and written in the business language. &nbsp;I recommend collaboratively white boarding your specs (a la <a title="Three Amigos Meeting" href="https://www.scrumalliance.org/community/articles/2013/2013-april/introducing-the-three-amigos" target="_blank">Three Amigos meeting</a>) and have somebody write it in the technology later.</li> 
- <li><b><span style="text-decoration:underline;">Fixture</span></b>&nbsp;- This is the glue code. &nbsp;This code understands the format that the specification is written in, and knows how to talk to either the application driver or the Automation Layer to implement the features of a test. &nbsp;This is generally code. &nbsp;Ideally it is written in a language similar to the SUT so everybody can update it. &nbsp;In Cucumber, these are the <a title="Step Definitions" href="https://github.com/cucumber/cucumber/wiki/Step-Definitions" target="_blank">Step Definitions</a> and in Fitnesse these <a title="Fitnesse Fixtures" href="http://fitnesse.org/FitNesse.UserGuide.FixtureGallery" target="_blank">Fixtures</a>.</li> 
- <li><b><span style="text-decoration:underline;">Automation (DSL)</span></b>&nbsp;- Don't start building this from day one. &nbsp;The automation layer is the <a title="Domain Specific Language" href="http://martinfowler.com/books/dsl.html" target="_blank">Domain Specific Language (DSL)</a> that will evolve as you build out your fixtures. &nbsp;It is an abstraction layer over the application driver. &nbsp;If you design this correctly to be a <a title="Fluent Interface" href="http://martinfowler.com/bliki/FluentInterface.html" target="_blank">fluent API</a> or even a full on DSL, then you will find that non-technical members of the team can look at this an possibly even contribute here. &nbsp;But don't set out to build a DSL...cause that ain't easy.</li> 
- <li><b><span style="text-decoration:underline;">Application Driver</span></b>&nbsp;- This is the code that knows how to talk to the system under test. &nbsp;For a web application, this is typically a framework like <a title="Selenium" href="http://www.seleniumhq.org/" target="_blank">Selenium</a>. &nbsp;If you are writing tests for a web service, then you will need to pick a tool that can send/receive&nbsp;SOAP or REST messages. &nbsp;If your application is a batch processing system that takes a package of zipped XML files and puts them in the database, then you need to build a custom framework that knows how to build the zip file, and verify the database got updated properly.</li> 
- <li><b><span style="text-decoration:underline;">System Under Test (SUT)</span></b>&nbsp;- This is the product you are building. &nbsp;This is what you are testing.</li> 
-</ol> 
-<h1>Acceptance Test Lifecycle</h1> 
-<p><img alt="Specification by Example Phases" src="http://farm8.staticflickr.com/7298/11433913676_995322ff97.jpg"><br> An acceptancetest should evolve collaboratively via a cross functional team. &nbsp;I think about it in three phases:</p> 
-<ol> 
- <li><b><span style="text-decoration:underline;">Collaborate and Define</span></b>&nbsp;- This is typically where you have a 'Three Amigos Meeting' where members of the business/analysts, testers, and engineers (and others too) will get together and write the requirement and the acceptance criteria. &nbsp;This can happen on a white board or on paper.</li> 
- <li><b><span style="text-decoration:underline;">Automation Phase</span></b>&nbsp;- Once a specification has been authored, then the specification will be captured in the automated testing tool and checked into version control. &nbsp;Then the test fixture and DSL will be authored to automate the failing test.</li> 
- <li><b><span style="text-decoration:underline;">Verification Phase</span></b>&nbsp;- This is the last phase. &nbsp;The code to satisfy the test is written now. &nbsp;The details of the DSL might also be filled in here (for instance, elements on the page to be called). &nbsp;The test is then run and re-run until it passes. &nbsp;When the test passes, the feature is "DONE". &nbsp;The verification will continue via continuous integration.</li> 
-</ol> 
-<p>You may note that you this may smell like <a title="Test Driven Development" href="http://en.wikipedia.org/wiki/Test-driven_development" target="_blank">Test Driven Development</a>. &nbsp;It should, cause it is...or <a title="(PDF) Chapter on ATDD" href="http://www.manning-source.com/books/koskela/Chapter9Sample.pdf" target="_blank">Acceptance Test Driven Development</a>.</p> 
-<h1>Responsibilities</h1> 
-<p><img alt="Specification by Example Roles" src="http://farm4.staticflickr.com/3673/11433879264_41b8eb6bfd.jpg"><br> I would also like to comment on who should do what.</p> 
-<ul> 
- <li><b><span style="text-decoration:underline;">Business and/or Analyst</span></b>&nbsp;- should focus on the user story and the acceptance criteria.</li> 
- <li><b><span style="text-decoration:underline;">QA</span></b>&nbsp;- should focus on the user story, acceptance criteria, the test fixture and the DSL.</li> 
- <li><b><span style="text-decoration:underline;">Engineer</span></b>&nbsp;- An engineer should be involved in all aspects of the acceptance test. &nbsp;They are ultimately responsible for satisfying the requirement.</li> 
-</ul> 
-<p>I firmly believe that an engineer (or an Engineer in Test) needs to be focused on the DSL layer and the SUT. &nbsp;This is heavy coding and design and should be not be where "testers learning to code" should focus their time.</p></p>
+        	<p><p>I was recently in a conversation with testers about how acceptance tests should be structured.   As we revisit how Blackboard conducts test automation, we were looking at patterns and practices to employ.  I shared my following perspective on how to think about the architecture of your acceptance test infrastructure, the lifecycle of a specification, as well as who should conduct which step.  This post is really a teaser post, as I am merely smearing pretty pictures on the web, without much background.  Isn't that what follow-up blogs are for?</p>
+<h1>Acceptance Test Composition</h1>
+<p><img alt="Acceptance Test Architecture" src="http://farm8.staticflickr.com/7386/11433880614_d8966527ab.jpg" /></p>
+<p>A well formed acceptance test architecture is composed of five core components:</p>
+<ol>
+<li><b><span style="text-decoration:underline;">Specification</span></b> - This is the document that describes what the system should be doing. The requirement that will be exercised by the application.  In an automated testing framework, this is usually implemented in <a title="Gherkin " href="https://github.com/cucumber/cucumber/wiki/Gherkin" target="_blank">Gherkin</a> (<a title="Cucumber" href="https://github.com/cucumber/cucumber" target="_blank">Cucumber</a>) or a wiki (<a title="Fitnesse" href="http://fitnesse.org/" target="_blank">Fitnesse</a>).  It should be easily read and understood by all members of the organization at any level and written in the business language.  I recommend collaboratively white boarding your specs (a la <a title="Three Amigos Meeting" href="https://www.scrumalliance.org/community/articles/2013/2013-april/introducing-the-three-amigos" target="_blank">Three Amigos meeting</a>) and have somebody write it in the technology later.</li>
+<li><b><span style="text-decoration:underline;">Fixture</span></b> - This is the glue code.  This code understands the format that the specification is written in, and knows how to talk to either the application driver or the Automation Layer to implement the features of a test.  This is generally code.  Ideally it is written in a language similar to the SUT so everybody can update it.  In Cucumber, these are the <a title="Step Definitions" href="https://github.com/cucumber/cucumber/wiki/Step-Definitions" target="_blank">Step Definitions</a> and in Fitnesse these <a title="Fitnesse Fixtures" href="http://fitnesse.org/FitNesse.UserGuide.FixtureGallery" target="_blank">Fixtures</a>.</li>
+<li><b><span style="text-decoration:underline;">Automation (DSL)</span></b> - Don't start building this from day one.  The automation layer is the <a title="Domain Specific Language" href="http://martinfowler.com/books/dsl.html" target="_blank">Domain Specific Language (DSL)</a> that will evolve as you build out your fixtures.  It is an abstraction layer over the application driver.  If you design this correctly to be a <a title="Fluent Interface" href="http://martinfowler.com/bliki/FluentInterface.html" target="_blank">fluent API</a> or even a full on DSL, then you will find that non-technical members of the team can look at this an possibly even contribute here.  But don't set out to build a DSL...cause that ain't easy.</li>
+<li><b><span style="text-decoration:underline;">Application Driver</span></b> - This is the code that knows how to talk to the system under test.  For a web application, this is typically a framework like <a title="Selenium" href="http://www.seleniumhq.org/" target="_blank">Selenium</a>.  If you are writing tests for a web service, then you will need to pick a tool that can send/receive SOAP or REST messages.  If your application is a batch processing system that takes a package of zipped XML files and puts them in the database, then you need to build a custom framework that knows how to build the zip file, and verify the database got updated properly.</li>
+<li><b><span style="text-decoration:underline;">System Under Test (SUT)</span></b> - This is the product you are building.  This is what you are testing.</li>
+</ol>
+<h1>Acceptance Test Lifecycle</h1>
+<p><img alt="Specification by Example Phases" src="http://farm8.staticflickr.com/7298/11433913676_995322ff97.jpg" /><br />
+An acceptancetest should evolve collaboratively via a cross functional team.  I think about it in three phases:</p>
+<ol>
+<li><b><span style="text-decoration:underline;">Collaborate and Define</span></b> - This is typically where you have a 'Three Amigos Meeting' where members of the business/analysts, testers, and engineers (and others too) will get together and write the requirement and the acceptance criteria.  This can happen on a white board or on paper.</li>
+<li><b><span style="text-decoration:underline;">Automation Phase</span></b> - Once a specification has been authored, then the specification will be captured in the automated testing tool and checked into version control.  Then the test fixture and DSL will be authored to automate the failing test.</li>
+<li><b><span style="text-decoration:underline;">Verification Phase</span></b> - This is the last phase.  The code to satisfy the test is written now.  The details of the DSL might also be filled in here (for instance, elements on the page to be called).  The test is then run and re-run until it passes.  When the test passes, the feature is "DONE".  The verification will continue via continuous integration.</li>
+</ol>
+<p>You may note that you this may smell like <a title="Test Driven Development" href="http://en.wikipedia.org/wiki/Test-driven_development" target="_blank">Test Driven Development</a>.  It should, cause it is...or <a title="(PDF) Chapter on ATDD" href="http://www.manning-source.com/books/koskela/Chapter9Sample.pdf" target="_blank">Acceptance Test Driven Development</a>.</p>
+<h1>Responsibilities</h1>
+<p><img alt="Specification by Example Roles" src="http://farm4.staticflickr.com/3673/11433879264_41b8eb6bfd.jpg" /><br />
+I would also like to comment on who should do what.</p>
+<ul>
+<li><b><span style="text-decoration:underline;">Business and/or Analyst</span></b> - should focus on the user story and the acceptance criteria.</li>
+<li><b><span style="text-decoration:underline;">QA</span></b> - should focus on the user story, acceptance criteria, the test fixture and the DSL.</li>
+<li><b><span style="text-decoration:underline;">Engineer</span></b> - An engineer should be involved in all aspects of the acceptance test.  They are ultimately responsible for satisfying the requirement.</li>
+</ul>
+<p>I firmly believe that an engineer (or an Engineer in Test) needs to be focused on the DSL layer and the SUT.  This is heavy coding and design and should be not be where "testers learning to code" should focus their time.</p>
+</p>
 
 					<p><em>Share this:</em></p>
           <p style="float:left">
@@ -177,19 +173,52 @@
 		<div id="push"></div>
     </div>
 
-    <div id="footer">
+		<!-- Footer -->
+    <footer>
       <div class="container">
-        <p class="muted credit">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
-        <p class="muted credit">&copy; 2009-2016 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <li class="list-inline-item">
+                <a href="https://twitter.com/SonOfGarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://www.linkedin.com/in/jmcgarr/">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://github.com/jmcgarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+						<p class="copyright text-muted">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
+            <p class="copyright text-muted">Copyright &copy; Mike McGarr 2009-2018 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v4.1</a> | Generated with <a href="http://jbake.org">JBake v2.6.2</a></p>
+          </div>
+        </div>
       </div>
-    </div>
+    </footer>
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/js/jquery-1.9.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/run_prettify.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom scripts for the clean blog look and feel -->
+    <script src="/js/clean-blog.min.js"></script>
+
     <script type="text/javascript">
       (function() {
         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;

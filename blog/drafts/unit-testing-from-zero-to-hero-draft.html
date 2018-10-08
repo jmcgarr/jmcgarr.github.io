@@ -9,119 +9,127 @@
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
 
-    <!-- Le styles -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="/css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- previous styles -->
     <link href="/css/asciidoctor.css" rel="stylesheet">
-    <link href="/css/base.css" rel="stylesheet">
-    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="/css/extra.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,300,400' rel='stylesheet' type='text/css'>
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="/js/html5shiv.js"></script>
-    <![endif]-->
 
-    <!-- Fav and touch icons -->
-    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
     <link rel="shortcut icon" href="/favicon.ico">
-<script type="text/javascript">
+    <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-49993013-1']);
-  _gaq.push(['_trackPageview']);
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-49993013-1']);
+      _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
 
-</script>
+    </script>
   </head>
   <body>
-    <div id="fb-root"></div>
-      <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
     <script src="//platform.linkedin.com/in.js" type="text/javascript">
      lang: en_US
     </script>
     <div id="wrap">
 
-	<!-- Fixed navbar -->
-      <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-          <div class="container">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="brand" href="/">Mike McGarr</a>
-            <div class="nav-collapse collapse">
-              <ul class="nav">
-                <li><a href="/about.html">About</a></li>
-                <li><a href="/archive.html">Posts</a></li>
-                <li><a href="/talks.html">Talks</a></li>
-                <li><a href="/feed.xml">Subscribe</a></li>
-              </ul>
-            </div><!--/.nav-collapse -->
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+          <a class="navbar-brand" href="/">Mike McGarr</a>
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/about.html">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/archive.html">Blog</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/talks.html">Talks</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/feed.xml">Subscribe</a>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
-      <div class="container-fluid">
-    <div class="row-fluid">
+      </nav>
 
-				<div class="span6 offset3">
+      
+<!-- Grab masthead data -->
 
-					<div class="page-header">
-						<h1>Unit Testing, From Zero to Hero</h1>
-					</div>
+      <!-- Page Header -->
+      <header class="masthead" style="background-image: url('/img/masthead/saocom-falcon-launch.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <div class="page-heading">
+                <h1>Unit Testing, From Zero to Hero</h1>
+                  <span class="subheading"><em>December 04, 2010</em></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="">
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row justify-content-between">
+            <div class="col-4"></div>
+            <div class="col-4 text-right">
+              <p class="photo-credit">Photo credit:
+                  <a href="https://www.flickr.com/photos/spacex/44451125454/" target="_blank">https://www.flickr.com/photos/spacex/44451125454/</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </header>
 
-					<p><em>December 04, 2010</em></p>
+		<div class="container">
 
-				</div>
-		</div>
+        <div class="col-lg-8 col-md-10 mx-auto">
 
-
-		<div class="row-fluid">
-
-				<div class="span2 offset1">
-					<p/>
-					<p class="text-right"><em></em>
-								<a href="/tags/junit.html">junit</a><br/>
-</em>
-								<a href="/tags/unit-testing.html">unit testing</a><br/>
-					</p>
-				</div>
-
-        <div class="span6">
-
-        	<p><p><strong>&lt;Is this a duplication of my previous post:&nbsp;/blog/practical-unit-testing.html&gt;</strong></p> 
-<p>When I first decided that to learn how to write unit tests, I remember being very confused on a number of topics and stumbling a lot before I finally got the hang of it. &nbsp;While this process is typical when it comes to learning, I decided that it would be nice to provide some hints and tips for a unit testing newbie. &nbsp;This post is a collection of tips for somebody just jumping into unit testing. &nbsp;If you familiar with unit testing, then feel free to comment on this post, adding your personal tips.</p> 
-<p><strong>Start with JUnit</strong></p> 
-<p>This is not to say that JUnit is the best framework available, cause there are others, but it is the first, and is still extremely popular. &nbsp;You will be able to get the most assistance with using it. &nbsp;I am not going to provide a tutorial on how to write your first unit test, mainly because there are so many out there. &nbsp;...Provide links to tutorials...</p> 
-<p><strong>Running the Tests</strong></p> 
-<p>Where most tutorials fall short is how to run the tests. &nbsp;I do not recommend just straight javac and java command line calls unless you are a complete Java newb. &nbsp;I am going to assume that you have some code you would like to test. &nbsp;Starting out, I would try running your tests inside your IDE. &nbsp;Eclipse has a great interface for this and it will help you get your feet wet. &nbsp;The other advantage of IDE based execution is the speed of execution. &nbsp;If I am writing a JUnit class in Eclipse, I can press Ctrl-F11 to run the unit test. &nbsp;Keeping your hands on the keyboard is important for maintaining flow.</p> 
-<p>I also recommend wiring your execution up to a build tool. &nbsp;You are going to want to execute your tests whenever you build your application. &nbsp;If your application is built from the IDE, then stop learning JUnit and go and learn Ant or Maven. &nbsp;I believe they add more critical to a project's success than unit testing, but that is just me.</p> 
-<p><strong>What to Test First</strong></p> 
-<p>...Start testing your static or isolated utility classes, avoid classes with external dependencies</p> 
-<p><strong>Don't Map Test Methods to Class Methods</strong></p> 
-<p>...Don't try mapping a test method to a class method</p> 
-<p><strong>Long method names are your friends</strong></p> 
-<p>...Don't be afraid of long test method names, in fact the longer the better</p> 
-<p><strong>One Assert Per Test</strong></p> 
-<p>The more you read about writing unit tests, you will see people talk about how you should only have a single assertion per test method. &nbsp;When I first started, this seemed daunting, but the most experienced I got, I started to see the reason why you want this and how it is done. &nbsp;&gt;&gt;&gt;MORE&gt;&gt;&gt;</p> 
-<p><strong>Test-First, But not Now</strong></p> 
-<p>Don't try test first right away...you should focus on familiarizing yourself with testing frameworks and how to write a good test. &nbsp;Once you have gotten used to this, then you can try test first. &nbsp;I think learning test-first development if you don't know how to write unit tests is like&nbsp;learning how to play hockey if you can't ice skate. &nbsp;I would argue that you should try test first development at some point, even if you don't think that it is for you. &nbsp;If you are interested, watching James Shore's Let Play series on Test Driven Development is one of the best ways to get started.</p></p>
+        	<p><p><strong>&lt;Is this a duplication of my previous post: /blog/practical-unit-testing.html&gt;</strong></p>
+<p>When I first decided that to learn how to write unit tests, I remember being very confused on a number of topics and stumbling a lot before I finally got the hang of it.  While this process is typical when it comes to learning, I decided that it would be nice to provide some hints and tips for a unit testing newbie.  This post is a collection of tips for somebody just jumping into unit testing.  If you familiar with unit testing, then feel free to comment on this post, adding your personal tips.</p>
+<p><strong>Start with JUnit</strong></p>
+<p>This is not to say that JUnit is the best framework available, cause there are others, but it is the first, and is still extremely popular.  You will be able to get the most assistance with using it.  I am not going to provide a tutorial on how to write your first unit test, mainly because there are so many out there.  ...Provide links to tutorials...</p>
+<p><strong>Running the Tests</strong></p>
+<p>Where most tutorials fall short is how to run the tests.  I do not recommend just straight javac and java command line calls unless you are a complete Java newb.  I am going to assume that you have some code you would like to test.  Starting out, I would try running your tests inside your IDE.  Eclipse has a great interface for this and it will help you get your feet wet.  The other advantage of IDE based execution is the speed of execution.  If I am writing a JUnit class in Eclipse, I can press Ctrl-F11 to run the unit test.  Keeping your hands on the keyboard is important for maintaining flow.</p>
+<p>I also recommend wiring your execution up to a build tool.  You are going to want to execute your tests whenever you build your application.  If your application is built from the IDE, then stop learning JUnit and go and learn Ant or Maven.  I believe they add more critical to a project's success than unit testing, but that is just me.</p>
+<p><strong>What to Test First</strong></p>
+<p>...Start testing your static or isolated utility classes, avoid classes with external dependencies</p>
+<p><strong>Don't Map Test Methods to Class Methods</strong></p>
+<p>...Don't try mapping a test method to a class method</p>
+<p><strong>Long method names are your friends</strong></p>
+<p>...Don't be afraid of long test method names, in fact the longer the better</p>
+<p><strong>One Assert Per Test</strong></p>
+<p>The more you read about writing unit tests, you will see people talk about how you should only have a single assertion per test method.  When I first started, this seemed daunting, but the most experienced I got, I started to see the reason why you want this and how it is done.  &gt;&gt;&gt;MORE&gt;&gt;&gt;</p>
+<p><strong>Test-First, But not Now</strong></p>
+<p>Don't try test first right away...you should focus on familiarizing yourself with testing frameworks and how to write a good test.  Once you have gotten used to this, then you can try test first.  I think learning test-first development if you don't know how to write unit tests is like learning how to play hockey if you can't ice skate.  I would argue that you should try test first development at some point, even if you don't think that it is for you.  If you are interested, watching James Shore's Let Play series on Test Driven Development is one of the best ways to get started.</p>
+</p>
 
 					<p><em>Share this:</em></p>
           <p style="float:left">
@@ -153,19 +161,52 @@
 		<div id="push"></div>
     </div>
 
-    <div id="footer">
+		<!-- Footer -->
+    <footer>
       <div class="container">
-        <p class="muted credit">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
-        <p class="muted credit">&copy; 2009-2016 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <li class="list-inline-item">
+                <a href="https://twitter.com/SonOfGarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://www.linkedin.com/in/jmcgarr/">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://github.com/jmcgarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+						<p class="copyright text-muted">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
+            <p class="copyright text-muted">Copyright &copy; Mike McGarr 2009-2018 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v4.1</a> | Generated with <a href="http://jbake.org">JBake v2.6.2</a></p>
+          </div>
+        </div>
       </div>
-    </div>
+    </footer>
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/js/jquery-1.9.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/run_prettify.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom scripts for the clean blog look and feel -->
+    <script src="/js/clean-blog.min.js"></script>
+
     <script type="text/javascript">
       (function() {
         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;

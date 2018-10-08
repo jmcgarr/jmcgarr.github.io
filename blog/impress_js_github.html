@@ -9,137 +9,125 @@
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
 
-    <!-- Le styles -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="/css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- previous styles -->
     <link href="/css/asciidoctor.css" rel="stylesheet">
-    <link href="/css/base.css" rel="stylesheet">
-    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="/css/extra.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,300,400' rel='stylesheet' type='text/css'>
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="/js/html5shiv.js"></script>
-    <![endif]-->
 
-    <!-- Fav and touch icons -->
-    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
     <link rel="shortcut icon" href="/favicon.ico">
-<script type="text/javascript">
+    <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-49993013-1']);
-  _gaq.push(['_trackPageview']);
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-49993013-1']);
+      _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
 
-</script>
+    </script>
   </head>
   <body>
-    <div id="fb-root"></div>
-      <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
     <script src="//platform.linkedin.com/in.js" type="text/javascript">
      lang: en_US
     </script>
     <div id="wrap">
 
-	<!-- Fixed navbar -->
-      <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-          <div class="container">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="brand" href="/">Mike McGarr</a>
-            <div class="nav-collapse collapse">
-              <ul class="nav">
-                <li><a href="/about.html">About</a></li>
-                <li><a href="/archive.html">Posts</a></li>
-                <li><a href="/talks.html">Talks</a></li>
-                <li><a href="/feed.xml">Subscribe</a></li>
-              </ul>
-            </div><!--/.nav-collapse -->
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+          <a class="navbar-brand" href="/">Mike McGarr</a>
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/about.html">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/archive.html">Blog</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/talks.html">Talks</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/feed.xml">Subscribe</a>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
-      <div class="container-fluid">
-    <div class="row-fluid">
+      </nav>
 
-				<div class="span6 offset3">
+      
+<!-- Grab masthead data -->
 
-					<div class="page-header">
-						<h1>Interactive presentations with impress.js + GitHub Pages</h1>
-					</div>
+      <!-- Page Header -->
+      <header class="masthead" style="background-image: url('/img/masthead/saocom-falcon-launch.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <div class="page-heading">
+                <h1>Interactive presentations with impress.js + GitHub Pages</h1>
+                  <span class="subheading"><em>January 16, 2012</em></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="">
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row justify-content-between">
+            <div class="col-4"></div>
+            <div class="col-4 text-right">
+              <p class="photo-credit">Photo credit:
+                  <a href="https://www.flickr.com/photos/spacex/44451125454/" target="_blank">https://www.flickr.com/photos/spacex/44451125454/</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </header>
 
-					<p><em>January 16, 2012</em></p>
+		<div class="container">
 
-				</div>
-		</div>
+        <div class="col-lg-8 col-md-10 mx-auto">
 
-
-		<div class="row-fluid">
-
-				<div class="span2 offset1">
-					<p/>
-					<p class="text-right"><em></em>
-								<a href="/tags/continuous-delivery.html">continuous delivery</a><br/>
-</em>
-								<a href="/tags/css3.html">css3</a><br/>
-</em>
-								<a href="/tags/github.html">github</a><br/>
-</em>
-								<a href="/tags/github-pages.html">github pages</a><br/>
-</em>
-								<a href="/tags/html5.html">html5</a><br/>
-</em>
-								<a href="/tags/impress.js.html">impress.js</a><br/>
-</em>
-								<a href="/tags/mcjug.html">mcjug</a><br/>
-</em>
-								<a href="/tags/prezi.html">prezi</a><br/>
-</em>
-								<a href="/tags/ruby.html">ruby</a><br/>
-</em>
-								<a href="/tags/showoff.html">showoff</a><br/>
-</em>
-								<a href="/tags/sinatra.html">sinatra</a><br/>
-					</p>
-				</div>
-
-        <div class="span6">
-
-        	<p><p>Next month, I am giving a follow-up of my <a title="Continuous Delivery Talk" href="/img/cd-at-mcjug.html" target="_blank">Continuous Delivery talk</a> to the <a title="MCJUG" href="http://www.mcjug.org/" target="_blank">Montgomery County Java User's Group</a>. &nbsp;In preparing for this talk, I decided that challenge myself by using a presentation tool other than PowerPoint. &nbsp;In fact, I decided to avoid any desktop variant and try some of the next generation web-based presentation tools.</p> 
-<p>I first considered <a title="Ruby Lang" href="http://www.ruby-lang.org/" target="_blank"><img class="alignright" src="http://www.mikemcgarr.com/img/ruby-logo.gif" alt="" width="186" height="67">Showoff</a>,&nbsp;a nice framework for building presentations in HTML (running on <a title="Ruby" href="http://www.ruby-lang.org/" target="_blank">Ruby</a>/<a title="Sinatra" href="http://www.sinatrarb.com/" target="_blank">Sinatra</a>). &nbsp;This tool is hot in the developer community right now. &nbsp;Since it is a running application, it depends on deploying to hosting provider like <a title="Heroku" href="http://www.heroku.com/" target="_blank">Heroku</a>. &nbsp;It does have a nice simple markdown for capturing content and I would consider using it in the future.</p> 
-<p><img class="alignleft" src="http://www.mikemcgarr.com/img/HTML5_Logo_512.png" alt="" width="88" height="88"><a title="HTML5 Slides" href="http://slides.html5rocks.com/#landing-slide" target="_blank">HTML5 Slides</a> is more of a demonstration on&nbsp;how you can use <a title="HTML5" href="http://en.wikipedia.org/wiki/HTML5" target="_blank">HTML5</a>/<a title="CSS3" href="http://www.css3.info/" target="_blank">CSS3</a>'s features to build web-based slide shows. &nbsp;I considered this option as a way to learn more about HTML5. &nbsp;The pages still need to hosted somewhere, and <a title="AWS S3" href="http://aws.amazon.com/s3/" target="_blank">AWS S3</a> would be the perfect location.</p> 
-<p><a title="Prezi" href="http://prezi.com/" target="_blank"><img class="alignright" src="http://www.mikemcgarr.com/img/prezi_vertical.png" alt="" width="169" height="68">Prezi.com</a> is a service for building Flash-based presentations that break the convention of slides. &nbsp;With Prezi.com, you can build dynamic visual presentations where the camera moves about on a page. &nbsp;Public presentations are hosted for free, but you would have to pay for private presentations. &nbsp;While Prezi <del datetime="2012-01-17T02:33:17+00:00">does</del> did offer a unique presentation style, I didn't feel the platform (Flash-based) fit my needs.</p> 
-<p>In the end, I chose&nbsp;<a title="impress.js" href="https://github.com/bartaz/impress.js" target="_blank">impress.js</a>, as it seemed to be the best of all solutions. &nbsp;Impress.js is essentially an HTML5 presentation framework that enables you to build Prezi.com like presentations. (thanks to <a title="MattMakai.com" href="http://www.mattmakai.com/" target="_blank">Matt Makai</a> for pointing this tool out) &nbsp;You build your presentations in html (div = slide) and using tags and css, you can manipulate size, position, scale and even animation within your slide. &nbsp;It is also the newest tool on the scene and seems promising. &nbsp;By building my presentation in impress.js, I will be forced to beef up my front-end skills, which have been lacking as of late.</p> 
-<p>I also discovered that impress.js presentations can easily be hosted on <a title="GitHub" href="https://github.com/" target="_blank">GitHub</a> using <a title="GitHub Pages" href="http://pages.github.com/" target="_blank">GitHub Pages</a>. &nbsp;Since my presentation is just a web page, all I have to do is push my changes to the <em>gh-pages</em> branch of my GitHub repository and wait for the site to be displayed. &nbsp;GitHub will deploy the website using a url following this convention:</p> 
-<blockquote>
- <p>http://${username}.github.com/${repositoryname}</p>
-</blockquote> 
-<p>Github Pages works for private repositories as well, and all you need to do to enable it is create the <em>gh-pages</em> branch. &nbsp;Having my presentation displayed directly from version control with a simple url makes the process simple to manage. &nbsp;Updates to the latest version are a git add, commit, push away.</p> 
-<p>Since I am just starting down this road, I may have some further feedback on how these tools work out, but so far, the presentation is looking great! &nbsp;If interested&nbsp;in any or all of these presentation technologies, here are some sample presentations:</p> 
-<ul> 
- <li><a title="TDD your CLI presentation" href="http://tdd-ruby-cli.heroku.com/#1" target="_blank">TDD your CLI</a> by <a title="Dave Copeland's website" href="http://www.naildrivin5.com/" target="_blank">Dave Copeland</a> (showoff)</li> 
- <li><a title="HTML5 Slides" href="http://slides.html5rocks.com/#landing-slide" target="_blank">HTML5 Demo Slides</a> at <a title="HTML5 Rocks " href="http://www.html5rocks.com/en/" target="_blank">HTML5Rocks</a> (HTML5 slides)</li> 
- <li><a title="Coca Cola Company Presentation" href="http://prezi.com/ftv9hvziwqi2/coca-cola-company/" target="_blank">Coca Cola Company</a> (Prezi.com)</li> 
- <li><a title="12412.org Presentation" href="http://extra.12412.org/digibury/#/title" target="_blank">12412.org Presentation</a> (impress.js)</li> 
-</ul></p>
+        	<p><p>Next month, I am giving a follow-up of my <a title="Continuous Delivery Talk" href="/img/cd-at-mcjug.html" target="_blank">Continuous Delivery talk</a> to the <a title="MCJUG" href="http://www.mcjug.org/" target="_blank">Montgomery County Java User's Group</a>.  In preparing for this talk, I decided that challenge myself by using a presentation tool other than PowerPoint.  In fact, I decided to avoid any desktop variant and try some of the next generation web-based presentation tools.</p>
+<p>I first considered <a title="Ruby Lang" href="http://www.ruby-lang.org/" target="_blank"><img class="alignright" src="/img/ruby-logo.gif" alt="" width="186" height="67" />Showoff</a>, a nice framework for building presentations in HTML (running on <a title="Ruby" href="http://www.ruby-lang.org/" target="_blank">Ruby</a>/<a title="Sinatra" href="http://www.sinatrarb.com/" target="_blank">Sinatra</a>).  This tool is hot in the developer community right now.  Since it is a running application, it depends on deploying to hosting provider like <a title="Heroku" href="http://www.heroku.com/" target="_blank">Heroku</a>.  It does have a nice simple markdown for capturing content and I would consider using it in the future.</p>
+<p><img class="alignleft" src="/img/HTML5_Logo_512.png" alt="" width="88" height="88" /><a title="HTML5 Slides" href="http://slides.html5rocks.com/#landing-slide" target="_blank">HTML5 Slides</a> is more of a demonstration on how you can use <a title="HTML5" href="http://en.wikipedia.org/wiki/HTML5" target="_blank">HTML5</a>/<a title="CSS3" href="http://www.css3.info/" target="_blank">CSS3</a>'s features to build web-based slide shows.  I considered this option as a way to learn more about HTML5.  The pages still need to hosted somewhere, and <a title="AWS S3" href="http://aws.amazon.com/s3/" target="_blank">AWS S3</a> would be the perfect location.</p>
+<p><a title="Prezi" href="http://prezi.com/" target="_blank"><img class="alignright" src="/img/prezi_vertical.png" alt="" width="169" height="68" />Prezi.com</a> is a service for building Flash-based presentations that break the convention of slides.  With Prezi.com, you can build dynamic visual presentations where the camera moves about on a page.  Public presentations are hosted for free, but you would have to pay for private presentations.  While Prezi <del datetime="2012-01-17T02:33:17+00:00">does</del> did offer a unique presentation style, I didn't feel the platform (Flash-based) fit my needs.</p>
+<p>In the end, I chose <a title="impress.js" href="https://github.com/bartaz/impress.js" target="_blank">impress.js</a>, as it seemed to be the best of all solutions.  Impress.js is essentially an HTML5 presentation framework that enables you to build Prezi.com like presentations. (thanks to <a title="MattMakai.com" href="http://www.mattmakai.com/" target="_blank">Matt Makai</a> for pointing this tool out)  You build your presentations in html (div = slide) and using tags and css, you can manipulate size, position, scale and even animation within your slide.  It is also the newest tool on the scene and seems promising.  By building my presentation in impress.js, I will be forced to beef up my front-end skills, which have been lacking as of late.</p>
+<p>I also discovered that impress.js presentations can easily be hosted on <a title="GitHub" href="https://github.com/" target="_blank">GitHub</a> using <a title="GitHub Pages" href="http://pages.github.com/" target="_blank">GitHub Pages</a>.  Since my presentation is just a web page, all I have to do is push my changes to the <em>gh-pages</em> branch of my GitHub repository and wait for the site to be displayed.  GitHub will deploy the website using a url following this convention:</p>
+<blockquote><p>http://${username}.github.com/${repositoryname}</p></blockquote>
+<p>Github Pages works for private repositories as well, and all you need to do to enable it is create the <em>gh-pages</em> branch.  Having my presentation displayed directly from version control with a simple url makes the process simple to manage.  Updates to the latest version are a git add, commit, push away.</p>
+<p>Since I am just starting down this road, I may have some further feedback on how these tools work out, but so far, the presentation is looking great!  If interested in any or all of these presentation technologies, here are some sample presentations:</p>
+<ul>
+<li><a title="TDD your CLI presentation" href="http://tdd-ruby-cli.heroku.com/#1" target="_blank">TDD your CLI</a> by <a title="Dave Copeland's website" href="http://www.naildrivin5.com/" target="_blank">Dave Copeland</a> (showoff)</li>
+<li><a title="HTML5 Slides" href="http://slides.html5rocks.com/#landing-slide" target="_blank">HTML5 Demo Slides</a> at <a title="HTML5 Rocks " href="http://www.html5rocks.com/en/" target="_blank">HTML5Rocks</a> (HTML5 slides)</li>
+<li><a title="Coca Cola Company Presentation" href="http://prezi.com/ftv9hvziwqi2/coca-cola-company/" target="_blank">Coca Cola Company</a> (Prezi.com)</li>
+<li><a title="12412.org Presentation" href="http://extra.12412.org/digibury/#/title" target="_blank">12412.org Presentation</a> (impress.js)</li>
+</ul>
+</p>
 
 					<p><em>Share this:</em></p>
           <p style="float:left">
@@ -171,19 +159,52 @@
 		<div id="push"></div>
     </div>
 
-    <div id="footer">
+		<!-- Footer -->
+    <footer>
       <div class="container">
-        <p class="muted credit">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
-        <p class="muted credit">&copy; 2009-2016 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <li class="list-inline-item">
+                <a href="https://twitter.com/SonOfGarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://www.linkedin.com/in/jmcgarr/">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://github.com/jmcgarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+						<p class="copyright text-muted">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
+            <p class="copyright text-muted">Copyright &copy; Mike McGarr 2009-2018 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v4.1</a> | Generated with <a href="http://jbake.org">JBake v2.6.2</a></p>
+          </div>
+        </div>
       </div>
-    </div>
+    </footer>
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/js/jquery-1.9.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/run_prettify.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom scripts for the clean blog look and feel -->
+    <script src="/js/clean-blog.min.js"></script>
+
     <script type="text/javascript">
       (function() {
         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;

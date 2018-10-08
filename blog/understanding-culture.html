@@ -9,255 +9,257 @@
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
 
-    <!-- Le styles -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="/css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- previous styles -->
     <link href="/css/asciidoctor.css" rel="stylesheet">
-    <link href="/css/base.css" rel="stylesheet">
-    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="/css/extra.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,300,400' rel='stylesheet' type='text/css'>
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="/js/html5shiv.js"></script>
-    <![endif]-->
 
-    <!-- Fav and touch icons -->
-    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
     <link rel="shortcut icon" href="/favicon.ico">
-<script type="text/javascript">
+    <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-49993013-1']);
-  _gaq.push(['_trackPageview']);
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-49993013-1']);
+      _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
 
-</script>
+    </script>
   </head>
   <body>
-    <div id="fb-root"></div>
-      <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
     <script src="//platform.linkedin.com/in.js" type="text/javascript">
      lang: en_US
     </script>
     <div id="wrap">
 
-	<!-- Fixed navbar -->
-      <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-          <div class="container">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="brand" href="/">Mike McGarr</a>
-            <div class="nav-collapse collapse">
-              <ul class="nav">
-                <li><a href="/about.html">About</a></li>
-                <li><a href="/archive.html">Posts</a></li>
-                <li><a href="/talks.html">Talks</a></li>
-                <li><a href="/feed.xml">Subscribe</a></li>
-              </ul>
-            </div><!--/.nav-collapse -->
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+          <a class="navbar-brand" href="/">Mike McGarr</a>
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/about.html">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/archive.html">Blog</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/talks.html">Talks</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/feed.xml">Subscribe</a>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
-      <div class="container-fluid">
-    <div class="row-fluid">
+      </nav>
 
-				<div class="span6 offset3">
+      
+<!-- Grab masthead data -->
 
-					<div class="page-header">
-						<h1>Understanding culture</h1>
-					</div>
+      <!-- Page Header -->
+      <header class="masthead" style="background-image: url('/img/masthead/saocom-falcon-launch.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <div class="page-heading">
+                <h1>Understanding culture</h1>
+                  <span class="subheading"><em>March 28, 2015</em></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="">
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row justify-content-between">
+            <div class="col-4"></div>
+            <div class="col-4 text-right">
+              <p class="photo-credit">Photo credit:
+                  <a href="https://www.flickr.com/photos/spacex/44451125454/" target="_blank">https://www.flickr.com/photos/spacex/44451125454/</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </header>
 
-					<p><em>March 28, 2015</em></p>
+		<div class="container">
 
-				</div>
-		</div>
+        <div class="col-lg-8 col-md-10 mx-auto">
 
-
-		<div class="row-fluid">
-
-				<div class="span2 offset1">
-					<p/>
-					<p class="text-right"><em></em>
-								<a href="/tags/change-management.html">change management</a><br/>
-</em>
-								<a href="/tags/culture.html">culture</a><br/>
-</em>
-								<a href="/tags/understanding-culture.html">understanding culture</a><br/>
-</em>
-								<a href="/tags/DevOps.html">DevOps</a><br/>
-					</p>
-				</div>
-
-        <div class="span6">
-
-        	<p><div class="paragraph"> 
- <p>In my <a href="/blog/the-phoenix-project.html">review of the Phoenix Project</a>, I mentioned that the organizational change that Parts Unlimited experienced seemed magical. Many of my own attempts to lead organization-wide change had not been successful. I had encountered resistance throughout the organization. I found success couldn’t be achieved overnight. It was always frustrating to find the obviously better solution get shot down time and time again.</p> 
-</div> 
-<div class="paragraph"> 
- <p>Reflecting back, I didn’t always grasp what the source of the resistance was, why obvious wins and good ideas were being ignored in favor of the status quo. Over time, I began to learn what was causing the resistance. There was an invisible force at work.</p> 
-</div> 
-<div class="paragraph"> 
- <p>Culture.</p> 
-</div> 
-<div class="paragraph"> 
- <p>Since coming to this realization, I have been obsessed with learning about organizational culture and how to influence it. In doing so, I have developed a model by which I use to understand culture.</p> 
-</div> 
-<div class="sect1"> 
- <h2 id="_what_is_organizational_culture">What is organizational culture?</h2> 
- <div class="sectionbody"> 
-  <div class="paragraph"> 
-   <p>There are a number of definitions for organizational culture in existence. To get a sense for the diversity of viewpoints, I recommend this <a href="https://hbr.org/2013/05/what-is-organizational-culture/">HBR article</a>. For now, let me offer up a simple model that I’ve found useful for understanding organizational culture (from here on out, I will refer to it as just culture).</p> 
-  </div> 
-  <div class="paragraph"> 
-   <p>In it’s simplest form, culture can be viewed as the <strong>expected and accepted behavior</strong> of the people within an organization. In other words, how people within an organization act, how they are expected to act, and what actions they are allowed to take defines a culture. Culture is behavior.</p> 
-  </div> 
-  <div class="sect2"> 
-   <h3 id="_visualizing_culture">Visualizing culture</h3> 
-   <div class="imageblock" style="text-align: center"> 
-    <div class="content"> 
-     <img src="http://www.mikemcgarr.com/img/culture.png" alt="Organizational Culture" width="500"> 
-    </div> 
-   </div> 
-   <div class="paragraph"> 
-    <p>Being a visual learner, I had a strong desire to depict culture visually. The picture above is my attempt to do so. The green triangle on top represents the four elements of organizational culture: values, behavior, process and tools. The concepts lower on the pyramid are foundational to concepts higher on the pyramid.</p> 
-   </div> 
-   <div class="paragraph"> 
-    <p>Foundational to, yet separate from culture are it’s people. People are at the same time critical to shaping a culture, while possibly still being transient to that culture. Meaning, you can remove or add people to a culture and it’s values, behaviors, processes or tools need not change.</p> 
-   </div> 
-   <div class="paragraph"> 
-    <p>The rest of the post will dive deeper into each of these concepts.</p> 
-   </div> 
-  </div> 
- </div> 
-</div> 
-<div class="sect1"> 
- <h2 id="_behavior">Behavior</h2> 
- <div class="sectionbody"> 
-  <div class="paragraph"> 
-   <p>As I stated earlier, culture can be viewed as the <strong>expected and accepted behaviors</strong> of the people within an organization. Let’s take a deeper look at what this means.</p> 
-  </div> 
-  <div class="paragraph"> 
-   <p><strong>Expected behaviors</strong> are the actions an individual within a culture should conduct themselves. Whether this is how they work, how they communicate or the hours they keep. An organization evaluates individual performance based on expected behaviors. Evaluating an organization’s annual performance criteria can be a good indicator of their culture’s expected behavior.</p> 
-  </div> 
-  <div class="paragraph"> 
-   <p><strong>Accepted behaviors</strong> are the actions of an individual that the culture allows. These behaviors are informally accepted. You are unlikely to find accepted behaviors documented somewhere. In my experience, accepted behaviors are often localized to a subgroup within the culture, like a project team or a division.</p> 
-  </div> 
-  <div class="paragraph"> 
-   <p>It’s possible that accepted behaviors conflict with an organization’s expected behaviors. An unfortunate common example is a culture that expects individuals to treat each other with respect, but sexist jokes are tolerated and possibly even encouraged.</p> 
-  </div> 
-  <div class="paragraph"> 
-   <p>There’s an interesting third type of behavior that I would like to mention. <strong>Rewarded behaviors</strong> are the actions individuals take that are praised, promoted and compensated. Rewarded behaviors are the actions that are needed to get ahead in that culture. Interestingly enough, rewarded behavior can be either expected (formal) or accepted (informal) behavior. Rewarded behaviors are the most potent indicator of an organization’s values, the foundation of culture.</p> 
-  </div> 
- </div> 
-</div> 
-<div class="sect1"> 
- <h2 id="_values">Values</h2> 
- <div class="sectionbody"> 
-  <div class="paragraph"> 
-   <p>An organization’s <strong>values</strong> define which behaviors are expected, accepted and rewarded. Values are the bedrock by which a culture reinforces itself. If an organization’s values aren’t well known, understood or communicated, it will be hard to understand how one should act.</p> 
-  </div> 
-  <div class="paragraph"> 
-   <p>Do you know what your company’s values are? Prior to my joining <a href="http://www.netflix.com">Netflix</a> I can honestly say I paid little attention to my company’s values. I might have seen them in a document a few times a year, but they seemed unimportant to me. They felt like obvious social norms. And they all looked the same to me. But as I began to understand that culture was the source of my frustrations, I started to see how an organization’s values were important. I also realized that an organization’s documented values don’t always paint a complete picture.</p> 
-  </div> 
-  <div class="sect2"> 
-   <h3 id="_stated_and_unstated_values">Stated and Unstated Values</h3> 
-   <div class="paragraph"> 
-    <p>There are two types of organizational values: stated and unstated values. <strong>Stated values</strong> are the documented organization values. Everybody in the company should have access to a clear definition of each value. Expected behaviors are generally based on stated values. <strong>Unstated values</strong> emerge from the accepted (and rewarded) behavior that does not align with the organization’s stated values.</p> 
-   </div> 
-   <div class="paragraph"> 
-    <p>If unstated values conflict with stated values, this could represent a problem for the culture. An organization that rewards behavior opposed to stated values indicates an unhealthy culture. Hopefully this is obvious to everybody. I will steal the example used in the <a href="http://www.slideshare.net/reed2001/culture-1798664">Netflix culture deck</a> of <a href="http://en.wikipedia.org/wiki/Enron">Enron</a>. Nuff said.</p> 
-   </div> 
-   <div class="imageblock" style="text-align: center"> 
-    <div class="content"> 
-     <img src="http://www.mikemcgarr.com/img/netflix-culture-enron.png" alt="Netflix Culture Deck on Enron" width="500"> 
-    </div> 
-   </div> 
-   <div class="paragraph"> 
-    <p>Unstated values that don’t conflict with stated values can be fascinating. Is this a sign that the company culture is evolving and stated organizational values haven’t caught up? Is this an indicator of a potent subculture spreading it’s values? Or is the organization unaware or unwilling to accept this emergent cultural value?</p> 
-   </div> 
-   <div class="sect3"> 
-    <h4 id="_deriving_values">Deriving values</h4> 
-    <div class="paragraph"> 
-     <p>Values have little meaning until viewed through the lens of behavior within an organization. In fact, you should be able to derive an organization’s values based on the behavior witnessed within. Does the organization say they value honesty, integrity and selflessness, yet the company’s VPs stab each other in the back to get ahead? Are the most successful VPs the ones who lie, cheat and steal?. It’s obvious that this organization’s has unstated values of dishonesty and selfishness. Values not reinforced by any behaviors are just words.</p> 
-    </div> 
-   </div> 
-  </div> 
- </div> 
-</div> 
-<div class="sect1"> 
- <h2 id="_process_and_tools">Process and Tools</h2> 
- <div class="sectionbody"> 
-  <div class="paragraph"> 
-   <p>Organizational <strong>processes</strong> are the expected behaviors that are critical enough to the organization’s operations to be formalized and documented. Processes can be viewed as a subset of expected behaviors that apply to individuals, teams and possibly even company assets.</p> 
-  </div> 
-  <div class="paragraph"> 
-   <p>Processes that are repeated and mission critical are candidates for automation via tools. Tools are important to ensuring processes are repeatable. Tools improve the efficiency of implementing processes. Tools can also simplify a process by abstracting the details.</p> 
-  </div> 
-  <div class="paragraph"> 
-   <p>Tools codify critical organizational processes. Processes are formalized expected behaviors that are critical to the organization’s operations. Behaviors are defined and reinforced by values.</p> 
-  </div> 
-  <div class="paragraph"> 
-   <p>Process and tools are likely the most well defined and understood aspect of an organization’s culture. They are the easiest to grasp and widely discussed. I will not dive into them any further in this post.</p> 
-  </div> 
- </div> 
-</div> 
-<div class="sect1"> 
- <h2 id="_people">People</h2> 
- <div class="sectionbody"> 
-  <div class="quoteblock"> 
-   <blockquote> 
-    <div class="paragraph"> 
-     <p>The most important people to the culture are those who leave</p> 
-    </div> 
-   </blockquote> 
-   <div class="attribution">
-     — Andy Dunn
-    <br> 
-    <cite><a href="https://medium.com/@dunn/creating-culture-21a117803f80">Creating Culture: An imperfect recipe</a></cite> 
-   </div> 
-  </div> 
-  <div class="paragraph"> 
-   <p>People are the most important element to maintaining a strong organizational culture. The people who make up your organization are responsible for continually reinforcing the culture. It’s the people within the organization that define what’s accepted behavior.</p> 
-  </div> 
-  <div class="paragraph"> 
-   <p>An individual joins an organization with personal values. These personal values may or may not conflict with the organization’s values. Hopefully the hiring process ensures that an individual’s values align with the organization’s.</p> 
-  </div> 
-  <div class="paragraph"> 
-   <p>The strength of an organization’s culture can be measured by its response to rogue individual behaviors. A strong culture will provide swift feedback to the individual. A strong culture will also prune its ranks based on how well an individual aligns with its values. A great example of this is Netflix’s response to brilliant jerks.</p> 
-  </div> 
-  <div class="imageblock" style="text-align: center"> 
-   <div class="content"> 
-    <img src="http://www.mikemcgarr.com/img/netflix-culture-jerks.png" alt="Netflix Culture Deck on Brilliant Jerks" width="500"> 
-   </div> 
-  </div> 
- </div> 
-</div> 
-<div class="sect1"> 
- <h2 id="_the_whole_is_greater_than_the_sum_of_its_parts">The whole is greater than the sum of it’s parts</h2> 
- <div class="sectionbody"> 
-  <div class="paragraph"> 
-   <p>All of these concepts (people, values, behaviors, processes and tools) swirl and collide, conflict with and continually reinforce an organization’s culture. You can understand part of an organization by looking at it’s tools, but it’s an incomplete picture. Understanding how to use these cultural concepts to change a culture is a topic for another time.</p> 
-  </div> 
- </div> 
+        	<p><div class="paragraph">
+<p>In my <a href="/blog/the-phoenix-project.html">review of the Phoenix Project</a>, I mentioned that the organizational change that Parts Unlimited experienced seemed magical.  Many of my own attempts to lead organization-wide change had not been successful.  I had encountered resistance throughout the organization. I found success couldn’t be achieved overnight.  It was always frustrating to find the obviously better solution get shot down time and time again.</p>
+</div>
+<div class="paragraph">
+<p>Reflecting back, I didn’t always grasp what the source of the resistance was, why obvious wins and good ideas were being ignored in favor of the status quo. Over time, I began to learn what was causing the resistance.  There was an invisible force at work.</p>
+</div>
+<div class="paragraph">
+<p>Culture.</p>
+</div>
+<div class="paragraph">
+<p>Since coming to this realization, I have been obsessed with learning about organizational culture and how to influence it.  In doing so, I have developed a model by which I use to understand culture.</p>
+</div>
+<div class="sect1">
+<h2 id="_what_is_organizational_culture">What is organizational culture?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are a number of definitions for organizational culture in existence.  To get a sense for the diversity of viewpoints, I recommend this <a href="https://hbr.org/2013/05/what-is-organizational-culture/">HBR article</a>.  For now, let me offer up a simple model that I’ve found useful for understanding organizational culture (from here on out, I will refer to it as just culture).</p>
+</div>
+<div class="paragraph">
+<p>In it&#8217;s simplest form, culture can be viewed as the <strong>expected and accepted behavior</strong> of the people within an organization.  In other words, how people within an organization act, how they are expected to act, and what actions they are allowed to take defines a culture.  Culture is behavior.</p>
+</div>
+<div class="sect2">
+<h3 id="_visualizing_culture">Visualizing culture</h3>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="/img/culture.png" alt="Organizational Culture" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>Being a visual learner, I had a strong desire to depict culture visually.  The picture above is my attempt to do so.  The green triangle on top represents the four elements of organizational culture: values, behavior, process and tools. The concepts lower on the pyramid are foundational to concepts higher on the pyramid.</p>
+</div>
+<div class="paragraph">
+<p>Foundational to, yet separate from culture are it&#8217;s people.  People are at the same time critical to shaping a culture, while possibly still being transient to that culture.  Meaning, you can remove or add people to a culture and it&#8217;s values, behaviors, processes or tools need not change.</p>
+</div>
+<div class="paragraph">
+<p>The rest of the post will dive deeper into each of these concepts.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_behavior">Behavior</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As I stated earlier, culture can be viewed as the <strong>expected and accepted behaviors</strong> of the people within an organization.  Let&#8217;s take a deeper look at what this means.</p>
+</div>
+<div class="paragraph">
+<p><strong>Expected behaviors</strong> are the actions an individual within a culture should conduct themselves.  Whether this is how they work, how they communicate or the hours they keep.  An organization evaluates individual performance based on expected behaviors.  Evaluating an organization&#8217;s annual performance criteria can be a good indicator of their culture&#8217;s expected behavior.</p>
+</div>
+<div class="paragraph">
+<p><strong>Accepted behaviors</strong> are the actions of an individual that the culture allows.  These behaviors are informally accepted.  You are unlikely to find accepted behaviors documented somewhere.  In my experience, accepted behaviors are often localized to a subgroup within the culture, like a project team or a division.</p>
+</div>
+<div class="paragraph">
+<p>It’s possible that accepted behaviors conflict with an organization&#8217;s expected behaviors.  An unfortunate common example is a culture that expects individuals to treat each other with respect, but sexist jokes are tolerated and possibly even encouraged.</p>
+</div>
+<div class="paragraph">
+<p>There’s an interesting third type of behavior that I would like to mention.  <strong>Rewarded behaviors</strong> are the actions individuals take that are praised, promoted and compensated.  Rewarded behaviors are the actions that are needed to get ahead in that culture.  Interestingly enough, rewarded behavior can be either expected (formal) or accepted (informal) behavior.  Rewarded behaviors are the most potent indicator of an organization&#8217;s values, the foundation of culture.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_values">Values</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>An organization’s <strong>values</strong> define which behaviors are expected, accepted and rewarded.  Values are the bedrock by which a culture reinforces itself.  If an organization&#8217;s values aren&#8217;t well known, understood or communicated, it will be hard to understand how one should act.</p>
+</div>
+<div class="paragraph">
+<p>Do you know what your company’s values are?  Prior to my joining <a href="http://www.netflix.com">Netflix</a> I can honestly say I paid little attention to my company&#8217;s values.  I might have seen them in a document a few times a year, but they seemed unimportant to me.  They felt like obvious social norms.  And they all looked the same to me.  But as I began to understand that culture was the source of my frustrations, I started to see how an organization&#8217;s values were important.  I also realized that an organization&#8217;s documented values don&#8217;t always paint a complete picture.</p>
+</div>
+<div class="sect2">
+<h3 id="_stated_and_unstated_values">Stated and Unstated Values</h3>
+<div class="paragraph">
+<p>There are two types of organizational values: stated and unstated values.  <strong>Stated values</strong> are the documented organization values.  Everybody in the company should have access to a clear definition of each value.  Expected behaviors are generally based on stated values. <strong>Unstated values</strong> emerge from the accepted (and rewarded) behavior that does not align with the organization&#8217;s stated values.</p>
+</div>
+<div class="paragraph">
+<p>If unstated values conflict with stated values, this could represent a problem for the culture.  An organization that rewards behavior opposed to stated values indicates an unhealthy culture.  Hopefully this is obvious to everybody.  I will steal the example used in the <a href="http://www.slideshare.net/reed2001/culture-1798664">Netflix culture deck</a> of <a href="http://en.wikipedia.org/wiki/Enron">Enron</a>.  Nuff said.</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="/img/netflix-culture-enron.png" alt="Netflix Culture Deck on Enron" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>Unstated values that don’t conflict with stated values can be fascinating.  Is this a sign that the company culture is evolving and stated organizational values haven’t caught up?  Is this an indicator of a potent subculture spreading it&#8217;s values?  Or is the organization unaware or unwilling to accept this emergent cultural value?</p>
+</div>
+<div class="sect3">
+<h4 id="_deriving_values">Deriving values</h4>
+<div class="paragraph">
+<p>Values have little meaning until viewed through the lens of behavior within an organization.  In fact, you should be able to derive an organization&#8217;s values based on the behavior witnessed within.  Does the organization say they value honesty, integrity and selflessness, yet the company’s VPs stab each other in the back to get ahead?  Are the most successful VPs the ones who lie, cheat and steal?.  It&#8217;s obvious that this organization&#8217;s has unstated values of dishonesty and selfishness.  Values not reinforced by any behaviors are just words.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_process_and_tools">Process and Tools</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Organizational <strong>processes</strong> are the expected behaviors that are critical enough to the organization&#8217;s operations to be formalized and documented.  Processes can be viewed as a subset of expected behaviors that apply to individuals, teams and possibly even company assets.</p>
+</div>
+<div class="paragraph">
+<p>Processes that are repeated and mission critical are candidates for automation via tools.  Tools are important to ensuring processes are repeatable.  Tools improve the efficiency of implementing processes.  Tools can also simplify a process by abstracting the details.</p>
+</div>
+<div class="paragraph">
+<p>Tools codify critical organizational processes.  Processes are formalized expected behaviors that are critical to the organization&#8217;s operations.  Behaviors are defined and reinforced by values.</p>
+</div>
+<div class="paragraph">
+<p>Process and tools are likely the most well defined and understood aspect of an organization’s culture.  They are the easiest to grasp and widely discussed.  I will not dive into them any further in this post.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_people">People</h2>
+<div class="sectionbody">
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>The most important people to the culture are those who leave</p>
+</div>
+</blockquote>
+<div class="attribution">
+&#8212; Andy Dunn<br>
+<cite><a href="https://medium.com/@dunn/creating-culture-21a117803f80">Creating Culture: An imperfect recipe</a></cite>
+</div>
+</div>
+<div class="paragraph">
+<p>People are the most important element to maintaining a strong organizational culture.  The people who make up your organization are responsible for continually reinforcing the culture.  It’s the people within the organization that define what’s accepted behavior.</p>
+</div>
+<div class="paragraph">
+<p>An individual joins an organization with personal values.  These personal values may or may not conflict with the organization&#8217;s values.  Hopefully the hiring process ensures that an individual&#8217;s values align with the organization&#8217;s.</p>
+</div>
+<div class="paragraph">
+<p>The strength of an organization&#8217;s culture can be measured by its response to rogue individual behaviors.  A strong culture will provide swift feedback to the individual.  A strong culture will also prune its ranks based on how well an individual aligns with its values.  A great example of this is Netflix&#8217;s response to brilliant jerks.</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="/img/netflix-culture-jerks.png" alt="Netflix Culture Deck on Brilliant Jerks" width="500">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_whole_is_greater_than_the_sum_of_its_parts">The whole is greater than the sum of it&#8217;s parts</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>All of these concepts (people, values, behaviors, processes and tools) swirl and collide, conflict with and continually reinforce an organization&#8217;s culture.  You can understand part of an organization by looking at it&#8217;s tools, but it&#8217;s an incomplete picture.  Understanding how to use these cultural concepts to change a culture is a topic for another time.</p>
+</div>
+</div>
 </div></p>
 
 					<p><em>Share this:</em></p>
@@ -290,19 +292,52 @@
 		<div id="push"></div>
     </div>
 
-    <div id="footer">
+		<!-- Footer -->
+    <footer>
       <div class="container">
-        <p class="muted credit">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
-        <p class="muted credit">&copy; 2009-2016 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <li class="list-inline-item">
+                <a href="https://twitter.com/SonOfGarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://www.linkedin.com/in/jmcgarr/">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://github.com/jmcgarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+						<p class="copyright text-muted">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
+            <p class="copyright text-muted">Copyright &copy; Mike McGarr 2009-2018 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v4.1</a> | Generated with <a href="http://jbake.org">JBake v2.6.2</a></p>
+          </div>
+        </div>
       </div>
-    </div>
+    </footer>
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/js/jquery-1.9.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/run_prettify.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom scripts for the clean blog look and feel -->
+    <script src="/js/clean-blog.min.js"></script>
+
     <script type="text/javascript">
       (function() {
         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;

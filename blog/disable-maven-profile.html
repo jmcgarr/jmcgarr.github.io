@@ -9,117 +9,116 @@
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
 
-    <!-- Le styles -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="/css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- previous styles -->
     <link href="/css/asciidoctor.css" rel="stylesheet">
-    <link href="/css/base.css" rel="stylesheet">
-    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="/css/extra.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,300,400' rel='stylesheet' type='text/css'>
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="/js/html5shiv.js"></script>
-    <![endif]-->
 
-    <!-- Fav and touch icons -->
-    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
     <link rel="shortcut icon" href="/favicon.ico">
-<script type="text/javascript">
+    <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-49993013-1']);
-  _gaq.push(['_trackPageview']);
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-49993013-1']);
+      _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
 
-</script>
+    </script>
   </head>
   <body>
-    <div id="fb-root"></div>
-      <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
     <script src="//platform.linkedin.com/in.js" type="text/javascript">
      lang: en_US
     </script>
     <div id="wrap">
 
-	<!-- Fixed navbar -->
-      <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-          <div class="container">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="brand" href="/">Mike McGarr</a>
-            <div class="nav-collapse collapse">
-              <ul class="nav">
-                <li><a href="/about.html">About</a></li>
-                <li><a href="/archive.html">Posts</a></li>
-                <li><a href="/talks.html">Talks</a></li>
-                <li><a href="/feed.xml">Subscribe</a></li>
-              </ul>
-            </div><!--/.nav-collapse -->
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+          <a class="navbar-brand" href="/">Mike McGarr</a>
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/about.html">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/archive.html">Blog</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/talks.html">Talks</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/feed.xml">Subscribe</a>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
-      <div class="container-fluid">
-    <div class="row-fluid">
+      </nav>
 
-				<div class="span6 offset3">
+      
+<!-- Grab masthead data -->
 
-					<div class="page-header">
-						<h1>Maven Tip: Disabling Profiles when a Property Does Not Exist</h1>
-					</div>
+      <!-- Page Header -->
+      <header class="masthead" style="background-image: url('/img/masthead/saocom-falcon-launch.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <div class="page-heading">
+                <h1>Maven Tip: Disabling Profiles when a Property Does Not Exist</h1>
+                  <span class="subheading"><em>February 09, 2011</em></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="">
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row justify-content-between">
+            <div class="col-4"></div>
+            <div class="col-4 text-right">
+              <p class="photo-credit">Photo credit:
+                  <a href="https://www.flickr.com/photos/spacex/44451125454/" target="_blank">https://www.flickr.com/photos/spacex/44451125454/</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </header>
 
-					<p><em>February 09, 2011</em></p>
+		<div class="container">
 
-				</div>
-		</div>
+        <div class="col-lg-8 col-md-10 mx-auto">
 
-
-		<div class="row-fluid">
-
-				<div class="span2 offset1">
-					<p/>
-					<p class="text-right"><em></em>
-								<a href="/tags/build.html">build</a><br/>
-</em>
-								<a href="/tags/Java.html">Java</a><br/>
-</em>
-								<a href="/tags/liquibase.html">liquibase</a><br/>
-</em>
-								<a href="/tags/maven.html">maven</a><br/>
-</em>
-								<a href="/tags/maven-profiles.html">maven profiles</a><br/>
-</em>
-								<a href="/tags/unit-testing.html">unit testing</a><br/>
-					</p>
-				</div>
-
-        <div class="span6">
-
-        	<p><p>I wanted to share a method for enabling a <a title="Maven" href="http://maven.apache.org/" target="_blank">Maven</a> <a title="Maven Profiles" href="http://maven.apache.org/guides/introduction/introduction-to-profiles.html" target="_blank">Build Profile</a> in the absense of a system property. &nbsp;I did not see this approach documented in the current version of the Maven Build Profile documentation, so I thought I would share it.</p> 
-<p>I find this approach particularly useful for turning off build features whenever you are disabling tests. &nbsp;In Maven, there are two properties that will <a title="Skipping tests" href="http://maven.apache.org/plugins/maven-surefire-plugin/examples/skipping-test.html" target="_blank">skip the execution of all tests</a>, but I prefer the "skipTests" property.</p> 
-<p>As an example, let's take a Maven <a title="Maven Project Object Model" href="http://maven.apache.org/pom.html#What_is_the_POM" target="_blank">POM</a> file that runs&nbsp;<a title="Managing Database Changes with Liquibase" href="/blog/intro-to-liquibase.html" target="_blank">Liquibase </a>to update the database. &nbsp; If you want to run a Maven install without executing the tests, then you would run the following command (Note: I am not advocating that tests be skipped, but I think this is a useful example):</p> 
+        	<p><p>I wanted to share a method for enabling a <a title="Maven" href="http://maven.apache.org/" target="_blank">Maven</a> <a title="Maven Profiles" href="http://maven.apache.org/guides/introduction/introduction-to-profiles.html" target="_blank">Build Profile</a> in the absense of a system property.  I did not see this approach documented in the current version of the Maven Build Profile documentation, so I thought I would share it.</p>
+<p>I find this approach particularly useful for turning off build features whenever you are disabling tests.  In Maven, there are two properties that will <a title="Skipping tests" href="http://maven.apache.org/plugins/maven-surefire-plugin/examples/skipping-test.html" target="_blank">skip the execution of all tests</a>, but I prefer the "skipTests" property.</p>
+<p>As an example, let's take a Maven <a title="Maven Project Object Model" href="http://maven.apache.org/pom.html#What_is_the_POM" target="_blank">POM</a> file that runs <a title="Managing Database Changes with Liquibase" href="/blog/intro-to-liquibase.html" target="_blank">Liquibase </a>to update the database.   If you want to run a Maven install without executing the tests, then you would run the following command (Note: I am not advocating that tests be skipped, but I think this is a useful example):</p>
 <pre>
 mvn clean install -DskipTests
-</pre> 
-<p>If I wanted to also disable Liquibase whenever the tests were skipped, I would configure Liquibase is a profile. &nbsp;This profile would be triggered in&nbsp;absence&nbsp;of the &nbsp;the "skipTests" property. &nbsp;This means that when the property is not declared, Liquibase will run. &nbsp;Here is how you would declare this profile:</p> 
+</pre>
+<p>If I wanted to also disable Liquibase whenever the tests were skipped, I would configure Liquibase is a profile.  This profile would be triggered in absence of the  the "skipTests" property.  This means that when the property is not declared, Liquibase will run.  Here is how you would declare this profile:</p>
 <pre class="prettyprint language-xml">
 &lt;profiles&gt;
    &lt;profile&gt;
@@ -134,13 +133,14 @@ mvn clean install -DskipTests
       ...
    &lt;/profile&gt;
 &lt;/profiles&gt;
-</pre> 
-<p>An alternative to this approach is to turn off the profile&nbsp;explicitly:</p> 
+</pre>
+<p>An alternative to this approach is to turn off the profile explicitly:</p>
 <pre>
 mvn clean install -DskipTests -P !update-database
-</pre> 
-<p>Using this approach does make it clear what you are trying to do, which is also an advantage. &nbsp;There is an advantage in turning features on and off based on a related trigger, like a single system property.</p> 
-<p>In regards to the <a title="Liquibase Maven Plugin" href="http://www.liquibase.org/manual/maven" target="_blank">Liquibase Maven plugin</a>, a feature was added to <a title="Skip Liquibase Feature" href="http://liquibase.jira.com/browse/CORE-495" target="_blank">allow property based skipping</a>. &nbsp;This is only available as of <a title="Liquibase 2.0 Released" href="http://blog.liquibase.org/2011/01/liquibase-2-0-officially-released.html" target="_blank">Liquibase 2.0</a>.</p></p>
+</pre>
+<p>Using this approach does make it clear what you are trying to do, which is also an advantage.  There is an advantage in turning features on and off based on a related trigger, like a single system property.</p>
+<p>In regards to the <a title="Liquibase Maven Plugin" href="http://www.liquibase.org/manual/maven" target="_blank">Liquibase Maven plugin</a>, a feature was added to <a title="Skip Liquibase Feature" href="http://liquibase.jira.com/browse/CORE-495" target="_blank">allow property based skipping</a>.  This is only available as of <a title="Liquibase 2.0 Released" href="http://blog.liquibase.org/2011/01/liquibase-2-0-officially-released.html" target="_blank">Liquibase 2.0</a>.</p>
+</p>
 
 					<p><em>Share this:</em></p>
           <p style="float:left">
@@ -172,19 +172,52 @@ mvn clean install -DskipTests -P !update-database
 		<div id="push"></div>
     </div>
 
-    <div id="footer">
+		<!-- Footer -->
+    <footer>
       <div class="container">
-        <p class="muted credit">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
-        <p class="muted credit">&copy; 2009-2016 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <li class="list-inline-item">
+                <a href="https://twitter.com/SonOfGarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://www.linkedin.com/in/jmcgarr/">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://github.com/jmcgarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+						<p class="copyright text-muted">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
+            <p class="copyright text-muted">Copyright &copy; Mike McGarr 2009-2018 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v4.1</a> | Generated with <a href="http://jbake.org">JBake v2.6.2</a></p>
+          </div>
+        </div>
       </div>
-    </div>
+    </footer>
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/js/jquery-1.9.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/run_prettify.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom scripts for the clean blog look and feel -->
+    <script src="/js/clean-blog.min.js"></script>
+
     <script type="text/javascript">
       (function() {
         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;

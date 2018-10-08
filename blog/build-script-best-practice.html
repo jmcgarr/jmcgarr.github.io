@@ -9,120 +9,122 @@
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
 
-    <!-- Le styles -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="/css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- previous styles -->
     <link href="/css/asciidoctor.css" rel="stylesheet">
-    <link href="/css/base.css" rel="stylesheet">
-    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="/css/extra.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,300,400' rel='stylesheet' type='text/css'>
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="/js/html5shiv.js"></script>
-    <![endif]-->
 
-    <!-- Fav and touch icons -->
-    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
     <link rel="shortcut icon" href="/favicon.ico">
-<script type="text/javascript">
+    <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-49993013-1']);
-  _gaq.push(['_trackPageview']);
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-49993013-1']);
+      _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
 
-</script>
+    </script>
   </head>
   <body>
-    <div id="fb-root"></div>
-      <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
     <script src="//platform.linkedin.com/in.js" type="text/javascript">
      lang: en_US
     </script>
     <div id="wrap">
 
-	<!-- Fixed navbar -->
-      <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-          <div class="container">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="brand" href="/">Mike McGarr</a>
-            <div class="nav-collapse collapse">
-              <ul class="nav">
-                <li><a href="/about.html">About</a></li>
-                <li><a href="/archive.html">Posts</a></li>
-                <li><a href="/talks.html">Talks</a></li>
-                <li><a href="/feed.xml">Subscribe</a></li>
-              </ul>
-            </div><!--/.nav-collapse -->
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+          <a class="navbar-brand" href="/">Mike McGarr</a>
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/about.html">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/archive.html">Blog</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/talks.html">Talks</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/feed.xml">Subscribe</a>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
-      <div class="container-fluid">
-    <div class="row-fluid">
+      </nav>
 
-				<div class="span6 offset3">
+      
+<!-- Grab masthead data -->
 
-					<div class="page-header">
-						<h1>Build Scripts and External Dependencies</h1>
-					</div>
+      <!-- Page Header -->
+      <header class="masthead" style="background-image: url('/img/masthead/saocom-falcon-launch.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <div class="page-heading">
+                <h1>Build Scripts and External Dependencies</h1>
+                  <span class="subheading"><em>February 15, 2013</em></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="">
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row justify-content-between">
+            <div class="col-4"></div>
+            <div class="col-4 text-right">
+              <p class="photo-credit">Photo credit:
+                  <a href="https://www.flickr.com/photos/spacex/44451125454/" target="_blank">https://www.flickr.com/photos/spacex/44451125454/</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </header>
 
-					<p><em>February 15, 2013</em></p>
+		<div class="container">
 
-				</div>
-		</div>
+        <div class="col-lg-8 col-md-10 mx-auto">
 
-
-		<div class="row-fluid">
-
-				<div class="span2 offset1">
-					<p/>
-					<p class="text-right"><em></em>
-								<a href="/tags/build-automation.html">build automation</a><br/>
-</em>
-								<a href="/tags/build-scripts.html">build scripts</a><br/>
-</em>
-								<a href="/tags/gradle.html">gradle</a><br/>
-</em>
-								<a href="/tags/maven.html">maven</a><br/>
-					</p>
-				</div>
-
-        <div class="span6">
-
-        	<p><p><a href="http://xkcd.com/293/"><img align="right" alt="" src="http://imgs.xkcd.com/comics/rtfm.png" width="245" height="304"></a> I recently ran across some project code that when checked out of version control, failed with an obscure warning. &nbsp;After some digging around in the code, I realized the script made a reference to an external plugin library. &nbsp;I had no clue where to acquire this library or setup this build. &nbsp;I had to reach out to other developers to find out what was causing the failure. &nbsp;The dependency turned out that a second project needed to be checked out from source control and added to the PATH. &nbsp;I was also told that I should have <a title="Read the Fucking Manual" href="http://en.wikipedia.org/wiki/RTFM" target="_blank">RTFM</a>.</p> 
-<p><strong>No External Dependencies</strong></p> 
-<p>I strongly believe that a project checked out from version control should be as simple and independent as possible. &nbsp;I should just grab the code and run the build. &nbsp;I try to avoid at all costs having environment dependencies, save the bare minimum (like a JDK and build tool installed). &nbsp;This will allow teams to quickly switch between projects and be productive quickly.</p> 
-<blockquote>
- <p><em><strong>Note</strong>: <a title="Gradle" href="http://www.gradle.org/" target="_blank">Gradle</a> provides an awesome way to minimize external dependencies even further. &nbsp;The <a title="Gradle Wrapper" href="http://www.gradle.org/docs/current/userguide/gradle_wrapper.html" target="_blank">Gradle Wrapper</a> is a small bit of code you check-into your project that downloads and runs Gradle. &nbsp;All you need is Java installed on the machine. &nbsp;The <a title="Grails" href="http://grails.org/" target="_blank">Grails</a> project has also adopted this approach with the <a title="Grails Wrapper" href="http://grails.org/doc/2.1.0/guide/single.html#wrapper" target="_blank">Grails Wrapper</a>. &nbsp; &nbsp;I think this is an awesome step in the right direction.</em></p>
-</blockquote> 
-<p>Modern build tools do a great job of managing external&nbsp;dependencies&nbsp;such as libraries, but usually provide a facility to customize build execution through a personal file in your home directory. &nbsp;I generally avoid these types of customizations.</p> 
-<p><strong>If you must...</strong></p> 
-<p>If however, your build script must rely on an external dependency, then it should check and warn the user explicitly. &nbsp;The error message I see when I run the build should tell me exactly what I need to do to fix the problem (like where the "f*cking manual" is and what page to read). &nbsp;This makes debugging build scripts for new users straightforward.</p> 
-<p><strong>...and fail fast</strong></p> 
-<p>Additionally, if your build script is going to fail because of a missing external dependency, do it quickly. &nbsp;If your build script's <em>deploy</em> phase depends on a password file being in your home directory, then ideally it should fail as soon as I call the build script with an appropriate warning. &nbsp;I shouldn't have to wait on the <em>compile</em>, <em>unit tests</em> and <em>package</em> phases to finish before it fails. &nbsp;This may be hard to do with some build tools (looking at you Maven), but others make this very easy (love you Gradle).</p> 
-<p><b>&nbsp;Fail intelligently</b></p> 
-<p>Lastly, if I call the <em>compile</em> phase, don't fail the build if I am missing a dependency needed for the <em>deploy</em> phase. &nbsp;I should only see a warning if I am trying to execute the task. &nbsp;I may want to write a build script that requires secure access to a username and password on the continuous integration server, but developers will never execute this phase. &nbsp;I don't want them to have to setup a username and password for something they will never execute.</p> 
-<p>Gradle makes this very easy to do. &nbsp;Gradle has three phases of build execution: initialization, configuration and execution. &nbsp;The initialization phase is to build a project graph (for multi-module projects), the configuration phase builds a task graph and the execute phase executes the project tasks. &nbsp;You can write code that checks the contents of the task graph and conditionally executes logic. &nbsp;For information on how to do this in Gradle, <a title="Gradle: Configuring the DAG" href="http://www.gradle.org/docs/current/userguide/userguide_single.html#configure-by-dag" target="_blank">read the f*cking manual</a>.</p></p>
+        	<p><p><a href="http://xkcd.com/293/"><img align="right" alt="" src="http://imgs.xkcd.com/comics/rtfm.png" width="245" height="304" /></a> I recently ran across some project code that when checked out of version control, failed with an obscure warning.  After some digging around in the code, I realized the script made a reference to an external plugin library.  I had no clue where to acquire this library or setup this build.  I had to reach out to other developers to find out what was causing the failure.  The dependency turned out that a second project needed to be checked out from source control and added to the PATH.  I was also told that I should have <a title="Read the Fucking Manual" href="http://en.wikipedia.org/wiki/RTFM" target="_blank">RTFM</a>.</p>
+<p><strong>No External Dependencies</strong></p>
+<p>I strongly believe that a project checked out from version control should be as simple and independent as possible.  I should just grab the code and run the build.  I try to avoid at all costs having environment dependencies, save the bare minimum (like a JDK and build tool installed).  This will allow teams to quickly switch between projects and be productive quickly.</p>
+<blockquote><p><em><strong>Note</strong>: <a title="Gradle" href="http://www.gradle.org/" target="_blank">Gradle</a> provides an awesome way to minimize external dependencies even further.  The <a title="Gradle Wrapper" href="http://www.gradle.org/docs/current/userguide/gradle_wrapper.html" target="_blank">Gradle Wrapper</a> is a small bit of code you check-into your project that downloads and runs Gradle.  All you need is Java installed on the machine.  The <a title="Grails" href="http://grails.org/" target="_blank">Grails</a> project has also adopted this approach with the <a title="Grails Wrapper" href="http://grails.org/doc/2.1.0/guide/single.html#wrapper" target="_blank">Grails Wrapper</a>.    I think this is an awesome step in the right direction.</em></p></blockquote>
+<p>Modern build tools do a great job of managing external dependencies such as libraries, but usually provide a facility to customize build execution through a personal file in your home directory.  I generally avoid these types of customizations.</p>
+<p><strong>If you must...</strong></p>
+<p>If however, your build script must rely on an external dependency, then it should check and warn the user explicitly.  The error message I see when I run the build should tell me exactly what I need to do to fix the problem (like where the "f*cking manual" is and what page to read).  This makes debugging build scripts for new users straightforward.</p>
+<p><strong>...and fail fast</strong></p>
+<p>Additionally, if your build script is going to fail because of a missing external dependency, do it quickly.  If your build script's <em>deploy</em> phase depends on a password file being in your home directory, then ideally it should fail as soon as I call the build script with an appropriate warning.  I shouldn't have to wait on the <em>compile</em>, <em>unit tests</em> and <em>package</em> phases to finish before it fails.  This may be hard to do with some build tools (looking at you Maven), but others make this very easy (love you Gradle).</p>
+<p><b> Fail intelligently</b></p>
+<p>Lastly, if I call the <em>compile</em> phase, don't fail the build if I am missing a dependency needed for the <em>deploy</em> phase.  I should only see a warning if I am trying to execute the task.  I may want to write a build script that requires secure access to a username and password on the continuous integration server, but developers will never execute this phase.  I don't want them to have to setup a username and password for something they will never execute.</p>
+<p>Gradle makes this very easy to do.  Gradle has three phases of build execution: initialization, configuration and execution.  The initialization phase is to build a project graph (for multi-module projects), the configuration phase builds a task graph and the execute phase executes the project tasks.  You can write code that checks the contents of the task graph and conditionally executes logic.  For information on how to do this in Gradle, <a title="Gradle: Configuring the DAG" href="http://www.gradle.org/docs/current/userguide/userguide_single.html#configure-by-dag" target="_blank">read the f*cking manual</a>.</p>
+</p>
 
 					<p><em>Share this:</em></p>
           <p style="float:left">
@@ -154,19 +156,52 @@
 		<div id="push"></div>
     </div>
 
-    <div id="footer">
+		<!-- Footer -->
+    <footer>
       <div class="container">
-        <p class="muted credit">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
-        <p class="muted credit">&copy; 2009-2016 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <li class="list-inline-item">
+                <a href="https://twitter.com/SonOfGarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://www.linkedin.com/in/jmcgarr/">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://github.com/jmcgarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+						<p class="copyright text-muted">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
+            <p class="copyright text-muted">Copyright &copy; Mike McGarr 2009-2018 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v4.1</a> | Generated with <a href="http://jbake.org">JBake v2.6.2</a></p>
+          </div>
+        </div>
       </div>
-    </div>
+    </footer>
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/js/jquery-1.9.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/run_prettify.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom scripts for the clean blog look and feel -->
+    <script src="/js/clean-blog.min.js"></script>
+
     <script type="text/javascript">
       (function() {
         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;

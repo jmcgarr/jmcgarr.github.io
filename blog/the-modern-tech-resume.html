@@ -9,259 +9,342 @@
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
 
-    <!-- Le styles -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="/css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- previous styles -->
     <link href="/css/asciidoctor.css" rel="stylesheet">
-    <link href="/css/base.css" rel="stylesheet">
-    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="/css/extra.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,300,400' rel='stylesheet' type='text/css'>
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="/js/html5shiv.js"></script>
-    <![endif]-->
 
-    <!-- Fav and touch icons -->
-    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
     <link rel="shortcut icon" href="/favicon.ico">
-<script type="text/javascript">
+    <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-49993013-1']);
-  _gaq.push(['_trackPageview']);
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-49993013-1']);
+      _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
 
-</script>
+    </script>
   </head>
   <body>
-    <div id="fb-root"></div>
-      <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
     <script src="//platform.linkedin.com/in.js" type="text/javascript">
      lang: en_US
     </script>
     <div id="wrap">
 
-	<!-- Fixed navbar -->
-      <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-          <div class="container">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="brand" href="/">Mike McGarr</a>
-            <div class="nav-collapse collapse">
-              <ul class="nav">
-                <li><a href="/about.html">About</a></li>
-                <li><a href="/archive.html">Posts</a></li>
-                <li><a href="/talks.html">Talks</a></li>
-                <li><a href="/feed.xml">Subscribe</a></li>
-              </ul>
-            </div><!--/.nav-collapse -->
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+          <a class="navbar-brand" href="/">Mike McGarr</a>
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/about.html">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/archive.html">Blog</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/talks.html">Talks</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/feed.xml">Subscribe</a>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
-      <div class="container-fluid">
-    <div class="row-fluid">
+      </nav>
 
-				<div class="span6 offset3">
+      
+<!-- Grab masthead data -->
 
-					<div class="page-header">
-						<h1>Building a modern resume</h1>
-					</div>
+      <!-- Page Header -->
+      <header class="masthead" style="background-image: url('/img/masthead/saocom-falcon-launch.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <div class="page-heading">
+                <h1>Building a modern resume</h1>
+                  <span class="subheading"><em>July 20, 2014</em></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="">
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row justify-content-between">
+            <div class="col-4"></div>
+            <div class="col-4 text-right">
+              <p class="photo-credit">Photo credit:
+                  <a href="https://www.flickr.com/photos/spacex/44451125454/" target="_blank">https://www.flickr.com/photos/spacex/44451125454/</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </header>
 
-					<p><em>July 20, 2014</em></p>
+		<div class="container">
 
-				</div>
-		</div>
+        <div class="col-lg-8 col-md-10 mx-auto">
 
-
-		<div class="row-fluid">
-
-				<div class="span2 offset1">
-					<p/>
-					<p class="text-right"><em></em>
-								<a href="/tags/general.html">general</a><br/>
-</em>
-								<a href="/tags/career.html">career</a><br/>
-</em>
-								<a href="/tags/modern-resume.html">modern resume</a><br/>
-					</p>
-				</div>
-
-        <div class="span6">
-
-        	<p><div class="paragraph"> 
- <p>After I had gone through the <a href="http://www.netflix.com">Netflix</a> recruiting process, it struck me that nobody ever asked me for a resume. The recruiting team already had all the information they needed that you would normally find on a resume. This information was readily available online. My profile on LinkedIn, my Twitter feed, my Github profile, and my blog all provided a comprehensive resume, more detailed than a 2-page resume. My online presence serves as my resume, a <em>modern technical resume</em>.</p> 
-</div> 
-<div class="imageblock"> 
- <div class="content"> 
-  <img src="http://www.mikemcgarr.com/img/the-modern-resume.png" alt="The Modern Resume"> 
- </div> 
-</div> 
-<div class="paragraph"> 
- <p>Since going through this process, I have talked to a number of friends who are looking to make a career change. I wanted to provide some recommendations for those who don’t have a strong online presence. Beefing up your online presence will help not only get you noticed, but help companies find out if you are the right fit. If you’re lucky, people will be lining out the door to have you work at their company.</p> 
-</div> 
-<div class="sect1"> 
- <h2 id="_linkedin">LinkedIn</h2> 
- <div class="sectionbody"> 
-  <div class="paragraph"> 
-   <p>The first place you should start is <a href="http://www.linkedin.com">LinkedIn</a>. LinkedIn has become the go-to site for recruiters to begin searching for candidates. Having an up-to-date and detailed LinkedIn profile can do wonders for making yourself discoverable. If you already have a good LinkedIn profile, then you likely get pinged by recruiters constantly. You may even find this annoying, but some day you will be glad that your LinkedIn profile is appealing.</p> 
-  </div> 
-  <div class="paragraph"> 
-   <p>Here are my recommendations for updating your LinkedIn profile:</p> 
-  </div> 
-  <div class="ulist"> 
-   <ul> 
-    <li> <p><strong>Summary</strong> - Write a short, concise paragraph describing what you do and what you specialize in. This paragraph will be your hook, your elevator pitch. What would you say to get somebody excited about you if they only read this section.</p> </li> 
-    <li> <p><strong>Employment history</strong> - List your previous employment history, dates, and title. Also add a description of the work you did there. You can be a bit more verbose here. Bulleted lists help people like me who scan.</p> </li> 
-    <li> <p><strong>Skills</strong> - Add skills that you currently have, and want to continue using. Don’t add 'assembly programming' if you just took a class in college.</p> </li> 
-    <li> <p><strong>Recommendations</strong> - Having a strong collection of recommendations is a nice touch. Asking for a recommendation from others might be hard for you to do. Best bet is, if you want to get a recommendation, give one.</p> </li> 
-    <li> <p><strong>Link your accounts</strong> - Make sure you list your twitter account, blog and any other account on your LinkedIn profile.</p> </li> 
-    <li> <p><strong>Picture optional</strong> - Don’t feel like you need to add a picture. If you are concerned about privacy, then don’t add it.</p> </li> 
-   </ul> 
-  </div> 
-  <div class="paragraph"> 
-   <p>Remember that if you do nothing else, I recommend making sure you have a complete LinkedIn profile. It raises questions from hiring managers if a individual doesn’t have a thorough profile.</p> 
-  </div> 
- </div> 
-</div> 
-<div class="sect1"> 
- <h2 id="_twitter">Twitter</h2> 
- <div class="sectionbody"> 
-  <div class="paragraph"> 
-   <p>While <a href="http://www.twitter.com">Twitter</a> may not be an indicator of how technically competent you are, it is still important. I am disappointed when I come across a technically promising LinkedIn profile, but only 25 tweets over 2 years. I know this isn’t exactly fair, but Twitter has become the communication medium of the tech industry. If you are an engineer and don’t participate, that speaks volumes.</p> 
-  </div> 
-  <div class="paragraph"> 
-   <p>Here are my recommendations for getting started:</p> 
-  </div> 
-  <div class="ulist"> 
-   <ul> 
-    <li> <p><strong>Sign up now!</strong> - If you don’t have a Twitter account, create one now. It’s easy.</p> </li> 
-    <li> <p><strong>Don’t sweat your handle, yet</strong> - Make sure you give it a simple, short, handle. Twitter allows you to change the name, but it’s better to get something simple early and stick with it.</p> </li> 
-    <li> <p><strong>Keep it professional</strong> - I don’t always follow this rule and my tweets are sometimes more politically charged than my office presence, but I recommend keeping it professional. Always ask, would I want this tweet on the front page of the New York Times.</p> </li> 
-    <li> <p><strong>Tweet regularly</strong> - Make sure you tweet fairly regularly. Tweeting twice a week is just 104 tweets in a year…​not a whole lot.</p> </li> 
-    <li> <p><strong>Be mundane</strong> - Not every tweet has to be ground breaking. If you hit a problem at work, tweet about it. When you discover something new and cool, tweet about it. When you find something you hate, tweet about it.</p> </li> 
-    <li> <p><strong>Add a picture</strong> - It doesn’t have to be your face, but don’t leave the defaults.</p> </li> 
-    <li> <p><strong>Share articles</strong> - A good way to tweet is to share articles and stories you liked. It doesn’t matter if somebody else already tweeted it.</p> </li> 
-   </ul> 
-  </div> 
-  <div class="paragraph"> 
-   <p>Building a good Twitter account can be a long road, so just start one tweet at a time.</p> 
-  </div> 
- </div> 
-</div> 
-<div class="sect1"> 
- <h2 id="_github">Github</h2> 
- <div class="sectionbody"> 
-  <div class="paragraph"> 
-   <p>Having a good <a href="http://www.github.com">Github</a> account can be the most useful part of your modern resume. Github serves as a modern portfolio of work, demonstrating how well you write code. Don’t hesitate to put code on Github, even if it’s just examples of frameworks and tools that you are learning. Ideally, you are open sourcing or contributing to an existing open source project.</p> 
-  </div> 
-  <div class="paragraph"> 
-   <p>Here are some bootstrapping tips for improving your Github account presence:</p> 
-  </div> 
-  <div class="ulist"> 
-   <ul> 
-    <li> <p><strong>Learn</strong> - If you are learning a new technology, create a repo with the coding exercises there.</p> </li> 
-    <li> <p><strong>Document</strong> - Fork an open source project and update the documentation. Most mid-size open source projects would love documentation help. If you are already using the project, this should take you less than one hour.</p> </li> 
-    <li> <p><strong>Test</strong> - Fork an open source project and add some unit tests. Hopefully the maintainer of the project believes in unit testing. Make a pull request.</p> </li> 
-    <li> <p><strong>Fix</strong> - Fork an open source project and fix a bug. Everybody loves bug fixes.</p> </li> 
-    <li> <p><strong>Find the right project</strong> - Find a project that you are passionate about and you might use daily. Ideally, this project also isn’t that popular. Smaller projects are likely to be receptive to new commiters.</p> </li> 
-    <li> <p><strong>Build</strong> - You know that silly manual task that’s been annoying you for a week now? Carve out a morning to automate it and open source the code.</p> </li> 
-   </ul> 
-  </div> 
-  <div class="paragraph"> 
-   <p>Your eventual goal with Github is to contribute to open source projects, whether they are your own or somebody else’s.</p> 
-  </div> 
- </div> 
-</div> 
-<div class="sect1"> 
- <h2 id="_blogging">Blogging</h2> 
- <div class="sectionbody"> 
-  <div class="paragraph"> 
-   <p>Almost every engineer I know falls into one of three camps: those who have a blog, those who don’t, and those who talk about starting a blog. A large majority of those with blogs haven’t posted anything new in over a year. Of those who talk about starting a blog, they seem to always have a reason why they haven’t started. What does that say? Blogging is hard work. But it is well worth the effort. It proves that you can compose your thoughts and write compelling prose. It is a great way to sell your ideas. It is a great way to get noticed.</p> 
-  </div> 
-  <div class="paragraph"> 
-   <p>Getting started isn’t easy, but here are some pointers:</p> 
-  </div> 
-  <div class="ulist"> 
-   <ul> 
-    <li> <p><strong>Pick a domain name</strong> - You have two options: be creative or choose your name. Either works great, but buy the domain name. Give yourself 24 hours to pick a name, and then just go with it.</p> </li> 
-    <li> <p><strong>Use a service</strong> - You may be tempted to use a blogging tool like <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://octopress.org/">Octopress</a> or <a href="http://jbake.org/">JBake</a>, and yes they are awesome (I am loving JBake). You may even want to stand up your own Wordpress server. Don’t. They are an obstacle to getting started. Use a service like Wordpress.com, Blogger or Tumblr. The only setup you will need is assigning your domain name to the service. Once that’s done, you can start blogging.</p> </li> 
-    <li> <p><strong>Fight the urge to make it pretty</strong> - Your first job is to build content. Don’t worry about fonts, designs, and content layout. They matter eventually, but a pretty blog with no content is worthless.</p> </li> 
-    <li> <p><strong>First entry, make it short</strong> - The hardest part is writing that first blog entry. So just do it. Write a blog entry about how you are starting a blog. People will read that and say, "Of course you are, cause I am reading it". But that’s ok. You need to get the first one out of the way.</p> </li> 
-    <li> <p><strong>Post regularly</strong> - Keep some simple goals. Once a month. Once you achieve that, double it to twice a month. Then once a week. The more you write, the easier it will be.</p> </li> 
-    <li> <p><strong>Share posts everywhere</strong> - When you write a blog, make sure you tweet about it, share on Facebook, share on LinkedIn, share on Google+…​everywhere. The more places you share, the more traffic you will recieve.</p> </li> 
-    <li> <p><strong>Don’t email it, blog it</strong> - Years ago, I asked my boss for two monitors. He said, "Why do you need it?". He asked me to justify it. So rather than sending him an email explanation, I wrote a <a href="http://www.mikemcgarr.com/blog/justifying-dual-monitors.html">blog entry justification</a> and sent him that. This turned out to be one of my most popular blog entries, because so many people needed to make the same justification (unfortunately).</p> </li> 
-    <li> <p><strong>Quick, short posts</strong> - A good way to create content is to write a blog entry on that small problem you just solved. These kinds of posts are great for generating traffic, are easy to write, and people love reading then. Another reason I like them is that they can also serve as your long term memory. I constantly refer back to my blog entry on how <a href="http://www.mikemcgarr.com/blog/git-tip-branch-your-previous-commit.html">branch my previous commit in Git</a>.</p> </li> 
-    <li> <p><strong>This is your journal</strong> - Think of your blog as a professional journal. You are providing a detailed picture of your professional journey as it happens. Somebody will care about the work you did, trust me.</p> </li> 
-   </ul> 
-  </div> 
-  <div class="paragraph"> 
-   <p>Having a good blog with a lot of content is hard work, but well worth it.</p> 
-  </div> 
-  <div class="sidebarblock"> 
-   <div class="content"> 
-    <div class="title">
-     A story on blogging
-    </div> 
-    <div class="paragraph"> 
-     <p>To further punctuate the value of blogging, let me tell a story. Over two years ago, I was working in consulting and looking to break out. I was meeting with <a href="https://twitter.com/PerfForensics">Steve Feldman</a> from <a href="http://www.blackboard.com">Blackboard</a> for coffee. When I showed up, he pulled out a piece of paper and put it front of me saying, "I want you to come to Blackboard and do this." On that piece of paper was a blog entry that I had written in <a href="http://www.mikemcgarr.com/blog/alm.html">May of 2011 about ALM</a>. I was floored. I took the job because I was being asked to implement a vision I laid out my blog.</p> 
-    </div> 
-   </div> 
-  </div> 
- </div> 
-</div> 
-<div class="sect1"> 
- <h2 id="_public_speaking">Public speaking</h2> 
- <div class="sectionbody"> 
-  <div class="paragraph"> 
-   <p>Public speaking is not for everybody, but it will have an amazing impact on your professional career. I have done enough public speaking to feel fairly comfortable in a large crowd. Public speaking is hard, but can propel your status just as well as anything above.</p> 
-  </div> 
-  <div class="ulist"> 
-   <ul> 
-    <li> <p><strong>Talk about what you know</strong> - It is quickly obvious when a speaker knows only a little bit about a subject, or has never actually done what they are saying. Make sure you talk about what you know and have done.</p> </li> 
-    <li> <p><strong>Start small</strong> - The best place to start is by giving brown bags to your team. Show them the work you are doing. Tell them you are trying to become a better public speaker and ask for feedback.</p> </li> 
-    <li> <p><strong>Start outside Powerpoint</strong> - When you start drafting your presentation, don’t do it in Powerpoint. Start off in a text editor or Google Doc and just outline the talk. Think about the points you want to hit and the flow of the content. I find that I change this outline 3 or 4 times before really getting into slides.</p> </li> 
-    <li> <p><strong>Practice, practice, practice</strong> - Make sure that you know your presentation well. You don’t want to look at slide and say the words, "what was I supposed to say here?". Take some time and practice in an environment similar to the one you will eventually be giving your presentation.</p> </li> 
-    <li> <p><strong>Time your practice sessions</strong> - Make sure you know how long your talk takes and how long you have. You don’t want to end an hour talk 20 minutes early. You also don’t want to go 30 minutes over. Leave 5 - 10 minutes for questions. Be considerate of your audiences time.</p> </li> 
-    <li> <p><strong>Don’t talk from the slides</strong> - This is a mistake I’ve made a number of times, and it usually results from either not knowing the subject matter well enough, or not practicing enough (or both). Your slides should punctuate your voice track, not be your voice track.</p> </li> 
-    <li> <p><strong>Bring notes</strong> - Presentation mode in Powerpoint is a great way to see the notes you have for a slide. But make sure your notes are super short. Your notes should be phrases. You want to be able to glance down, see two words, and have them trigger what you want to say. Don’t write full sentences in your notes.</p> </li> 
-    <li> <p><strong>Scale up</strong> - Don’t start your public speaking career by submitting talks to national conferences. Start small, by giving brown bags to your team. Then to your company. Then meetups. Then conferences. You need to build up your skills and confidence over time.</p> </li> 
-    <li> <p><strong>Tell stories</strong> - You don’t always have to give technical talks showcasing a technology or tool. Some of the best talks I have heard were of somebody’s experience on a project. Don’t be afraid to talk about your experiences. Also, some of my favorite talks are stories of failure, so share them.</p> </li> 
-    <li> <p><strong>Upload your slides</strong> - Make sure to upload your slides to sites like <a href="http://www.slideshare.net/">Slideshare</a> and <a href="https://speakerdeck.com/">Speakerdeck</a>. They are great ways to share your content. They also provide another means for people to discover you, so make sure you include your contact information.</p> </li> 
-    <li> <p><strong>Record your talk</strong> - One of the best ways to improve your public speaking skills is to record your talks. I have learned a lot from watching my talks. It can be painful, Even if it’s just the audio. You can do this from your computer during the talk.</p> </li> 
-    <li> <p><strong>Blog about your talk</strong> - If you have a blog, add an entry sharing your experiences giving the talk. It’s also a good way to point your users at your video (if you have it) and your slides. Here’s an example of a <a href="http://www.mikemcgarr.com/blog/continuous-delivery-applied-dc-agile-engineering-conference.html">blog entry I wrote about a talk I gave</a>.</p> </li> 
-   </ul> 
-  </div> 
-  <div class="paragraph"> 
-   <p>There are a lot of sources for how to improve your public speaking skills. In fact, I am currently reading <a href="http://presentationpatterns.com/">Presentation Patterns</a>, and it seems like a great resource.</p> 
-  </div> 
- </div> 
-</div> 
-<div class="sect1"> 
- <h2 id="_final_thoughts">Final thoughts</h2> 
- <div class="sectionbody"> 
-  <div class="paragraph"> 
-   <p>At this point you may thinking, "F' that, no way I am doing all that!". Don’t. Pick some of these things and start there. Pick off one thing and complete it. You will find that the feedback and response you get will egg you on to do more. It’s also important to note that you can have a great career and never do any of this stuff.</p> 
-  </div> 
- </div> 
+        	<p><div class="paragraph">
+<p>After I had gone through the <a href="http://www.netflix.com">Netflix</a> recruiting process, it struck me that nobody ever asked me for a resume.  The recruiting team already had all the information they needed that you would normally find on a resume.  This information was readily available online.  My profile on LinkedIn, my Twitter feed, my Github profile, and my blog all provided a comprehensive resume, more detailed than a 2-page resume.  My online presence serves as my resume, a <em>modern technical resume</em>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/img/the-modern-resume.png" alt="The Modern Resume">
+</div>
+</div>
+<div class="paragraph">
+<p>Since going through this process, I have talked to a number of friends who are looking to make a career change.  I wanted to provide some recommendations for those who don&#8217;t have a strong online presence.  Beefing up your online presence will help not only get you noticed, but help companies find out if you are the right fit.  If you&#8217;re lucky, people will be lining out the door to have you work at their company.</p>
+</div>
+<div class="sect1">
+<h2 id="_linkedin">LinkedIn</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The first place you should start is <a href="http://www.linkedin.com">LinkedIn</a>.  LinkedIn has become the go-to site for recruiters to begin searching for candidates.  Having an up-to-date and detailed LinkedIn profile can do wonders for making yourself discoverable.  If you already have a good LinkedIn profile, then you likely get pinged by recruiters constantly.  You may even find this annoying, but some day you will be glad that your LinkedIn profile is appealing.</p>
+</div>
+<div class="paragraph">
+<p>Here are my recommendations for updating your LinkedIn profile:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Summary</strong> - Write a short, concise paragraph describing what you do and what you specialize in.  This paragraph will be your hook, your elevator pitch.  What would you say to get somebody excited about you if they only read this section.</p>
+</li>
+<li>
+<p><strong>Employment history</strong> - List your previous employment history, dates, and title.  Also add a description of the work you did there.  You can be a bit more verbose here.  Bulleted lists help people like me who scan.</p>
+</li>
+<li>
+<p><strong>Skills</strong> - Add skills that you currently have, and want to continue using.  Don&#8217;t add 'assembly programming' if you just took a class in college.</p>
+</li>
+<li>
+<p><strong>Recommendations</strong> - Having a strong collection of recommendations is a nice touch.  Asking for a recommendation from others might be hard for you to do.  Best bet is, if you want to get a recommendation, give one.</p>
+</li>
+<li>
+<p><strong>Link your accounts</strong> - Make sure you list your twitter account, blog and any other account on your LinkedIn profile.</p>
+</li>
+<li>
+<p><strong>Picture optional</strong> - Don&#8217;t feel like you need to add a picture.  If you are concerned about privacy, then don&#8217;t add it.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Remember that if you do nothing else, I recommend making sure you have a complete LinkedIn profile.  It raises questions from hiring managers if a individual doesn&#8217;t have a thorough profile.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_twitter">Twitter</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>While <a href="http://www.twitter.com">Twitter</a> may not be an indicator of how technically competent you are, it is still important.  I am disappointed when I come across a technically promising LinkedIn profile, but only 25 tweets over 2 years.  I know this isn&#8217;t exactly fair, but Twitter has become the communication medium of the tech industry.  If you are an engineer and don’t participate, that speaks volumes.</p>
+</div>
+<div class="paragraph">
+<p>Here are my recommendations for getting started:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Sign up now!</strong> - If you don’t have a Twitter account, create one now.  It&#8217;s easy.</p>
+</li>
+<li>
+<p><strong>Don&#8217;t sweat your handle, yet</strong> - Make sure you give it a simple, short, handle.  Twitter allows you to change the name, but it’s better to get something simple early and stick with it.</p>
+</li>
+<li>
+<p><strong>Keep it professional</strong> - I don&#8217;t always follow this rule and my tweets are sometimes more politically charged than my office presence, but I recommend keeping it professional.  Always ask, would I want this tweet on the front page of the New York Times.</p>
+</li>
+<li>
+<p><strong>Tweet regularly</strong> - Make sure you tweet fairly regularly.  Tweeting twice a week is just 104 tweets in a year&#8230;&#8203;not a whole lot.</p>
+</li>
+<li>
+<p><strong>Be mundane</strong> - Not every tweet has to be ground breaking.  If you hit a problem at work, tweet about it.  When you discover something new and cool, tweet about it.  When you find something you hate, tweet about it.</p>
+</li>
+<li>
+<p><strong>Add a picture</strong> - It doesn&#8217;t have to be your face, but don&#8217;t leave the defaults.</p>
+</li>
+<li>
+<p><strong>Share articles</strong> - A good way to tweet is to share articles and stories you liked.  It doesn&#8217;t matter if somebody else already tweeted it.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Building a good Twitter account can be a long road, so just start one tweet at a time.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_github">Github</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Having a good <a href="http://www.github.com">Github</a> account can be the most useful part of your modern resume.  Github serves as a modern portfolio of work, demonstrating how well you write code.  Don’t hesitate to put code on Github, even if it’s just examples of frameworks and tools that you are learning.  Ideally, you are open sourcing or contributing to an existing open source project.</p>
+</div>
+<div class="paragraph">
+<p>Here are some bootstrapping tips for improving your Github account presence:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Learn</strong> - If you are learning a new technology, create a repo with the coding exercises there.</p>
+</li>
+<li>
+<p><strong>Document</strong> - Fork an open source project and update the documentation.  Most mid-size open source projects would love documentation help.  If you are already using the project, this should take you less than one hour.</p>
+</li>
+<li>
+<p><strong>Test</strong> - Fork an open source project and add some unit tests.  Hopefully the maintainer of the project believes in unit testing.  Make a pull request.</p>
+</li>
+<li>
+<p><strong>Fix</strong> - Fork an open source project and fix a bug.  Everybody loves bug fixes.</p>
+</li>
+<li>
+<p><strong>Find the right project</strong> - Find a project that you are passionate about and you might use daily.  Ideally, this project also isn&#8217;t that popular.  Smaller projects are likely to be receptive to new commiters.</p>
+</li>
+<li>
+<p><strong>Build</strong> - You know that silly manual task that&#8217;s been annoying you for a week now?  Carve out a morning to automate it and open source the code.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Your eventual goal with Github is to contribute to open source projects, whether they are your own or somebody else&#8217;s.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_blogging">Blogging</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Almost every engineer I know falls into one of three camps: those who have a blog, those who don&#8217;t, and those who talk about starting a blog.  A large majority of those with blogs haven&#8217;t posted anything new in over a year.  Of those who talk about starting a blog, they seem to always have a reason why they haven&#8217;t started.  What does that say?  Blogging is hard work.  But it is well worth the effort.  It proves that you can compose your thoughts and write compelling prose.  It is a great way to sell your ideas.  It is a great way to get noticed.</p>
+</div>
+<div class="paragraph">
+<p>Getting started isn&#8217;t easy, but here are some pointers:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pick a domain name</strong> - You have two options: be creative or choose your name.  Either works great, but buy the domain name.  Give yourself 24 hours to pick a name, and then just go with it.</p>
+</li>
+<li>
+<p><strong>Use a service</strong> - You may be tempted to use a blogging tool like <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://octopress.org/">Octopress</a> or <a href="http://jbake.org/">JBake</a>, and yes they are awesome (I am loving JBake).  You may even want to stand up your own Wordpress server.  Don&#8217;t. They are an obstacle to getting started.  Use a service like Wordpress.com, Blogger or Tumblr.  The only setup you will need is assigning your domain name to the service.  Once that&#8217;s done, you can start blogging.</p>
+</li>
+<li>
+<p><strong>Fight the urge to make it pretty</strong> - Your first job is to build content.  Don&#8217;t worry about fonts, designs, and content layout.  They matter eventually, but a pretty blog with no content is worthless.</p>
+</li>
+<li>
+<p><strong>First entry, make it short</strong> - The hardest part is writing that first blog entry.  So just do it.  Write a blog entry about how you are starting a blog.  People will read that and say, "Of course you are, cause I am reading it".  But that&#8217;s ok.  You need to get the first one out of the way.</p>
+</li>
+<li>
+<p><strong>Post regularly</strong> - Keep some simple goals.  Once a month.  Once you achieve that, double it to twice a month.  Then once a week.  The more you write, the easier it will be.</p>
+</li>
+<li>
+<p><strong>Share posts everywhere</strong> - When you write a blog, make sure you tweet about it, share on Facebook, share on LinkedIn, share on Google+&#8230;&#8203;everywhere.  The more places you share, the more traffic you will recieve.</p>
+</li>
+<li>
+<p><strong>Don&#8217;t email it, blog it</strong> - Years ago, I asked my boss for two monitors.  He said, "Why do you need it?".  He asked me to justify it.  So rather than sending him an email explanation, I wrote a <a href="http://www.mikemcgarr.com/blog/justifying-dual-monitors.html">blog entry justification</a> and sent him that.  This turned out to be one of my most popular blog entries, because so many people needed to make the same justification (unfortunately).</p>
+</li>
+<li>
+<p><strong>Quick, short posts</strong> - A good way to create content is to write a blog entry on that small problem you just solved.  These kinds of posts are great for generating traffic, are easy to write, and people love reading then.  Another reason I like them is that they can also serve as your long term memory.  I constantly refer back to my blog entry on how <a href="http://www.mikemcgarr.com/blog/git-tip-branch-your-previous-commit.html">branch my previous commit in Git</a>.</p>
+</li>
+<li>
+<p><strong>This is your journal</strong> - Think of your blog as a professional journal.  You are providing a detailed picture of your professional journey as it happens.  Somebody will care about the work you did, trust me.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Having a good blog with a lot of content is hard work, but well worth it.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">A story on blogging</div>
+<div class="paragraph">
+<p>To further punctuate the value of blogging, let me tell a story.  Over two years ago, I was working in consulting and looking to break out.  I was meeting with <a href="https://twitter.com/PerfForensics">Steve Feldman</a> from <a href="http://www.blackboard.com">Blackboard</a> for coffee.  When I showed up, he pulled out a piece of paper and put it front of me saying, "I want you to come to Blackboard and do this."  On that piece of paper was a blog entry that I had written in <a href="http://www.mikemcgarr.com/blog/alm.html">May of 2011 about ALM</a>.  I was floored.  I took the job because I was being asked to implement a vision I laid out my blog.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_public_speaking">Public speaking</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Public speaking is not for everybody, but it will have an amazing impact on your professional career.  I have done enough public speaking to feel fairly comfortable in a large crowd.  Public speaking is hard, but can propel your status just as well as anything above.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Talk about what you know</strong> - It is quickly obvious when a speaker knows only a little bit about a subject, or has never actually done what they are saying.  Make sure you talk about what you know and have done.</p>
+</li>
+<li>
+<p><strong>Start small</strong> - The best place to start is by giving brown bags to your team.  Show them the work you are doing.  Tell them you are trying to become a better public speaker and ask for feedback.</p>
+</li>
+<li>
+<p><strong>Start outside Powerpoint</strong> - When you start drafting your presentation, don&#8217;t do it in Powerpoint.  Start off in a text editor or Google Doc and just outline the talk.  Think about the points you want to hit and the flow of the content.  I find that I change this outline 3 or 4 times before really getting into slides.</p>
+</li>
+<li>
+<p><strong>Practice, practice, practice</strong> - Make sure that you know your presentation well.  You don&#8217;t want to look at slide and say the words, "what was I supposed to say here?".  Take some time and practice in an environment similar to the one you will eventually be giving your presentation.</p>
+</li>
+<li>
+<p><strong>Time your practice sessions</strong> - Make sure you know how long your talk takes and how long you have. You don&#8217;t want to end an hour talk 20 minutes early.  You also don&#8217;t want to go 30 minutes over.  Leave 5 - 10 minutes for questions.  Be considerate of your audiences time.</p>
+</li>
+<li>
+<p><strong>Don&#8217;t talk from the slides</strong> - This is a mistake I&#8217;ve made a number of times, and it usually results from either not knowing the subject matter well enough, or not practicing enough (or both).  Your slides should punctuate your voice track, not be your voice track.</p>
+</li>
+<li>
+<p><strong>Bring notes</strong> - Presentation mode in Powerpoint is a great way to see the notes you have for a slide.  But make sure your notes are super short.  Your notes should be phrases.  You want to be able to glance down, see two words, and have them trigger what you want to say.  Don&#8217;t write full sentences in your notes.</p>
+</li>
+<li>
+<p><strong>Scale up</strong> - Don&#8217;t start your public speaking career by submitting talks to national conferences.  Start small, by giving brown bags to your team.  Then to your company.  Then meetups.  Then conferences.  You need to build up your skills and confidence over time.</p>
+</li>
+<li>
+<p><strong>Tell stories</strong> - You don&#8217;t always have to give technical talks showcasing a technology or tool.  Some of the best talks I have heard were of somebody&#8217;s experience on a project.  Don&#8217;t be afraid to talk about your experiences.  Also, some of my favorite talks are stories of failure, so share them.</p>
+</li>
+<li>
+<p><strong>Upload your slides</strong> - Make sure to upload your slides to sites like <a href="http://www.slideshare.net/">Slideshare</a> and <a href="https://speakerdeck.com/">Speakerdeck</a>.  They are great ways to share your content.  They also provide another means for people to discover you, so make sure you include your contact information.</p>
+</li>
+<li>
+<p><strong>Record your talk</strong> - One of the best ways to improve your public speaking skills is to record your talks.  I have learned a lot from watching my talks.  It can be painful, Even if it&#8217;s just the audio.  You can do this from your computer during the talk.</p>
+</li>
+<li>
+<p><strong>Blog about your talk</strong> - If you have a blog, add an entry sharing your experiences giving the talk.  It&#8217;s also a good way to point your users at your video (if you have it) and your slides.  Here&#8217;s an example of a <a href="http://www.mikemcgarr.com/blog/continuous-delivery-applied-dc-agile-engineering-conference.html">blog entry I wrote about a talk I gave</a>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>There are a lot of sources for how to improve your public speaking skills.  In fact, I am currently reading <a href="http://presentationpatterns.com/">Presentation Patterns</a>, and it seems like a great resource.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_final_thoughts">Final thoughts</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>At this point you may thinking, "F' that, no way I am doing all that!".  Don&#8217;t.  Pick some of these things and start there.  Pick off one thing and complete it.  You will find that the feedback and response you get will egg you on to do more.  It&#8217;s also important to note that you can have a great career and never do any of this stuff.</p>
+</div>
+</div>
 </div></p>
 
 					<p><em>Share this:</em></p>
@@ -294,19 +377,52 @@
 		<div id="push"></div>
     </div>
 
-    <div id="footer">
+		<!-- Footer -->
+    <footer>
       <div class="container">
-        <p class="muted credit">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
-        <p class="muted credit">&copy; 2009-2016 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <li class="list-inline-item">
+                <a href="https://twitter.com/SonOfGarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://www.linkedin.com/in/jmcgarr/">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://github.com/jmcgarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+						<p class="copyright text-muted">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
+            <p class="copyright text-muted">Copyright &copy; Mike McGarr 2009-2018 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v4.1</a> | Generated with <a href="http://jbake.org">JBake v2.6.2</a></p>
+          </div>
+        </div>
       </div>
-    </div>
+    </footer>
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/js/jquery-1.9.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/run_prettify.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom scripts for the clean blog look and feel -->
+    <script src="/js/clean-blog.min.js"></script>
+
     <script type="text/javascript">
       (function() {
         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;

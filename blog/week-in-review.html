@@ -9,175 +9,179 @@
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
 
-    <!-- Le styles -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="/css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- previous styles -->
     <link href="/css/asciidoctor.css" rel="stylesheet">
-    <link href="/css/base.css" rel="stylesheet">
-    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="/css/extra.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,300,400' rel='stylesheet' type='text/css'>
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="/js/html5shiv.js"></script>
-    <![endif]-->
 
-    <!-- Fav and touch icons -->
-    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
     <link rel="shortcut icon" href="/favicon.ico">
-<script type="text/javascript">
+    <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-49993013-1']);
-  _gaq.push(['_trackPageview']);
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-49993013-1']);
+      _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
 
-</script>
+    </script>
   </head>
   <body>
-    <div id="fb-root"></div>
-      <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
     <script src="//platform.linkedin.com/in.js" type="text/javascript">
      lang: en_US
     </script>
     <div id="wrap">
 
-	<!-- Fixed navbar -->
-      <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-          <div class="container">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="brand" href="/">Mike McGarr</a>
-            <div class="nav-collapse collapse">
-              <ul class="nav">
-                <li><a href="/about.html">About</a></li>
-                <li><a href="/archive.html">Posts</a></li>
-                <li><a href="/talks.html">Talks</a></li>
-                <li><a href="/feed.xml">Subscribe</a></li>
-              </ul>
-            </div><!--/.nav-collapse -->
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+          <a class="navbar-brand" href="/">Mike McGarr</a>
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/about.html">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/archive.html">Blog</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/talks.html">Talks</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/feed.xml">Subscribe</a>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
-      <div class="container-fluid">
-    <div class="row-fluid">
+      </nav>
 
-				<div class="span6 offset3">
+      
+<!-- Grab masthead data -->
 
-					<div class="page-header">
-						<h1>How I share information with my team</h1>
-					</div>
+      <!-- Page Header -->
+      <header class="masthead" style="background-image: url('/img/masthead/saocom-falcon-launch.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <div class="page-heading">
+                <h1>How I share information with my team</h1>
+                  <span class="subheading"><em>November 14, 2016</em></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="">
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row justify-content-between">
+            <div class="col-4"></div>
+            <div class="col-4 text-right">
+              <p class="photo-credit">Photo credit:
+                  <a href="https://www.flickr.com/photos/spacex/44451125454/" target="_blank">https://www.flickr.com/photos/spacex/44451125454/</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </header>
 
-					<p><em>November 14, 2016</em></p>
+		<div class="container">
 
-				</div>
-		</div>
+        <div class="col-lg-8 col-md-10 mx-auto">
 
-
-		<div class="row-fluid">
-
-				<div class="span2 offset1">
-					<p/>
-					<p class="text-right"><em></em>
-								<a href="/tags/management.html">management</a><br/>
-</em>
-								<a href="/tags/leadership.html">leadership</a><br/>
-</em>
-								<a href="/tags/productivity.html">productivity</a><br/>
-</em>
-								<a href="/tags/writing.html">writing</a><br/>
-					</p>
-				</div>
-
-        <div class="span6">
-
-        	<p><div class="paragraph"> 
- <p>As an engineering manager at <a href="http://www.netflix.com">Netflix</a>, I spend most of my time in meetings and one-on-ones. During these meetings, I collect a lot of information that’s valuable to the members of my engineering team. When my team was only four people, disseminating information was easy. It usually involved a quick hallway chat or was covered during a regular one-on-one. But late last year my team doubled in size. With the larger team, I struggled to keep everybody informed in a timely way. It became obvious that I wasn’t effectively scaling team communication and I needed to make a change.</p> 
-</div> 
-<div class="paragraph"> 
- <p>My first instinct was to establish a weekly team meeting to share my notes and info collected from the week prior. But I was reticent to establish a weekly ceremony just to have my team sit and listen to me. I felt it would not be an effective use of both my time and theirs. I shared my dilemma with <a href="https://twitter.com/aglover">Andy Glover</a>, who manages another Netflix engineering team of a similar size. Andy told me that each week he sends his team a Week-in-Review: a document containing relevant meeting notes from the week prior. I decided to give it a try.</p> 
-</div> 
-<div class="sect1"> 
- <h2 id="_whats_a_week_in_review">What’s a Week-in-Review?</h2> 
- <div class="sectionbody"> 
-  <div class="paragraph"> 
-   <p>It’s been nine months since I started writing my own “WIR”, and the impact has been significant. Here’s how it works: Each WIR is a summary of the meetings and conversations that I had over the course of a week. I don’t summarize every meeting, focusing only on the most relevant information. Each week’s entry winds up being a two to three pages <a href="https://www.google.com/docs/about/">Google Doc</a>. Rather than creating a new Google Doc each week, I prepend each week’s entry to the top of the prior week’s. Every WIR I’ve written for 2016 is within a single Google Doc, that now runs about 50 pages long.</p> 
-  </div> 
-  <div class="paragraph"> 
-   <p>Every Friday, I carve out a couple hours to write my WIR. I try to keep notes throughout the week, but I am not always good about this. My goal is to have my WIR waiting in everybody’s inbox no later than first thing Monday morning.</p> 
-  </div> 
-  <div class="paragraph"> 
-   <p>Over the year, the layout I use for my WIR has evolved. Early versions wound up being just a series of paragraphs, each tackling a particular topic or meeting. I began to see patterns in my WIR and began creating sections to cover each week. My current WIR format something looks like this:</p> 
-  </div> 
-  <div class="imageblock"> 
-   <div class="content"> 
-    <a class="image" href="https://docs.google.com/document/d/117EvvX8RwnYMC9HCMnbfUmIrB0oSvoRmLkjPBInFKfY"><img src="http://www.mikemcgarr.com/img/week-in-review.png" alt="Week in Review Example"></a> 
-   </div> 
-  </div> 
-  <div class="paragraph"> 
-   <p><strong><em>Click the image (or <a href="https://docs.google.com/document/d/117EvvX8RwnYMC9HCMnbfUmIrB0oSvoRmLkjPBInFKfY">here</a>) to view the full Google Doc.</em></strong></p> 
-  </div> 
-  <div class="paragraph"> 
-   <p>I try to keep it light and informal in the opening paragraphs. I have settled on four sections, but these are likely to evolve over time. The <strong><em>Planning and Roadmap</em></strong> section usually makes an appearance during our quarterly planning cycle. I spend a significant portion of my time hiring, which is why I include a <strong><em>Recruiting</em></strong> section. The team is always interested in the recruiting pipeline and progress I am making. My team also has a diverse portfolio of products,so I also include a <strong><em>Product Updates</em></strong> section to keep us all on the same page. These first three sections are focused on “swirling” information internally within the team. And I usually close out each WIR with a <strong><em>Meetings and Context</em></strong> section, focused on exposing external information to the team.</p> 
-  </div> 
- </div> 
-</div> 
-<div class="sect1"> 
- <h2 id="_why_google_docs">Why Google Docs?</h2> 
- <div class="sectionbody"> 
-  <div class="paragraph"> 
-   <p>I could use a blogging platform or just sending an email for my WIR. But Google Docs offers a ton of advantages. First, Google Docs’ commenting features allows my WIR to be collaborative. My team is comfortable correcting details, asking questions and merely ‘+1’ to parts they love.</p> 
-  </div> 
-  <div class="paragraph"> 
-   <p>Google Docs provides me strict control access control over my WIR. By limiting access to just the team (and my manager), I can create a safe space for candor.</p> 
-  </div> 
-  <div class="paragraph"> 
-   <p>Lastly, because all my WIR entries are within a single Google Doc, search is greatly simplified. My WIR has become a detailed log of every meeting and important conversation I’ve had for the past year. If I want to remember who said something or when, I can search my WIR using Ctrl-F.</p> 
-  </div> 
- </div> 
-</div> 
-<div class="sect1"> 
- <h2 id="_why_not_a_team_meeting">Why not a team meeting?</h2> 
- <div class="sectionbody"> 
-  <div class="paragraph"> 
-   <p>I freely admit to having a bias against meetings, so I’ll start there.</p> 
-  </div> 
-  <div class="paragraph"> 
-   <p>Meetings have the potential to be a gigantic waste of time. You are effectively applying a global lock on the productivity of the team. Meetings are extremely valuable when they focus on discussion. But if a meeting is only for one-way information transfer, you need to ask if there are any other possible ways to sharing this information before you pull your whole team off of their laptops and into a conference room.</p> 
-  </div> 
-  <div class="paragraph"> 
-   <p>Meetings break flow. Everybody’s schedule is different and when they are in flow is also different. For me, I’m a morning person and want to be heads down early. For others, it’s the afternoon or evening. A meeting is likely to disrupt somebody’s flow, no matter when I schedule it. Being a former engineer helps me understand the importance of flow, and I do my best as a manager to eliminate meetings whenever I can.</p> 
-  </div> 
-  <div class="paragraph"> 
-   <p>One the greatest features of a WIR is its asynchronous nature. Each member of my team has their own preferences for when, where and how often they read it. When a team member is out on vacation, it is easy for them to catch up on what they missed. I also use it as a tool for helping onboard new team members. They can read as much as they want about what our team has been doing this past year.</p> 
-  </div> 
- </div> 
-</div> 
-<div class="sect1"> 
- <h2 id="_conclusion">Conclusion</h2> 
- <div class="sectionbody"> 
-  <div class="paragraph"> 
-   <p>There is also a small, personal benefit to the WIR. I found that whenever I finish a WIR, I have this tremendous feeling of accomplishment. I used to look back on my meeting packed calendar and think that I didn’t get very much accomplished. The act of writing my WIR helps me extract the value from each meeting. It allows me to reflect and keep things moving forward. It makes me realize how much I “did” each week. Authoring a Week-in-Review has been simple, yet powerful management tool. If you’re trying to figure out how to share information your team needs, that only you have gathered, and you want to cut out a team meeting, give it a try. Thanks again to Andy for showing me the way.</p> 
-  </div> 
- </div> 
+        	<p><div class="paragraph">
+<p>As an engineering manager at <a href="http://www.netflix.com">Netflix</a>, I spend most of my time in meetings and one-on-ones. During these meetings, I collect a lot of information that’s valuable to the members of my engineering team. When my team was only four people, disseminating information was easy. It usually involved a quick hallway chat or was covered during a regular one-on-one. But late last year my team doubled in size. With the larger team, I struggled to keep everybody informed in a timely way. It became obvious that I wasn’t effectively scaling team communication and I needed to make a change.</p>
+</div>
+<div class="paragraph">
+<p>My first instinct was to establish a weekly team meeting to share my notes and info collected from the week prior. But I was reticent to establish a weekly ceremony just to have my team sit and listen to me. I felt it would not be an effective use of both my time and theirs. I shared my dilemma with <a href="https://twitter.com/aglover">Andy Glover</a>, who manages another Netflix engineering team of a similar size. Andy told me that each week he sends his team a Week-in-Review: a document containing relevant meeting notes from the week prior. I decided to give it a try.</p>
+</div>
+<div class="sect1">
+<h2 id="_whats_a_week_in_review">What&#8217;s a Week-in-Review?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>It’s been nine months since I started writing my own “WIR”, and the impact has been significant. Here’s how it works: Each WIR is a summary of the meetings and conversations that I had over the course of a week. I don’t summarize every meeting, focusing only on the most relevant information. Each week’s entry winds up being a two to three pages <a href="https://www.google.com/docs/about/">Google Doc</a>. Rather than creating a new Google Doc each week, I prepend each week’s entry to the top of the prior week’s. Every WIR I’ve written for 2016 is within a single Google Doc, that now runs about 50 pages long.</p>
+</div>
+<div class="paragraph">
+<p>Every Friday, I carve out a couple hours to write my WIR. I try to keep notes throughout the week, but I am not always good about this. My goal is to have my WIR waiting in everybody’s inbox no later than first thing Monday morning.</p>
+</div>
+<div class="paragraph">
+<p>Over the year, the layout I use for my WIR has evolved. Early versions wound up being just a series of paragraphs, each tackling a particular topic or meeting. I began to see patterns in my WIR and began creating sections to cover each week. My current WIR format something looks like this:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="https://docs.google.com/document/d/117EvvX8RwnYMC9HCMnbfUmIrB0oSvoRmLkjPBInFKfY"><img src="/img/week-in-review.png" alt="Week in Review Example"></a>
+</div>
+</div>
+<div class="paragraph">
+<p><strong><em>Click the image (or <a href="https://docs.google.com/document/d/117EvvX8RwnYMC9HCMnbfUmIrB0oSvoRmLkjPBInFKfY">here</a>) to view the full Google Doc.</em></strong></p>
+</div>
+<div class="paragraph">
+<p>I try to keep it light and informal in the opening paragraphs. I have settled on four sections, but these are likely to evolve over time. The <strong><em>Planning and Roadmap</em></strong> section usually makes an appearance during our quarterly planning cycle. I spend a significant portion of my time hiring, which is why I include a <strong><em>Recruiting</em></strong> section. The team is always interested in the recruiting pipeline and progress I am making. My team also has a diverse portfolio of products,so I also include a <strong><em>Product Updates</em></strong> section to keep us all on the same page. These first three sections are focused on “swirling” information internally within the team. And I usually close out each WIR with a <strong><em>Meetings and Context</em></strong> section, focused on exposing external information to the team.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_why_google_docs">Why Google Docs?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>I could use a blogging platform or just sending an email for my WIR. But Google Docs offers a ton of advantages.
+First, Google Docs’ commenting features allows my WIR to be collaborative. My team is comfortable correcting details, asking questions and merely ‘+1’ to parts they love.</p>
+</div>
+<div class="paragraph">
+<p>Google Docs provides me strict control access control over my WIR. By limiting access to just the team (and my manager), I can create a safe space for candor.</p>
+</div>
+<div class="paragraph">
+<p>Lastly, because all my WIR entries are within a single Google Doc, search is greatly simplified. My WIR has become a detailed log of every meeting and important conversation I’ve had for the past year. If I want to remember who said something or when, I can search my WIR using Ctrl-F.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_why_not_a_team_meeting">Why not a team meeting?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>I freely admit to having a bias against meetings, so I’ll start there.</p>
+</div>
+<div class="paragraph">
+<p>Meetings have the potential to be a gigantic waste of time. You are effectively applying a global lock on the productivity of the team. Meetings are extremely valuable when they focus on discussion. But if a meeting is only for one-way information transfer, you need to ask if there are any other possible ways to sharing this information before you pull your whole team off of their laptops and into a conference room.</p>
+</div>
+<div class="paragraph">
+<p>Meetings break flow. Everybody’s schedule is different and when they are in flow is also different. For me, I’m a morning person and want to be heads down early. For others, it’s the afternoon or evening. A meeting is likely to disrupt somebody’s flow, no matter when I schedule it. Being a former engineer helps me understand the importance of flow, and I do my best as a manager to eliminate meetings whenever I can.</p>
+</div>
+<div class="paragraph">
+<p>One the greatest features of a WIR is its asynchronous nature. Each member of my team has their own preferences for when, where and how often they read it. When a team member is out on vacation, it is easy for them to catch up on what they missed. I also use it as a tool for helping onboard new team members. They can read as much as they want about what our team has been doing this past year.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conclusion">Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There is also a small, personal benefit to the WIR. I found that whenever I finish a WIR, I have this tremendous feeling of accomplishment. I used to look back on my meeting packed calendar and think that I didn’t get very much accomplished. The act of writing my WIR helps me extract the value from each meeting. It allows me to reflect and keep things moving forward.  It makes me realize how much I “did” each week. Authoring a Week-in-Review has been simple, yet powerful management tool. If you’re trying to figure out how to share information your team needs, that only you have gathered, and you want to cut out a team meeting, give it a try. Thanks again to Andy for showing me the way.</p>
+</div>
+</div>
 </div></p>
 
 					<p><em>Share this:</em></p>
@@ -210,19 +214,52 @@
 		<div id="push"></div>
     </div>
 
-    <div id="footer">
+		<!-- Footer -->
+    <footer>
       <div class="container">
-        <p class="muted credit">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
-        <p class="muted credit">&copy; 2009-2016 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <li class="list-inline-item">
+                <a href="https://twitter.com/SonOfGarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://www.linkedin.com/in/jmcgarr/">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://github.com/jmcgarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+						<p class="copyright text-muted">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
+            <p class="copyright text-muted">Copyright &copy; Mike McGarr 2009-2018 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v4.1</a> | Generated with <a href="http://jbake.org">JBake v2.6.2</a></p>
+          </div>
+        </div>
       </div>
-    </div>
+    </footer>
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/js/jquery-1.9.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/run_prettify.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom scripts for the clean blog look and feel -->
+    <script src="/js/clean-blog.min.js"></script>
+
     <script type="text/javascript">
       (function() {
         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;

@@ -9,159 +9,168 @@
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
 
-    <!-- Le styles -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="/css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- previous styles -->
     <link href="/css/asciidoctor.css" rel="stylesheet">
-    <link href="/css/base.css" rel="stylesheet">
-    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="/css/extra.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,300,400' rel='stylesheet' type='text/css'>
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="/js/html5shiv.js"></script>
-    <![endif]-->
 
-    <!-- Fav and touch icons -->
-    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
     <link rel="shortcut icon" href="/favicon.ico">
-<script type="text/javascript">
+    <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-49993013-1']);
-  _gaq.push(['_trackPageview']);
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-49993013-1']);
+      _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
 
-</script>
+    </script>
   </head>
   <body>
-    <div id="fb-root"></div>
-      <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
     <script src="//platform.linkedin.com/in.js" type="text/javascript">
      lang: en_US
     </script>
     <div id="wrap">
 
-	<!-- Fixed navbar -->
-      <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-          <div class="container">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="brand" href="/">Mike McGarr</a>
-            <div class="nav-collapse collapse">
-              <ul class="nav">
-                <li><a href="/about.html">About</a></li>
-                <li><a href="/archive.html">Posts</a></li>
-                <li><a href="/talks.html">Talks</a></li>
-                <li><a href="/feed.xml">Subscribe</a></li>
-              </ul>
-            </div><!--/.nav-collapse -->
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+          <a class="navbar-brand" href="/">Mike McGarr</a>
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/about.html">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/archive.html">Blog</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/talks.html">Talks</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/feed.xml">Subscribe</a>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
-      <div class="container-fluid">
-    <div class="row-fluid">
+      </nav>
 
-				<div class="span6 offset3">
+      
+<!-- Grab masthead data -->
 
-					<div class="page-header">
-						<h1>JMeter Crash Course</h1>
-					</div>
+      <!-- Page Header -->
+      <header class="masthead" style="background-image: url('/img/masthead/saocom-falcon-launch.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <div class="page-heading">
+                <h1>JMeter Crash Course</h1>
+                  <span class="subheading"><em>May 07, 2012</em></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="">
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row justify-content-between">
+            <div class="col-4"></div>
+            <div class="col-4 text-right">
+              <p class="photo-credit">Photo credit:
+                  <a href="https://www.flickr.com/photos/spacex/44451125454/" target="_blank">https://www.flickr.com/photos/spacex/44451125454/</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </header>
 
-					<p><em>May 07, 2012</em></p>
+		<div class="container">
 
-				</div>
-		</div>
+        <div class="col-lg-8 col-md-10 mx-auto">
 
-
-		<div class="row-fluid">
-
-				<div class="span2 offset1">
-					<p/>
-					<p class="text-right"><em></em>
-								<a href="/tags/jmeter.html">jmeter</a><br/>
-</em>
-								<a href="/tags/performance-testing.html">performance testing</a><br/>
-					</p>
-				</div>
-
-        <div class="span6">
-
-        	<p><p>I have had a lot of success using <a title="JMeter" href="http://jmeter.apache.org/index.html" target="_blank">JMeter</a> to provide quick performance tests, and this guide will help you get started with JMeter. &nbsp;I have used JMeter with success on web applications, web services and databases, and I find that it works extremely well. &nbsp;I have even used JMeter on .NET projects. &nbsp;This doesn't cover performance testing best practices. &nbsp;I will save those for another post.</p> 
-<h3>Download and install the Java SDK</h3> 
-<ol> 
- <li>Download the SDK from Oracle <a title="Java SE Development Kit 6 Update 27" href="http://www.oracle.com/technetwork/java/javasebusiness/downloads/java-archive-downloads-javase6-419409.html#jdk-6u27-oth-JPR" target="_blank">here </a>(Note: Recommend Java SE 6 update 27. &nbsp;I've had issues with update 29)</li> 
- <li>Run the installer. &nbsp;Take note of the install location</li> 
- <li>Add $java_install_dir/bin/ to your system path</li> 
-</ol> 
-<h3>Install JMeter</h3> 
-<ol> 
- <li>Download JMeter from Apache's website:&nbsp;<a title="JMeter Downloads" href="http://jmeter.apache.org/download_jmeter.cgi" target="_blank">http://jmeter.apache.org/download_jmeter.cgi</a></li> 
- <li>Unzip to a location on your machine.</li> 
- <li>Add $jmeter_install_dir/bin to your path (Note: if you are using Windows, then I recommend just creating a shortcut to $jmeter_install_dir/bin/jmeter.bat)</li> 
- <li>Run the bin/jmeter command and you should see JMeter open a window.</li> 
-</ol> 
-<div>
- <img title="jmeter-window" src="http://www.mikemcgarr.com/img/jmeter-window.png" alt="" width="614" height="402">
-</div> 
-<h3>Recording a Script</h3> 
-<p>The following instructions will setup JMeter to record a performance script that you can use for replay. &nbsp;This is the fastest way of setting up a performance test script.</p> 
-<ol> 
- <li>Right-click on Test Plan and then select Add &gt; Threads (Users) &gt; &nbsp;and Create a ThreadGroup</li> 
- <li>Right-click on the Workbench then select Add &gt; Non-Test Elements &gt; HTTP Proxy Server 
-  <ol> 
-   <li>Set the Target Controller to "Test Plan &gt; &nbsp;Thread Group"</li> 
-   <li>Set the Grouping to "Store 1st sampler of each group only"</li> 
-   <li>Add Exclusions</li> 
-   <li>Change Port (Optional)</li> 
-   <li>Start the Proxy Server</li> 
-  </ol> </li> 
- <li>Click the Start button on the Http Proxy Server</li> 
- <li>Update IE to use a Proxy Server 
-  <ol> 
-   <li>Internet Options</li> 
-   <li>Connections Tab</li> 
-   <li>LAN Settings</li> 
-   <li>Click 'User Proxy Server'</li> 
-   <li>Enter localhost and port.</li> 
-   <li>Click OK and OK.</li> 
-  </ol> </li> 
- <li>Start clicking through your application (make sure JMeter is recording your clicks)</li> 
- <li>Save the recording.</li> 
-</ol> 
-<h3>Adding Listeners</h3> 
-<p>JMeter uses listeners to record the results of the performance test. &nbsp;Take a look at the various types of listeners <a title="JMeter Listeners" href="http://jmeter.apache.org/usermanual/listeners.html" target="_blank">here</a> and add one by right clicking on the Thread Group and adding a Listener there.</p> 
-<h3>Running a Performance Test</h3> 
-<p>Once your script is recorded and you have added listeners, make sure you save your script. &nbsp;Now you can run it!</p> 
-<ol> 
- <li>Open up the ThreadGroup node and make the following changes: 
-  <ol> 
-   <li>Change the Number of Threads to the number of concurrent users you would like to run in the performance test.</li> 
-   <li>Change the Ramp-up Period to the number of seconds it takes for all the users to start.</li> 
-  </ol> </li> 
- <li>In the menu, click Run, Start.</li> 
- <li>Sit back and watch JMeter ramp up!</li> 
-</ol> 
-<h3>Final Thoughts</h3> 
-<p>This post is intended to get you started with a simple JMeter performance test. &nbsp;I also only focused on using JMeter to performance test a web application. &nbsp;JMeter can performance test web apps, databases, JMS servers, email servers, LDAP servers, web services, and much more. &nbsp;I recommend taking a look at JMeter's manual, available <a title="JMeter Manual" href="http://jmeter.apache.org/usermanual/index.html" target="_blank">here</a>.</p></p>
+        	<p><p>I have had a lot of success using <a title="JMeter" href="http://jmeter.apache.org/index.html" target="_blank">JMeter</a> to provide quick performance tests, and this guide will help you get started with JMeter.  I have used JMeter with success on web applications, web services and databases, and I find that it works extremely well.  I have even used JMeter on .NET projects.  This doesn't cover performance testing best practices.  I will save those for another post.</p>
+<h3>Download and install the Java SDK</h3>
+<ol>
+<li>Download the SDK from Oracle <a title="Java SE Development Kit 6 Update 27" href="http://www.oracle.com/technetwork/java/javasebusiness/downloads/java-archive-downloads-javase6-419409.html#jdk-6u27-oth-JPR" target="_blank">here </a>(Note: Recommend Java SE 6 update 27.  I've had issues with update 29)</li>
+<li>Run the installer.  Take note of the install location</li>
+<li>Add $java_install_dir/bin/ to your system path</li>
+</ol>
+<h3>Install JMeter</h3>
+<ol>
+<li>Download JMeter from Apache's website: <a title="JMeter Downloads" href="http://jmeter.apache.org/download_jmeter.cgi" target="_blank">http://jmeter.apache.org/download_jmeter.cgi</a></li>
+<li>Unzip to a location on your machine.</li>
+<li>Add $jmeter_install_dir/bin to your path (Note: if you are using Windows, then I recommend just creating a shortcut to $jmeter_install_dir/bin/jmeter.bat)</li>
+<li>Run the bin/jmeter command and you should see JMeter open a window.</li>
+</ol>
+<div><img title="jmeter-window" src="/img/jmeter-window.png" alt="" width="614" height="402" /></div>
+<h3>Recording a Script</h3>
+<p>The following instructions will setup JMeter to record a performance script that you can use for replay.  This is the fastest way of setting up a performance test script.</p>
+<ol>
+<li>Right-click on Test Plan and then select Add &gt; Threads (Users) &gt;  and Create a ThreadGroup</li>
+<li>Right-click on the Workbench then select Add &gt; Non-Test Elements &gt; HTTP Proxy Server
+<ol>
+<li>Set the Target Controller to "Test Plan &gt;  Thread Group"</li>
+<li>Set the Grouping to "Store 1st sampler of each group only"</li>
+<li>Add Exclusions</li>
+<li>Change Port (Optional)</li>
+<li>Start the Proxy Server</li>
+</ol>
+</li>
+<li>Click the Start button on the Http Proxy Server</li>
+<li>Update IE to use a Proxy Server
+<ol>
+<li>Internet Options</li>
+<li>Connections Tab</li>
+<li>LAN Settings</li>
+<li>Click 'User Proxy Server'</li>
+<li>Enter localhost and port.</li>
+<li>Click OK and OK.</li>
+</ol>
+</li>
+<li>Start clicking through your application (make sure JMeter is recording your clicks)</li>
+<li>Save the recording.</li>
+</ol>
+<h3>Adding Listeners</h3>
+<p>JMeter uses listeners to record the results of the performance test.  Take a look at the various types of listeners <a title="JMeter Listeners" href="http://jmeter.apache.org/usermanual/listeners.html" target="_blank">here</a> and add one by right clicking on the Thread Group and adding a Listener there.</p>
+<h3>Running a Performance Test</h3>
+<p>Once your script is recorded and you have added listeners, make sure you save your script.  Now you can run it!</p>
+<ol>
+<li>Open up the ThreadGroup node and make the following changes:
+<ol>
+<li>Change the Number of Threads to the number of concurrent users you would like to run in the performance test.</li>
+<li>Change the Ramp-up Period to the number of seconds it takes for all the users to start.</li>
+</ol>
+</li>
+<li>In the menu, click Run, Start.</li>
+<li>Sit back and watch JMeter ramp up!</li>
+</ol>
+<h3>Final Thoughts</h3>
+<p>This post is intended to get you started with a simple JMeter performance test.  I also only focused on using JMeter to performance test a web application.  JMeter can performance test web apps, databases, JMS servers, email servers, LDAP servers, web services, and much more.  I recommend taking a look at JMeter's manual, available <a title="JMeter Manual" href="http://jmeter.apache.org/usermanual/index.html" target="_blank">here</a>.</p>
+</p>
 
 					<p><em>Share this:</em></p>
           <p style="float:left">
@@ -193,19 +202,52 @@
 		<div id="push"></div>
     </div>
 
-    <div id="footer">
+		<!-- Footer -->
+    <footer>
       <div class="container">
-        <p class="muted credit">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
-        <p class="muted credit">&copy; 2009-2016 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <li class="list-inline-item">
+                <a href="https://twitter.com/SonOfGarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://www.linkedin.com/in/jmcgarr/">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://github.com/jmcgarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+						<p class="copyright text-muted">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
+            <p class="copyright text-muted">Copyright &copy; Mike McGarr 2009-2018 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v4.1</a> | Generated with <a href="http://jbake.org">JBake v2.6.2</a></p>
+          </div>
+        </div>
       </div>
-    </div>
+    </footer>
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/js/jquery-1.9.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/run_prettify.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom scripts for the clean blog look and feel -->
+    <script src="/js/clean-blog.min.js"></script>
+
     <script type="text/javascript">
       (function() {
         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;

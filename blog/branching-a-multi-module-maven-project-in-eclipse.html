@@ -9,112 +9,118 @@
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
 
-    <!-- Le styles -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="/css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- previous styles -->
     <link href="/css/asciidoctor.css" rel="stylesheet">
-    <link href="/css/base.css" rel="stylesheet">
-    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="/css/extra.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,300,400' rel='stylesheet' type='text/css'>
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="/js/html5shiv.js"></script>
-    <![endif]-->
 
-    <!-- Fav and touch icons -->
-    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
     <link rel="shortcut icon" href="/favicon.ico">
-<script type="text/javascript">
+    <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-49993013-1']);
-  _gaq.push(['_trackPageview']);
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-49993013-1']);
+      _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
 
-</script>
+    </script>
   </head>
   <body>
-    <div id="fb-root"></div>
-      <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
     <script src="//platform.linkedin.com/in.js" type="text/javascript">
      lang: en_US
     </script>
     <div id="wrap">
 
-	<!-- Fixed navbar -->
-      <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-          <div class="container">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="brand" href="/">Mike McGarr</a>
-            <div class="nav-collapse collapse">
-              <ul class="nav">
-                <li><a href="/about.html">About</a></li>
-                <li><a href="/archive.html">Posts</a></li>
-                <li><a href="/talks.html">Talks</a></li>
-                <li><a href="/feed.xml">Subscribe</a></li>
-              </ul>
-            </div><!--/.nav-collapse -->
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+          <a class="navbar-brand" href="/">Mike McGarr</a>
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/about.html">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/archive.html">Blog</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/talks.html">Talks</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/feed.xml">Subscribe</a>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
-      <div class="container-fluid">
-    <div class="row-fluid">
+      </nav>
 
-				<div class="span6 offset3">
+      
+<!-- Grab masthead data -->
 
-					<div class="page-header">
-						<h1>Branching Problems with a Multi-Module Maven Project</h1>
-					</div>
+      <!-- Page Header -->
+      <header class="masthead" style="background-image: url('/img/masthead/saocom-falcon-launch.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <div class="page-heading">
+                <h1>Branching Problems with a Multi-Module Maven Project</h1>
+                  <span class="subheading"><em>February 16, 2010</em></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="">
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row justify-content-between">
+            <div class="col-4"></div>
+            <div class="col-4 text-right">
+              <p class="photo-credit">Photo credit:
+                  <a href="https://www.flickr.com/photos/spacex/44451125454/" target="_blank">https://www.flickr.com/photos/spacex/44451125454/</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </header>
 
-					<p><em>February 16, 2010</em></p>
+		<div class="container">
 
-				</div>
-		</div>
+        <div class="col-lg-8 col-md-10 mx-auto">
 
-
-		<div class="row-fluid">
-
-				<div class="span2 offset1">
-					<p/>
-					<p class="text-right"><em></em>
-								<a href="/tags/eclipse.html">eclipse</a><br/>
-</em>
-								<a href="/tags/maven.html">maven</a><br/>
-</em>
-								<a href="/tags/subversion.html">subversion</a><br/>
-					</p>
-				</div>
-
-        <div class="span6">
-
-        	<p><p>I was impressed last year when I found that the <a href="http://m2eclipse.sonatype.org/" target="_blank">M2eclipse</a> <a href="http://www.eclipse.org/" target="_blank">Eclipse</a> plugin handled multi-module projects checked out of <a href="http://subversion.tigris.org/" target="_blank">Subversion</a> using <a href="http://subclipse.tigris.org/" target="_blank">Subclipse</a> with ease.&nbsp; Eclipse does <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=35973" target="_blank">not natively support</a> a nested multi-module project structure <a href="http://maven.apache.org/guides/getting-started/index.html#How_do_I_build_more_than_one_project_at_once" target="_blank">recommended by Maven</a>, and getting the two to work well together has historically been a pain.&nbsp; M2eclipse has solved this by "mapping" the child modules of the project you are importing to sibling projects in your Eclipse workspace.&nbsp; For example, lets take the following multi-module Maven project:</p> 
-<p style="text-align:center;"><img class="size-full wp-image-226 aligncenter" title="Project Structure." src="http://www.mikemcgarr.com/img/finder-view1.png" alt="" width="164" height="154"></p> 
-<p>This project consists of one parent project (springapp) which has four child modules (core, model, utility and webapp). &nbsp;In the second image below, you can see that when this project is imported into Eclipse using M2eclipse, 5 projects have been created. &nbsp;There is one project for each of the child modules and one for the parent project. &nbsp;As you can see from the expanded view of parent module, it still includes the directories of the child modules, even though they are also contained in sibling projects in Eclipse. &nbsp;This is only moderately confusing.</p> 
-<p style="text-align:center;"><img class="size-full wp-image-215 aligncenter" title="Project view from inside Eclipse" src="http://www.mikemcgarr.com/img/eclipse-view1.png" alt="View of project from Eclipse." width="204" height="258"></p> 
-<p>It has served us well and I haven't experienced any real issues until today.&nbsp; As is common practice, I reached a point where I wanted take my work from the trunk and create a branch.&nbsp; I had a bunch of working files not checked in, so I wanted to just create a branch right from my working directory.&nbsp; There is this option in Subclipse to Branch/Tag (remember that in Subversion, the act of branching or tagging is essentially no different, both are simple copy commands to another directory).&nbsp; So I went ahead and highlighted all Eclipse projects, right click on them and then choose the Branch/Tag option, following the wizard that walked me through the process.&nbsp; When I was done and my code was branched, I felt pretty good, until I took a closer look at the code in the branch.</p> 
-<p style="text-align:center;"><img class="size-full wp-image-222 aligncenter" title="Project Incorrectly Branched in Subversion" src="http://www.mikemcgarr.com/img/subversion-view.png" alt="View of Subversion After bad Branching" width="203" height="421"></p> 
-<p>If you compare the project structure in the trunk to the project structure in new-work-branch, focusing on the highlighted folder, you can see that something is amiss. &nbsp;I checked in the 5 Eclipse projects as if they were separate modules of the springapp project instead of treating them like one project to check in. &nbsp;Luckily I caught this before I did any real damage, although my solution was to remove the branch and start over again.&nbsp; What I should have done was to select only the parent project when I started my branching effort, since the parent project in Eclipse encompasses all of the child projects as well. &nbsp;Lesson learned!</p> 
-<p>While we could easily blame this problem on Maven for having a multi-module setup or even m2eclipse for allowing this happen, the truth is, the Eclipse platform should natively support hierarchical or nested project structures, like other IDE's do.&nbsp; This has been a user request for some time, and with my experience today, I feel even more strongly about the need to make this change.</p></p>
+        	<p><p>I was impressed last year when I found that the <a href="http://m2eclipse.sonatype.org/" target="_blank">M2eclipse</a> <a href="http://www.eclipse.org/" target="_blank">Eclipse</a> plugin handled multi-module projects checked out of <a href="http://subversion.tigris.org/" target="_blank">Subversion</a> using <a href="http://subclipse.tigris.org/" target="_blank">Subclipse</a> with ease.  Eclipse does <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=35973" target="_blank">not natively support</a> a nested multi-module project structure <a href="http://maven.apache.org/guides/getting-started/index.html#How_do_I_build_more_than_one_project_at_once" target="_blank">recommended by Maven</a>, and getting the two to work well together has historically been a pain.  M2eclipse has solved this by "mapping" the child modules of the project you are importing to sibling projects in your Eclipse workspace.  For example, lets take the following multi-module Maven project:</p>
+<p style="text-align:center;"><img class="size-full wp-image-226 aligncenter" title="Project Structure." src="/img/finder-view1.png" alt="" width="164" height="154" /></p>
+<p>This project consists of one parent project (springapp) which has four child modules (core, model, utility and webapp).  In the second image below, you can see that when this project is imported into Eclipse using M2eclipse, 5 projects have been created.  There is one project for each of the child modules and one for the parent project.  As you can see from the expanded view of parent module, it still includes the directories of the child modules, even though they are also contained in sibling projects in Eclipse.  This is only moderately confusing.</p>
+<p style="text-align:center;"><img class="size-full wp-image-215 aligncenter" title="Project view from inside Eclipse" src="/img/eclipse-view1.png" alt="View of project from Eclipse." width="204" height="258" /></p>
+<p>It has served us well and I haven't experienced any real issues until today.  As is common practice, I reached a point where I wanted take my work from the trunk and create a branch.  I had a bunch of working files not checked in, so I wanted to just create a branch right from my working directory.  There is this option in Subclipse to Branch/Tag (remember that in Subversion, the act of branching or tagging is essentially no different, both are simple copy commands to another directory).  So I went ahead and highlighted all Eclipse projects, right click on them and then choose the Branch/Tag option, following the wizard that walked me through the process.  When I was done and my code was branched, I felt pretty good, until I took a closer look at the code in the branch.</p>
+<p style="text-align:center;"><img class="size-full wp-image-222 aligncenter" title="Project Incorrectly Branched in Subversion" src="/img/subversion-view.png" alt="View of Subversion After bad Branching" width="203" height="421" /></p>
+<p>If you compare the project structure in the trunk to the project structure in new-work-branch, focusing on the highlighted folder, you can see that something is amiss.  I checked in the 5 Eclipse projects as if they were separate modules of the springapp project instead of treating them like one project to check in.  Luckily I caught this before I did any real damage, although my solution was to remove the branch and start over again.  What I should have done was to select only the parent project when I started my branching effort, since the parent project in Eclipse encompasses all of the child projects as well.  Lesson learned!</p>
+<p>While we could easily blame this problem on Maven for having a multi-module setup or even m2eclipse for allowing this happen, the truth is, the Eclipse platform should natively support hierarchical or nested project structures, like other IDE's do.  This has been a user request for some time, and with my experience today, I feel even more strongly about the need to make this change.</p>
+</p>
 
 					<p><em>Share this:</em></p>
           <p style="float:left">
@@ -146,19 +152,52 @@
 		<div id="push"></div>
     </div>
 
-    <div id="footer">
+		<!-- Footer -->
+    <footer>
       <div class="container">
-        <p class="muted credit">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
-        <p class="muted credit">&copy; 2009-2016 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <li class="list-inline-item">
+                <a href="https://twitter.com/SonOfGarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://www.linkedin.com/in/jmcgarr/">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://github.com/jmcgarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+						<p class="copyright text-muted">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
+            <p class="copyright text-muted">Copyright &copy; Mike McGarr 2009-2018 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v4.1</a> | Generated with <a href="http://jbake.org">JBake v2.6.2</a></p>
+          </div>
+        </div>
       </div>
-    </div>
+    </footer>
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/js/jquery-1.9.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/run_prettify.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom scripts for the clean blog look and feel -->
+    <script src="/js/clean-blog.min.js"></script>
+
     <script type="text/javascript">
       (function() {
         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;

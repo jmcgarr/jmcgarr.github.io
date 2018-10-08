@@ -9,157 +9,197 @@
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
 
-    <!-- Le styles -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="/css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- previous styles -->
     <link href="/css/asciidoctor.css" rel="stylesheet">
-    <link href="/css/base.css" rel="stylesheet">
-    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="/css/extra.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,300,400' rel='stylesheet' type='text/css'>
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="/js/html5shiv.js"></script>
-    <![endif]-->
 
-    <!-- Fav and touch icons -->
-    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
     <link rel="shortcut icon" href="/favicon.ico">
-<script type="text/javascript">
+    <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-49993013-1']);
-  _gaq.push(['_trackPageview']);
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-49993013-1']);
+      _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
 
-</script>
+    </script>
   </head>
   <body>
-    <div id="fb-root"></div>
-      <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
     <script src="//platform.linkedin.com/in.js" type="text/javascript">
      lang: en_US
     </script>
     <div id="wrap">
 
-	<!-- Fixed navbar -->
-      <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-          <div class="container">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="brand" href="/">Mike McGarr</a>
-            <div class="nav-collapse collapse">
-              <ul class="nav">
-                <li><a href="/about.html">About</a></li>
-                <li><a href="/archive.html">Posts</a></li>
-                <li><a href="/talks.html">Talks</a></li>
-                <li><a href="/feed.xml">Subscribe</a></li>
-              </ul>
-            </div><!--/.nav-collapse -->
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+          <a class="navbar-brand" href="/">Mike McGarr</a>
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/about.html">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/archive.html">Blog</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/talks.html">Talks</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/feed.xml">Subscribe</a>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
-      <div class="container-fluid">
-	<div class="row-fluid">
+      </nav>
 
-		<div class="span2">
-		</div>
 
-		<div class="span8">
-			<div class="page-header">
-				<h1>Mike McGarr's Blog</h1>
+
+      
+<!-- Grab masthead data -->
+
+      <!-- Page Header -->
+      <header class="masthead" style="background-image: url('/img/masthead/lone-cypress-2.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <div class="page-heading">
+                <h1>Mike McGarr's homepage</h1>
+                  <span class="subheading">articles and talks from a software engineering leader</span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="">
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row justify-content-between">
+            <div class="col-4"></div>
+            <div class="col-4 text-right">
+              <p class="photo-credit">Photo credit:
+                  <a href="https://flic.kr/p/hADZKt" target="_blank">https://flic.kr/p/hADZKt</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+	<div class="container">
+    <div class="row justify-content-md-center">
+			<div class="col-lg-8 col-md-10 mx-auto">
+
+						<div class="post-preview">
+			  			<a href="blog/week-in-review.html"><h3 class="post-title">How I share information with my team</h3></a>
+			  			<p class="post-meta">November 14, 2016</p>
+			  			<p class="post-subtitle">As an engineering manager at Netflix, I spend most of my time in meetings and one-on-ones. During these meetings, I collect a lot of information that’s valuable to the members of my engineering team. When my team was only four people, disseminating information was easy. It usually involved a quick hallway chat or was covered during a regular one-on-one. But late last year my team doubled in size. With the larger team, I struggled to keep everybody informed in a timely way. It became obvious that I wasn’t effectively scaling team communication and I needed to make a change.</p>
+						</div>
+						<hr>
+						<div class="post-preview">
+			  			<a href="blog/thats-right.html"><h3 class="post-title">That&apos;s right. That&apos;s right.</h3></a>
+			  			<p class="post-meta">November 09, 2015</p>
+			  			<p class="post-subtitle">Two simple words, repeated. I have come to appreciate how powerful these words are. They don't come naturally to me, but then again they aren't my words. Delivered correctly and with the appropriate tone, these two words encourage the recipient to continue asking questions. These words validating and yet they also encourage the recipient to be vulnerable, and to feel that it is okay to be uncertain. These words create a fertile environment for collaboration.</p>
+						</div>
+						<hr>
+						<div class="post-preview">
+			  			<a href="blog/understanding-culture.html"><h3 class="post-title">Understanding culture</h3></a>
+			  			<p class="post-meta">March 28, 2015</p>
+			  			<p class="post-subtitle">In my review of the Phoenix Project, I mentioned that the organizational change that Parts Unlimited experienced seemed magically.  Many of my own attempts to lead organization-wide change have not been as successful that quickly.  I would encounter resistance throughout the organization I found success couldn’t be achieved overnight.  It was always frustrating to find the obviously better solution get shot down time and time again.</p>
+						</div>
+						<hr>
+						<div class="post-preview">
+			  			<a href="blog/how-i-kanban.html"><h3 class="post-title">How I Kanban (with Trello)</h3></a>
+			  			<p class="post-meta">October 26, 2014</p>
+			  			<p class="post-subtitle">For years I have been trying to find the perfect personal task management process that is easy, intuitive and effective.  My friends and colleagues have witnessed the various techniques I have adopted over the years.  “Hey Mike, why are carrying a stack of notecards?” they would ask.  I have tried various GTD (Getting Things Done) apps, to stacks of notecards, to Scrum boards at home, to giant lists...all of them failed.</p>
+						</div>
+						<hr>
+						<div class="post-preview">
+			  			<a href="blog/the-modern-tech-resume.html"><h3 class="post-title">Building a modern resume</h3></a>
+			  			<p class="post-meta">July 20, 2014</p>
+			  			<p class="post-subtitle">After I had gone through the Netflix recruiting process, it struck me that nobody ever asked me for a resume.  The recruiting team already had all the information they needed that you would normally find on a resume.  This information was readily available online.  My profile on LinkedIn, my Twitter feed, my Github profile, and my blog all provided a comprehensive data set, more detailed than a 2-page resume.  My online presence serves as my resume, a modern technical resume.</p>
+						</div>
+						<hr>
+
+					<p>Older posts are available in the <a href="/archive.html">archive</a>.</p>
 			</div>
-		</div>
-	</div>
-	<div class="row-fluid">
-
-		<div class="span2">
-		</div>
-
-		<div class="span5">
-
-		  			<a href="blog/week-in-review.html"><h3>How I share information with my team</h3></a>
-		  			<p>November 14, 2016</p>
-		  			<p>As an engineering manager at Netflix, I spend most of my time in meetings and one-on-ones. During these meetings, I collect a lot of information that’s valuable to the members of my engineering team. When my team was only four people, disseminating information was easy. It usually involved a quick hallway chat or was covered during a regular one-on-one. But late last year my team doubled in size. With the larger team, I struggled to keep everybody informed in a timely way. It became obvious that I wasn’t effectively scaling team communication and I needed to make a change.</p>
-
-		  			<a href="blog/thats-right.html"><h3>That&apos;s right. That&apos;s right.</h3></a>
-		  			<p>November 09, 2015</p>
-		  			<p>Two simple words, repeated. I have come to appreciate how powerful these words are. They don't come naturally to me, but then again they aren't my words. Delivered correctly and with the appropriate tone, these two words encourage the recipient to continue asking questions. These words validating and yet they also encourage the recipient to be vulnerable, and to feel that it is okay to be uncertain. These words create a fertile environment for collaboration.</p>
-
-		  			<a href="blog/understanding-culture.html"><h3>Understanding culture</h3></a>
-		  			<p>March 28, 2015</p>
-		  			<p>In my review of the Phoenix Project, I mentioned that the organizational change that Parts Unlimited experienced seemed magically.  Many of my own attempts to lead organization-wide change have not been as successful that quickly.  I would encounter resistance throughout the organization I found success couldn’t be achieved overnight.  It was always frustrating to find the obviously better solution get shot down time and time again.</p>
-
-		  			<a href="blog/how-i-kanban.html"><h3>How I Kanban (with Trello)</h3></a>
-		  			<p>October 26, 2014</p>
-		  			<p>For years I have been trying to find the perfect personal task management process that is easy, intuitive and effective.  My friends and colleagues have witnessed the various techniques I have adopted over the years.  “Hey Mike, why are carrying a stack of notecards?” they would ask.  I have tried various GTD (Getting Things Done) apps, to stacks of notecards, to Scrum boards at home, to giant lists...all of them failed.</p>
-
-		  			<a href="blog/the-modern-tech-resume.html"><h3>Building a modern resume</h3></a>
-		  			<p>July 20, 2014</p>
-		  			<p>After I had gone through the Netflix recruiting process, it struck me that nobody ever asked me for a resume.  The recruiting team already had all the information they needed that you would normally find on a resume.  This information was readily available online.  My profile on LinkedIn, my Twitter feed, my Github profile, and my blog all provided a comprehensive data set, more detailed than a 2-page resume.  My online presence serves as my resume, a modern technical resume.</p>
-
-
-			<hr />
-
-			<p>Older posts are available in the <a href="/archive.html">archive</a>.</p>
-		</div>
-
-		<div class="span3">
-
-			<img src="img/profile_pic-sq.jpg" style="width:300px;height:266px"/>
-			<p>
-			Passionate engineer seeking to optimize development teams and organizations
-			</p>
-			<a href="http://www.mikemcgarr.com/feed.xml" target="_blank">
-			   <img src="img/webicon-rss.svg" alt="RSS Feed" style="width:42px;height:42px">
-			</a>
-			<a href="http://twitter.com/SonOfGarr" target="_blank">
-			   <img src="img/webicon-twitter.svg" alt="Twitter account" style="width:42px;height:42px">
-			</a>
-			<a href="http://github.com/jmcgarr" target="_blank">
-			   <img src="img/webicon-github.svg" alt="Github account" style="width:42px;height:42px">
-			</a>
-			<a href="https://www.linkedin.com/in/jmcgarr" target="_blank">
-			   <img src="img/webicon-linkedin.svg" alt="LinkedIn Profile" style="width:42px;height:42px">
-			</a>
-		</div>
+    </div>
 	</div>
 
 		</div>
 		<div id="push"></div>
     </div>
 
-    <div id="footer">
+		<!-- Footer -->
+    <footer>
       <div class="container">
-        <p class="muted credit">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
-        <p class="muted credit">&copy; 2009-2016 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <li class="list-inline-item">
+                <a href="https://twitter.com/SonOfGarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://www.linkedin.com/in/jmcgarr/">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://github.com/jmcgarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+						<p class="copyright text-muted">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
+            <p class="copyright text-muted">Copyright &copy; Mike McGarr 2009-2018 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v4.1</a> | Generated with <a href="http://jbake.org">JBake v2.6.2</a></p>
+          </div>
+        </div>
       </div>
-    </div>
+    </footer>
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/js/jquery-1.9.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/run_prettify.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom scripts for the clean blog look and feel -->
+    <script src="/js/clean-blog.min.js"></script>
+
     <script type="text/javascript">
       (function() {
         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;

@@ -9,148 +9,141 @@
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
 
-    <!-- Le styles -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="/css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- previous styles -->
     <link href="/css/asciidoctor.css" rel="stylesheet">
-    <link href="/css/base.css" rel="stylesheet">
-    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="/css/extra.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,300,400' rel='stylesheet' type='text/css'>
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="/js/html5shiv.js"></script>
-    <![endif]-->
 
-    <!-- Fav and touch icons -->
-    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
     <link rel="shortcut icon" href="/favicon.ico">
-<script type="text/javascript">
+    <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-49993013-1']);
-  _gaq.push(['_trackPageview']);
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-49993013-1']);
+      _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
 
-</script>
+    </script>
   </head>
   <body>
-    <div id="fb-root"></div>
-      <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
     <script src="//platform.linkedin.com/in.js" type="text/javascript">
      lang: en_US
     </script>
     <div id="wrap">
 
-	<!-- Fixed navbar -->
-      <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-          <div class="container">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="brand" href="/">Mike McGarr</a>
-            <div class="nav-collapse collapse">
-              <ul class="nav">
-                <li><a href="/about.html">About</a></li>
-                <li><a href="/archive.html">Posts</a></li>
-                <li><a href="/talks.html">Talks</a></li>
-                <li><a href="/feed.xml">Subscribe</a></li>
-              </ul>
-            </div><!--/.nav-collapse -->
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+          <a class="navbar-brand" href="/">Mike McGarr</a>
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/about.html">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/archive.html">Blog</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/talks.html">Talks</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/feed.xml">Subscribe</a>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
-      <div class="container-fluid">
-    <div class="row-fluid">
+      </nav>
 
-				<div class="span6 offset3">
+      
+<!-- Grab masthead data -->
 
-					<div class="page-header">
-						<h1>A Practical Approach to Unit Testing</h1>
-					</div>
+      <!-- Page Header -->
+      <header class="masthead" style="background-image: url('/img/masthead/saocom-falcon-launch.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <div class="page-heading">
+                <h1>A Practical Approach to Unit Testing</h1>
+                  <span class="subheading"><em>May 07, 2010</em></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="">
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row justify-content-between">
+            <div class="col-4"></div>
+            <div class="col-4 text-right">
+              <p class="photo-credit">Photo credit:
+                  <a href="https://www.flickr.com/photos/spacex/44451125454/" target="_blank">https://www.flickr.com/photos/spacex/44451125454/</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </header>
 
-					<p><em>May 07, 2010</em></p>
+		<div class="container">
 
-				</div>
-		</div>
+        <div class="col-lg-8 col-md-10 mx-auto">
 
-
-		<div class="row-fluid">
-
-				<div class="span2 offset1">
-					<p/>
-					<p class="text-right"><em></em>
-								<a href="/tags/bdd.html">bdd</a><br/>
-</em>
-								<a href="/tags/easyb.html">easyb</a><br/>
-</em>
-								<a href="/tags/eclipse.html">eclipse</a><br/>
-</em>
-								<a href="/tags/Java.html">Java</a><br/>
-</em>
-								<a href="/tags/jbehave.html">jbehave</a><br/>
-</em>
-								<a href="/tags/junit.html">junit</a><br/>
-</em>
-								<a href="/tags/maven.html">maven</a><br/>
-</em>
-								<a href="/tags/tdd.html">tdd</a><br/>
-</em>
-								<a href="/tags/unit-testing.html">unit testing</a><br/>
-					</p>
-				</div>
-
-        <div class="span6">
-
-        	<p><p>Last year I was asked to give a one day workshop on how to write unit tests. &nbsp;I put together a presentation and workshop format and it was a huge success. &nbsp;The team quickly took to not only writing unit tests but was able to quickly utilize mock frameworks and other testing tools. &nbsp;The team's code coverage for the application quickly increased and management was pleased. &nbsp;I recently took another look at this presentation to see if I wanted to revise anything and I thought I would share some of the thoughts here. &nbsp;These guidelines are intended to get somebody started with unit testing quickly, but could be a welcome refresher for somebody who has been writing tests for a while.</p> 
-<p><strong> Benefits of Unit Testing</strong></p> 
-<p>I won't belabor this point, simply because there is too much literature floating around the internet on why to unit test your code. &nbsp;In fact, I think that you would be hard pressed to find anybody who would disagree on this point. &nbsp;I have found however that a surprisingly high percentage of developers I have encountered agree that writing unit tests is good, but still don't know how to do it. &nbsp;Regardless, here is a list of some (but not all) of the benefits of conducting unit testing:</p> 
-<ul> 
- <li>Reduces New Bugs</li> 
- <li>Reduces Bugs from Reappearing</li> 
- <li>Enables Refactoring</li> 
- <li>Improves Design</li> 
- <li>Forces you to Think</li> 
- <li>Reduces Fear</li> 
- <li>Speeds the Development Process</li> 
- <li>Can Provide a Form of Documentation</li> 
-</ul> 
-<p>I am certain that there are more than this, so feel free to leave me a comment and let me know your thoughts.</p> 
-<p><strong>Where to Start Testing</strong></p> 
-<p>Projects that are trying to start unit testing usually stop when they try to determine which part of their code they should test first. &nbsp;I decided that my guidance on where to start depends on the developer's level of proficiency with writing unit tests.</p> 
-<p>If you are a unit testing newbie, then you should start by writing unit tests against a utility class. &nbsp;Utility classes tend to have very little external dependencies and have a simple input/output approach. &nbsp;You will find that a basic lesson in using <a title="JUnit's Website" href="http://www.junit.org/" target="_blank">JUnit</a> will provide you all the information you need to test these methods.</p> 
-<p>For developers experienced in unit testing, then your goal should be to focus on the most critical components in your application. &nbsp;This code should meet at least one of the following criteria:</p> 
-<ul> 
- <li>most commonly used functions</li> 
- <li>most critical functions (security, DAOs, business/service classes)</li> 
- <li>most complex functions (high cyclomatic complexity)</li> 
-</ul> 
-<p>My preferred IDE, <a title="Eclipse" href="http://www.eclipse.org/" target="_blank">Eclipse</a>, provides some simple wizards for creating unit tests quickly. &nbsp;I also prescribe the to <a title="Maven" href="http://maven.apache.org/" target="_blank">Maven</a> <a title="Maven Standard Directory Layout" href="http://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html" target="_blank">project structure convention</a> of storing all of my unit tests in the project's src/test/java directory. &nbsp;If this is your first time writing unit tests, then I recommend that you follow the <a title="JUnit Cookbook" href="http://junit.sourceforge.net/doc/cookbook/cookbook.htm" target="_blank">JUnit cookbook</a> for a guide on how to write unit tests with JUnit.</p> 
-<p><strong>Writing Meaningful Tests</strong></p> 
-<p>It is important to understand how to write meaningful unit tests, which are tests that focus on testing the behavior of the Class Under Test (CUT). &nbsp;This focus on behavior is the central motivation of <a title="BDD" href="http://behaviour-driven.org/" target="_blank">Behavior Driven Development (BDD)</a>, which teaches that unit tests should be structure in a <a title="Given When Then" href="http://blog.objectmentor.com/articles/2008/11/27/the-truth-about-bdd" target="_blank">"Given, When, Then"</a> structure. &nbsp;While I would support any team moving to a full BDD implementation using frameworks like <a title="easyb" href="http://www.easyb.org/" target="_blank">easyb</a> or <a title="JBehave" href="http://jbehave.org/" target="_blank">JBehave</a>, it isn't necessary. &nbsp;If you read Dan North's article on the <a title="Introducing BDD" href="http://blog.dannorth.net/introducing-bdd/" target="_blank">evolution of BDD</a>, he discusses how he struggled to teach developers how to write good unit tests, and the key was semantics. &nbsp;He first wanted developers to think of their test names as sentences rather following the existing convention of prefixing the word test to the method under test. I really liked this concept and I felt that the focus on behavior coupled with the meaningful test names helps developers significantly. &nbsp;So came up with these guidelines:</p> 
-<ul> 
- <li>Each test method should map to a behavior and/or condition of the CUT</li> 
- <li>Each test method's name should be descriptive enough to define the behavior/conditions being tested</li> 
- <li>Each test method should have assertions that validate the behavior/conditions being tested</li> 
-</ul> 
-<p>Sounds great, but I think that an example might be more meaningful. &nbsp;Let's imagine we are testing a utility class that will convert Celsius to Fahrenheit and back again. &nbsp;When we stub out a unit test class, this is what it looks like.</p> 
+        	<p><p>Last year I was asked to give a one day workshop on how to write unit tests.  I put together a presentation and workshop format and it was a huge success.  The team quickly took to not only writing unit tests but was able to quickly utilize mock frameworks and other testing tools.  The team's code coverage for the application quickly increased and management was pleased.  I recently took another look at this presentation to see if I wanted to revise anything and I thought I would share some of the thoughts here.  These guidelines are intended to get somebody started with unit testing quickly, but could be a welcome refresher for somebody who has been writing tests for a while.</p>
+<p><strong> Benefits of Unit Testing</strong></p>
+<p>I won't belabor this point, simply because there is too much literature floating around the internet on why to unit test your code.  In fact, I think that you would be hard pressed to find anybody who would disagree on this point.  I have found however that a surprisingly high percentage of developers I have encountered agree that writing unit tests is good, but still don't know how to do it.  Regardless, here is a list of some (but not all) of the benefits of conducting unit testing:</p>
+<ul>
+<li>Reduces New Bugs</li>
+<li>Reduces Bugs from Reappearing</li>
+<li>Enables Refactoring</li>
+<li>Improves Design</li>
+<li>Forces you to Think</li>
+<li>Reduces Fear</li>
+<li>Speeds the Development Process</li>
+<li>Can Provide a Form of Documentation</li>
+</ul>
+<p>I am certain that there are more than this, so feel free to leave me a comment and let me know your thoughts.</p>
+<p><strong>Where to Start Testing</strong></p>
+<p>Projects that are trying to start unit testing usually stop when they try to determine which part of their code they should test first.  I decided that my guidance on where to start depends on the developer's level of proficiency with writing unit tests.</p>
+<p>If you are a unit testing newbie, then you should start by writing unit tests against a utility class.  Utility classes tend to have very little external dependencies and have a simple input/output approach.  You will find that a basic lesson in using <a title="JUnit's Website" href="http://www.junit.org/" target="_blank">JUnit</a> will provide you all the information you need to test these methods.</p>
+<p>For developers experienced in unit testing, then your goal should be to focus on the most critical components in your application.  This code should meet at least one of the following criteria:</p>
+<ul>
+<li>most commonly used functions</li>
+<li>most critical functions (security, DAOs, business/service classes)</li>
+<li>most complex functions (high cyclomatic complexity)</li>
+</ul>
+<p>My preferred IDE, <a title="Eclipse" href="http://www.eclipse.org/" target="_blank">Eclipse</a>, provides some simple wizards for creating unit tests quickly.  I also prescribe the to <a title="Maven" href="http://maven.apache.org/" target="_blank">Maven</a> <a title="Maven Standard Directory Layout" href="http://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html" target="_blank">project structure convention</a> of storing all of my unit tests in the project's src/test/java directory.  If this is your first time writing unit tests, then I recommend that you follow the <a title="JUnit Cookbook" href="http://junit.sourceforge.net/doc/cookbook/cookbook.htm" target="_blank">JUnit cookbook</a> for a guide on how to write unit tests with JUnit.</p>
+<p><strong>Writing Meaningful Tests</strong></p>
+<p>It is important to understand how to write meaningful unit tests, which are tests that focus on testing the behavior of the Class Under Test (CUT).  This focus on behavior is the central motivation of <a title="BDD" href="http://behaviour-driven.org/" target="_blank">Behavior Driven Development (BDD)</a>, which teaches that unit tests should be structure in a <a title="Given When Then" href="http://blog.objectmentor.com/articles/2008/11/27/the-truth-about-bdd" target="_blank">"Given, When, Then"</a> structure.  While I would support any team moving to a full BDD implementation using frameworks like <a title="easyb" href="http://www.easyb.org/" target="_blank">easyb</a> or <a title="JBehave" href="http://jbehave.org/" target="_blank">JBehave</a>, it isn't necessary.  If you read Dan North's article on the <a title="Introducing BDD" href="http://blog.dannorth.net/introducing-bdd/" target="_blank">evolution of BDD</a>, he discusses how he struggled to teach developers how to write good unit tests, and the key was semantics.  He first wanted developers to think of their test names as sentences rather following the existing convention of prefixing the word test to the method under test. I really liked this concept and I felt that the focus on behavior coupled with the meaningful test names helps developers significantly.  So came up with these guidelines:</p>
+<ul>
+<li>Each test method should map to a behavior and/or condition of the CUT</li>
+<li>Each test method's name should be descriptive enough to define the behavior/conditions being tested</li>
+<li>Each test method should have assertions that validate the behavior/conditions being tested</li>
+</ul>
+<p>Sounds great, but I think that an example might be more meaningful.  Let's imagine we are testing a utility class that will convert Celsius to Fahrenheit and back again.  When we stub out a unit test class, this is what it looks like.</p>
 <pre class="prettyprint language-java">
 public class TemperatureUtilTest
 {
@@ -161,20 +154,18 @@ public class TemperatureUtilTest
   @Test public void testCanHandleNullCelsius() {...}
   @Test public void testCanHandleInvalidCelsius() {...}
 }
-</pre> 
-<p>What is great about this format, as Dan North points out, is if you remove the Java syntax and the word "test" from the code, you are left with:</p> 
-<blockquote>
- <p>TemperatureUtil...</p> 
- <p>...can convert Celsius to Fahrenheit.</p> 
- <p>...can handle null Fahrenheit.</p> 
- <p>...can handle invalid Fahrenheit.</p> 
- <p>...can convert Fahrenheit to Celsius.</p> 
- <p>...can handle null Celsius.</p> 
- <p>...can handle invalid Celsius.</p>
-</blockquote> 
-<p>This serves as a good depiction of the behavior of the CUT. &nbsp; This is a good example of how unit tests can serve as documentation. &nbsp;One of the problems with this documentation is that it is deeply embedded in the code and not easily extracted, a problem which is further addressed with BDD and <a title="Acceptance Test Driven Development" href="http://www.methodsandtools.com/archive/archive.php?id=72" target="_blank">Acceptance Test Driven Development (ATDD)</a> frameworks and tools.</p> 
-<p><strong>Write Simple Assertions</strong></p> 
-<p>Now that you have your test methods stubbed out, start writing your tests. &nbsp;Your tests should be short and sweet, passing in the control input data to the method under test and then asserting the results of the test. &nbsp;Many sites state that a unit test should only have one assertion and I agree with the philosophy of this approach, but I don't enforce it in practice. &nbsp;Rather, your assertions should be testing the behavior, which may mean more than one assertion. &nbsp;Let's look at a quick example of a test method.</p> 
+</pre>
+<p>What is great about this format, as Dan North points out, is if you remove the Java syntax and the word "test" from the code, you are left with:</p>
+<blockquote><p>TemperatureUtil...</p>
+<p>...can convert Celsius to Fahrenheit.</p>
+<p>...can handle null Fahrenheit.</p>
+<p>...can handle invalid Fahrenheit.</p>
+<p>...can convert Fahrenheit to Celsius.</p>
+<p>...can handle null Celsius.</p>
+<p>...can handle invalid Celsius.</p></blockquote>
+<p>This serves as a good depiction of the behavior of the CUT.   This is a good example of how unit tests can serve as documentation.  One of the problems with this documentation is that it is deeply embedded in the code and not easily extracted, a problem which is further addressed with BDD and <a title="Acceptance Test Driven Development" href="http://www.methodsandtools.com/archive/archive.php?id=72" target="_blank">Acceptance Test Driven Development (ATDD)</a> frameworks and tools.</p>
+<p><strong>Write Simple Assertions</strong></p>
+<p>Now that you have your test methods stubbed out, start writing your tests.  Your tests should be short and sweet, passing in the control input data to the method under test and then asserting the results of the test.  Many sites state that a unit test should only have one assertion and I agree with the philosophy of this approach, but I don't enforce it in practice.  Rather, your assertions should be testing the behavior, which may mean more than one assertion.  Let's look at a quick example of a test method.</p>
 <pre class="prettyprint language-java">
 @Test public void testCanConvertCelsiusToFarhenheit()
 {
@@ -182,10 +173,11 @@ public class TemperatureUtilTest
   Celsius cTemp = TemperatureUtil.convert(fTemp);
   assertEquals(0, celsius.getTempAsInt());
 }
-</pre> 
-<p>Pretty straight forward.</p> 
-<p><strong>Some final thoughts</strong></p> 
-<p>I definitely do not consider this the most comprehensive approach to unit testing, but I think that some of this information could be helpful to somebody starting out. &nbsp;Good luck and remember that unit testing can be fun!</p></p>
+</pre>
+<p>Pretty straight forward.</p>
+<p><strong>Some final thoughts</strong></p>
+<p>I definitely do not consider this the most comprehensive approach to unit testing, but I think that some of this information could be helpful to somebody starting out.  Good luck and remember that unit testing can be fun!</p>
+</p>
 
 					<p><em>Share this:</em></p>
           <p style="float:left">
@@ -217,19 +209,52 @@ public class TemperatureUtilTest
 		<div id="push"></div>
     </div>
 
-    <div id="footer">
+		<!-- Footer -->
+    <footer>
       <div class="container">
-        <p class="muted credit">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
-        <p class="muted credit">&copy; 2009-2016 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <li class="list-inline-item">
+                <a href="https://twitter.com/SonOfGarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://www.linkedin.com/in/jmcgarr/">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://github.com/jmcgarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+						<p class="copyright text-muted">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
+            <p class="copyright text-muted">Copyright &copy; Mike McGarr 2009-2018 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v4.1</a> | Generated with <a href="http://jbake.org">JBake v2.6.2</a></p>
+          </div>
+        </div>
       </div>
-    </div>
+    </footer>
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/js/jquery-1.9.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/run_prettify.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom scripts for the clean blog look and feel -->
+    <script src="/js/clean-blog.min.js"></script>
+
     <script type="text/javascript">
       (function() {
         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;

@@ -9,140 +9,146 @@
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
 
-    <!-- Le styles -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="/css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- previous styles -->
     <link href="/css/asciidoctor.css" rel="stylesheet">
-    <link href="/css/base.css" rel="stylesheet">
-    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="/css/extra.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,300,400' rel='stylesheet' type='text/css'>
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="/js/html5shiv.js"></script>
-    <![endif]-->
 
-    <!-- Fav and touch icons -->
-    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
     <link rel="shortcut icon" href="/favicon.ico">
-<script type="text/javascript">
+    <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-49993013-1']);
-  _gaq.push(['_trackPageview']);
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-49993013-1']);
+      _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
 
-</script>
+    </script>
   </head>
   <body>
-    <div id="fb-root"></div>
-      <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
     <script src="//platform.linkedin.com/in.js" type="text/javascript">
      lang: en_US
     </script>
     <div id="wrap">
 
-	<!-- Fixed navbar -->
-      <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-          <div class="container">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="brand" href="/">Mike McGarr</a>
-            <div class="nav-collapse collapse">
-              <ul class="nav">
-                <li><a href="/about.html">About</a></li>
-                <li><a href="/archive.html">Posts</a></li>
-                <li><a href="/talks.html">Talks</a></li>
-                <li><a href="/feed.xml">Subscribe</a></li>
-              </ul>
-            </div><!--/.nav-collapse -->
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+          <a class="navbar-brand" href="/">Mike McGarr</a>
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/about.html">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/archive.html">Blog</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/talks.html">Talks</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/feed.xml">Subscribe</a>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
-      <div class="container-fluid">
-    <div class="row-fluid">
+      </nav>
 
-				<div class="span6 offset3">
+      
+<!-- Grab masthead data -->
 
-					<div class="page-header">
-						<h1>Git Crash Course</h1>
-					</div>
+      <!-- Page Header -->
+      <header class="masthead" style="background-image: url('/img/masthead/saocom-falcon-launch.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <div class="page-heading">
+                <h1>Git Crash Course</h1>
+                  <span class="subheading"><em>May 03, 2012</em></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="">
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row justify-content-between">
+            <div class="col-4"></div>
+            <div class="col-4 text-right">
+              <p class="photo-credit">Photo credit:
+                  <a href="https://www.flickr.com/photos/spacex/44451125454/" target="_blank">https://www.flickr.com/photos/spacex/44451125454/</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </header>
 
-					<p><em>May 03, 2012</em></p>
+		<div class="container">
 
-				</div>
-		</div>
+        <div class="col-lg-8 col-md-10 mx-auto">
 
-
-		<div class="row-fluid">
-
-				<div class="span2 offset1">
-					<p/>
-					<p class="text-right"><em></em>
-								<a href="/tags/git.html">git</a><br/>
-</em>
-								<a href="/tags/tutorial.html">tutorial</a><br/>
-					</p>
-				</div>
-
-        <div class="span6">
-
-        	<p><p>Our current team has decided to adopt Git and some members aren't familiar with it. &nbsp;I wanted to put together a short introduction to the <a title="Git" href="http://git-scm.com/" target="_blank">Git</a> command line for these team members. &nbsp;The goal is to make team members productive immediately, while learning the nuances of Git over time. &nbsp;My introduction assumes that you have Git installed and setup. &nbsp;For installation instructions, go to&nbsp;<a href="http://git-scm.com/">http://git-scm.com/</a>. &nbsp;For instructions on configuring Git, I recommend&nbsp;<a title="GitHub" href="https://github.com/" target="_blank">Github</a>'s&nbsp;tutorials for <a title="Setup Github (Windows)" href="http://help.github.com/win-set-up-git/" target="_blank">Windows</a>, <a title="Setup GitHub (Mac)" href="http://help.github.com/mac-set-up-git/" target="_blank">OS X</a> and <a title="Setup GitHub (Linux)" href="http://help.github.com/linux-set-up-git/" target="_blank">Linux</a>.</p> 
-<h3>Cloning a Repository</h3> 
-<p>First, you need to get a copy of the source code on your machine from a repository. &nbsp;With Git, you do this by cloning the repository locally. &nbsp;Since Git is a&nbsp;distributed version control system (DVCS), it will copy the whole source code repository locally. &nbsp;For more on DVCS, check out&nbsp;<a title="Not so quick guide to DVCS" href="http://www.infoq.com/articles/dvcs-guide" target="_blank">this</a>.</p> 
-<p>To clone a remote repository, you will need to use the Git&nbsp;<a title="Git clone Man Page" href="http://schacon.github.com/git/git-clone.html" target="_blank">clone</a> command. &nbsp;The following is example of clone a public GitHub repository:</p> 
+        	<p><p>Our current team has decided to adopt Git and some members aren't familiar with it.  I wanted to put together a short introduction to the <a title="Git" href="http://git-scm.com/" target="_blank">Git</a> command line for these team members.  The goal is to make team members productive immediately, while learning the nuances of Git over time.  My introduction assumes that you have Git installed and setup.  For installation instructions, go to <a href="http://git-scm.com/">http://git-scm.com/</a>.  For instructions on configuring Git, I recommend <a title="GitHub" href="https://github.com/" target="_blank">Github</a>'s tutorials for <a title="Setup Github (Windows)" href="http://help.github.com/win-set-up-git/" target="_blank">Windows</a>, <a title="Setup GitHub (Mac)" href="http://help.github.com/mac-set-up-git/" target="_blank">OS X</a> and <a title="Setup GitHub (Linux)" href="http://help.github.com/linux-set-up-git/" target="_blank">Linux</a>.</p>
+<h3>Cloning a Repository</h3>
+<p>First, you need to get a copy of the source code on your machine from a repository.  With Git, you do this by cloning the repository locally.  Since Git is a distributed version control system (DVCS), it will copy the whole source code repository locally.  For more on DVCS, check out <a title="Not so quick guide to DVCS" href="http://www.infoq.com/articles/dvcs-guide" target="_blank">this</a>.</p>
+<p>To clone a remote repository, you will need to use the Git <a title="Git clone Man Page" href="http://schacon.github.com/git/git-clone.html" target="_blank">clone</a> command.  The following is example of clone a public GitHub repository:</p>
 <pre>
-$&gt; git clone&nbsp;git@github.com:jmcgarr/java-bdd-examples.git
-</pre> 
-<h3>Checking in Code</h3> 
-<p>Now that you have the code, you can begin making changes. &nbsp;Once you are ready to check in these changes, there are a few steps you need to take to get the changes into a remote repository:</p> 
+$&gt; git clone git@github.com:jmcgarr/java-bdd-examples.git
+</pre>
+<h3>Checking in Code</h3>
+<p>Now that you have the code, you can begin making changes.  Once you are ready to check in these changes, there are a few steps you need to take to get the changes into a remote repository:</p>
 <pre>
 $&gt; git status -S
 $&gt; git add . -A
-$&gt; git commit -m "Add a commit message here"
+$&gt; git commit -m &quot;Add a commit message here&quot;
 $&gt; git push origin master
-</pre> 
-<p>Line 1 issues a <a title="Git status man page" href="http://schacon.github.com/git/git-status.html" target="_blank"><em>status</em></a> command, telling you which files have changed locally. &nbsp;The <a title="Git add man page" href="http://schacon.github.com/git/git-add.html" target="_blank">add</a> command on line 2 tells Git to stage all changed files so that they can be committed to your local repository. &nbsp;The <a title="Git commit Man Page" href="http://schacon.github.com/git/git-commit.html" target="_blank">commit</a> command on line 3 will commit the changes you added to your local repository. &nbsp;Line 4 is where you will <a title="Git push Man Page" href="http://schacon.github.com/git/git-push.html" target="_blank">push</a>&nbsp;the changes in your local repository to the remote repository.</p> 
-<blockquote>
- <p>Note: Your fellow team members will not see your changes until you push them to the remote repository. &nbsp;When you commit, you are only commit the change to your local copy of the repository</p>
-</blockquote> 
-<h3>Getting the Latest Version</h3> 
-<p>Prior to pushing your changes to a remote repository, you may want to grab the latest code from the repository. &nbsp;To get the latest remote changes, use the following commands:</p> 
+</pre>
+<p>Line 1 issues a <a title="Git status man page" href="http://schacon.github.com/git/git-status.html" target="_blank"><em>status</em></a> command, telling you which files have changed locally.  The <a title="Git add man page" href="http://schacon.github.com/git/git-add.html" target="_blank">add</a> command on line 2 tells Git to stage all changed files so that they can be committed to your local repository.  The <a title="Git commit Man Page" href="http://schacon.github.com/git/git-commit.html" target="_blank">commit</a> command on line 3 will commit the changes you added to your local repository.  Line 4 is where you will <a title="Git push Man Page" href="http://schacon.github.com/git/git-push.html" target="_blank">push</a> the changes in your local repository to the remote repository.</p>
+<blockquote><p>Note: Your fellow team members will not see your changes until you push them to the remote repository.  When you commit, you are only commit the change to your local copy of the repository</p></blockquote>
+<h3>Getting the Latest Version</h3>
+<p>Prior to pushing your changes to a remote repository, you may want to grab the latest code from the repository.  To get the latest remote changes, use the following commands:</p>
 <pre>
 $&gt; git fetch origin
 $&gt; git merge master
-</pre> 
-<p>Line 1 will sync your local Git repository with the remote Git repository. &nbsp;Your working copy of the code will not be updated until you issue a merge command (line 2). &nbsp;Git provides a way of combining these two commands into one, by using the <a title="Git pull Man Page" href="http://schacon.github.com/git/git-pull.html" target="_blank">pull</a> command:</p> 
+</pre>
+<p>Line 1 will sync your local Git repository with the remote Git repository.  Your working copy of the code will not be updated until you issue a merge command (line 2).  Git provides a way of combining these two commands into one, by using the <a title="Git pull Man Page" href="http://schacon.github.com/git/git-pull.html" target="_blank">pull</a> command:</p>
 <pre>
 $&gt; git pull origin master
-</pre> 
-<p>This command will fetch the remote repository changes, and merge them into the master branch.</p> 
-<h3>Learn More</h3> 
-<p>Git is a powerful version control tool and it is extremely useful. &nbsp;This tutorial should get you started immediately. &nbsp;But be warned, that you should take the time to learn more about Git and how it works. &nbsp;Here are some useful resources for learning more about Git:</p> 
-<ul> 
- <li><a title="Git Reference" href="http://gitref.org/" target="_blank">http://gitref.org/</a></li> 
- <li><a title="Git Visual Guide" href="http://marklodato.github.com/visual-git-guide/index-en.html" target="_blank">http://marklodato.github.com/visual-git-guide/index-en.html</a></li> 
- <li><a title="GitHub Help" href="http://help.github.com/remotes/" target="_blank">http://help.github.com/remotes/</a></li> 
- <li><a title="Scott Chacon on Git" href="http://www.youtube.com/watch?v=ZDR433b0HJY" target="_blank">http://www.youtube.com/watch?v=ZDR433b0HJY</a></li> 
-</ul></p>
+</pre>
+<p>This command will fetch the remote repository changes, and merge them into the master branch.</p>
+<h3>Learn More</h3>
+<p>Git is a powerful version control tool and it is extremely useful.  This tutorial should get you started immediately.  But be warned, that you should take the time to learn more about Git and how it works.  Here are some useful resources for learning more about Git:</p>
+<ul>
+<li><a title="Git Reference" href="http://gitref.org/" target="_blank">http://gitref.org/</a></li>
+<li><a title="Git Visual Guide" href="http://marklodato.github.com/visual-git-guide/index-en.html" target="_blank">http://marklodato.github.com/visual-git-guide/index-en.html</a></li>
+<li><a title="GitHub Help" href="http://help.github.com/remotes/" target="_blank">http://help.github.com/remotes/</a></li>
+<li><a title="Scott Chacon on Git" href="http://www.youtube.com/watch?v=ZDR433b0HJY" target="_blank">http://www.youtube.com/watch?v=ZDR433b0HJY</a></li>
+</ul>
+</p>
 
 					<p><em>Share this:</em></p>
           <p style="float:left">
@@ -174,19 +180,52 @@ $&gt; git pull origin master
 		<div id="push"></div>
     </div>
 
-    <div id="footer">
+		<!-- Footer -->
+    <footer>
       <div class="container">
-        <p class="muted credit">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
-        <p class="muted credit">&copy; 2009-2016 | Mixed with <a href="http://twitter.github.com/bootstrap/">Bootstrap v2.3.1</a> | Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <li class="list-inline-item">
+                <a href="https://twitter.com/SonOfGarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://www.linkedin.com/in/jmcgarr/">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://github.com/jmcgarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+						<p class="copyright text-muted">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
+            <p class="copyright text-muted">Copyright &copy; Mike McGarr 2009-2018 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v4.1</a> | Generated with <a href="http://jbake.org">JBake v2.6.2</a></p>
+          </div>
+        </div>
       </div>
-    </div>
+    </footer>
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/js/jquery-1.9.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/run_prettify.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom scripts for the clean blog look and feel -->
+    <script src="/js/clean-blog.min.js"></script>
+
     <script type="text/javascript">
       (function() {
         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
