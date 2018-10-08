@@ -2,18 +2,15 @@
 
 	<#include "menu.ftl">
 
-	<div class="row-fluid">
-	
-		<div class="span6 offset3">
+	<#assign masthead = "about-bg.jpg">
+	<#include "masthead.ftl">
 
-			<div class="page-header">
-				<h1><#escape x as x?xml>${content.title}</#escape></h1>
+	<!-- Main Content -->
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 col-md-10 mx-auto">
+				<p>${content.body}</p>
 			</div>
-
-			<!--p><em>${content.date?string("MMMM dd yyyy")}</em></p-->
-
-			<p>${content.body}</p>
-
 		</div>
 	</div>
 

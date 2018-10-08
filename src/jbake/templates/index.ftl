@@ -2,58 +2,30 @@
 
 	<#include "menu.ftl">
 
-	<div class="row-fluid">
+  <#assign pageTitle = "Mike McGarr's homepage">
+	<#assign pageSubtitle = "articles and talks from a software engineering leader">
 
-		<div class="span2">
-		</div>
+	<#include "masthead.ftl">
 
-		<div class="span8">
-			<div class="page-header">
-				<h1>Mike McGarr's Blog</h1>
+	<div class="container">
+    <div class="row justify-content-md-center">
+			<div class="col-lg-8 col-md-10 mx-auto">
+
+		  		<#list posts as post>
+			  		<#if (post.status == "published")>
+						<div class="post-preview">
+			  			<a href="${post.uri}"><h3 class="post-title"><#escape x as x?xml>${post.title}</#escape></h3></a>
+			  			<p class="post-meta">${post.date?string("MMMM dd, yyyy")}</p>
+			  			<p class="post-subtitle">${post.summary}</p>
+						</div>
+						<hr>
+			  		</#if>
+			  		<#if post_index = 5><#break></#if>
+			  	</#list>
+
+					<p>Older posts are available in the <a href="/${config.archive_file}">archive</a>.</p>
 			</div>
-		</div>
-	</div>
-	<div class="row-fluid">
-
-		<div class="span2">
-		</div>
-
-		<div class="span5">
-
-			<#list posts as post>
-		  		<#if (post.status == "published")>
-		  			<a href="${post.uri}"><h3><#escape x as x?xml>${post.title}</#escape></h3></a>
-		  			<p>${post.date?string("MMMM dd, yyyy")}</p>
-		  			<p>${post.summary}</p>
-
-		  		</#if>
-		  		<#if post_index = 5><#break></#if>
-		  	</#list>
-
-			<hr />
-
-			<p>Older posts are available in the <a href="/${config.archive_file}">archive</a>.</p>
-		</div>
-
-		<div class="span3">
-
-			<img src="img/profile_pic-sq.jpg" style="width:300px;height:266px"/>
-			<p>
-			Passionate engineer seeking to optimize development teams and organizations
-			</p>
-			<a href="http://www.mikemcgarr.com/feed.xml" target="_blank">
-			   <img src="img/webicon-rss.svg" alt="RSS Feed" style="width:42px;height:42px">
-			</a>
-			<a href="http://twitter.com/SonOfGarr" target="_blank">
-			   <img src="img/webicon-twitter.svg" alt="Twitter account" style="width:42px;height:42px">
-			</a>
-			<a href="http://github.com/jmcgarr" target="_blank">
-			   <img src="img/webicon-github.svg" alt="Github account" style="width:42px;height:42px">
-			</a>
-			<a href="https://www.linkedin.com/in/jmcgarr" target="_blank">
-			   <img src="img/webicon-linkedin.svg" alt="LinkedIn Profile" style="width:42px;height:42px">
-			</a>
-		</div>
+    </div>
 	</div>
 
 <#include "footer.ftl">

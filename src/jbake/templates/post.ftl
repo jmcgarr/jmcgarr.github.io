@@ -1,32 +1,11 @@
 <#include "header.ftl">
 
 	<#include "menu.ftl">
+	<#include "masthead.ftl">
 
-    <div class="row-fluid">
+		<div class="container">
 
-				<div class="span6 offset3">
-
-					<div class="page-header">
-						<h1><#escape x as x?xml>${content.title}</#escape></h1>
-					</div>
-
-					<p><em>${content.date?string("MMMM dd, yyyy")}</em></p>
-
-				</div>
-		</div>
-
-
-		<div class="row-fluid">
-
-				<div class="span2 offset1">
-					<p/>
-					<p class="text-right"><em><#list content.tags as tag></em>
-								<a href="/tags/${tag?trim?replace(' ','-')}.html">${tag}</a><br/>
-								</#list>
-					</p>
-				</div>
-
-        <div class="span6">
+        <div class="col-lg-8 col-md-10 mx-auto">
 
         	<p>${content.body}</p>
 
