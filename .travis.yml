@@ -5,4 +5,4 @@ branches:
 install: ./gradlew tasks
 script:
   - "./gradlew bake --info --stacktrace"
-  - "./gradlew gitPublishCommit --info --stacktrace"
+  - "./gradlew gitPublishPush --info --stacktrace"
