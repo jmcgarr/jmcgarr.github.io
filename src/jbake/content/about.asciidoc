@@ -1,4 +1,5 @@
 title=About Me
+subtitle=...for those who don't know me.
 date=2014-08-30
 type=page
 status=published

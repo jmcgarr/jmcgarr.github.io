@@ -2,6 +2,7 @@ title=Talks
 date=2014-09-01
 type=page
 status=published
+masthead=../jax-devops-speaking.jpg
 ~~~~~~
 
 == Beyond the culture deck: What you don't already know about Netflix's culture
