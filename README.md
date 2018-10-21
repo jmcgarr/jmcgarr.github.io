@@ -18,22 +18,20 @@ To preview
 
 Blog To Do:
 ----------
-- Work on overall layout/design
-- Setup CI with Travis or Cloudbees?
-- add favicon
 - Add links to previous blog post at bottom
 - internal links convert to new blog
 - all links should open in new tab
-- add markdown generator (removing the build error)
+- Update instructions to README for "live editing" mode (window 1 `gw -t bake` and window 2 `gw bakePreview`)
+- Tweak look and feel of masthead to take up less vertical space
+- Build the CSS using SCSS (or something like that)
 
 Gradle Plugin To Do:
 --------------------
 - task to create a post (optionally a branch as well called post/____)
-- Add live reload type feature when preview is on (reruns jbake)
-
-Redesign BLOCKERS:
-------------------
-
+- Add live reload type feature when preview is on (reruns jbake) - see script in build.gradle
+- Improve the incremental bake time
+- Enable a single command that will incrementally bake, serve content via jetty and live reload on edits
+- toast message when bake it complete, especially in live reload mode
 
 Redesign NICE-TO-HAVES
 ----------------------
