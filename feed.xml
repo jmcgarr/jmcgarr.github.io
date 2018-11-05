@@ -6,9 +6,117 @@
     <atom:link href="http://www.mikemcgarr.com/feed.xml" rel="self" type="application/rss+xml" />
     <description>Mike McGarr's Personal Blog</description>
     <language>en-gb</language>
-    <pubDate>Wed, 10 Oct 2018 15:38:23 +0000</pubDate>
-    <lastBuildDate>Wed, 10 Oct 2018 15:38:23 +0000</lastBuildDate>
+    <pubDate>Mon, 5 Nov 2018 17:36:39 +0000</pubDate>
+    <lastBuildDate>Mon, 5 Nov 2018 17:36:39 +0000</lastBuildDate>
 
+    <item>
+      <title>Discovering culture through artifacts</title>
+      <link>http://www.mikemcgarr.comblog/discovering-culture-thru-artifacts.html</link>
+      <pubDate>Mon, 5 Nov 2018 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">blog/discovering-culture-thru-artifacts.html</guid>
+      	<description>
+	&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;In a previous post, I shared my approach to &lt;a href=&quot;/blog/understanding-culture.html&quot;&gt;visualizing and understanding the culture of an organization&lt;/a&gt;. Assuming you agree with my approach to understanding culture, you might find yourself asking the question, &quot;Great! How do I get started?&quot; In my experience, I tend to look for an organization&amp;#8217;s &lt;strong&gt;cultural artifacts&lt;/strong&gt; as a starting point for understanding their culture. So what are cultural artifacts and why are they useful?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;A &lt;strong&gt;cultural artifact&lt;/strong&gt; is something that a team creates, shares and/or somehow emits outside their team that can be observed. You can use these artifacts to gain insight into the culture of a team or organization. Cultural artifacts can provide you with insight into the potential culture of a team. Similar to archaeological artifacts one might find in an ancient Egyptian pyramid, cultural artifacts provide you with clues to what a team might expect from you. Identifying cultural artifacts can be a quick way to understanding how a team works and what they believe.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;So what does a cultural artifact look like and where do I go to find them? I suspect that there are dozens of cultural artifacts that be used to discover the culture of a team. For me, there are a few that I tend to lean on in particular. The cultural artifacts of a team I seek out are &lt;strong&gt;managers&lt;/strong&gt;, &lt;strong&gt;behaviors&lt;/strong&gt;, &lt;strong&gt;tools&lt;/strong&gt;, and &lt;strong&gt;domain&lt;/strong&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_managers_as_cultural_artifacts&quot;&gt;Managers as cultural artifacts&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The first cultural artifact I look for is the manager of the team. The manager of a team or organization is responsible for setting priorities and holding team members accountable for achieving these priorities. Managers are particularly special to the culture of a team because they influence the shape and direction of a team. The personal values and behaviors of a team manager will manifest lead to biases in how the team is molded, hence shaping the culture.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The following are the primary means by which a manager shapes a team:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;Managers are responsible for hiring.&lt;/strong&gt;&lt;/em&gt; Managers are responsible for deciding who will be a member of their team. If the hiring manager is self-aware, they will recognize their own biases, and hire team members to compensate. If a manager is not self-aware, the team they create will end up looking and behaving like them. The beliefs and biases of a team’s manager guide who they hire.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;Managers are responsible for firing.&lt;/strong&gt;&lt;/em&gt; I come back to one of my favorite quotes from Andy Dunn, the founder of Bonobos, &lt;a href=&quot;https://medium.com/@dunn/creating-culture-21a117803f80&quot;&gt;“The most important people to your culture are those who leave&amp;#8230;&amp;#8203;the people you fire are more important than the people you hire.”&lt;/a&gt; When a manager lets somebody on the team go, the remaining members of the team will look for lessons on how they personally can avoid a similar failure mode. This will strongly shape how the remaining team members behave. It is important for a manager to fire team members who are toxic to the health and performance of the team. Firing is one of the hardest parts of a manager. If a manager tolerates a brilliant jerk for too long, this sends a signal to the rest of the team that being “brilliant” is more important than being a collaborative or respectful.  Whether the manager knows it or not, they are shaping a culture that embraces brilliant jerks. Inaction can be just as important as action, especially when it comes to terminations.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;Managers are responsible for rewards.&lt;/strong&gt;&lt;/em&gt; Behaviors that are rewarded can be one of the potent and dangerous indicators of a team’s culture. When a manager promotes a member of the team, this sends a signal to the rest of the team regarding how to get promoted. Meaning, the rest of the team will look at the newly promoted individual&amp;#8217;s behavior as promotion worthy. Not just their good behavior, but &lt;strong&gt;ALL&lt;/strong&gt; their behavior. This is very important. If a manager promotes somebody who never delivers on time, but is great at code reviews, then the rest of the team now knows what the manager values. Many of us have worked in an organization where those who were promoted were also the ones that backstabbed other leaders and worked in their own interest. This organization never stated that internal competition was a core value, but those who were successful knew it to be true. An organization that promotes leaders who backstab each other is creating a culture that says “we value backstabbing”.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;Managers are responsible for modeling behavior.&lt;/strong&gt;&lt;/em&gt; When one joins a new team, they will often look first to their new manager to understand which behaviors are accepted, expected and rewarded. If the manager tells everyone on the team that giving candid feedback is important, but they themselves are unable to provide feedback, then their words are merely wind and the culture of the team shifts slowly away from being candid. Actions speak louder than words. It is also likely that a manager’s behavior indicates how they hire, fire and reward members of their team. So, in observing a manager’s behavior, there is a chance that members of the team may model similar behavior.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;When looking at the manager of a team as a cultural artifact, one last thing to consider is how long they&amp;#8217;ve been the manager. Tenure plays a huge role in the potency of a manager as a cultural artifact. The longer a manager is leading a team and the more they hire and fire, the stronger their influence on a team. If a manager is new to a team, then you can use the manager as a predictor of the team&amp;#8217;s future culture.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_behavior_as_a_cultural_artifact&quot;&gt;Behavior as a cultural artifact&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;While the manager shapes the composition and direction of the team, a team is still composed of individuals. These individuals will each exhibit their own behavior, based on their personal values. Whether you are working with another team or joining a team, the majority of your interactions will be with its team members, so their behavior makes an excellent cultural artifact. Managers are cultural artifacts that help you understand how the team&amp;#8217;s culture came to be, and where it&amp;#8217;s going. But the behavior of the team is an artifact of the team&amp;#8217;s &lt;strong&gt;current culture&lt;/strong&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Within an organization, there are plenty of opportunities to observe the behavior of another team. In a meeting. At lunch. In the hallway. At a happy hour. In a Slack channel. Each time you observe the behavior of an individual, you are collecting information about their team&amp;#8217;s culture. Through these observations, you will begin to understand what they believe and value.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;There are behaviors that are directly applicable to the work one does in software engineering, such as unit testing or bi-weekly sprints. Observing this behavior in another team is definitely a cultural artifact, especially if their behavior deviates from any organizational norm. When working with a team that has strong engineering practices, you can assume that they will expect you and your team to share in their beliefs. They will likely assume that you should be building software the same way that they do. And if you don&amp;#8217;t subscribe to their approaches, you can expect some level of friction and disappointment.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Beyond engineering practices, it is also important to assess how the team communications, gives feedback and shares ideas. Do individuals treat members of other team&amp;#8217;s with respect? Do they share feedback readily or do they gossip and undermine each other? Do they communicate their plans and designs with the rest of the organization? Do they work towards establishing collaborative relationships or competitive ones? These are some of the most interesting questions you should be trying to ask of a team.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_tools_as_a_cultural_artifact&quot;&gt;Tools as a cultural artifact&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This is often the easiest artifact to identify and also one of the weaker indicators of a team&amp;#8217;s culture. The tools a team uses can indicate the potential beliefs of a team, especially if their tool choices are unique. I am using the term tools to cover a wide range of things. Programming languages, version control systems, chat clients, runtime frameworks, and even a sticky notes are all examples of tools. A team will select a tool because they believe it solves are a particular problem or need for them. While tools are designed to solve problems, they all carry with them constraints or limitations that must also be accepted. By adopting a tool, a team is shaping their culture.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;If a team adopts an open source tool, then there is a chance that a community exists around the use of this tool. This community formed around a shared set of beliefs that binds them and shapes the direction of the tool. When a team adopts an open source tool, they are also adopting the beliefs of the open source community surrounding that tool. For instance, the Ruby programming language has a global and passionate community that believes strongly in &apos;developer happiness&apos;. So by choosing Ruby for a project, the team is either already aligned with the &apos;developer happiness&apos; belief or will eventually align with it. Why? Well, they will likely hire engineers with Ruby experience who believe in &apos;developer happiness&apos;, thus further &quot;infecting&quot; the team with this belief.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;So, by looking at the tools a team or organizations uses, you can make some guesses as to what their culture may be. I feel this point is often overlooked and I have observed it to be a constant source of unspoken tension between teams.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_domain_as_a_cultural_artifact&quot;&gt;Domain as a cultural artifact&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;When an organization forms a team, it does so in order to address a particular need within the organization. &lt;em&gt;&quot;We have a lot of data, so let&amp;#8217;s build a data engineering team.&quot; &quot;Our deployments are slow, so let&amp;#8217;s build a release engineering team.&quot; &quot;Our engineers waste a lot of time, so let&amp;#8217;s build a developer productivity team.&quot;&lt;/em&gt; Teams are born from a need. When the need is gone, there is a chance that the team will go as well. The need, or problem domain, that the team exists to address, can be a valuable cultural artifact.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;I have spent the last few years leading engineering teams focused on providing development infrastructure and tooling to the larger organization. These teams were formed to address the organization-wide need for centralized development support. Each of these teams needed to provide domain expertise, tooling, and support to the rest of the company. I was hired to lead these teams due to my passion and expertise in this space. I, in turn, hired engineers who were also passionate about providing this domain. The history, legacy, and composition of the team is embroiled within the domain of the team. The tools we choose and recommend are based on the organizational need. This is a cultural artifact.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;I once made the mistake in assuming that two engineering teams that we were supporting shared the same beliefs. Both were product teams, focused on the UI, and both built their product in JavaScript. I was surprised to find these two teams were asking for conflicting features in the tool we were building for them. Upon digging in, we realized that these two UI teams were formed to solved very different business needs. The first team was formed to build a robust, reliant and performant experience within a small yet important portion of the product&amp;#8217;s UI. As a result, they believed in building solutions themselves from scratch, as third-party products often fell short of their performance and telemetry needs. The second team was formed to build a user experience that changed based on hundreds of A/B tests, most of which would fail and be thrown out. As a result, this team valued developer velocity and cared more about high level abstractions and less about lower level details. Once I understood how the domain influenced the culture of these two teams, it became clear how we might build solutions that met both of their needs.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_a_caveat&quot;&gt;A caveat&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Cultural artifacts are extremely valuable to beginning the process of identifying and understanding the culture of a team. I use them all the time. But they have their limits. Cultural artifacts are an indicator of a team&amp;#8217;s &lt;strong&gt;potential&lt;/strong&gt; culture. They are clues. And these clues need to be validated. It is possible that an artifact may lead you to an incorrect conclusion. It&amp;#8217;s always important to validate your initial read, and to give a team the benefit of the doubt.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;_getting_started&quot;&gt;Getting started&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;My hope is that you be able to use cultural artifacts to improve your understanding of the teams you work with everyday. Identifying cultural artifacts may be uncomfortable at first, so I recommend looking at the artifacts of the team you are on as a starting point. What are the artifacts that you and your team emit? What are the tools you use telling others about your team&amp;#8217;s culture? How does your manager influence the culture of the team? How do other team&amp;#8217;s view your team based on your behavior? These are all important questions to ask, as it is likely that others are using these  artifacts to assess you and your team.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+	</description>
+    </item>
     <item>
       <title>Thank you Netflix</title>
       <link>http://www.mikemcgarr.comblog/thank-you-netflix.html</link>
@@ -1136,24 +1244,6 @@ for (item in Hudson.instance.items) {
 	</description>
     </item>
     <item>
-      <title>DC Tech Ops Meetup Alliance (aka the Super Friends)</title>
-      <link>http://www.mikemcgarr.comblog/dc-tech-ops-meetup.html</link>
-      <pubDate>Thu, 21 Feb 2013 00:00:00 +0000</pubDate>
-      <guid isPermaLink="false">blog/dc-tech-ops-meetup.html</guid>
-      	<description>
-	&lt;p&gt;On Tuesday night, my meetup group (&lt;a title=&quot;DC Continuous Integration, Delivery, &amp;amp; Deployment Group&quot; href=&quot;http://www.meetup.com/DC-continuous-integration/&quot; target=&quot;_blank&quot;&gt;DC Continuous Integration, Delivery and Deployment Group&lt;/a&gt;) joined forces with a number of other groups to present the most awesome gathering we have ever known.  The meeting was the brainchild of &lt;a title=&quot;Nathen Harvey&quot; href=&quot;http://www.nathenharvey.com/&quot; target=&quot;_blank&quot;&gt;Nathen Harvey&lt;/a&gt;, who runs the &lt;a title=&quot;DevOpsDC&quot; href=&quot;http://www.meetup.com/DevOpsDC/&quot; target=&quot;_blank&quot;&gt;DevOpsDC&lt;/a&gt; and &lt;a title=&quot;MongoDC&quot; href=&quot;http://www.meetup.com/Washington-DC-MongoDB-Users-Group/&quot; target=&quot;_blank&quot;&gt;MongoDC&lt;/a&gt; user groups and works for &lt;a title=&quot;OpsCode&quot; href=&quot;http://www.opscode.com/&quot; target=&quot;_blank&quot;&gt;OpsCode&lt;/a&gt; as their Technical Community Manager.  Nathen sent an email with the subject of &apos;DC Tech Ops Meetup Alliance (aka the Super Friends)&apos;...how could I not be in.&lt;/p&gt;
-&lt;p&gt;&lt;a title=&quot;DevOpsDC Meeting Invite&quot; href=&quot;http://www.meetup.com/DevOpsDC/events/97686352/&quot; target=&quot;_blank&quot;&gt;The&lt;/a&gt; meeting brought together &lt;a title=&quot;Big Data DC&quot; href=&quot;http://www.meetup.com/bigdatadc/&quot; target=&quot;_blank&quot;&gt;Big Data DC&lt;/a&gt;, &lt;a title=&quot;Crabby Admins&quot; href=&quot;http://crabbyadmins.org/&quot; target=&quot;_blank&quot;&gt;Crabby Admins - LOPSA, Baltimore Chapter&lt;/a&gt;, &lt;a title=&quot;DCAST&quot; href=&quot;http://www.meetup.com/D-CAST/&quot; target=&quot;_blank&quot;&gt;DC Agile Software Testing Group (DCAST)&lt;/a&gt;, &lt;a title=&quot;DC Continuous Integration, Delivery and Deployment Group&quot; href=&quot;http://www.meetup.com/DC-continuous-integration/&quot; target=&quot;_blank&quot;&gt;DC Continuous Integration, Delivery, &amp;amp; Deployment Group&lt;/a&gt;, &lt;a title=&quot;DevOpsDC&quot; href=&quot;http://www.meetup.com/DevOpsDC/&quot; target=&quot;_blank&quot;&gt;DevOpsDC&lt;/a&gt;, &lt;a title=&quot;LOPSA&quot; href=&quot;http://www.meetup.com/lopsadc/&quot; target=&quot;_blank&quot;&gt;LOPSA DC - The League of Professional System Administrators&lt;/a&gt;, &lt;a title=&quot;NOVA MySQL&quot; href=&quot;http://www.meetup.com/NOVA-MySQL/&quot; target=&quot;_blank&quot;&gt;NOVA MySQL&lt;/a&gt;, &lt;a title=&quot;Arlington Ruby&quot; href=&quot;http://www.meetup.com/Arlington-Ruby/&quot; target=&quot;_blank&quot;&gt;Arlington Ruby&lt;/a&gt; and &lt;a title=&quot;DC Ruby User Group&quot; href=&quot;http://www.dcrug.org/&quot; target=&quot;_blank&quot;&gt;DC Ruby User Group&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;For the meeting, we brought in some great speakers.  First, we had &lt;a title=&quot;Avleen Vig&quot; href=&quot;https://twitter.com/avleen&quot; target=&quot;_blank&quot;&gt;Avleen Vig&lt;/a&gt; and &lt;a title=&quot;Patrick McDonnell&quot; href=&quot;https://twitter.com/mcdonnps&quot; target=&quot;_blank&quot;&gt;Patrick McDonnell&lt;/a&gt; from &lt;a title=&quot;Etsy&quot; href=&quot;http://www.etsy.com/&quot; target=&quot;_blank&quot;&gt;Etsy&lt;/a&gt; to talk about &lt;a title=&quot;OpsSchool&quot; href=&quot;http://www.opsschool.org/en/latest/&quot; target=&quot;_blank&quot;&gt;Ops School&lt;/a&gt;.  Here&apos;s the video:&lt;/p&gt;
-&lt;p&gt;&lt;iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;//www.youtube.com/embed/0gx7oQaAy6g&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;&lt;/p&gt;
-&lt;p&gt;After Avleen and Patrick, &lt;a title=&quot;Theo Schlossnagle&quot; href=&quot;http://omniti.com/is/theo-schlossnagle&quot; target=&quot;_blank&quot;&gt;Theo Schlossnagle&lt;/a&gt;, CEO of &lt;a title=&quot;OmniTI&quot; href=&quot;http://omniti.com/&quot; target=&quot;_blank&quot;&gt;OmniTI&lt;/a&gt;  was up next.  We were lucky enough that he gave two presentations.  The first was a short presentation on How to Tie Your Shoes the Right Way (I love the unicorns):&lt;/p&gt;
-&lt;p&gt;&lt;iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;//www.youtube.com/embed/UQ6UNhdP6Ic&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;&lt;/p&gt;
-&lt;p&gt;Next, Theo gave a great presentation on careers.  It was spot on and definitely worth watching.  Here&apos;s the video:&lt;/p&gt;
-&lt;p&gt;&lt;iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;//www.youtube.com/embed/qyxUIY72ywc&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;&lt;/p&gt;
-&lt;p&gt;I want to send a special thank you to Nathen for making this all happen.  It was a great night.  I definitely look forward to further collaborations between DevOpsDc and my meetup.  If you are looking for the original meeting invite, here it is.  Enjoy the videos.&lt;/p&gt;
-
-	</description>
-    </item>
-    <item>
       <title>Book Review: The Phoenix Project</title>
       <link>http://www.mikemcgarr.comblog/the-phoenix-project.html</link>
       <pubDate>Thu, 21 Feb 2013 00:00:00 +0000</pubDate>
@@ -1175,6 +1265,24 @@ for (item in Hudson.instance.items) {
 &lt;p&gt;I am also not sure that one can avoid studying the art of &lt;a title=&quot;Change management&quot; href=&quot;http://en.wikipedia.org/wiki/Change_management&quot; target=&quot;_blank&quot;&gt;change management&lt;/a&gt;.  The book touches briefly on the topic indirectly, but it is much harder to change a culture than book leads you to believe.  That&apos;s not to say the lessons in the book aren&apos;t valuable, but the timeline should be taken with a grain of salt.  The book depicts a company on the edge of collapse.  Not everybody will find themselves with such a motivating catalyst for change.  More than likely you will find stern resistance to new ideas and approaches.  Be prepared to fight.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Conclusion&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;I thoroughly enjoyed the book and highly recommend it to anybody interested in DevOps, who works in IT, or works in an organization that has a dysfunctional IT shop.  It&apos;s a fast pace book that will leave with a long list of other books to read.  I also recommend you check out &lt;a title=&quot;Jez Humble&quot; href=&quot;http://jezhumble.net/&quot; target=&quot;_blank&quot;&gt;Jez Humble&apos;s&lt;/a&gt; &lt;a title=&quot;Jez Humble reviews the Phoenix Project&quot; href=&quot;http://continuousdelivery.com/2013/01/book-review-the-phoenix-project/&quot; target=&quot;_blank&quot;&gt;review of The Phoenix Project&lt;/a&gt;.  (Note: I didn&apos;t read any other reviews until I had written my own, I am happy with the similarities) Go out and buy it now!&lt;/p&gt;
+
+	</description>
+    </item>
+    <item>
+      <title>DC Tech Ops Meetup Alliance (aka the Super Friends)</title>
+      <link>http://www.mikemcgarr.comblog/dc-tech-ops-meetup.html</link>
+      <pubDate>Thu, 21 Feb 2013 00:00:00 +0000</pubDate>
+      <guid isPermaLink="false">blog/dc-tech-ops-meetup.html</guid>
+      	<description>
+	&lt;p&gt;On Tuesday night, my meetup group (&lt;a title=&quot;DC Continuous Integration, Delivery, &amp;amp; Deployment Group&quot; href=&quot;http://www.meetup.com/DC-continuous-integration/&quot; target=&quot;_blank&quot;&gt;DC Continuous Integration, Delivery and Deployment Group&lt;/a&gt;) joined forces with a number of other groups to present the most awesome gathering we have ever known.  The meeting was the brainchild of &lt;a title=&quot;Nathen Harvey&quot; href=&quot;http://www.nathenharvey.com/&quot; target=&quot;_blank&quot;&gt;Nathen Harvey&lt;/a&gt;, who runs the &lt;a title=&quot;DevOpsDC&quot; href=&quot;http://www.meetup.com/DevOpsDC/&quot; target=&quot;_blank&quot;&gt;DevOpsDC&lt;/a&gt; and &lt;a title=&quot;MongoDC&quot; href=&quot;http://www.meetup.com/Washington-DC-MongoDB-Users-Group/&quot; target=&quot;_blank&quot;&gt;MongoDC&lt;/a&gt; user groups and works for &lt;a title=&quot;OpsCode&quot; href=&quot;http://www.opscode.com/&quot; target=&quot;_blank&quot;&gt;OpsCode&lt;/a&gt; as their Technical Community Manager.  Nathen sent an email with the subject of &apos;DC Tech Ops Meetup Alliance (aka the Super Friends)&apos;...how could I not be in.&lt;/p&gt;
+&lt;p&gt;&lt;a title=&quot;DevOpsDC Meeting Invite&quot; href=&quot;http://www.meetup.com/DevOpsDC/events/97686352/&quot; target=&quot;_blank&quot;&gt;The&lt;/a&gt; meeting brought together &lt;a title=&quot;Big Data DC&quot; href=&quot;http://www.meetup.com/bigdatadc/&quot; target=&quot;_blank&quot;&gt;Big Data DC&lt;/a&gt;, &lt;a title=&quot;Crabby Admins&quot; href=&quot;http://crabbyadmins.org/&quot; target=&quot;_blank&quot;&gt;Crabby Admins - LOPSA, Baltimore Chapter&lt;/a&gt;, &lt;a title=&quot;DCAST&quot; href=&quot;http://www.meetup.com/D-CAST/&quot; target=&quot;_blank&quot;&gt;DC Agile Software Testing Group (DCAST)&lt;/a&gt;, &lt;a title=&quot;DC Continuous Integration, Delivery and Deployment Group&quot; href=&quot;http://www.meetup.com/DC-continuous-integration/&quot; target=&quot;_blank&quot;&gt;DC Continuous Integration, Delivery, &amp;amp; Deployment Group&lt;/a&gt;, &lt;a title=&quot;DevOpsDC&quot; href=&quot;http://www.meetup.com/DevOpsDC/&quot; target=&quot;_blank&quot;&gt;DevOpsDC&lt;/a&gt;, &lt;a title=&quot;LOPSA&quot; href=&quot;http://www.meetup.com/lopsadc/&quot; target=&quot;_blank&quot;&gt;LOPSA DC - The League of Professional System Administrators&lt;/a&gt;, &lt;a title=&quot;NOVA MySQL&quot; href=&quot;http://www.meetup.com/NOVA-MySQL/&quot; target=&quot;_blank&quot;&gt;NOVA MySQL&lt;/a&gt;, &lt;a title=&quot;Arlington Ruby&quot; href=&quot;http://www.meetup.com/Arlington-Ruby/&quot; target=&quot;_blank&quot;&gt;Arlington Ruby&lt;/a&gt; and &lt;a title=&quot;DC Ruby User Group&quot; href=&quot;http://www.dcrug.org/&quot; target=&quot;_blank&quot;&gt;DC Ruby User Group&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;For the meeting, we brought in some great speakers.  First, we had &lt;a title=&quot;Avleen Vig&quot; href=&quot;https://twitter.com/avleen&quot; target=&quot;_blank&quot;&gt;Avleen Vig&lt;/a&gt; and &lt;a title=&quot;Patrick McDonnell&quot; href=&quot;https://twitter.com/mcdonnps&quot; target=&quot;_blank&quot;&gt;Patrick McDonnell&lt;/a&gt; from &lt;a title=&quot;Etsy&quot; href=&quot;http://www.etsy.com/&quot; target=&quot;_blank&quot;&gt;Etsy&lt;/a&gt; to talk about &lt;a title=&quot;OpsSchool&quot; href=&quot;http://www.opsschool.org/en/latest/&quot; target=&quot;_blank&quot;&gt;Ops School&lt;/a&gt;.  Here&apos;s the video:&lt;/p&gt;
+&lt;p&gt;&lt;iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;//www.youtube.com/embed/0gx7oQaAy6g&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;&lt;/p&gt;
+&lt;p&gt;After Avleen and Patrick, &lt;a title=&quot;Theo Schlossnagle&quot; href=&quot;http://omniti.com/is/theo-schlossnagle&quot; target=&quot;_blank&quot;&gt;Theo Schlossnagle&lt;/a&gt;, CEO of &lt;a title=&quot;OmniTI&quot; href=&quot;http://omniti.com/&quot; target=&quot;_blank&quot;&gt;OmniTI&lt;/a&gt;  was up next.  We were lucky enough that he gave two presentations.  The first was a short presentation on How to Tie Your Shoes the Right Way (I love the unicorns):&lt;/p&gt;
+&lt;p&gt;&lt;iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;//www.youtube.com/embed/UQ6UNhdP6Ic&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;&lt;/p&gt;
+&lt;p&gt;Next, Theo gave a great presentation on careers.  It was spot on and definitely worth watching.  Here&apos;s the video:&lt;/p&gt;
+&lt;p&gt;&lt;iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;//www.youtube.com/embed/qyxUIY72ywc&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;&lt;/p&gt;
+&lt;p&gt;I want to send a special thank you to Nathen for making this all happen.  It was a great night.  I definitely look forward to further collaborations between DevOpsDc and my meetup.  If you are looking for the original meeting invite, here it is.  Enjoy the videos.&lt;/p&gt;
 
 	</description>
     </item>
