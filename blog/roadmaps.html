@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>How I Roadmap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The personal blog of J. Michael McGarr, professional automation rant monger.  Passionate about #devops #continuousDelivery #lean #agile">
+    <meta name="author" content="https://twitter.com/SonOfGarr">
+    <meta name="keywords" content="">
+    <meta name="generator" content="JBake">
+
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="/css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- previous styles -->
+    <link href="/css/asciidoctor.css" rel="stylesheet">
+    <link href="/css/extra.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="/favicon.ico">
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-49993013-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+  </head>
+  <body>
+    <script src="//platform.linkedin.com/in.js" type="text/javascript">
+     lang: en_US
+    </script>
+    <div id="wrap">
+
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+          <a class="navbar-brand" href="/">Mike McGarr</a>
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/about.html">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/archive.html">Blog</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/talks.html">Talks</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/feed.xml">Subscribe</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      
+<!-- Grab masthead data -->
+
+      <!-- Page Header -->
+      <header class="masthead" style="background-image: url('/img/masthead/roadmap.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <div class="page-heading">
+                <h1>How I Roadmap</h1>
+                  <span class="subheading"><em>November 11, 2018</em></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="">
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row justify-content-between">
+            <div class="col-4"></div>
+            <div class="col-4 text-right">
+              <p class="photo-credit">Photo credit:
+                  <a href="https://flic.kr/p/9r9JTj" target="_blank">https://flic.kr/p/9r9JTj</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+		<div class="container">
+
+        <div class="col-lg-8 col-md-10 mx-auto">
+
+        	<p><div class="paragraph">
+<p>A few years back, I took over an engineering team that was failing to meet the needs of their customers. One of the many complaints leveled was that the team did not effectively communicate their plans. It became apparent to me that I needed to find a way to share the work the team planned to do over the short and long term. I began searching for examples that were simple and effective. This is when I began experimenting with <strong>visual roadmaps</strong>.</p>
+</div>
+<div class="paragraph">
+<p>There are likely many approaches to visualizing a product or team&#8217;s roadmap. What I want to share with you is an approach that I have taken over the past few years that has worked for me. I have tweaked my approach over the years, incorporating feedback from friends and peers, experimenting along the way.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s take a look at an example:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="/img/sample-roadmap.png"><img src="/img/sample-roadmap.png" alt="sample roadmap"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>The above image shows the roadmap for fictitious tools team. As you can see from the key on the right, the team manages the companies Artifactory, Github Enterprise, Jenkins and build system. The details of the roadmap aren&#8217;t really the relevant part, but I tried to make it somewhat believable.</p>
+</div>
+<div class="paragraph">
+<p>The rest of the post will break down elements of the roadmap and how I think about it. At the very end, I will provide links to templates you can use to create your own roadmap.</p>
+</div>
+<div class="sect1">
+<h2 id="_audience">Audience</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When I started building visual roadmaps, the intended audience was primarily my team&#8217;s customers. They were keenly interested in what we were working on and wanted to know where we were going. Over time, however, I was surprised to find that there were other users of the roadmaps. It now feels a bit obvious.</p>
+</div>
+<div class="paragraph">
+<p>My team gained a lot by having a visual roadmap. During our planning meetings, we would bring up our roadmap. We would discuss the status of the work in the current quarter, as well work we had planned for the future. Being able to see three quarters worth of work in a single diagram gave us a lot more context when we had to make scheduling tradeoffs.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, I found that having an up-to-date visual roadmap streamlined our quarterly planning sessions. Why? Well because we already had a rough outline of what we wanted to do in the coming quarters. We were constantly adding and shifting work around for the next two quarters. So when it came time to put our quarterly plan together, we focused on verifying and breaking down the work that was already on the roadmap. In fact, I found that we always knew what we would be working on at any given time.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_time">Time</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>My roadmaps tend to be broken up into quarters. This is because the organizations that I&#8217;ve worked at tend to have a quarterly planning cycle. The quarter on the far left is always the current quarter. I typically only include the current quarter and the following two quarters. It is hard to predict what will be working on beyond 9 months.</p>
+</div>
+<div class="paragraph">
+<p>I like to break the current quarter down even further by month. This is to denote an increased level of accuracy that we can provide for estimates. The farther right something is on the roadmap, the less certain it is.</p>
+</div>
+<div class="paragraph">
+<p>I also like to include a vertical line indicating the current date. This line serves two purposes. The first is to remind everybody how far we are in the quarter, obviously. The second purpose is to remind me when I last updated the roadmap. If the current date is two or three weeks behind, then I am not doing a good job updating.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_granularity">Granularity</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For the roadmaps I&#8217;ve built, I only include coarse grain projects or features. In the Agile community, you might call them <strong>epics</strong>, but any term you use fits. Each bar in the roadmap is effectively an epic.</p>
+</div>
+<div class="paragraph">
+<p>Occasionally I might include a "fine grain" task on the roadmap, like an Agile story or task. This would be if this small bit of work had tremendous value and interest to my customers. Rather than forcing them to dive into our team&#8217;s backlog of tickets, I could give them some visibility on the roadmap. This is, however, rare.</p>
+</div>
+<div class="paragraph">
+<p>Since epics tend to be large chunks of work, most of the visual blocks span multiple months.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_updates">Updates</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>I will only update the roadmap once every two weeks or so. I update the roadmap after a sprint is complete. I will update the roadmap with the team as well. The team is already in the planning mindset. Additionally, the probability that the results of our recent sprint will impact future work is high. Discussions we have around the roadmap are often fruitful as well.</p>
+</div>
+<div class="paragraph">
+<p>I do spend more time updating the roadmap at the end of a quarter, but I still don&#8217;t find it excessive at all.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_color">Color</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>I am a visual person. I also, like to use color. My use of color may offend you, and for that I am sorry. I want the roadmap to be bright and inviting. I could remove all the color and shift to a gray tone, but I just feel it will feel grab and unappealing. I want the mood to be light, uplifting and positive.</p>
+</div>
+<div class="paragraph">
+<p>More specifically, I use color to denote products or types of work. You may see this from the key on the right. This makes it easier to hone in on the products or types of work you care most about.</p>
+</div>
+<div class="paragraph">
+<p>Now, I will say that I have not accommodated those with color blindness. If this is important, I believe using swimlanes instead of color may be a better approach.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_getting_details">Getting details</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The devil is in the details. For most of these epics, a customer or team member will want to dig in further. To address this need, I began adding links in the diagram to the specific JIRA Epic. This allows anybody to dig into all the history and notes contained in that epic. A wealth of data just a click away.</p>
+</div>
+<div class="paragraph">
+<p>What&#8217;s nice about this approach is that the visual roadmap can be thought of as merely a representation of the epics within JIRA. Engineers might be more comfortable working with JIRA tickets, while I wanted to focus on epics. Epics became the unit of work I cared most about, and engineers knew that. By asking engineers on my team to always associate work with an epic, I could manage the roadmap more effectively. This connection within JIRA was extremely valuable for bridging the gap between coarse grain and fine grain work.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_done_delayed_and_unplanned_work">Done, Delayed and Unplanned work</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When the team completed an epic, I wanted to make sure that the roadmap reflected that it was done. I personally like fading the colors and text of the epic block in the roadmap. You can see an example of this in the above example. The first epic is faded because the team completed the work. Once again, this enabled my customers and me to get the information we needed, at a glance.</p>
+</div>
+<div class="paragraph">
+<p>Similarly, if planned work wound up getting delayed, I wanted to make sure that our customers knew. For delayed work, I merely outline the epic block in a bold red outline. I would also move the epic into what I considered a more realistic timeline. So when you glanced at the roadmap, you might see that work targeted for this quarter has been pushed out.</p>
+</div>
+<div class="paragraph">
+<p>One quick note about delayed work. I only mark something as delayed if it was targeted for the current quarter and it won&#8217;t get done then. If I had something slated for the next coming quarter, and it got pushed even further, I don&#8217;t call that out. Why? Well, I view work beyond the current quarter as goals, not commitments. This will of course vary based on your organizational culture.</p>
+</div>
+<div class="paragraph">
+<p>Lastly, there is a chance that something changes mid-quarter, forcing us to do work we hadn&#8217;t planned on. For this, I highlight this epic with a bold green outline. This can help tell a story as to why some other work didn&#8217;t get done. Unplanned work is inevitable.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_experiments">Experiments</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Previously incarnations of my roadmaps included some experiments that I thought were worth mentioning.</p>
+</div>
+<div class="paragraph">
+<p>The first is something I already mentioned. In the past, I used swimlanes to separate types of work. For instance, I might have a swimlane called "Customer impact" and another called "Technical debt". I&#8217;ve also used swimlanes to separate out products (instead of color). I imagine swimlanes could be useful in a variety of ways but found my roadmaps were more compact without them.</p>
+</div>
+<div class="paragraph">
+<p>Another concept I briefly experimented with was adding ownership to each epic. I would annotate each epic block with the initials of the engineer on my team who was leading this work. This didn&#8217;t necessarily mean that they were working alone, but that they owned the work. I would include a small cute bubble with their initials to denote ownership. Customers didn&#8217;t necessarily benefit from this, but the team did. It also helped me understand how to balance the ownership of work. More recently, I would manage ownership within JIRA and not on the roadmap.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_why_a_google_drawing_a_short_rant_on_tools">Why a Google Drawing? (A short rant on tools.)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>I suspect at this point, a lot of you have asked this question. "Why is Mike using <a href="https://docs.google.com/drawings/">Google Drawing</a>? Isn&#8217;t there some tool out there that can do all this for him?" In short, the answer is yes there is. A ton in fact. But I have yet to try.</p>
+</div>
+<div class="paragraph">
+<p>Why not? Well, it&#8217;s because using a drawing tool is just easier, and honestly there are very few constraints. Let me explain.</p>
+</div>
+<div class="paragraph">
+<p>Whenever you encounter a problem, the first thing you will do is try to solve this problem with a process. Often, the process you implement will eventually be supported or enabled by a tool. For me, I wanted to solve the <em>problem of communicating long-term plans</em>. I decided that I would <em>institute a process with my teams to define our long-term plans</em>. I then decided to <em>lean on a visual roadmap as a tool</em> for communicating our plans. I had a <em>problem</em>, I found a <em>process</em>, and lastly a <em>tool</em>, in that order.</p>
+</div>
+<div class="paragraph">
+<p>The problem with starting with a tool is that the tool has been designed to solve a problem, or set of problems, that may not be the problem you want to solve. By using a flexible tool, like Google Drawing, I&#8217;ve been able to experiment, change, and upend my whole approach with very few headaches. Put another way, I&#8217;ve been refining my process. I suspect I could implement a tool at this point since I&#8217;ve learned enough about the process I want. If you start with a tool, your process will be shaped by the constraints of the tool.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_influences">Influences</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>I wanted to give a shout out to the biggest influence on my roadmaps. The site that got me started was the <a href="https://itkanban.wordpress.com/framework/roadmaps/strategic-roadmaps/">IT Kanban wordpress site</a>, that included a section on Strategic roadmaps. Their approach just clicked with me and my early roadmaps looked just like theirs.</p>
+</div>
+<div class="paragraph">
+<p>Since then, I&#8217;ve had some great feedback from colleagues with a lot more product management experience than me. In particular, I want to give a shout out to <a href="http://barryhawkins.com/">Barry Hawkins</a> for some of his feedback and insight. Thanks Barry!</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_give_it_a_shot">Give it a shot</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>It&#8217;s taken me a while to get to this point, and there may be one or two of you who might want to build your own roadmaps. To help you get started, here are some links to Google Drawings I&#8217;ve built that you can try:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.google.com/drawings/d/1qLqyCcHMySgsHpEDXMUPi0emc2DkpVPfbIZihgE58kY/edit?usp=sharing">Sample Roadmap (shown above)</a></p>
+</li>
+<li>
+<p><a href="https://docs.google.com/drawings/d/1HyKfJv2Yg3pvic7gj_8b79YItQ0t3yTFDzXuX0vFP_k/edit?usp=sharing">Visual roadmap template</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If you do end up building roadmaps, I would love to hear about it. If you are currently doing something else that works for you, definitely share your approach.</p>
+</div>
+</div>
+</div></p>
+
+					<p><em>Share this:</em></p>
+          <p style="float:left">
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.mikemcgarr.com/blog/roadmaps.html" data-via="SonOfGarr" data-lang="fr">Tweeter</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                <div class="g-plusone" data-size="medium" data-href="http://www.mikemcgarr.com/blog/roadmaps.html"></div>
+                <script type="IN/Share" data-url="http://www.mikemcgarr.com/blog/roadmaps.html" data-counter="right"></script>
+                <div class="fb-like" data-href="http://www.mikemcgarr.com/blog/roadmaps.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+          </p>
+
+          <hr>
+
+          <div id="disqus_thread">
+          <script type="text/javascript">
+                var disqus_shortname = 'mikemcgarr';
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+          </script>
+          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        </div>
+    </div>
+
+		</div>
+		<div id="push"></div>
+    </div>
+
+		<!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <li class="list-inline-item">
+                <a href="https://twitter.com/SonOfGarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://www.linkedin.com/in/jmcgarr/">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://github.com/jmcgarr">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+						<p class="copyright text-muted">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
+            <p class="copyright text-muted">Copyright &copy; Mike McGarr 2009-2018 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v4.1</a> | Generated with <a href="http://jbake.org">JBake v2.6.2</a></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom scripts for the clean blog look and feel -->
+    <script src="/js/clean-blog.min.js"></script>
+
+    <script type="text/javascript">
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/platform.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    </script>
+  </body>
+</html>
