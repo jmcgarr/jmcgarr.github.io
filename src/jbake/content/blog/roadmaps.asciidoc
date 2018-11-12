@@ -21,9 +21,9 @@ The rest of the post will break down elements of the roadmap and how I think abo
 
 == Audience
 
-When I started building visual roadmaps, the intended audience was primarily my team's customers. They were keenly interested in what we were working on and wanted to know where we were going. Over time however, I was surprised to find that there were other users of the roadmaps. It now feels a bit obvious.
+When I started building visual roadmaps, the intended audience was primarily my team's customers. They were keenly interested in what we were working on and wanted to know where we were going. Over time, however, I was surprised to find that there were other users of the roadmaps. It now feels a bit obvious.
 
-My team gained a lot by having a visual roadmap. During our planning meetings we would bring up our roadmap. We would discuss the status of the work in the current quarter, as well work we had planned for the future. Being able to see three quarters worth of work in a single diagram gave us a lot more context when we had to make scheduling tradeoffs.
+My team gained a lot by having a visual roadmap. During our planning meetings, we would bring up our roadmap. We would discuss the status of the work in the current quarter, as well work we had planned for the future. Being able to see three quarters worth of work in a single diagram gave us a lot more context when we had to make scheduling tradeoffs.
 
 Additionally, I found that having an up-to-date visual roadmap streamlined our quarterly planning sessions. Why? Well because we already had a rough outline of what we wanted to do in the coming quarters. We were constantly adding and shifting work around for the next two quarters. So when it came time to put our quarterly plan together, we focused on verifying and breaking down the work that was already on the roadmap. In fact, I found that we always knew what we would be working on at any given time.
 
@@ -45,13 +45,13 @@ Since epics tend to be large chunks of work, most of the visual blocks span mult
 
 == Updates
 
-I will only update the roadmap once ever two weeks or so. I update the roadmap after a sprint is complete. I will update the roadmap with the team as well. The team is already in the planning mindset. Additionally, the probability that the results of our recent sprint will impact future work is high. Discussions we have around the roadmap are often fruitful as well.
+I will only update the roadmap once every two weeks or so. I update the roadmap after a sprint is complete. I will update the roadmap with the team as well. The team is already in the planning mindset. Additionally, the probability that the results of our recent sprint will impact future work is high. Discussions we have around the roadmap are often fruitful as well.
 
 I do spend more time updating the roadmap at the end of a quarter, but I still don't find it excessive at all.
 
 == Color
 
-I am a visual person. I also, like to use color. My use of color may offend you, and for that I am sorry. I want the roadmap to be bright and inviting. I could remove all the color and shift to gray tone, but I just feel it will feel grab and unappealing. I want the mood to be light, uplifting and positive.
+I am a visual person. I also, like to use color. My use of color may offend you, and for that I am sorry. I want the roadmap to be bright and inviting. I could remove all the color and shift to a gray tone, but I just feel it will feel grab and unappealing. I want the mood to be light, uplifting and positive.
 
 More specifically, I use color to denote products or types of work. You may see this from the key on the right. This makes it easier to hone in on the products or types of work you care most about.
 
@@ -65,11 +65,11 @@ What's nice about this approach is that the visual roadmap can be thought of as 
 
 == Done, Delayed and Unplanned work
 
-When the team completed epic, I wanted to make sure that the roadmap reflected that it was done. I personally like fading the colors and text of the epic block in the roadmap. You can see an example of this in the above example. The first epic is faded because the team completed the work. Once again, this enabled my customers and I to get the information we needed, at a glance.
+When the team completed an epic, I wanted to make sure that the roadmap reflected that it was done. I personally like fading the colors and text of the epic block in the roadmap. You can see an example of this in the above example. The first epic is faded because the team completed the work. Once again, this enabled my customers and me to get the information we needed, at a glance.
 
-Similarly, If planned work wound up getting delayed, I wanted to make sure that our customers knew. For delayed work, I merely outline the epic block in a bold read outline. I would also move the epic into what I considered a more realistic timeline. So when you glanced at the roadmap, you might see that work targeted for this quarter has been pushed out.
+Similarly, if planned work wound up getting delayed, I wanted to make sure that our customers knew. For delayed work, I merely outline the epic block in a bold red outline. I would also move the epic into what I considered a more realistic timeline. So when you glanced at the roadmap, you might see that work targeted for this quarter has been pushed out.
 
-One quick note about delayed work. I only mark something as delayed if it was targeted for the current quarter and it won't get done then. If I had something slated for the next coming quarter, and it got pushed even further, I don't call that out. Why? Well, I view work beyond the current quarter as goals, not commitments. This may will of course vary based on your organizational culture.
+One quick note about delayed work. I only mark something as delayed if it was targeted for the current quarter and it won't get done then. If I had something slated for the next coming quarter, and it got pushed even further, I don't call that out. Why? Well, I view work beyond the current quarter as goals, not commitments. This will of course vary based on your organizational culture.
 
 Lastly, there is a chance that something changes mid-quarter, forcing us to do work we hadn't planned on. For this, I highlight this epic with a bold green outline. This can help tell a story as to why some other work didn't get done. Unplanned work is inevitable.
 
@@ -77,7 +77,7 @@ Lastly, there is a chance that something changes mid-quarter, forcing us to do w
 
 Previously incarnations of my roadmaps included some experiments that I thought were worth mentioning.
 
-The first is something I already mentioned. In the past, I used swinlanes to separate types of work. For instance, I might have a swimlane called "Customer impact" and another called "Technical debt". I've also used swinlanes to separate out products (instead of color). I imagine swinlanes could be useful in a variety of ways, but found my roadmaps were more compact without them.
+The first is something I already mentioned. In the past, I used swimlanes to separate types of work. For instance, I might have a swimlane called "Customer impact" and another called "Technical debt". I've also used swimlanes to separate out products (instead of color). I imagine swimlanes could be useful in a variety of ways but found my roadmaps were more compact without them.
 
 Another concept I briefly experimented with was adding ownership to each epic. I would annotate each epic block with the initials of the engineer on my team who was leading this work. This didn't necessarily mean that they were working alone, but that they owned the work. I would include a small cute bubble with their initials to denote ownership. Customers didn't necessarily benefit from this, but the team did. It also helped me understand how to balance the ownership of work. More recently, I would manage ownership within JIRA and not on the roadmap.
 
@@ -87,15 +87,15 @@ I suspect at this point, a lot of you have asked this question. "Why is Mike usi
 
 Why not? Well, it's because using a drawing tool is just easier, and honestly there are very few constraints. Let me explain.
 
-Whenever you encounter a problem, the first thing you will do is try to solve this problem with a process. Often, the process you implement will eventually be supported or enabled by a tool. For me, I wanted to solve the __problem of communicating long term plans__. I decided that I would __institute a process with my teams to define our long term plans__. I then decided to __lean on a visual roadmap as a tool__ for communicating our plans. I had a __problem__, I found a __process__, and lastly a __tool__, in that order.
+Whenever you encounter a problem, the first thing you will do is try to solve this problem with a process. Often, the process you implement will eventually be supported or enabled by a tool. For me, I wanted to solve the __problem of communicating long-term plans__. I decided that I would __institute a process with my teams to define our long-term plans__. I then decided to __lean on a visual roadmap as a tool__ for communicating our plans. I had a __problem__, I found a __process__, and lastly a __tool__, in that order.
 
-The problem with starting with a tool is that the tool has been designed to solve a problem, or set of problems, that may not be the problem you want to solve. By using a flexible tool, like Google Drawing, I've been able to experiment, change, and up end my whole approach with very few head aches. Put another way, I've been refining my process. I suspect I could implement a tool at this point, since I've learned enough about the process I want. If you start with a tool, your process will be shaped by the constraints of the tool.
+The problem with starting with a tool is that the tool has been designed to solve a problem, or set of problems, that may not be the problem you want to solve. By using a flexible tool, like Google Drawing, I've been able to experiment, change, and upend my whole approach with very few headaches. Put another way, I've been refining my process. I suspect I could implement a tool at this point since I've learned enough about the process I want. If you start with a tool, your process will be shaped by the constraints of the tool.
 
 == Influences
 
-I wanted to give a shout out to my biggest influence on my roadmaps. The site that got me started was the https://itkanban.wordpress.com/framework/roadmaps/strategic-roadmaps/[IT Kanban wordpress site], that included a section on Strategic roadmaps. Their approach just clicked with me and my early roadmaps looked just like theirs.
+I wanted to give a shout out to the biggest influence on my roadmaps. The site that got me started was the https://itkanban.wordpress.com/framework/roadmaps/strategic-roadmaps/[IT Kanban wordpress site], that included a section on Strategic roadmaps. Their approach just clicked with me and my early roadmaps looked just like theirs.
 
-Since then, I've had some great feedback from colleagues with a lot more product management experience then me. In particular, I want to give a shout out to http://barryhawkins.com/[Barry Hawkins] for some of his feedback and insight. Thanks Barry!
+Since then, I've had some great feedback from colleagues with a lot more product management experience than me. In particular, I want to give a shout out to http://barryhawkins.com/[Barry Hawkins] for some of his feedback and insight. Thanks Barry!
 
 == Give it a shot
 
