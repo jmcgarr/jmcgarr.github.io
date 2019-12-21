@@ -2,8 +2,9 @@
 
 	<#include "menu.ftl">
 
-  <#assign pageTitle = "Mike McGarr's homepage">
-	<#assign pageSubtitle = "articles and talks from a software engineering leader">
+<!-- Not title -->
+	<#assign pageTitle = "">
+	<#assign pageSubtitle = "">
 
 	<#include "masthead.ftl">
 
