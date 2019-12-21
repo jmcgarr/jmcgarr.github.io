@@ -6,8 +6,8 @@
     <atom:link href="http://www.mikemcgarr.com/feed.xml" rel="self" type="application/rss+xml" />
     <description>Mike McGarr's Personal Blog</description>
     <language>en-gb</language>
-    <pubDate>Tue, 29 Jan 2019 15:48:59 +0000</pubDate>
-    <lastBuildDate>Tue, 29 Jan 2019 15:48:59 +0000</lastBuildDate>
+    <pubDate>Sat, 21 Dec 2019 20:02:27 +0000</pubDate>
+    <lastBuildDate>Sat, 21 Dec 2019 20:02:27 +0000</lastBuildDate>
 
     <item>
       <title>How I Roadmap</title>
@@ -535,7 +535,7 @@ First, Google Docs’ commenting features allows my WIR to be collaborative. My 
 &lt;/div&gt;
 &lt;div class=&quot;sect2&quot;&gt;
 &lt;h3 id=&quot;_visualizing_culture&quot;&gt;Visualizing culture&lt;/h3&gt;
-&lt;div class=&quot;imageblock&quot; style=&quot;text-align: center&quot;&gt;
+&lt;div class=&quot;imageblock text-center&quot;&gt;
 &lt;div class=&quot;content&quot;&gt;
 &lt;img src=&quot;/img/culture.png&quot; alt=&quot;Organizational Culture&quot; width=&quot;500&quot;&gt;
 &lt;/div&gt;
@@ -589,7 +589,7 @@ First, Google Docs’ commenting features allows my WIR to be collaborative. My 
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;If unstated values conflict with stated values, this could represent a problem for the culture.  An organization that rewards behavior opposed to stated values indicates an unhealthy culture.  Hopefully this is obvious to everybody.  I will steal the example used in the &lt;a href=&quot;http://www.slideshare.net/reed2001/culture-1798664&quot;&gt;Netflix culture deck&lt;/a&gt; of &lt;a href=&quot;http://en.wikipedia.org/wiki/Enron&quot;&gt;Enron&lt;/a&gt;.  Nuff said.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class=&quot;imageblock&quot; style=&quot;text-align: center&quot;&gt;
+&lt;div class=&quot;imageblock text-center&quot;&gt;
 &lt;div class=&quot;content&quot;&gt;
 &lt;img src=&quot;/img/netflix-culture-enron.png&quot; alt=&quot;Netflix Culture Deck on Enron&quot; width=&quot;500&quot;&gt;
 &lt;/div&gt;
@@ -646,7 +646,7 @@ First, Google Docs’ commenting features allows my WIR to be collaborative. My 
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;The strength of an organization&amp;#8217;s culture can be measured by its response to rogue individual behaviors.  A strong culture will provide swift feedback to the individual.  A strong culture will also prune its ranks based on how well an individual aligns with its values.  A great example of this is Netflix&amp;#8217;s response to brilliant jerks.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class=&quot;imageblock&quot; style=&quot;text-align: center&quot;&gt;
+&lt;div class=&quot;imageblock text-center&quot;&gt;
 &lt;div class=&quot;content&quot;&gt;
 &lt;img src=&quot;/img/netflix-culture-jerks.png&quot; alt=&quot;Netflix Culture Deck on Brilliant Jerks&quot; width=&quot;500&quot;&gt;
 &lt;/div&gt;
