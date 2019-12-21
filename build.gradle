@@ -1,6 +1,5 @@
-
 plugins {
-    id 'org.jbake.site' version '1.4.0'
+    id 'org.jbake.site' version '5.0.0'
     id "org.ajoberstar.git-publish" version "1.0.1"
 }
 
