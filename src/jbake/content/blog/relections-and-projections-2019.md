@@ -11,7 +11,7 @@ As 2019 comes to a close it's time to look back on the last year...as well forwa
 
 ## Reflections on 2019
 
-First...let's reflect on the past year.
+First, some reflections on the past year.
 
 ### A year at Slack
 
@@ -73,6 +73,6 @@ My goal for the year is at least 10 coding projects completed for the year, with
 
 ### Goal #4: Exercise
 
-I've learned that I am more productive and happier when I exercise. Although, it has been harder to find the time this year, with the 2.5 hours I spend commuting daily. Recently, I've started waking up at 5:30 and working out from 6 - 7am. This change has been amazing, and hard. I have found that rather than doing this a few times a week, committing to a daily exercise routine is easier. And so...
+History has taught me that I am more productive and happier when I exercise. Although, it has been harder to find the time this year, given my 2.5 hours of daily commute time. Recently, I've started waking up at 5:30 to workout before work. This change has been hard, but immediate. I have found that rather than doing this a few times a week, committing to a daily exercise routine is easier. And so...
 
 ...my goal for 2020 is to exercise everyday. I expect I will have to take a day off here and there, but a daily routine feels doable.
