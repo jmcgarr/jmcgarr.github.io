@@ -2,8 +2,18 @@ title=Talks
 date=2014-09-01
 type=page
 status=published
-masthead=../jax-devops-speaking.jpg
+masthead=../qcon_crowd.png
 ~~~~~~
+
+== Build and deploy to the cloud using Netflix OSS
++++
+<iframe src="https://player.vimeo.com/video/193721675" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" align="right" allowfullscreen></iframe>
++++
+Getting started on AWS is easy, but building a scalable, reliable, and performant product in the cloud can be a challenge for startups and enterprises alike. Netflix has famously migrated all our services to the cloud. Along the way, we have open-sourced large portions of our platform that helped make this a reality. In this talk, Mike McGarr (Manager - Netflix Developer Productivity) will provide a survey of the Netflix OSS products available. Mike will also share patterns and lessons Netflix learned migrating to the cloud. This talk will cover tools such as Nebula, Aminator and Spinnaker. Lastly, Mike will leave you with a roadmap for how to get started with Netflix OSS on your cloud today.
+
+Presented at:
+
+- https://devops.jaxlondon.com/blog/devops-conference/build-deploy-cloud-using-netflix-oss/[JAX DevOps 2016]
 
 == Beyond the culture deck: What you don't already know about Netflix's culture
 ++++

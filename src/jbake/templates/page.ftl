@@ -1,8 +1,6 @@
 <#include "header.ftl">
 
 	<#include "menu.ftl">
-
-	<#assign masthead = "about-bg.jpg">
 	<#include "masthead.ftl">
 
 	<!-- Main Content -->

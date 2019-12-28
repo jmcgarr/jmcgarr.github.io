@@ -7,7 +7,9 @@
       </#if>
 
 <!-- Grab masthead data -->
-      <#if content.masthead??>
+      <#if masthead??>
+        <!-- do nothing...we are set -->
+      <#elseif content.masthead??>
         <#assign masthead = content.masthead>
         <#if content.mastheadCredit??>
           <#assign mastheadCredit = content.mastheadCredit>

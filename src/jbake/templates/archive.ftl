@@ -2,9 +2,10 @@
 
 	<#include "menu.ftl">
 
-	<#assign masthead = "about-bg.jpg">
-  <#assign pageTitle = "Mike's Blog">
-	<#assign pageSubtitle = "Collection of blog entries from over the years">
+  <#assign pageTitle = "Blog Archive">
+	<#assign pageSubtitle = "">
+	<#assign masthead = "london-view.png">
+	<#assign mastheadCredit = "Me, View from QCon London 2019 talk">
 	<#include "masthead.ftl">
 
 	<div class="container">

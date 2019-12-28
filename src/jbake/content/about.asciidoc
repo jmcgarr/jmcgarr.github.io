@@ -1,17 +1,21 @@
 title=About Me
-subtitle=...for those who don't know me.
+subtitle=...for those who don't know
 date=2014-08-30
 type=page
 status=published
+masthead=hawaii.png
+mastheadCredit=Me, Lana'i from Kaanapali
 ~~~~~~
 
-image:img/profile_pic-sq.jpg[Profile,300,300,role="right"]
+image:img/me_qcon_panel_sq.png[Profile,300,300,role="right"]
 
 I am an engineering leader and manager, who's been building software and leading teams since 2001. I am passionate about growing engineering teams, especially those focused on developing core infrastructure components essential to the operation of the engineering teams. My area of research and curiosity centers on how organizational culture is developed, cultivated and shaped and devour as much as I can on this subject. My technical background is strongly routed in Java, as well as the growing space of developer productivity.
 
 I am currently a Senior Engineering Manager at https://www.slack.com[Slack], leading the Frontend Infrastructure team. This team is focused on building JavaScript browser components, performance improvements and build infrastructure. This is a new and exciting technical area for me, and I am excited to dive in with my great team. I joined Slack in the fall of 2018.
 
 Prior to joining Slack, I was the Engineering Manager for the http://www.netflix.com/[Netflix] Developer Productivity team. I joined Netflix in 2014, moving my family across the country to California. The Developer Productivity space evolved from the then Build Tools team, and I grew the team from 7 engineers to 20. During this period, our team helped build engineering focused tools that enabled underserved engineering communities at Netflix, such as JavaScript, Python and Ruby engineers. We also build services to help inspect and remediate issues with dependency management. This, while also supporting the companies version control, issue tracking, documentation, continuous integration, and software build needs.
+
+image:img/profile_pic-sq.jpg[Profile,300,300,role="left"]
 
 Prior to Netflix, I was the Director of DevOps, for http://www.blackboard.com/[Blackboard] http://www.blackboard.com/Platforms/Learn/Overview.aspx[Learn] (their flagship product). As Director of DevOps, I was responsible for the build and test infrastructure, as well as the development tooling.  In addition to managing the DevOps team, I was charged with coaching senior management, engineering and QA on how to migrate Blackboard Learn towards continuous delivery.
 
