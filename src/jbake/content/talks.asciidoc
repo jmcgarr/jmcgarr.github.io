@@ -5,9 +5,112 @@ status=published
 masthead=../qcon_crowd.png
 ~~~~~~
 
-== Build and deploy to the cloud using Netflix OSS
+== Cultures, Microcultures and Finding your Way (2019)
+
+image::/img/qcon-microcultures-talk.png[QCon Keynote, 390, 250, role="right", link="https://www.infoq.com/presentations/microcultures-organizational-culture/"]
+
+Mike McGarr explores the essence of organizational culture and how it impacts our work. He talks about the microcultures that can exist within an organization that provide layers of influence in our lives and job satisfaction.
+
+Presented at:
+
+- https://www.infoq.com/presentations/microcultures-organizational-culture/[QCon SF 2019 (Keynote)]
+
+== Discovering Culture through Artifacts (2019)
+
+image::/img/discovering-culture-artifacts.png[QCon London, 390, 250, role="right", link="https://www.infoq.com/presentations/discovery-organizational-culture-artifacts/"]
+
+Mike McGarr shares an approach to discovering organizational culture through its artifacts. He shares his model for understanding culture and the key artifacts that allow building an understanding of an organization's culture. He also shares a wealth of "experiences" (that's code for failures) that have shaped his approach to discovering culture.
+
+Presented at:
+
+- https://www.infoq.com/presentations/discovery-organizational-culture-artifacts/[QCon London 2019]
+
+== Better DevEx at Netflix: Polyglot and Containers (2018)
+
+image::/img/qcon-ny-talk.png[QCon NY, 390, 250, role="right", link="https://www.infoq.com/presentations/netflix-polyglot-containers"]
+
+Mike McGarr talks about the evolution of developer tooling at Netflix, focusing on command line tools they built to address evolving needs around programming languages, containers and more. He shares lessons learned while trying to support diverse programming languages and environments within a centralized team.
+
+Presented at:
+
+- https://www.infoq.com/presentations/netflix-polyglot-containers[QCon NY 2018]
+
+== Productivity Engineering: Surviving DevOps (2018)
+++++
+<iframe width="390" height="260" src="https://www.youtube.com/embed/cmbavBi_SLY" frameborder="0" align="right" allowfullscreen></iframe>
+++++
+
+The software industry has seen an influx of technologies and techniques, including DevOps, cloud, Agile, microservices, machine learning, big data, containers and more. Organizations are becoming flatter and engineers are being asked to do more than ever before. All of this contributes to an increase in cognitive load for engineers.
+
+Mike McGarr (Manager, Netflix Developer Productivity) will talk about the challenges that arise from DevOps cultures like Netflix, and their approach to tackling these problems. Mike will provide some advice on how growing companies interested in DevOps can reduce cognitive load and maximize business value.
+
+Presented at:
+
+- Excella Consulting
+
+== Continuously Integrating Distributed Code at Netflix (2017)
+++++
+<iframe width="390" height="260" src="https://www.youtube.com/embed/Gw6QWlreY0w" frameborder="0" align="right" allowfullscreen></iframe>
+++++
+Three years ago Netflix migrated all of its source code to Git for version control. This change furthered the independence of our engineering teams enabling them to manage, build, test and deploy with little friction. But the more distributed our source code becomes, the harder it can be to assess the impact of a change or understand the state of the world. Making a simple change to a shared library could have impact to dozens of critical services so the more feedback engineers can gain, the better. But how do you run an expensive operation against every single git repository within your organization?
+
+Presented at:
+
+- [Atlassian Summit 2017]
+
+== Dependencies, distributed code and engineering velocity (2017)
+++++
+<iframe width="390" height="260" src="https://www.youtube.com/embed/k_mPS_1JpXM" frameborder="0" align="right" allowfullscreen></iframe>
+++++
+
+Most software engineers loathe and fear debugging dependency update issues. They are common challenges in the modern enterprise environment. The proliferation of git repositories, the sharing of reusable code and rise of the microservice all conspire to make organization-wide binary integration a nightmare.
+
+At Netflix, engineers are not immune to the cost of dependency updates. Library owners publish new versions of their code without a comprehensive understanding of the organizational impact. Application owners ingest new library versions that can fail in obvious or subtle ways, leading to decreased confidence and slower organizational velocity. But these are problems we understand, and tooling can help.
+
+Presented at:
+
+- [Gradle Summit 2017]
+
+== The rise of polyglot programming (2017)
+++++
+<iframe width="390" height="260" src="https://www.youtube.com/embed/W3HkCF0jBZA" frameborder="0" align="right" allowfullscreen></iframe>
+++++
+A quick scan of Netlfix’s GitHub repository informs you that Netflix’s cloud deployment platform is built for JVM applications (and continues to serve the company well). But as Netflix evolves, languages and platforms like Node.js and Python have become more popular and are increasingly used in critical systems. Netflix needed to start thinking about building tools to support this polyglot world.
+
+Mike McGarr discusses the early days of Netflix’s polyglot journey and where the company is going in the future. Mike explores the various tools and approaches Netflix employs to provide first-class support for a variety of languages and platforms and shares the challenges of supporting a polyglot codebase as well as lessons learned for enterprises embarking on this journey.
+
+Presented at:
+
+- https://conferences.oreilly.com/velocity/vl-ny-2017/public/schedule/detail/61524[Velocity NY 2017]
+- https://www.youtube.com/watch?v=W3HkCF0jBZA[DevOpsCon 2017]
+
+== Dependencies, Monorepos and beyond (2017)
+
+++++
+<iframe width="390" height="260" src="https://www.youtube.com/embed/VNqmHJtItCs" frameborder="0" align="right" allowfullscreen></iframe>
+++++
+Dependency hell. Two words that many software engineers know and loathe. Unfortunately, Netflix engineers are not immune to the cost of dependency hell. Library owners publish new versions of their code without a comprehensive understand of the organizational impact. Application owners ingest new library versions that can fail in obvious or subtle ways, leading to decreased confidence and slower organizational velocity. In this talk, Mike McGarr (Manager, Developer Productivity at Netflix) will talk about the challenges of shared code, dependency hell and some existing solutions. He will then share the approach that Netflix is moving towards to decrease the cost of dependency hell.
+
+Presented at:
+
+- [DevOpsCon 2017]
+
+== Containers: How they add to a proven cloud-native architecture (2016)
+
+https://www.oreilly.com/library/view/velocity-2016-/9781491944653/video261555.html
+
+This was a talk I gave with Andrew Spyker (Netflix) in 2016.
+
+The Netflix streaming service architecture is composed of thousands microservices, is cloud native, employs DevOps for continuous deployment of immutable instances, is designed from the ground up for failure and chaos injection, and runs a global footprint at the scale required to power one-third of all Internet download traffic. Netflix has been doing this on the Amazon cloud with virtual machines for over five years, blazing a trail for similar architectures. In the last year, it invested in containers for batch-style jobs and started to experiment with integrating them into its service-style application workflows. Mike McGarr and Andrew Spyker explain the potential containers have to help Netflix create a more productive development experience while simultaneously deepening its control over resource management. Contrary to many other container advocates, Netflix is investing in containers even though it already has mature CI/CD workflows and elastic/ephemeral infrastructure. Join Mike and Andrew to see why Netflix is moving forward with containers, how it can leverage its existing operational machinery, and how it’s running containers with a similar guarantee of high availability.
+
+Presented at:
+
+- https://conferences.oreilly.com/velocity/vl-ny-2016/public/schedule/detail/53268[Velocity NY 2016]
+
+
+== Build and deploy to the cloud using Netflix OSS (2016)
 +++
-<iframe src="https://player.vimeo.com/video/193721675" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" align="right" allowfullscreen></iframe>
+<iframe src="https://player.vimeo.com/video/193721675" width="390" height="260" frameborder="0" allow="autoplay; fullscreen" align="right" allowfullscreen></iframe>
 +++
 Getting started on AWS is easy, but building a scalable, reliable, and performant product in the cloud can be a challenge for startups and enterprises alike. Netflix has famously migrated all our services to the cloud. Along the way, we have open-sourced large portions of our platform that helped make this a reality. In this talk, Mike McGarr (Manager - Netflix Developer Productivity) will provide a survey of the Netflix OSS products available. Mike will also share patterns and lessons Netflix learned migrating to the cloud. This talk will cover tools such as Nebula, Aminator and Spinnaker. Lastly, Mike will leave you with a roadmap for how to get started with Netflix OSS on your cloud today.
 
@@ -15,7 +118,7 @@ Presented at:
 
 - https://devops.jaxlondon.com/blog/devops-conference/build-deploy-cloud-using-netflix-oss/[JAX DevOps 2016]
 
-== Beyond the culture deck: What you don't already know about Netflix's culture
+== Beyond the culture deck: What you don't already know about Netflix's culture (2015)
 ++++
 <iframe width="390" height="260" src="https://www.youtube.com/embed/3hULyTAESBE" frameborder="0" align="right" allowfullscreen></iframe>
 ++++
@@ -31,7 +134,7 @@ Presented at:
 - https://niketechtalks-dec2015.splashthat.com/[Nike Tech Talks]
 
 
-== A centralized team in a decentralized world
+== A centralized team in a decentralized world (2015)
 ++++
 <iframe width="390" height="260" src="https://www.youtube.com/embed/mWwVLRALhaE" frameborder="0" align="right" allowfullscreen></iframe>
 ++++
@@ -45,7 +148,7 @@ Presented at:
 - http://gradlesummit.com/conference/santa_clara/2015/06/session?id=33638[Gradle Summit 2015] - https://www.youtube.com/watch?v=mRVZ3-qkfFg[(Video)]
 - http://www.alm-forum.com/s15/presenters#mikem[ALM Summit 2015]
 
-== Build and deploy to the cloud using Netflix OSS
+== Build and deploy to the cloud using Netflix OSS (2015)
 ++++
 <iframe width="390" height="260" src="https://www.youtube.com/embed/y2VTnNnzrwk" frameborder="0" align="right" allowfullscreen></iframe>
 ++++
@@ -55,7 +158,7 @@ Presented at:
 
 - https://www.twilio.com/signal/2015/videos?speaker=mike-mcgarr[Twilio Signal 2015]
 
-== Shepherding Change: Leading your DevOps transformation
+== Shepherding Change: Leading your DevOps transformation (2014)
 ++++
 <iframe src="//www.slideshare.net/slideshow/embed_code/41736337" width="390" height="260" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
 ++++
@@ -65,7 +168,7 @@ Presented at:
 
 - http://www.meetup.com/DevOpsDC/events/217434472/[DevOpsDC, November 18, 2014]
 
-== Zero to the Cloud with @NetflixOSS
+== Zero to the Cloud with @NetflixOSS (2014)
 ++++
 <iframe src="//www.slideshare.net/slideshow/embed_code/41684570" width="390" height="260" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
 ++++
@@ -75,7 +178,7 @@ Presented at:
 
 - http://www.meetup.com/AWS-Washington-DC-Meet-Up/events/217681072/[AWS DC Meetup - November 17, 2014]
 
-== Engineering Tools at Netflix: Enabling Continuous Delivery
+== Engineering Tools at Netflix: Enabling Continuous Delivery (2014)
 ++++
 <iframe src="//www.slideshare.net/slideshow/embed_code/40130240" width="390" height="260" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
 ++++
@@ -85,7 +188,7 @@ Presented at:
 
 - http://www.meetup.com/Bay-Area-Infracoders/events/210267462/[Bay Area Infracoders - October 9, 2014]
 
-== Implementing DevOps
+== Implementing DevOps (2014)
 ++++
 <iframe src="//www.slideshare.net/slideshow/embed_code/38581512" width="330" height="290" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
 ++++
@@ -95,7 +198,7 @@ Presented at:
 
 - USPTO (internal) - June 9, 2014
 
-== Infrastructure as Code
+== Infrastructure as Code (2013)
 ++++
 <iframe src="//www.slideshare.net/slideshow/embed_code/24144601" width="330" height="290" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
 ++++
@@ -105,7 +208,7 @@ Presented at:
 
 - http://blog.blackboard.com/devcon-2013-a-new-hope/[Blackboard DevCon 2013] - June 8/9, 2013
 
-== Introduction to Continuous Delivery
+== Introduction to Continuous Delivery (2013)
 ++++
 <iframe src="//www.slideshare.net/slideshow/embed_code/17452976" width="330" height="290" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
 ++++
@@ -130,7 +233,7 @@ My go to talk in the past has been an introduction to Continuous Delivery.  This
 - http://agiledc.org/[AgileDC 2012] - October 23, 2012 - http://www.slideshare.net/jmcgarr/continuous-delivery-applied-agiledc[(Slides)]
 - http://www.meetup.com/DC-continuous-delivery/events/80979862/[DC Continuous Delivery Meetup] - September 19, 2012 - http://www.slideshare.net/jmcgarr/continuous-delivery-applied-dc-ci-user-group[(Slides)]
 
-== Improving Design through TDD
+== Improving Design through TDD (2012)
 ++++
 <iframe src="//www.slideshare.net/slideshow/embed_code/15574515" width="330" height="290" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
 ++++
@@ -142,7 +245,7 @@ Presented at:
 
 - http://www.eventbrite.com/e/2012-dc-agile-engineering-conference-and-global-day-of-coderetreat-registration-4384492134[DC Agile Engineering] - December 7, 2012 - https://www.youtube.com/watch?v=5-K8RH0WLXg[(Video)]
 
-== ATDD with Concordian (Lightning Talk)
+== ATDD with Concordian (2011)
 ++++
 <iframe src="//www.slideshare.net/slideshow/embed_code/8341499" width="330" height="290" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" align="right" allowfullscreen> </iframe>
 ++++
