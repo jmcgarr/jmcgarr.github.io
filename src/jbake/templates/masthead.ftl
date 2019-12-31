@@ -22,8 +22,17 @@
         <#assign mastheadCredit = "https://flic.kr/p/hADZKt">
       </#if>
 
+<!--  TODO fix this -->
+      <#assign mastheadURL = "/img/masthead/${masthead}">
+
+      <!--#if masthead.starts_with("http")-->
+        <!--#assign mastheadURL = masthead-->
+      <!--#else-->
+        <!--#assign mastheadURL = "/img/masthead/${masthead}"-->
+      <!--/#if-->
+
       <!-- Page Header -->
-      <header class="masthead" style="background-image: url('/img/masthead/${masthead}')">
+      <header class="masthead" style="background-image: url('${mastheadURL}')">
         <div class="overlay"></div>
         <div class="container">
           <div class="row">
