@@ -6,8 +6,8 @@
     <atom:link href="http://www.mikemcgarr.com/feed.xml" rel="self" type="application/rss+xml" />
     <description>Mike McGarr's Personal Blog</description>
     <language>en-gb</language>
-    <pubDate>Fri, 3 Jan 2020 19:34:59 +0000</pubDate>
-    <lastBuildDate>Fri, 3 Jan 2020 19:34:59 +0000</lastBuildDate>
+    <pubDate>Fri, 3 Jan 2020 19:41:56 +0000</pubDate>
+    <lastBuildDate>Fri, 3 Jan 2020 19:41:56 +0000</lastBuildDate>
 
     <item>
       <title>Three horizons</title>
@@ -20,7 +20,7 @@
 &lt;/div&gt;
 &lt;hr&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;In a prior post, I shared an approach I use for visualizing a &lt;a href=&quot;https://www.mikemcgarr.com/blog/roadmaps.html&quot;&gt;team’s roadmap&lt;/a&gt;. Visual roadmaps have proven extremely useful for alignment, both within the team as well as with partners and customers. It’s a simple way to answer the question, &lt;em&gt;“what are we going to work on”&lt;/em&gt;? But I have found that it lacked insight into the evolution of the products themselves, and how they were evolving.&lt;/p&gt;
+&lt;p&gt;In a prior post, I shared an approach I use for visualizing a &lt;a href=&quot;https://www.mikemcgarr.com/blog/roadmaps.html&quot; target=&quot;&lt;em&gt;blank&quot;&gt;team’s roadmap&lt;/a&gt;. Visual roadmaps have proven extremely useful for alignment, both within the team as well as with partners and customers. It’s a simple way to answer the question, _“what are we going to work on”&lt;/em&gt;? But I have found that it lacked insight into the evolution of the products themselves, and how they were evolving.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;A roadmap represents the outcome of planning and prioritization exercises. It is the &lt;em&gt;&quot;work to be done&quot;&lt;/em&gt; or said differently &lt;em&gt;&quot;what we have prioritized&quot;&lt;/em&gt;. A roadmap defines &lt;strong&gt;projects&lt;/strong&gt;,&amp;#8230;&amp;#8203;work with a start and end date. While most teams I have managed do project work, this work is often in support of improving the &lt;strong&gt;products&lt;/strong&gt; they manage. A roadmap that is project focused doesn&amp;#8217;t provide a product-centric view. When looking at a roadmap, you can&amp;#8217;t tell how growing the team by two more engineers will impact the product&amp;#8217;s evolution. McKinnsey&amp;#8217;s three horizons model has proven extremely in helping me fill this gap.&lt;/p&gt;
@@ -32,11 +32,11 @@
 &lt;h2 id=&quot;_mckinnseys_three_horizons_model&quot;&gt;McKinnsey&amp;#8217;s three horizons model&lt;/h2&gt;
 &lt;div class=&quot;sectionbody&quot;&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;I was introduced to the McKinnsey three horizon model while reading &lt;a href=&quot;https://www.amazon.com/Lean-Enterprise-Performance-Organizations-Innovate/dp/1449368425&quot;&gt;Lean Enterprise&lt;/a&gt;. The three horizons model proposes that leaders should think about investments in the company&amp;#8217;s product portfolio across three separate horizons. Each horizon provides different timeframes on expected returns, as well as differing levels of risk.&lt;/p&gt;
+&lt;p&gt;I was introduced to the McKinnsey three horizon model while reading &lt;a href=&quot;https://www.amazon.com/Lean-Enterprise-Performance-Organizations-Innovate/dp/1449368425&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Lean Enterprise&lt;/a&gt;. The three horizons model proposes that leaders should think about investments in the company&amp;#8217;s product portfolio across three separate horizons. Each horizon provides different timeframes on expected returns, as well as differing levels of risk.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&quot;img-three-horizon&quot; class=&quot;imageblock text-center&quot;&gt;
 &lt;div class=&quot;content&quot;&gt;
-&lt;a class=&quot;image&quot; href=&quot;https://www.amazon.com/Lean-Enterprise-Performance-Organizations-Innovate/dp/1449368425&quot;&gt;&lt;img src=&quot;/img/three-horizons-lean-enterprise.png&quot; alt=&quot;Three Horizons&quot; width=&quot;500&quot;&gt;&lt;/a&gt;
+&lt;a class=&quot;image&quot; href=&quot;https://www.amazon.com/Lean-Enterprise-Performance-Organizations-Innovate/dp/1449368425&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&lt;img src=&quot;/img/three-horizons-lean-enterprise.png&quot; alt=&quot;Three Horizons&quot; width=&quot;500&quot;&gt;&lt;/a&gt;
 &lt;/div&gt;
 &lt;div class=&quot;title&quot;&gt;Figure 1: Three Horizon model (source: Lean Enterprise)&lt;/div&gt;
 &lt;/div&gt;
@@ -46,10 +46,10 @@
 &lt;p&gt;The first horizon is the company&amp;#8217;s current dominant product in the market. Investments in first horizon products are expected to yield returns sometime within the next 12 months. Apple&amp;#8217;s improvements to the iPhone, their dominant product, is an example of first horizon investments.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;The second horizon is the company&amp;#8217;s emerging business or new product line. It may be seen as the company&amp;#8217;s future by some, but it may yet need to &lt;a href=&quot;https://en.wikipedia.org/wiki/Crossing_the_Chasm&quot;&gt;cross the chasm&lt;/a&gt;. Investments in second horizon products are expected to yield results a year or two into the future (12 to 36 months from now). In sticking with the Apple example, you can imagine improvements to the Apple Watch or AirPods as examples of second horizon investments.&lt;/p&gt;
+&lt;p&gt;The second horizon is the company&amp;#8217;s emerging business or new product line. It may be seen as the company&amp;#8217;s future by some, but it may yet need to &lt;a href=&quot;https://en.wikipedia.org/wiki/Crossing_the_Chasm&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;cross the chasm&lt;/a&gt;. Investments in second horizon products are expected to yield results a year or two into the future (12 to 36 months from now). In sticking with the Apple example, you can imagine improvements to the Apple Watch or AirPods as examples of second horizon investments.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;The third horizon represents a completely new business that may not be defined as of yet. The company may be trying to determine what the market wants. This is the realm of &lt;a href=&quot;https://en.wikipedia.org/wiki/Lean_startup&quot;&gt;Lean Startup&lt;/a&gt; techniques. Investments into the third horizon will yield results years from now. You can think of this horizon as market disruptions. For Apple, I haven&amp;#8217;t a clue what this may be&amp;#8230;&amp;#8203;but I suspect they may have an idea.&lt;/p&gt;
+&lt;p&gt;The third horizon represents a completely new business that may not be defined as of yet. The company may be trying to determine what the market wants. This is the realm of &lt;a href=&quot;https://en.wikipedia.org/wiki/Lean_startup&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Lean Startup&lt;/a&gt; techniques. Investments into the third horizon will yield results years from now. You can think of this horizon as market disruptions. For Apple, I haven&amp;#8217;t a clue what this may be&amp;#8230;&amp;#8203;but I suspect they may have an idea.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
