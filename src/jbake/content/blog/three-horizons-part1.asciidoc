@@ -1,5 +1,5 @@
 title=Three horizons
-date=2020-01-02
+date=2020-01-03
 type=post
 tags=management
 status=published
@@ -7,44 +7,49 @@ summary=In a prior post, I shared an approach I use for visualizing a team’s r
 masthead=three-hills.jpg
 mastheadCredit=https://flic.kr/p/rFRzzj
 ~~~~~~
-_Note: This is the first post in a three part series on my exploration of the Three Horizon model. In this first post, I will provide a brief introduction to McKinsey's Three Horizon model_
+_Note: This is the first post in a two-part exploration of the Three Horizon model._
 
 ---
-In a prior post, I shared an approach I use for visualizing a https://www.mikemcgarr.com/blog/roadmaps.html[team’s roadmap]. Visual roadmaps have proven extremely useful for alignment, both within the team as well as with partners and customers. It’s a simple answer to the question, “where are you going”? But I found that it failed to convey any plans to **evolve our products**. To address these needs, I needed to look elsewhere.
+In a prior post, I shared an approach I use for visualizing a https://www.mikemcgarr.com/blog/roadmaps.html[team’s roadmap]. Visual roadmaps have proven extremely useful for alignment, both within the team as well as with partners and customers. It’s a simple way to answer the question, _“what are we going to work on”_? But I have found that it lacked insight into the evolution of the products themselves, and how they were evolving.
 
-A roadmap represents the outcome of planning and prioritization exercises. It is the "work to be done" or said differently "what we are prioritizing". A roadmap clearly contains **projects**,...work with a start and end date. My teams have often built and managed **products**, which their own lifecycle. I needed a framework for thinking about products and not projects.
+A roadmap represents the outcome of planning and prioritization exercises. It is the _"work to be done"_ or said differently _"what we have prioritized"_. A roadmap defines **projects**,...work with a start and end date. While most teams I have managed do project work, this work is often in support of improving the **products** they manage. A roadmap that is project focused doesn't provide a product-centric view. When looking at a roadmap, you can't tell how growing the team by two more engineers will impact the product's evolution. McKinnsey's three horizons model has proven extremely in helping me fill this gap.
+
+Before exploring how I use the three horizons model, I will provide an intro to the three horizons model.
 
 == McKinnsey's three horizons model
 
-I was introduced to the McKinnsey three horizon model while reading https://www.amazon.com/Lean-Enterprise-Performance-Organizations-Innovate/dp/1449368425[Lean Enterprise]. The three horizon model proposes that leaders should think about investing in the company's growth in three separate horizons. Each horizon provides different timeframes on expected returns, as well as differing levels of risk.
+I was introduced to the McKinnsey three horizon model while reading https://www.amazon.com/Lean-Enterprise-Performance-Organizations-Innovate/dp/1449368425[Lean Enterprise]. The three horizons model proposes that leaders should think about investments in the company's product portfolio across three separate horizons. Each horizon provides different timeframes on expected returns, as well as differing levels of risk.
 
 .Three Horizon model (source: Lean Enterprise)
 [#img-three-horizon]
 [caption="Figure 1: ",link=https://www.amazon.com/Lean-Enterprise-Performance-Organizations-Innovate/dp/1449368425]
 image::/img/three-horizons-lean-enterprise.png[Three Horizons,500,align="center"]
 
-- The first horizon is the company's current dominant product in the market. Any investments in the first horizon should yield returns within the next 12 months. Apple's iPhone is a great example.
+- The first horizon is the company's current dominant product in the market. Investments in first horizon products are expected to yield returns sometime within the next 12 months. Apple's improvements to the iPhone, their dominant product, is an example of first horizon investments.
 
-- The second horizon is the company's emerging business or new product line. The future of the company...that may yet need to https://en.wikipedia.org/wiki/Crossing_the_Chasm[cross the chasm]. Investments in second horizon are expected to grow and yield significant results next year or two (12 to 36 months from now). If we stick with the Apple, think of the Watch or AirPods...making money and tons of potential growth.
+- The second horizon is the company's emerging business or new product line. It may be seen as the company's future by some, but it may yet need to https://en.wikipedia.org/wiki/Crossing_the_Chasm[cross the chasm]. Investments in second horizon products are expected to yield results a year or two into the future (12 to 36 months from now). In sticking with the Apple example, you can imagine improvements to the Apple Watch or AirPods as examples of second horizon investments.
 
-- The third horizon represents a completely new business, likely yet to be defined. The company doesn't yet know what the market is. This is the realm of https://en.wikipedia.org/wiki/Lean_startup[Lean Startup]. Expect returns 3 to 6 years from now. For Apple, I suspect they know what this might be...but haven't told us yet. This horizon is all about disruption.
+- The third horizon represents a completely new business that may not be defined as of yet. The company may be trying to determine what the market wants. This is the realm of https://en.wikipedia.org/wiki/Lean_startup[Lean Startup] techniques. Investments into the third horizon will yield results years from now. You can think of this horizon as market disruptions. For Apple, I haven't a clue what this may be...but I suspect they may have an idea.
 
-== Investments ratios
+== Balancing investments
 
-Now that we all know about the three horizons, you can imagine how challenging it is for leaders in a company to figure out the correct investments strategy for all three horizons. Given a limited number of people in your company, how many people should be focused on horizon one vs horizon two and three?
+One of the tenets of this model is balancing investments across all three horizons concurrently. Investing in a horizon one product line alone will yield near term results, but may forfeit the company's future growth. Conversely, over investing in a product that has yet to be proven marketable could also destroy the company's future. Leaders need to devise an investment strategy that optimizes both short, medium and long term growth.
 
-In my limited search through the interwebs, I found a few recommended ratios. In Lean Enterprise, they highlight Intuit's 70-20-10 distribution model. 70% of their workforce is focused on horizon one, 20% on horizon two and 10% on horizon three. The specific ratios don't matter for my purposes. Each company will find a ratio that meets their own comfort level.
+If you spend some time searching the internet, you will find a number of recommended investment ratios across the three horizons. In the book Lean Enterprise, they highlight Intuit's 70-20-10 investment ratio. 70% of their workforce is focused on horizon one, 20% on horizon two and 10% on horizon three. I have seen other articles that recommend a 40-40-20 investment ratio.
 
-== Shifting focus
+The specific ratios don't matter for the purposes of this post. Each company will find a ratio that meets their own comfort level.
 
+== Rolling horizons
 image::/img/three-horizons-mcgarr.png[Three horizons,align="center"]
 
-Over time, the products in the second horizon may cross the chasm and it is time to shift your investment ratios around. Your horizon one product growth has flatlined and the market is hungry for horizon two. It's time to increase your investment in this product line and potentially decreasing your investment in horizon one. The above drawing makes it a bit easier to visualize this.
+In the above visualization, the y-axis represents the amount of investment into a given horizon, and the x-axis represents time. As you can see, the curve of the horizons overlapping, implying concurrent investment. As time progresses, your investment in each horizon should increase or decrease. I expect the that real life curves aren't as consistent as I've drawn them.
 
-For a large company, it's possible that your horizon one business doesn't go away, but is no longer dominant. You may find yourself growing a new division to ensure your horizon two product line keeps up with demand, but keep the horizon one team intact. When I joined Netflix, the DVD division was still bringing in money, but operated like a separate business...with very little growth. DVD was a horizon one product, while streaming was horizon two.
+One of the interesting attributes of the three horizon model is how the horizons aren't static. As time progresses, the company will find that horizon two has crossed the chasm and become the dominant product line in their portfolio. Which means, that investment into this horizon will yield near term results, and you should likely increase.
 
-Over time, your horizon two product will become your horizon one product. Your investments in horizon three start to crystalize and you increase investment ratio...making this bet a horizon two product. And so forth and so on.
+This may also mean that your horizon three experiments are becoming clearer and you may increase your investment in one, making it your new horizon two. You will continue to experiment in future product lines, so there should always be a horizon three.
+
+It is also important to not that the y-axis can grow over time. Imagine if you will that your horizon one product line has flatlined in growth, but still produces revenue consistently (like Netflix's DVD business). You may not want to kill this business, but minimize investments here. So, in order to ramp up investments in horizon two or three, you will need to grow. It's possible that older company's will have four or five horizons at any given time.
 
 == Up next
 
-This post served as a brief introduction to the three horizon model. In the next post, I will share how I have applied this model to engineering teams to help manage their product portfolio. In the third post, I will share a framework for applying the three horizons model to staffing and growth investment decisions.
+This post served as an introduction to the three horizon model as it applies to companies. My next post will explore how I have applied this model to engineering teams. Stay tuned.
