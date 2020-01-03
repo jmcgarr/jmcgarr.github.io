@@ -79,6 +79,14 @@
       
 <!-- Grab masthead data -->
 
+<!--  TODO fix this -->
+
+      <!--#if masthead.starts_with("http")-->
+        <!--#assign mastheadURL = masthead-->
+      <!--#else-->
+        <!--#assign mastheadURL = "/img/masthead/roadmap.jpg"-->
+      <!--/#if-->
+
       <!-- Page Header -->
       <header class="masthead" style="background-image: url('/img/masthead/roadmap.jpg')">
         <div class="overlay"></div>
