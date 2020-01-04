@@ -1,0 +1,16 @@
+title=Three horizons applied
+date=2020-01-10
+type=draft
+tags=management
+status=published
+summary=...
+masthead=three-hills.jpg
+mastheadCredit=https://flic.kr/p/rFRzzj
+~~~~~~
+_Note: This is the second post in a three part exploration of the Three Horizon model. In the previous post, I provided an intr
+
+---
+
+Three horizons for engineering teams
+
+Using
