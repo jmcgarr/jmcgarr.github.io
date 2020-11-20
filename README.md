@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jmcgarr/jmcgarr.github.io.svg?branch=source)](https://travis-ci.org/jmcgarr/jmcgarr.github.io)
+
 My Blog
 ==================
 Blog is published at https://www.mikemcgarr.com
