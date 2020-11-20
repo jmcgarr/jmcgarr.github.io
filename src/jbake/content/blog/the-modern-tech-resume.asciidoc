@@ -4,6 +4,8 @@ type=post
 tags=general, career, modern resume
 status=published
 summary=After I had gone through the Netflix recruiting process, it struck me that nobody ever asked me for a resume.  The recruiting team already had all the information they needed that you would normally find on a resume.  This information was readily available online.  My profile on LinkedIn, my Twitter feed, my Github profile, and my blog all provided a comprehensive data set, more detailed than a 2-page resume.  My online presence serves as my resume, a modern technical resume.
+masthead=resume.jpg
+mastheadCredit=https://flic.kr/p/nbAtrh
 ~~~~~~
 After I had gone through the http://www.netflix.com[Netflix] recruiting process, it struck me that nobody ever asked me for a resume.  The recruiting team already had all the information they needed that you would normally find on a resume.  This information was readily available online.  My profile on LinkedIn, my Twitter feed, my Github profile, and my blog all provided a comprehensive resume, more detailed than a 2-page resume.  My online presence serves as my resume, a _modern technical resume_.
 

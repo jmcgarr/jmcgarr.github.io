@@ -4,6 +4,8 @@ type=post
 tags=agile,kanban,productivity,trello
 status=published
 summary=For years I have been trying to find the perfect personal task management process that is easy, intuitive and effective.  My friends and colleagues have witnessed the various techniques I have adopted over the years.  “Hey Mike, why are carrying a stack of notecards?” they would ask.  I have tried various GTD (Getting Things Done) apps, to stacks of notecards, to Scrum boards at home, to giant lists...all of them failed.
+masthead=toyota-factory.jpg
+mastheadCredit=https://flic.kr/p/ewnpoM
 ~~~~~~
 For years I have been trying to find the perfect personal task management process that is easy, intuitive and effective.  My friends and colleagues have witnessed the various techniques I have adopted over the years.  “Hey Mike, why are carrying a stack of notecards?” they would ask.  I have tried various http://gettingthingsdone.com/[GTD (Getting Things Done)] apps, to stacks of notecards, to Scrum boards at home, to giant lists...all of them failed.  
 
