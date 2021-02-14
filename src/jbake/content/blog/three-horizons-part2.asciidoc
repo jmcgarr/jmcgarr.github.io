@@ -7,7 +7,7 @@ summary=The Three Horizons model is a tool used by executives to model and under
 masthead=multi-hills.jpg
 mastheadCredit=https://flic.kr/p/4G2GiC
 ~~~~~~
-_Note: This is the second post in a three part exploration of the Three Horizon model. In the previous post, I provided an intr_
+_Note: It took me a long time to get back to this post, for a number of reasons. First, life is busier than ever and I wrote the first post while on holiday. Second...2020...fuck 2020. Thirdly, well,...some of the ideas I was originally planning on sharing started changing and I wanted to see some of them play out. Excuses aside, on to the post.
 
 ---
 The Three Horizons model is a tool used by executives to model and understand current and future business ventures. Never having been an executive myself, I haven't used the Three Horizons model in this manner. I have, however, found the Three Horizons model extremely useful in planning and modeling investment levels for the engineering teams I have led. That is what I will share today.
