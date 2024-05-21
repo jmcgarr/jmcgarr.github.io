@@ -37,4 +37,7 @@ jobs:
       run: ./gradlew bake --info --stacktrace
 
     - name: Publish content
+      env:
+        GRGIT_USER: ${{ secrets.GRGIT_USER }}
+        GRGIT_PASS: ${{ secrets.GRGIT_PASS }}
       run: ./gradlew gitPublishPush --info --stacktrace
