@@ -1,0 +1,19 @@
+title=Three horizons applied
+date=2020-04-07
+type=post
+tags=management
+status=published
+summary=The Three Horizons model is a tool used by executives to model and understand current and future business ventures. Never having been an executive myself, I haven't used the Three Horizons model in this manner. I have, however, found the Three Horizons model extremely useful in planning and modeling investment levels for the engineering teams I have led. That is what I will share today.
+masthead=multi-hills.jpg
+mastheadCredit=https://flic.kr/p/4G2GiC
+~~~~~~
+_Note: It took me a long time to get back to this post, for a number of reasons. First, life is busier than ever and I wrote the first post while on holiday. Second...2020...fuck 2020. Thirdly, well,...some of the ideas I was originally planning on sharing started changing and I wanted to see some of them play out. Excuses aside, on to the post.
+
+---
+The Three Horizons model is a tool used by executives to model and understand current and future business ventures. Never having been an executive myself, I haven't used the Three Horizons model in this manner. I have, however, found the Three Horizons model extremely useful in planning and modeling investment levels for the engineering teams I have led. That is what I will share today.
+
+As I stated in my previous post, I started leaning on the Three Horizons model to address deficiencies I experienced in my existing roadmapping tool kit. Most notably was limitations of roadmaps
+
+When I consider the various engineering teams I've led, they often have the privilege of owning numerous products. I suspect this is because almost all of the engineering teams I've led in the past 8 years have been focused on infrastructure needs, like DevOps or developer productivity. Every team was constrained by the number of engineers on the team as well as their expertise. Which meant the evolution of these products was also constrained.
+
+Each product was put in place to address a particular business and/or engineering problem. Over time I realized that focusing on the problem first is important when thinking about
