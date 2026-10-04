@@ -17,8 +17,11 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    # Write access is used only by the publish steps, which run only on a push to source.
+    # Same-repo PRs come from people who can already push; fork PRs always get a read-only token.
     permissions:
-      contents: read
+      contents: write   # push the built site to master
+      pages: write      # request a GitHub Pages build
 
     steps:
     - uses: actions/checkout@v4
@@ -44,6 +47,15 @@ jobs:
     - name: Publish content
       if: github.event_name == 'push' && github.ref == 'refs/heads/source'
       env:
-        GRGIT_USER: ${{ secrets.GRGIT_USER }}
-        GRGIT_PASS: ${{ secrets.GRGIT_PASS }}
+        # The built-in token: created fresh for each run, scoped to this repo, nothing to expire
+        GRGIT_USER: x-access-token
+        GRGIT_PASS: ${{ secrets.GITHUB_TOKEN }}
       run: ./gradlew gitPublishPush --info --stacktrace
+
+    # Not every push made with GITHUB_TOKEN reliably starts a Pages build, so ask for one explicitly.
+    # If the push already started a build, this just queues a rebuild of the same commit.
+    - name: Request a GitHub Pages build
+      if: github.event_name == 'push' && github.ref == 'refs/heads/source'
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: gh api --method POST "repos/${{ github.repository }}/pages/builds"
