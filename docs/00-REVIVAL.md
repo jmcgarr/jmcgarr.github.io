@@ -53,7 +53,7 @@ du -sh build/jbake                                    # published site size
 | #  | Milestone              | Theme                                                    | Bugs | Improvements |
 |----|------------------------|----------------------------------------------------------|------|--------------|
 | M0 | Baseline & Guardrails  | Know exactly what's live; make change safe               | 0    | 6            |
-| M1 | Stop the Bleeding      | Everything the site does, it does correctly              | 8    | 1            |
+| M1 | Stop the Bleeding      | Everything the site does, it does correctly              | 9    | 1            |
 | M2 | Lighten the Load       | Fast on a phone; site shrinks ~90%                       | 2    | 5            |
 | M3 | Modern Toolchain       | Builds anywhere, deploys safely, no personal tokens      | 1    | 9            |
 | M4 | Chart the Future       | Decide the platform before investing in polish           | 0    | 2            |
@@ -174,6 +174,8 @@ are in the build. A pull request can no longer publish to the live site.
   - **Test:** `grep -rE 'ga\.js|UA-49993013' build/jbake` returns nothing. If you pick a replacement, its real-time dashboard records a visit to the live site after publish.
 - [ ] T014 [P] [BUG] Fix the README. Remove the dead Travis badge, change the publish command from `bake publish` to the real task (`gitPublishPush`, or whatever M3 replaces it with), and document the preview steps (`README.md`)
   - **Test:** Follow the README step by step from a fresh clone. The preview works at http://localhost:8080 and the badge renders.
+- [ ] T066 [BUG] Publishing is broken: the first publish since 2024 (the PR #18 merge, run 37229952098) failed at `gitPublishPush` with `TransportException: … not authorized`. The personal access token in `GRGIT_PASS` (set 2024-05-22) has expired. Publish with the built-in `GITHUB_TOKEN` instead (`GRGIT_USER: x-access-token`, job permission `contents: write`), and request a Pages build explicitly (`pages: write`), because a push made with `GITHUB_TOKEN` might not start one (`.github/workflows/gradle.yml`)
+  - **Test:** After merging, the push run's "Publish content" and "Request a GitHub Pages build" steps succeed. `git fetch origin master && git diff --stat live-2026-10 origin/master` lists only `feed.xml` (see [`reports/linux-build-vs-live-2026-10-04.md`](reports/linux-build-vs-live-2026-10-04.md)). `gh api repos/jmcgarr/jmcgarr.github.io/pages/builds/latest --jq '.status + " " + .commit'` shows `built` for the new `master` commit. `curl -s https://www.mikemcgarr.com/feed.xml | grep -m1 lastBuildDate` shows the new build time.
 
 ### Improvements
 
@@ -258,6 +260,7 @@ CI is green. Its output is identical to the pre-upgrade build, and deploying nee
   - **Test:** `./gradlew tasks --all | grep -i gitPublish` returns nothing. A push to `source` still deploys.
 - [ ] T029 [IMP] Delete the `GRGIT_USER` and `GRGIT_PASS` repo secrets and revoke the personal access token behind them (GitHub settings)
   - **Test:** `gh secret list` no longer shows them. The next deploy still succeeds.
+  - _Note (2026-10-04): the workflow stopped using these secrets in T066, and the token had already expired. This can be done as soon as T066's publish succeeds, ahead of the rest of M3._
 - [ ] T030 [P] [IMP] Add Dependabot for `github-actions` and `gradle` (`.github/dependabot.yml`)
   - **Test:** The Insights → Dependency graph → Dependabot tab shows both ecosystems being checked.
 - [ ] T031 [P] [IMP] Add CI quality gates on every PR: `xmllint` on the feed and sitemap, `lychee --offline build/jbake`, `scripts/check-urls.sh`, and `scripts/check-docs-not-published.sh` (`.github/workflows/gradle.yml`)
