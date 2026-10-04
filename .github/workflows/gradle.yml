@@ -40,7 +40,9 @@ jobs:
     - name: Check docs are not published
       run: scripts/check-docs-not-published.sh build/jbake
 
+    # Pull requests build and run the checks above, but only a push to source publishes
     - name: Publish content
+      if: github.event_name == 'push' && github.ref == 'refs/heads/source'
       env:
         GRGIT_USER: ${{ secrets.GRGIT_USER }}
         GRGIT_PASS: ${{ secrets.GRGIT_PASS }}
