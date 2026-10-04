@@ -40,10 +40,31 @@ jobs:
     - name: Check docs are not published
       run: scripts/check-docs-not-published.sh build/jbake
 
-    # Pull requests build and run the checks above, but only a push to source publishes
+    # THROWAWAY TEST BRANCH (T005 negative test). DO NOT MERGE.
+    # Same shape as the real step (an `if:` with no status function), but true on PRs
+    # and harmless: no secrets, no publish.
     - name: Publish content
-      if: github.event_name == 'push' && github.ref == 'refs/heads/source'
-      env:
-        GRGIT_USER: ${{ secrets.GRGIT_USER }}
-        GRGIT_PASS: ${{ secrets.GRGIT_PASS }}
-      run: ./gradlew gitPublishPush --info --stacktrace
+      if: github.event_name == 'pull_request'
+      run: echo "DRY RUN - would publish build/jbake to master"
+
+    # TEST ONLY: what would a publish from this Linux build change on the live site?
+    - name: Compare with live site
+      if: always()
+      run: |
+        git fetch --no-tags --depth=1 origin master
+        mkdir -p /tmp/live
+        git archive FETCH_HEAD | tar -x -C /tmp/live
+        echo "live files:  $(find /tmp/live -type f | wc -l)"
+        echo "build files: $(find build/jbake -type f | wc -l)"
+        diff -rq /tmp/live build/jbake > /tmp/diff.txt || true
+        echo "== only on live (a publish would delete): $(grep -c '^Only in /tmp/live' /tmp/diff.txt || true)"
+        grep '^Only in /tmp/live' /tmp/diff.txt | head -50 || true
+        echo "== only in build (a publish would add): $(grep -c '^Only in build' /tmp/diff.txt || true)"
+        grep '^Only in build' /tmp/diff.txt | head -50 || true
+        echo "== changed: $(grep -c '^Files ' /tmp/diff.txt || true)"
+        grep '^Files ' /tmp/diff.txt | head -100 || true
+        echo "== content diffs (first 10 changed files, 40 lines each)"
+        grep '^Files ' /tmp/diff.txt | head -10 | sed -E 's/^Files (.*) and (.*) differ$/\1\t\2/' |
+          while IFS=$'\t' read -r a b; do echo "--- $b"; diff "$a" "$b" | head -40 || true; done
+        echo "== URL check (strict on Linux)"
+        scripts/check-urls.sh build/jbake
