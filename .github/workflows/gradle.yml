@@ -17,11 +17,10 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    # Write access is used only by the publish steps, which run only on a push to source.
+    # Write access is used only by the publish step, which runs only on a push to source.
     # Same-repo PRs come from people who can already push; fork PRs always get a read-only token.
     permissions:
       contents: write   # push the built site to master
-      pages: write      # request a GitHub Pages build
 
     steps:
     - uses: actions/checkout@v4
@@ -43,19 +42,16 @@ jobs:
     - name: Check docs are not published
       run: scripts/check-docs-not-published.sh build/jbake
 
-    # Pull requests build and run the checks above, but only a push to source publishes
+    # Pull requests build and run the checks above, but only a push to source publishes.
+    # The push to master starts the GitHub Pages build by itself.
     - name: Publish content
       if: github.event_name == 'push' && github.ref == 'refs/heads/source'
       env:
         # The built-in token: created fresh for each run, scoped to this repo, nothing to expire
         GRGIT_USER: x-access-token
         GRGIT_PASS: ${{ secrets.GITHUB_TOKEN }}
-      run: ./gradlew gitPublishPush --info --stacktrace
-
-    # Not every push made with GITHUB_TOKEN reliably starts a Pages build, so ask for one explicitly.
-    # If the push already started a build, this just queues a rebuild of the same commit.
-    - name: Request a GitHub Pages build
-      if: github.event_name == 'push' && github.ref == 'refs/heads/source'
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: gh api --method POST "repos/${{ github.repository }}/pages/builds"
+      run: |
+        # Author the publish commit as the Actions bot (git-publish uses JGit, which reads ~/.gitconfig)
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        ./gradlew gitPublishPush --info --stacktrace
