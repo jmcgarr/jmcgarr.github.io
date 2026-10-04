@@ -36,6 +36,10 @@ jobs:
     - name: Bake with Gradle
       run: ./gradlew bake --info --stacktrace
 
+    # TEST ONLY: simulate docs/ leaking into the site
+    - name: Simulate a docs leak
+      run: cp -R docs build/jbake/docs
+
     # docs/ holds internal planning docs and must never reach the live site (see AGENTS.md)
     - name: Check docs are not published
       run: scripts/check-docs-not-published.sh build/jbake
