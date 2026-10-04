@@ -132,7 +132,7 @@ _None. This milestone is groundwork._
   - _Done 2026-10-04: bake root and publish contents confirmed, Pages source is `master` `/` (and `https_enforced` is already `true`). Guard passes on a clean bake. Negative tests fail as expected for a `docs/` dir, a `.md` file outside `vendor/`, the `REVIVAL` marker in HTML, and a planning doc hidden under `vendor/`. The live URL check is already 404 (re-check after the next publish)._
 - [ ] T005 [IMP] Run the docs guard in CI as a step after "Bake with Gradle" and before "Publish content" (`.github/workflows/gradle.yml`)
   - **Test:** The Actions log shows the guard step passing. On a throwaway branch, temporarily copying `docs/` into `build/jbake` makes the workflow fail **before** publishing.
-  - _2026-10-04: step added and the workflow YAML parses with it between bake and publish. **Not yet verified in Actions**: needs the branch pushed and a CI run._
+  - _2026-10-04: step added between bake and publish. **CI verified (positive):** in PR #18's run the guard printed `OK: no docs/ content in build/jbake` before the (skipped) publish step. **Negative CI test not run yet.** A failing guard should block publishing because GitHub adds an implicit `success() &&` to the publish step's `if:`, but that hasn't been demonstrated in Actions._
 - [x] T006 [IMP] Add `scripts/check-urls.sh`. It diffs the `.html` files in `build/jbake` against `docs/baseline/urls.txt`, prints any **missing** and **new** URLs, and takes an optional allowlist of expected removals (`docs/baseline/expected-removals.txt`)
   - **Test:** On a clean bake of unmodified `source`, it reports 0 missing. Deleting one file in `build/jbake/blog/` makes it exit non-zero and name that file.
   - _Done 2026-10-04: a clean bake reports 0 missing. Deleting `blog/roadmaps.html` or `tags/acceptance test.html` fails and names the file, an allowlisted removal passes, and a new page is reported without failing. On a case-insensitive filesystem (macOS), pages that differ only by case (`tags/DevOps.html` vs `tags/devops.html`) overwrite each other during the bake, so the script reports them as warnings there. CI on Linux stays strict. See T055._
@@ -141,7 +141,7 @@ _None. This milestone is groundwork._
 
 - [x] CHK001 Tag `live-2026-10` exists on the remote
 - [x] CHK002 `docs/baseline/urls.txt` and `docs/baseline/metrics.md` are committed
-- [ ] CHK003 The docs guard passes locally **and** runs in CI before the publish step _(local: passes; CI: pending first run, see T005)_
+- [x] CHK003 The docs guard passes locally **and** runs in CI before the publish step _(CI: PR #18, run 37214338446)_
 - [x] CHK004 `scripts/check-urls.sh` reports 0 missing URLs on an unmodified clean bake
 - [x] CHK005 `https://www.mikemcgarr.com/docs/00-REVIVAL.md` returns 404 _(2026-10-04; re-check after the next publish)_
 
@@ -158,9 +158,10 @@ are in the build. A pull request can no longer publish to the live site.
 
 - [ ] T007 [BUG] Fix the missing `/` between host and path in the sitemap and feed URLs. They currently render as `http://www.mikemcgarr.comblog/...` (`src/jbake/jbake.properties`, `src/jbake/templates/sitemap.ftl`, `src/jbake/templates/feed.ftl`)
   - **Test:** `grep -cE 'mikemcgarr\.com[a-z]' build/jbake/sitemap.xml build/jbake/feed.xml` returns `0` for both files. `xmllint --noout` passes. The feed validates at https://validator.w3.org/feed/. Google Search Console accepts the sitemap with 0 errors.
-- [ ] T008 [BUG] Run the publish step only on `push`, not on `pull_request`. Today a same-repo PR would deploy unmerged content (`.github/workflows/gradle.yml`, add `if: github.event_name == 'push'`)
+- [x] T008 [BUG] Run the publish step only on `push`, not on `pull_request`. Today a same-repo PR would deploy unmerged content (`.github/workflows/gradle.yml`, add `if: github.event_name == 'push'`)
   - **Issue:** Refs #4. This is closed issue #4 (Travis published from branches) coming back with GitHub Actions.
   - **Test:** Open a throwaway PR. The Actions log shows "Publish content" as **skipped**, and `git ls-remote origin master` is unchanged before and after.
+  - _Done 2026-10-04: the step is gated on `github.event_name == 'push' && github.ref == 'refs/heads/source'`. Draft PR [#18](https://github.com/jmcgarr/jmcgarr.github.io/pull/18) ran CI as `pull_request` (run 37214338446): bake and docs guard succeeded, "Publish content" was **skipped**, and `master` stayed at `dd49867`._
 - [ ] T009 [BUG] Stop publishing drafts. All 12 are live under `/blog/drafts/*-draft.html`. First check whether the JBake version in use can skip rendering drafts. If it can't, move `src/jbake/content/blog/drafts/` outside the bake root (for example `drafts/` at the repo root)
   - **Test:** `find build/jbake -name '*-draft.html'` is empty. After the next publish, `curl -sI https://www.mikemcgarr.com/blog/drafts/specflow-selenium-draft.html` returns `404`. Add the draft URLs to `docs/baseline/expected-removals.txt` so `check-urls.sh` passes.
 - [ ] T010 [BUG] Serve the site over HTTPS everywhere. Set `site.host=https://www.mikemcgarr.com`, remove the hardcoded `http://www.mikemcgarr.com/` share URLs, and turn on **Enforce HTTPS** in the Pages settings (`src/jbake/jbake.properties`, `src/jbake/templates/post.ftl`). _Note (2026-10-04): Enforce HTTPS is already on (`https_enforced: true`); the template and config changes are still needed._
@@ -185,7 +186,7 @@ are in the build. A pull request can no longer publish to the live site.
 - [ ] CHK007 No drafts are reachable on the live site
 - [ ] CHK008 HTTPS is enforced, and the build has no `http://www.mikemcgarr.com` self-links
 - [ ] CHK009 Home, a post, About, and Archive load with **zero** console errors
-- [ ] CHK010 A test PR ran CI without publishing
+- [x] CHK010 A test PR ran CI without publishing _(PR #18, 2026-10-04)_
 - [ ] CHK011 `check-urls.sh` reports only the expected draft removals
 
 ---
@@ -247,7 +248,7 @@ CI is green. Its output is identical to the pre-upgrade build, and deploying nee
 - [ ] T024 [IMP] Upgrade the Gradle wrapper from 5.6.4 to the latest 8.x, going through 6.9 and 7.6 and fixing deprecations at each step (`gradle/wrapper/gradle-wrapper.properties`, `build.gradle`)
   - **Test:** `./gradlew --version` reports 8.x. `./gradlew clean bake --warning-mode all` has no deprecation warnings. **Output-equivalence check:** before upgrading, copy a clean bake to `/tmp/bake-before`. After upgrading, `diff -r /tmp/bake-before build/jbake` is empty, or every difference is explained.
 - [ ] T025 [IMP] Upgrade `org.jbake.site` from 5.0.0 to the latest 5.x, along with its bundled JBake version (`build.gradle`)
-  - **Issue:** Closes #3. JBake 2.6.x's OrientDB calls `sun.misc.VM`, which doesn't exist after JDK 8. Reproduced 2026-10-04: a bake on JDK 11 (Corretto 11.0.23, the version CI uses) succeeds but logs `ClassNotFoundException: sun.misc.VM` stack traces. JDK 1.8 logs none.
+  - **Issue:** Closes #3. JBake 2.6.x's OrientDB calls `sun.misc.VM`, which doesn't exist after JDK 8. Reproduced 2026-10-04: a bake on JDK 11 (Corretto 11.0.23, the version CI uses) succeeds but logs `ClassNotFoundException: sun.misc.VM` stack traces. JDK 1.8 logs none. CI shows it too: 6 occurrences in PR #18's Temurin 11 bake.
   - **Test:** The same output-equivalence `diff -r` as T024. Tags, archive, feed, and sitemap are all present. On JDK 11 **and** JDK 21, `./gradlew clean bake --info 2>&1 | grep -c 'sun.misc.VM'` returns `0`.
 - [ ] T026 [P] [IMP] Delete the dead build files: `.travis.yml` (travis-ci.org shut down in 2021), plus `ci.gradle` and `publish.gradle`, which are never applied and use jcenter and gradle-git 0.8 (repo root)
   - **Test:** `./gradlew clean bake` still works. `grep -r 'ci.gradle\|publish.gradle' .` finds no references.
