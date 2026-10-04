@@ -1,0 +1,272 @@
+about.html
+archive.html
+blog/2013-six-month-check-point.html
+blog/a-hack-to-syncing-multiple-google-calenders-with-your-iphone.html
+blog/a-new-adventure-begins.html
+blog/a-roadmap-unit-testing.html
+blog/alm.html
+blog/avoid-code-freezes.html
+blog/boyds-law-of-iteration.html
+blog/branching-a-multi-module-maven-project-in-eclipse.html
+blog/build-once-deploy-many.html
+blog/build-script-best-practice.html
+blog/cd-at-mcjug.html
+blog/ci-interview.html
+blog/continuous-delivery-applied-dc-agile-engineering-conference.html
+blog/dc-tech-ops-meetup.html
+blog/dependency-management-in-net.html
+blog/developer-reading-lis.html
+blog/devops-in-the-federal-government.html
+blog/disable-maven-profile.html
+blog/discovering-culture-thru-artifacts.html
+blog/drafts/acceptance-test-driven-development-draft.html
+blog/drafts/acceptance-test-frameworks-draft.html
+blog/drafts/break-your-app-into-separate-components-draft.html
+blog/drafts/dev-tools-draft.html
+blog/drafts/evolving-features-into-acceptance-tests-draft.html
+blog/drafts/getting-hacked-learning-lessons-the-hard-way-draft.html
+blog/drafts/i-need-to-hire-a-devops-expert-draft.html
+blog/drafts/maven-pipelines-draft.html
+blog/drafts/retrospectives-building-collective-ownership-draft.html
+blog/drafts/specflow-selenium-draft.html
+blog/drafts/the-job-dsl-plugin-draft.html
+blog/drafts/unit-testing-from-zero-to-hero-draft.html
+blog/dvcs-ci.html
+blog/ebooks.html
+blog/enforcing-coding-standards.html
+blog/excella-craftsmanship.html
+blog/follow-the-leaders.html
+blog/getting-back-into-the-swing-of-things.html
+blog/git-crashcourse.html
+blog/git-for-fork-pullrequest.html
+blog/git-tip-branch-your-previous-commit.html
+blog/goals-for-2013.html
+blog/grails-best-practice-resources.html
+blog/how-i-kanban.html
+blog/impress_js_github.html
+blog/improving-designs-through-tdd.html
+blog/improving-my-shell-fu-oh-my-zsh.html
+blog/interview-for-sd-times.html
+blog/intro-to-liquibase.html
+blog/java-ee-interview.html
+blog/java-live.html
+blog/jenkins-github-int.html
+blog/jmeter-crash-course.html
+blog/justifying-dual-monitors.html
+blog/looking-back-on-2012.html
+blog/mastering-jenkins-making-bulk-updates-to-jobs.html
+blog/maven-cobertura-and-aspectj.html
+blog/mcjug-return.html
+blog/my-continuous-delivery-talk-at-aln-dc.html
+blog/octopress-on-os.html
+blog/on-acceptance-test-architecture-lifecycles-and-responsibilities.html
+blog/openjdk-6-install-lucid.html
+blog/practical-unit-testing.html
+blog/relections-and-projections-2019.html
+blog/roadmaps.html
+blog/ruby-broke-my-path.html
+blog/scrum-walls.html
+blog/shortcuts-to-productivity.html
+blog/simple-git-aliases.html
+blog/sonar.html
+blog/teamcity-port.html
+blog/test-method-names.html
+blog/thank-you-netflix.html
+blog/thats-right.html
+blog/the-modern-tech-resume.html
+blog/the-phoenix-project.html
+blog/three-horizons-part1.html
+blog/top-200-agile-hm.html
+blog/understanding-culture.html
+blog/upcoming-talks.html
+blog/ut-vs-it.html
+blog/vagrant-cheatsheat.html
+blog/vim-syntax-highlighting.html
+blog/we-arent-failing-fast-enough.html
+blog/week-in-review.html
+blog/why-i-hate-ant.html
+blog/writing-user-stories.html
+index.html
+speaker-bio.html
+tags/.NET.html
+tags/DevOps.html
+tags/Excella Consulting.html
+tags/Groovy.html
+tags/INVEST.html
+tags/Java.html
+tags/Nuget.html
+tags/SUT.html
+tags/Scala.html
+tags/acceptance test.html
+tags/agile richmond.html
+tags/agile.html
+tags/agiledc.html
+tags/agiledox.html
+tags/alm.html
+tags/amazon.html
+tags/ant.html
+tags/apt-get.html
+tags/art of unit testing.html
+tags/artifactory.html
+tags/aspectj.html
+tags/atdd.html
+tags/awards.html
+tags/bash.html
+tags/bdd.html
+tags/best practices.html
+tags/blackboard.html
+tags/book review.html
+tags/books.html
+tags/boyd's law.html
+tags/branching.html
+tags/build automation.html
+tags/build pipelines.html
+tags/build scripts.html
+tags/build.html
+tags/buildr.html
+tags/bundler.html
+tags/career.html
+tags/change management.html
+tags/cheatsheet.html
+tags/checkstyle.html
+tags/chef.html
+tags/cloud.html
+tags/cobertura.html
+tags/code freeze.html
+tags/code katas.html
+tags/code quality.html
+tags/coding dojo.html
+tags/coding standards.html
+tags/configuration management.html
+tags/continuous delivery.html
+tags/continuous integration.html
+tags/crap4j.html
+tags/css3.html
+tags/cucumber.html
+tags/culture.html
+tags/database.html
+tags/dc continuous integration.html
+tags/debian.html
+tags/dependency management.html
+tags/deployment automation.html
+tags/deployment pipelines.html
+tags/deployments.html
+tags/devops.html
+tags/devopsdays.html
+tags/devopsdc.html
+tags/dvcs.html
+tags/easyb.html
+tags/ebooks.html
+tags/eclipse.html
+tags/excella.html
+tags/facebook.html
+tags/fail fast.html
+tags/feedback.html
+tags/findbugs.html
+tags/fitnesse.html
+tags/foss.html
+tags/general.html
+tags/gherkin.html
+tags/git.html
+tags/gitflow.html
+tags/github pages.html
+tags/github.html
+tags/go.html
+tags/goals.html
+tags/google calender.html
+tags/goos.html
+tags/government.html
+tags/gradle.html
+tags/grails.html
+tags/groovy.html
+tags/html5.html
+tags/hudson.html
+tags/impress.js.html
+tags/infinitest.html
+tags/infrastructure management.html
+tags/integration testing.html
+tags/interview.html
+tags/iphone.html
+tags/ivy.html
+tags/java ee.html
+tags/jbehave.html
+tags/jenkins.html
+tags/jira.html
+tags/jmeter.html
+tags/jmock.html
+tags/junit.html
+tags/kanban.html
+tags/kindle.html
+tags/lamdbas.html
+tags/leadership.html
+tags/lean.html
+tags/legacy code.html
+tags/life.html
+tags/linux.html
+tags/liquibase.html
+tags/mac osx.html
+tags/management.html
+tags/maven profiles.html
+tags/maven.html
+tags/mcjug.html
+tags/mercurial.html
+tags/mocking.html
+tags/mockito.html
+tags/modern resume.html
+tags/monitoring.html
+tags/netflix.html
+tags/nexus.html
+tags/octopress.html
+tags/oh-my-zsh.html
+tags/openjdk.html
+tags/operations.html
+tags/opsschool.html
+tags/paired programming.html
+tags/performance testing.html
+tags/ping pong.html
+tags/pmd.html
+tags/powermock.html
+tags/presentation.html
+tags/presentations.html
+tags/prezi.html
+tags/productivity.html
+tags/public speaking.html
+tags/puppet.html
+tags/rake.html
+tags/requirements.html
+tags/rss.html
+tags/ruby.html
+tags/rvm.html
+tags/scrum walls.html
+tags/scrum.html
+tags/sd times.html
+tags/selenium.html
+tags/shell-fu.html
+tags/showoff.html
+tags/sinatra.html
+tags/software craftsmenship.html
+tags/sonar.html
+tags/static code analysis.html
+tags/subversion.html
+tags/tags.html
+tags/talks.html
+tags/tdd.html
+tags/teamcity.html
+tags/technical debt.html
+tags/test automation.html
+tags/test fixture.html
+tags/testing.html
+tags/trello.html
+tags/tutorial.html
+tags/twitter.html
+tags/ubuntu.html
+tags/understanding culture.html
+tags/unit testing.html
+tags/user stories.html
+tags/vagrant.html
+tags/version control.html
+tags/vi.html
+tags/vim.html
+tags/writing.html
+tags/zsh.html
+talks.html
