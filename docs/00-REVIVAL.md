@@ -129,7 +129,7 @@ _None. This milestone is groundwork._
     - `gh api repos/jmcgarr/jmcgarr.github.io/pages --jq '.source'` returns `{"branch":"master","path":"/"}`.
     - After the next publish, `curl -s -o /dev/null -w '%{http_code}' https://www.mikemcgarr.com/docs/00-REVIVAL.md` returns `404`.
     - Negative test: `mkdir build/jbake/docs && scripts/check-docs-not-published.sh` exits non-zero.
-  - _Done 2026-10-04: bake root and publish contents confirmed, Pages source is `master` `/` (and `https_enforced` is already `true`). Guard passes on a clean bake. Negative tests fail as expected for a `docs/` dir, a `.md` file outside `vendor/`, the `REVIVAL` marker in HTML, and a planning doc hidden under `vendor/`. The live URL check is already 404 (re-check after the next publish)._
+  - _Done 2026-10-04: bake root and publish contents confirmed, Pages source is `master` `/` (and `https_enforced` is already `true`). Guard passes on a clean bake. Negative tests fail as expected for a `docs/` dir, a `.md` file outside `vendor/`, the `REVIVAL` marker in HTML, and a planning doc hidden under `vendor/`. The live URL check is already 404 (still 404 after the `cbca98c` publish)._
 - [x] T005 [IMP] Run the docs guard in CI as a step after "Bake with Gradle" and before "Publish content" (`.github/workflows/gradle.yml`)
   - **Test:** The Actions log shows the guard step passing. On a throwaway branch, temporarily copying `docs/` into `build/jbake` makes the workflow fail **before** publishing.
   - _2026-10-04: step added between bake and publish. **CI verified (positive):** in PR #18's run the guard printed `OK: no docs/ content in build/jbake` before the (skipped) publish step. **Negative CI test passed** in throwaway PR [#19](https://github.com/jmcgarr/jmcgarr.github.io/pull/19), which swapped publish for a dry-run `echo` with the same kind of `if:`. Control run 37226118033: guard passed, dry-run publish **ran**. Leak run 37226203986 (`docs/` copied into the build): guard **failed** and dry-run publish was **skipped**. GitHub adds an implicit `success() &&` to an `if:` with no status function, so a failing guard blocks the real publish too._
@@ -143,7 +143,7 @@ _None. This milestone is groundwork._
 - [x] CHK002 `docs/baseline/urls.txt` and `docs/baseline/metrics.md` are committed
 - [x] CHK003 The docs guard passes locally **and** runs in CI before the publish step _(CI: PR #18, run 37214338446)_
 - [x] CHK004 `scripts/check-urls.sh` reports 0 missing URLs on an unmodified clean bake
-- [x] CHK005 `https://www.mikemcgarr.com/docs/00-REVIVAL.md` returns 404 _(2026-10-04; re-check after the next publish)_
+- [x] CHK005 `https://www.mikemcgarr.com/docs/00-REVIVAL.md` returns 404 _(2026-10-04, and again after the `cbca98c` publish)_
 
 ---
 
@@ -174,8 +174,9 @@ are in the build. A pull request can no longer publish to the live site.
   - **Test:** `grep -rE 'ga\.js|UA-49993013' build/jbake` returns nothing. If you pick a replacement, its real-time dashboard records a visit to the live site after publish.
 - [ ] T014 [P] [BUG] Fix the README. Remove the dead Travis badge, change the publish command from `bake publish` to the real task (`gitPublishPush`, or whatever M3 replaces it with), and document the preview steps (`README.md`)
   - **Test:** Follow the README step by step from a fresh clone. The preview works at http://localhost:8080 and the badge renders.
-- [ ] T066 [BUG] Publishing is broken: the first publish since 2024 (the PR #18 merge, run 37229952098) failed at `gitPublishPush` with `TransportException: … not authorized`. The personal access token in `GRGIT_PASS` (set 2024-05-22) has expired. Publish with the built-in `GITHUB_TOKEN` instead (`GRGIT_USER: x-access-token`, job permission `contents: write`), and request a Pages build explicitly (`pages: write`), because a push made with `GITHUB_TOKEN` might not start one (`.github/workflows/gradle.yml`)
+- [x] T066 [BUG] Publishing is broken: the first publish since 2024 (the PR #18 merge, run 37229952098) failed at `gitPublishPush` with `TransportException: … not authorized`. The personal access token in `GRGIT_PASS` (set 2024-05-22) has expired. Publish with the built-in `GITHUB_TOKEN` instead (`GRGIT_USER: x-access-token`, job permission `contents: write`), and request a Pages build explicitly (`pages: write`), because a push made with `GITHUB_TOKEN` might not start one (`.github/workflows/gradle.yml`)
   - **Test:** After merging, the push run's "Publish content" and "Request a GitHub Pages build" steps succeed. `git fetch origin master && git diff --stat live-2026-10 origin/master` lists only `feed.xml` (see [`reports/linux-build-vs-live-2026-10-04.md`](reports/linux-build-vs-live-2026-10-04.md)). `gh api repos/jmcgarr/jmcgarr.github.io/pages/builds/latest --jq '.status + " " + .commit'` shows `built` for the new `master` commit. `curl -s https://www.mikemcgarr.com/feed.xml | grep -m1 lastBuildDate` shows the new build time.
+  - _Done 2026-10-04: PR #20 merged, and push run 37231079943 published `master` `cbca98c`. `git diff --stat live-2026-10 origin/master` showed only `feed.xml` (2 lines), Pages showed `built` for `cbca98c`, and the live feed showed `lastBuildDate` Sun, 4 Oct 2026 20:11:32. That run proved a `GITHUB_TOKEN` push **does** start a Pages build by itself (at 20:11:49). The explicit request started a second build that cancelled the first, which Pages then recorded as "errored: Page build failed". The follow-up PR removes the request step and `pages: write`, and makes `github-actions[bot]` the author of the publish commit instead of `runner <runner@…>` (checked locally with `-Duser.home` pointing at a bot-only `.gitconfig`)._
 
 ### Improvements
 
