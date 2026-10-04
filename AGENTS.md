@@ -1,0 +1,183 @@
+# AGENTS.md
+
+Rules for AI agents (and humans) working in this repository.
+
+## What this is
+
+This is the source of **Mike McGarr's personal blog, https://www.mikemcgarr.com**. It has been
+published since 2009. Other sites, search engines, RSS readers, and slide decks have about 15 years of
+links pointing at it. **Treat it as a live publication, not a code project.** Every published URL is
+a promise to the people who linked to it.
+
+- **Generator:** JBake 2.6 through the Gradle plugin `org.jbake.site` (Gradle 5.6.4 wrapper, JDK 1.8 via `.java-version`)
+- **Theme:** Start Bootstrap "Clean Blog" (Bootstrap 4.1, jQuery 3.3, Font Awesome 5) as FreeMarker templates
+- **Branches:** `source` holds the source (the default branch). `master` holds the generated site that GitHub Pages serves.
+- **Deploys:** GitHub Actions bakes and publishes on **every push to `source`**. Merging to `source` *is* publishing.
+- **Current work:** follows [`docs/00-REVIVAL.md`](docs/00-REVIVAL.md). Read it before starting any task.
+
+### Layout
+
+```
+src/jbake/content/        Pages and posts → published as HTML (see "URLs are permanent")
+  blog/                   Posts (legacy .html from WordPress, .asciidoc, .md)
+  blog/drafts/            Draft posts (status=draft)
+src/jbake/templates/      FreeMarker templates (*.ftl)
+src/jbake/assets/         Copied to the site root as-is. EVERYTHING here is published.
+src/jbake/jbake.properties
+docs/                     Planning and internal docs. NEVER published (see "docs/ conventions")
+build/jbake/              Generated output (git-ignored)
+```
+
+### Commands
+
+```sh
+./gradlew clean bake          # build the site into build/jbake
+./gradlew clean bakePreview   # build + serve at http://localhost:8080
+```
+
+**Never run `./gradlew gitPublishPush`** and never push to `master`. Publishing happens only through
+CI after a change is merged to `source`.
+
+---
+
+## Rule 1: URLs are permanent
+
+Do not change, move, or remove any URL the site has published unless the owner has explicitly approved
+that specific change.
+
+### How JBake builds URLs
+
+| Source | Published URL |
+|---|---|
+| `src/jbake/content/<dir>/<name>.<html\|asciidoc\|md>` | `/<dir>/<name>.html` |
+| `src/jbake/content/blog/drafts/<name>.*` | `/blog/drafts/<name>-draft.html` |
+| `tags=a, b` in front matter | `/tags/a.html`, `/tags/b.html` |
+| `src/jbake/assets/<path>` | `/<path>` (images, CSS, JS, `CNAME`, `favicon.ico`) |
+| Templates | `/index.html`, `/archive.html`, `/feed.xml`, `/sitemap.xml` |
+
+So all of the following **change or remove a published URL**, and each needs explicit approval:
+
+- Renaming or moving a file under `src/jbake/content/` (including fixing a typo in a slug like `relections-and-projections-2019`)
+- Removing or renaming a tag in a post's `tags=` front matter (that can delete a `/tags/*.html` page)
+- Renaming, moving, or deleting anything under `src/jbake/assets/`, especially `img/` (other sites may hotlink these images)
+- Changing `site.host`, the feed or archive file names, or JBake settings that affect output paths (for example tag sanitizing)
+
+Changing a post's **format** (for example `.html` → `.md`) is safe *only if* the directory and base
+name stay the same, because the output is still `<name>.html`.
+
+### When a URL change is approved
+
+1. Leave a **redirect stub** at the old path: a small HTML page with `<meta http-equiv="refresh">` and `<link rel="canonical">` pointing at the new URL. (GitHub Pages has no server-side redirects.)
+2. Add any intentionally removed URL to `docs/baseline/expected-removals.txt`.
+3. Verify with `scripts/check-urls.sh` (once it exists, see revival task T006). Until then, compare the URL lists before and after:
+   ```sh
+   (cd build/jbake && find . -name '*.html' | sort) > /tmp/urls-before.txt
+   # ...make the change, ./gradlew clean bake...
+   (cd build/jbake && find . -name '*.html' | sort) | comm -23 /tmp/urls-before.txt -
+   ```
+   The output must be empty, or list only the approved removals.
+
+## Rule 2: Branch for every change
+
+- **Every change goes on its own branch off `source`.** That includes one-line fixes, docs-only edits, and changes to this file.
+- **Never commit directly to `source` or `master`.** A push to `source` deploys the live site.
+- One task, or one tightly related group of tasks, per branch. Don't mix unrelated work.
+- Changes reach `source` only through a pull request that the owner reviews and merges.
+- Don't push branches or open PRs unless asked.
+
+### Branch names
+
+`<type>/<short-kebab-description>`. Include the revival task ID when there is one.
+
+| Type | Use for | Example |
+|---|---|---|
+| `fix/` | Bugs (`[BUG]` tasks) | `fix/T007-sitemap-trailing-slash` |
+| `perf/` | Size and speed work | `perf/T016-masthead-images` |
+| `feat/` | New site behavior or template features | `feat/T042-open-graph-tags` |
+| `chore/` | Build, CI, tooling, dependencies, cleanup | `chore/T024-gradle-8` |
+| `docs/` | Changes to `docs/`, `README.md`, `AGENTS.md` only | `docs/revival-plan` |
+| `post/` | New or edited blog content (matches the existing `post/five-disciplines`) | `post/three-horizons-part2` |
+
+## Rule 3: Respect the author's content
+
+- Posts are the author's voice. **Don't rewrite, reword, or "improve" published prose** unless asked.
+- Don't change a post's `date=`. It controls ordering, the archive, the feed, and the sitemap.
+- Don't change `status=` (draft ↔ published) unless asked. Publishing is the author's decision.
+- Front matter is `key=value` lines ending with a `~~~~~~` separator. Keep that format.
+- 63 legacy files use old Mac **CR-only** line endings. Don't mass-convert or reformat them outside revival task T051, because that makes diffs unreadable.
+
+## Rule 4: Nothing private gets published
+
+- Everything under `src/jbake/` can end up on the live site. Never put notes, plans, credentials, or scratch files there.
+- Internal material goes in `docs/` (or outside the repo).
+- Optimize images **before** adding them under `src/jbake/assets/img/`: ≤ 1920px wide, ≤ 400 KB as a target.
+- Never commit `build/`, secrets, or tokens.
+
+## Definition of done
+
+Before you say a change is finished:
+
+- [ ] `./gradlew clean bake` succeeds with no new warnings
+- [ ] You checked the affected pages in `./gradlew clean bakePreview` (home, one post, About, Archive at minimum for template changes)
+- [ ] No URL was removed or changed without approval (Rule 1 check)
+- [ ] `docs/` content is not in `build/jbake` (`test ! -e build/jbake/docs`)
+- [ ] If the work came from a revival task, its checkbox is ticked in `docs/00-REVIVAL.md` **on the same branch**, and its `Test:` line was actually run
+- [ ] You report what you verified and what you didn't. Never claim a test passed if you didn't run it.
+
+---
+
+## `docs/` conventions
+
+`docs/` is for planning and internal documentation **about** the site. It is never part of the site.
+
+### Not published, ever
+
+- `docs/` lives outside the JBake root (`src/jbake/`), so it is never baked.
+- Never copy, symlink, or reference `docs/` content from `src/jbake/`.
+- GitHub Pages must never be set to serve from a `/docs` folder.
+- Revival tasks T004/T005 add a guard script and CI check for this. Keep them passing.
+
+### File naming
+
+- Top-level docs are numbered: **`NN-SHORT-NAME.md`**, with a two-digit sequence and an UPPER-KEBAB-CASE name (for example `00-REVIVAL.md`, `01-PLATFORM-DECISION.md`).
+- Numbers are assigned in creation order and **never reused or renumbered**. If a doc is replaced, mark it superseded rather than deleting it.
+- Subdirectories:
+  - `docs/baseline/`: snapshots of the live site (`urls.txt`, `metrics.md`, `expected-removals.txt`). Only update them at a milestone checkpoint, and say so in the commit message.
+  - `docs/reports/`: generated, point-in-time reports named `<topic>-YYYY-MM-DD.md` (for example `links-2026-10-15.md`). Don't edit them after creating them; make a new dated one instead.
+
+### Document header
+
+Every numbered doc starts with a title and a metadata line:
+
+```markdown
+# <Title>
+
+**Branch**: `<branch it was written on>` | **Created**: YYYY-MM-DD | **Status**: Draft | Accepted | Done | Superseded by NN
+```
+
+Always use absolute ISO dates (`2026-10-04`), never relative ones like "last week".
+
+### Decision records
+
+Platform and architecture decisions (for example `01-PLATFORM-DECISION.md`) use these sections:
+**Context → Options → Decision → Consequences**. The status moves from `Draft` → `Accepted`, and later to `Superseded by NN` if replaced.
+
+### Tasks and checklists (Spec Kit style)
+
+```
+- [ ] T000 [P] [BUG|IMP] Description (`path/to/file`)
+  - **Test:** how to prove the task is done
+```
+
+- **`T###`**: Task IDs are unique across the whole plan. They are **never renumbered or reused**. New tasks take the next free ID and go in the milestone where they belong.
+- **`[P]`**: Can run in parallel with the other `[P]` tasks in the same section.
+- **`[BUG]`** for something broken or wrong. **`[IMP]`** for an improvement. Within each milestone, list them in separate `### Bugs` and `### Improvements` sections.
+- **Every task needs a `Test:` line** that clearly passes or fails (a command, URL check, or specific manual step).
+- **`CHK###`**: Milestone checkpoint items. A milestone is done only when all of them are checked.
+- Each milestone has a **Goal** (its theme) and an **Independent Test**.
+- Tick a checkbox only after its `Test:` has actually passed. Tick it in the same branch/PR as the work.
+
+### Style
+
+- Use GitHub-flavored Markdown with relative links between docs (`[plan](00-REVIVAL.md)`).
+- Use real file paths and runnable commands. Keep prose short.
