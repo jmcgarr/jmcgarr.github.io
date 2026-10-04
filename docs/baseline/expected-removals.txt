@@ -1,0 +1,3 @@
+# Published URLs (from urls.txt) that are intentionally removed from the site.
+# One path per line, relative to the site root. Each removal needs the owner's
+# approval and a reason (see AGENTS.md, Rule 1). Lines starting with # are ignored.

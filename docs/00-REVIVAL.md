@@ -55,7 +55,7 @@ du -sh build/jbake                                    # published site size
 | M2 | Lighten the Load       | Fast on a phone; site shrinks ~90%                       | 2    | 5            |
 | M3 | Modern Toolchain       | Builds anywhere, deploys safely, no personal tokens      | 1    | 9            |
 | M4 | Chart the Future       | Decide the platform before investing in polish           | 0    | 2            |
-| M5 | Polished Presentation  | Valid HTML, discoverable, shares well                    | 6    | 7            |
+| M5 | Polished Presentation  | Valid HTML, discoverable, shares well                    | 7    | 7            |
 | M6 | Content Care           | Accurate content; every link and image works             | 3    | 4            |
 
 ### Dependencies & Order
@@ -81,30 +81,36 @@ _None. This milestone is groundwork._
 
 ### Improvements
 
-- [ ] T001 [IMP] Tag the currently-live site so it can always be compared or restored: `git tag live-2026-10 origin/master && git push origin live-2026-10`
+- [x] T001 [IMP] Tag the currently-live site so it can always be compared or restored: `git tag live-2026-10 origin/master && git push origin live-2026-10`
   - **Test:** `git ls-remote --tags origin live-2026-10` returns a ref that points at the current `origin/master` commit.
-- [ ] T002 [P] [IMP] Record the URL inventory of the live site (`docs/baseline/urls.txt`): `git ls-tree -r --name-only live-2026-10 | grep '\.html$' | sort > docs/baseline/urls.txt`
+  - _Done 2026-10-04: annotated tag, peels to `dd49867` (= `origin/master`)._
+- [x] T002 [P] [IMP] Record the URL inventory of the live site (`docs/baseline/urls.txt`): `git ls-tree -r -z --name-only live-2026-10 | tr '\0' '\n' | grep '\.html$' | LC_ALL=C sort > docs/baseline/urls.txt` (`-z` keeps paths with spaces or non-ASCII characters from being quoted)
   - **Test:** `wc -l docs/baseline/urls.txt` equals the number of `.html` files in `live-2026-10`.
-- [ ] T003 [P] [IMP] Record baseline metrics (`docs/baseline/metrics.md`): published size (`du -sh` of a `live-2026-10` checkout, about 125 MB), Lighthouse mobile scores (Performance, Accessibility, Best Practices, SEO) for `/`, `/about.html`, `/archive.html`, and one post, plus the count of `http://` links in content (559)
+  - _Done 2026-10-04: 272 URLs, matching the tag (181 are tag pages, 48 of those with spaces in the name)._
+- [x] T003 [P] [IMP] Record baseline metrics (`docs/baseline/metrics.md`): published size (`du -sh` of a `live-2026-10` checkout, about 125 MB), Lighthouse mobile scores (Performance, Accessibility, Best Practices, SEO) for `/`, `/about.html`, `/archive.html`, and one post, plus the count of `http://` links in content (559)
   - **Test:** The file has all four pages × four scores, the site size, and the link count, with the date measured.
-- [ ] T004 [IMP] **Guarantee `docs/` is never published.** Verify that the bake root is `src/jbake` and that `gitPublish.contents` copies only `build/jbake`, and confirm that GitHub Pages is **not** set to "Deploy from branch → `source` → `/docs`". Then add `scripts/check-docs-not-published.sh`, which fails if `build/jbake` contains a `docs/` directory, any `*.md` file, or the string `REVIVAL`
+  - _Done 2026-10-04: median of 3 Lighthouse 12.8.2 mobile runs per page. Note that SEO already scores 100, so M5 is judged by its task tests rather than that score._
+- [x] T004 [IMP] **Guarantee `docs/` is never published.** Verify that the bake root is `src/jbake` and that `gitPublish.contents` copies only `build/jbake`, and confirm that GitHub Pages is **not** set to "Deploy from branch → `source` → `/docs`". Then add `scripts/check-docs-not-published.sh`, which fails if `build/jbake` contains a `docs/` directory, any `*.md` file outside `vendor/` (third-party packages ship their own READMEs, e.g. `vendor/fontawesome-free/README.md`), or the string `REVIVAL` anywhere
   - **Test:**
     - `./gradlew clean bake && scripts/check-docs-not-published.sh` exits 0.
     - `gh api repos/jmcgarr/jmcgarr.github.io/pages --jq '.source'` returns `{"branch":"master","path":"/"}`.
     - After the next publish, `curl -s -o /dev/null -w '%{http_code}' https://www.mikemcgarr.com/docs/00-REVIVAL.md` returns `404`.
     - Negative test: `mkdir build/jbake/docs && scripts/check-docs-not-published.sh` exits non-zero.
+  - _Done 2026-10-04: bake root and publish contents confirmed, Pages source is `master` `/` (and `https_enforced` is already `true`). Guard passes on a clean bake. Negative tests fail as expected for a `docs/` dir, a `.md` file outside `vendor/`, the `REVIVAL` marker in HTML, and a planning doc hidden under `vendor/`. The live URL check is already 404 (re-check after the next publish)._
 - [ ] T005 [IMP] Run the docs guard in CI as a step after "Bake with Gradle" and before "Publish content" (`.github/workflows/gradle.yml`)
   - **Test:** The Actions log shows the guard step passing. On a throwaway branch, temporarily copying `docs/` into `build/jbake` makes the workflow fail **before** publishing.
-- [ ] T006 [IMP] Add `scripts/check-urls.sh`. It diffs the `.html` files in `build/jbake` against `docs/baseline/urls.txt`, prints any **missing** and **new** URLs, and takes an optional allowlist of expected removals (`docs/baseline/expected-removals.txt`)
+  - _2026-10-04: step added and the workflow YAML parses with it between bake and publish. **Not yet verified in Actions**: needs the branch pushed and a CI run._
+- [x] T006 [IMP] Add `scripts/check-urls.sh`. It diffs the `.html` files in `build/jbake` against `docs/baseline/urls.txt`, prints any **missing** and **new** URLs, and takes an optional allowlist of expected removals (`docs/baseline/expected-removals.txt`)
   - **Test:** On a clean bake of unmodified `source`, it reports 0 missing. Deleting one file in `build/jbake/blog/` makes it exit non-zero and name that file.
+  - _Done 2026-10-04: a clean bake reports 0 missing. Deleting `blog/roadmaps.html` or `tags/acceptance test.html` fails and names the file, an allowlisted removal passes, and a new page is reported without failing. On a case-insensitive filesystem (macOS), pages that differ only by case (`tags/DevOps.html` vs `tags/devops.html`) overwrite each other during the bake, so the script reports them as warnings there. CI on Linux stays strict. See T055._
 
 ### Checkpoint: M0
 
-- [ ] CHK001 Tag `live-2026-10` exists on the remote
-- [ ] CHK002 `docs/baseline/urls.txt` and `docs/baseline/metrics.md` are committed
-- [ ] CHK003 The docs guard passes locally **and** runs in CI before the publish step
-- [ ] CHK004 `scripts/check-urls.sh` reports 0 missing URLs on an unmodified clean bake
-- [ ] CHK005 `https://www.mikemcgarr.com/docs/00-REVIVAL.md` returns 404
+- [x] CHK001 Tag `live-2026-10` exists on the remote
+- [x] CHK002 `docs/baseline/urls.txt` and `docs/baseline/metrics.md` are committed
+- [ ] CHK003 The docs guard passes locally **and** runs in CI before the publish step _(local: passes; CI: pending first run, see T005)_
+- [x] CHK004 `scripts/check-urls.sh` reports 0 missing URLs on an unmodified clean bake
+- [x] CHK005 `https://www.mikemcgarr.com/docs/00-REVIVAL.md` returns 404 _(2026-10-04; re-check after the next publish)_
 
 ---
 
@@ -123,7 +129,7 @@ are in the build. A pull request can no longer publish to the live site.
   - **Test:** Open a throwaway PR. The Actions log shows "Publish content" as **skipped**, and `git ls-remote origin master` is unchanged before and after.
 - [ ] T009 [BUG] Stop publishing drafts. All 12 are live under `/blog/drafts/*-draft.html`. First check whether the JBake version in use can skip rendering drafts. If it can't, move `src/jbake/content/blog/drafts/` outside the bake root (for example `drafts/` at the repo root)
   - **Test:** `find build/jbake -name '*-draft.html'` is empty. After the next publish, `curl -sI https://www.mikemcgarr.com/blog/drafts/specflow-selenium-draft.html` returns `404`. Add the draft URLs to `docs/baseline/expected-removals.txt` so `check-urls.sh` passes.
-- [ ] T010 [BUG] Serve the site over HTTPS everywhere. Set `site.host=https://www.mikemcgarr.com`, remove the hardcoded `http://www.mikemcgarr.com/` share URLs, and turn on **Enforce HTTPS** in the Pages settings (`src/jbake/jbake.properties`, `src/jbake/templates/post.ftl`)
+- [ ] T010 [BUG] Serve the site over HTTPS everywhere. Set `site.host=https://www.mikemcgarr.com`, remove the hardcoded `http://www.mikemcgarr.com/` share URLs, and turn on **Enforce HTTPS** in the Pages settings (`src/jbake/jbake.properties`, `src/jbake/templates/post.ftl`). _Note (2026-10-04): Enforce HTTPS is already on (`https_enforced: true`); the template and config changes are still needed._
   - **Test:** `grep -r 'http://www.mikemcgarr.com' build/jbake` returns nothing. `curl -sI http://www.mikemcgarr.com/` returns `301` to `https://`. `gh api repos/jmcgarr/jmcgarr.github.io/pages --jq .https_enforced` returns `true`.
 - [ ] T011 [P] [BUG] Remove the dead social widgets: Google+ (`g-plusone`, `apis.google.com/js/platform.js`), LinkedIn `in.js` and `IN/Share`, and the Facebook `fb-like` div, which has no SDK loaded (`src/jbake/templates/header.ftl`, `src/jbake/templates/footer.ftl`, `src/jbake/templates/post.ftl`)
   - **Test:** `grep -rE 'apis.google.com|g-plusone|platform.linkedin.com|IN/Share|fb-like' build/jbake` returns nothing. The browser console on a post page shows no errors from third-party scripts.
@@ -280,6 +286,8 @@ Accessibility ≥ 95. Social preview validators show a title, description, and i
   - **Test:** New tag URLs have no spaces. Every old tag URL in `docs/baseline/urls.txt` still loads and redirects to the new one. `check-urls.sh` passes.
 - [ ] T040 [P] [BUG] `<meta name="author">` is set to a Twitter URL. Set it to the author's name (`src/jbake/templates/header.ftl`)
   - **Test:** `grep -h 'name="author"' build/jbake/index.html` shows a name, not a URL.
+- [ ] T055 [P] [BUG] Inconsistent tag casing creates duplicate tag pages that each list only some of the posts: `DevOps` (1 post) vs `devops` (5), and `Groovy` (5) vs `groovy` (1). Both versions are live (`tags/DevOps.html` and `tags/devops.html`). On macOS (case-insensitive filesystem) they overwrite each other, so a local bake doesn't match CI. Normalize the tags in front matter to lowercase, and leave redirect stubs at `tags/DevOps.html` and `tags/Groovy.html` (`src/jbake/content/blog/`)
+  - **Test:** `git ls-files -z src/jbake/content | xargs -0 cat | tr '\r' '\n' | grep '^tags=' | tr ',' '\n' | sed 's/^tags=//;s/^ *//;s/ *$//' | sort -u | sort -f | uniq -di` prints nothing (no tag differs from another only by case). `tags/devops.html` and `tags/groovy.html` list all 6 posts each. In CI (Linux), `check-urls.sh` passes, with the old capitalized URLs served by redirect stubs.
 
 ### Improvements
 

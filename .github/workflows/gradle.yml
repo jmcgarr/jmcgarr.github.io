@@ -36,6 +36,10 @@ jobs:
     - name: Bake with Gradle
       run: ./gradlew bake --info --stacktrace
 
+    # docs/ holds internal planning docs and must never reach the live site (see AGENTS.md)
+    - name: Check docs are not published
+      run: scripts/check-docs-not-published.sh build/jbake
+
     - name: Publish content
       env:
         GRGIT_USER: ${{ secrets.GRGIT_USER }}
