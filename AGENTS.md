@@ -113,6 +113,28 @@ name stay the same, because the output is still `<name>.html`.
 - Optimize images **before** adding them under `src/jbake/assets/img/`: ≤ 1920px wide, ≤ 400 KB as a target.
 - Never commit `build/`, secrets, or tokens.
 
+## Rule 5: Link work to GitHub issues
+
+The repo's [GitHub issues](https://github.com/jmcgarr/jmcgarr.github.io/issues) are mapped to plan tasks in the
+[GitHub Issues](docs/00-REVIVAL.md#github-issues) table of the revival plan. A task that resolves an issue has an `Issue:` line.
+
+- **Before starting work,** run `gh issue list`. If an open issue isn't in the map, add a task and a map row for it first, on a `docs/` branch.
+- **When a change completes a task with `Issue: Closes #N`,** put `Closes #N` on its own line in the commit message **and** the PR description. Use one keyword per issue (`Closes #3` and `Closes #16` on separate lines). `Closes #3, #16` closes only #3.
+- **For partial work,** use `Refs #N`. It links the issue without closing it.
+- **Issues close only when the change merges into `source`,** the default branch. Pushing a feature branch or opening a PR closes nothing, which is intended: an issue is done when the fix is live.
+- Don't close, reopen, comment on, label, or create GitHub issues unless asked.
+
+Commit message shape:
+
+```
+Fix the sitemap and feed URLs missing a slash
+
+<why>
+
+Closes #N
+Co-Authored-By: …
+```
+
 ## Definition of done
 
 Before you say a change is finished:
@@ -122,6 +144,7 @@ Before you say a change is finished:
 - [ ] No URL was removed or changed without approval (Rule 1 check)
 - [ ] `docs/` content is not in `build/jbake` (`test ! -e build/jbake/docs`)
 - [ ] If the work came from a revival task, its checkbox is ticked in `docs/00-REVIVAL.md` **on the same branch**, and its `Test:` line was actually run
+- [ ] If the task has an `Issue:` line, the commit message (and PR description) carries the matching `Closes #N` / `Refs #N` line (Rule 5)
 - [ ] You report what you verified and what you didn't. Never claim a test passed if you didn't run it.
 
 ---
@@ -166,6 +189,7 @@ Platform and architecture decisions (for example `01-PLATFORM-DECISION.md`) use 
 
 ```
 - [ ] T000 [P] [BUG|IMP] Description (`path/to/file`)
+  - **Issue:** Closes #N        (only when the task resolves a GitHub issue)
   - **Test:** how to prove the task is done
 ```
 
@@ -173,6 +197,7 @@ Platform and architecture decisions (for example `01-PLATFORM-DECISION.md`) use 
 - **`[P]`**: Can run in parallel with the other `[P]` tasks in the same section.
 - **`[BUG]`** for something broken or wrong. **`[IMP]`** for an improvement. Within each milestone, list them in separate `### Bugs` and `### Improvements` sections.
 - **Every task needs a `Test:` line** that clearly passes or fails (a command, URL check, or specific manual step).
+- **`Issue:`** (optional): `Closes #N` or `Refs #N` for the GitHub issue the task resolves or contributes to. Every open issue must appear in the plan's GitHub Issues table (Rule 5).
 - **`CHK###`**: Milestone checkpoint items. A milestone is done only when all of them are checked.
 - Each milestone has a **Goal** (its theme) and an **Independent Test**.
 - Tick a checkbox only after its `Test:` has actually passed. Tick it in the same branch/PR as the work.

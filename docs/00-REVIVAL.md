@@ -14,6 +14,7 @@ Task format (adapted from Spec Kit `tasks.md`):
 
 ```
 - [ ] T000 [P] [BUG|IMP] Description (`path/to/file`)
+  - **Issue:** Closes #N        (only when the task resolves a GitHub issue)
   - **Test:** how to prove the task is done
 ```
 
@@ -22,6 +23,7 @@ Task format (adapted from Spec Kit `tasks.md`):
 - **[BUG]**: Something that is broken, wrong, or publishing something it shouldn't.
 - **[IMP]**: Improvement. The current behavior works, but it could be faster, cleaner, safer, or easier to maintain.
 - **Test:** Every task has a concrete check: a command, a URL, or a manual step with a clear pass/fail result.
+- **Issue:** Links the task to a GitHub issue. `Closes #N` means the PR that completes the task closes the issue. `Refs #N` means the task contributes but doesn't finish it. Copy the line into that commit message and PR description (see [GitHub Issues](#github-issues) and `AGENTS.md` Rule 5).
 - **CHK000**: Checkpoint items (Spec Kit checklist style). A milestone is done only when all of its CHK items are checked.
 
 ### Definition of Done (applies to every task)
@@ -55,8 +57,9 @@ du -sh build/jbake                                    # published site size
 | M2 | Lighten the Load       | Fast on a phone; site shrinks ~90%                       | 2    | 5            |
 | M3 | Modern Toolchain       | Builds anywhere, deploys safely, no personal tokens      | 1    | 9            |
 | M4 | Chart the Future       | Decide the platform before investing in polish           | 0    | 2            |
-| M5 | Polished Presentation  | Valid HTML, discoverable, shares well                    | 7    | 7            |
-| M6 | Content Care           | Accurate content; every link and image works             | 3    | 4            |
+| M5 | Polished Presentation  | Valid HTML, discoverable, shares well                    | 8    | 9            |
+| M6 | Content Care           | Accurate content; every link and image works             | 3    | 5            |
+| M7 | Writing Flow           | Writing a post is pleasant: scaffold, watch, live reload | 0    | 6            |
 
 ### Dependencies & Order
 
@@ -65,6 +68,36 @@ du -sh build/jbake                                    # published site size
 - **M2 and M3** don't depend on each other and can run in either order or overlap.
 - **M4 is a decision gate.** It should finish before **M5**, because M5 is template work for the current JBake platform and would be thrown away if the site migrates.
 - **M6** depends only on M0 and can be picked up at any time. It's good work for spare evenings.
+- **M7** comes after M4, because its tasks depend on the platform decision. T061 also needs T008 (M1). It doesn't depend on M5 or M6.
+
+### GitHub Issues
+
+Open issues on [jmcgarr/jmcgarr.github.io](https://github.com/jmcgarr/jmcgarr.github.io/issues), reviewed 2026-10-04, and the tasks that resolve them.
+
+| Issue | Title | GitHub label | Task(s) | Milestone | Put in the resolving PR |
+|---|---|---|---|---|---|
+| [#3](https://github.com/jmcgarr/jmcgarr.github.io/issues/3) | OrientDB errors when using OpenJDK | bug | T025 (fix), T023 | M3 | `Closes #3` (T025), `Refs #3` (T023) |
+| [#4](https://github.com/jmcgarr/jmcgarr.github.io/issues/4) _(closed)_ | TravisCI: pushing a branch still publishes the site | bug | T008 (the same problem came back with GitHub Actions) | M1 | `Refs #4` |
+| [#6](https://github.com/jmcgarr/jmcgarr.github.io/issues/6) | Update all existing links to open in a new tab | enhancement | T058 | M5 | `Closes #6` |
+| [#7](https://github.com/jmcgarr/jmcgarr.github.io/issues/7) | CSS should be generated per build | enhancement | T043 | M5 | `Closes #7` |
+| [#8](https://github.com/jmcgarr/jmcgarr.github.io/issues/8) | [Gradle] Add a task that creates a new post | enhancement | T060, T061 | M7 | `Refs #8` (T060), `Closes #8` (T061) |
+| [#9](https://github.com/jmcgarr/jmcgarr.github.io/issues/9) | [Gradle] Re-add the watch/rebuild feature | enhancement | T062 | M7 | `Closes #9` |
+| [#10](https://github.com/jmcgarr/jmcgarr.github.io/issues/10) | [Gradle] Improve incremental build times | enhancement | T063 | M7 | `Closes #10` |
+| [#11](https://github.com/jmcgarr/jmcgarr.github.io/issues/11) | [Gradle] Live reload? | enhancement | T064 | M7 | `Closes #11` |
+| [#12](https://github.com/jmcgarr/jmcgarr.github.io/issues/12) | [Gradle] Add toast messages when a build is complete | enhancement | T065 | M7 | `Closes #12` |
+| [#13](https://github.com/jmcgarr/jmcgarr.github.io/issues/13) | Add a tags page to browse by topics | enhancement | T057 | M5 | `Closes #13` |
+| [#14](https://github.com/jmcgarr/jmcgarr.github.io/issues/14) | Add mastheads for older posts | enhancement | T059 | M6 | `Closes #14` |
+| [#15](https://github.com/jmcgarr/jmcgarr.github.io/issues/15) | Fix the code snippet look and feel | bug, enhancement | T056 | M5 | `Closes #15` |
+| [#16](https://github.com/jmcgarr/jmcgarr.github.io/issues/16) | Masthead should be able to include remote images | bug | T037 | M5 | `Closes #16` |
+
+Open pull requests [#5](https://github.com/jmcgarr/jmcgarr.github.io/pull/5) (`[WIP] Three Horizons Part 2`) and
+[#17](https://github.com/jmcgarr/jmcgarr.github.io/pull/17) (draft, `The Five Disciplines of Management`) are covered by T032.
+
+**How issues get closed:**
+- Put the task's `Closes #N` line, one line per issue, in both the commit message and the PR description. `Closes #3, #16` closes only #3.
+- GitHub closes the issue when that commit or PR is merged into `source`, the default branch. Pushing a feature branch or opening a PR doesn't close anything.
+- Use `Refs #N` for partial work. It links the issue without closing it.
+- If M4 decides to migrate and that makes an issue moot (for example the generator has watch mode built in), close the issue from the PR that delivers the replacement, and say so in the PR.
 
 ---
 
@@ -126,6 +159,7 @@ are in the build. A pull request can no longer publish to the live site.
 - [ ] T007 [BUG] Fix the missing `/` between host and path in the sitemap and feed URLs. They currently render as `http://www.mikemcgarr.comblog/...` (`src/jbake/jbake.properties`, `src/jbake/templates/sitemap.ftl`, `src/jbake/templates/feed.ftl`)
   - **Test:** `grep -cE 'mikemcgarr\.com[a-z]' build/jbake/sitemap.xml build/jbake/feed.xml` returns `0` for both files. `xmllint --noout` passes. The feed validates at https://validator.w3.org/feed/. Google Search Console accepts the sitemap with 0 errors.
 - [ ] T008 [BUG] Run the publish step only on `push`, not on `pull_request`. Today a same-repo PR would deploy unmerged content (`.github/workflows/gradle.yml`, add `if: github.event_name == 'push'`)
+  - **Issue:** Refs #4. This is closed issue #4 (Travis published from branches) coming back with GitHub Actions.
   - **Test:** Open a throwaway PR. The Actions log shows "Publish content" as **skipped**, and `git ls-remote origin master` is unchanged before and after.
 - [ ] T009 [BUG] Stop publishing drafts. All 12 are live under `/blog/drafts/*-draft.html`. First check whether the JBake version in use can skip rendering drafts. If it can't, move `src/jbake/content/blog/drafts/` outside the bake root (for example `drafts/` at the repo root)
   - **Test:** `find build/jbake -name '*-draft.html'` is empty. After the next publish, `curl -sI https://www.mikemcgarr.com/blog/drafts/specflow-selenium-draft.html` returns `404`. Add the draft URLs to `docs/baseline/expected-removals.txt` so `check-urls.sh` passes.
@@ -205,6 +239,7 @@ CI is green. Its output is identical to the pre-upgrade build, and deploying nee
 ### Bugs
 
 - [ ] T023 [BUG] Make local and CI use the same JDK. Today `.java-version` is `1.8` and CI uses `11`. After T024/T025, standardize on JDK 21 (LTS) (`.java-version`, `.github/workflows/gradle.yml`)
+  - **Issue:** Refs #3
   - **Test:** In the repo, `java -version` reports 21. The workflow has `java-version: '21'`. The bake succeeds locally and in CI.
 
 ### Improvements
@@ -212,7 +247,8 @@ CI is green. Its output is identical to the pre-upgrade build, and deploying nee
 - [ ] T024 [IMP] Upgrade the Gradle wrapper from 5.6.4 to the latest 8.x, going through 6.9 and 7.6 and fixing deprecations at each step (`gradle/wrapper/gradle-wrapper.properties`, `build.gradle`)
   - **Test:** `./gradlew --version` reports 8.x. `./gradlew clean bake --warning-mode all` has no deprecation warnings. **Output-equivalence check:** before upgrading, copy a clean bake to `/tmp/bake-before`. After upgrading, `diff -r /tmp/bake-before build/jbake` is empty, or every difference is explained.
 - [ ] T025 [IMP] Upgrade `org.jbake.site` from 5.0.0 to the latest 5.x, along with its bundled JBake version (`build.gradle`)
-  - **Test:** The same output-equivalence `diff -r` as T024. Tags, archive, feed, and sitemap are all present.
+  - **Issue:** Closes #3. JBake 2.6.x's OrientDB calls `sun.misc.VM`, which doesn't exist after JDK 8. Reproduced 2026-10-04: a bake on JDK 11 (Corretto 11.0.23, the version CI uses) succeeds but logs `ClassNotFoundException: sun.misc.VM` stack traces. JDK 1.8 logs none.
+  - **Test:** The same output-equivalence `diff -r` as T024. Tags, archive, feed, and sitemap are all present. On JDK 11 **and** JDK 21, `./gradlew clean bake --info 2>&1 | grep -c 'sun.misc.VM'` returns `0`.
 - [ ] T026 [P] [IMP] Delete the dead build files: `.travis.yml` (travis-ci.org shut down in 2021), plus `ci.gradle` and `publish.gradle`, which are never applied and use jcenter and gradle-git 0.8 (repo root)
   - **Test:** `./gradlew clean bake` still works. `grep -r 'ci.gradle\|publish.gradle' .` finds no references.
 - [ ] T027 [IMP] Move deploys to native GitHub Pages: `actions/upload-pages-artifact` (path `build/jbake`) plus `actions/deploy-pages`, triggered only on push to `source`. Set Pages to "GitHub Actions" and confirm the custom domain `www.mikemcgarr.com` is still set in Settings → Pages (`.github/workflows/gradle.yml`)
@@ -225,8 +261,8 @@ CI is green. Its output is identical to the pre-upgrade build, and deploying nee
   - **Test:** The Insights → Dependency graph → Dependabot tab shows both ecosystems being checked.
 - [ ] T031 [P] [IMP] Add CI quality gates on every PR: `xmllint` on the feed and sitemap, `lychee --offline build/jbake`, `scripts/check-urls.sh`, and `scripts/check-docs-not-published.sh` (`.github/workflows/gradle.yml`)
   - **Test:** A throwaway PR that deletes an image used by a post fails CI and names the missing file.
-- [ ] T032 [IMP] Clean up the branches. Decide what to do with `post/five-disciplines` (finish and merge, or park it; it has diverged from origin). Tag each stale branch as `archive/<name>` before deleting it: `blog/*`, `guard`, `feature/update-look-and-feel`, `post/three-horizons-part2`. After T027, retire `master` (it's already preserved by `live-2026-10`) (git remotes)
-  - **Test:** `git branch -r` lists only `origin/source` plus any branches you're actively working on. `git ls-remote --tags origin 'archive/*'` lists every removed branch.
+- [ ] T032 [IMP] Clean up the branches. Decide what to do with `post/five-disciplines` (finish and merge, or park it; it has diverged from origin). Tag each stale branch as `archive/<name>` before deleting it: `blog/*`, `guard`, `feature/update-look-and-feel`, `post/three-horizons-part2`. After T027, retire `master` (it's already preserved by `live-2026-10`). Also resolve the two open content PRs, [#5](https://github.com/jmcgarr/jmcgarr.github.io/pull/5) `[WIP] Three Horizons Part 2` (last updated 2021-02-14) and draft [#17](https://github.com/jmcgarr/jmcgarr.github.io/pull/17) `The Five Disciplines of Management`: finish and merge, or close. Merging publishes the post, so that's the owner's call, and it should wait until T008 and T009 are done (git remotes, GitHub PRs)
+  - **Test:** `git branch -r` lists only `origin/source` plus any branches you're actively working on. `git ls-remote --tags origin 'archive/*'` lists every removed branch. `gh pr list --state open` shows no stale PRs.
 
 ### Checkpoint: M3
 
@@ -236,6 +272,7 @@ CI is green. Its output is identical to the pre-upgrade build, and deploying nee
 - [ ] CHK020 No PAT-based secrets remain
 - [ ] CHK021 The docs guard still passes against the Pages artifact
 - [ ] CHK022 Only active branches remain, and old ones are preserved as `archive/*` tags
+- [ ] CHK037 Issue #3 is closed by the merged T025 PR, and bakes on JDK 11/21 log no `sun.misc.VM` errors
 
 ---
 
@@ -253,7 +290,7 @@ _None. This milestone is a decision gate._
 
 ### Improvements
 
-- [ ] T033 [IMP] Write a decision record comparing staying on JBake with Hugo, Astro, and Eleventy (`docs/01-PLATFORM-DECISION.md`). Criteria: support for the existing formats (legacy HTML, AsciiDoc, Markdown, front matter), keeping URLs the same, theme effort, toolchain upkeep, community health, and local preview experience
+- [ ] T033 [IMP] Write a decision record comparing staying on JBake with Hugo, Astro, and Eleventy (`docs/01-PLATFORM-DECISION.md`). Criteria: support for the existing formats (legacy HTML, AsciiDoc, Markdown, front matter), keeping URLs the same, theme effort, toolchain upkeep, community health, and the writing workflow: new-post scaffolding, watch/rebuild, incremental builds, and live reload (issues #8–#12, M7)
   - **Test:** The record has Context, Options, Decision, and Consequences sections, and its status is **Accepted**.
 - [ ] T034 [IMP] _(Only if migrating)_ Run a spike: port three representative posts (one HTML, one AsciiDoc, one Markdown) plus the archive page to the chosen platform (separate branch)
   - **Test:** `scripts/check-urls.sh`, run against the spike output, keeps all four URLs. A side-by-side visual check against the live pages looks right.
@@ -279,7 +316,8 @@ Accessibility ≥ 95. Social preview validators show a title, description, and i
 - [ ] T036 [P] [BUG] `post.ftl` has a grid column with no `row` around it, so its alignment doesn't match pages (`src/jbake/templates/post.ftl`)
   - **Test:** In preview at the md and lg breakpoints, a post's text column lines up with the About page's text column.
 - [ ] T037 [P] [BUG] `masthead.ftl` always renders an empty `<span class="subheading">` because `pageSubtitle` is always defined. Also finish or remove the commented-out "TODO fix this" block and support full-URL or arbitrary-path mastheads, so the `masthead=../qcon_crowd.png` workaround can go (`src/jbake/templates/masthead.ftl`, affected content front matter)
-  - **Test:** `grep -l '<span class="subheading"></span>' build/jbake -r` returns nothing. `grep -r 'masthead=\.\./' src/jbake/content` returns nothing. The affected pages still show their mastheads.
+  - **Issue:** Closes #16. Remote mastheads keep large images out of the repo, which is what the issue asks for.
+  - **Test:** `grep -l '<span class="subheading"></span>' build/jbake -r` returns nothing. `grep -r 'masthead=\.\./' src/jbake/content` returns nothing. The affected pages still show their mastheads. A test post with `masthead=https://…` shows that remote image as its header background.
 - [ ] T038 [P] [BUG] The footer still says "Copyright 2009–2018" and "Bootstrap v4.1". Derive the year from `published_date` and fix or remove the version text (`src/jbake/templates/footer.ftl`)
   - **Test:** After a bake, the footer shows the current year. `grep -r '2009-2018' build/jbake` returns nothing.
 - [ ] T039 [P] [BUG] Tag page URLs contain spaces (for example `tags/acceptance test.html`). Turn on JBake tag sanitizing and generate redirect stubs (meta refresh + `rel=canonical`) at the old paths (`src/jbake/jbake.properties`, redirect stub template or script)
@@ -288,6 +326,9 @@ Accessibility ≥ 95. Social preview validators show a title, description, and i
   - **Test:** `grep -h 'name="author"' build/jbake/index.html` shows a name, not a URL.
 - [ ] T055 [P] [BUG] Inconsistent tag casing creates duplicate tag pages that each list only some of the posts: `DevOps` (1 post) vs `devops` (5), and `Groovy` (5) vs `groovy` (1). Both versions are live (`tags/DevOps.html` and `tags/devops.html`). On macOS (case-insensitive filesystem) they overwrite each other, so a local bake doesn't match CI. Normalize the tags in front matter to lowercase, and leave redirect stubs at `tags/DevOps.html` and `tags/Groovy.html` (`src/jbake/content/blog/`)
   - **Test:** `git ls-files -z src/jbake/content | xargs -0 cat | tr '\r' '\n' | grep '^tags=' | tr ',' '\n' | sed 's/^tags=//;s/^ *//;s/ *$//' | sort -u | sort -f | uniq -di` prints nothing (no tag differs from another only by case). `tags/devops.html` and `tags/groovy.html` list all 6 posts each. In CI (Linux), `check-urls.sh` passes, with the old capitalized URLs served by redirect stubs.
+- [ ] T056 [P] [BUG] Code snippets have no highlighting and poor styling. Legacy posts mark 12 code blocks with Google code-prettify classes (`prettyprint`, `language-*`, `linenums`), but no template loads prettify, and 28 more are bare `<pre>`. Add self-hosted syntax highlighting that understands those classes (or maps them), and give `pre` and `code` readable styles (monospace, background, `overflow-x: auto`) that work with both `clean-blog.css` and `asciidoctor.css`. Fix the misspelled class `languague-groovy` (a markup fix only, no prose changes) (`src/jbake/templates/footer.ftl`, `src/jbake/assets/css/`, `src/jbake/assets/js/`)
+  - **Issue:** Closes #15
+  - **Test:** In preview, the code blocks on `blog/improving-my-shell-fu-oh-my-zsh.html` (the example in #15) are monospaced and highlighted, and at 375px width they scroll sideways instead of overflowing the page. A post with bare `<pre>` blocks also looks right. `grep -rl languague src/jbake/content` returns nothing.
 
 ### Improvements
 
@@ -295,8 +336,9 @@ Accessibility ≥ 95. Social preview validators show a title, description, and i
   - **Test:** `grep -L 'rel="canonical"' build/jbake/blog/*.html` returns nothing. `grep -h 'name="description"' build/jbake/blog/*.html | sort -u | wc -l` is close to the post count.
 - [ ] T042 [P] [IMP] Add Open Graph and Twitter card tags (title, summary, absolute `https://` masthead image, URL) (`src/jbake/templates/header.ftl`)
   - **Test:** For two posts, LinkedIn Post Inspector and https://www.opengraph.xyz show the right title, description, and image.
-- [ ] T043 [P] [IMP] Keep one source of truth for CSS. Today `clean-blog.css` is hand-edited, while `clean-blog.min.css` and the SCSS are stale. Either keep SCSS and add a compile step, or keep plain CSS and delete the rest (`src/jbake/assets/css/`, SCSS sources)
-  - **Test:** Change one color in the chosen source, bake, and the change shows up in preview. No orphaned or stale stylesheet remains in the repo.
+- [ ] T043 [P] [IMP] Generate the theme CSS from SCSS on every build, as #7 asks. Today `clean-blog.css` is hand-edited (for example the May 2024 font changes), while `clean-blog.min.css` and the SCSS are stale. Port the hand edits back into the SCSS (it came from Start Bootstrap Clean Blog v5.0.1, which you can diff against), add a Sass compile step to the build, and stop committing generated CSS (`src/jbake/assets/css/`, SCSS sources moved by T020, `build.gradle`)
+  - **Issue:** Closes #7
+  - **Test:** `git ls-files 'src/jbake/assets/css/clean-blog*'` returns nothing. `./gradlew clean bake` produces `build/jbake/css/clean-blog.css`. Screenshots of the four baseline pages before and after look the same. Changing one SCSS variable changes the rendered site.
 - [ ] T044 [P] [IMP] Make `index.ftl` iterate `published_posts` instead of `posts` with a status check and a manual break (`src/jbake/templates/index.ftl`)
   - **Test:** The home page shows the same 6 posts, in the same order, as the baseline live home page.
 - [ ] T045 [P] [IMP] Decide on comments: keep Disqus, switch to Giscus (GitHub Discussions), or remove them (`src/jbake/templates/post.ftl`)
@@ -305,6 +347,12 @@ Accessibility ≥ 95. Social preview validators show a title, description, and i
   - **Test:** Lighthouse Accessibility ≥ 95 on the four baseline pages.
 - [ ] T047 [P] [IMP] Update the footer social links (Twitter → X; consider Bluesky or Mastodon) (`src/jbake/templates/footer.ftl`)
   - **Test:** `lychee build/jbake/index.html` reports every footer link as reachable.
+- [ ] T057 [P] [IMP] Add a page for browsing posts by topic: a tag index listing every tag with its post count, linked from the menu. Use JBake's tag index rendering if the upgraded version (T025) supports it, otherwise write a template. Do this after T055 and T039, so the index doesn't show duplicate or space-filled tags (`src/jbake/templates/`, `src/jbake/templates/menu.ftl`, `src/jbake/jbake.properties`)
+  - **Issue:** Closes #13
+  - **Test:** The tag index lists every tag exactly once, and each count matches the number of posts on that tag's page. The menu links to it. `lychee --offline build/jbake` is clean. `check-urls.sh` lists the index as a new URL and reports nothing missing.
+- [ ] T058 [P] [IMP] Open off-site links in a new tab across all posts, including the legacy HTML posts that #6 doesn't want to edit by hand. Do it once in the template: a small script that adds `target="_blank" rel="noopener noreferrer"` to links pointing outside `www.mikemcgarr.com`. That avoids editing each post and means new posts don't need a linter. Consider a visually hidden "(opens in new tab)" hint for screen readers (`src/jbake/templates/footer.ftl`, `src/jbake/assets/js/`)
+  - **Issue:** Closes #6
+  - **Test:** In preview, an external link in a legacy HTML post (`blog/sonar.html`) and in an AsciiDoc post opens a new tab, and DevTools shows `rel="noopener noreferrer"`. Menu links, archive links, links between posts, and `#` anchors still open in the same tab.
 
 ### Checkpoint: M5
 
@@ -312,6 +360,7 @@ Accessibility ≥ 95. Social preview validators show a title, description, and i
 - [ ] CHK026 Lighthouse SEO ≥ 95 and Accessibility ≥ 95 on the four baseline pages
 - [ ] CHK027 Social previews are verified for two posts
 - [ ] CHK028 `check-urls.sh` passes, including the old tag URLs (via redirects)
+- [ ] CHK038 Issues #6, #7, #13, #15, and #16 are closed by merged PRs
 
 ---
 
@@ -342,6 +391,9 @@ About, Talks, and Bio pages are current, and all content files use LF line endin
   - **Test:** Every draft has a recorded decision (a short table in `docs/reports/drafts-triage.md`).
 - [ ] T054 [P] [IMP] _(Optional)_ Fix the slug typos (`relections-and-projections-2019`, `vagrant-cheatsheat`, `developer-reading-lis`), but **only** together with redirect stubs at the old URLs (`src/jbake/content/blog/`)
   - **Test:** Each old URL redirects to the new one. `check-urls.sh` passes with the old URLs still present as stubs.
+- [ ] T059 [P] [IMP] Give older posts their own mastheads. On 2026-10-04, 65 of 74 published posts used the default image. This is manual, creative work: choose an image for each post, with credit, that follows the image size rule in `AGENTS.md`, or use a remote image once T037 supports it. Only add `masthead=` and `mastheadCredit=` lines, and keep each file's existing line endings (`src/jbake/content/blog/`)
+  - **Issue:** Closes #14
+  - **Test:** `for f in src/jbake/content/blog/*.*; do tr '\r' '\n' < "$f" | grep -q '^masthead=' || echo "$f"; done | wc -l` returns `0` (baseline: 65). No newly added image in `src/jbake/assets/img/masthead/` is over 400 KB. Every new masthead has a `mastheadCredit=`.
 
 ### Checkpoint: M6
 
@@ -349,6 +401,53 @@ About, Talks, and Bio pages are current, and all content files use LF line endin
 - [ ] CHK030 About, Talks, and Speaker Bio have been reviewed and are current
 - [ ] CHK031 `grep -rlU $'\r' src/jbake/content` returns nothing
 - [ ] CHK032 Every draft has a triage decision
+- [ ] CHK039 Issue #14 is closed by a merged PR
+
+---
+
+## M7: Writing Flow
+
+**Goal**: Writing a post is pleasant again. One command starts a post on its own branch, and the preview
+rebuilds and reloads by itself while you write.
+
+**Independent Test**: From a clean checkout, run the new-post command, open the preview, and edit the
+post. The browser shows the change within about 2 seconds with no manual step, and none of the preview
+tooling ends up in a production bake.
+
+_Do this after M4. If the site migrates, mainstream generators include most of this (for example
+`hugo server` watches, rebuilds, and live-reloads). In that case, re-scope these tasks to configuring and verifying that._
+
+### Bugs
+
+_None. The owner filed all of these (#8–#12) as enhancements._
+
+### Improvements
+
+- [ ] T060 [IMP] Add a Gradle task that starts a new post. It creates `<slug>.asciidoc` with the front matter filled in (`title`, today's `date`, `type=post`, `tags`, `status=draft`, `summary`, then `~~~~~~`), and creates and switches to a `post/<slug>` branch. It must refuse to overwrite an existing file, because that URL may already be published. Put the file wherever T009 decided drafts live, so it isn't published (`build.gradle`)
+  - **Issue:** Refs #8 (steps 1–3 of the issue)
+  - **Test:** `./gradlew newPost -Ptitle="Hello World"` creates `hello-world.asciidoc` with every header field, and `git branch --show-current` prints `post/hello-world`. Running it again fails with "already exists". After `./gradlew bake`, the draft isn't in the build output, archive, or feed.
+- [ ] T061 [IMP] Optional follow-up: let the new-post task also commit the file, push the branch, and open a draft `[WIP]` PR with `gh` (steps 4–6 of the issue). This needs T008 first, so the PR's CI run can't publish (`build.gradle`)
+  - **Issue:** Closes #8
+  - **Test:** `./gradlew newPost -Ptitle="Hello World" -Ppr` leaves a commit on `post/hello-world`, pushes the branch, and opens a draft PR titled `[WIP] Hello World` (`gh pr view --json isDraft` returns `true`). That PR's CI run shows "Publish content" as skipped. Delete the test PR and branch afterwards.
+- [ ] T062 [IMP] Bring back watch-and-rebuild: while the preview runs, changes to content, templates, or assets rebuild the site automatically. First check whether the upgraded JBake plugin (T025) has a watch task. Otherwise, run Gradle continuous build (`./gradlew -t bake`) next to the preview server (`build.gradle`)
+  - **Issue:** Closes #9
+  - **Test:** With the preview running, edit a post and save. Within 5 seconds, with no restart, `build/jbake/blog/<post>.html` contains the change. Repeat with a template and a CSS file.
+- [ ] T063 [IMP] Make rebuilds after a small edit fast. Baseline 2026-10-04 (JDK 1.8, warm Gradle daemon): a clean bake takes about 6 s. Measure the time from saving one post to the rebuilt page in T062's watch mode. If it's over 2 s, speed it up, for example by re-rendering only changed content if the JBake version supports it (`build.gradle`, `src/jbake/jbake.properties`)
+  - **Issue:** Closes #10
+  - **Test:** Change one post's text and time the rebuild. Use a real edit, not `touch`, because Gradle checks file contents. It should take ≤ 2 s, recorded in `docs/baseline/metrics.md` at the M7 checkpoint. If it already meets the target before any change, record that and close the issue with the numbers as evidence.
+- [ ] T064 [IMP] Add live reload, so the browser refreshes itself after each rebuild. Replace the `liveEdit` task (AppleScript that only works on macOS with Chrome) with a cross-browser approach, for example a livereload script injected only into preview builds. It must never ship to the live site (`build.gradle`, `src/jbake/templates/`)
+  - **Issue:** Closes #11
+  - **Test:** With the preview open in Chrome and in Safari or Firefox, saving a post refreshes the page automatically. After a normal `./gradlew clean bake`, `grep -rli livereload build/jbake` returns nothing.
+- [ ] T065 [P] [IMP] Show a notification when a rebuild finishes. In watch mode on macOS, show a notification when a rebuild succeeds or fails (for example with `osascript -e 'display notification …'`). Do nothing on other systems and in CI. The issue itself says this may be unnecessary if builds are fast, so decide after T063 (`build.gradle`)
+  - **Issue:** Closes #12
+  - **Test:** In watch mode on macOS, saving a post shows a "Site rebuilt" notification, and breaking a template shows a failure notification. CI logs show no notification errors. If you decide not to build this, record the decision and T063's numbers here, and close #12 from that PR.
+
+### Checkpoint: M7
+
+- [ ] CHK033 The new-post task creates a draft on its own `post/` branch and never overwrites an existing post
+- [ ] CHK034 Saving a post updates the open browser within about 2 s, with no manual steps
+- [ ] CHK035 `grep -rli livereload build/jbake` returns nothing after a production bake
+- [ ] CHK036 Issues #8–#12 are closed by merged PRs (`gh issue list --state open` shows none of them)
 
 ---
 
@@ -356,4 +455,5 @@ About, Talks, and Bio pages are current, and all content files use LF line endin
 
 - **Keep URLs stable.** This site has links pointing at it from about 15 years of the web. Any task that changes a URL must leave a redirect stub, and `check-urls.sh` is what enforces that.
 - **Ship each milestone separately.** Publish after each checkpoint passes, then update `docs/baseline/metrics.md` so the next milestone measures against the new numbers.
+- **Keep the issue map current.** Check `gh issue list` at each milestone checkpoint. Any new issue gets a task and a row in [GitHub Issues](#github-issues).
 - **Number future planning docs** after this one (`01-PLATFORM-DECISION.md`, `02-...`). They all live in `docs/`, which T004/T005 keep off the live site.
