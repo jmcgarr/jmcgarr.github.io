@@ -53,13 +53,14 @@ du -sh build/jbake                                    # published site size
 | #  | Milestone              | Theme                                                    | Bugs | Improvements |
 |----|------------------------|----------------------------------------------------------|------|--------------|
 | M0 | Baseline & Guardrails  | Know exactly what's live; make change safe               | 0    | 6            |
-| M1 | Stop the Bleeding      | Everything the site does, it does correctly              | 12   | 1            |
+| M1 | Stop the Bleeding      | Everything the site does, it does correctly              | 11   | 1            |
 | M2 | Lighten the Load       | Fast on a phone; site shrinks ~90%                       | 2    | 5            |
 | M3 | Modern Toolchain       | Builds anywhere, deploys safely, no personal tokens      | 1    | 9            |
 | M4 | Chart the Future       | Decide the platform before investing in polish           | 0    | 2            |
 | M5 | Polished Presentation  | Valid HTML, discoverable, shares well                    | 8    | 9            |
 | M6 | Content Care           | Accurate content; every link and image works             | 3    | 5            |
 | M7 | Writing Flow           | Writing a post is pleasant: scaffold, watch, live reload | 0    | 6            |
+| —  | Backlog                | Unscheduled; not reproduced or waiting on evidence       | 1    | 0            |
 
 ### Dependencies & Order
 
@@ -172,12 +173,12 @@ are in the build. A pull request can no longer publish to the live site.
 - [x] T011 [P] [BUG] Remove the dead social widgets: Google+ (`g-plusone`, `apis.google.com/js/platform.js`), LinkedIn `in.js` and `IN/Share`, and the Facebook `fb-like` div, which has no SDK loaded (`src/jbake/templates/header.ftl`, `src/jbake/templates/footer.ftl`, `src/jbake/templates/post.ftl`)
   - **Test:** `grep -rE 'apis.google.com|g-plusone|platform.linkedin.com|IN/Share|fb-like' build/jbake` returns nothing. The browser console on a post page shows no errors from third-party scripts.
   - _Done 2026-10-05 (`fix/T011-T013-widgets-analytics`): the grep returns 0 files. Measured locally with Lighthouse 12 (preview, before → after): home Best Practices 82 → 100, requests 25 → 20, third-party hosts 8 → 6. Post (`three-horizons-part1`) Best Practices 57 → 82, requests 67 → 44, **console errors 1 → 0** (the Google+ frame CSP error), third-party hosts 21 → 13. The rest are mostly Disqus and the trackers it loads (Taboola, Criteo), which is T045._ **Live (PRs #26/#27 published, `master` `7185995`):** all 260 live pages return 200, and none contain any dead widget or old analytics code. Lighthouse on the live home and post pages shows **0 console errors**, and home Best Practices is 100._
-- [ ] T012 [P] [BUG] Fix the French Twitter button (`data-lang="fr"`, label "Tweeter"). Replace the share bar with plain share links that need no third-party JS (X, LinkedIn, Bluesky, email) (`src/jbake/templates/post.ftl`)
+- [x] T012 [P] [BUG] Fix the French Twitter button (`data-lang="fr"`, label "Tweeter"). Replace the share bar with plain share links that need no third-party JS (X, LinkedIn, Bluesky, email) (`src/jbake/templates/post.ftl`)
   - **Test:** `grep -rE 'data-lang="fr"|Tweeter' build/jbake` returns nothing. In preview, each share link opens a pre-filled composer with the post's `https://` URL.
-  - _2026-10-05: replaced with plain links (LinkedIn, X, Bluesky, Email; owner's choice), no JavaScript, on all 86 post pages. The grep returns 0. Decoding the links on `git-for-fork-pullrequest` (title with apostrophes) gives the exact title and `https://` URL for each, with spaces as `%20` (not `+`, which mail clients would show literally). The X and Bluesky composer URLs return 200 with the parameters intact. LinkedIn redirects logged-out visitors to sign in and carries the URL through. **Still to do after publish:** the owner clicks each link once while logged in. Tick then. Live: share links are on 74 of 74 published posts._
-- [ ] T013 [P] [BUG] Remove the dead Universal Analytics snippet (`ga.js`, `UA-49993013-1`), which stopped collecting data in July 2023. Decide whether to replace it with GA4, Plausible, GoatCounter, or nothing (`src/jbake/templates/header.ftl`)
+  - _2026-10-05: replaced with plain links (LinkedIn, X, Bluesky, Email; owner's choice), no JavaScript, on all 86 post pages. The grep returns 0. Decoding the links on `git-for-fork-pullrequest` (title with apostrophes) gives the exact title and `https://` URL for each, with spaces as `%20` (not `+`, which mail clients would show literally). The X and Bluesky composer URLs return 200 with the parameters intact. LinkedIn redirects logged-out visitors to sign in and carries the URL through. **Still to do after publish:** the owner clicks each link once while logged in. Live: share links are on 74 of 74 published posts. **2026-10-05: the owner tested the share links on the live site, and they work.**_
+- [x] T013 [P] [BUG] Remove the dead Universal Analytics snippet (`ga.js`, `UA-49993013-1`), which stopped collecting data in July 2023. Decide whether to replace it with GA4, Plausible, GoatCounter, or nothing (`src/jbake/templates/header.ftl`)
   - **Test:** `grep -rE 'ga\.js|UA-49993013' build/jbake` returns nothing. If you pick a replacement, its real-time dashboard records a visit to the live site after publish.
-  - _2026-10-05: Universal Analytics removed. **GoatCounter** (owner's choice; site `mikemcgarr`) added to `footer.ftl` with an explicit `https://` script URL. It's on 270 of 270 pages and loads in the preview (`gc.zgo.at`), and it doesn't count `localhost`. The grep returns 0. **Still to do after publish:** a visit appears at https://mikemcgarr.goatcounter.com. Tick then. Live: on 260 of 260 pages, and Lighthouse saw the script load and send a hit to `mikemcgarr.goatcounter.com`._
+  - _2026-10-05: Universal Analytics removed. **GoatCounter** (owner's choice; site `mikemcgarr`) added to `footer.ftl` with an explicit `https://` script URL. It's on 270 of 270 pages and loads in the preview (`gc.zgo.at`), and it doesn't count `localhost`. The grep returns 0. **Still to do after publish:** a visit appears at https://mikemcgarr.goatcounter.com. Live: on 260 of 260 pages, and Lighthouse saw the script load and send a hit to `mikemcgarr.goatcounter.com`. **2026-10-05: the owner confirmed visits appear in the GoatCounter dashboard.**_
 - [x] T014 [P] [BUG] Fix the README. Remove the dead Travis badge, change the publish command from `bake publish` to the real task (`gitPublishPush`, or whatever M3 replaces it with), and document the preview steps (`README.md`)
   - **Test:** Follow the README step by step from a fresh clone. The preview works at http://localhost:8080 and the badge renders.
   - _Done 2026-10-05 (`docs/T014-T015-readme`): rewrote the README (requirements, preview, drafts, writing a post, publishing through PRs, checks). **Tested from a fresh clone:** `.java-version` picked JDK 1.8. A draft made from the README's header template previewed at `/blog/drafts/readme-test-draft.html` and stayed out of the archive, feed, sitemap, and publish contents. `/` redirects to `/index.html` (200). Ctrl+C stopped the preview within 2 s (exit 130, tested by sending SIGINT to the process group as a terminal does). The Checks commands passed._
@@ -189,8 +190,6 @@ are in the build. A pull request can no longer publish to the live site.
   - _Done 2026-10-05: PR #24 merged, publish run 37254189282 (`master` `0e0b953`) changed only `A .nojekyll` and the `feed.xml` timestamp. `tags/.NET.html` returns **200**, listing its 2 posts. The full sweep returned **260 × 200 and 12 × 404** (drafts). 14 of 15 sample live files were byte-identical before and after. `CNAME` now serves its 19-byte content instead of a 404 page (harmless). The Pages build took **31.7 s**, down from 47–48 s._
 - [ ] T068 [BUG] `https://mikemcgarr.com` (bare domain, HTTPS) fails with a certificate mismatch. Its DNS A records point to `192.30.252.153`/`.154`, GitHub Pages addresses retired in 2018, which present a `*.github.com` certificate. GitHub's certificate covers only `www.mikemcgarr.com`. **Owner action at the domain registrar:** point `@` A records to `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` (optionally AAAA `2606:50c0:8000::153` … `8003::153`), and keep `www` CNAME → `jmcgarr.github.io`. If GitHub doesn't issue a certificate covering both names, remove and re-add the custom domain under Settings → Pages. Also consider verifying the domain in GitHub to prevent takeover (DNS)
   - **Test:** `dig +short mikemcgarr.com A` lists only `185.199.108-111.153`. `curl -sI https://mikemcgarr.com/` returns `301` to `https://www.mikemcgarr.com/` with no certificate error. `gh api repos/jmcgarr/jmcgarr.github.io/pages --jq '.https_certificate.domains'` includes both names. Then re-submit the sitemap for T007.
-- [ ] T069 [BUG] Safari Reader (reported by a reader on iOS) shows **only the first portion of a post**. Mozilla Readability, a close cousin of Safari's Reader, keeps 96–100% of 10 live posts (2026-10-05), so the problem is specific to Safari's heuristics, which lean on page structure. Likely cause: `post.ftl` wraps the post in `<p>${content.body}</p>`. A paragraph can't contain headings or sections, so the browser closes it at once, leaving the post as **loose sibling blocks** between empty `<p>`s. Those siblings share the column with the share links, an `<hr>`, and the Disqus embed, and nothing marks where the post starts and ends: no `<article>`, no `<main>`, no article metadata. AsciiDoc posts are the clearest case. `three-horizons-part1` parses into a note, an `<hr>`, three `div.paragraph` blocks, and four `div.sect1` section blocks, and a heuristic that groups similar siblings would keep the opening paragraphs and drop the sections. **Fix:** put the post's title, date, and body in one `<article>` inside `<main>` (no `<p>` wrapper), with the share links and comments outside it, and add article metadata (`og:type=article`, published date). This covers the `<article>` part of T035, so do the two together. Ask which post the reader was on, and include it in the test (`src/jbake/templates/post.ftl`, `src/jbake/templates/masthead.ftl`, `src/jbake/templates/header.ftl`)
-  - **Test:** On **iOS Safari** (macOS Safari's Reader uses the same engine and is handy for quick checks), open Reader on at least 4 posts: an AsciiDoc post with sections (`blog/three-horizons-part1.html`), a Markdown post (`blog/relections-and-projections-2019.html`), a legacy HTML post (`blog/sonar.html`), and the long `blog/the-modern-tech-resume.html`, plus the reported post if known. Reader shows the title and **the full text through the last section**, without share links or comments. Automated proxy: every built post has exactly one `<article>` containing all of the post's words and none of the share/comment markup, and Mozilla Readability still keeps ≥ 95% on the same posts.
 
 ### Improvements
 
@@ -201,11 +200,11 @@ are in the build. A pull request can no longer publish to the live site.
 ### Checkpoint: M1
 
 - [ ] CHK006 The sitemap is accepted in Search Console and the feed passes the W3C validator
-- [ ] CHK007 No drafts are reachable on the live site
-- [ ] CHK008 HTTPS is enforced, and the build has no `http://www.mikemcgarr.com` self-links
-- [ ] CHK009 Home, a post, About, and Archive load with **zero** console errors
+- [x] CHK007 No drafts are reachable on the live site _(2026-10-05: all 12 return 404 in the full sweep)_
+- [x] CHK008 HTTPS is enforced, and the build has no `http://www.mikemcgarr.com` self-links _(2026-10-05. The bare domain's HTTPS is T068.)_
+- [x] CHK009 Home, a post, About, and Archive load with **zero** console errors _(2026-10-05, Lighthouse on the live site: 0/0/0/0)_
 - [x] CHK010 A test PR ran CI without publishing _(PR #18, 2026-10-04)_
-- [ ] CHK011 `check-urls.sh` reports only the expected draft removals
+- [x] CHK011 `check-urls.sh` reports only the expected draft removals _(2026-10-05: also confirmed live, with 260 × 200 and 12 × 404)_
 
 ---
 
@@ -331,7 +330,7 @@ Accessibility ≥ 95. Social preview validators show a title, description, and i
 
 ### Bugs
 
-- [ ] T035 [BUG] `<p>${content.body}</p>` wraps block-level HTML in a paragraph, which is invalid HTML. _(The post-page part is done with T069 in M1. This task still covers `page.ftl`.)_ Use `<article>` for posts and `<div>` for pages (`src/jbake/templates/post.ftl`, `src/jbake/templates/page.ftl`)
+- [ ] T035 [BUG] `<p>${content.body}</p>` wraps block-level HTML in a paragraph, which is invalid HTML. _(The same `<article>` restructuring is the likely fix for T069 in the backlog, so do them together.)_ Use `<article>` for posts and `<div>` for pages (`src/jbake/templates/post.ftl`, `src/jbake/templates/page.ftl`)
   - **Test:** `vnu build/jbake/about.html build/jbake/blog/roadmaps.html` reports no "element not allowed as child of `p`" or "no `p` element in scope" errors.
 - [ ] T036 [P] [BUG] `post.ftl` has a grid column with no `row` around it, so its alignment doesn't match pages (`src/jbake/templates/post.ftl`)
   - **Test:** In preview at the md and lg breakpoints, a post's text column lines up with the About page's text column.
@@ -468,6 +467,23 @@ _None. The owner filed all of these (#8–#12) as enhancements._
 - [ ] CHK034 Saving a post updates the open browser within about 2 s, with no manual steps
 - [ ] CHK035 `grep -rli livereload build/jbake` returns nothing after a production bake
 - [ ] CHK036 Issues #8–#12 are closed by merged PRs (`gh issue list --state open` shows none of them)
+
+---
+
+## Backlog
+
+**Goal**: Keep reports and ideas that aren't scheduled into a milestone yet, so nothing gets lost.
+Pick items up when there's new evidence or a milestone touches the same files.
+
+### Bugs
+
+- [ ] T069 [BUG] Safari Reader (reported by a reader on iOS) shows **only the first portion of a post**. Mozilla Readability, a close cousin of Safari's Reader, keeps 96–100% of 10 live posts (2026-10-05), so the problem is specific to Safari's heuristics, which lean on page structure. Likely cause: `post.ftl` wraps the post in `<p>${content.body}</p>`. A paragraph can't contain headings or sections, so the browser closes it at once, leaving the post as **loose sibling blocks** between empty `<p>`s. Those siblings share the column with the share links, an `<hr>`, and the Disqus embed, and nothing marks where the post starts and ends: no `<article>`, no `<main>`, no article metadata. AsciiDoc posts are the clearest case. `three-horizons-part1` parses into a note, an `<hr>`, three `div.paragraph` blocks, and four `div.sect1` section blocks, and a heuristic that groups similar siblings would keep the opening paragraphs and drop the sections. **Fix:** put the post's title, date, and body in one `<article>` inside `<main>` (no `<p>` wrapper), with the share links and comments outside it, and add article metadata (`og:type=article`, published date). This covers the `<article>` part of T035, so do the two together. Ask which post the reader was on, and include it in the test (`src/jbake/templates/post.ftl`, `src/jbake/templates/masthead.ftl`, `src/jbake/templates/header.ftl`)
+  - **Test:** On **iOS Safari** (macOS Safari's Reader uses the same engine and is handy for quick checks), open Reader on at least 4 posts: an AsciiDoc post with sections (`blog/three-horizons-part1.html`), a Markdown post (`blog/relections-and-projections-2019.html`), a legacy HTML post (`blog/sonar.html`), and the long `blog/the-modern-tech-resume.html`, plus the reported post if known. Reader shows the title and **the full text through the last section**, without share links or comments. Automated proxy: every built post has exactly one `<article>` containing all of the post's words and none of the share/comment markup, and Mozilla Readability still keeps ≥ 95% on the same posts.
+  - _2026-10-05: moved to the backlog at the owner's request. The owner tested on iOS and things **seemed fine**, so the report isn't reproduced. Reopen with the specific post (and iOS version) if it's reported again. The fix above is still worth doing when T035 is picked up._
+
+### Improvements
+
+_None yet._
 
 ---
 
