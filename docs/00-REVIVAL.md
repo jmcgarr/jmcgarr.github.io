@@ -194,7 +194,7 @@ are in the build. A pull request can no longer publish to the live site.
 
 - [x] T015 [IMP] Add a GitHub Actions status badge to the README (`README.md`)
   - **Test:** The badge renders on the GitHub repo page and reflects the latest `source` run.
-  - _Done 2026-10-05: the badge uses `badge.svg?branch=source&event=push`, which reports **passing**. Without `event=push` GitHub reported "no status" even though the latest `source` push run (37254189282) succeeded. It reflects the runs that build and publish `source`. Re-check on the repo page after merge._
+  - _Done 2026-10-05: the badge uses `badge.svg?branch=source&event=push`, which reports **passing**. Without `event=push` GitHub reported "no status" even though the latest `source` push run (37254189282) succeeded. It reflects the runs that build and publish `source`. Re-check on the repo page after merge. **Follow-up (after PR #25 merged):** `branch=source&event=push` flipped between "no status" and "passing" across repeated requests, and GitHub's runs API returned nothing for `branch=source`, so its branch lookup is unreliable for this repo. `?event=push` alone reported "passing" on every request. The workflow's push trigger only fires for `source`, so it means the same thing. The badge now uses `badge.svg?event=push` (5/5 "passing")._
 
 ### Checkpoint: M1
 
