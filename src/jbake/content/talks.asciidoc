@@ -2,12 +2,12 @@ title=Talks
 date=2014-09-01
 type=page
 status=published
-masthead=../qcon_crowd.png
+masthead=../qcon_crowd.jpg
 ~~~~~~
 
 == Cultures, Microcultures and Finding your Way (2019)
 
-image::/img/qcon-microcultures-talk.png[QCon Keynote, 390, 250, role="right", link="https://www.infoq.com/presentations/microcultures-organizational-culture/"]
+image::/img/qcon-microcultures-talk.jpg[QCon Keynote, 390, 250, role="right", link="https://www.infoq.com/presentations/microcultures-organizational-culture/"]
 
 Mike McGarr explores the essence of organizational culture and how it impacts our work. He talks about the microcultures that can exist within an organization that provide layers of influence in our lives and job satisfaction.
 
@@ -17,7 +17,7 @@ Presented at:
 
 == Discovering Culture through Artifacts (2019)
 
-image::/img/discovering-culture-artifacts.png[QCon London, 390, 250, role="right", link="https://www.infoq.com/presentations/discovery-organizational-culture-artifacts/"]
+image::/img/discovering-culture-artifacts.jpg[QCon London, 390, 250, role="right", link="https://www.infoq.com/presentations/discovery-organizational-culture-artifacts/"]
 
 Mike McGarr shares an approach to discovering organizational culture through its artifacts. He shares his model for understanding culture and the key artifacts that allow building an understanding of an organization's culture. He also shares a wealth of "experiences" (that's code for failures) that have shaped his approach to discovering culture.
 
@@ -27,7 +27,7 @@ Presented at:
 
 == Better DevEx at Netflix: Polyglot and Containers (2018)
 
-image::/img/qcon-ny-talk.png[QCon NY, 390, 250, role="right", link="https://www.infoq.com/presentations/netflix-polyglot-containers"]
+image::/img/qcon-ny-talk.jpg[QCon NY, 390, 250, role="right", link="https://www.infoq.com/presentations/netflix-polyglot-containers"]
 
 Mike McGarr talks about the evolution of developer tooling at Netflix, focusing on command line tools they built to address evolving needs around programming languages, containers and more. He shares lessons learned while trying to support diverse programming languages and environments within a centralized team.
 

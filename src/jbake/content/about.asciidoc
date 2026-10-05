@@ -7,7 +7,7 @@ masthead=hawaii.jpg
 mastheadCredit=Me, Lana'i from Kaanapali
 ~~~~~~
 
-image:img/me_qcon_panel_sq.png[Profile,300,300,role="right"]
+image:img/me_qcon_panel_sq.jpg[Profile,300,300,role="right"]
 
 I am an engineering leader and manager, who's been building software and leading teams since 2001. I am passionate about growing engineering teams, especially those focused on developing core infrastructure components essential to the operation of the engineering teams. My area of research and curiosity centers on how organizational culture is developed, cultivated and shaped and devour as much as I can on this subject. My technical background is strongly routed in Java, as well as the growing space of developer productivity.
 
