@@ -65,6 +65,11 @@ So all of the following **change or remove a published URL**, and each needs exp
 Changing a post's **format** (for example `.html` → `.md`) is safe *only if* the directory and base
 name stay the same, because the output is still `<name>.html`.
 
+**Images (owner's policy, "option B"):** never remove a published image URL. To shrink or convert an
+image, re-encode a JPEG in place under the same name. For a photo saved as PNG, add a new `<name>.jpg`,
+point the pages at it, and replace `<name>.png` with a small fallback copy. Convert to sRGB before
+dropping the color profile, and strip camera metadata. See T016 in the revival plan for the exact method.
+
 ### When a URL change is approved
 
 1. Leave a **redirect stub** at the old path: a small HTML page with `<meta http-equiv="refresh">` and `<link rel="canonical">` pointing at the new URL. (GitHub Pages has no server-side redirects.)

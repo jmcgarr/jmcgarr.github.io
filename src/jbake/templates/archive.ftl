@@ -4,7 +4,7 @@
 
   <#assign pageTitle = "Blog Archive">
 	<#assign pageSubtitle = "">
-	<#assign masthead = "london-view.png">
+	<#assign masthead = "london-view.jpg">
 	<#assign mastheadCredit = "Me, View from QCon London 2019 talk">
 	<#include "masthead.ftl">
 

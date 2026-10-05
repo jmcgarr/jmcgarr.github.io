@@ -4,7 +4,7 @@ type=post
 tags=general
 status=published
 summary=December is often a time for reflection. We look back on the year and reflect on what we've accomplished. I am no exception. As I look back on 2019, there are a few things that stand out.
-masthead=london-alley.png
+masthead=london-alley.jpg
 mastheadCredit=Me, an alley in London, March 2019
 ~~~~~~
 As 2019 comes to a close it's time to look back on the last year...as well as forward to the year to come. I will start with a look back on 2019, and then set some goals for the coming year.
