@@ -42,6 +42,17 @@ jobs:
     - name: Check docs are not published
       run: scripts/check-docs-not-published.sh build/jbake
 
+    # Drafts render in build/jbake for local preview; the publish contents must exclude them.
+    # gitPublishCopy assembles exactly what would be pushed to master, without committing or pushing.
+    - name: Check drafts are not published
+      run: |
+        ./gradlew gitPublishCopy
+        drafts="$(find build/gitPublish -name '*-draft.html')"
+        if [ -n "$drafts" ]; then
+          echo "FAIL: drafts in the publish contents:"; echo "$drafts"; exit 1
+        fi
+        echo "OK: no drafts in the publish contents"
+
     # Pull requests build and run the checks above, but only a push to source publishes.
     # The push to master starts the GitHub Pages build by itself.
     - name: Publish content

@@ -1,3 +1,18 @@
 # Published URLs (from urls.txt) that are intentionally removed from the site.
 # One path per line, relative to the site root. Each removal needs the owner's
 # approval and a reason (see AGENTS.md, Rule 1). Lines starting with # are ignored.
+
+# 2026-10-04, T009 (approved by the owner): drafts are rendered by JBake for local
+# preview but excluded from publishing (build.gradle gitPublish contents).
+blog/drafts/acceptance-test-driven-development-draft.html
+blog/drafts/acceptance-test-frameworks-draft.html
+blog/drafts/break-your-app-into-separate-components-draft.html
+blog/drafts/dev-tools-draft.html
+blog/drafts/evolving-features-into-acceptance-tests-draft.html
+blog/drafts/getting-hacked-learning-lessons-the-hard-way-draft.html
+blog/drafts/i-need-to-hire-a-devops-expert-draft.html
+blog/drafts/maven-pipelines-draft.html
+blog/drafts/retrospectives-building-collective-ownership-draft.html
+blog/drafts/specflow-selenium-draft.html
+blog/drafts/the-job-dsl-plugin-draft.html
+blog/drafts/unit-testing-from-zero-to-hero-draft.html

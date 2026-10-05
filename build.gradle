@@ -14,6 +14,9 @@ gitPublish {
   contents {
     from (file('build/jbake')) {
       into '.'
+      // JBake always renders status=draft posts (as <name>-draft.html) and has no setting to
+      // skip them. Keep them in the local preview, but never publish them.
+      exclude '**/*-draft.html'
     }
   }
 }
