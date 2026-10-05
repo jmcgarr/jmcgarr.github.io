@@ -20,7 +20,7 @@ a promise to the people who linked to it.
 ```
 src/jbake/content/        Pages and posts → published as HTML (see "URLs are permanent")
   blog/                   Posts (legacy .html from WordPress, .asciidoc, .md)
-  blog/drafts/            Draft posts (status=draft)
+  blog/drafts/            Draft posts (status=draft): rendered for local preview, never published
 src/jbake/templates/      FreeMarker templates (*.ftl)
 src/jbake/assets/         Copied to the site root as-is. EVERYTHING here is published.
 src/jbake/jbake.properties
@@ -32,7 +32,7 @@ build/jbake/              Generated output (git-ignored)
 
 ```sh
 ./gradlew clean bake          # build the site into build/jbake
-./gradlew clean bakePreview   # build + serve at http://localhost:8080
+./gradlew clean bakePreview   # build + serve at http://localhost:8080 (drafts at /blog/drafts/<name>-draft.html)
 ```
 
 **Never run `./gradlew gitPublishPush`** and never push to `master`. Publishing happens only through
@@ -50,7 +50,7 @@ that specific change.
 | Source | Published URL |
 |---|---|
 | `src/jbake/content/<dir>/<name>.<html\|asciidoc\|md>` | `/<dir>/<name>.html` |
-| `src/jbake/content/blog/drafts/<name>.*` | `/blog/drafts/<name>-draft.html` |
+| `src/jbake/content/blog/drafts/<name>.*` (`status=draft`) | **Not published.** Preview only, at `http://localhost:8080/blog/drafts/<name>-draft.html` |
 | `tags=a, b` in front matter | `/tags/a.html`, `/tags/b.html` |
 | `src/jbake/assets/<path>` | `/<path>` (images, CSS, JS, `CNAME`, `favicon.ico`) |
 | Templates | `/index.html`, `/archive.html`, `/feed.xml`, `/sitemap.xml` |
