@@ -48,12 +48,7 @@
     <!-- Custom scripts for the clean blog look and feel -->
     <script src="/js/clean-blog.min.js"></script>
 
-    <script type="text/javascript">
-      (function() {
-        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-        po.src = 'https://apis.google.com/js/platform.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-      })();
-    </script>
+    <!-- Privacy-friendly analytics, no cookies: https://mikemcgarr.goatcounter.com (doesn't count localhost) -->
+    <script data-goatcounter="https://mikemcgarr.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
   </body>
 </html>

@@ -9,13 +9,14 @@
 
         	<p>${content.body}</p>
 
-					<p><em>Share this:</em></p>
-          <p style="float:left">
-                <a href="https://twitter.com/share" class="twitter-share-button" data-url="${config.site_host}/${content.uri}" data-via="SonOfGarr" data-lang="fr">Tweeter</a>
-                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-                <div class="g-plusone" data-size="medium" data-href="${config.site_host}/${content.uri}"></div>
-                <script type="IN/Share" data-url="${config.site_host}/${content.uri}" data-counter="right"></script>
-                <div class="fb-like" data-href="${config.site_host}/${content.uri}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+          <#-- Plain share links: no third-party scripts, nothing loads until a reader clicks -->
+          <#assign shareUrl = "${config.site_host}/${content.uri}">
+          <#assign shareTitle = content.title!"">
+          <p class="share-links"><em>Share this:</em>
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl?url('UTF-8')}" target="_blank" rel="noopener noreferrer">LinkedIn</a> &middot;
+            <a href="https://x.com/intent/post?text=${shareTitle?url('UTF-8')}&amp;url=${shareUrl?url('UTF-8')}&amp;via=SonOfGarr" target="_blank" rel="noopener noreferrer">X</a> &middot;
+            <a href="https://bsky.app/intent/compose?text=${(shareTitle + " " + shareUrl)?url('UTF-8')}" target="_blank" rel="noopener noreferrer">Bluesky</a> &middot;
+            <a href="mailto:?subject=${shareTitle?url('UTF-8')}&amp;body=${shareUrl?url('UTF-8')}">Email</a>
           </p>
 
           <hr>
