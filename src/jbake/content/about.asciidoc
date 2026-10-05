@@ -3,7 +3,7 @@ subtitle=...for those who don't know
 date=2014-08-30
 type=page
 status=published
-masthead=hawaii.png
+masthead=hawaii.jpg
 mastheadCredit=Me, Lana'i from Kaanapali
 ~~~~~~
 
