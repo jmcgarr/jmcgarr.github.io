@@ -8,3 +8,38 @@
 .photo-credit a {
   color: #d2d1d1;
 }
+
+/* Read-only comments archived from Disqus (T045) */
+.archived-comments {
+  margin: 0 0 2rem;
+  font-size: 0.95rem;
+}
+.archived-comments summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.archived-comment-list,
+.archived-comment-replies {
+  list-style: none;
+  padding-left: 0;
+}
+.archived-comment-replies {
+  margin-left: 1.25rem;
+  padding-left: 1rem;
+  border-left: 2px solid #e9ecef;
+}
+.archived-comment {
+  margin-top: 1.25rem;
+}
+.archived-comment-meta {
+  margin: 0;
+  color: #6c757d;
+}
+.archived-comment-body p {
+  margin: 0.4rem 0;
+}
+.archived-comment-note {
+  margin-top: 1.5rem;
+  color: #6c757d;
+  font-style: italic;
+}
