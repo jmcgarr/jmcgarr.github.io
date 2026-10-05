@@ -1,4 +1,4 @@
-[![Build and publish](https://github.com/jmcgarr/jmcgarr.github.io/actions/workflows/gradle.yml/badge.svg?branch=source)](https://github.com/jmcgarr/jmcgarr.github.io/actions/workflows/gradle.yml?query=branch%3Asource)
+[![Build and publish](https://github.com/jmcgarr/jmcgarr.github.io/actions/workflows/gradle.yml/badge.svg?branch=source&event=push)](https://github.com/jmcgarr/jmcgarr.github.io/actions/workflows/gradle.yml?query=branch%3Asource+event%3Apush)
 
 My Blog
 ==================
