@@ -6,8 +6,7 @@ Source for https://www.mikemcgarr.com, built with [JBake](https://jbake.org) and
 
 Requirements
 ============
-- **JDK 1.8 or 11** (CI uses 11). `.java-version` selects 1.8 if you use [jenv](https://www.jenv.be). Works on Apple Silicon.
-  JDK 17+ needs the newer Gradle planned in T024.
+- **JDK 21** (CI uses 21 too). `.java-version` selects it if you use [jenv](https://www.jenv.be). Works on Apple Silicon.
 - Nothing else: `./gradlew` downloads the right Gradle version.
 
 To preview
@@ -15,7 +14,8 @@ To preview
 ```
 ./gradlew clean bakePreview
 ```
-Then open http://localhost:8080. Stop it with `Ctrl+C`.
+Then open http://localhost:8080. Stop it with `Ctrl+C`. (`./gradlew preview` does the same. It serves the baked
+site with the JDK's built-in `jwebserver`, because the JBake plugin's own preview server doesn't work on Gradle 8.)
 
 Drafts (posts with `status=draft`) are rendered for preview only, at
 `http://localhost:8080/blog/drafts/<name>-draft.html`. They are never published.
@@ -54,7 +54,7 @@ How the site is built and deployed
 Everything happens in one workflow, [`.github/workflows/gradle.yml`](.github/workflows/gradle.yml)
 (shown as **"Java CI with Gradle"** under Actions). It runs on every pull request and every push to `source`.
 
-1. **Bake:** `./gradlew bake` renders `src/jbake/` into `build/jbake/` with JBake (JDK 11 in CI). Drafts are
+1. **Bake:** `./gradlew bake` renders `src/jbake/` into `build/jbake/` with JBake (JDK 21). Drafts are
    rendered too, as `<name>-draft.html`, but only so you can preview them locally.
 2. **Stage:** `build/jbake/` is copied to **`build/site/` without drafts**. `build/site/` is exactly what goes live.
 3. **Check:** every check below runs on `build/site/`, so what's checked is what ships.
