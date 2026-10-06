@@ -72,8 +72,12 @@
         <!--#assign mastheadURL = "/img/masthead/hawaii.jpg"-->
       <!--/#if-->
 
+      <link rel="preload" as="image" href="/img/masthead/hawaii-960.jpg" media="(max-width: 575.98px)">
+      <link rel="preload" as="image" href="/img/masthead/hawaii-1440.jpg" media="(min-width: 576px) and (max-width: 1279.98px)">
+      <link rel="preload" as="image" href="/img/masthead/hawaii.jpg" media="(min-width: 1280px)">
+
       <!-- Page Header -->
-      <header class="masthead" style="background-image: url('/img/masthead/hawaii.jpg')">
+      <header class="masthead" style="--masthead-sm: url('/img/masthead/hawaii-960.jpg'); --masthead-md: url('/img/masthead/hawaii-1440.jpg'); --masthead-lg: url('/img/masthead/hawaii.jpg')">
         <div class="overlay"></div>
         <div class="container">
           <div class="row">

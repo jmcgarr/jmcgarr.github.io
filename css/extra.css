@@ -43,3 +43,19 @@
   color: #6c757d;
   font-style: italic;
 }
+
+/* Responsive header image (T071). The URLs come from custom properties set on the <header> by
+   masthead.ftl; these breakpoints must match the preload media queries there. */
+header.masthead {
+  background-image: var(--masthead-sm);
+}
+@media (min-width: 576px) {
+  header.masthead {
+    background-image: var(--masthead-md);
+  }
+}
+@media (min-width: 1280px) {
+  header.masthead {
+    background-image: var(--masthead-lg);
+  }
+}

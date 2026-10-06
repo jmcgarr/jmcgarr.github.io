@@ -72,8 +72,12 @@
         <!--#assign mastheadURL = "/img/masthead/saocom-falcon-launch.jpg"-->
       <!--/#if-->
 
+      <link rel="preload" as="image" href="/img/masthead/saocom-falcon-launch-960.jpg" media="(max-width: 575.98px)">
+      <link rel="preload" as="image" href="/img/masthead/saocom-falcon-launch-1440.jpg" media="(min-width: 576px) and (max-width: 1279.98px)">
+      <link rel="preload" as="image" href="/img/masthead/saocom-falcon-launch.jpg" media="(min-width: 1280px)">
+
       <!-- Page Header -->
-      <header class="masthead" style="background-image: url('/img/masthead/saocom-falcon-launch.jpg')">
+      <header class="masthead" style="--masthead-sm: url('/img/masthead/saocom-falcon-launch-960.jpg'); --masthead-md: url('/img/masthead/saocom-falcon-launch-1440.jpg'); --masthead-lg: url('/img/masthead/saocom-falcon-launch.jpg')">
         <div class="overlay"></div>
         <div class="container">
           <div class="row">
