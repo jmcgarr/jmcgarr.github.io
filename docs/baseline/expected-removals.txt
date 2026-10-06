@@ -16,3 +16,12 @@ blog/drafts/retrospectives-building-collective-ownership-draft.html
 blog/drafts/specflow-selenium-draft.html
 blog/drafts/the-job-dsl-plugin-draft.html
 blog/drafts/unit-testing-from-zero-to-hero-draft.html
+
+# 2026-10-05, T019/T020 (approved by the owner): 1,431 unused library and source files removed
+# from the published site. No page referenced them. These aren't HTML pages, so check-urls.sh doesn't
+# track them, and they're recorded here as groups (exact list: git show --stat on the T019/T020 commit).
+#   vendor/fontawesome-free/{svgs,less,scss,js,sprites,metadata}/**, its css/* except all.min.css, README.md
+#   vendor/bootstrap/** except css/bootstrap.min.css and js/bootstrap.bundle.min.js (incl. *.map)
+#   vendor/jquery/** except jquery.min.js (incl. *.map, slim builds)
+#   js/clean-blog.js, js/contact_me*.js, js/jqBootstrapValidation*.js, css/clean-blog.min.css
+#   scss/** (moved to src/scss/, kept as source for T043, no longer published)
