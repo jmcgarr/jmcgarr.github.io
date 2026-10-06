@@ -42,6 +42,10 @@ jobs:
     - name: Check docs are not published
       run: scripts/check-docs-not-published.sh build/jbake
 
+    # Every header image in use needs its 960/1440px variants (T071), or phones get a blank header
+    - name: Check masthead variants
+      run: python3 scripts/masthead-variants.py --check
+
     # Drafts render in build/jbake for local preview; the publish contents must exclude them.
     # gitPublishCopy assembles exactly what would be pushed to master, without committing or pushing.
     - name: Check drafts are not published
