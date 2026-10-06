@@ -1,14 +1,15 @@
 # Builds the site with JBake, runs the quality gates, and deploys to GitHub Pages (revival task T027).
-# Pull requests run everything except the deploy. Pushes to `source` (and manual runs on `source`) deploy.
+# Pull requests run everything except the deploy. Pushes to `main` (and manual runs on `main`) deploy.
+# "source" is listed only for the rename transition (T093); remove it once `main` exists.
 # Pages must be set to Settings → Pages → Build and deployment → Source: "GitHub Actions".
 
 name: Java CI with Gradle
 
 on:
   push:
-    branches: [ "source" ]
+    branches: [ "main", "source" ]
   pull_request:
-    branches: [ "source" ]
+    branches: [ "main", "source" ]
   workflow_dispatch:   # "Run workflow" button: redeploy on demand (e.g. re-run an older run to roll back)
 
 jobs:
@@ -86,16 +87,16 @@ jobs:
     # names start with "." by default, and the site has published pages like that (tags/.NET.html, T067).
     # Without it the deployed site would silently differ from the checked build/site.
     - name: Upload the site for GitHub Pages
-      if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/source'
+      if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
       uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
       with:
         path: build/site
         include-hidden-files: true
 
-  # Only a push (or manual run) on `source` deploys. Pull requests stop after the build job.
+  # Only a push (or manual run) on `main` deploys. Pull requests stop after the build job.
   deploy:
     needs: build
-    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/source'
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
       pages: write      # deploy to GitHub Pages

@@ -11,8 +11,8 @@ a promise to the people who linked to it.
 
 - **Generator:** JBake 2.6 through the Gradle plugin `org.jbake.site` (Gradle 5.6.4 wrapper, JDK 1.8 via `.java-version`)
 - **Theme:** Start Bootstrap "Clean Blog" (Bootstrap 4.1, jQuery 3.3, Font Awesome 5) as FreeMarker templates
-- **Branches:** `source` holds the source (the default branch). `master` is the **retired** publishing branch from before T027, frozen and preserved by tag `live-2026-10`. Don't push to it.
-- **Deploys:** GitHub Actions bakes, checks, and deploys to GitHub Pages (as an artifact, no commits) on **every push to `source`**. Merging to `source` *is* publishing. A manual "Run workflow" on `source` redeploys.
+- **Branches:** `main` holds the source (the default branch; renamed from `source` in T093). `master` is the **retired** publishing branch from before T027, frozen and preserved by tag `live-2026-10`. Don't push to it.
+- **Deploys:** GitHub Actions bakes, checks, and deploys to GitHub Pages (as an artifact, no commits) on **every push to `main`**. Merging to `main` *is* publishing. A manual "Run workflow" on `main` redeploys.
 - **Current work:** follows [`docs/00-REVIVAL.md`](docs/00-REVIVAL.md). Read it before starting any task.
 
 ### Layout
@@ -37,7 +37,7 @@ build/jbake/              Generated output (git-ignored)
 ./gradlew clean bakePreview   # build + serve at http://localhost:8080 (drafts at /blog/drafts/<name>-draft.html)
 ```
 
-**Publishing happens only through CI** after a change is merged to `source`. There's no local publish command.
+**Publishing happens only through CI** after a change is merged to `main`. There's no local publish command.
 What gets deployed is `build/jbake` minus drafts (`*-draft.html`), staged as `build/site` by the workflow.
 
 ---
@@ -88,10 +88,10 @@ dropping the color profile, and strip camera metadata. See T016 in the revival p
 
 ## Rule 2: Branch for every change
 
-- **Every change goes on its own branch off `source`.** That includes one-line fixes, docs-only edits, and changes to this file.
-- **Never commit directly to `source` or `master`.** A push to `source` deploys the live site.
+- **Every change goes on its own branch off `main`.** That includes one-line fixes, docs-only edits, and changes to this file.
+- **Never commit directly to `main` or `master`.** A push to `main` deploys the live site.
 - One task, or one tightly related group of tasks, per branch. Don't mix unrelated work.
-- Changes reach `source` only through a pull request that the owner reviews and merges.
+- Changes reach `main` only through a pull request that the owner reviews and merges.
 - Don't push branches or open PRs unless asked.
 
 ### Branch names
@@ -130,7 +130,7 @@ The repo's [GitHub issues](https://github.com/jmcgarr/jmcgarr.github.io/issues) 
 - **Before starting work,** run `gh issue list`. If an open issue isn't in the map, add a task and a map row for it first, on a `docs/` branch.
 - **When a change completes a task with `Issue: Closes #N`,** put `Closes #N` on its own line in the commit message **and** the PR description. Use one keyword per issue (`Closes #3` and `Closes #16` on separate lines). `Closes #3, #16` closes only #3.
 - **For partial work,** use `Refs #N`. It links the issue without closing it.
-- **Issues close only when the change merges into `source`,** the default branch. Pushing a feature branch or opening a PR closes nothing, which is intended: an issue is done when the fix is live.
+- **Issues close only when the change merges into `main`,** the default branch. Pushing a feature branch or opening a PR closes nothing, which is intended: an issue is done when the fix is live.
 - Don't close, reopen, comment on, label, or create GitHub issues unless asked.
 
 Commit message shape:
