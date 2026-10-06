@@ -1,0 +1,30 @@
+# Dependabot (revival task T030). Weekly PRs for outdated dependencies. Each PR runs the full CI
+# (bake + quality gates) and never deploys, so you can merge with confidence or close to skip.
+version: 2
+updates:
+  # Workflow actions, including ones pinned to a commit SHA (Dependabot updates the SHA and its
+  # version comment together)
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      github-actions:
+        patterns: ["*"]
+    commit-message:
+      prefix: "chore(actions)"
+
+  # Gradle plugins and the wrapper. Major upgrades of JBake/Gradle are planned work (T024/T025,
+  # or replaced by a migration, see docs/02-ROQ-MIGRATION.md), so only minor/patch updates come here.
+  - package-ecosystem: gradle
+    directory: /
+    schedule:
+      interval: weekly
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+    groups:
+      gradle:
+        patterns: ["*"]
+    commit-message:
+      prefix: "chore(gradle)"
