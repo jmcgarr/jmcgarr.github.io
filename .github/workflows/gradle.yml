@@ -82,13 +82,15 @@ jobs:
         fail: true
         jobSummary: true
 
-    # Package the staged site for GitHub Pages. Hidden files are left out by default; that's fine because
-    # Actions-based Pages never runs Jekyll, so .nojekyll (T067) is no longer needed.
+    # Package the staged site for GitHub Pages. include-hidden-files is required: the action drops files whose
+    # names start with "." by default, and the site has published pages like that (tags/.NET.html, T067).
+    # Without it the deployed site would silently differ from the checked build/site.
     - name: Upload the site for GitHub Pages
       if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/source'
       uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
       with:
         path: build/site
+        include-hidden-files: true
 
   # Only a push (or manual run) on `source` deploys. Pull requests stop after the build job.
   deploy:
