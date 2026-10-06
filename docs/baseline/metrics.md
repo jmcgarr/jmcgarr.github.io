@@ -51,3 +51,23 @@ npx -y lighthouse@12 <url> --chrome-flags="--headless=new" \
 - **Third-party widgets dominate the post page.** Its 178 requests come mostly from the share buttons and Disqus, and they cause its Best Practices score of 57 (M1 T011–T013, M5 T045).
 - **Lighthouse SEO is already 100.** It only checks basics (title, meta description presence, crawlability), so M5's "SEO ≥ 95" checkpoint is met before any work. Judge the M5 meta and social tasks by their own `Test:` lines (canonical, per-page descriptions, Open Graph), not by this score.
 - **macOS bakes don't match CI bakes.** Case-only tag duplicates collapse on the case-insensitive filesystem (see T055).
+
+## After M2 (2026-10-06)
+
+Measured after PRs #29–#37 (live site). The M0 numbers above are kept for comparison. Lighthouse 12, mobile,
+**median of 5 runs** (M0 used 3; scores swung ±10 between single runs before the fonts were self-hosted).
+
+| Page | Perf (M0 → now) | FCP | LCP | Page weight (M0 → now) | A11y | Best Pr. | SEO |
+|---|---|---|---|---|---|---|---|
+| `/` | 72 → **96** | 1.2 s | 2.7 s | 1.3 → **0.39 MB** | 89 | 100 | 100 |
+| `/about.html` | 67 → **93** | 1.1 s | 3.2 s | 15.1 → **0.46 MB** | 95 | 100 | 100 |
+| `/archive.html` | 65 → **96** | 1.1 s | 2.7 s | 13.8 → **0.40 MB** | 89 | 100 | 100 |
+| `/blog/three-horizons-part1.html` | 56 → **81** | 1.1 s | 5.1 s | 4.5 → **0.72 MB** | 96 | 100 | 100 |
+
+| Metric | M0 | After M2 |
+|---|---|---|
+| Published size | 125.0 MB, 1,824 files | **21.8 MB, 433 files** |
+| Post page requests | 178 (Disqus trackers) | ~26 |
+| Third-party hosts on a post | 46 (live, Disqus) | 8, none of them trackers (Giscus, GoatCounter, CDN) |
+
+The post page's remaining LCP gap is a 308 KB in-post diagram downloading alongside the header (Backlog T075).

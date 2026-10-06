@@ -60,7 +60,7 @@ du -sh build/jbake                                    # published site size
 | M5 | Polished Presentation  | Valid HTML, discoverable, shares well                    | 8    | 9            |
 | M6 | Content Care           | Accurate content; every link and image works             | 3    | 5            |
 | M7 | Writing Flow           | Writing a post is pleasant: scaffold, watch, live reload | 0    | 6            |
-| —  | Backlog                | Unscheduled; not reproduced or waiting on evidence       | 1    | 0            |
+| —  | Backlog                | Unscheduled; not reproduced or waiting on evidence       | 1    | 1            |
 
 ### Dependencies & Order
 
@@ -211,6 +211,8 @@ are in the build. A pull request can no longer publish to the live site.
 
 ## M2: Lighten the Load
 
+> **Status: closed 2026-10-06 by owner decision.** CHK014–CHK016 pass. CHK012 (size) and CHK013 (performance on all four pages) are **waived by the owner** ("we are good on performance for now"). Results: site **125 MB → 21.8 MB**. Lighthouse mobile, median of 5, live: **home 96, about 93, archive 96, post 81** (from 72/67/65/56). The post page's remaining gap and its likely fix are in the Backlog (T075).
+
 **Goal**: A first visit is fast on a phone. No page ships more than ~1 MB of images, and the
 published site shrinks from ~130 MB to ≤ 15 MB.
 
@@ -266,11 +268,11 @@ baseline pages. An offline link check finds no missing assets.
 
 ### Checkpoint: M2
 
-- [ ] CHK012 `du -sh build/jbake` ≤ 15 MB (baseline ~130 MB) _(2026-10-05: **19 MB** after T016/T017/T019/T020. Given the owner's decisions to keep unused images (T018, 5.3 MB) and Font Awesome (2.4 MB), 15 MB isn't reachable without revisiting those. Consider revising the target to ≤ 20 MB.)_
-- [ ] CHK013 Lighthouse mobile Performance ≥ 90 on `/`, `/about.html`, `/archive.html`, and one post (recorded in `docs/baseline/metrics.md`)
-- [ ] CHK014 `lychee --offline build/jbake` reports 0 missing local assets
-- [ ] CHK015 No visual regressions on the four baseline pages at mobile and desktop widths
-- [ ] CHK016 `check-urls.sh` reports 0 unexpected missing HTML URLs
+- [ ] CHK012 `du -sh build/jbake` ≤ 15 MB (baseline ~130 MB) **Waived by owner 2026-10-06:** **21.8 MB** in 433 files (from 125 MB / 1,824). Over target because the owner chose to keep unused images (T018, 5.3 MB) and Font Awesome (2.4 MB), and because the performance work added header variants (T071, ~5 MB) and self-hosted font subsets (T073, 336 KB).
+- [ ] CHK013 Lighthouse mobile Performance ≥ 90 on `/`, `/about.html`, `/archive.html`, and one post (recorded in `docs/baseline/metrics.md`) **Waived by owner 2026-10-06:** home **96**, about **93**, archive **96**, post **81** (live, median of 5). On the post page, LCP (the header) competes for bandwidth with a 308 KB in-post diagram; see T075 in the Backlog.
+- [x] CHK014 `lychee --offline build/jbake` reports 0 missing local assets _(2026-10-06: checked with an equivalent script, since lychee isn't installed. All 856 local image references in the build resolve, every asset referenced by live pages and CSS returns 200, all 121 live image URLs and 20 font files return 200)_
+- [x] CHK015 No visual regressions on the four baseline pages at mobile and desktop widths _(2026-10-05: before/after screenshots of the live site at 1280px and 500px look the same. Fonts were pixel-identical after T072 and T073.)_
+- [x] CHK016 `check-urls.sh` reports 0 unexpected missing HTML URLs _(2026-10-06: all 260 kept URLs return 200 live, and the 12 drafts are expected removals)_
 
 ---
 
@@ -512,7 +514,8 @@ Pick items up when there's new evidence or a milestone touches the same files.
 
 ### Improvements
 
-_None yet._
+- [ ] T075 [IMP] Lazy-load in-post images, so they don't compete with the header image (LCP) for bandwidth on slow connections. On `three-horizons-part1` (live 2026-10-06), the header's LCP has a 1.8 s load delay plus 1.8 s load time while a 308 KB diagram downloads alongside it. That page scores 81 against 93–96 elsewhere. Fix: in `post.ftl`, render `${content.body?replace("<img ", "<img loading=\"lazy\" decoding=\"async\" ")}`. In-post images are always below the full-width header, so they can never be the LCP. It covers AsciiDoc, Markdown, and legacy HTML posts, and doesn't affect the feed (`feed.ftl` uses `post.body` directly). Proposed while pushing M2 to 90; deferred when the owner closed M2 (`src/jbake/templates/post.ftl`)
+  - **Test:** every `<img>` inside post bodies has `loading="lazy"`, and none outside them do. Lighthouse mobile (live, median of 5) on `three-horizons-part1` is ≥ 90, and the header no longer waits on the diagram.
 
 ---
 
