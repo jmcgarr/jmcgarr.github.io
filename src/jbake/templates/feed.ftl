@@ -9,7 +9,8 @@
     <pubDate>${published_date?string("EEE, d MMM yyyy HH:mm:ss Z")}</pubDate>
     <lastBuildDate>${published_date?string("EEE, d MMM yyyy HH:mm:ss Z")}</lastBuildDate>
 
-    <#list published_posts as post>
+    <#-- The 20 most recent posts (T021); older posts are in the archive and sitemap -->
+    <#list published_posts[0..*20] as post>
     <item>
       <title><#escape x as x?xml>${post.title}</#escape></title>
       <link>${config.site_host}/${post.uri}</link>

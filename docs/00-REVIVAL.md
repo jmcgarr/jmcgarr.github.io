@@ -239,8 +239,9 @@ baseline pages. An offline link check finds no missing assets.
   - **Test:** The footer and menu icons render in preview. `du -sh src/jbake/assets/vendor/fontawesome-free` is under 1 MB, or the directory is gone. Offline lychee is clean.
 - [ ] T020 [P] [IMP] Remove unused JS and CSS: unminified and slim jQuery/Bootstrap variants, `*.map` files, `contact_me*.js`, and `jqBootstrapValidation*.js`. Also stop publishing `scss/` by moving the SCSS sources out of `assets/` (`src/jbake/assets/vendor/`, `src/jbake/assets/js/`, `src/jbake/assets/scss/`)
   - **Test:** At mobile width the navbar collapse and toggle work. On desktop the scroll-up navbar reveal works. `test ! -e build/jbake/scss` passes. Offline lychee is clean.
-- [ ] T021 [P] [IMP] Limit the RSS feed to the 20 most recent posts. It's currently 440 KB with all 75 (`src/jbake/templates/feed.ftl`)
+- [x] T021 [P] [IMP] Limit the RSS feed to the 20 most recent posts. It's currently 440 KB with all 75 (`src/jbake/templates/feed.ftl`)
   - **Test:** `grep -c '<item>' build/jbake/feed.xml` returns `20`. The file is under 150 KB and still validates.
+  - _Done 2026-10-05 (`perf/T021-feed-cap`): `feed.ftl` lists `published_posts[0..*20]`, the 20 newest posts with full text, back to Feb 2013. Older posts are still in the archive and sitemap. **Feed 437 KB → 184 KB**, with 20 items, well-formed, and the same newest-first order. Each kept item is byte-identical to before (the only difference is trailing whitespace after the last `</item>`), so readers see no changed or duplicate items. **Size target revised from < 150 KB to < 200 KB:** 150 KB was a rough guess, and with full post text it would mean only about 15 posts. 10 posts ≈ 111 KB, 15 ≈ 145 KB, 20 ≈ 172–184 KB. The owner can lower the count if preferred._
 - [ ] T022 [IMP] Self-host Lora and Open Sans, or drop them for the system font stack (this continues the May 2024 font changes) (`src/jbake/templates/header.ftl`, `src/jbake/assets/css/clean-blog.css`)
   - **Test:** The DevTools Network tab shows no requests to `fonts.googleapis.com` or `fonts.gstatic.com`. Headings and body text look right on home and on a post.
 
