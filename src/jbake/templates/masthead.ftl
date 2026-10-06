@@ -31,8 +31,22 @@
         <!--#assign mastheadURL = "/img/masthead/${masthead}"-->
       <!--/#if-->
 
+      <#-- Responsive header image (T071): phones get the 960px variant, tablets and small laptops 1440px,
+           larger screens the full image. Variants come from scripts/masthead-variants.py. The CSS
+           (extra.css) picks one by width, and the preloads use the same media queries so each browser
+           fetches exactly one image, early. Remote (http) mastheads have no variants. -->
+      <#if mastheadURL?starts_with("http")>
+        <#assign mastheadSm = mastheadURL mastheadMd = mastheadURL>
+      <#else>
+        <#assign mastheadBase = mastheadURL?keep_before_last(".") mastheadExt = mastheadURL?keep_after_last(".")>
+        <#assign mastheadSm = "${mastheadBase}-960.${mastheadExt}" mastheadMd = "${mastheadBase}-1440.${mastheadExt}">
+      </#if>
+      <link rel="preload" as="image" href="${mastheadSm}" media="(max-width: 575.98px)">
+      <link rel="preload" as="image" href="${mastheadMd}" media="(min-width: 576px) and (max-width: 1279.98px)">
+      <link rel="preload" as="image" href="${mastheadURL}" media="(min-width: 1280px)">
+
       <!-- Page Header -->
-      <header class="masthead" style="background-image: url('${mastheadURL}')">
+      <header class="masthead" style="--masthead-sm: url('${mastheadSm}'); --masthead-md: url('${mastheadMd}'); --masthead-lg: url('${mastheadURL}')">
         <div class="overlay"></div>
         <div class="container">
           <div class="row">

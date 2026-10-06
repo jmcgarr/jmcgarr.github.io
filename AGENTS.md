@@ -71,6 +71,8 @@ name stay the same, because the output is still `<name>.html`.
 image, re-encode a JPEG in place under the same name. For a photo saved as PNG, add a new `<name>.jpg`,
 point the pages at it, and replace `<name>.png` with a small fallback copy. Convert to sRGB before
 dropping the color profile, and strip camera metadata. See T016 in the revival plan for the exact method.
+**Header (masthead) images** also need 960px and 1440px variants for phones and tablets: run
+`scripts/masthead-variants.py` after adding or changing one (it needs Pillow). CI fails without them.
 
 ### When a URL change is approved
 
