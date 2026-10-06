@@ -341,9 +341,9 @@ _None. This milestone is a decision gate._
 
 ### Improvements
 
-- [ ] T033 [IMP] Write a decision record comparing staying on JBake with Hugo, Astro, and Eleventy (`docs/01-PLATFORM-DECISION.md`). Criteria: support for the existing formats (legacy HTML, AsciiDoc, Markdown, front matter), keeping URLs the same, theme effort, toolchain upkeep, community health, and the writing workflow: new-post scaffolding, watch/rebuild, incremental builds, and live reload (issues #8–#12, M7)
+- [ ] T033 [IMP] Write a decision record comparing staying on JBake with Hugo, Astro, Eleventy, and **Roq (Quarkus)** (`docs/01-PLATFORM-DECISION.md`). The owner asked to consider Roq (2026-10-06). Its fit assessment, go/no-go criteria, and phased migration plan (T076–T091) are in [`02-ROQ-MIGRATION.md`](02-ROQ-MIGRATION.md). Criteria: support for the existing formats (legacy HTML, AsciiDoc, Markdown, front matter), keeping URLs the same, theme effort, toolchain upkeep, community health, and the writing workflow: new-post scaffolding, watch/rebuild, incremental builds, and live reload (issues #8–#12, M7)
   - **Test:** The record has Context, Options, Decision, and Consequences sections, and its status is **Accepted**.
-- [ ] T034 [IMP] _(Only if migrating)_ Run a spike: port three representative posts (one HTML, one AsciiDoc, one Markdown) plus the archive page to the chosen platform (separate branch)
+- [ ] T034 [IMP] _(Only if migrating. For Roq, this is Phase 1 of [`02-ROQ-MIGRATION.md`](02-ROQ-MIGRATION.md), T076–T081, which also covers tag URLs, feed `<guid>`s, and AsciiDoc fidelity)_ Run a spike: port three representative posts (one HTML, one AsciiDoc, one Markdown) plus the archive page to the chosen platform (separate branch)
   - **Test:** `scripts/check-urls.sh`, run against the spike output, keeps all four URLs. A side-by-side visual check against the live pages looks right.
 
 ### Checkpoint: M4
@@ -526,4 +526,5 @@ Pick items up when there's new evidence or a milestone touches the same files.
 - **Keep URLs stable.** This site has links pointing at it from about 15 years of the web. Any task that changes a URL must leave a redirect stub, and `check-urls.sh` is what enforces that.
 - **Ship each milestone separately.** Publish after each checkpoint passes, then update `docs/baseline/metrics.md` so the next milestone measures against the new numbers.
 - **Keep the issue map current.** Check `gh issue list` at each milestone checkpoint. Any new issue gets a task and a row in [GitHub Issues](#github-issues).
+- **Option docs:** [`02-ROQ-MIGRATION.md`](02-ROQ-MIGRATION.md) is a possible JBake → Roq migration (T076–T091). It isn't scheduled; it feeds the M4 decision. If Roq is chosen, it replaces M3's T023–T025 and re-scopes M5/M7 (see its "What changes" table). T027 (Pages via Actions) applies either way.
 - **Number future planning docs** after this one (`01-PLATFORM-DECISION.md`, `02-...`). They all live in `docs/`, which T004/T005 keep off the live site.
