@@ -6,7 +6,8 @@ Source for https://www.mikemcgarr.com, built with [JBake](https://jbake.org) and
 
 Requirements
 ============
-- **JDK 1.8.** `.java-version` selects it if you use [jenv](https://www.jenv.be). JDK 11 also builds, but it logs harmless OrientDB `sun.misc.VM` errors ([#3](https://github.com/jmcgarr/jmcgarr.github.io/issues/3)).
+- **JDK 1.8 or 11** (CI uses 11). `.java-version` selects 1.8 if you use [jenv](https://www.jenv.be). Works on Apple Silicon.
+  JDK 17+ needs the newer Gradle planned in T024.
 - Nothing else: `./gradlew` downloads the right Gradle version.
 
 To preview

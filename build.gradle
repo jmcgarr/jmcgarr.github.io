@@ -44,3 +44,14 @@ task liveEdit {
 }
 
 bakePreview.dependsOn tasks.find{ it.name == 'bake' }
+
+// JBake 2.6.x (via org.jbake.site 5.5.0) pulls in JNA 4.5.0, whose native library has no Apple Silicon
+// (arm64) build, so the bake fails on M-series Macs. JNA 5.x is API-compatible and ships every platform.
+configurations.all {
+    resolutionStrategy.eachDependency { details ->
+        if (details.requested.group == 'net.java.dev.jna') {
+            details.useVersion '5.17.0'
+            details.because 'JNA 4.5.0 has no Apple Silicon (arm64) native library'
+        }
+    }
+}
