@@ -44,18 +44,64 @@ When it's ready, set `status=published` and move it to `src/jbake/content/blog/`
 To publish
 ==========
 There is no manual publish step. Open a pull request against `source`. When it's merged,
-[GitHub Actions](.github/workflows/gradle.yml) bakes the site, runs the checks, and pushes it to the
-`master` branch, which GitHub Pages serves. Pull requests run the same build and checks but never publish.
+[GitHub Actions](.github/workflows/gradle.yml) bakes the site, runs the checks, and **deploys it to GitHub Pages**.
+Pull requests run the same build and checks but never deploy. To redeploy (for example, to roll back by
+re-running an older run), use **Actions → Java CI with Gradle → Run workflow** on `source`.
 
-Don't run `./gradlew gitPublishPush` locally.
+How the site is built and deployed
+==================================
+Everything happens in one workflow, [`.github/workflows/gradle.yml`](.github/workflows/gradle.yml)
+(shown as **"Java CI with Gradle"** under Actions). It runs on every pull request and every push to `source`.
 
-Checks
-======
+1. **Bake:** `./gradlew bake` renders `src/jbake/` into `build/jbake/` with JBake (JDK 11 in CI). Drafts are
+   rendered too, as `<name>-draft.html`, but only so you can preview them locally.
+2. **Stage:** `build/jbake/` is copied to **`build/site/` without drafts**. `build/site/` is exactly what goes live.
+3. **Check:** every check below runs on `build/site/`, so what's checked is what ships.
+4. **Upload:** `build/site/` is packaged as the GitHub Pages artifact (pushes and manual runs on `source` only).
+5. **Deploy:** a separate `deploy` job publishes the artifact to GitHub Pages (pushes and manual runs on
+   `source` only, never two at once).
+
+**Pull requests stop after step 3:** they build and check but never deploy. Merging to `source` *is* publishing.
+
+| Check | Protects against |
+|---|---|
+| Drafts are not published | Unfinished `*-draft.html` posts going live |
+| Docs are not published | Anything from `docs/` (planning notes) going live |
+| Masthead variants | A header image missing its 960/1440px sizes (phones would get a blank header) |
+| Published URLs still exist (`scripts/check-urls.sh`) | Removing or renaming any page that's live (strict on CI's Linux runner) |
+| Feed and sitemap XML | A broken `feed.xml` or `sitemap.xml` |
+| Local links and assets (lychee) | Broken internal links, or missing images, CSS, JS, or fonts |
+
+**GitHub settings and DNS this depends on:**
+- **Settings → Pages → Build and deployment → Source: "GitHub Actions".**
+- **Custom domain:** `www.mikemcgarr.com`, with **Enforce HTTPS** on (Settings → Pages). The HTTPS certificate is
+  issued by Let's Encrypt and managed by GitHub automatically.
+- **DNS (GoDaddy):** `www` CNAME → `jmcgarr.github.io`. `@` (bare domain) A records → `185.199.108.153`,
+  `185.199.109.153`, `185.199.110.153`, `185.199.111.153`.
+- **No secrets or tokens.** The build job has read-only access, and the deploy job can only deploy to Pages.
+
+**Redeploy or roll back:**
+- **Redeploy:** Actions → Java CI with Gradle → **Run workflow** (branch `source`).
+- **Roll back a bad change:** revert the PR on GitHub and merge the revert. That deploys the previous content.
+  For a faster stopgap, open an older successful run on `source` and **Re-run all jobs**, which rebuilds and
+  redeploys that commit.
+- **Emergency:** Settings → Pages → Source → **"Deploy from a branch: `master`"** serves the last build made
+  before the switch to Actions (Oct 2026). `master` is otherwise retired, so don't push to it.
+
+**Dependency updates:** Dependabot (`.github/dependabot.yml`) opens weekly PRs for the workflow's actions and
+Gradle. Each runs the same build and checks, and never deploys.
+
+**Run the same checks locally:**
 ```
 ./gradlew clean bake
-scripts/check-urls.sh                  # no published URL may disappear
-scripts/check-docs-not-published.sh    # docs/ must never reach the site
+rm -rf build/site && rsync -a --prune-empty-dirs --exclude '*-draft.html' build/jbake/ build/site/
+scripts/check-docs-not-published.sh build/site   # docs/ must never reach the site
+scripts/check-urls.sh build/site                 # no published URL may disappear
+python3 scripts/masthead-variants.py --check     # header images have their phone/tablet sizes
+xmllint --noout build/site/feed.xml build/site/sitemap.xml
 ```
+The link checker (lychee) runs in CI. To run it locally, install [lychee](https://lychee.cli.rs) and see the
+"Check local links and assets" step in the workflow for its options.
 
 More
 ====
