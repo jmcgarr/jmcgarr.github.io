@@ -11,8 +11,8 @@ a promise to the people who linked to it.
 
 - **Generator:** JBake 2.6 through the Gradle plugin `org.jbake.site` (Gradle 5.6.4 wrapper, JDK 1.8 via `.java-version`)
 - **Theme:** Start Bootstrap "Clean Blog" (Bootstrap 4.1, jQuery 3.3, Font Awesome 5) as FreeMarker templates
-- **Branches:** `source` holds the source (the default branch). `master` holds the generated site that GitHub Pages serves.
-- **Deploys:** GitHub Actions bakes and publishes on **every push to `source`**. Merging to `source` *is* publishing.
+- **Branches:** `source` holds the source (the default branch). `master` is the **retired** publishing branch from before T027, frozen and preserved by tag `live-2026-10`. Don't push to it.
+- **Deploys:** GitHub Actions bakes, checks, and deploys to GitHub Pages (as an artifact, no commits) on **every push to `source`**. Merging to `source` *is* publishing. A manual "Run workflow" on `source` redeploys.
 - **Current work:** follows [`docs/00-REVIVAL.md`](docs/00-REVIVAL.md). Read it before starting any task.
 
 ### Layout
@@ -37,8 +37,8 @@ build/jbake/              Generated output (git-ignored)
 ./gradlew clean bakePreview   # build + serve at http://localhost:8080 (drafts at /blog/drafts/<name>-draft.html)
 ```
 
-**Never run `./gradlew gitPublishPush`** and never push to `master`. Publishing happens only through
-CI after a change is merged to `source`.
+**Publishing happens only through CI** after a change is merged to `source`. There's no local publish command.
+What gets deployed is `build/jbake` minus drafts (`*-draft.html`), staged as `build/site` by the workflow.
 
 ---
 

@@ -1,9 +1,6 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
+# Builds the site with JBake, runs the quality gates, and deploys to GitHub Pages (revival task T027).
+# Pull requests run everything except the deploy. Pushes to `source` (and manual runs on `source`) deploy.
+# Pages must be set to Settings → Pages → Build and deployment → Source: "GitHub Actions".
 
 name: Java CI with Gradle
 
@@ -12,15 +9,13 @@ on:
     branches: [ "source" ]
   pull_request:
     branches: [ "source" ]
+  workflow_dispatch:   # "Run workflow" button: redeploy on demand (e.g. re-run an older run to roll back)
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-    # Write access is used only by the publish step, which runs only on a push to source.
-    # Same-repo PRs come from people who can already push; fork PRs always get a read-only token.
     permissions:
-      contents: write   # push the built site to master
+      contents: read
 
     steps:
     - uses: actions/checkout@v4
@@ -30,7 +25,7 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
 
-    # Configure Gradle for optimal use in GiHub Actions, including caching of downloaded dependencies.
+    # Configure Gradle for optimal use in GitHub Actions, including caching of downloaded dependencies.
     # See: https://github.com/gradle/actions/blob/main/setup-gradle/README.md
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
@@ -38,9 +33,26 @@ jobs:
     - name: Bake with Gradle
       run: ./gradlew bake --info --stacktrace
 
+    # Exactly what gets deployed: the bake output minus drafts. JBake always renders status=draft posts
+    # (as <name>-draft.html) for local preview and has no setting to skip them (T009). Every check below
+    # runs on this staged folder, so what's checked is what ships.
+    - name: Stage the site for deployment
+      run: |
+        rm -rf build/site && mkdir -p build/site
+        rsync -a --prune-empty-dirs --exclude '*-draft.html' build/jbake/ build/site/
+        echo "Staged $(find build/site -type f | wc -l) files ($(du -sh build/site | cut -f1))"
+
+    - name: Check drafts are not published
+      run: |
+        drafts="$(find build/site -name '*-draft.html')"
+        if [ -n "$drafts" ]; then
+          echo "FAIL: drafts in the deploy contents:"; echo "$drafts"; exit 1
+        fi
+        echo "OK: no drafts in the deploy contents"
+
     # docs/ holds internal planning docs and must never reach the live site (see AGENTS.md)
     - name: Check docs are not published
-      run: scripts/check-docs-not-published.sh build/jbake
+      run: scripts/check-docs-not-published.sh build/site
 
     # Every header image in use needs its 960/1440px variants (T071), or phones get a blank header
     - name: Check masthead variants
@@ -48,12 +60,12 @@ jobs:
 
     # Quality gates (T031). On Linux check-urls.sh is strict (case-sensitive), so it catches what macOS bakes can't.
     - name: Check published URLs still exist
-      run: scripts/check-urls.sh build/jbake
+      run: scripts/check-urls.sh build/site
 
     - name: Validate feed and sitemap XML
       run: |
         command -v xmllint >/dev/null || { sudo apt-get update -qq && sudo apt-get install -y -qq libxml2-utils; }
-        xmllint --noout build/jbake/feed.xml build/jbake/sitemap.xml && echo "OK: feed.xml and sitemap.xml are well-formed"
+        xmllint --noout build/site/feed.xml build/site/sitemap.xml && echo "OK: feed.xml and sitemap.xml are well-formed"
 
     # Fails on any broken internal link or missing image/CSS/JS/font. Offline: external sites aren't checked
     # (that's T050). '^file://[^/]' skips protocol-relative embeds (//www.youtube.com/...), which offline mode
@@ -64,33 +76,36 @@ jobs:
         lycheeVersion: v0.24.2
         args: >-
           --offline --no-progress
-          --root-dir ${{ github.workspace }}/build/jbake
+          --root-dir ${{ github.workspace }}/build/site
           --exclude '^file://[^/]'
-          'build/jbake/**/*.html'
+          'build/site/**/*.html'
         fail: true
         jobSummary: true
 
-    # Drafts render in build/jbake for local preview; the publish contents must exclude them.
-    # gitPublishCopy assembles exactly what would be pushed to master, without committing or pushing.
-    - name: Check drafts are not published
-      run: |
-        ./gradlew gitPublishCopy
-        drafts="$(find build/gitPublish -name '*-draft.html')"
-        if [ -n "$drafts" ]; then
-          echo "FAIL: drafts in the publish contents:"; echo "$drafts"; exit 1
-        fi
-        echo "OK: no drafts in the publish contents"
+    # Package the staged site for GitHub Pages. Hidden files are left out by default; that's fine because
+    # Actions-based Pages never runs Jekyll, so .nojekyll (T067) is no longer needed.
+    - name: Upload the site for GitHub Pages
+      if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/source'
+      uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+      with:
+        path: build/site
 
-    # Pull requests build and run the checks above, but only a push to source publishes.
-    # The push to master starts the GitHub Pages build by itself.
-    - name: Publish content
-      if: github.event_name == 'push' && github.ref == 'refs/heads/source'
-      env:
-        # The built-in token: created fresh for each run, scoped to this repo, nothing to expire
-        GRGIT_USER: x-access-token
-        GRGIT_PASS: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        # Author the publish commit as the Actions bot (git-publish uses JGit, which reads ~/.gitconfig)
-        git config --global user.name "github-actions[bot]"
-        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        ./gradlew gitPublishPush --info --stacktrace
+  # Only a push (or manual run) on `source` deploys. Pull requests stop after the build job.
+  deploy:
+    needs: build
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/source'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write      # deploy to GitHub Pages
+      id-token: write   # verify the deployment came from this workflow
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    # Never run two deploys at once, and never cancel one that has started
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    steps:
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1

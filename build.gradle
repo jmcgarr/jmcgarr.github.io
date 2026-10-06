@@ -1,24 +1,9 @@
 plugins {
     id 'org.jbake.site' version '5.0.0'
-    id "org.ajoberstar.git-publish" version "1.0.1"
 }
 
 bakePreview {
     port = '8080'
-}
-
-gitPublish {
-  repoUri = 'https://github.com/jmcgarr/jmcgarr.github.io.git'
-  branch = 'master'
-  commitMessage = 'Publishing an update to my website'
-  contents {
-    from (file('build/jbake')) {
-      into '.'
-      // JBake always renders status=draft posts (as <name>-draft.html) and has no setting to
-      // skip them. Keep them in the local preview, but never publish them.
-      exclude '**/*-draft.html'
-    }
-  }
 }
 
 // Based on a nice blog post from LD: http://ldaley.com/post/164424162157/auto-reload-html-asciidoctor-gradle-plugin-output
@@ -59,4 +44,3 @@ task liveEdit {
 }
 
 bakePreview.dependsOn tasks.find{ it.name == 'bake' }
-gitPublishCommit.dependsOn tasks.find{ it.name == 'bake' }

@@ -44,10 +44,9 @@ When it's ready, set `status=published` and move it to `src/jbake/content/blog/`
 To publish
 ==========
 There is no manual publish step. Open a pull request against `source`. When it's merged,
-[GitHub Actions](.github/workflows/gradle.yml) bakes the site, runs the checks, and pushes it to the
-`master` branch, which GitHub Pages serves. Pull requests run the same build and checks but never publish.
-
-Don't run `./gradlew gitPublishPush` locally.
+[GitHub Actions](.github/workflows/gradle.yml) bakes the site, runs the checks, and **deploys it to GitHub Pages**.
+Pull requests run the same build and checks but never deploy. To redeploy (for example, to roll back by
+re-running an older run), use **Actions → Java CI with Gradle → Run workflow** on `source`.
 
 Checks
 ======
