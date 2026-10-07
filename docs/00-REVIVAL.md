@@ -59,8 +59,8 @@ du -sh build/jbake                                    # published site size
 | M4 | Chart the Future       | Decide the platform before investing in polish           | 0    | 2            |
 | M5 | Polished Presentation  | Valid HTML, discoverable, shares well                    | 8    | 9            |
 | M6 | Content Care           | Accurate content; every link and image works             | 3    | 5            |
-| M7 | Writing Flow           | Writing a post is pleasant: scaffold, watch, live reload | 0    | 6            |
-| —  | Backlog                | Unscheduled; not reproduced or waiting on evidence       | 1    | 1            |
+| M7 | Writing Flow           | Writing a post is pleasant: scaffold, watch, live reload | 1    | 9            |
+| —  | Backlog                | Unscheduled; not reproduced or waiting on evidence       | 1    | 2            |
 
 ### Dependencies & Order
 
@@ -69,7 +69,7 @@ du -sh build/jbake                                    # published site size
 - **M2 and M3** don't depend on each other and can run in either order or overlap.
 - **M4 is a decision gate.** It should finish before **M5**, because M5 is template work for the current JBake platform and would be thrown away if the site migrates.
 - **M6** depends only on M0 and can be picked up at any time. It's good work for spare evenings.
-- **M7** comes after M4, because its tasks depend on the platform decision. T061 also needs T008 (M1). It doesn't depend on M5 or M6.
+- **M7** comes after M4, because its tasks depend on the platform decision (made 2026-10-07: stay on JBake). T061 also needs T008 (M1). It doesn't depend on M5 or M6.
 
 ### GitHub Issues
 
@@ -353,6 +353,8 @@ CI is green. Its output is identical to the pre-upgrade build, and deploying nee
 
 ## M4: Chart the Future
 
+> **Status: done 2026-10-07.** The owner accepted [`01-PLATFORM-DECISION.md`](01-PLATFORM-DECISION.md): **stay on JBake** and turn on modern Markdown, with **Roq, then Hugo** as the successor order if a re-evaluation trigger fires. T033 and CHK023 pass. T034 and CHK024 are not applicable. Follow-ups are T094–T097 (M7) and T098 (Backlog).
+
 **Goal**: Decide deliberately whether to stay on JBake or move to a mainstream generator before
 spending effort on template polish.
 
@@ -365,16 +367,18 @@ _None. This milestone is a decision gate._
 
 ### Improvements
 
-- [ ] T033 [IMP] Write a decision record comparing staying on JBake with Hugo, Astro, Eleventy, and **Roq (Quarkus)** (`docs/01-PLATFORM-DECISION.md`). The owner asked to consider Roq (2026-10-06). Its fit assessment, go/no-go criteria, and phased migration plan (T076–T091) are in [`02-ROQ-MIGRATION.md`](02-ROQ-MIGRATION.md). Criteria: support for the existing formats (legacy HTML, AsciiDoc, Markdown, front matter), keeping URLs the same, theme effort, toolchain upkeep, community health, and the writing workflow: new-post scaffolding, watch/rebuild, incremental builds, and live reload (issues #8–#12, M7)
+- [x] T033 [IMP] Write a decision record comparing staying on JBake with Hugo, Astro, Eleventy, and **Roq (Quarkus)** (`docs/01-PLATFORM-DECISION.md`). The owner asked to consider Roq (2026-10-06). Its fit assessment, go/no-go criteria, and phased migration plan (T076–T091) are in [`02-ROQ-MIGRATION.md`](02-ROQ-MIGRATION.md). Criteria: support for the existing formats (legacy HTML, AsciiDoc, Markdown, front matter), keeping URLs the same, theme effort, toolchain upkeep, community health, and the writing workflow: new-post scaffolding, watch/rebuild, incremental builds, and live reload (issues #8–#12, M7)
   - **Test:** The record has Context, Options, Decision, and Consequences sections, and its status is **Accepted**.
   - _2026-10-07 (`docs/T033-platform-decision`): draft written, [`01-PLATFORM-DECISION.md`](01-PLATFORM-DECISION.md). Owner's requirements: **Java first, Go second, no frameworks in dynamic languages (Ruby, JS/TS, Python)**, and good **Markdown** support (he's considering moving off AsciiDoc). It compares JBake, Roq, and Hugo in depth; Eleventy and Astro are excluded by the language rule. **Proposed: stay on JBake and turn on modern Markdown (one tested config line); successor order Roq, then Hugo.** New evidence: the current setup works on Gradle 9.8.0; JBake 2.7.0 runs without the unmaintained plugin via `JavaExec` with identical output; JBake's default Markdown settings mangle tables, footnotes, and line wraps; a missing `summary=` breaks the build with a misleading error. **Tick when the owner accepts** (Status → Accepted)._
+  - _**Accepted by the owner 2026-10-07.** Decision: stay on JBake and turn on modern Markdown; successor order Roq, then Hugo. Follow-up tasks T094–T098 added (M7 and Backlog)._
 - [ ] T034 [IMP] _(Only if migrating. For Roq, this is Phase 1 of [`02-ROQ-MIGRATION.md`](02-ROQ-MIGRATION.md), T076–T081, which also covers tag URLs, feed `<guid>`s, and AsciiDoc fidelity)_ Run a spike: port three representative posts (one HTML, one AsciiDoc, one Markdown) plus the archive page to the chosen platform (separate branch)
   - **Test:** `scripts/check-urls.sh`, run against the spike output, keeps all four URLs. A side-by-side visual check against the live pages looks right.
+  - _**Not applicable (2026-10-07):** the accepted decision is to stay on JBake, so there's no migration spike. If a re-evaluation trigger in [`01-PLATFORM-DECISION.md`](01-PLATFORM-DECISION.md) fires, the Roq spike (T076–T081) runs instead._
 
 ### Checkpoint: M4
 
-- [ ] CHK023 `docs/01-PLATFORM-DECISION.md` exists with status Accepted
-- [ ] CHK024 If migrating: the spike preserves URLs, and M5 has been re-scoped for the new platform (M5 tasks assume JBake/FreeMarker)
+- [x] CHK023 `docs/01-PLATFORM-DECISION.md` exists with status Accepted _(2026-10-07)_
+- [ ] CHK024 If migrating: the spike preserves URLs, and M5 has been re-scoped for the new platform (M5 tasks assume JBake/FreeMarker) **Not applicable 2026-10-07:** staying on JBake, so M5 stands as written.
 
 ---
 
@@ -405,6 +409,7 @@ Accessibility ≥ 95. Social preview validators show a title, description, and i
 - [ ] T056 [P] [BUG] Code snippets have no highlighting and poor styling. Legacy posts mark 12 code blocks with Google code-prettify classes (`prettyprint`, `language-*`, `linenums`), but no template loads prettify, and 28 more are bare `<pre>`. Add self-hosted syntax highlighting that understands those classes (or maps them), and give `pre` and `code` readable styles (monospace, background, `overflow-x: auto`) that work with both `clean-blog.css` and `asciidoctor.css`. Fix the misspelled class `languague-groovy` (a markup fix only, no prose changes) (`src/jbake/templates/footer.ftl`, `src/jbake/assets/css/`, `src/jbake/assets/js/`)
   - **Issue:** Closes #15
   - **Test:** In preview, the code blocks on `blog/improving-my-shell-fu-oh-my-zsh.html` (the example in #15) are monospaced and highlighted, and at 375px width they scroll sideways instead of overflowing the page. A post with bare `<pre>` blocks also looks right. `grep -rl languague src/jbake/content` returns nothing.
+  - _2026-10-07 (M4): with T094, Markdown fenced code renders as `<pre><code class="language-xxx">`, so a client-side highlighter that reads `language-*` classes covers new Markdown posts. Note: JBake has no build-time highlighting for Markdown (Hugo does; see [`01-PLATFORM-DECISION.md`](01-PLATFORM-DECISION.md))._
 
 ### Improvements
 
@@ -494,15 +499,21 @@ tooling ends up in a production bake.
 _Do this after M4. If the site migrates, mainstream generators include most of this (for example
 `hugo server` watches, rebuilds, and live-reloads). In that case, re-scope these tasks to configuring and verifying that._
 
+_**M4 decided 2026-10-07: stay on JBake** ([`01-PLATFORM-DECISION.md`](01-PLATFORM-DECISION.md)), so these tasks are built on JBake. Do **T096** (JBake run directly, without the unmaintained plugin) before T062–T064, because watch and live reload hook into how the bake runs. T094 and T095 can go first: they make the next post, in Markdown, work well._
+
 ### Bugs
 
-_None. The owner filed all of these (#8–#12) as enhancements._
+_The owner filed #8–#12 as enhancements. T095 was found while testing for the M4 decision._
+
+- [ ] T095 [BUG] A post without `summary=` **breaks the whole build**. `index.ftl` prints `${post.summary}` for the newest six posts, so a new post that leaves it out fails with "Failed to render masterindex". The unmaintained Gradle plugin then crashes while logging that error, so it surfaces as a misleading **"Java heap space"** (found 2026-10-07, see [`01-PLATFORM-DECISION.md`](01-PLATFORM-DECISION.md)). Make `summary` optional (`${post.summary!""}`, or omit the `<p class="post-subtitle">` when it's missing) and keep it in the README's new-post template (`src/jbake/templates/index.ftl`)
+  - **Test:** Locally, add a temporary published post with no `summary=` line and run `./gradlew clean bake`: it succeeds, and the home page lists the post without an empty subtitle. Remove the temporary post. With no temporary post, the output is identical to before (`diff -r` against a pre-change bake, ignoring `feed.xml`).
 
 ### Improvements
 
 - [ ] T060 [IMP] Add a Gradle task that starts a new post. It creates `<slug>.asciidoc` with the front matter filled in (`title`, today's `date`, `type=post`, `tags`, `status=draft`, `summary`, then `~~~~~~`), and creates and switches to a `post/<slug>` branch. It must refuse to overwrite an existing file, because that URL may already be published. Create it with `status=draft` in `src/jbake/content/blog/drafts/`. Per T009, drafts render for local preview but are never published (`build.gradle`)
   - **Issue:** Refs #8 (steps 1–3 of the issue)
   - **Test:** `./gradlew newPost -Ptitle="Hello World"` creates `hello-world.asciidoc` with every header field, and `git branch --show-current` prints `post/hello-world`. Running it again fails with "already exists". After `./gradlew bake`, the draft previews at `/blog/drafts/hello-world-draft.html`. It isn't in the archive or feed, and `./gradlew gitPublishCopy` leaves it out of the publish contents.
+  - _2026-10-07 (M4): the owner is considering Markdown for new writing. Support both formats, for example `-Pformat=md|asciidoc`, defaulting to whichever the owner prefers when this is built. Needs T094 for Markdown to render well._
 - [ ] T061 [IMP] Optional follow-up: let the new-post task also commit the file, push the branch, and open a draft `[WIP]` PR with `gh` (steps 4–6 of the issue). This needs T008 first, so the PR's CI run can't publish (`build.gradle`)
   - **Issue:** Closes #8
   - **Test:** `./gradlew newPost -Ptitle="Hello World" -Ppr` leaves a commit on `post/hello-world`, pushes the branch, and opens a draft PR titled `[WIP] Hello World` (`gh pr view --json isDraft` returns `true`). That PR's CI run shows "Publish content" as skipped. Delete the test PR and branch afterwards.
@@ -518,6 +529,13 @@ _None. The owner filed all of these (#8–#12) as enhancements._
 - [ ] T065 [P] [IMP] Show a notification when a rebuild finishes. In watch mode on macOS, show a notification when a rebuild succeeds or fails (for example with `osascript -e 'display notification …'`). Do nothing on other systems and in CI. The issue itself says this may be unnecessary if builds are fast, so decide after T063 (`build.gradle`)
   - **Issue:** Closes #12
   - **Test:** In watch mode on macOS, saving a post shows a "Site rebuilt" notification, and breaking a template shows a failure notification. CI logs show no notification errors. If you decide not to build this, record the decision and T063's numbers here, and close #12 from that PR.
+
+- [ ] T094 [P] [IMP] **Modern Markdown on JBake.** The site has no `markdown.extensions` setting, so JBake's defaults apply (`HARDWRAPS,AUTOLINKS,FENCED_CODE_BLOCKS,DEFINITIONS`). Line breaks inside a paragraph become `<br>`, and tables, task lists, strikethrough, and footnotes render as literal text (tested 2026-10-07). Set the tested line in `jbake.properties`: `markdown.extensions=AUTOLINKS,FENCED_CODE_BLOCKS,DEFINITIONS,TABLES,STRIKETHROUGH,TASKLISTITEMS,FOOTNOTES,SMARTYPANTS`. Including `SMARTYPANTS` (curly quotes, `…`, dashes) is the owner's call, and it's the only thing that changes an existing page: the typography of `relections-and-projections-2019`. Add a Markdown example to the README's new-post section (`src/jbake/jbake.properties`, `README.md`)
+  - **Test:** Locally, add a temporary post with wrapped lines, a table, a task list, `~~strikethrough~~`, a footnote, and a fenced `java` block, then bake. Its HTML has one `<p>` for the wrapped paragraph (no `<br />`), plus `<table>`, `task-list-item`, `<del>`, a `footnotes` block, and `class="language-java"`. Remove the temporary post. `scripts/check-urls.sh` passes, and `diff -r` against a pre-change bake (ignoring `feed.xml`) lists only `blog/relections-and-projections-2019.html` (or nothing without `SMARTYPANTS`), plus `feed.xml`, which carries that post's body.
+- [ ] T096 [IMP] **Run JBake directly and upgrade to 2.7.0.** The Gradle plugin `org.jbake.site` is unmaintained: last release 5.5.0 (2021-05-19), last commit 2022-01-02. Its preview already broke on Gradle 8 (T024), it can't run JBake 2.7.0 (`commons-configuration` class missing), and it hides template errors (T095). Replace it with a `JavaExec` task on `org.jbake:jbake-core:2.7.0` (main class `org.jbake.launcher.Main`, args `src/jbake build/jbake -b`), tested in a scratch clone on 2026-10-07. Keep the commands `./gradlew bake`, `bakePreview`, and `preview`. Also needed: `db.path=cache` (2.7.0 rejects `build/cache`), create the `jffi` extract directory before running, keep the JNA 5.17.0 force, and add an SLF4J binding (`build.gradle`, `src/jbake/jbake.properties`)
+  - **Test:** `./gradlew clean bake` succeeds with no deprecation warnings. Its output has the same file list as a pre-change bake and differs only in the footer's `JBake v2.7.0` and `feed.xml` (compare with the version string normalized). All CI gates pass on the PR. `./gradlew clean bakePreview` still serves drafts at `/blog/drafts/<name>-draft.html`. A template error (temporarily break `index.ftl`) is reported with FreeMarker's message, not "Java heap space".
+- [ ] T097 [IMP] **Gradle 9.** Upgrade the wrapper from 8.14.5 to the current 9.x. The current setup was tested on 9.8.0 on 2026-10-07 (identical output); retest after T096. Dependabot ignores Gradle majors on purpose, so this is a deliberate step (`gradle/wrapper/`, `gradlew`, `gradlew.bat`)
+  - **Test:** `./gradlew clean bake --warning-mode all` reports 0 deprecations, and the output is identical to the 8.14.5 build except `feed.xml`. CI on the PR is green, and `./gradlew bakePreview` still works.
 
 ### Checkpoint: M7
 
@@ -541,6 +559,8 @@ Pick items up when there's new evidence or a milestone touches the same files.
 
 ### Improvements
 
+- [ ] T098 [IMP] **Yearly platform check** (next: 2027-10). Review the re-evaluation triggers in [`01-PLATFORM-DECISION.md`](01-PLATFORM-DECISION.md#decision): JBake/`JavaExec` still builds on the newest Java LTS and Gradle major, no unfixed security issues in OrientDB, AsciidoctorJ, or flexmark, whether M7's live reload is good enough, and Roq's maturity. If a trigger fires, start the Roq spike (T076–T081), then Hugo if Roq fails the criteria.
+  - **Test:** a dated note under this task records each trigger as fired or not, with evidence (versions tested, links). If one fired, a new decision doc supersedes `01` (Status: Superseded by NN).
 - [ ] T075 [IMP] Lazy-load in-post images, so they don't compete with the header image (LCP) for bandwidth on slow connections. On `three-horizons-part1` (live 2026-10-06), the header's LCP has a 1.8 s load delay plus 1.8 s load time while a 308 KB diagram downloads alongside it. That page scores 81 against 93–96 elsewhere. Fix: in `post.ftl`, render `${content.body?replace("<img ", "<img loading=\"lazy\" decoding=\"async\" ")}`. In-post images are always below the full-width header, so they can never be the LCP. It covers AsciiDoc, Markdown, and legacy HTML posts, and doesn't affect the feed (`feed.ftl` uses `post.body` directly). Proposed while pushing M2 to 90; deferred when the owner closed M2 (`src/jbake/templates/post.ftl`)
   - **Test:** every `<img>` inside post bodies has `loading="lazy"`, and none outside them do. Lighthouse mobile (live, median of 5) on `three-horizons-part1` is ≥ 90, and the header no longer waits on the diagram.
 

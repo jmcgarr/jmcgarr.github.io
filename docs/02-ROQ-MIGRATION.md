@@ -1,6 +1,6 @@
 # Option: Migrate from JBake to Roq (Quarkus)
 
-**Branch**: `docs/roq-migration-plan` | **Created**: 2026-10-06 | **Status**: Draft (option under consideration, not scheduled)
+**Branch**: `docs/roq-migration-plan` | **Created**: 2026-10-06 | **Status**: Draft (not scheduled: the first successor if a trigger in [01-PLATFORM-DECISION.md](01-PLATFORM-DECISION.md) fires, Accepted 2026-10-07)
 
 This is a plan for **possibly** replacing JBake with [Roq](https://iamroq.dev), the Quarkus static site
 generator. The owner isn't ready to switch. This doc lets the M4 platform decision

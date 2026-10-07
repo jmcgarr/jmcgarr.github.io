@@ -1,6 +1,6 @@
 # Platform Decision: Stay on JBake or Migrate
 
-**Branch**: `docs/T033-platform-decision` | **Created**: 2026-10-07 | **Status**: Draft (proposed decision below, awaiting the owner)
+**Branch**: `docs/T033-platform-decision` | **Created**: 2026-10-07 | **Status**: Accepted (2026-10-07)
 
 Revival task T033 (M4).
 - **Compared in depth:** staying on **JBake**, moving to **Roq** (Java), or moving to **Hugo** (Go).
@@ -250,10 +250,8 @@ Both were assessed, and both fail requirement 1 (JavaScript/TypeScript on Node).
 
 ## Decision
 
-> **Proposed (awaiting the owner): A. Stay on JBake now, and turn on modern Markdown.**
+> **Accepted by the owner on 2026-10-07: A. Stay on JBake now, and turn on modern Markdown.**
 > **Successor order if a trigger fires: Roq (Java) first, then Hugo (Go).**
->
-> If it's accepted, set **Status: Accepted** and tick T033 and CHK023.
 
 **Why:**
 
@@ -292,25 +290,26 @@ the [decision criteria](02-ROQ-MIGRATION.md#decision-criteria-go--no-go-after-th
 - **M4 closes without a spike.** T034 and CHK024 don't apply. Mark them "not applicable: staying on JBake".
 - **M5 (polish) proceeds on JBake and FreeMarker** as written. Keeping template changes small and CSS-first
   limits rework if a migration happens later.
-- **Proposed follow-up tasks, to add to the plan when this is accepted:**
-  - **[IMP] Modern Markdown on JBake** (`src/jbake/jbake.properties`, `README.md`):
+- **Follow-up tasks, added to [the plan](00-REVIVAL.md) on 2026-10-07:**
+  - **T094 [IMP] Modern Markdown on JBake** (`src/jbake/jbake.properties`, `README.md`):
     - set the tested `markdown.extensions` line (with or without `SMARTYPANTS`, the owner's call)
     - add a Markdown example to the README's new-post section
     - **Test:** a fixture post with wrapped lines, a table, a task list, a footnote, and fenced code renders
       correctly; `check-urls.sh` passes; no other page changes
-  - **[BUG] A missing `summary=` breaks the build with a misleading "Java heap space"** (`index.ftl`): make it
+  - **T095 [BUG] A missing `summary=` breaks the build with a misleading "Java heap space"** (`index.ftl`): make it
     optional (`${post.summary!""}`) or fail with a clear message.
-  - **[IMP] Replace the unmaintained Gradle plugin** with the tested `JavaExec` task, and upgrade to **JBake 2.7.0**:
+  - **T096 [IMP] Replace the unmaintained Gradle plugin** with the tested `JavaExec` task, and upgrade to **JBake 2.7.0**:
     - `db.path` change
     - keep `bake` and `bakePreview` as commands
     - this also fixes the misleading error above
     - prove identical output and passing gates
-  - **[IMP] Gradle 9** wrapper upgrade (tested compatible on 2026-10-07).
-  - **M7 live reload on JBake:** continuous build plus automatic browser refresh. This narrows the alternatives'
+  - **T097 [IMP] Gradle 9** wrapper upgrade (tested compatible on 2026-10-07).
+  - **M7 live reload on JBake** (existing T062 and T064): continuous build plus automatic browser refresh. This narrows the alternatives'
     biggest advantage.
-  - **Issue #15** (code snippet look): add a client-side highlighter for fenced code.
+  - **Issue #15** (code snippet look, existing T056): add a client-side highlighter for fenced code.
 - **AsciiDoc stays supported.** Moving new writing to Markdown is the owner's choice per post, with no
   conversion needed on JBake. Converting old AsciiDoc posts is only needed if Hugo is ever chosen.
+- **T098 (Backlog):** a yearly check of the re-evaluation triggers, next due 2027-10.
 - [02-ROQ-MIGRATION.md](02-ROQ-MIGRATION.md) stays the ready plan for the first successor. A Hugo plan would be
   written only if Roq's spike fails.
 - **What we accept:**
