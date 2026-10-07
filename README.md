@@ -44,25 +44,25 @@ When it's ready, set `status=published` and move it to `src/jbake/content/blog/`
 
 To publish
 ==========
-There is no manual publish step. Open a pull request against `source`. When it's merged,
+There is no manual publish step. Open a pull request against `main`. When it's merged,
 [GitHub Actions](.github/workflows/gradle.yml) bakes the site, runs the checks, and **deploys it to GitHub Pages**.
 Pull requests run the same build and checks but never deploy. To redeploy (for example, to roll back by
-re-running an older run), use **Actions → Java CI with Gradle → Run workflow** on `source`.
+re-running an older run), use **Actions → Java CI with Gradle → Run workflow** on `main`.
 
 How the site is built and deployed
 ==================================
 Everything happens in one workflow, [`.github/workflows/gradle.yml`](.github/workflows/gradle.yml)
-(shown as **"Java CI with Gradle"** under Actions). It runs on every pull request and every push to `source`.
+(shown as **"Java CI with Gradle"** under Actions). It runs on every pull request and every push to `main`.
 
 1. **Bake:** `./gradlew bake` renders `src/jbake/` into `build/jbake/` with JBake (JDK 21). Drafts are
    rendered too, as `<name>-draft.html`, but only so you can preview them locally.
 2. **Stage:** `build/jbake/` is copied to **`build/site/` without drafts**. `build/site/` is exactly what goes live.
 3. **Check:** every check below runs on `build/site/`, so what's checked is what ships.
-4. **Upload:** `build/site/` is packaged as the GitHub Pages artifact (pushes and manual runs on `source` only).
+4. **Upload:** `build/site/` is packaged as the GitHub Pages artifact (pushes and manual runs on `main` only).
 5. **Deploy:** a separate `deploy` job publishes the artifact to GitHub Pages (pushes and manual runs on
-   `source` only, never two at once).
+   `main` only, never two at once).
 
-**Pull requests stop after step 3:** they build and check but never deploy. Merging to `source` *is* publishing.
+**Pull requests stop after step 3:** they build and check but never deploy. Merging to `main` *is* publishing.
 
 | Check | Protects against |
 |---|---|
@@ -82,9 +82,9 @@ Everything happens in one workflow, [`.github/workflows/gradle.yml`](.github/wor
 - **No secrets or tokens.** The build job has read-only access, and the deploy job can only deploy to Pages.
 
 **Redeploy or roll back:**
-- **Redeploy:** Actions → Java CI with Gradle → **Run workflow** (branch `source`).
+- **Redeploy:** Actions → Java CI with Gradle → **Run workflow** (branch `main`).
 - **Roll back a bad change:** revert the PR on GitHub and merge the revert. That deploys the previous content.
-  For a faster stopgap, open an older successful run on `source` and **Re-run all jobs**, which rebuilds and
+  For a faster stopgap, open an older successful run on `main` and **Re-run all jobs**, which rebuilds and
   redeploys that commit.
 - **Emergency:** Settings → Pages → Source → **"Deploy from a branch: `master`"** serves the last build made
   before the switch to Actions (Oct 2026). `master` is otherwise retired, so don't push to it.
