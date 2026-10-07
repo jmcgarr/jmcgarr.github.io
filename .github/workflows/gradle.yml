@@ -1,5 +1,6 @@
 # Builds the site with JBake, runs the quality gates, and deploys to GitHub Pages (revival task T027).
-# Pull requests run everything except the deploy. Pushes to `main` (and manual runs on `main`) deploy.
+# Pull requests run everything except the deploy. Pushes to `main` (and manual runs on `main`) deploy,
+# then smoke-test the live site.
 # Pages must be set to Settings → Pages → Build and deployment → Source: "GitHub Actions".
 
 name: Java CI with Gradle
@@ -100,6 +101,8 @@ jobs:
     permissions:
       pages: write      # deploy to GitHub Pages
       id-token: write   # verify the deployment came from this workflow
+    outputs:
+      page_url: ${{ steps.deployment.outputs.page_url }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -111,3 +114,18 @@ jobs:
     - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+
+  # Post-deploy smoke test (T092): fetches known URLs from the live site and fails the run if any isn't as
+  # expected (pages and assets 200, a draft and docs/ 404). The gates above check build/site before upload;
+  # this catches anything lost after it, like the hidden-file drop fixed in #47. Retries allow for the CDN.
+  smoke-test:
+    needs: deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+    - uses: actions/checkout@v7
+      with:
+        sparse-checkout: scripts
+    - name: Check the live site
+      run: scripts/smoke-test.sh "${{ needs.deploy.outputs.page_url }}"
