@@ -2,8 +2,30 @@ plugins {
     id 'org.jbake.site' version '5.5.0'
 }
 
-bakePreview {
-    port = '8080'
+// Under Gradle 8, JRuby (inside AsciidoctorJ, used by the bake) extracts its native jffi library into the
+// project root (jffi*.dylib). Point the extraction at build/tmp instead, which `clean` removes.
+def jffiDir = layout.buildDirectory.dir('tmp/jffi').get().asFile
+jffiDir.mkdirs()
+System.setProperty('jffi.extract.dir', jffiDir.absolutePath)
+
+// Local preview (T024). The JBake plugin's own bakePreview sets its task's logging level, which Gradle 8
+// made read-only ("Cannot set readonly property: level"), and 5.5.0 is the plugin's last release. So
+// preview serves build/jbake with the JDK's built-in static server (jwebserver, JDK 18+) instead, at
+// http://localhost:8080 (drafts included, as before). As an Exec task, Ctrl+C stops the server cleanly.
+tasks.register('preview', Exec) {
+    group = 'documentation'
+    description = 'Bakes the site and serves build/jbake at http://localhost:8080 (Ctrl+C to stop).'
+    dependsOn 'bake'
+    commandLine "${System.getProperty('java.home')}/bin/jwebserver",
+            '--directory', file('build/jbake').absolutePath,
+            '--port', '8080',
+            '--bind-address', '127.0.0.1'
+}
+
+// Keep the familiar command: `./gradlew bakePreview` now runs the preview task above.
+tasks.named('bakePreview') {
+    actions.clear()
+    dependsOn 'preview'
 }
 
 // Based on a nice blog post from LD: http://ldaley.com/post/164424162157/auto-reload-html-asciidoctor-gradle-plugin-output
@@ -43,7 +65,6 @@ task liveEdit {
     }
 }
 
-bakePreview.dependsOn tasks.find{ it.name == 'bake' }
 
 // JBake 2.6.x (via org.jbake.site 5.5.0) pulls in JNA 4.5.0, whose native library has no Apple Silicon
 // (arm64) build, so the bake fails on M-series Macs. JNA 5.x is API-compatible and ships every platform.

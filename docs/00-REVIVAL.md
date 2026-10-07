@@ -290,14 +290,16 @@ CI is green. Its output is identical to the pre-upgrade build, and deploying nee
 
 ### Bugs
 
-- [ ] T023 [BUG] Make local and CI use the same JDK. Today `.java-version` is `1.8` and CI uses `11`. After T024/T025, standardize on JDK 21 (LTS) (`.java-version`, `.github/workflows/gradle.yml`)
+- [x] T023 [BUG] Make local and CI use the same JDK. Today `.java-version` is `1.8` and CI uses `11`. After T024/T025, standardize on JDK 21 (LTS) (`.java-version`, `.github/workflows/gradle.yml`)
   - **Issue:** Refs #3
   - **Test:** In the repo, `java -version` reports 21. The workflow has `java-version: '21'`. The bake succeeds locally and in CI.
+  - _Done 2026-10-06 with T024: `.java-version` is `21.0` (jenv → Temurin 21.0.3), the workflow uses `java-version: '21'`, and README/AGENTS say JDK 21. **Fresh clone on Apple Silicon (arm64)** with that JDK: `./gradlew clean bake` exit 0 on Gradle 8.14.5, 0 deprecations, 0 `sun.misc.VM`. CI on JDK 21 is verified by this PR's run._
 
 ### Improvements
 
-- [ ] T024 [IMP] Upgrade the Gradle wrapper from 5.6.4 to the latest 8.x, going through 6.9 and 7.6 and fixing deprecations at each step (`gradle/wrapper/gradle-wrapper.properties`, `build.gradle`)
+- [x] T024 [IMP] Upgrade the Gradle wrapper from 5.6.4 to the latest 8.x, going through 6.9 and 7.6 and fixing deprecations at each step (`gradle/wrapper/gradle-wrapper.properties`, `build.gradle`)
   - **Test:** `./gradlew --version` reports 8.x. `./gradlew clean bake --warning-mode all` has no deprecation warnings. **Output-equivalence check:** before upgrading, copy a clean bake to `/tmp/bake-before`. After upgrading, `diff -r /tmp/bake-before build/jbake` is empty, or every difference is explained.
+  - _Done 2026-10-06 (`chore/T024-T023-gradle-8-jdk-21`). Wrapper **5.6.4 → 6.9.4 (JDK 1.8) → 7.6.6 (JDK 11) → 8.14.5 (JDK 21)**. At every step `clean bake --warning-mode all` reported **0 deprecation warnings**, and the output was **identical** to a pre-upgrade baseline (Gradle 5.6.4 / JDK 1.8) apart from the feed timestamp. **Two Gradle 8 issues found and fixed:** (1) the plugin's `bakePreview` fails ("Cannot set readonly property: level"; plugin 5.5.0 is its last release). It's replaced by a `preview` Exec task serving `build/jbake` with the JDK's built-in `jwebserver` on `127.0.0.1:8080`, and `bakePreview` now runs it, so the command is unchanged. Tested: pages, drafts, a tag with a space, CSS, fonts, images, and the feed all 200. Ctrl+C frees the port with no leftover process. About page fonts are pixel-identical to the old preview, apart from the photo T074 re-encoded. (2) JRuby (in AsciidoctorJ) extracted `jffi*.dylib` into the project root. `jffi.extract.dir` now points at `build/tmp/jffi`, plus `.gitignore` entries. Verified with a fresh daemon. Dependabot ignores Gradle majors, so 9.x stays a deliberate future step._
 - [x] T025 [IMP] Upgrade `org.jbake.site` from 5.0.0 to the latest 5.x, along with its bundled JBake version (`build.gradle`)
   - **Issue:** Closes #3. JBake 2.6.x's OrientDB calls `sun.misc.VM`, which doesn't exist after JDK 8. Reproduced 2026-10-04: a bake on JDK 11 (Corretto 11.0.23, the version CI uses) succeeds but logs `ClassNotFoundException: sun.misc.VM` stack traces. JDK 1.8 logs none. CI shows it too: 6 occurrences in PR #18's Temurin 11 bake.
   - **Test:** The same output-equivalence `diff -r` as T024. Tags, archive, feed, and sitemap are all present. On JDK 11, `./gradlew clean bake --info 2>&1 | grep -c 'sun.misc.VM'` returns `0` (JDK 21 needs Gradle ≥ 8.5, so that check moves to T024).
@@ -332,13 +334,13 @@ CI is green. Its output is identical to the pre-upgrade build, and deploying nee
 
 ### Checkpoint: M3
 
-- [ ] CHK017 Fresh clone + JDK 21 on Apple Silicon: `./gradlew clean bake` succeeds with no deprecation warnings
-- [ ] CHK018 The rendered output matches the pre-upgrade build (or every difference has been reviewed)
+- [x] CHK017 Fresh clone + JDK 21 on Apple Silicon: `./gradlew clean bake` succeeds with no deprecation warnings _(2026-10-06: fresh clone, arm64, Temurin 21.0.3, Gradle 8.14.5: exit 0, 0 deprecations)_
+- [x] CHK018 The rendered output matches the pre-upgrade build (or every difference has been reviewed) _(2026-10-06: Gradle 8.14.5/JDK 21 vs 5.6.4/JDK 1.8: identical except the feed timestamp. Plugin 5.0→5.5 differed only by the footer's JBake version, see T025.)_
 - [x] CHK019 Push to `source` deploys through GitHub Pages Actions. PRs run the quality gates and never deploy _(2026-10-06: since #44; every push run deploys, and PR runs skip upload/deploy)_
 - [x] CHK020 No PAT-based secrets remain _(2026-10-05: `GRGIT_*` deleted, expired token deleted. Deploys use OIDC `id-token` + `pages: write`)_
 - [x] CHK021 The docs guard still passes against the Pages artifact _(2026-10-06: the guard runs on `build/site`, which is exactly the uploaded artifact since #47 added `include-hidden-files`. Live `docs/00-REVIVAL.md` returns 404)_
 - [x] CHK022 Only active branches remain, and old ones are preserved as `archive/*` tags _(2026-10-06: remote = `source`, `master` (kept for rollback), and the branches of open PRs #5, #17, #49. 6 `archive/*` tags.)_
-- [ ] CHK037 Issue #3 is closed by the merged T025 PR, and bakes on JDK 11/21 log no `sun.misc.VM` errors _(2026-10-06: **#3 closed** by PR #48, and JDK 11 logs 0 errors in CI and locally. JDK 21 waits on Gradle ≥ 8.5 (T024).)_
+- [x] CHK037 Issue #3 is closed by the merged T025 PR, and bakes on JDK 11/21 log no `sun.misc.VM` errors _(2026-10-06: **#3 closed** by PR #48, and JDK 11 logs 0 errors in CI and locally. JDK 21 on Gradle 8.14.5 also logs 0 (T024).)_
 
 ---
 

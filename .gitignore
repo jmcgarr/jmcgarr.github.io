@@ -7,3 +7,8 @@ build/
 .gradletasknamecache
 .idea/
 output/
+
+# Native libraries JRuby/jffi may extract during a bake (should land in build/tmp/jffi)
+jffi*.dylib
+jffi*.so
+jffi*.dll
