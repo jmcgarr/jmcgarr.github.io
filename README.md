@@ -61,6 +61,10 @@ Everything happens in one workflow, [`.github/workflows/gradle.yml`](.github/wor
 4. **Upload:** `build/site/` is packaged as the GitHub Pages artifact (pushes and manual runs on `main` only).
 5. **Deploy:** a separate `deploy` job publishes the artifact to GitHub Pages (pushes and manual runs on
    `main` only, never two at once).
+6. **Smoke test:** after a deploy, `scripts/smoke-test.sh` fetches a few known live URLs (home, a post, tag pages
+   including `tags/.NET.html`, feed, sitemap, an image, a font) and expects 200, plus 404 for a draft and `docs/`.
+   It retries for a few minutes to allow for the CDN. If it fails, the run goes red **after** the site is live:
+   check the listed URLs, then fix forward or roll back (below). Run it yourself any time: `scripts/smoke-test.sh`.
 
 **Pull requests stop after step 3:** they build and check but never deploy. Merging to `main` *is* publishing.
 
