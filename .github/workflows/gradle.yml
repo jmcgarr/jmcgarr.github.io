@@ -1,15 +1,14 @@
 # Builds the site with JBake, runs the quality gates, and deploys to GitHub Pages (revival task T027).
 # Pull requests run everything except the deploy. Pushes to `main` (and manual runs on `main`) deploy.
-# "source" is listed only for the rename transition (T093); remove it once `main` exists.
 # Pages must be set to Settings → Pages → Build and deployment → Source: "GitHub Actions".
 
 name: Java CI with Gradle
 
 on:
   push:
-    branches: [ "main", "source" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "main", "source" ]
+    branches: [ "main" ]
   workflow_dispatch:   # "Run workflow" button: redeploy on demand (e.g. re-run an older run to roll back)
 
 jobs:
