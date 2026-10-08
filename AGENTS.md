@@ -35,6 +35,7 @@ build/jbake/              Generated output (git-ignored)
 ```sh
 ./gradlew clean bake          # build the site into build/jbake
 ./gradlew clean bakePreview   # build + serve at http://localhost:8080 (drafts at /blog/drafts/<name>-draft.html)
+./gradlew newPost -Ptitle="My Post"   # start a draft on a new post/<slug> branch (see README)
 ```
 
 **Publishing happens only through CI** after a change is merged to `main`. There's no local publish command.

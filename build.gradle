@@ -65,6 +65,21 @@ tasks.register('bakePreview') {
     dependsOn 'preview'
 }
 
+// Starts a new draft post on its own post/<slug> branch (T060, issue #8). The logic is scripts/NewPost.java,
+// a single-file Java program, so it can also run without Gradle: java scripts/NewPost.java --title="My Post".
+//   ./gradlew newPost -Ptitle="My Post Title" [-Ptags="a, b"] [-Psummary="..."] [-Pformat=md|asciidoc]
+//                     [-Pslug=my-post] [-Pbranch=false]
+tasks.register('newPost', Exec) {
+    group = 'writing'
+    description = 'Starts a draft post on a new post/<slug> branch: ./gradlew newPost -Ptitle="My Post Title"'
+    executable = "${System.getProperty('java.home')}/bin/java"
+    def options = ['title', 'tags', 'summary', 'format', 'slug', 'branch']
+    argumentProviders.add({
+        ['scripts/NewPost.java'] + options.findAll { providers.gradleProperty(it).isPresent() }
+                .collect { "--${it}=${providers.gradleProperty(it).get()}".toString() }
+    } as CommandLineArgumentProvider)
+}
+
 // Based on a nice blog post from LD: http://ldaley.com/post/164424162157/auto-reload-html-asciidoctor-gradle-plugin-output
 task liveEdit {
     if (System.getProperty("os.name").toLowerCase().contains("mac")) {
