@@ -12,3 +12,6 @@ output/
 jffi*.dylib
 jffi*.so
 jffi*.dll
+
+# Heap dumps the Gradle daemon writes when it runs out of memory (T099)
+*.hprof

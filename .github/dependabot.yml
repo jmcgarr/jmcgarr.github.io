@@ -14,8 +14,8 @@ updates:
     commit-message:
       prefix: "chore(actions)"
 
-  # Gradle plugins and the wrapper. Major upgrades of JBake/Gradle are planned work (T024/T025,
-  # or replaced by a migration, see docs/02-ROQ-MIGRATION.md), so only minor/patch updates come here.
+  # Gradle dependencies (JBake and its engines, T096) and the wrapper. Major upgrades of JBake/Gradle are
+  # planned work (see docs/01-PLATFORM-DECISION.md), so only minor/patch updates come here.
   - package-ecosystem: gradle
     directory: /
     schedule:

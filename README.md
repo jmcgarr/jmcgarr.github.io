@@ -15,7 +15,11 @@ To preview
 ./gradlew clean bakePreview
 ```
 Then open http://localhost:8080. Stop it with `Ctrl+C`. (`./gradlew preview` does the same. It serves the baked
-site with the JDK's built-in `jwebserver`, because the JBake plugin's own preview server doesn't work on Gradle 8.)
+site with the JDK's built-in `jwebserver`.) One known gap: `jwebserver` refuses paths with a dot-file, so
+`/tags/.NET.html` is a 404 in the preview only. The live site serves it (T100).
+
+`./gradlew bake` runs JBake 2.7 directly in its own JVM (`build.gradle`). If a template or post has an error, the
+build fails and prints JBake's message with the file and line.
 
 Drafts (posts with `status=draft`) are rendered for preview only, at
 `http://localhost:8080/blog/drafts/<name>-draft.html`. They are never published.
