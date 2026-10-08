@@ -10,7 +10,7 @@
     <title><#if (content.title)??><#escape x as x?xml>${content.title}</#escape><#else>Mike McGarr</#if></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Personal website of Mike McGarr - Passionate engineering leader and manager.">
-    <meta name="author" content="https://twitter.com/SonOfGarr">
+    <meta name="author" content="Mike McGarr">
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
 

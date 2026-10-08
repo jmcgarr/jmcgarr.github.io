@@ -2,7 +2,7 @@ title=Talks
 date=2014-09-01
 type=page
 status=published
-masthead=../qcon_crowd.jpg
+masthead=/img/qcon_crowd.jpg
 ~~~~~~
 
 == Cultures, Microcultures and Finding your Way (2019)

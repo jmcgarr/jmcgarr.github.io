@@ -1,6 +1,5 @@
 		</div>
 		<div id="push"></div>
-    </div>
 
 		<!-- Footer -->
     <footer>
@@ -34,7 +33,7 @@
               </li>
             </ul>
 						<p class="copyright text-muted">All posts on this blog are published with a <em>Creative Commons by-nc-sa</em> license.<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a></p>
-            <p class="copyright text-muted">Copyright &copy; Mike McGarr 2009-2018 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v4.1</a> | Generated with <a href="http://jbake.org">JBake ${version}</a></p>
+            <p class="copyright text-muted">Copyright &copy; Mike McGarr 2009-${published_date?string("yyyy")} | Mixed with <a href="http://getbootstrap.com/">Bootstrap</a> | Generated with <a href="http://jbake.org">JBake ${version}</a></p>
           </div>
         </div>
       </div>

@@ -22,14 +22,13 @@
         <#assign mastheadCredit = "https://flic.kr/p/hADZKt">
       </#if>
 
-<!--  TODO fix this -->
-      <#assign mastheadURL = "/img/masthead/${masthead}">
-
-      <!--#if masthead.starts_with("http")-->
-        <!--#assign mastheadURL = masthead-->
-      <!--#else-->
-        <!--#assign mastheadURL = "/img/masthead/${masthead}"-->
-      <!--/#if-->
+      <#-- masthead= can be a full URL (a remote image, used as-is), a site path starting with "/" (any
+           image under src/jbake/assets), or a file name in /img/masthead/ (T037) -->
+      <#if masthead?starts_with("http") || masthead?starts_with("/")>
+        <#assign mastheadURL = masthead>
+      <#else>
+        <#assign mastheadURL = "/img/masthead/${masthead}">
+      </#if>
 
       <#-- Responsive header image (T071): phones get the 960px variant, tablets and small laptops 1440px,
            larger screens the full image. Variants come from scripts/masthead-variants.py. The CSS
@@ -53,7 +52,7 @@
             <div class="col-lg-8 col-md-10 mx-auto">
               <div class="page-heading">
                 <h1>${pageTitle}</h1>
-                <#if pageSubtitle??>
+                <#if pageSubtitle?has_content>
                   <span class="subheading">${pageSubtitle}</span>
                 </#if>
                 <#if content.type == "post" && content.date??>

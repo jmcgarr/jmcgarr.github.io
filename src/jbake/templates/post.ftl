@@ -4,10 +4,12 @@
 	<#include "masthead.ftl">
 
 		<div class="container">
+      <div class="row">
 
         <div class="col-lg-8 col-md-10 mx-auto">
 
-        	<p>${content.body}</p>
+        	<#-- The post body is block-level HTML, so it can't sit inside a <p> (T035) -->
+        	<article>${content.body}</article>
 
           <#-- Plain share links: no third-party scripts, nothing loads until a reader clicks -->
           <#assign shareUrl = "${config.site_host}/${content.uri}">
@@ -45,6 +47,7 @@
           </script>
           <noscript>Comments are powered by <a href="https://giscus.app">giscus</a> and need JavaScript.</noscript>
         </div>
+      </div>
     </div>
 
 <#include "footer.ftl">
