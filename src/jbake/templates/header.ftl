@@ -32,6 +32,9 @@
     <!-- previous styles -->
     <link href="/css/asciidoctor.css" rel="stylesheet">
     <link href="/css/extra.css" rel="stylesheet">
+<#-- Code block styles, only on pages with code (T056) -->
+<#include "code-highlight.ftl">
+<@codeHighlightCss/>
 
     <link rel="shortcut icon" href="/favicon.ico">
   </head>
