@@ -16,10 +16,10 @@ configurations {
 
 dependencies {
     jbake 'org.jbake:jbake-core:2.7.0'
-    // jbake-core marks its engines and CLI parser as optional, so add the ones this site uses, at the versions
-    // jbake-core 2.7.0 was built and tested with.
+    // jbake-core marks its engines and CLI parser as optional, so add the ones this site uses. Dependabot keeps
+    // them current (minor/patch); check each update by comparing a bake against main.
     jbake 'org.freemarker:freemarker:2.3.35'                         // templates (*.ftl)
-    jbake 'org.asciidoctor:asciidoctorj:2.5.13'                       // *.asciidoc
+    jbake 'org.asciidoctor:asciidoctorj:2.5.13'                      // *.asciidoc
     jbake 'com.vladsch.flexmark:flexmark:0.64.8'                     // *.md
     jbake 'com.vladsch.flexmark:flexmark-profile-pegdown:0.64.8'     // markdown.extensions in jbake.properties
     jbake 'info.picocli:picocli:4.7.7'                               // JBake's command-line launcher
