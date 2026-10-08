@@ -26,8 +26,19 @@ Drafts (posts with `status=draft`) are rendered for preview only, at
 
 To write a post
 ===============
-Create `src/jbake/content/blog/drafts/<slug>.md` (Markdown) or `<slug>.asciidoc` (AsciiDoc), starting with a
-header like this. It's JBake's `key=value` format ending in `~~~~~~`, not YAML front matter:
+Start a draft with one command, from a clean working tree:
+```
+./gradlew newPost -Ptitle="My Post Title" -Ptags="management, leadership" -Psummary="A short teaser."
+```
+It creates `src/jbake/content/blog/drafts/my-post-title.md` with the header below filled in (`status=draft`,
+today's date) and switches to a new branch `post/my-post-title` made from `main`. Options: `-Pformat=asciidoc`
+for AsciiDoc, `-Pslug=...` to choose the URL slug yourself, and `-Pbranch=false` to stay on the current branch.
+It refuses a slug that's already a draft, a post, or a published URL, and warns when a tag differs only by
+capitalization from an existing one (that would make a second tag page).
+
+To create one by hand instead, make `src/jbake/content/blog/drafts/<slug>.md` (Markdown) or `<slug>.asciidoc`
+(AsciiDoc), starting with a header like this. It's JBake's `key=value` format ending in `~~~~~~`, not YAML front
+matter:
 
 ```
 title=My Post Title
