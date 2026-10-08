@@ -9,7 +9,7 @@ published since 2009. Other sites, search engines, RSS readers, and slide decks 
 links pointing at it. **Treat it as a live publication, not a code project.** Every published URL is
 a promise to the people who linked to it.
 
-- **Generator:** JBake 2.7, run directly by a Gradle `JavaExec` task in `build.gradle` (no JBake plugin, T096). Gradle 8.14 wrapper, JDK 21 via `.java-version`
+- **Generator:** JBake 2.7, run directly by a Gradle `JavaExec` task in `build.gradle` (no JBake plugin, T096). Gradle 9.8 wrapper (T097), JDK 21 via `.java-version`
 - **Theme:** Start Bootstrap "Clean Blog" (Bootstrap 4.1, jQuery 3.3, Font Awesome 5) as FreeMarker templates
 - **Branches:** `main` holds the source (the default branch; renamed from `source` in T093). `master` is the **retired** publishing branch from before T027, frozen and preserved by tag `live-2026-10`. Don't push to it.
 - **Deploys:** GitHub Actions bakes, checks, and deploys to GitHub Pages (as an artifact, no commits) on **every push to `main`**. Merging to `main` *is* publishing. A manual "Run workflow" on `main` redeploys.
