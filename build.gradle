@@ -12,6 +12,9 @@ repositories {
 
 configurations {
     jbake
+    // The preview also needs JBake's optional web server and file watcher (T062, T100). They live in their own
+    // configuration so the production bake's classpath stays exactly as it was.
+    jbakePreview { extendsFrom jbake }
 }
 
 dependencies {
@@ -23,45 +26,57 @@ dependencies {
     jbake 'com.vladsch.flexmark:flexmark:0.64.8'                     // *.md
     jbake 'com.vladsch.flexmark:flexmark-profile-pegdown:0.64.8'     // markdown.extensions in jbake.properties
     jbake 'info.picocli:picocli:4.7.7'                               // JBake's command-line launcher
+    // Preview only (`jbake -b -s`, T062/T100). JBake's server is written against Jetty 9.4; its watcher uses VFS.
+    jbakePreview 'org.eclipse.jetty:jetty-server:9.4.58.v20250814'   // serves build/jbake at localhost:8080
+    jbakePreview 'org.apache.commons:commons-vfs2:2.10.0'            // watches src/jbake for changes
+}
+
+// The bake and the preview both run JBake's own launcher in a fresh JVM (T096), with these settings.
+def jbakeSource = file('src/jbake')
+def jbakeDestination = layout.buildDirectory.dir('jbake').get().asFile
+// JRuby (inside AsciidoctorJ) extracts a native jffi library while baking. Keep it under build/tmp, which `clean`
+// removes, instead of the project root (T024).
+def jffiDir = layout.buildDirectory.dir('tmp/jffi').get().asFile
+def configureJBake = { JavaExec task ->
+    task.mainClass = 'org.jbake.launcher.Main'
+    // JRuby (AsciidoctorJ) asks for these to use native IO on modern JDKs; without them it prints a warning.
+    task.jvmArgs '--add-opens', 'java.base/sun.nio.ch=ALL-UNNAMED', '--add-opens', 'java.base/java.io=ALL-UNNAMED'
+    task.systemProperty 'jffi.extract.dir', jffiDir.absolutePath
+    task.systemProperty 'logback.configurationFile', file('gradle/jbake-logback.xml').absolutePath
+    task.doFirst { jffiDir.mkdirs() }
 }
 
 // Bakes src/jbake into build/jbake (drafts included, as <name>-draft.html; CI leaves them out of the deploy).
 tasks.register('bake', JavaExec) {
     group = 'build'
     description = 'Bakes the site from src/jbake into build/jbake with JBake.'
-    def source = file('src/jbake')
-    def destination = layout.buildDirectory.dir('jbake').get().asFile
-    // JRuby (inside AsciidoctorJ) extracts a native jffi library while baking. Keep it under build/tmp, which
-    // `clean` removes, instead of the project root (T024).
-    def jffiDir = layout.buildDirectory.dir('tmp/jffi').get().asFile
-    inputs.dir(source)
-    outputs.dir(destination)
+    configureJBake(it)
+    inputs.dir(jbakeSource)
+    outputs.dir(jbakeDestination)
     classpath = configurations.jbake
-    mainClass = 'org.jbake.launcher.Main'
-    args source.absolutePath, destination.absolutePath, '-b'
-    // JRuby (AsciidoctorJ) asks for these to use native IO on modern JDKs; without them it prints a warning.
-    jvmArgs '--add-opens', 'java.base/sun.nio.ch=ALL-UNNAMED', '--add-opens', 'java.base/java.io=ALL-UNNAMED'
-    systemProperty 'jffi.extract.dir', jffiDir.absolutePath
-    systemProperty 'logback.configurationFile', file('gradle/jbake-logback.xml').absolutePath
-    doFirst { jffiDir.mkdirs() }
+    args jbakeSource.absolutePath, jbakeDestination.absolutePath, '-b'
 }
 
-// Local preview (T024): serves build/jbake with the JDK's built-in static server (jwebserver, JDK 18+) at
-// http://localhost:8080, drafts included. As an Exec task, Ctrl+C stops the server cleanly.
-tasks.register('preview', Exec) {
+// Local preview (T062, T100): `jbake -b -s` bakes into build/jbake, serves it with Jetty at http://localhost:8080
+// (127.0.0.1 only; server.* in jbake.properties), drafts included, and watches content, templates, and assets:
+// a save is live in about 1 s (it polls every second, then rebakes everything, or copies a changed asset). In this
+// mode JBake sets site.host to http://localhost:8080/, so feed, sitemap, and share links stay local. Unlike the
+// JDK's jwebserver (used before), Jetty serves dot-file paths such as /tags/.NET.html. One JVM serves the whole
+// session; Ctrl+C stops it. Restart after changing jbake.properties, or after deleting or renaming a source file
+// (its old page stays in build/jbake until `clean`). The next `./gradlew bake` notices the changed output and
+// rebakes with the real site.host.
+tasks.register('preview', JavaExec) {
     group = 'documentation'
-    description = 'Bakes the site and serves build/jbake at http://localhost:8080 (Ctrl+C to stop).'
-    dependsOn 'bake'
-    commandLine "${System.getProperty('java.home')}/bin/jwebserver",
-            '--directory', file('build/jbake').absolutePath,
-            '--port', '8080',
-            '--bind-address', '127.0.0.1'
+    description = 'Bakes the site, serves it at http://localhost:8080, and rebuilds on every save (Ctrl+C to stop).'
+    configureJBake(it)
+    classpath = configurations.jbakePreview
+    args jbakeSource.absolutePath, jbakeDestination.absolutePath, '-b', '-s'
 }
 
 // Keep the familiar command: `./gradlew bakePreview` runs the preview task above.
 tasks.register('bakePreview') {
     group = 'documentation'
-    description = 'Same as preview: bakes the site and serves it at http://localhost:8080.'
+    description = 'Same as preview: bakes, serves http://localhost:8080, and rebuilds on every save.'
     dependsOn 'preview'
 }
 

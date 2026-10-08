@@ -14,9 +14,14 @@ To preview
 ```
 ./gradlew clean bakePreview
 ```
-Then open http://localhost:8080. Stop it with `Ctrl+C`. (`./gradlew preview` does the same. It serves the baked
-site with the JDK's built-in `jwebserver`.) One known gap: `jwebserver` refuses paths with a dot-file, so
-`/tags/.NET.html` is a 404 in the preview only. The live site serves it (T100).
+Then open http://localhost:8080. Stop it with `Ctrl+C`. (`./gradlew preview` does the same.)
+
+**It rebuilds on save.** While the preview runs, saving a post, a template (`src/jbake/templates/`), or an asset
+such as CSS (`src/jbake/assets/`) updates the site in about a second, with no restart. Reload the page to see it.
+The terminal logs each change it picks up, and any template or post error. This is JBake's own server and watcher
+(`jbake -b -s`), so in the preview the feed, sitemap, and share links point at `http://localhost:8080`; a normal
+`./gradlew bake` uses the real address again. Restart the preview after changing `jbake.properties`, or after
+deleting or renaming a file (its old page stays in `build/jbake` until `clean`).
 
 `./gradlew bake` runs JBake 2.7 directly in its own JVM (`build.gradle`). If a template or post has an error, the
 build fails and prints JBake's message with the file and line.
