@@ -16,12 +16,18 @@ To preview
 ```
 Then open http://localhost:8080. Stop it with `Ctrl+C`. (`./gradlew preview` does the same.)
 
-**It rebuilds on save.** While the preview runs, saving a post, a template (`src/jbake/templates/`), or an asset
-such as CSS (`src/jbake/assets/`) updates the site in about a second, with no restart. Reload the page to see it.
-The terminal logs each change it picks up, and any template or post error. This is JBake's own server and watcher
-(`jbake -b -s`), so in the preview the feed, sitemap, and share links point at `http://localhost:8080`; a normal
-`./gradlew bake` uses the real address again. Restart the preview after changing `jbake.properties`, or after
-deleting or renaming a file (its old page stays in `build/jbake` until `clean`).
+**It rebuilds on save, and the open page reloads itself.** While the preview runs, saving a post, a template
+(`src/jbake/templates/`), or an asset such as CSS (`src/jbake/assets/`) rebuilds the site with no restart, and the
+page open in your browser reloads about 0.5–1.6 s after you save. No browser extension is needed: preview pages carry
+a small script (`src/jbake/templates/preview-reload.ftl`) that asks the server every half second whether the page or
+its CSS changed. A normal bake leaves the script out, and CI fails if it ever reaches the deploy contents. The
+terminal logs each change it picks up, and any template or post error; a page broken by a template error reloads
+again once you fix it. If you stop the preview, open pages keep trying for about a minute (and reload once it's back),
+then stop; reload them by hand after that.
+
+This is JBake's own server and watcher (`jbake -b -s`), so in the preview the feed, sitemap, and share links point
+at `http://localhost:8080`; a normal `./gradlew bake` uses the real address again. Restart the preview after changing
+`jbake.properties`, or after deleting or renaming a file (its old page stays in `build/jbake` until `clean`).
 
 `./gradlew bake` runs JBake 2.7 directly in its own JVM (`build.gradle`). If a template or post has an error, the
 build fails and prints JBake's message with the file and line.
@@ -114,6 +120,7 @@ Everything happens in one workflow, [`.github/workflows/gradle.yml`](.github/wor
 | Check | Protects against |
 |---|---|
 | Drafts are not published | Unfinished `*-draft.html` posts going live |
+| Live reload is not published | The preview's live-reload script (marker `livereload`) going live |
 | Docs are not published | Anything from `docs/` (planning notes) going live |
 | Masthead variants | A header image missing its 960/1440px sizes (phones would get a blank header) |
 | Published URLs still exist (`scripts/check-urls.sh`) | Removing or renaming any page that's live (strict on CI's Linux runner) |

@@ -51,6 +51,16 @@ jobs:
         fi
         echo "OK: no drafts in the deploy contents"
 
+    # The preview's live-reload script (T064) is only for `./gradlew preview`. Its marker must never go live.
+    - name: Check live reload is not published
+      run: |
+        test -d build/site
+        pages="$(grep -rliI livereload build/site || true)"
+        if [ -n "$pages" ]; then
+          echo "FAIL: the preview's live-reload script is in the deploy contents:"; echo "$pages"; exit 1
+        fi
+        echo "OK: no live-reload script in the deploy contents"
+
     # docs/ holds internal planning docs and must never reach the live site (see AGENTS.md)
     - name: Check docs are not published
       run: scripts/check-docs-not-published.sh build/site
