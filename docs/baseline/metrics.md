@@ -71,3 +71,17 @@ Measured after PRs #29–#37 (live site). The M0 numbers above are kept for comp
 | Third-party hosts on a post | 46 (live, Disqus) | 8, none of them trackers (Giscus, GoatCounter, CDN) |
 
 The post page's remaining LCP gap is a 308 KB in-post diagram downloading alongside the header (Backlog T075).
+
+## After M7 (2026-10-08)
+
+Writing-loop timings on `main` at `be5cdc9` (after PRs #63–#65), Apple Silicon, JDK 21, Gradle 9.8.1, JBake 2.7.0.
+Measured on a clean clone: `./gradlew newPost`, then `./gradlew clean bakePreview`, then 10 edits of the new draft.
+
+| Metric | M0 (2026-10-04) | After M7 |
+|---|---|---|
+| Clean bake | about 6 s (JDK 1.8, Gradle 5.6.4, warm daemon) | about 3–4 s (2.9 s of it is the cold JBake bake) |
+| Preview start, to the new draft being served | no watch mode | 4.4 s |
+| Save → change served by the preview | no watch mode (re-run the bake by hand) | **0.24–1.24 s, median 0.78 s** (10 edits, none missed) |
+| Save → page reloaded in the browser | manual refresh | 0.4–1.6 s (Chrome, 80 saves, T064); Firefox and Safari confirmed by the owner |
+| Bakes in one Gradle daemon before "Java heap space" | 3 (T099) | no limit seen (10 in a row, then 50+ rebuilds in one preview) |
+
