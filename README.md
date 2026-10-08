@@ -47,6 +47,16 @@ for AsciiDoc, `-Pslug=...` to choose the URL slug yourself, and `-Pbranch=false`
 It refuses a slug that's already a draft, a post, or a published URL, and warns when a tag differs only by
 capitalization from an existing one (that would make a second tag page).
 
+Add `-Ppr` to also commit the draft, push `post/my-post-title` to GitHub, and open a **draft** pull request
+titled `[WIP] My Post Title`:
+```
+./gradlew newPost -Ptitle="My Post Title" -Ppr
+```
+It needs the [GitHub CLI](https://cli.github.com) logged in (`gh auth login`), and checks that first, before it
+creates anything. Pull requests never deploy, so the PR is safe to push to as you write. If the commit, push, or
+PR step fails, nothing is undone and the error lists the commands to finish by hand. `-Ppr` can't be combined
+with `-Pbranch=false`.
+
 To create one by hand instead, make `src/jbake/content/blog/drafts/<slug>.md` (Markdown) or `<slug>.asciidoc`
 (AsciiDoc), starting with a header like this. It's JBake's `key=value` format ending in `~~~~~~`, not YAML front
 matter:
