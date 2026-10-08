@@ -22,7 +22,8 @@ Drafts (posts with `status=draft`) are rendered for preview only, at
 
 To write a post
 ===============
-Create `src/jbake/content/blog/drafts/<slug>.asciidoc` (or `.md`), starting with a header like this:
+Create `src/jbake/content/blog/drafts/<slug>.md` (Markdown) or `<slug>.asciidoc` (AsciiDoc), starting with a
+header like this. It's JBake's `key=value` format ending in `~~~~~~`, not YAML front matter:
 
 ```
 title=My Post Title
@@ -35,6 +36,28 @@ masthead=three-hills.jpg
 mastheadCredit=https://flic.kr/p/rFRzzj
 ~~~~~~
 ```
+
+`summary` is optional but recommended: it's the teaser under the title on the home page.
+
+Markdown is GitHub-style: wrap lines however you like (single line breaks don't break the paragraph), and use
+tables, task lists (`- [ ]`), `~~strikethrough~~`, footnotes (`[^1]`), and fenced code blocks with a language:
+
+````
+Some text that wraps
+across two lines is one paragraph.
+
+| Tool  | Language |
+|-------|----------|
+| JBake | Java     |
+
+```java
+System.out.println("hello");
+```
+
+A claim that needs a source.[^1]
+
+[^1]: The source.
+````
 
 If you use a new header image (`masthead=`), put it in `src/jbake/assets/img/masthead/` (≤ 1920px wide) and run
 `scripts/masthead-variants.py` (needs Pillow: `pip install pillow`) to create its phone and tablet sizes.

@@ -85,9 +85,12 @@ markdown.extensions=AUTOLINKS,FENCED_CODE_BLOCKS,DEFINITIONS,TABLES,STRIKETHROUG
     text.
   - flexmark 0.62 is from 2020.
 - **Found while testing:** a post without `summary=` **breaks the whole build**. `index.ftl` requires it for the
-  newest six posts. The dead Gradle plugin then crashes while logging the error, so it surfaces as a misleading
-  **"Java heap space"**. The README's new-post template includes `summary=`, so the documented path works, but
-  it's a trap (see Consequences).
+  newest six posts. The dead Gradle plugin then crashes while logging the error, so it surfaces as a confusing
+  Groovy error (`No signature of method … error()`) instead of the template message. The README's new-post
+  template includes `summary=`, so the documented path works, but it's a trap (see Consequences).
+  - _Correction 2026-10-07 (T094/T095): the "Java heap space" errors seen during this testing were a separate
+    problem, not this one. The Gradle daemon leaks memory on every bake, and the 4th bake in one daemon runs out
+    of heap, on `main` too (T099)._
 
 ### What any platform must preserve
 
@@ -296,7 +299,7 @@ the [decision criteria](02-ROQ-MIGRATION.md#decision-criteria-go--no-go-after-th
     - add a Markdown example to the README's new-post section
     - **Test:** a fixture post with wrapped lines, a table, a task list, a footnote, and fenced code renders
       correctly; `check-urls.sh` passes; no other page changes
-  - **T095 [BUG] A missing `summary=` breaks the build with a misleading "Java heap space"** (`index.ftl`): make it
+  - **T095 [BUG] A missing `summary=` breaks the build with a confusing error** (`index.ftl`): make it
     optional (`${post.summary!""}`) or fail with a clear message.
   - **T096 [IMP] Replace the unmaintained Gradle plugin** with the tested `JavaExec` task, and upgrade to **JBake 2.7.0**:
     - `db.path` change
