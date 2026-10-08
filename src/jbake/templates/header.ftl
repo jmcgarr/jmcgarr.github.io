@@ -2,6 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
+<#-- Local preview only (T064): reloads the page after each rebuild. See preview-reload.ftl. Kept at column 0
+     so a normal bake outputs nothing here, not even indentation. -->
+<#if (config.preview_livereload!"") == "true">
+<#include "preview-reload.ftl">
+</#if>
     <title><#if (content.title)??><#escape x as x?xml>${content.title}</#escape><#else>Mike McGarr</#if></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Personal website of Mike McGarr - Passionate engineering leader and manager.">

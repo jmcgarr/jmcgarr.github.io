@@ -64,19 +64,23 @@ tasks.register('bake', JavaExec) {
 // JDK's jwebserver (used before), Jetty serves dot-file paths such as /tags/.NET.html. One JVM serves the whole
 // session; Ctrl+C stops it. Restart after changing jbake.properties, or after deleting or renaming a source file
 // (its old page stays in build/jbake until `clean`). The next `./gradlew bake` notices the changed output and
-// rebakes with the real site.host.
+// rebakes with the real site.host, without the live-reload script.
 tasks.register('preview', JavaExec) {
     group = 'documentation'
-    description = 'Bakes the site, serves it at http://localhost:8080, and rebuilds on every save (Ctrl+C to stop).'
+    description = 'Bakes, serves http://localhost:8080, rebuilds on save, and reloads the open page (Ctrl+C to stop).'
     configureJBake(it)
     classpath = configurations.jbakePreview
     args jbakeSource.absolutePath, jbakeDestination.absolutePath, '-b', '-s'
+    // Live reload (T064): templates see this as config.preview_livereload, and header.ftl then adds a small
+    // script (templates/preview-reload.ftl) that reloads the page after each rebuild. Only this task sets it,
+    // so `bake` never outputs the script, and CI fails if it ever reaches the deploy contents.
+    systemProperty 'preview.livereload', 'true'
 }
 
 // Keep the familiar command: `./gradlew bakePreview` runs the preview task above.
 tasks.register('bakePreview') {
     group = 'documentation'
-    description = 'Same as preview: bakes, serves http://localhost:8080, and rebuilds on every save.'
+    description = 'Same as preview: bakes, serves http://localhost:8080, rebuilds on every save, and reloads the page.'
     dependsOn 'preview'
 }
 
@@ -93,41 +97,4 @@ tasks.register('newPost', Exec) {
         ['scripts/NewPost.java'] + options.findAll { providers.gradleProperty(it).isPresent() }
                 .collect { "--${it}=${providers.gradleProperty(it).get()}".toString() }
     } as CommandLineArgumentProvider)
-}
-
-// Based on a nice blog post from LD: http://ldaley.com/post/164424162157/auto-reload-html-asciidoctor-gradle-plugin-output
-task liveEdit {
-    if (System.getProperty("os.name").toLowerCase().contains("mac")) {
-        doLast {
-            ["osascript", "-e", """
-                try
-                    tell application "Finder" to get application file id "com.google.Chrome"
-                    set appExists to true
-                on error
-                    set appExists to false
-                end try
-                if appExists then
-                    tell application "Google Chrome"
-                        set theUrl to "http://localhost:8080/"
-                        set found to false
-                        set theWindowIndex to 0
-                        repeat with theWindow in every window
-                            set theTabIndex to 0
-                            repeat with theTab in every tab of theWindow
-                                set theTabIndex to theTabIndex + 1
-                                if theTab's URL starts with theUrl then
-                                    set found to true
-                                    tell application "Google Chrome" to set active tab index of theWindow to theTabIndex
-                                    tell theTab to reload
-                                end if
-                            end repeat
-                        end repeat
-                        if not found then
-                            set URL of (active tab of (make new window)) to theUrl
-                        end if
-                    end tell
-                end if
-            """].execute()
-        }
-    }
 }
