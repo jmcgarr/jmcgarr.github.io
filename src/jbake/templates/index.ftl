@@ -17,7 +17,7 @@
 						<div class="post-preview">
 			  			<a href="${post.uri}"><h3 class="post-title"><#escape x as x?xml>${post.title}</#escape></h3></a>
 			  			<p class="post-meta">${post.date?string("MMMM dd, yyyy")}</p>
-			  			<p class="post-subtitle">${post.summary}</p>
+			  			<#if post.summary?has_content><p class="post-subtitle">${post.summary}</p></#if>
 						</div>
 						<hr>
 			  		</#if>
