@@ -9,6 +9,8 @@
     </encoder>
   </appender>
   <logger name="org.jbake.app.Oven" level="INFO"/>
+  <!-- Preview (T062): the server's address and each change the watcher picks up -->
+  <logger name="org.jbake.launcher" level="INFO"/>
   <logger name="com.orientechnologies" level="ERROR"/>
   <logger name="FilenoUtil" level="ERROR"/>
   <root level="WARN">
