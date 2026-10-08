@@ -1,17 +1,53 @@
 plugins {
-    id 'org.jbake.site' version '5.5.0'
+    id 'base'   // provides `clean`
 }
 
-// Under Gradle 8, JRuby (inside AsciidoctorJ, used by the bake) extracts its native jffi library into the
-// project root (jffi*.dylib). Point the extraction at build/tmp instead, which `clean` removes.
-def jffiDir = layout.buildDirectory.dir('tmp/jffi').get().asFile
-jffiDir.mkdirs()
-System.setProperty('jffi.extract.dir', jffiDir.absolutePath)
+// JBake runs directly (T096) instead of through the Gradle plugin `org.jbake.site`. That plugin is unmaintained
+// (last release 5.5.0, 2021), can't run JBake 2.7, hid template errors behind a Groovy error (T095), and leaked
+// memory in the Gradle daemon on every bake until the 4th one failed with "Java heap space" (T099). Running
+// JBake's own launcher in a fresh JVM per bake fixes all of that. Dependabot proposes jbake-core updates.
+repositories {
+    mavenCentral()
+}
 
-// Local preview (T024). The JBake plugin's own bakePreview sets its task's logging level, which Gradle 8
-// made read-only ("Cannot set readonly property: level"), and 5.5.0 is the plugin's last release. So
-// preview serves build/jbake with the JDK's built-in static server (jwebserver, JDK 18+) instead, at
-// http://localhost:8080 (drafts included, as before). As an Exec task, Ctrl+C stops the server cleanly.
+configurations {
+    jbake
+}
+
+dependencies {
+    jbake 'org.jbake:jbake-core:2.7.0'
+    // jbake-core marks its engines and CLI parser as optional, so add the ones this site uses, at the versions
+    // jbake-core 2.7.0 was built and tested with.
+    jbake 'org.freemarker:freemarker:2.3.31'                         // templates (*.ftl)
+    jbake 'org.asciidoctor:asciidoctorj:2.5.7'                       // *.asciidoc
+    jbake 'com.vladsch.flexmark:flexmark:0.62.2'                     // *.md
+    jbake 'com.vladsch.flexmark:flexmark-profile-pegdown:0.62.2'     // markdown.extensions in jbake.properties
+    jbake 'info.picocli:picocli:4.6.2'                               // JBake's command-line launcher
+}
+
+// Bakes src/jbake into build/jbake (drafts included, as <name>-draft.html; CI leaves them out of the deploy).
+tasks.register('bake', JavaExec) {
+    group = 'build'
+    description = 'Bakes the site from src/jbake into build/jbake with JBake.'
+    def source = file('src/jbake')
+    def destination = layout.buildDirectory.dir('jbake').get().asFile
+    // JRuby (inside AsciidoctorJ) extracts a native jffi library while baking. Keep it under build/tmp, which
+    // `clean` removes, instead of the project root (T024).
+    def jffiDir = layout.buildDirectory.dir('tmp/jffi').get().asFile
+    inputs.dir(source)
+    outputs.dir(destination)
+    classpath = configurations.jbake
+    mainClass = 'org.jbake.launcher.Main'
+    args source.absolutePath, destination.absolutePath, '-b'
+    // JRuby (AsciidoctorJ) asks for these to use native IO on modern JDKs; without them it prints a warning.
+    jvmArgs '--add-opens', 'java.base/sun.nio.ch=ALL-UNNAMED', '--add-opens', 'java.base/java.io=ALL-UNNAMED'
+    systemProperty 'jffi.extract.dir', jffiDir.absolutePath
+    systemProperty 'logback.configurationFile', file('gradle/jbake-logback.xml').absolutePath
+    doFirst { jffiDir.mkdirs() }
+}
+
+// Local preview (T024): serves build/jbake with the JDK's built-in static server (jwebserver, JDK 18+) at
+// http://localhost:8080, drafts included. As an Exec task, Ctrl+C stops the server cleanly.
 tasks.register('preview', Exec) {
     group = 'documentation'
     description = 'Bakes the site and serves build/jbake at http://localhost:8080 (Ctrl+C to stop).'
@@ -22,9 +58,10 @@ tasks.register('preview', Exec) {
             '--bind-address', '127.0.0.1'
 }
 
-// Keep the familiar command: `./gradlew bakePreview` now runs the preview task above.
-tasks.named('bakePreview') {
-    actions.clear()
+// Keep the familiar command: `./gradlew bakePreview` runs the preview task above.
+tasks.register('bakePreview') {
+    group = 'documentation'
+    description = 'Same as preview: bakes the site and serves it at http://localhost:8080.'
     dependsOn 'preview'
 }
 
@@ -61,18 +98,6 @@ task liveEdit {
                     end tell
                 end if
             """].execute()
-        }
-    }
-}
-
-
-// JBake 2.6.x (via org.jbake.site 5.5.0) pulls in JNA 4.5.0, whose native library has no Apple Silicon
-// (arm64) build, so the bake fails on M-series Macs. JNA 5.x is API-compatible and ships every platform.
-configurations.all {
-    resolutionStrategy.eachDependency { details ->
-        if (details.requested.group == 'net.java.dev.jna') {
-            details.useVersion '5.17.0'
-            details.because 'JNA 4.5.0 has no Apple Silicon (arm64) native library'
         }
     }
 }
