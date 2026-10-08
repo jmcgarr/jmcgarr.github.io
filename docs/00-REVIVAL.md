@@ -60,7 +60,7 @@ du -sh build/jbake                                    # published site size
 | M5 | ⚙️ [Polished Presentation](#m5-polished-presentation) | Valid HTML, discoverable, shares well                    | 8    | 9            |
 | M6 | [Content Care](#m6-content-care) | Accurate content; every link and image works             | 3    | 5            |
 | M7 | ✅ [Writing Flow](#m7-writing-flow) | Writing a post is pleasant: scaffold, watch, live reload | 3    | 9            |
-| —  | [Backlog](#backlog) | Unscheduled; not reproduced or waiting on evidence       | 1    | 3            |
+| —  | [Backlog](#backlog) | Unscheduled; not reproduced or waiting on evidence       | 1    | 4            |
 
 ✅ done · ⚙️ in progress (M5 is next, per [Dependencies & Order](#dependencies--order)) · no mark: not started
 
@@ -467,7 +467,7 @@ About, Talks, and Bio pages are current, and all content files use LF line endin
 
 ### Improvements
 
-- [ ] T051 [IMP] Convert the 63 content files with old Mac CR-only line endings (from the WordPress import) to LF (`src/jbake/content/`)
+- [ ] T051 [IMP] Convert the 63 content files with old Mac CR-only line endings (from the WordPress import) to LF (`src/jbake/content/`) _(Superseded by **T102** if the content converges on one format: converted files get LF anyway.)_
   - **Test:** `grep -rlU $'\r' src/jbake/content | wc -l` returns `0`. `diff -rw` between bakes from before and after the conversion shows only whitespace changes.
 - [ ] T052 [P] [IMP] Upgrade outbound `http://` links to `https://` where the target supports it (`src/jbake/content/`)
   - **Test:** The `http://` link count drops from the 559 baseline in `docs/baseline/metrics.md`, and `lychee` is still clean.
@@ -587,6 +587,11 @@ Pick items up when there's new evidence or a milestone touches the same files.
 
 ### Improvements
 
+- [ ] T102 [IMP] **Converge all content on one format, AsciiDoc or Markdown (owner to decide).** Today the site mixes three formats, so old and new posts are written, previewed, and styled differently. Published: **62 legacy WordPress `.html`** posts (2009–2013; 43 with CR-only line endings, 16 with inline `style=`, 5 with `<iframe>` embeds), **14 `.asciidoc`** (11 posts from 2014–2020 plus About, Talks, Speaker Bio), and **1 `.md`**. Drafts: 10 `.html`, 2 `.asciidoc`. The owner wants old and new content on a single format (requested 2026-10-08).
+  - **Decide first** (record the choice and the date here). **Markdown** is where new writing is heading (T094 made it render well; `newPost` defaults to it), it keeps every platform option open (Hugo needs it, see [`01-PLATFORM-DECISION.md`](01-PLATFORM-DECISION.md)), and it takes JRuby/AsciidoctorJ out of the build if the 14 AsciiDoc files convert too. **AsciiDoc** is the owner's format of 2014–2020 and richer, but it ties the site to Asciidoctor. Raw HTML (embeds, inline styles) passes through Markdown as-is; AsciiDoc needs `++++` passthrough blocks.
+  - **Constraints:** URLs stay the same, because a format change keeps the base name, so `<name>.html` doesn't change (AGENTS.md Rule 1). Posts are the author's voice (Rule 3), so this is a **mechanical conversion**, not an edit: the rendered text must not change. Keep `date=`, `status=`, `tags=`, and every header field. Feed `<guid>`s are unchanged because they come from the URL. Archived comments (T045) attach by URI, so they're unaffected. This supersedes **T051** (CR-only line endings): converted files get LF. Do it in batches (for example by year) so each PR is reviewable.
+  - _Not scheduled. Pick it up after M5/M6, or before a platform move if a re-evaluation trigger fires (T098)._
+  - **Test:** a script compares each converted page's **visible text** (HTML tags stripped, whitespace normalized) before and after, and every page matches, or each difference is listed and approved by the owner. Images, links, and embeds are all present (counts per page are equal). `scripts/check-urls.sh` passes and the URL list is identical. `feed.xml` `<guid>`s are identical. Headless screenshots of a sample of 10 converted posts (old WordPress, AsciiDoc, and with embeds) at 1280px and 375px look right. Afterwards, `find src/jbake/content -type f | sed 's/.*\.//' | sort -u` lists only the chosen format.
 - [ ] T101 [P] [IMP] **Say clearly when the preview's port is taken.** Starting `./gradlew bakePreview` while another preview is already running (for example in a second terminal or another clone) fails with JBake's "ERROR jbake - unable to start the server" and exit value 4. It doesn't say that port 8080 is in use. Before starting, check the port in `build.gradle` and fail with "port 8080 is in use (is another preview running?)". Found 2026-10-08 during the M7 checkpoint (`build.gradle`)
   - **Test:** with one preview running, a second `./gradlew bakePreview` fails within a few seconds with a message naming port 8080. With the port free, the preview starts as before.
 - [ ] T098 [IMP] **Yearly platform check** (next: 2027-10). Review the re-evaluation triggers in [`01-PLATFORM-DECISION.md`](01-PLATFORM-DECISION.md#decision): JBake/`JavaExec` still builds on the newest Java LTS and Gradle major, no unfixed security issues in OrientDB, AsciidoctorJ, or flexmark, whether M7's live reload is good enough, and Roq's maturity. If a trigger fires, start the Roq spike (T076–T081), then Hugo if Roq fails the criteria.
