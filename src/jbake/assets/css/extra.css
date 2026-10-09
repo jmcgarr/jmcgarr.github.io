@@ -86,6 +86,37 @@ header.masthead {
   margin-left: 1.5em;
 }
 
+/* --- Topics page (T057): tags/index.html, every tag with its post count --- */
+.topics-heading {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+}
+.topics-list {
+  list-style: none;
+  margin-left: 0; /* flush with the headings (asciidoctor.css indents every ul by 1.5em) */
+  padding-left: 0;
+}
+.topics-list li {
+  break-inside: avoid;
+  margin-bottom: 0.25rem;
+}
+.topics-count {
+  color: #6c757d;
+  white-space: nowrap;
+}
+@media (min-width: 576px) {
+  .topics-list {
+    columns: 2;
+    column-gap: 2rem;
+  }
+}
+@media (min-width: 992px) {
+  .topics-list {
+    columns: 3;
+  }
+}
+/* --- end Topics page --- */
+
 /* Responsive header image (T071). The URLs come from custom properties set on the <header> by
    masthead.ftl; these breakpoints must match the preload media queries there. */
 header.masthead {

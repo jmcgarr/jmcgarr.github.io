@@ -1,7 +1,7 @@
 <#include "header.ftl">
 
 	<#include "menu.ftl">
-	<#assign pageTitle = "Tag: ${tag}">
+	<#assign pageTitle = "Tag: ${tagName(tag)}"><#-- the tag as written, with its spaces (tag-names.ftl, T057) -->
 
 	<@externalLinksIn><#include "masthead.ftl"></@externalLinksIn><#-- the photo credit opens in a new tab (T058) -->
 

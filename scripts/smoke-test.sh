@@ -32,6 +32,8 @@ checks=(
   "tags/acceptance%20test.html 200"                    # an old tag URL with a space: now a redirect stub (T039)
   "tags/acceptance-test.html 200"                      # ...and the tag page it points to
   "tags/DevOps.html 200"                               # old capitalized tag URL: a stub added only on Linux (T055)
+  "tags/ 200"                                          # the Topics page (T057): its URL is the folder...
+  "tags/index.html 200"                                # ...served from this file
   "feed.xml 200"
   "sitemap.xml 200"
   "css/clean-blog.css 200"
