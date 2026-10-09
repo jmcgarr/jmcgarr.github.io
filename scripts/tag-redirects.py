@@ -24,6 +24,10 @@ Where the stubs go:
 The new name of an old tag is worked out from the posts: spaces become hyphens, as JBake does, and if
 no published post uses that exact tag any more, a tag that differs only by case is used. An old tag
 with no match at all is an error: decide what it should point to before going on.
+
+--check also makes sure each real tag page shows its tag as written in the posts, spaces included
+(templates/tag-names.ftl, T057): JBake keeps only the hyphenated form, so a tag with a hyphen of its
+own (apt-get) must be listed in that template, or it would be shown as "apt get".
 Standard library only. Run from the repository root.
 """
 import html, os, re, sys
@@ -43,6 +47,11 @@ def url_path(path):
 
 def published_tags():
     """Tag names as JBake publishes them: every tag of every non-draft page, spaces made hyphens."""
+    return {t.replace(" ", "-") for t in written_tags()}
+
+
+def written_tags():
+    """Every tag of every non-draft page, as written in its front matter (spaces kept)."""
     tags = set()
     for dirpath, _, files in os.walk(CONTENT):
         for f in files:
@@ -53,7 +62,7 @@ def published_tags():
                 continue
             for tag in meta.get("tags", "").split(","):
                 if tag.strip():
-                    tags.add(tag.strip().replace(" ", "-"))
+                    tags.add(tag.strip())
     return tags
 
 
@@ -174,6 +183,7 @@ def check(site):
             problems.append(f"{old}: no robots noindex")
     spaced = [f for f in os.listdir(os.path.join(site, "tags")) if " " in f and f"tags/{f}" not in pairs]
     problems += [f"tags/{f}: a tag page with a space in its URL that isn't a known stub" for f in spaced]
+    problems += shown_names(site)
     print(f"{len(old_urls)} baseline tag URLs: {real} real tag pages, {stubs} redirect stubs, {len(skipped)} not checkable here")
     for old in skipped:
         print(f"  ~ {old} (case-insensitive filesystem: same file as {pairs[old]}; the stub is added only on Linux)")
@@ -182,6 +192,26 @@ def check(site):
     if problems:
         sys.exit(f"FAIL: {len(problems)} problems in {site}")
     print(f"OK: every baseline tag URL in {site} is a tag page or a stub whose target is a tag page")
+
+
+def shown_names(site):
+    """Problems with the tag name a real tag page shows (its og:title, "Tag: <name>"), compared with the posts."""
+    written = {t.replace(" ", "-"): t for t in written_tags()}
+    problems, checked = [], 0
+    for f in sorted(os.listdir(os.path.join(site, "tags"))):
+        if not f.endswith(".html") or f == "index.html" or f[:-len(".html")] not in written:
+            continue
+        text = open(os.path.join(site, "tags", f), encoding="utf-8").read()
+        if 'http-equiv="refresh"' in text:
+            continue
+        title = re.search(r'<meta property="og:title" content="Tag: ([^"]*)">', text)
+        shown, want = title and html.unescape(title.group(1)), written[f[:-len(".html")]]
+        checked += 1
+        if shown != want:
+            problems.append(f"tags/{f}: shows the tag as {shown!r}, the posts write {want!r} "
+                            "(list it in src/jbake/templates/tag-names.ftl)")
+    print(f"{checked} tag pages checked for the tag name they show: {checked - len(problems)} as written in the posts")
+    return problems
 
 
 if __name__ == "__main__":

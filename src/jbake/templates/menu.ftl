@@ -17,6 +17,9 @@
               <li class="nav-item">
                 <a class="nav-link" href="/archive.html">Blog</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/tags/">Topics</a>
+              </li>
 
               <li class="nav-item">
                 <a class="nav-link" href="/talks.html">Talks</a>

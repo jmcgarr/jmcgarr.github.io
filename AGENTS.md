@@ -58,7 +58,7 @@ that specific change.
 | `tags=a, b` in front matter | `/tags/a.html`, `/tags/b.html`; spaces become hyphens (`tags=unit testing` → `/tags/unit-testing.html`, `tag.sanitize=true`, T039) and capitals are kept |
 | `src/jbake/assets/<path>` | `/<path>` (images, CSS, JS, `CNAME`, `favicon.ico`) |
 | `src/case-redirects/<path>` | `/<path>`, but only on Linux (CI): redirect stubs whose names differ from a real page only by case (T055) |
-| Templates | `/index.html`, `/archive.html`, `/feed.xml`, `/sitemap.xml` |
+| Templates | `/index.html`, `/archive.html`, `/feed.xml`, `/sitemap.xml`, `/tags/index.html` (Topics, linked as `/tags/`, T057) |
 
 **Tags:** keep a tag's spelling and casing the same in every post (lowercase unless it's a name). `DevOps` and
 `devops` make two tag pages that each list only some posts. The old tag URLs with spaces, and `tags/DevOps.html`

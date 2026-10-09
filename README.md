@@ -78,7 +78,10 @@ mastheadCredit=https://flic.kr/p/rFRzzj
 **Tags:** each tag gets a page at `/tags/<tag>.html`, with spaces turned into hyphens (`continuous delivery` →
 `/tags/continuous-delivery.html`; `tag.sanitize=true`, T039). Capitals are kept, so write a tag the same way every
 time, in lowercase unless it's a name (`devops`, not `DevOps`): `DevOps` and `devops` would make two pages that
-each list only some of the posts (T055).
+each list only some of the posts (T055). Pages show a tag as you wrote it, spaces included ("Tag: continuous
+delivery"); only the URL has hyphens. JBake keeps only the hyphenated form, so a tag with a hyphen of its own
+(`apt-get`) must be added to `src/jbake/templates/tag-names.ftl`, or it's shown as "apt get"; CI names any such tag.
+Every tag is listed with its post count on the **Topics** page, `/tags/` (in the menu; T057).
 
 Markdown is GitHub-style: wrap lines however you like (single line breaks don't break the paragraph), and use
 tables, task lists (`- [ ]`), `~~strikethrough~~`, footnotes (`[^1]`), and fenced code blocks with a language:
@@ -131,7 +134,7 @@ Everything happens in one workflow, [`.github/workflows/gradle.yml`](.github/wor
 5. **Deploy:** a separate `deploy` job publishes the artifact to GitHub Pages (pushes and manual runs on
    `main` only, never two at once).
 6. **Smoke test:** after a deploy, `scripts/smoke-test.sh` fetches a few known live URLs (home, a post, tag pages
-   including `tags/.NET.html`, feed, sitemap, an image, a font) and expects 200, plus 404 for a draft and `docs/`.
+   including `tags/.NET.html`, the Topics page, feed, sitemap, an image, a font) and expects 200, plus 404 for a draft and `docs/`.
    It retries for a few minutes to allow for the CDN. If it fails, the run goes red **after** the site is live:
    check the listed URLs, then fix forward or roll back (below). Run it yourself any time: `scripts/smoke-test.sh`.
 
@@ -144,7 +147,7 @@ Everything happens in one workflow, [`.github/workflows/gradle.yml`](.github/wor
 | Docs are not published | Anything from `docs/` (planning notes) going live |
 | Masthead variants | A header image missing its 960/1440px sizes (phones would get a blank header) |
 | Published URLs still exist (`scripts/check-urls.sh`) | Removing or renaming any page that's live (strict on CI's Linux runner) |
-| Old tag URLs redirect (`scripts/tag-redirects.py --check`) | An old tag URL that's missing, or whose redirect stub points at a page that isn't there |
+| Old tag URLs redirect (`scripts/tag-redirects.py --check`) | An old tag URL that's missing, or whose redirect stub points at a page that isn't there; a tag page that shows its tag differently from the posts |
 | Feed and sitemap XML | A broken `feed.xml` or `sitemap.xml` |
 | Local links and assets (lychee) | Broken internal links, or missing images, CSS, JS, or fonts |
 

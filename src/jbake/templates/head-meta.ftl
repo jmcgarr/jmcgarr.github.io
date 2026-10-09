@@ -43,6 +43,7 @@
 <#function metaDescriptionOf html>
   <#return metaTrim(metaAttr(metaPlainText(html)), 155)>
 </#function>
+<#include "tag-names.ftl"><#-- tagName(): a tag as the author wrote it, spaces included (T057); also for tags.ftl, tags-index.ftl -->
 
 <#assign metaHost = (config.site_host!"https://www.mikemcgarr.com")?remove_ending("/")>
 <#assign metaKind = (content.type)!"">
@@ -59,9 +60,13 @@
 <#elseif metaKind == "tag">
   <#-- JBake's tag page path. Tag sanitizing (T039) changes the tag name itself when posts are read, so this
        stays right. (Looking the tag up in `tags` instead makes the bake about 6 times slower.) -->
-  <#assign metaPath = "${config.tag_path!'tags'}/${tag}${config.output_extension!'.html'}" metaTitle = "Tag: ${tag}">
+  <#assign metaPath = "${config.tag_path!'tags'}/${tag}${config.output_extension!'.html'}" metaTitle = "Tag: ${tagName(tag)}">
   <#assign metaCount = (tag_posts![])?size>
-  <#assign metaDescription = "${metaCount} ${(metaCount == 1)?then('post', 'posts')} on Mike McGarr's blog tagged “${metaAttr(tag)}”.">
+  <#assign metaDescription = "${metaCount} ${(metaCount == 1)?then('post', 'posts')} on Mike McGarr's blog tagged “${metaAttr(tagName(tag))}”.">
+<#elseif metaKind == "tags">
+  <#-- The Topics page (T057), tags/index.html. Its URL is the folder, /tags/, like the home page's is /. -->
+  <#assign metaPath = "${config.tag_path!'tags'}/" metaTitle = "Topics">
+  <#assign metaDescription = "Every topic on Mike McGarr's blog, with the number of posts on each.">
 <#else>
   <#assign metaPath = (content.uri)!"" metaTitle = (content.title)!"Mike McGarr">
   <#if (content.summary)?has_content>
