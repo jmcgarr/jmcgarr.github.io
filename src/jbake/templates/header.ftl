@@ -35,6 +35,8 @@
 <#-- Code block styles, only on pages with code (T056) -->
 <#include "code-highlight.ftl">
 <@codeHighlightCss/>
+<#-- externalLinks(), used by post, page and index: off-site links open in a new tab (T058) -->
+<#include "external-links.ftl">
 
     <link rel="shortcut icon" href="/favicon.ico">
   </head>

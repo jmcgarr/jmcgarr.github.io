@@ -100,6 +100,9 @@ A claim that needs a source.[^1]
 [^1]: The source.
 ````
 
+Write links normally. Links to other sites open in a new tab automatically (the templates add `target="_blank"`,
+`rel="noopener noreferrer"` and a screen reader hint at build time), so there's nothing to add by hand.
+
 If you use a new header image (`masthead=`), put it in `src/jbake/assets/img/masthead/` (≤ 1920px wide) and run
 `scripts/masthead-variants.py` (needs Pillow: `pip install pillow`) to create its phone and tablet sizes.
 `masthead=` also takes a full `https://` URL (a remote image, used as-is at every width, so pick one around

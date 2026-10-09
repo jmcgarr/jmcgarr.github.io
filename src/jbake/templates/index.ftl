@@ -6,7 +6,7 @@
 	<#assign pageTitle = "">
 	<#assign pageSubtitle = "">
 
-	<#include "masthead.ftl">
+	<@externalLinksIn><#include "masthead.ftl"></@externalLinksIn><#-- the photo credit opens in a new tab (T058) -->
 
 	<div class="container">
     <div class="row justify-content-md-center">
