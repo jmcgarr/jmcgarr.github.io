@@ -17,12 +17,12 @@
 							</ul>
 						</li>
 						<li>
-							<h4>${post.date?string("MMMM yyyy")}</h4>
+							<h2>${post.date?string("MMMM yyyy")}</h2>
 							<ul>
 						</#if>
 					<#else>
 						<li>
-							<h4>${post.date?string("MMMM yyyy")}</h4>
+							<h2>${post.date?string("MMMM yyyy")}</h2>
 							<ul>
 					</#if>
 

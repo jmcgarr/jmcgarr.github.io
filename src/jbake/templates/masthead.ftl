@@ -51,7 +51,8 @@
           <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
               <div class="page-heading">
-                <h1>${pageTitle}</h1>
+                <#-- The home page shows no title, but screen readers still get its heading (T046) -->
+                <h1><#if pageTitle?has_content>${pageTitle}<#else><span class="sr-only">Mike McGarr</span></#if></h1>
                 <#if pageSubtitle?has_content>
                   <span class="subheading">${pageSubtitle}</span>
                 </#if>
@@ -71,12 +72,13 @@
           <div class="row justify-content-between">
             <div class="col-4"></div>
             <div class="col-4 text-right">
-              <p class="photo-credit">Photo credit:
+              <#-- The span gets a faint dark backdrop (extra.css), so the credit stays readable on bright photos (T046) -->
+              <p class="photo-credit"><span class="photo-credit-text">Photo credit:
                 <#if mastheadCredit?starts_with("http")>
                   <a href="${mastheadCredit}" target="_blank">${mastheadCredit}</a>
                 <#else>
                   ${mastheadCredit}
-                </#if>
+                </#if></span>
               </p>
             </div>
           </div>

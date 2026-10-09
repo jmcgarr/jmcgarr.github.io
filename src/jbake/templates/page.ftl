@@ -5,6 +5,7 @@
 	<@externalLinksIn><#include "masthead.ftl"></@externalLinksIn>
 
 	<!-- Main Content -->
+	<main id="main-content"><#-- skip-link target and main landmark (T046) -->
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-8 col-md-10 mx-auto">
@@ -12,6 +13,7 @@
 			</div>
 		</div>
 	</div>
+	</main>
 
 	<hr>
 

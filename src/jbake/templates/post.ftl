@@ -4,6 +4,7 @@
 	<#-- Off-site links open in a new tab (T058, external-links.ftl): the photo credit, the body, the archived comments -->
 	<@externalLinksIn><#include "masthead.ftl"></@externalLinksIn>
 
+	<main id="main-content"><#-- skip-link target and main landmark (T046) -->
 		<div class="container">
       <div class="row">
 
@@ -50,5 +51,6 @@
         </div>
       </div>
     </div>
+	</main>
 
 <#include "footer.ftl">

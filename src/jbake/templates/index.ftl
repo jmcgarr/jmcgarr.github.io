@@ -8,6 +8,7 @@
 
 	<@externalLinksIn><#include "masthead.ftl"></@externalLinksIn><#-- the photo credit opens in a new tab (T058) -->
 
+	<main id="main-content"><#-- skip-link target and main landmark (T046) -->
 	<div class="container">
     <div class="row justify-content-md-center">
 			<div class="col-lg-8 col-md-10 mx-auto">
@@ -15,7 +16,7 @@
 		  		<#-- The 6 newest published posts. [0..*6] stops early if there are fewer. -->
 		  		<#list published_posts[0..*6] as post>
 						<div class="post-preview">
-			  			<a href="${post.uri}"><h3 class="post-title"><#escape x as x?xml>${post.title}</#escape></h3></a>
+			  			<a href="${post.uri}"><h2 class="post-title"><#escape x as x?xml>${post.title}</#escape></h2></a>
 			  			<p class="post-meta">${post.date?string("MMMM dd, yyyy")}</p>
 			  			<#if post.summary?has_content><p class="post-subtitle">${post.summary}</p></#if>
 						</div>
@@ -26,5 +27,6 @@
 			</div>
     </div>
 	</div>
+	</main>
 
 <#include "footer.ftl">

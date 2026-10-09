@@ -41,4 +41,8 @@
     <link rel="shortcut icon" href="/favicon.ico">
   </head>
   <body>
+    <#-- Hidden until a keyboard user tabs to it (T046). Tag pages have no <main id="main-content"> yet, so no link there. -->
+    <#if (content.type!"") != "tag">
+    <a class="skip-link sr-only sr-only-focusable" href="#main-content">Skip to main content</a>
+    </#if>
     <div id="wrap">
