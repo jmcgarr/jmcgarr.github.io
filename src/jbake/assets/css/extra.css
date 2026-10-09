@@ -1,12 +1,13 @@
+/* White, on a faint backdrop (T046 block below): #d2d1d1 was as low as 2.1:1 on bright photos */
 .photo-credit {
   font-size: 14px;
   margin-bottom: 0;
   text-align: right;
-  color: #d2d1d1;
+  color: #fff;
 }
 
 .photo-credit a {
-  color: #d2d1d1;
+  color: #fff;
 }
 
 /* Read-only comments archived from Disqus (T045) */
@@ -76,7 +77,7 @@ header.masthead {
   }
 }
 
-/* Archive and tag pages (T104): the outer list holds one <li> per month (its <h4> and its list of
+/* Archive and tag pages (T104): the outer list holds one <li> per month (its <h2> and its list of
    posts). No marker on those items, and the same indent as the old markup (asciidoctor.css gives
    "ul li ul" 1.25em; the old "ul ul" got 1.5em), so it looks unchanged. */
 .archive-months {
@@ -116,6 +117,46 @@ header.masthead {
   }
 }
 /* --- end Topics page --- */
+/* ---- Accessibility (T046) ---------------------------------------------------------------------- */
+/* Archive and tag pages: each month's heading is an <h2> (an <h4> skipped two levels after the
+   page's <h1>). Keep the <h4> size: Bootstrap's 1.5rem, and asciidoctor.css's 1.4375em from 768px. */
+.archive-months > li > h2 {
+  font-size: 1.5rem;
+}
+@media only screen and (min-width: 768px) {
+  .archive-months > li > h2 {
+    font-size: 1.4375em;
+  }
+}
+/* Photo credit: a faint backdrop in the overlay's color right behind the text, so it reaches 4.5:1
+   on any photo (white text over the overlay and this backdrop is 4.88:1 even on a pure white
+   pixel; a text-shadow alone stayed under 4:1 on thin 14px text). Painted only: an inline
+   element's background, vertical padding (it fills the line's 21px, so it also covers the
+   underline) and sideways box-shadows don't move anything. */
+.photo-credit-text {
+  padding: 2px 0;
+  background-color: rgba(33, 37, 41, 0.3);
+  box-shadow: 0.25em 0 0 rgba(33, 37, 41, 0.3), -0.25em 0 0 rgba(33, 37, 41, 0.3);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+/* Home page post dates: #868e96 on white is 3.32:1, Bootstrap's muted gray #6c757d is 4.69:1 */
+.post-preview > .post-meta {
+  color: #6c757d;
+}
+/* "Skip to main content" (header.ftl): hidden until focused, then shown above the fixed navbar */
+.skip-link.sr-only-focusable:focus {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 1040;
+  padding: 0.5rem 1rem;
+  background-color: #fff;
+  color: #212529;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 0 2px #0085a1;
+}
+/* ---- end T046 ------------------------------------------------------------------------------------ */
 
 /* Responsive header image (T071). The URLs come from custom properties set on the <header> by
    masthead.ftl; these breakpoints must match the preload media queries there. */

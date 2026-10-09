@@ -41,4 +41,6 @@
     <link rel="shortcut icon" href="/favicon.ico">
   </head>
   <body>
+    <#-- Hidden until a keyboard user tabs to it (T046). Every page has a <main id="main-content">. -->
+    <a class="skip-link sr-only sr-only-focusable" href="#main-content">Skip to main content</a>
     <div id="wrap">

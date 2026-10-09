@@ -5,6 +5,7 @@
 
 	<@externalLinksIn><#include "masthead.ftl"></@externalLinksIn><#-- the photo credit opens in a new tab (T058) -->
 
+	<main id="main-content"><#-- skip-link target and main landmark (T046) -->
 	<div class="container">
     <div class="row justify-content-md-center">
 			<div class="col-lg-8 col-md-10 mx-auto">
@@ -17,12 +18,12 @@
 							</ul>
 						</li>
 						<li>
-							<h4>${post.date?string("MMMM yyyy")}</h4>
+							<h2>${post.date?string("MMMM yyyy")}</h2>
 							<ul>
 						</#if>
 					<#else>
 						<li>
-							<h4>${post.date?string("MMMM yyyy")}</h4>
+							<h2>${post.date?string("MMMM yyyy")}</h2>
 							<ul>
 					</#if>
 
@@ -38,5 +39,6 @@
 			</div>
 		</div>
 	</div>
+	</main>
 
 <#include "footer.ftl">

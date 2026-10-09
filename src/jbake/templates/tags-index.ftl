@@ -31,6 +31,7 @@
 						<li><a href="/${topic.uri?url_path('UTF-8')}">${topic.name?html}</a> <span class="topics-count">(${topic.count}<span class="sr-only"> ${(topic.count == 1)?then("post", "posts")}</span>)</span></li>
 	</#macro>
 
+	<main id="main-content"><#-- skip-link target and main landmark (T046) -->
 	<div class="container">
 		<div class="row justify-content-md-center">
 			<div class="col-lg-8 col-md-10 mx-auto">
@@ -55,5 +56,6 @@
 			</div>
 		</div>
 	</div>
+	</main>
 
 <#include "footer.ftl">
