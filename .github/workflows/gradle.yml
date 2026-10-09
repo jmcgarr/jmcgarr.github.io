@@ -73,6 +73,11 @@ jobs:
     - name: Check published URLs still exist
       run: scripts/check-urls.sh build/site
 
+    # Old tag URLs (with spaces, or capitalized twins) are redirect stubs (T039, T055). Each must point at a real
+    # tag page. On Linux the 2 case-only stubs (src/case-redirects/) are added by the bake, and checked here too.
+    - name: Check old tag URLs redirect
+      run: python3 scripts/tag-redirects.py --check build/site
+
     - name: Validate feed and sitemap XML
       run: |
         command -v xmllint >/dev/null || { sudo apt-get update -qq && sudo apt-get install -y -qq libxml2-utils; }

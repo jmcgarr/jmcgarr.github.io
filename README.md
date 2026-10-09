@@ -75,6 +75,11 @@ mastheadCredit=https://flic.kr/p/rFRzzj
 
 `summary` is optional but recommended: it's the teaser under the title on the home page.
 
+**Tags:** each tag gets a page at `/tags/<tag>.html`, with spaces turned into hyphens (`continuous delivery` →
+`/tags/continuous-delivery.html`; `tag.sanitize=true`, T039). Capitals are kept, so write a tag the same way every
+time, in lowercase unless it's a name (`devops`, not `DevOps`): `DevOps` and `devops` would make two pages that
+each list only some of the posts (T055).
+
 Markdown is GitHub-style: wrap lines however you like (single line breaks don't break the paragraph), and use
 tables, task lists (`- [ ]`), `~~strikethrough~~`, footnotes (`[^1]`), and fenced code blocks with a language:
 
@@ -136,6 +141,7 @@ Everything happens in one workflow, [`.github/workflows/gradle.yml`](.github/wor
 | Docs are not published | Anything from `docs/` (planning notes) going live |
 | Masthead variants | A header image missing its 960/1440px sizes (phones would get a blank header) |
 | Published URLs still exist (`scripts/check-urls.sh`) | Removing or renaming any page that's live (strict on CI's Linux runner) |
+| Old tag URLs redirect (`scripts/tag-redirects.py --check`) | An old tag URL that's missing, or whose redirect stub points at a page that isn't there |
 | Feed and sitemap XML | A broken `feed.xml` or `sitemap.xml` |
 | Local links and assets (lychee) | Broken internal links, or missing images, CSS, JS, or fonts |
 
@@ -164,11 +170,24 @@ Gradle. Each runs the same build and checks, and never deploys.
 rm -rf build/site && rsync -a --prune-empty-dirs --exclude '*-draft.html' build/jbake/ build/site/
 scripts/check-docs-not-published.sh build/site   # docs/ must never reach the site
 scripts/check-urls.sh build/site                 # no published URL may disappear
+python3 scripts/tag-redirects.py --check build/site   # old tag URLs are tag pages or working redirects
 python3 scripts/masthead-variants.py --check     # header images have their phone/tablet sizes
 xmllint --noout build/site/feed.xml build/site/sitemap.xml
 ```
 The link checker (lychee) runs in CI. To run it locally, install [lychee](https://lychee.cli.rs) and see the
 "Check local links and assets" step in the workflow for its options.
+
+**Old tag URLs (T039, T055):** tag pages used to be published with spaces (`/tags/acceptance test.html`), and two
+tags had a capitalized twin (`/tags/DevOps.html`, `/tags/Groovy.html`). Those 50 URLs are now small redirect pages
+(meta refresh, `rel=canonical`, `noindex`, and a visible link) to the new pages, made by `scripts/tag-redirects.py`
+from `docs/baseline/urls.txt` and committed: 48 in `src/jbake/assets/tags/`, and the 2 capitalized ones in
+`src/case-redirects/tags/`. Run the script again if a tag in that list stops being used, and keep its stubs.
+**macOS caveat:** macOS filesystems ignore case, so `tags/DevOps.html` and `tags/devops.html` are the same file
+there. `./gradlew bake` therefore adds `src/case-redirects/` only when `build/jbake` is case-sensitive (Linux, as
+in CI and on GitHub Pages) and says so when it skips them. A local bake on a Mac has the real `devops` and `groovy`
+pages but not those 2 stubs, and `check-urls.sh` and `tag-redirects.py --check` report them as "can't check here".
+They're not JBake assets on purpose: JBake copies assets after rendering, so on a Mac the stub would overwrite the
+real page and redirect to itself.
 
 More
 ====
