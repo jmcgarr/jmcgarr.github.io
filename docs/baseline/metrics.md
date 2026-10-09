@@ -85,3 +85,15 @@ Measured on a clean clone: `./gradlew newPost`, then `./gradlew clean bakePrevie
 | Save → page reloaded in the browser | manual refresh | 0.4–1.6 s (Chrome, 80 saves, T064); Firefox and Safari confirmed by the owner |
 | Bakes in one Gradle daemon before "Java heap space" | 3 (T099) | no limit seen (10 in a row, then 50+ rebuilds in one preview) |
 
+## After M5 (2026-10-09)
+
+Live site at `7eced9f` (after PRs #67–#80). Measured by the owner (Lighthouse in Chrome DevTools, mobile) and by CI.
+
+| Metric | M0 (2026-10-04) | After M5 |
+|---|---|---|
+| Lighthouse SEO (`/`, About, Archive, `three-horizons-part1`) | 100 on all four | **100** on all four |
+| Lighthouse Accessibility (same pages) | 89 / 95 / 89 / 96 | **100 / 100 / 100 / 100** |
+| Nu HTML Checker errors from templates (all published pages) | 1,556 (2026-10-08 count) | **0** (18 remain inside 13 legacy post bodies; M6) |
+| Pages wider than a 375px phone screen | 253 of 258 | **0** at every width from 320 to 1280px |
+| Tag URLs with spaces | 48 | 0 (50 old URLs kept as redirect stubs) |
+
