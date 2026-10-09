@@ -12,16 +12,14 @@
     <div class="row justify-content-md-center">
 			<div class="col-lg-8 col-md-10 mx-auto">
 
-		  		<#list posts as post>
-			  		<#if (post.status == "published")>
+		  		<#-- The 6 newest published posts. [0..*6] stops early if there are fewer. -->
+		  		<#list published_posts[0..*6] as post>
 						<div class="post-preview">
 			  			<a href="${post.uri}"><h3 class="post-title"><#escape x as x?xml>${post.title}</#escape></h3></a>
 			  			<p class="post-meta">${post.date?string("MMMM dd, yyyy")}</p>
 			  			<#if post.summary?has_content><p class="post-subtitle">${post.summary}</p></#if>
 						</div>
 						<hr>
-			  		</#if>
-			  		<#if post_index = 5><#break></#if>
 			  	</#list>
 
 					<p>Older posts are available in the <a href="/${config.archive_file}">archive</a>.</p>

@@ -97,6 +97,8 @@ A claim that needs a source.[^1]
 
 If you use a new header image (`masthead=`), put it in `src/jbake/assets/img/masthead/` (≤ 1920px wide) and run
 `scripts/masthead-variants.py` (needs Pillow: `pip install pillow`) to create its phone and tablet sizes.
+`masthead=` also takes a full `https://` URL (a remote image, used as-is at every width, so pick one around
+1920px wide), or a site path such as `/img/qcon_crowd.jpg` for an image elsewhere under `src/jbake/assets/`.
 
 When it's ready, set `status=published` and move it to `src/jbake/content/blog/`. Its URL will be
 `/blog/<slug>.html`. Published URLs are permanent, so pick the slug carefully (see [AGENTS.md](AGENTS.md)).

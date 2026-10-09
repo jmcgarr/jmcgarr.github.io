@@ -3,7 +3,7 @@ subtitle=Page intended for conference organizers
 date=2014-11-03
 type=page
 status=published
-masthead=../jax-devops-speaking.jpg
+masthead=/img/jax-devops-speaking.jpg
 ~~~~~~
 
 image:img/profile_pic-sq.jpg[Profile,300,300,role="right"]

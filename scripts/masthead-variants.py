@@ -6,9 +6,10 @@ Usage:
   scripts/masthead-variants.py --check   exit 1 if any masthead in use is missing a variant
 
 A masthead is any local image named by `masthead=` in content front matter or by
-`<#assign masthead = "...">` in a template, resolved relative to src/jbake/assets/img/masthead/.
-Remote (http) mastheads have no variants. Requires Pillow. Variants are sRGB, progressive JPEG,
-with no camera metadata. Sources narrower than a variant are copied as-is.
+`<#assign masthead = "...">` in a template, resolved relative to src/jbake/assets/img/masthead/,
+or to src/jbake/assets/ when it starts with "/" (T037). Remote (http) mastheads have no variants.
+Requires Pillow. Variants are sRGB, progressive JPEG, with no camera metadata. Sources narrower
+than a variant are copied as-is.
 Existing variants are never overwritten (delete one to regenerate it).
 """
 import io, os, re, shutil, sys
@@ -53,7 +54,7 @@ def make_variant(source, target, width):
 def main(check_only):
     missing = []
     for name in mastheads_in_use():
-        source = os.path.normpath(os.path.join(MASTHEAD_DIR, name))
+        source = os.path.normpath(os.path.join(ASSETS, name.lstrip("/")) if name.startswith("/") else os.path.join(MASTHEAD_DIR, name))
         if not os.path.isfile(source):
             missing.append(f"{source} (the masthead itself is missing)")
             continue
