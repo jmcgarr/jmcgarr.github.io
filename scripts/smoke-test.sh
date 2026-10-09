@@ -29,7 +29,9 @@ checks=(
   "blog/roadmaps.html 200"                             # a post (AsciiDoc)
   "blog/a-roadmap-unit-testing.html 200"               # a legacy WordPress post
   "tags/.NET.html 200"                                 # hidden-file name: the one #47 lost
-  "tags/acceptance%20test.html 200"                    # a tag with a space
+  "tags/acceptance%20test.html 200"                    # an old tag URL with a space: now a redirect stub (T039)
+  "tags/acceptance-test.html 200"                      # ...and the tag page it points to
+  "tags/DevOps.html 200"                               # old capitalized tag URL: a stub added only on Linux (T055)
   "feed.xml 200"
   "sitemap.xml 200"
   "css/clean-blog.css 200"

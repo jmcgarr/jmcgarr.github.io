@@ -46,15 +46,38 @@ def configureJBake = { JavaExec task ->
     task.doFirst { jffiDir.mkdirs() }
 }
 
+// Redirect stubs whose names differ from a real page only by letter case, such as tags/DevOps.html → tags/devops.html
+// (T055, made by scripts/tag-redirects.py). They can't be JBake assets: on a case-insensitive filesystem (macOS)
+// both names are one file, and JBake copies assets after rendering, so the stub would replace the real page. The
+// bake adds them only when build/jbake is case-sensitive, as on Linux, where CI builds and GitHub Pages serves.
+def caseRedirects = file('src/case-redirects')
+
 // Bakes src/jbake into build/jbake (drafts included, as <name>-draft.html; CI leaves them out of the deploy).
 tasks.register('bake', JavaExec) {
     group = 'build'
     description = 'Bakes the site from src/jbake into build/jbake with JBake.'
     configureJBake(it)
     inputs.dir(jbakeSource)
+    inputs.dir(caseRedirects)
     outputs.dir(jbakeDestination)
     classpath = configurations.jbake
     args jbakeSource.absolutePath, jbakeDestination.absolutePath, '-b'
+    doLast {
+        def destination = jbakeDestination.toPath()
+        if (java.nio.file.Files.exists(destination.resolve('INDEX.HTML'))) {
+            logger.lifecycle('Case-insensitive filesystem: left out the redirect stubs in src/case-redirects ' +
+                    '(they would replace the real pages with the same name in another case). CI adds them.')
+            return
+        }
+        def source = caseRedirects.toPath()
+        java.nio.file.Files.walk(source).withCloseable { paths ->
+            paths.filter { java.nio.file.Files.isRegularFile(it) }.each { file ->
+                def target = destination.resolve(source.relativize(file).toString())
+                java.nio.file.Files.createDirectories(target.parent)
+                java.nio.file.Files.copy(file, target, java.nio.file.StandardCopyOption.REPLACE_EXISTING)
+            }
+        }
+    }
 }
 
 // Local preview (T062, T100): `jbake -b -s` bakes into build/jbake, serves it with Jetty at http://localhost:8080
