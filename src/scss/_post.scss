@@ -1,4 +1,6 @@
 // Styling for the post page
+@use "variables" as *;
+
 .post-preview {
   > a {
     color: $gray-900;

@@ -1,4 +1,6 @@
 // Mixins
+@use "variables" as *;
+
 // Bootstrap Button Variant
 @mixin button-variant($color, $background, $border) {
   color: $color;
@@ -49,15 +51,12 @@
     background-color: $color;
   }
 }
+// Vendor prefixes: only the ones the 2018 build's autoprefixer kept (and the site has served since).
 @mixin transition-all() {
   -webkit-transition: all 0.2s;
-  -moz-transition: all 0.2s;
   transition: all 0.2s;
 }
 @mixin background-cover() {
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
   background-size: cover;
 }
 @mixin serif-font() {
@@ -65,4 +64,7 @@
 }
 @mixin sans-serif-font() {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+@mixin system-font() {
+  font-family: $font-family-system;
 }

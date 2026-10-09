@@ -1,4 +1,7 @@
 // Styling for the contact page
+@use "variables" as *;
+@use "mixins" as *;
+
 .floating-label-form-group {
   font-size: 14px;
   position: relative;
@@ -15,11 +18,13 @@
     border: none;
     border-radius: 0;
     background: none;
+    -webkit-box-shadow: none !important;
     box-shadow: none !important;
-    @include serif-font;
+    // May 2024: the system font (was Lora)
+    @include system-font;
     &::-webkit-input-placeholder {
       color: $gray-600;
-      @include serif-font;
+      @include system-font;
     }
   }
   label {
@@ -31,8 +36,6 @@
     display: block;
     margin: 0;
     -webkit-transition: top 0.3s ease, opacity 0.3s ease;
-    -moz-transition: top 0.3s ease, opacity 0.3s ease;
-    -ms-transition: top 0.3s ease, opacity 0.3s ease;
     transition: top 0.3s ease, opacity 0.3s ease;
     vertical-align: middle;
     vertical-align: baseline;

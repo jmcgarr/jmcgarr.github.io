@@ -1,4 +1,7 @@
 // Styling for the masthead
+@use "variables" as *;
+@use "mixins" as *;
+
 header.masthead {
   // TIP: Background images are set within the HTML using inline CSS!
   margin-bottom: 50px;
@@ -19,10 +22,11 @@ header.masthead {
   .page-heading,
   .post-heading,
   .site-heading {
-    padding: 200px 0 150px;
+    // December 2019: 150px at the top (was 200px), on phones and wider screens
+    padding: 150px 0 150px;
     color: white;
     @media only screen and (min-width: 768px) {
-      padding: 200px 0;
+      padding: 150px 0;
     }
   }
   .page-heading,
