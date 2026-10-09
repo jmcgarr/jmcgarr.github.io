@@ -31,3 +31,10 @@ $warning:       $yellow !default;
 $danger:        $red !default;
 $light:         $gray-100 !default;
 $dark:          $gray-800 !default;
+
+// Button hover color: darken($primary, 7.5%) as the original 2018 build rounded it. Written out because Dart
+// Sass now keeps fractional channels (rgb(0%, 39.77%, 48.14%)) and its global darken() is deprecated.
+$primary-hover: #00657b !default;
+
+// Body text font (May 2024): the system UI font of each platform. Replaced the template's Lora.
+$font-family-system: -apple-system, BlinkMacSystemFont, "Avenir Next", Avenir, "Nimbus Sans L", Roboto, "Noto Sans", "Segoe UI", Arial, Helvetica, "Helvetica Neue", sans-serif !default;

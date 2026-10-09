@@ -1,8 +1,12 @@
 // Global styling for this template
+@use "variables" as *;
+@use "mixins" as *;
+
 body {
-  font-size: 20px;
   color: $gray-900;
-  @include serif-font;
+  // May 2024: the system font at 1.15rem (was Lora at 20px)
+  @include system-font;
+  font-size: 1.15rem;
 }
 
 p {
@@ -20,7 +24,7 @@ h4,
 h5,
 h6 {
   font-weight: 800;
-  @include sans-serif-font;
+  // May 2024: headings use the body font (they were Open Sans)
 }
 
 a {

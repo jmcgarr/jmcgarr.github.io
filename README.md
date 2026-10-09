@@ -7,7 +7,8 @@ Source for https://www.mikemcgarr.com, built with [JBake](https://jbake.org) and
 Requirements
 ============
 - **JDK 21** (CI uses 21 too). `.java-version` selects it if you use [jenv](https://www.jenv.be). Works on Apple Silicon.
-- Nothing else: `./gradlew` downloads the right Gradle version.
+- Nothing else: `./gradlew` downloads the right Gradle version, and Gradle downloads the Sass compiler (see
+  [To change the site's styles](#to-change-the-sites-styles)). No Node or Ruby.
 
 To preview
 ==========
@@ -17,7 +18,8 @@ To preview
 Then open http://localhost:8080. Stop it with `Ctrl+C`. (`./gradlew preview` does the same.)
 
 **It rebuilds on save, and the open page reloads itself.** While the preview runs, saving a post, a template
-(`src/jbake/templates/`), or an asset such as CSS (`src/jbake/assets/`) rebuilds the site with no restart, and the
+(`src/jbake/templates/`), an asset such as CSS (`src/jbake/assets/`), or the theme's SCSS (`src/scss/`) rebuilds the
+site with no restart, and the
 page open in your browser reloads about 0.5–1.6 s after you save. No browser extension is needed: preview pages carry
 a small script (`src/jbake/templates/preview-reload.ftl`) that asks the server every half second whether the page or
 its CSS changed. A normal bake leaves the script out, and CI fails if it ever reaches the deploy contents. The
@@ -114,6 +116,28 @@ If you use a new header image (`masthead=`), put it in `src/jbake/assets/img/mas
 When it's ready, set `status=published` and move it to `src/jbake/content/blog/`. Its URL will be
 `/blog/<slug>.html`. Published URLs are permanent, so pick the slug carefully (see [AGENTS.md](AGENTS.md)).
 
+To change the site's styles
+===========================
+**Edit `src/scss/`, never `clean-blog.css`.** The theme's stylesheet, `/css/clean-blog.css`, is generated from
+`src/scss/clean-blog.scss` and its partials (`_variables.scss` for colors and fonts, `_global.scss`, `_navbar.scss`,
+`_masthead.scss`, ...) on every build (T043). It isn't in the repository: `./gradlew compileSass` writes it to
+`build/generated/sass/css/clean-blog.css`, and `bake` and `preview` copy it into the site at the same URL as always.
+A Sass error fails the build (and CI) with the file and line. The build also refuses to run if a
+`src/jbake/assets/css/clean-blog.css` reappears, since JBake would publish it and it would go stale.
+
+While `./gradlew preview` runs, saving a file in `src/scss/` recompiles the CSS within about a second and the open
+page reloads. A Sass error there is printed in the terminal, and the page keeps the last good CSS.
+
+Small site-specific additions that aren't part of the theme go in `src/jbake/assets/css/extra.css`, which is
+plain CSS and published as-is.
+
+**The compiler** is [Dart Sass](https://sass-lang.com/dart-sass/), the reference Sass implementation, run from
+Gradle by the [freefair Sass plugin](https://plugins.gradle.org/plugin/io.freefair.sass-base) through its
+Java host, [`sass-embedded-host`](https://github.com/larsgrefer/dart-sass-java). No Node, Ruby, or separate install:
+the host's jar (about 49 MB, from Maven Central, cached by Gradle) carries Dart Sass for macOS, Linux, and Windows.
+On first use it unpacks the one for your machine into the system temp folder and runs it as a helper process (a
+small Dart runtime plus the compiler), talking to it over stdin/stdout. Dependabot keeps the plugin current.
+
 To publish
 ==========
 There is no manual publish step. Open a pull request against `main`. When it's merged,
@@ -126,8 +150,9 @@ How the site is built and deployed
 Everything happens in one workflow, [`.github/workflows/gradle.yml`](.github/workflows/gradle.yml)
 (shown as **"Java CI with Gradle"** under Actions). It runs on every pull request and every push to `main`.
 
-1. **Bake:** `./gradlew bake` renders `src/jbake/` into `build/jbake/` with JBake (JDK 21). Drafts are
-   rendered too, as `<name>-draft.html`, but only so you can preview them locally.
+1. **Bake:** `./gradlew bake` compiles `src/scss/` into `css/clean-blog.css` with Dart Sass and renders
+   `src/jbake/` into `build/jbake/` with JBake (JDK 21). Drafts are rendered too, as `<name>-draft.html`, but only
+   so you can preview them locally. A Sass, template, or post error fails the build here.
 2. **Stage:** `build/jbake/` is copied to **`build/site/` without drafts**. `build/site/` is exactly what goes live.
 3. **Check:** every check below runs on `build/site/`, so what's checked is what ships.
 4. **Upload:** `build/site/` is packaged as the GitHub Pages artifact (pushes and manual runs on `main` only).

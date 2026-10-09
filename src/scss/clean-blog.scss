@@ -1,9 +1,15 @@
-@import "variables.scss";
-@import "mixins.scss";
-@import "global.scss";
-@import "navbar.scss";
-@import "masthead.scss";
-@import "post.scss";
-@import "contact.scss";
-@import "footer.scss";
-@import "bootstrap-overrides.scss";
+/*!
+ * Start Bootstrap - Clean Blog v5.0.1 (https://startbootstrap.com/template-overviews/clean-blog)
+ * Copyright 2013-2018 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-clean-blog/blob/master/LICENSE)
+ */
+
+// The site's theme stylesheet. The build compiles this file to /css/clean-blog.css (T043): edit the partials
+// here, never the CSS. Dart Sass runs inside Gradle (`./gradlew compileSass`, part of every bake and preview).
+@use "global";
+@use "navbar";
+@use "masthead";
+@use "post";
+@use "contact";
+@use "footer";
+@use "bootstrap-overrides";
