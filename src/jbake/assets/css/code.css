@@ -1,0 +1,116 @@
+/* Code blocks (T056). Loaded only on pages that contain a <pre> (see templates/code-highlight.ftl).
+   Applies to legacy WordPress <pre> blocks, AsciiDoc listing blocks, and Markdown fenced code alike, with or
+   without JavaScript. Token colors are for PrismJS (vendor/prism/), a light theme to suit Clean Blog; every
+   color has at least 4.5:1 contrast on the block background. */
+
+pre,
+.literalblock > .content > pre,
+.listingblock > .content > pre {
+  margin: 0 0 1.5rem;
+  padding: 0.875rem 1rem;
+  overflow-x: auto; /* long lines scroll inside the block instead of widening the page */
+  -webkit-overflow-scrolling: touch;
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #24292e;
+  background: #f6f8fa;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  white-space: pre;
+  word-wrap: normal;
+  overflow-wrap: normal;
+  word-break: normal;
+  -moz-tab-size: 4;
+  tab-size: 4;
+  -webkit-hyphens: none;
+  hyphens: none;
+  text-shadow: none;
+}
+
+@media (min-width: 768px) {
+  pre,
+  .literalblock > .content > pre,
+  .listingblock > .content > pre {
+    font-size: 0.9375rem;
+  }
+}
+
+pre > code,
+.literalblock > .content > pre > code,
+.listingblock > .content > pre > code {
+  display: block;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  white-space: inherit;
+  background: none;
+  border: 0;
+}
+
+/* AsciiDoc listings: the block already has its own bottom margin. */
+.listingblock > .content > pre,
+.literalblock > .content > pre {
+  margin-bottom: 0;
+}
+
+/* PrismJS tokens */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #5c6670;
+  font-style: italic;
+}
+.token.punctuation {
+  color: #4f5760;
+}
+.token.keyword,
+.token.important,
+.token.atrule,
+.token.selector,
+.token.annotation {
+  color: #c4183c;
+}
+.token.string,
+.token.char,
+.token.attr-value,
+.token.regex,
+.token.url {
+  color: #0b5394;
+}
+.token.number,
+.token.boolean,
+.token.constant,
+.token.symbol,
+.token.builtin {
+  color: #005cc5;
+}
+.token.function,
+.token.class-name,
+.token.attr-name {
+  color: #6339a5;
+}
+.token.tag,
+.token.inserted,
+.token.key,
+.token.property {
+  color: #1f6f32;
+}
+.token.variable,
+.token.parameter,
+.token.deleted {
+  color: #a8440d;
+}
+.token.operator,
+.token.entity {
+  color: #24292e;
+}
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+.token.italic {
+  font-style: italic;
+}

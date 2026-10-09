@@ -49,5 +49,7 @@
 
     <!-- Privacy-friendly analytics, no cookies: https://mikemcgarr.goatcounter.com (doesn't count localhost) -->
     <script data-goatcounter="https://mikemcgarr.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<#-- Code highlighting, only on pages with code (T056, code-highlight.ftl) -->
+<@codeHighlightJs/>
   </body>
 </html>
