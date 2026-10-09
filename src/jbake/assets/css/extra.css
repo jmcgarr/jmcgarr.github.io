@@ -44,6 +44,48 @@
   font-style: italic;
 }
 
+/* No sideways scrolling on phones (T103). A URL or other word too long for a whole line (the photo
+   credit, links and file paths in posts, bare URLs on pages) wraps instead of widening the page;
+   lines that already fit don't change. Not set on the whole page: beside a floated image, Chrome
+   would split words instead of moving them below the image. Code blocks still scroll inside
+   themselves (code.css), and video embeds shrink to the column (images already do, in
+   asciidoctor.css). */
+.photo-credit,
+article p,
+article li,
+article a,
+a.bare {
+  overflow-wrap: break-word;
+}
+article p:has(img[align]),
+article p:has(img[align]) a {
+  overflow-wrap: normal;
+}
+iframe {
+  max-width: 100%;
+}
+/* A long word in a masthead title may hang into the column's padding without being split, but it
+   must not widen the page (at 375px, one title overhangs by 2px). Below 375px, split such a word
+   rather than clip it. */
+header.masthead {
+  overflow-x: clip;
+}
+@media (max-width: 374.98px) {
+  header.masthead h1 {
+    overflow-wrap: break-word;
+  }
+}
+
+/* Archive and tag pages (T104): the outer list holds one <li> per month (its <h4> and its list of
+   posts). No marker on those items, and the same indent as the old markup (asciidoctor.css gives
+   "ul li ul" 1.25em; the old "ul ul" got 1.5em), so it looks unchanged. */
+.archive-months {
+  list-style: none;
+}
+.archive-months > li > ul {
+  margin-left: 1.5em;
+}
+
 /* Responsive header image (T071). The URLs come from custom properties set on the <header> by
    masthead.ftl; these breakpoints must match the preload media queries there. */
 header.masthead {
