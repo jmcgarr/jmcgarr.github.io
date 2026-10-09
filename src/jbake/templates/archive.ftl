@@ -6,7 +6,7 @@
 	<#assign pageSubtitle = "">
 	<#assign masthead = "london-view.jpg">
 	<#assign mastheadCredit = "Me, View from QCon London 2019 talk">
-	<#include "masthead.ftl">
+	<@externalLinksIn><#include "masthead.ftl"></@externalLinksIn><#-- the photo credit opens in a new tab (T058) -->
 
 	<div class="container">
     <div class="row justify-content-md-center">
