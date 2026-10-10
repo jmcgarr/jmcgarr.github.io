@@ -130,7 +130,7 @@ http://www.slideshare.net/jmcgarr/beyond-the-culture-deck-what-you-dont-already-
 
 Presented at:
 
-- http://devopsenterprise.io/sessions/beyond-the-culture-deck-what-you-dont-already-know-about-netflix/[DevOps Enterprise Summit 2015] - https://www.youtube.com/watch?v=3hULyTAESBE[(Video)]
+- https://web.archive.org/web/20151024054123/http://devopsenterprise.io:80/sessions/beyond-the-culture-deck-what-you-dont-already-know-about-netflix/[DevOps Enterprise Summit 2015] - https://www.youtube.com/watch?v=3hULyTAESBE[(Video)]
 - https://niketechtalks-dec2015.splashthat.com/[Nike Tech Talks]
 
 
@@ -145,7 +145,7 @@ http://www.slideshare.net/jmcgarr/centralized-team-in-a-decentralized-world-engi
 Presented at:
 
 - http://www.oscon.com/open-source-2015/public/schedule/detail/42183[OSCON 2015] - https://www.youtube.com/watch?v=mWwVLRALhaE[(Video)]
-- http://gradlesummit.com/conference/santa_clara/2015/06/session?id=33638[Gradle Summit 2015] - https://www.youtube.com/watch?v=mRVZ3-qkfFg[(Video)]
+- https://web.archive.org/web/20150319054924/http://gradlesummit.com/conference/santa_clara/2015/06/session?id=33638[Gradle Summit 2015] - https://www.youtube.com/watch?v=mRVZ3-qkfFg[(Video)]
 - https://www.alm-forum.com/s15/presenters#mikem[ALM Summit 2015]
 
 == Build and deploy to the cloud using Netflix OSS (2015)
