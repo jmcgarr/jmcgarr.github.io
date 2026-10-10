@@ -499,13 +499,17 @@ About, Talks, and Bio pages are current, and all content files use LF line endin
 
 - [ ] T048 [BUG] The About page is out of date (it says "currently at Slack", from 2018). Review the Talks and Speaker Bio pages too (`src/jbake/content/about.asciidoc`, `talks.asciidoc`, `speaker-bio.asciidoc`)
   - **Test:** A manual read-through confirms roles, employers, and dates are current, and each page's `date=` is updated.
+  - _2026-10-09: the out-of-date sentences on About, Speaker Bio and Talks are quoted in [`reports/content-2026-10-09.md`](reports/content-2026-10-09.md) §I.1 (no wording proposed; the author writes it), awaiting owner._
 - [ ] T049 [BUG] Fix images hotlinked from dead or insecure hosts (public Dropbox links, agilescout.com, the Hudson wiki, `http://farm*.staticflickr.com`). Recover what you can through the Wayback Machine and self-host it in `assets/img/`, and remove or replace the rest (`src/jbake/content/blog/`)
   - **Test:** `grep -rE '<img[^>]+src="https?://' src/jbake/content` returns only intentional, working external images. `lychee build/jbake` reports 0 broken image URLs.
+  - _2026-10-09: findings in [`reports/content-2026-10-09.md`](reports/content-2026-10-09.md) §C (every hotlinked image, with Wayback snapshots and suggested local paths), awaiting owner approval._
 - [ ] T050 [BUG] Fix broken outbound links. Update each one, point it to an archive.org snapshot, or remove it (`src/jbake/content/`)
   - **Test:** Save a `lychee build/jbake` report to `docs/reports/links-<date>.md` showing 0 errors, or with each remaining failure listed and justified.
+  - _2026-10-09: findings in [`reports/content-2026-10-09.md`](reports/content-2026-10-09.md) §A (online check of every outbound link: broken links with Wayback snapshots, permanent redirects, and the ones to check by hand), awaiting owner approval. That report is the proposal, not this task's test report._
 
 - [ ] T105 [P] [BUG] **WordPress debris inside code blocks.** Four legacy posts have leftover markup from the WordPress export inside their `<pre>` blocks, and it shows as literal text: `" frameborder="0" allowfullscreen>`. Affected: `improving-my-shell-fu-oh-my-zsh`, `simple-git-aliases`, `ruby-broke-my-path`, `octopress-on-os`. Found in M5 track 3, 2026-10-08. It's markup, not prose, but it's in post files, so show the owner the exact removals first (AGENTS.md Rule 3). Keep the CR-only line endings (or do it with T102) (`src/jbake/content/blog/`)
   - **Test:** `grep -rl 'frameborder="0" allowfullscreen>' src/jbake/content/blog/*.html` lists none of the four posts, any `<iframe>` embeds elsewhere are untouched, and each post's visible text changes only by the removed debris.
+  - _2026-10-09: exact removals in [`reports/content-2026-10-09.md`](reports/content-2026-10-09.md) §D, awaiting owner approval. A fifth post has the same debris (`test-method-names`, twice), and the export ate a `]` in each case, so most fixes restore it rather than only delete._
 
 ### Improvements
 
@@ -514,6 +518,7 @@ About, Talks, and Bio pages are current, and all content files use LF line endin
   - _Done 2026-10-09 (`chore/T051-lf-line-endings`), **owner's request**. GitHub showed 47 of PR #83's 58 post edits as a one-line replacement of the whole file, because git only counts `\n` as a line break. All 63 files were converted, 43 CR-only and 20 mixed: **1,589 bare CR → LF**, with no CRLF pairs. **Each file equals its old version with CR → LF, byte for byte** (script check, 0 mismatches). **Test:** `grep -rlU $'\r' src/jbake/content | wc -l` → `0`. **The baked site is byte-identical** before and after: all 494 files, ignoring only `feed.xml`'s timestamps. JBake already normalized line endings when it read these posts, so no reader-visible or published byte changes. Guards: a CI step "Check sources have no CR line endings" (content, templates, SCSS) and `.gitattributes` (`text eol=lf` for those folders, CRLF kept for `*.bat`). Not converted: `gradlew.bat`/`gradle/gradlew.bat` (Windows scripts need CRLF) and five legacy `webicon-*.svg` images (published assets, not edited)._
 - [ ] T052 [P] [IMP] Upgrade outbound `http://` links to `https://` where the target supports it (`src/jbake/content/`)
   - **Test:** The `http://` link count drops from the 559 baseline in `docs/baseline/metrics.md`, and `lychee` is still clean.
+  - _2026-10-09: findings in [`reports/content-2026-10-09.md`](reports/content-2026-10-09.md) §B (each upgrade tested: the `https://` URL works and lands on the same page), awaiting owner approval. The count is 555 today by the baseline command._
 - [ ] T053 [P] [IMP] Triage the 12-post drafts backlog: finish and publish, keep as drafts, or delete (`drafts/` after T009)
   - **Test:** Every draft has a recorded decision (a short table in `docs/reports/drafts-triage.md`).
 - [ ] T054 [P] [IMP] _(Optional)_ Fix the slug typos (`relections-and-projections-2019`, `vagrant-cheatsheat`, `developer-reading-lis`), but **only** together with redirect stubs at the old URLs (`src/jbake/content/blog/`)
