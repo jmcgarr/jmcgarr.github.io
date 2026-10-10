@@ -17,7 +17,7 @@ sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer/Platforms/M
 <h3>Rake</h3>
 <p>When I ran the 'rake install' command, I got the following error:</p>
 <pre>
-$ rake install rake aborted! You have already activated rake 0.9.2.2, but your Gemfile requires rake 0.9.2. Using bundle exec may solve this.[/sourcecode" frameborder="0" allowfullscreen>
+$ rake install rake aborted! You have already activated rake 0.9.2.2, but your Gemfile requires rake 0.9.2. Using bundle exec may solve this.
 </pre>
 <p>There is also a <a href="https://github.com/imathis/octopress/issues/250" target="_blank">bug report</a> for this on Octopress, but it was easy enough to fix by just updating the Gemfile.lock to point to rake 0.9.2.2 instead of 0.9.2.  I imagine there is a better way to do this with Ruby, but since this is my first foray into Ruby development.</p>
 <p>That should resolve your issues.  Best of luck!</p>

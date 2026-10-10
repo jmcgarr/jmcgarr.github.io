@@ -6,7 +6,7 @@ status=published
 ~~~~~~
 <p>When coaching individuals on how to name unit test methods, I have struggled to come up with a standard that I like.  I have read numerous posts and books on the subject with a wide variety of results and standards.  In this blog I will explore the various standards for naming unit test methods and present my perspective on the subject.</p>
 <p>Prior to discussing unit test methods, I want to mention that the naming conventions for unit test <em>classes</em> are fairly well solidified.  I will assume that everybody will using the following naming convention for their unit test classes:</p>
-<blockquote><p>[NameOfClassUnderTest" frameborder="0" allowfullscreen></iframe>Test</p></blockquote>
+<blockquote><p>[NameOfClassUnderTest]Test</p></blockquote>
 <p>Some conventions specify that the 'Test' postfix be 'Tests'.  I personally don't care about the difference between the two, so long as your team uses one or the other and not both.</p>
 <p><strong>JUnit</strong></p>
 <p><a title="JUnit" href="http://www.junit.org/" target="_blank">JUnit</a> is one of the first unit testing frameworks and one could argue is responsible for the explosion of unit testing over the past ten years.  In previous versions of JUnit, it was necessary that the name of the unit test method be prefixed with <strong>test</strong>.  This was how the JUnit runner identified unit test methods.  So a unit test method name might look like this:</p>
@@ -21,7 +21,7 @@ public void testAddingTwoNumbers();
 <p><strong>The Art of Unit Testing</strong></p>
 <p><a title="Roy Osherove" href="http://osherove.com/blog" target="_blank">Roy Osherove</a> wrote a great book on unit testing called <a title="The Art of Unit Testing" href="http://artofunittesting.com/" target="_blank">the Art of Unit Testing</a>.  While this book was focused on <a title="Microsoft .NET" href="http://en.wikipedia.org/wiki/.NET_Framework" target="_blank">.NET</a> testing approaches, there is a lot of good recommendations there applicable to all developers, and I would recommend it.</p>
 <p>In this book (as well as his <a title="Roy's Naming standards" href="http://osherove.com/blog/2005/4/3/naming-standards-for-unit-tests.html" target="_blank">blog</a>), Roy recommends a unit test method naming convention that uses the following pattern:</p>
-<blockquote><p>[MethodName_StateUnderTest_ExpectedBehavior" frameborder="0" allowfullscreen></iframe></p></blockquote>
+<blockquote><p>[MethodName_StateUnderTest_ExpectedBehavior]</p></blockquote>
 <p>While I appreciate how comprehensive this standard is, I don't personally subscribe to this approach.  I find that this approach doesn't put enough emphasis on the overall behavior of the class under test, but rather inputs and outputs of methods on the class.  When applying TDD, I find that I think more about behavior than I do inputs/outputs.</p>
 <p><strong>Introducing BDD</strong></p>
 <p>Dan North introduced Behavior Driven Development, or BDD in 2006 with an article in Better Software magazine (which you can read <a title="Dan North introducing BDD" href="http://dannorth.net/introducing-bdd/" target="_blank">here</a>).  In this article, Dan discusses the series of revelations he had regarding unit test naming conventions before he came across BDD's Given When Then convention.  I am not going to go over BDD here, but I definitely recommend reading this article.</p>

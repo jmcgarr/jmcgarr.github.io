@@ -7,7 +7,7 @@ status=published
 <p>Yesterday I spent some time <a title="Octopress on OS X" href="/blog/octopress-on-os.html" target="_blank">getting Ruby up and running on my Mac</a>, with the intent of playing with <a title="Octopress" href="http://octopress.org/" target="_blank">Octopress</a>.  Today, I wanted to go back to a <a title="Grails" href="http://grails.org/" target="_blank">Grails</a> app I had been working on, when I realized that Grails was no longer in my PATH.  Somehow, my PATH variable had been "hijacked" by the <a title="Ruby" href="http://www.ruby-lang.org/en/" target="_blank">Ruby</a> or <a title="Ruby RVM" href="https://rvm.io/" target="_blank">RVM</a> installs.  I immediately started to investigate the issue.</p>
 <pre>
 $&gt; grails run-app
--bash: grails: command not found[/sourcecode" frameborder="0" allowfullscreen>
+-bash: grails: command not found
 </pre>
 First, I double checked my <em>~/.profile</em> file, where I added Grails to my PATH.  This was unchanged, but Grails was stil not being added to my PATH.<br />
 <pre>
