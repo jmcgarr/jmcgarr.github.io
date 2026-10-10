@@ -14,7 +14,7 @@ Two simple words, repeated. I have come to appreciate how powerful these words a
 
 Let me tell you how I stumbled upon them.
 
-About a year ago, https://twitter.com/jon_k_schneider[Jon Schneider] joined the Build Tools team at http://www.netflix.com[Netflix]. Jon quickly ramped up on http://github.com/nebula-plugins[Nebula], our http://www.gradle.org[Gradle] build system. Then he shifted his gaze to Astrid. Astrid is a internal tool that provides insight into the complete Java dependency graph at Netflix. This was the perfect place or Jon to apply his love of math and algorithms.
+About a year ago, https://twitter.com/jon_k_schneider[Jon Schneider] joined the Build Tools team at https://www.netflix.com[Netflix]. Jon quickly ramped up on https://github.com/nebula-plugins[Nebula], our https://www.gradle.org[Gradle] build system. Then he shifted his gaze to Astrid. Astrid is a internal tool that provides insight into the complete Java dependency graph at Netflix. This was the perfect place or Jon to apply his love of math and algorithms.
 
 As development progressed on Astrid, Jon and I would discuss his progress. He would share with me technical challenges and how he overcame them. Not being as deep in math as Jon, I would often struggle with some of the concepts. In order to ensure I understood, I would repeat back my understanding of what he said.
 

@@ -21,9 +21,17 @@ Where the stubs go:
                                   (build.gradle) copies these only when the output folder is
                                   case-sensitive, as on Linux, where CI builds and GitHub Pages serves.
 
+The old tag URLs kept are:
+  - every tag URL in docs/baseline/urls.txt (the live site before the revival), and
+  - the hyphenated page of every baseline tag with a space (tags/acceptance-test.html). Those were
+    published by T039 on 2026-10-09 and aren't in the baseline, which only changes at a milestone
+    checkpoint. Each is derived from its baseline twin, so the list needs no upkeep.
+
 The new name of an old tag is worked out from the posts: spaces become hyphens, as JBake does, and if
-no published post uses that exact tag any more, a tag that differs only by case is used. An old tag
-with no match at all is an error: decide what it should point to before going on.
+no published post uses that exact tag any more, a tag that differs only by case is used. A tag that
+was merged into another or renamed on purpose is listed in RENAMES (old -> new, as written in the
+posts), and all its old URLs (spaced and hyphenated) point to the new tag's page. An old tag with no
+match at all is an error: decide what it should point to (add it to RENAMES) before going on.
 
 --check also makes sure each real tag page shows its tag as written in the posts, spaces included
 (templates/tag-names.ftl, T057): JBake keeps only the hyphenated form, so a tag with a hyphen of its
@@ -38,6 +46,21 @@ BASELINE = "docs/baseline/urls.txt"
 CONTENT = "src/jbake/content"
 STUB_DIRS = {False: "src/jbake/assets", True: "src/case-redirects"}  # key: differs only by case?
 MARKER = "<!-- tag redirect stub (scripts/tag-redirects.py) -->"
+
+# Tags merged into another tag or renamed, old -> new, both as written in the posts' tags= lines. Every old URL of
+# the old tag (baseline and hyphenated) becomes a stub to the new tag's page. Never remove an entry: its stubs are
+# published URLs. Owner-approved 2026-10-09 (docs/reports/content-2026-10-09.md, section H).
+RENAMES = {
+    "presentation": "presentations",                       # H1 merge
+    "talks": "presentations",                              # H2 merge
+    "excella": "Excella Consulting",                       # H3 merge
+    "vi": "vim",                                           # H4 merge
+    "lamdbas": "lambdas",                                  # H5 typo
+    "google calender": "google calendar",                  # H6 typo
+    "software craftsmenship": "software craftsmanship",    # H7 typo
+    "paired programming": "pair programming",              # H8 the usual term
+    "build": "build automation",                           # H9 merge
+}
 
 
 def url_path(path):
@@ -66,18 +89,41 @@ def written_tags():
     return tags
 
 
+def baseline_tag_urls():
+    """The tag URLs in docs/baseline/urls.txt (the live site before the revival)."""
+    return [u.strip() for u in open(BASELINE, encoding="utf-8") if u.startswith("tags/")]
+
+
+def hyphenated_tag_urls():
+    """The hyphenated twin of every baseline tag URL with a space: published since T039 (2026-10-09), not in the baseline."""
+    baseline = set(baseline_tag_urls())
+    return sorted({u.replace(" ", "-") for u in baseline if " " in u} - baseline)
+
+
+def old_tag_urls():
+    """Every tag URL the site has published and must keep: (url, where it comes from)."""
+    return [(u, "baseline") for u in baseline_tag_urls()] + [(u, "since T039") for u in hyphenated_tag_urls()]
+
+
 def redirects():
-    """[(old path, new path)] for every baseline tag URL that no longer has a real tag page."""
+    """[(old path, new path)] for every old tag URL that no longer has a real tag page."""
     tags = published_tags()
     by_fold = {}
     for t in tags:
         by_fold.setdefault(t.casefold(), []).append(t)
-    old_urls = [u.strip() for u in open(BASELINE, encoding="utf-8") if u.startswith("tags/")]
+    renames = {o.replace(" ", "-"): n.replace(" ", "-") for o, n in RENAMES.items()}
     pairs, errors = [], []
-    for old in old_urls:
+    for o, n in renames.items():
+        if o in tags:
+            errors.append(f"RENAMES: '{o}' is still used by a published post (its stub would replace the real page)")
+        if n not in tags:
+            errors.append(f"RENAMES: '{o}' -> '{n}', but no published post uses '{n}'")
+    for old, _ in old_tag_urls():
         name = old[len("tags/"):-len(".html")]
         new = name.replace(" ", "-")
-        if new not in tags:
+        if new in renames:
+            new = renames[new]
+        elif new not in tags:
             matches = by_fold.get(new.casefold(), [])
             if len(matches) != 1:
                 errors.append(f"{old}: no published tag {'matches' if not matches else 'is unambiguous'}: {matches}")
@@ -149,8 +195,8 @@ def check(site):
     case_insensitive = os.path.exists(os.path.join(site, "INDEX.HTML"))
     problems, skipped, real, stubs = [], [], 0, 0
     pairs = dict(redirects())
-    old_urls = [u.strip() for u in open(BASELINE, encoding="utf-8") if u.startswith("tags/")]
-    for old in old_urls:
+    old_urls = old_tag_urls()
+    for old, _ in old_urls:
         if not exists_exactly(site, old):
             if case_insensitive and old in pairs and old.casefold() == pairs[old].casefold():
                 skipped.append(old)
@@ -184,14 +230,18 @@ def check(site):
     spaced = [f for f in os.listdir(os.path.join(site, "tags")) if " " in f and f"tags/{f}" not in pairs]
     problems += [f"tags/{f}: a tag page with a space in its URL that isn't a known stub" for f in spaced]
     problems += shown_names(site)
-    print(f"{len(old_urls)} baseline tag URLs: {real} real tag pages, {stubs} redirect stubs, {len(skipped)} not checkable here")
+    by_source = {}
+    for _, source in old_urls:
+        by_source[source] = by_source.get(source, 0) + 1
+    print(f"{len(old_urls)} old tag URLs ({by_source.get('baseline', 0)} baseline, {by_source.get('since T039', 0)} hyphenated "
+          f"since T039): {real} real tag pages, {stubs} redirect stubs, {len(skipped)} not checkable here")
     for old in skipped:
         print(f"  ~ {old} (case-insensitive filesystem: same file as {pairs[old]}; the stub is added only on Linux)")
     for p in problems:
         print(f"  ! {p}")
     if problems:
         sys.exit(f"FAIL: {len(problems)} problems in {site}")
-    print(f"OK: every baseline tag URL in {site} is a tag page or a stub whose target is a tag page")
+    print(f"OK: every old tag URL in {site} is a tag page or a stub whose target is a tag page")
 
 
 def shown_names(site):

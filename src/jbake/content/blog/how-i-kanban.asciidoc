@@ -7,9 +7,9 @@ summary=For years I have been trying to find the perfect personal task managemen
 masthead=toyota-factory.jpg
 mastheadCredit=https://flic.kr/p/ewnpoM
 ~~~~~~
-For years I have been trying to find the perfect personal task management process that is easy, intuitive and effective.  My friends and colleagues have witnessed the various techniques I have adopted over the years.  “Hey Mike, why are carrying a stack of notecards?” they would ask.  I have tried various http://gettingthingsdone.com/[GTD (Getting Things Done)] apps, to stacks of notecards, to Scrum boards at home, to giant lists...all of them failed.  
+For years I have been trying to find the perfect personal task management process that is easy, intuitive and effective.  My friends and colleagues have witnessed the various techniques I have adopted over the years.  “Hey Mike, why are carrying a stack of notecards?” they would ask.  I have tried various https://gettingthingsdone.com/[GTD (Getting Things Done)] apps, to stacks of notecards, to Scrum boards at home, to giant lists...all of them failed.  
 
-Eventually, I settled on an implementation of http://www.personalkanban.com/pk/[Personal Kanban] using https://trello.com/[Trello].  The beauty of this approach is it’s simple, free and easy to take with you.  
+Eventually, I settled on an implementation of https://www.personalkanban.com/pk/[Personal Kanban] using https://trello.com/[Trello].  The beauty of this approach is it’s simple, free and easy to take with you.  
 
 Rather than share my actual personal kanban board (what, I like my privacy), I decided to create https://trello.com/b/KloBf6xB/example-personal-kanban[an example one to share].  Here’s a screenshot.
 
@@ -57,7 +57,7 @@ If the card is no longer relevant, then I will use Trello's archive feature.  Th
 If the card is still relevant, what is the priority of this card.  I will move it to the top or the bottom of the column depending on how I feel it's priority has changed.  
 
 == Context
-From the begining, I wanted to apply the concept of http://hamberg.no/gtd/#contexts[context from GTD] to my Personal Kanban Trello board.  While with GTD, you can have a lot of contexts.  For me, I only use two contexts: personal and work.  I apply a context to a card through two methods: backlogs and http://help.trello.com/customer/portal/articles/935748-adding-labels-to-cards[Trello Labels].
+From the begining, I wanted to apply the concept of https://hamberg.no/gtd/#contexts[context from GTD] to my Personal Kanban Trello board.  While with GTD, you can have a lot of contexts.  For me, I only use two contexts: personal and work.  I apply a context to a card through two methods: backlogs and http://help.trello.com/customer/portal/articles/935748-adding-labels-to-cards[Trello Labels].
 
 In my Trello board, I have two backlogs, personal and work.  I like using separate backlogs beause I prefer prioritizing my personal and work cards separately.  When I am at work, the cards in the work backlog have a higher priority than the cards in the personal backlog.  When I am home, the inverse is true.  This approach may not appeal to everybody.
 

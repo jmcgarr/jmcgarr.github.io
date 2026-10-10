@@ -48,13 +48,13 @@ There’s an interesting third type of behavior that I would like to mention.  *
 
 An organization’s *values* define which behaviors are expected, accepted and rewarded.  Values are the bedrock by which a culture reinforces itself.  If an organization's values aren't well known, understood or communicated, it will be hard to understand how one should act.
 
-Do you know what your company’s values are?  Prior to my joining http://www.netflix.com[Netflix] I can honestly say I paid little attention to my company's values.  I might have seen them in a document a few times a year, but they seemed unimportant to me.  They felt like obvious social norms.  And they all looked the same to me.  But as I began to understand that culture was the source of my frustrations, I started to see how an organization's values were important.  I also realized that an organization's documented values don't always paint a complete picture.
+Do you know what your company’s values are?  Prior to my joining https://www.netflix.com[Netflix] I can honestly say I paid little attention to my company's values.  I might have seen them in a document a few times a year, but they seemed unimportant to me.  They felt like obvious social norms.  And they all looked the same to me.  But as I began to understand that culture was the source of my frustrations, I started to see how an organization's values were important.  I also realized that an organization's documented values don't always paint a complete picture.
 
 === Stated and Unstated Values
 
 There are two types of organizational values: stated and unstated values.  *Stated values* are the documented organization values.  Everybody in the company should have access to a clear definition of each value.  Expected behaviors are generally based on stated values. *Unstated values* emerge from the accepted (and rewarded) behavior that does not align with the organization's stated values.
 
-If unstated values conflict with stated values, this could represent a problem for the culture.  An organization that rewards behavior opposed to stated values indicates an unhealthy culture.  Hopefully this is obvious to everybody.  I will steal the example used in the http://www.slideshare.net/reed2001/culture-1798664[Netflix culture deck] of http://en.wikipedia.org/wiki/Enron[Enron].  Nuff said.
+If unstated values conflict with stated values, this could represent a problem for the culture.  An organization that rewards behavior opposed to stated values indicates an unhealthy culture.  Hopefully this is obvious to everybody.  I will steal the example used in the http://www.slideshare.net/reed2001/culture-1798664[Netflix culture deck] of https://en.wikipedia.org/wiki/Enron[Enron].  Nuff said.
 
 image::/img/netflix-culture-enron.png[Netflix Culture Deck on Enron,500,align="center"]
 
