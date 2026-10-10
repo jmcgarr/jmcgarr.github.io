@@ -122,7 +122,7 @@ dropping the color profile, and strip camera metadata. See T016 in the revival p
 - Don't change a post's `date=`. It controls ordering, the archive, the feed, and the sitemap.
 - Don't change `status=` (draft ↔ published) unless asked. Publishing is the author's decision.
 - Front matter is `key=value` lines ending with a `~~~~~~` separator. Keep that format.
-- 63 legacy files use old Mac **CR-only** line endings. Don't mass-convert or reformat them outside revival task T051, because that makes diffs unreadable.
+- All content uses **LF** line endings. The 63 legacy WordPress posts were converted from old Mac CR-only line breaks in revival task T051, so diffs stay line-by-line on GitHub. CI fails if a CR line ending comes back.
 
 ## Rule 4: Nothing private gets published
 

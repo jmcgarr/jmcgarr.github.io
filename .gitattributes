@@ -1,0 +1,7 @@
+# Line endings (T051). Content, templates, and styles are stored with LF line endings so diffs stay
+# line-by-line on GitHub. (Git can't normalize old Mac CR-only files; CI's "Check sources have no CR line
+# endings" step catches those.) The Windows wrapper script keeps CRLF.
+src/jbake/content/**    text eol=lf
+src/jbake/templates/**  text eol=lf
+src/scss/**             text eol=lf
+*.bat                   text eol=crlf
