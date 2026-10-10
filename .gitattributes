@@ -1,7 +1,10 @@
 # Line endings (T051). Content, templates, and styles are stored with LF line endings so diffs stay
 # line-by-line on GitHub. (Git can't normalize old Mac CR-only files; CI's "Check sources have no CR line
-# endings" step catches those.) The Windows wrapper script keeps CRLF.
+# endings" step catches those.)
 src/jbake/content/**    text eol=lf
 src/jbake/templates/**  text eol=lf
 src/scss/**             text eol=lf
-*.bat                   text eol=crlf
+# The Windows wrapper scripts are stored with CRLF and must stay byte-for-byte as they are. Marking them `text`
+# (as T051 first did) made git report them as modified in every checkout, because `text` files are expected
+# to be stored with LF.
+*.bat                   -text
