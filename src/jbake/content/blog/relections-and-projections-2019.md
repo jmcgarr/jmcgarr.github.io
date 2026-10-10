@@ -37,7 +37,7 @@ Special thank you to Dan North for the invitation to speak. It was an honor (sor
 
 I was lucky enough to be invited to [keynote QCon San Francisco](https://www.infoq.com/presentations/microcultures-organizational-culture/) this year. I am told that my talk at QCon London was a big reason for the invitation. This would be the third time I keynoted a conference (previously [Gradle Summit](https://www.youtube.com/watch?v=k_mPS_1JpXM) and [DevOpsCon](https://www.youtube.com/watch?v=VNqmHJtItCs)), but QCon was the biggest stage for sure. It was stressful and challenging, but absolutely worth it. I can remember first discovering InfoQ.com and loving the quality of the content...and thinking I would never get a talk posted there. With this keynote in the bag, I feel like I've unlocked a personal achievement.
 
-Thank you to [Wes Reisz](https://qconlondon.com/pc-chairs/wes-reisz) for the invitation to speak.
+Thank you to [Wes Reisz](https://web.archive.org/web/20191204095539/https://qconlondon.com/pc-chairs/wes-reisz/) for the invitation to speak.
 
 ### Back at Nike
 
