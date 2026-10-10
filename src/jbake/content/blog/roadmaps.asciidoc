@@ -95,7 +95,7 @@ The problem with starting with a tool is that the tool has been designed to solv
 
 I wanted to give a shout out to the biggest influence on my roadmaps. The site that got me started was the https://itkanban.wordpress.com/framework/roadmaps/strategic-roadmaps/[IT Kanban wordpress site], that included a section on Strategic roadmaps. Their approach just clicked with me and my early roadmaps looked just like theirs.
 
-Since then, I've had some great feedback from colleagues with a lot more product management experience than me. In particular, I want to give a shout out to http://barryhawkins.com/[Barry Hawkins] for some of his feedback and insight. Thanks Barry!
+Since then, I've had some great feedback from colleagues with a lot more product management experience than me. In particular, I want to give a shout out to https://barryhawkins.com/[Barry Hawkins] for some of his feedback and insight. Thanks Barry!
 
 == Give it a shot
 

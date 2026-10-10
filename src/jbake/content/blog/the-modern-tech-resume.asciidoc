@@ -7,7 +7,7 @@ summary=After I had gone through the Netflix recruiting process, it struck me th
 masthead=resume.jpg
 mastheadCredit=https://flic.kr/p/nbAtrh
 ~~~~~~
-After I had gone through the http://www.netflix.com[Netflix] recruiting process, it struck me that nobody ever asked me for a resume.  The recruiting team already had all the information they needed that you would normally find on a resume.  This information was readily available online.  My profile on LinkedIn, my Twitter feed, my Github profile, and my blog all provided a comprehensive resume, more detailed than a 2-page resume.  My online presence serves as my resume, a _modern technical resume_.
+After I had gone through the https://www.netflix.com[Netflix] recruiting process, it struck me that nobody ever asked me for a resume.  The recruiting team already had all the information they needed that you would normally find on a resume.  This information was readily available online.  My profile on LinkedIn, my Twitter feed, my Github profile, and my blog all provided a comprehensive resume, more detailed than a 2-page resume.  My online presence serves as my resume, a _modern technical resume_.
 
 image::/img/the-modern-resume.png[The Modern Resume]
 
@@ -46,7 +46,7 @@ Building a good Twitter account can be a long road, so just start one tweet at a
 
 == Github
 
-Having a good http://www.github.com[Github] account can be the most useful part of your modern resume.  Github serves as a modern portfolio of work, demonstrating how well you write code.  Don’t hesitate to put code on Github, even if it’s just examples of frameworks and tools that you are learning.  Ideally, you are open sourcing or contributing to an existing open source project.  
+Having a good https://www.github.com[Github] account can be the most useful part of your modern resume.  Github serves as a modern portfolio of work, demonstrating how well you write code.  Don’t hesitate to put code on Github, even if it’s just examples of frameworks and tools that you are learning.  Ideally, you are open sourcing or contributing to an existing open source project.  
 
 Here are some bootstrapping tips for improving your Github account presence:
 
@@ -66,7 +66,7 @@ Almost every engineer I know falls into one of three camps: those who have a blo
 Getting started isn't easy, but here are some pointers:
 
 * *Pick a domain name* - You have two options: be creative or choose your name.  Either works great, but buy the domain name.  Give yourself 24 hours to pick a name, and then just go with it.  
-* *Use a service* - You may be tempted to use a blogging tool like http://jekyllrb.com/[Jekyll], http://octopress.org/[Octopress] or http://jbake.org/[JBake], and yes they are awesome (I am loving JBake).  You may even want to stand up your own Wordpress server.  Don't. They are an obstacle to getting started.  Use a service like Wordpress.com, Blogger or Tumblr.  The only setup you will need is assigning your domain name to the service.  Once that's done, you can start blogging.
+* *Use a service* - You may be tempted to use a blogging tool like https://jekyllrb.com/[Jekyll], https://octopress.org/[Octopress] or https://jbake.org/[JBake], and yes they are awesome (I am loving JBake).  You may even want to stand up your own Wordpress server.  Don't. They are an obstacle to getting started.  Use a service like Wordpress.com, Blogger or Tumblr.  The only setup you will need is assigning your domain name to the service.  Once that's done, you can start blogging.
 * *Fight the urge to make it pretty* - Your first job is to build content.  Don't worry about fonts, designs, and content layout.  They matter eventually, but a pretty blog with no content is worthless.
 * *First entry, make it short* - The hardest part is writing that first blog entry.  So just do it.  Write a blog entry about how you are starting a blog.  People will read that and say, "Of course you are, cause I am reading it".  But that's ok.  You need to get the first one out of the way.
 * *Post regularly* - Keep some simple goals.  Once a month.  Once you achieve that, double it to twice a month.  Then once a week.  The more you write, the easier it will be.  
@@ -79,7 +79,7 @@ Having a good blog with a lot of content is hard work, but well worth it.
 
 .A story on blogging
 ****
-To further punctuate the value of blogging, let me tell a story.  Over two years ago, I was working in consulting and looking to break out.  I was meeting with https://twitter.com/PerfForensics[Steve Feldman] from http://www.blackboard.com[Blackboard] for coffee.  When I showed up, he pulled out a piece of paper and put it front of me saying, "I want you to come to Blackboard and do this."  On that piece of paper was a blog entry that I had written in https://www.mikemcgarr.com/blog/alm.html[May of 2011 about ALM].  I was floored.  I took the job because I was being asked to implement a vision I laid out my blog.
+To further punctuate the value of blogging, let me tell a story.  Over two years ago, I was working in consulting and looking to break out.  I was meeting with https://twitter.com/PerfForensics[Steve Feldman] from https://www.blackboard.com[Blackboard] for coffee.  When I showed up, he pulled out a piece of paper and put it front of me saying, "I want you to come to Blackboard and do this."  On that piece of paper was a blog entry that I had written in https://www.mikemcgarr.com/blog/alm.html[May of 2011 about ALM].  I was floored.  I took the job because I was being asked to implement a vision I laid out my blog.
 ****
 
 == Public speaking
@@ -95,11 +95,11 @@ Public speaking is not for everybody, but it will have an amazing impact on your
 * *Bring notes* - Presentation mode in Powerpoint is a great way to see the notes you have for a slide.  But make sure your notes are super short.  Your notes should be phrases.  You want to be able to glance down, see two words, and have them trigger what you want to say.  Don't write full sentences in your notes.
 * *Scale up* - Don't start your public speaking career by submitting talks to national conferences.  Start small, by giving brown bags to your team.  Then to your company.  Then meetups.  Then conferences.  You need to build up your skills and confidence over time.
 * *Tell stories* - You don't always have to give technical talks showcasing a technology or tool.  Some of the best talks I have heard were of somebody's experience on a project.  Don't be afraid to talk about your experiences.  Also, some of my favorite talks are stories of failure, so share them.
-* *Upload your slides* - Make sure to upload your slides to sites like http://www.slideshare.net/[Slideshare] and https://speakerdeck.com/[Speakerdeck].  They are great ways to share your content.  They also provide another means for people to discover you, so make sure you include your contact information.
+* *Upload your slides* - Make sure to upload your slides to sites like https://www.slideshare.net/[Slideshare] and https://speakerdeck.com/[Speakerdeck].  They are great ways to share your content.  They also provide another means for people to discover you, so make sure you include your contact information.
 * *Record your talk* - One of the best ways to improve your public speaking skills is to record your talks.  I have learned a lot from watching my talks.  It can be painful, Even if it's just the audio.  You can do this from your computer during the talk.  
 * *Blog about your talk* - If you have a blog, add an entry sharing your experiences giving the talk.  It's also a good way to point your users at your video (if you have it) and your slides.  Here's an example of a https://www.mikemcgarr.com/blog/continuous-delivery-applied-dc-agile-engineering-conference.html[blog entry I wrote about a talk I gave].
 
-There are a lot of sources for how to improve your public speaking skills.  In fact, I am currently reading http://presentationpatterns.com/[Presentation Patterns], and it seems like a great resource.
+There are a lot of sources for how to improve your public speaking skills.  In fact, I am currently reading https://presentationpatterns.com/[Presentation Patterns], and it seems like a great resource.
 
 == Final thoughts
 

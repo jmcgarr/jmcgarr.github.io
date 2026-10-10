@@ -146,7 +146,7 @@ Presented at:
 
 - http://www.oscon.com/open-source-2015/public/schedule/detail/42183[OSCON 2015] - https://www.youtube.com/watch?v=mWwVLRALhaE[(Video)]
 - http://gradlesummit.com/conference/santa_clara/2015/06/session?id=33638[Gradle Summit 2015] - https://www.youtube.com/watch?v=mRVZ3-qkfFg[(Video)]
-- http://www.alm-forum.com/s15/presenters#mikem[ALM Summit 2015]
+- https://www.alm-forum.com/s15/presenters#mikem[ALM Summit 2015]
 
 == Build and deploy to the cloud using Netflix OSS (2015)
 ++++
@@ -166,7 +166,7 @@ In this presentation, I cover the field of organizational change management and 
 
 Presented at:
 
-- http://www.meetup.com/DevOpsDC/events/217434472/[DevOpsDC, November 18, 2014]
+- https://www.meetup.com/DevOpsDC/events/217434472/[DevOpsDC, November 18, 2014]
 
 == Zero to the Cloud with @NetflixOSS (2014)
 ++++
@@ -176,7 +176,7 @@ In this presentation, I provide survey of the NetflixOSS tools.  In addition to 
 
 Presented at:
 
-- http://www.meetup.com/AWS-Washington-DC-Meet-Up/events/217681072/[AWS DC Meetup - November 17, 2014]
+- https://www.meetup.com/AWS-Washington-DC-Meet-Up/events/217681072/[AWS DC Meetup - November 17, 2014]
 
 == Engineering Tools at Netflix: Enabling Continuous Delivery (2014)
 ++++
@@ -186,7 +186,7 @@ The Engineering Tools team is a responsible for building tools that support Netf
 
 Presented at:
 
-- http://www.meetup.com/Bay-Area-Infracoders/events/210267462/[Bay Area Infracoders - October 9, 2014]
+- https://www.meetup.com/Bay-Area-Infracoders/events/210267462/[Bay Area Infracoders - October 9, 2014]
 
 == Implementing DevOps (2014)
 ++++
@@ -228,10 +228,10 @@ My go to talk in the past has been an introduction to Continuous Delivery.  This
 **Continuous Delivery Applied:**
 
 - AOL (internal) - May 31, 2013 - https://dl.dropboxusercontent.com/u/3118373/talks/Continuous%20Delivery%20Applied-AOL.pptx[(Slides)]
-- http://www.meetup.com/Richmond-Java-Users-Group/[Richmond JUG] - March 20, 2013 - http://www.slideshare.net/jmcgarr/continuous-delivery-applied-richmond-j[(Slides)]
+- https://www.meetup.com/Richmond-Java-Users-Group/[Richmond JUG] - March 20, 2013 - http://www.slideshare.net/jmcgarr/continuous-delivery-applied-richmond-j[(Slides)]
 - http://www.agilerichmond.com[Agile Richmond] - November 14, 2012 - http://www.slideshare.net/jmcgarr/continuous-delivery-applied-agile-richmond[(Slides)]
 - http://agiledc.org/[AgileDC 2012] - October 23, 2012 - http://www.slideshare.net/jmcgarr/continuous-delivery-applied-agiledc[(Slides)]
-- http://www.meetup.com/DC-continuous-delivery/events/80979862/[DC Continuous Delivery Meetup] - September 19, 2012 - http://www.slideshare.net/jmcgarr/continuous-delivery-applied-dc-ci-user-group[(Slides)]
+- https://www.meetup.com/DC-continuous-delivery/events/80979862/[DC Continuous Delivery Meetup] - September 19, 2012 - http://www.slideshare.net/jmcgarr/continuous-delivery-applied-dc-ci-user-group[(Slides)]
 
 == Improving Design through TDD (2012)
 ++++
