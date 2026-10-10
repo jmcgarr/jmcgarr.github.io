@@ -57,7 +57,7 @@ If the card is no longer relevant, then I will use Trello's archive feature.  Th
 If the card is still relevant, what is the priority of this card.  I will move it to the top or the bottom of the column depending on how I feel it's priority has changed.  
 
 == Context
-From the begining, I wanted to apply the concept of https://hamberg.no/gtd/#contexts[context from GTD] to my Personal Kanban Trello board.  While with GTD, you can have a lot of contexts.  For me, I only use two contexts: personal and work.  I apply a context to a card through two methods: backlogs and http://help.trello.com/customer/portal/articles/935748-adding-labels-to-cards[Trello Labels].
+From the begining, I wanted to apply the concept of https://hamberg.no/gtd/#contexts[context from GTD] to my Personal Kanban Trello board.  While with GTD, you can have a lot of contexts.  For me, I only use two contexts: personal and work.  I apply a context to a card through two methods: backlogs and https://support.atlassian.com/trello/docs/adding-labels-to-cards/[Trello Labels].
 
 In my Trello board, I have two backlogs, personal and work.  I like using separate backlogs beause I prefer prioritizing my personal and work cards separately.  When I am at work, the cards in the work backlog have a higher priority than the cards in the personal backlog.  When I am home, the inverse is true.  This approach may not appeal to everybody.
 

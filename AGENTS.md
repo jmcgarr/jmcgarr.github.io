@@ -185,6 +185,7 @@ Before you say a change is finished:
 - Subdirectories:
   - `docs/baseline/`: snapshots of the live site (`urls.txt`, `metrics.md`, `expected-removals.txt`). Only update them at a milestone checkpoint, and say so in the commit message.
   - `docs/reports/`: generated, point-in-time reports named `<topic>-YYYY-MM-DD.md` (for example `links-2026-10-15.md`). Don't edit them after creating them; make a new dated one instead.
+    Exception: a report whose **Status** says *living tracker* is updated in place as work lands (for example `links-2026-10-09.md`, whose "Fixed" section records each batch of link fixes; owner's request, 2026-10-10).
 
 ### Document header
 
