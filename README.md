@@ -213,6 +213,11 @@ tags had a capitalized twin (`/tags/DevOps.html`, `/tags/Groovy.html`). Those 50
 (meta refresh, `rel=canonical`, `noindex`, and a visible link) to the new pages, made by `scripts/tag-redirects.py`
 from `docs/baseline/urls.txt` and committed: 48 in `src/jbake/assets/tags/`, and the 2 capitalized ones in
 `src/case-redirects/tags/`. Run the script again if a tag in that list stops being used, and keep its stubs.
+**Merging or renaming a tag** (needs the owner's approval, AGENTS.md Rule 1): add `old → new` to `RENAMES` in the
+script, edit the posts' `tags=` lines, and run the script. It writes a stub at every old URL of the old tag: the
+baseline one and, for a tag with a space, the hyphenated page published since T039 (`tags/google-calender.html`).
+`--check` covers those hyphenated URLs too (derived from the baseline, which they aren't in). The 2026-10-09 merges
+and typo fixes (report §H) added 9 stubs and repointed 3, for 59 in all.
 **macOS caveat:** macOS filesystems ignore case, so `tags/DevOps.html` and `tags/devops.html` are the same file
 there. `./gradlew bake` therefore adds `src/case-redirects/` only when `build/jbake` is case-sensitive (Linux, as
 in CI and on GitHub Pages) and says so when it skips them. A local bake on a Mac has the real `devops` and `groovy`
