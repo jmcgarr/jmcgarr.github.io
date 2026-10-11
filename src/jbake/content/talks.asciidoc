@@ -141,7 +141,7 @@ https://www.slideshare.net/slideshow/centralized-team-in-a-decentralized-world-e
 
 Presented at:
 
-- http://www.oscon.com/open-source-2015/public/schedule/detail/42183[OSCON 2015] - https://www.youtube.com/watch?v=mWwVLRALhaE[(Video)]
+- https://web.archive.org/web/20150520222236/http://www.oscon.com:80/open-source-2015/public/schedule/detail/42183[OSCON 2015] - https://www.youtube.com/watch?v=mWwVLRALhaE[(Video)]
 - https://web.archive.org/web/20150319054924/http://gradlesummit.com/conference/santa_clara/2015/06/session?id=33638[Gradle Summit 2015] - https://www.youtube.com/watch?v=mRVZ3-qkfFg[(Video)]
 - https://www.alm-forum.com/s15/presenters#mikem[ALM Summit 2015]
 
@@ -227,7 +227,7 @@ My go to talk in the past has been an introduction to Continuous Delivery.  This
 - AOL (internal) - May 31, 2013 - (Slides)
 - https://www.meetup.com/Richmond-Java-Users-Group/[Richmond JUG] - March 20, 2013 - https://www.slideshare.net/slideshow/continuous-delivery-applied-richmond-j/17452976[(Slides)]
 - https://web.archive.org/web/20141010001519/http://agilerichmond.com:80/[Agile Richmond] - November 14, 2012 - https://www.slideshare.net/slideshow/continuous-delivery-applied-agile-richmond/15200632[(Slides)]
-- http://agiledc.org/[AgileDC 2012] - October 23, 2012 - https://www.slideshare.net/slideshow/continuous-delivery-applied-agiledc/14871013[(Slides)]
+- https://web.archive.org/web/20141216191652/http://agiledc.org/[AgileDC 2012] - October 23, 2012 - https://www.slideshare.net/slideshow/continuous-delivery-applied-agiledc/14871013[(Slides)]
 - https://www.meetup.com/DC-continuous-delivery/events/80979862/[DC Continuous Delivery Meetup] - September 19, 2012 - https://www.slideshare.net/slideshow/continuous-delivery-applied-dc-ci-user-group/14358624[(Slides)]
 
 == Improving Design through TDD (2012)
