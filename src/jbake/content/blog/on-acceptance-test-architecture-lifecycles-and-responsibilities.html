@@ -7,7 +7,7 @@ summary=I was recently in a conversation with testers about how acceptance tests
 ~~~~~~
 <p>I was recently in a conversation with testers about how acceptance tests should be structured.   As we revisit how Blackboard conducts test automation, we were looking at patterns and practices to employ.  I shared my following perspective on how to think about the architecture of your acceptance test infrastructure, the lifecycle of a specification, as well as who should conduct which step.  This post is really a teaser post, as I am merely smearing pretty pictures on the web, without much background.  Isn't that what follow-up blogs are for?</p>
 <h1>Acceptance Test Composition</h1>
-<p><img alt="Acceptance Test Architecture" src="http://farm8.staticflickr.com/7386/11433880614_d8966527ab.jpg" /></p>
+<p><img alt="Acceptance Test Architecture" src="/img/acceptance-test-arch.jpg" /></p>
 <p>A well formed acceptance test architecture is composed of five core components:</p>
 <ol>
 <li><b><span style="text-decoration:underline;">Specification</span></b> - This is the document that describes what the system should be doing. The requirement that will be exercised by the application.  In an automated testing framework, this is usually implemented in <a title="Gherkin " href="https://cucumber.io/docs/gherkin/" target="_blank">Gherkin</a> (<a title="Cucumber" href="https://cucumber.io/" target="_blank">Cucumber</a>) or a wiki (<a title="Fitnesse" href="https://fitnesse.org/" target="_blank">Fitnesse</a>).  It should be easily read and understood by all members of the organization at any level and written in the business language.  I recommend collaboratively white boarding your specs (a la <a title="Three Amigos Meeting" href="https://www.scrumalliance.org/community/articles/2013/2013-april/introducing-the-three-amigos" target="_blank">Three Amigos meeting</a>) and have somebody write it in the technology later.</li>
@@ -17,7 +17,7 @@ summary=I was recently in a conversation with testers about how acceptance tests
 <li><b><span style="text-decoration:underline;">System Under Test (SUT)</span></b> - This is the product you are building.  This is what you are testing.</li>
 </ol>
 <h1>Acceptance Test Lifecycle</h1>
-<p><img alt="Specification by Example Phases" src="http://farm8.staticflickr.com/7298/11433913676_995322ff97.jpg" /><br />
+<p><img alt="Specification by Example Phases" src="/img/acceptance-test-lifecycle.jpg" /><br />
 An acceptancetest should evolve collaboratively via a cross functional team.  I think about it in three phases:</p>
 <ol>
 <li><b><span style="text-decoration:underline;">Collaborate and Define</span></b> - This is typically where you have a 'Three Amigos Meeting' where members of the business/analysts, testers, and engineers (and others too) will get together and write the requirement and the acceptance criteria.  This can happen on a white board or on paper.</li>
@@ -26,7 +26,7 @@ An acceptancetest should evolve collaboratively via a cross functional team.  I
 </ol>
 <p>You may note that you this may smell like <a title="Test Driven Development" href="https://en.wikipedia.org/wiki/Test-driven_development" target="_blank">Test Driven Development</a>.  It should, cause it is...or <a title="(PDF) Chapter on ATDD" href="https://web.archive.org/web/20120327213210/http://www.manning-source.com/books/koskela/Chapter9Sample.pdf" target="_blank">Acceptance Test Driven Development</a>.</p>
 <h1>Responsibilities</h1>
-<p><img alt="Specification by Example Roles" src="http://farm4.staticflickr.com/3673/11433879264_41b8eb6bfd.jpg" /><br />
+<p><img alt="Specification by Example Roles" src="/img/acceptance-test-responsibilities.jpg" /><br />
 I would also like to comment on who should do what.</p>
 <ul>
 <li><b><span style="text-decoration:underline;">Business and/or Analyst</span></b> - should focus on the user story and the acceptance criteria.</li>
