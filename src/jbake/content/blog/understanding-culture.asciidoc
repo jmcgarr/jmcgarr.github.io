@@ -54,7 +54,7 @@ Do you know what your company’s values are?  Prior to my joining https://www.n
 
 There are two types of organizational values: stated and unstated values.  *Stated values* are the documented organization values.  Everybody in the company should have access to a clear definition of each value.  Expected behaviors are generally based on stated values. *Unstated values* emerge from the accepted (and rewarded) behavior that does not align with the organization's stated values.
 
-If unstated values conflict with stated values, this could represent a problem for the culture.  An organization that rewards behavior opposed to stated values indicates an unhealthy culture.  Hopefully this is obvious to everybody.  I will steal the example used in the http://www.slideshare.net/reed2001/culture-1798664[Netflix culture deck] of https://en.wikipedia.org/wiki/Enron[Enron].  Nuff said.
+If unstated values conflict with stated values, this could represent a problem for the culture.  An organization that rewards behavior opposed to stated values indicates an unhealthy culture.  Hopefully this is obvious to everybody.  I will steal the example used in the https://www.slideshare.net/slideshow/culture-1798664/1798664[Netflix culture deck] of https://en.wikipedia.org/wiki/Enron[Enron].  Nuff said.
 
 image::/img/netflix-culture-enron.png[Netflix Culture Deck on Enron,500,align="center"]
 
