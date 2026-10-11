@@ -30,4 +30,4 @@ for (item in Hudson.instance.items) {
 }
 </pre>
 <p>Like I said before, you need to understand Jenkins' underlying API's. In this script, I am iterating through the items on Jenkins (formerly Hudson, hence the old class name). I then grab the name of the item of only rename those items starting with the 'FUN-' prefix. For jobs in the camel case format, they all have a 'Commit' at the end of their name. For them, I just make sure the name is lowercase. For the human readable names, I need to use the replaceFirst method to reformat the names. Also note that I need to call the renameTo() method. That's it!</p>
-<p>For more examples of Groovy scripts for the Jenkins Script Console, I recommend you check out the <a title="Jenkins Script Console Wiki Page" href="https://wiki.jenkins-ci.org/display/JENKINS/Jenkins+Script+Console" target="_blank">Jenkins Script Console wiki page</a>.</p>
+<p>For more examples of Groovy scripts for the Jenkins Script Console, I recommend you check out the <a title="Jenkins Script Console Wiki Page" href="https://www.jenkins.io/doc/book/managing/script-console/" target="_blank">Jenkins Script Console wiki page</a>.</p>

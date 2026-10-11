@@ -81,7 +81,7 @@ Mike McGarr discusses the early days of Netflix’s polyglot journey and where t
 
 Presented at:
 
-- https://conferences.oreilly.com/velocity/vl-ny-2017/public/schedule/detail/61524[Velocity NY 2017]
+- https://conferences.oreilly.com/velocity/vl-ny-2017/public/schedule/detail/61524.html[Velocity NY 2017]
 - https://www.youtube.com/watch?v=W3HkCF0jBZA[DevOpsCon 2017]
 
 == Dependencies, Monorepos and beyond (2017)
@@ -123,7 +123,7 @@ A significant chunk of DevOps rhetoric centers around “unicorn” companies li
 
 In this talk, I’ll share with you the reality of working at Netflix. I’ll share details about how people work at Netflix, how we communicate, how we are organized, how work is prioritized, how we manage risk, how we build teams and how our culture plays a central role in everything we do. Lastly, Mike will share what are the important lessons that every manager and executive should learn about Netflix’s culture.
 
-http://www.slideshare.net/jmcgarr/beyond-the-culture-deck-what-you-dont-already-know-about-netflix[Slides]
+https://www.slideshare.net/slideshow/beyond-the-culture-deck-what-you-dont-already-know-about-netflix/54317588[Slides]
 
 Presented at:
 
@@ -137,7 +137,7 @@ Presented at:
 ++++
 In this presentation, I discuss the various forces at play that create tension for centralized teams like Netflix's Engineering Tools team.  I share some of the challenges we face balancing out customer needs with support issues.  I also share how we remain innovative while throttling the rate of change we impose on our customers.
 
-http://www.slideshare.net/jmcgarr/centralized-team-in-a-decentralized-world-engineering-tools-at-netflix[Slides]
+https://www.slideshare.net/slideshow/centralized-team-in-a-decentralized-world-engineering-tools-at-netflix/49333797[Slides]
 
 Presented at:
 
@@ -215,20 +215,20 @@ My go to talk in the past has been an introduction to Continuous Delivery.  This
 
 **Introduction to Continuous Delivery:**
 
-- https://web.archive.org/web/20140831024221/http://blog.blackboard.com:80/devcon-2013-a-new-hope/[Blackboard DevCon 2013] - June 8/9, 2013 - http://www.slideshare.net/jmcgarr/introduction-to-continuous-delivery-bbworlddevcon-2013[(Slides)]
-- https://web.archive.org/web/20141121185918/http://www.eventbrite.com:80/e/mcjug-06152011-meeting-tickets-1790267739[Montgomery County JUG] June 15, 2011 - http://www.slideshare.net/jmcgarr/continuous-delivery-8341276[(Slides)]
+- https://web.archive.org/web/20140831024221/http://blog.blackboard.com:80/devcon-2013-a-new-hope/[Blackboard DevCon 2013] - June 8/9, 2013 - https://www.slideshare.net/slideshow/introduction-to-continuous-delivery-bbworlddevcon-2013/24144779[(Slides)]
+- https://web.archive.org/web/20141121185918/http://www.eventbrite.com:80/e/mcjug-06152011-meeting-tickets-1790267739[Montgomery County JUG] June 15, 2011 - https://www.slideshare.net/slideshow/continuous-delivery-8341276/8341276[(Slides)]
 
 **Continuous Delivery: Tools and Techniques:**
 
-- Montgomery Country JUG - February 15, 2012 - http://www.slideshare.net/jmcgarr/continuous-delivery-tools-and-techniques[(Slides)]
+- Montgomery Country JUG - February 15, 2012 - https://www.slideshare.net/slideshow/continuous-delivery-tools-and-techniques/12026922[(Slides)]
 
 **Continuous Delivery Applied:**
 
 - AOL (internal) - May 31, 2013 - (Slides)
-- https://www.meetup.com/Richmond-Java-Users-Group/[Richmond JUG] - March 20, 2013 - http://www.slideshare.net/jmcgarr/continuous-delivery-applied-richmond-j[(Slides)]
-- https://web.archive.org/web/20141010001519/http://agilerichmond.com:80/[Agile Richmond] - November 14, 2012 - http://www.slideshare.net/jmcgarr/continuous-delivery-applied-agile-richmond[(Slides)]
-- http://agiledc.org/[AgileDC 2012] - October 23, 2012 - http://www.slideshare.net/jmcgarr/continuous-delivery-applied-agiledc[(Slides)]
-- https://www.meetup.com/DC-continuous-delivery/events/80979862/[DC Continuous Delivery Meetup] - September 19, 2012 - http://www.slideshare.net/jmcgarr/continuous-delivery-applied-dc-ci-user-group[(Slides)]
+- https://www.meetup.com/Richmond-Java-Users-Group/[Richmond JUG] - March 20, 2013 - https://www.slideshare.net/slideshow/continuous-delivery-applied-richmond-j/17452976[(Slides)]
+- https://web.archive.org/web/20141010001519/http://agilerichmond.com:80/[Agile Richmond] - November 14, 2012 - https://www.slideshare.net/slideshow/continuous-delivery-applied-agile-richmond/15200632[(Slides)]
+- http://agiledc.org/[AgileDC 2012] - October 23, 2012 - https://www.slideshare.net/slideshow/continuous-delivery-applied-agiledc/14871013[(Slides)]
+- https://www.meetup.com/DC-continuous-delivery/events/80979862/[DC Continuous Delivery Meetup] - September 19, 2012 - https://www.slideshare.net/slideshow/continuous-delivery-applied-dc-ci-user-group/14358624[(Slides)]
 
 == Improving Design through TDD (2012)
 ++++
@@ -250,4 +250,4 @@ This is the first bit of public speaking I did was a lightning talk at a local m
 
 Presented at:
 
-- http://www.meetup.com/D-CAST/events/17021962/[DC Agile Software Testing Group] - April 26, 2011
+- https://www.meetup.com/dcast-io/events/17021962/[DC Agile Software Testing Group] - April 26, 2011

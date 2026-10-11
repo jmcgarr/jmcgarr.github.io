@@ -30,7 +30,7 @@ Remember that if you do nothing else, I recommend making sure you have a complet
 
 == Twitter
 
-While http://www.twitter.com[Twitter] may not be an indicator of how technically competent you are, it is still important.  I am disappointed when I come across a technically promising LinkedIn profile, but only 25 tweets over 2 years.  I know this isn't exactly fair, but Twitter has become the communication medium of the tech industry.  If you are an engineer and don’t participate, that speaks volumes.  
+While https://x.com/[Twitter] may not be an indicator of how technically competent you are, it is still important.  I am disappointed when I come across a technically promising LinkedIn profile, but only 25 tweets over 2 years.  I know this isn't exactly fair, but Twitter has become the communication medium of the tech industry.  If you are an engineer and don’t participate, that speaks volumes.  
 
 Here are my recommendations for getting started:
 
@@ -79,7 +79,7 @@ Having a good blog with a lot of content is hard work, but well worth it.
 
 .A story on blogging
 ****
-To further punctuate the value of blogging, let me tell a story.  Over two years ago, I was working in consulting and looking to break out.  I was meeting with https://twitter.com/PerfForensics[Steve Feldman] from https://www.blackboard.com[Blackboard] for coffee.  When I showed up, he pulled out a piece of paper and put it front of me saying, "I want you to come to Blackboard and do this."  On that piece of paper was a blog entry that I had written in https://www.mikemcgarr.com/blog/alm.html[May of 2011 about ALM].  I was floored.  I took the job because I was being asked to implement a vision I laid out my blog.
+To further punctuate the value of blogging, let me tell a story.  Over two years ago, I was working in consulting and looking to break out.  I was meeting with https://x.com/PerfForensics[Steve Feldman] from https://www.blackboard.com[Blackboard] for coffee.  When I showed up, he pulled out a piece of paper and put it front of me saying, "I want you to come to Blackboard and do this."  On that piece of paper was a blog entry that I had written in https://www.mikemcgarr.com/blog/alm.html[May of 2011 about ALM].  I was floored.  I took the job because I was being asked to implement a vision I laid out my blog.
 ****
 
 == Public speaking

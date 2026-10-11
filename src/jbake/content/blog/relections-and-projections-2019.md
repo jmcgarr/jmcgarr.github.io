@@ -41,7 +41,7 @@ Thank you to [Wes Reisz](https://web.archive.org/web/20191204095539/https://qcon
 
 ### Back at Nike
 
-To ensure I practiced my QCon keynote talk, I wanted to practice my talk first. As luck would have it, [Thomas Lockney](https://twitter.com/tlockney) reached out to ask if I might be interested in speaking at an internal DevOps Day conference at Nike. This event just so happened to fall a month before QCon SF, providing me the perfect commitment device to prep my talk early. It also just so happened that I got the chance to hang with my friend [Nora Jones](https://twitter.com/nora_js) (who was also speaking there), as well as [Courtney Kissler](https://twitter.com/chawklady) (who was the event's exec sponsor). The talk I gave at that event wound up being very different than my keynote, so if you were disappointed with my Nike talk, I offer up my QCon SF talk for you instead.
+To ensure I practiced my QCon keynote talk, I wanted to practice my talk first. As luck would have it, [Thomas Lockney](https://x.com/tlockney) reached out to ask if I might be interested in speaking at an internal DevOps Day conference at Nike. This event just so happened to fall a month before QCon SF, providing me the perfect commitment device to prep my talk early. It also just so happened that I got the chance to hang with my friend [Nora Jones](https://x.com/nora_js) (who was also speaking there), as well as [Courtney Kissler](https://x.com/chawklady) (who was the event's exec sponsor). The talk I gave at that event wound up being very different than my keynote, so if you were disappointed with my Nike talk, I offer up my QCon SF talk for you instead.
 
 Thank you to Thomas Lockney for the invitation.
 
