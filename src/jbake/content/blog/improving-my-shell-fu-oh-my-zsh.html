@@ -14,11 +14,11 @@ curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | 
 <p>These are the OMZ killer features.</p>
 <h2>Zsh</h2>
 <p>The best feature of Oh My Zsh is Zsh itself.  I am just learning Zsh, but so far there are immediately two things it does much better than bash.</p>
-<h4>Autocomplete</h4>
+<h3>Autocomplete</h3>
 <p>Zsh is built with an autocomplete feature that is awesome.  When I type 'vi &lt;tab&gt;', zsh will present me with a list of the files in my current directory.  If I press &lt;tab&gt; a second time though, it highlights the first one in the list.  At which point I can just cycle through the files with my arrow keys and select the one I want.  Pretty cool huh?  the autocomplete can also help you see what commands are in your path.  Type 'v &lt;tab&gt;' and I can see all the commands that start with v.</p>
 <p>The autocomplete is very much command aware as well.  <a title="Mike Grouchy" href="https://mikegrouchy.com/" target="_blank">Mike Grouchy's</a> <a title="Zsh is your friend" href="https://mikegrouchy.com/blog/zsh-is-your-friend/" target="_blank">Zsh blog</a> shows how when you type 'kill &lt;tab&gt;', you get a list of the available processes you can kill.  Now that is awesome!</p>
 <p>I also stumbled upon this feature recently.  The autocomplete works with your history to combine into an awesome feature.  If I type 'ssh &lt;up arrow&gt;' it will go back into my history to the last ssh command I ran.  Wow!</p>
-<h4>Autocorrect</h4>
+<h3>Autocorrect</h3>
 <p>If you type a command, Zsh will help you out.  For instance, if I type 'vargant up &lt;enter&gt;', Zsh stops me and says are you sure this command is right.  Looks like you are trying to type 'vagrant'.  It gives you four options: (n)o, (y)es, (a)bort, and (e)dit.  (n)o will run the uncorrected command, (y) runs the autocorrected command, (a) exits to a blank prompt and (e) exits to a prompt with the command you wrote written out.</p>
 <pre>
 mmcgarr@mmcgarrmbp:~/Code » vargant up
@@ -31,7 +31,7 @@ mmcgarr@mmcgarrmbp:~/Code » vargant up
 <h2>Plugins</h2>
 <p>The next thing I checked out were the plugins.  OMZ comes with a bunch of plugins.  These plugins add shell magic for specific frameworks, like auto-complete and additional context information.  Of course you can see that these plugins are building upon Zsh's awesome auto-complete features.  For example, I added the vagrant OMZ plugin and when I type 'vagrant &lt;tab&gt;', it presents me with a list of the available commands for vagrant.</p>
 <p><img class="aligncenter size-large" alt="ohmyzsh-vagrant" src="/img/ohmyzsh-vagrant.png" width="594" height="256" /></p>
-<p></a>Enabling/disabling a plugin is as simple as editing the ~/.zshrc file and updating the following line.  As you can see, I enabled the vagrant, knife and gradle plugins (git enabled by default).</p>
+<p>Enabling/disabling a plugin is as simple as editing the ~/.zshrc file and updating the following line.  As you can see, I enabled the vagrant, knife and gradle plugins (git enabled by default).</p>
 <pre class="prettyprint linenums">
 plugins=(git vagrant knife gradle)
 </pre>
