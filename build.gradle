@@ -204,6 +204,27 @@ def sassPreviewWatcher = gradle.sharedServices.registerIfAbsent('sassPreviewWatc
 // session; Ctrl+C stops it. Restart after changing jbake.properties, or after deleting or renaming a source file
 // (its old page stays in build/jbake until `clean`). The next `./gradlew bake` notices the changed output and
 // rebakes with the real site.host, without the live-reload script.
+//
+// If the port is taken (say, by a preview in another terminal or clone), JBake only says "unable to start the
+// server" and exits with 4 (T101). So check first: bind the address JBake will use, the same way its Jetty does,
+// and fail with a clear message if that doesn't work. The address comes from server.hostname and server.port in
+// jbake.properties, where JBake reads it (JBake's own defaults are localhost and 8820).
+def jbakeProperties = new File(jbakeSource, 'jbake.properties')
+def checkPreviewPortFree = {
+    def config = new Properties()
+    jbakeProperties.withReader('UTF-8') { config.load(it) }
+    def host = config.getProperty('server.hostname', 'localhost').trim()
+    def port = config.getProperty('server.port', '8820').trim() as int
+    try {
+        new ServerSocket().withCloseable { socket ->
+            socket.reuseAddress = true   // as Jetty does, so a just-stopped preview doesn't count as "in use"
+            socket.bind(new InetSocketAddress(host, port))
+        }
+    } catch (BindException ignored) {
+        throw new GradleException("Port $port is already in use (is another bakePreview running?). " +
+                'Stop it, or set server.port in src/jbake/jbake.properties.')
+    }
+}
 tasks.register('preview', JavaExec) {
     group = 'documentation'
     description = 'Bakes, serves http://localhost:8080, rebuilds on save, and reloads the open page (Ctrl+C to stop).'
@@ -215,6 +236,7 @@ tasks.register('preview', JavaExec) {
     dependsOn 'compileSass'
     usesService(sassPreviewWatcher)
     doFirst {
+        checkPreviewPortFree()
         checkNoHandEditedCss()
         copyTree(sassOutput, jbakeDestination)
         sassPreviewWatcher.get().start()

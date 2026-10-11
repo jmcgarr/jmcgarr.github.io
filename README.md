@@ -15,7 +15,9 @@ To preview
 ```
 ./gradlew clean bakePreview
 ```
-Then open http://localhost:8080. Stop it with `Ctrl+C`. (`./gradlew preview` does the same.)
+Then open http://localhost:8080. Stop it with `Ctrl+C`. (`./gradlew preview` does the same.) If port 8080 is
+already in use, for example by a preview in another terminal, it stops right away and says so; stop the other one, or
+set `server.port` in `src/jbake/jbake.properties`.
 
 **It rebuilds on save, and the open page reloads itself.** While the preview runs, saving a post, a template
 (`src/jbake/templates/`), an asset such as CSS (`src/jbake/assets/`), or the theme's SCSS (`src/scss/`) rebuilds the
