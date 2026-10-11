@@ -3,7 +3,7 @@
 **Branch**: `docs/site-revival` | **Created**: 2026-10-04 | **Status**: Draft
 **Input**: Repository review of 2026-10-03 (JBake 2.6 / Gradle 5.6.4 / Clean Blog theme)
 
-This plan brings the site back to a healthy state over seven milestones. Each milestone has one
+This plan brings the site back to a healthy state over nine milestones (M0–M8). Each milestone has one
 theme and can be tested on its own, so you can ship it to the live site before starting the next.
 
 ---
@@ -58,8 +58,9 @@ du -sh build/jbake                                    # published site size
 | M3 | ✅ [Modern Toolchain](#m3-modern-toolchain) | Builds anywhere, deploys safely, no personal tokens      | 1    | 11           |
 | M4 | ✅ [Chart the Future](#m4-chart-the-future) | Decide the platform before investing in polish           | 0    | 2            |
 | M5 | ✅ [Polished Presentation](#m5-polished-presentation) | Valid HTML, discoverable, shares well                    | 10   | 9            |
-| M6 | ⚙️ [Content Care](#m6-content-care) | Accurate content; every link and image works             | 4    | 6            |
+| M6 | ✅ [Content Care](#m6-content-care) | Accurate content; every link and image works             | 4    | 4            |
 | M7 | ✅ [Writing Flow](#m7-writing-flow) | Writing a post is pleasant: scaffold, watch, live reload | 3    | 9            |
+| M8 | [Author's Desk](#m8-authors-desk) | What only the author can write, choose or click; done last | 1    | 7            |
 | —  | [Backlog](#backlog) | Unscheduled; not reproduced or waiting on evidence       | 1    | 4            |
 
 ✅ done · ⚙️ in progress · no mark: not started
@@ -72,6 +73,7 @@ du -sh build/jbake                                    # published site size
 - **M4 is a decision gate.** It should finish before **M5**, because M5 is template work for the current JBake platform and would be thrown away if the site migrates.
 - **M6** depends only on M0 and can be picked up at any time. It's good work for spare evenings.
 - **M7** comes after M4, because its tasks depend on the platform decision (made 2026-10-07: stay on JBake). T061 also needs T008 (M1). It doesn't depend on M5 or M6.
+- **M8 goes last** (owner's choice, 2026-10-11). Its tasks need the author's own words, choices or accounts, so they don't block the other milestones.
 
 ### GitHub Issues
 
@@ -89,7 +91,7 @@ Open issues on [jmcgarr/jmcgarr.github.io](https://github.com/jmcgarr/jmcgarr.gi
 | [#11](https://github.com/jmcgarr/jmcgarr.github.io/issues/11) _(closed)_ | [Gradle] Live reload? | enhancement | T064 | M7 | `Closes #11` |
 | [#12](https://github.com/jmcgarr/jmcgarr.github.io/issues/12) _(closed by `docs/close-M7`)_ | [Gradle] Add toast messages when a build is complete | enhancement | T065 | M7 | `Closes #12` |
 | [#13](https://github.com/jmcgarr/jmcgarr.github.io/issues/13) | Add a tags page to browse by topics | enhancement | T057 | M5 | `Closes #13` |
-| [#14](https://github.com/jmcgarr/jmcgarr.github.io/issues/14) | Add mastheads for older posts | enhancement | T059 | M6 | `Closes #14` |
+| [#14](https://github.com/jmcgarr/jmcgarr.github.io/issues/14) | Add mastheads for older posts | enhancement | T059 | M8 | `Closes #14` |
 | [#15](https://github.com/jmcgarr/jmcgarr.github.io/issues/15) | Fix the code snippet look and feel | bug, enhancement | T056 | M5 | `Closes #15` |
 | [#16](https://github.com/jmcgarr/jmcgarr.github.io/issues/16) | Masthead should be able to include remote images | bug | T037 | M5 | `Closes #16` |
 
@@ -255,8 +257,6 @@ baseline pages. An offline link check finds no missing assets.
 - [x] T021 **Won't do (owner decision, 2026-10-05).** [P] [IMP] Limit the RSS feed to the 20 most recent posts. It's currently 440 KB with all 75 (`src/jbake/templates/feed.ftl`)
   - **Test:** `grep -c '<item>' build/jbake/feed.xml` returns `20`. The file is under 150 KB and still validates.
   - _Measured value was too small to be worth it: the feed is served **gzipped** (123 KB for all 74 posts, 52 KB if capped at 20), and GitHub Pages answers conditional requests, so readers that remember the feed's ETag get `304 Not Modified` (0 bytes) unless it has changed. The cap would save ~71 KB per reader **only when the feed changes** (about once per publish). The full feed also gives new subscribers the whole back catalogue. PR #33 (capped at 20) was closed. Revisit if the feed grows a lot once posting resumes._
-- [ ] T022 [IMP] **Deferred 2026-10-05 (owner):** don't change fonts yet. The owner wants to settle on the *right* fonts first, and is open to optimizing font downloads afterwards (for example, Google Fonts loads 10 Open Sans + 4 Lora variants, which are used only for the nav, buttons, and header subheadings). Was: Self-host Lora and Open Sans, or drop them for the system font stack (this continues the May 2024 font changes) (`src/jbake/templates/header.ftl`, `src/scss/_variables.scss` and `_mixins.scss`, which generate `clean-blog.css` since T043)
-  - **Test:** The DevTools Network tab shows no requests to `fonts.googleapis.com` or `fonts.gstatic.com`. Headings and body text look right on home and on a post.
 
 - [x] T071 [IMP] **The header photo is the largest content (LCP) on every page**, but it's a CSS background, so the browser only discovers it after the CSS loads, and phones get the 1920px version. Serve **width-appropriate variants** (960px for phones, 1440px for tablets and small laptops, the full ≤ 1920px image for larger screens) chosen by media query, and **preload** the right one so it downloads in parallel with the CSS. Generate the variants with a committed script, keeping option B (new URLs only, none removed). WebP was considered: it saves only 60–120 KB per photo beyond resizing, and browsers that support WebP but not CSS `image-set(… type())` would download the image twice, so add it only if still short of 90 (`src/jbake/templates/masthead.ftl`, `src/jbake/assets/css/extra.css`, `scripts/`)
   - **Test:** every masthead in use has its 960/1440 variants. At 412px wide the page requests the 960px variant **once** (no double download) and no 1920px image. Lighthouse lists the header image as preloaded, and LCP on the four baseline pages improves against the M2 checkpoint run.
@@ -489,17 +489,17 @@ Accessibility ≥ 95. Social preview validators show a title, description, and i
 
 ## M6: Content Care
 
+> **Status: done 2026-10-11.** All tasks and checkpoints CHK029, CHK031, CHK040 and CHK041 pass: every outbound link fixed or justified (T050), no broken images (T049), 0 HTML errors in post bodies (T108), every embed titled (T107), and LF line endings throughout (T051). The tasks only the author can do (About and Talks, drafts, alt text, mastheads) moved to M8.
+
 **Goal**: The writing is accurate and easy to read, and every link and image still works.
 _(This milestone can be done at any time after M0.)_
 
-**Independent Test**: A full `lychee` run reports 0 broken links (or documents each exception), the
-About, Talks, and Bio pages are current, and all content files use LF line endings.
+**Independent Test**: A full `lychee` run reports 0 broken links (or documents each exception), every
+image and embed works and has a text alternative or title, post bodies have no HTML errors, and all content files use LF
+line endings. _(2026-10-11: the About, Talks and Bio review moved to M8 with the other tasks only the owner can do.)_
 
 ### Bugs
 
-- [ ] T048 [BUG] The About page is out of date (it says "currently at Slack", from 2018). Review the Talks and Speaker Bio pages too (`src/jbake/content/about.asciidoc`, `talks.asciidoc`, `speaker-bio.asciidoc`)
-  - **Test:** A manual read-through confirms roles, employers, and dates are current, and each page's `date=` is updated.
-  - _2026-10-09: the out-of-date sentences on About, Speaker Bio and Talks are quoted in [`reports/content-2026-10-09.md`](reports/content-2026-10-09.md) §I.1 (no wording proposed; the author writes it), awaiting owner._
 - [x] T049 [BUG] Fix images hotlinked from dead or insecure hosts (public Dropbox links, agilescout.com, the Hudson wiki, `http://farm*.staticflickr.com`). Recover what you can through the Wayback Machine and self-host it in `assets/img/`, and remove or replace the rest (`src/jbake/content/blog/`)
   - **Test:** `grep -rE '<img[^>]+src="https?://' src/jbake/content` returns only intentional, working external images. `lychee build/jbake` reports 0 broken image URLs.
   - _2026-10-09: findings in [`reports/content-2026-10-09.md`](reports/content-2026-10-09.md) §C (every hotlinked image, with Wayback snapshots and suggested local paths), awaiting owner approval._
@@ -516,6 +516,10 @@ About, Talks, and Bio pages are current, and all content files use LF line endin
   - _2026-10-09: exact removals in [`reports/content-2026-10-09.md`](reports/content-2026-10-09.md) §D, awaiting owner approval. A fifth post has the same debris (`test-method-names`, twice), and the export ate a `]` in each case, so most fixes restore it rather than only delete._
   - _Done 2026-10-09 (`content/M6-apply-B-D-H`; **owner's approval 2026-10-09, in conversation: "I approve all B, D, H"**). D1–D7 applied exactly as the report's table says, by a script that reads and writes bytes and replaces only the target bytes (each target found once, on the listed line): `]` restored in `improving-my-shell-fu-oh-my-zsh` (`[nyae]?`), `simple-git-aliases` (`[alias]`) and `test-method-names` (×2); the `[/sourcecode…` fragment removed in `octopress-on-os` and `ruby-broke-my-path`; the invisible 1×1 Twitter image removed from `the-phoenix-project`. 0 items skipped. All 6 files are CR-only and keep identical CR/LF/CRLF counts and `file` terminators. **Test passed:** the grep lists none of the five posts (only the real embeds in `continuous-delivery-applied-dc-agile-engineering-conference`, `dc-tech-ops-meetup` and `improving-designs-through-tdd`, untouched). Against a bake of `main`, only the 6 posts and `feed.xml` (the same bodies, plus its timestamp) changed; visible text (tags stripped, whitespace normalized) differs only by the debris and restored `]`, and `the-phoenix-project`'s is identical. Nu HTML Checker 26.10.9 (`--errors-only`, 307 published pages): **18 → 15** errors, G5, G15 and G16 fixed as the report says._
 
+- [x] T108 [BUG] Fix the HTML errors inside post bodies (report [§G](reports/content-2026-10-09.md#g-html-errors-inside-post-bodies-18-on-13-posts): G1–G18; G5, G15 and G16 were already fixed by §D). Markup only, never prose. Six posts' `h3` section headings become `h2` (larger, the owner sees screenshots first) (`src/jbake/content/blog/`)
+  - **Test:** Nu HTML Checker `--errors-only` on the staged `build/site` reports **0 errors** (baseline: 15 on 2026-10-09 after §D), or each one left is listed and approved by the owner. Visible text is unchanged except G17's stray `_`.
+  - _Done 2026-10-11: **owner's approval 2026-10-11, in conversation: "go ahead with E and G"**. #102: G6, G7, G11–G14 and G17 (markup fixes; G14's URL text now links to its page, which answers 200; G17's link opens in a new tab again, the stray `_` is gone and the quote is italic), then G3, G4, G8, G9, G10 and G18 in a second commit (33 section headings `h3` → `h2`, about 14% larger; the owner kept it). #101: G1 and G2 (they share lines with §E). G5, G15 and G16 were already fixed by §D. Visible text unchanged apart from G17's `_`. **Test passed** on `main` at `96b2c17`: Nu HTML Checker 26.10.11, `--errors-only --skip-non-html` on the staged `build/site` (311 pages): **0 errors** (15 before)._
+
 ### Improvements
 
 - [x] T051 [IMP] Convert the 63 content files with old Mac CR-only line endings (from the WordPress import) to LF (`src/jbake/content/`) _(Pulled forward from T102 by the owner on 2026-10-09, so the M6 content edits show as small diffs on GitHub.)_
@@ -526,24 +530,20 @@ About, Talks, and Bio pages are current, and all content files use LF line endin
   - **Test:** The `http://` link count drops from the 559 baseline in `docs/baseline/metrics.md`, and `lychee` is still clean.
   - _2026-10-09: findings in [`reports/content-2026-10-09.md`](reports/content-2026-10-09.md) §B (each upgrade tested: the `https://` URL works and lands on the same page), awaiting owner approval. The count is 555 today by the baseline command._
   - _Done 2026-10-09 (`content/M6-apply-B-D-H`; **owner's approval 2026-10-09, in conversation: "I approve all B, D, H"**). **240 of the 241 items applied** exactly as the report's tables say, in 57 files (31 CR-only, 12 CR/LF mix, 14 LF), by a byte-level script: on each listed line, every link (`href`/`src` value or AsciiDoc URL macro) to exactly that URL. That's 248 links (B91 and B120 each have two links to their URL on the listed line), plus **5 links whose text is the URL itself** (B120, B122, B131, B138, B140), where the displayed `http://` becomes `https://` too. B92 also drops `www.` (`https://sinatrarb.com/`), as its row says. **Skipped: B182** (`http://www.nathenharvey.com/` → `https://nathenharvey.com/` in `dc-tech-ops-meetup`): re-checked today before committing, `https://nathenharvey.com/` fails with a TLS hostname mismatch (GitHub Pages' `*.github.io` certificate) while the `http://` link works, so the change would break a working link; left as is for the owner. An independent check diffs every changed file against the previous commit: the only byte differences are 253 × `http` → `https` and one `www.` removed (B92), each at a listed file, line and URL; every applied item is found; CR/LF/CRLF counts and `file` terminators are unchanged in all 57 files. Against the previous bake, only the 57 matching pages and `feed.xml` changed, with the same byte changes (plus `feed.xml`'s time); visible text changed only in the 5 URL-as-text links. An online lychee 0.24.2 run over the 182 new URLs: 180 OK; `https://nathenharvey.com/` failed (above) and Scribd answered lychee 410 but 200 to curl, as its `http://` link does (it redirects to the same `https://` URL). **Test passed:** the baseline command counts **555 → 302** `http://` links, and `lychee --offline` on the staged site reports 0 errors._
-- [ ] T053 [P] [IMP] Triage the 12-post drafts backlog: finish and publish, keep as drafts, or delete (`drafts/` after T009)
-  - **Test:** Every draft has a recorded decision (a short table in `docs/reports/drafts-triage.md`).
-- [ ] T054 [P] [IMP] _(Optional)_ Fix the slug typos (`relections-and-projections-2019`, `vagrant-cheatsheat`, `developer-reading-lis`), but **only** together with redirect stubs at the old URLs (`src/jbake/content/blog/`)
-  - **Test:** Each old URL redirects to the new one. `check-urls.sh` passes with the old URLs still present as stubs.
-- [ ] T059 [P] [IMP] Give older posts their own mastheads. On 2026-10-04, 65 of 74 published posts used the default image. This is manual, creative work: choose an image for each post, with credit, that follows the image size rule in `AGENTS.md`, or use a remote image once T037 supports it. Only add `masthead=` and `mastheadCredit=` lines, and keep each file's existing line endings (`src/jbake/content/blog/`)
-  - **Issue:** Closes #14
-  - **Test:** `for f in src/jbake/content/blog/*.*; do tr '\r' '\n' < "$f" | grep -q '^masthead=' || echo "$f"; done | wc -l` returns `0` (baseline: 65). No newly added image in `src/jbake/assets/img/masthead/` is over 400 KB. Every new masthead has a `mastheadCredit=`.
 - [x] T106 [IMP] Tag hygiene: merge duplicate tags and fix tag typos, with redirect stubs at every old tag URL (report [§H](reports/content-2026-10-09.md#h-tag-hygiene), H1–H9) (`src/jbake/content/blog/`, `scripts/tag-redirects.py`, `src/jbake/assets/tags/`)
   - **Test:** `python3 scripts/tag-redirects.py --check build/site` and `scripts/check-urls.sh build/site` pass; every old URL of a merged or renamed tag (baseline and hyphenated) ends on the new tag page in a browser; each new page lists the union of its old pages' posts.
   - _Done 2026-10-09 (`content/M6-apply-B-D-H`; **owner's approval 2026-10-09, in conversation: "I approve all B, D, H"**, including the optional H2 and H9). **Tags:** `presentation` and `talks` → `presentations` (5 posts), `excella` → `Excella Consulting` (3), `vi` → `vim` (2), `build` → `build automation` (4), and typo fixes `lamdbas` → `lambdas`, `google calender` → `google calendar`, `software craftsmenship` → `software craftsmanship`, `paired programming` → `pair programming`. 12 tag edits in 10 posts, `tags=` lines only (in place; `improving-designs-through-tdd` had both `presentation` and `talks`, so `talks` was dropped rather than duplicated); every other byte, and the CR/LF counts, unchanged. 0 items skipped. **Tooling:** `scripts/tag-redirects.py` has an explicit `RENAMES` map (old → new), and it stops with an error if a renamed tag is still used by a post (its stub would replace the real page) or its new tag isn't. It now keeps **two** lists of old tag URLs: the 181 in `docs/baseline/urls.txt`, and the **48 hyphenated pages published since T039**, which aren't in the baseline (it changes only at a checkpoint). Those are derived from their baseline twins (each baseline tag URL with a space → hyphens), which is exactly what T039 published, so no extra list needs upkeep; tags first published after T039 aren't covered until the next baseline. `--check` checks all 229 (deleting `tags/google-calender.html` or `tags/unit-testing.html` from a copy of the build made it fail and name them; `check-urls.sh` doesn't see either). **Stubs:** 9 new (`tags/presentation`, `talks`, `excella`, `vi`, `lamdbas`, `build`, and the hyphenated `google-calender`, `software-craftsmenship`, `paired-programming`) and 3 repointed (`google calender`, `software craftsmenship`, `paired programming`, from the T039 pages to the new ones): 59 in all (57 assets + the 2 Linux-only case stubs). Nothing added to `expected-removals.txt`. **Test passed:** `tag-redirects.py --check`: 229 old tag URLs, 170 real tag pages, 57 stubs, 2 not checkable on macOS (`DevOps`, `Groovy`, as before). `check-urls.sh`: all 272 baseline URLs accounted for; 4 new tag pages (`google-calendar`, `lambdas`, `pair-programming`, `software-craftsmanship`). Headless Chrome (served by `jwebserver`): all 12 new or repointed stubs, spaced and hyphenated, end on the new page with its own canonical and `og:title`. Each new page lists exactly the union of its old pages' posts. Against the previous bake, only tag pages, Topics and `feed.xml`'s time changed: no post page changed, and nothing was removed. **Topics** (`/tags/`): 179 → **174** topics, merged counts updated, and `presentations` (5) joins "Most used". Nu HTML Checker: 15 errors, unchanged (all in post bodies)._
 
+- [x] T107 [P] [IMP] Give every `<iframe>` embed a `title`, so screen readers announce the video or slides and not just "frame" (report [§E](reports/content-2026-10-09.md#e-embeds-without-a-title-accessibility): E1–E26, titles from YouTube oEmbed or the talk's heading). Markup only; nothing visible changes. E6, the dead Vimeo embed, was already removed by A151 (#91), so 25 remain (`src/jbake/content/`)
+  - **Test:** every `<iframe>` in the published pages of `build/site` has a non-empty `title`. The changed pages' visible text is identical.
+  - _Done 2026-10-11 (#101): **owner's approval 2026-10-11, in conversation: "go ahead with E and G"**. 25 titles, exactly the report's wording: 16 on Talks (E1–E5, E7–E17) and 9 in 5 posts (E18–E26), each found by its video or slide ID. Against a bake of `main`, only those 6 pages and `feed.xml` changed, and they're byte-identical with the titles taken out. **Test passed** on `main` at `96b2c17`: 25 `<iframe>`s in the published pages of `build/site`, **0 without a title** (25 before)._
+
 ### Checkpoint: M6
 
-- [ ] CHK029 `lychee build/jbake` reports 0 broken links, or every exception is documented in `docs/reports/`
-- [ ] CHK030 About, Talks, and Speaker Bio have been reviewed and are current
-- [ ] CHK031 `grep -rlU $'\r' src/jbake/content` returns nothing
-- [ ] CHK032 Every draft has a triage decision
-- [ ] CHK039 Issue #14 is closed by a merged PR
+- [x] CHK029 `lychee build/jbake` reports 0 broken links, or every exception is documented in `docs/reports/` _(2026-10-11, `main` at `96b2c17`: online lychee over `build/site`, 8,807 links, 26 distinct failing URLs, every one listed and justified in [`reports/links-2026-10-11.md`](reports/links-2026-10-11.md): anti-bot answers, the ninerbikes quirk and the kept opsschool link)_
+- [x] CHK031 `grep -rlU $'\r' src/jbake/content` returns nothing _(2026-10-11: 0 files; CI also fails on a CR line ending since T051)_
+- [x] CHK040 Nu HTML Checker `--errors-only` on `build/site` reports 0 errors, or each one left is approved (T108) _(2026-10-11: 0 errors on 311 pages at `96b2c17`)_
+- [x] CHK041 Every `<iframe>` in the published pages has a `title` (T107) _(2026-10-11: 25 of 25 at `96b2c17`)_
 
 ---
 
@@ -632,6 +632,56 @@ _The owner filed #8–#12 as enhancements. T095 was found while testing for the 
 
 ---
 
+## M8: Author's Desk
+
+**Goal**: Everything only the author can write, choose or click: current bio and talks, alt text in the
+author's words, the drafts, the old posts' header images, and the account settings only the owner can reach.
+_(Owner's request, 2026-10-11: these were spread over M2 and M6; they're collected here and done last.
+Agents can prepare material for each one, such as proposed wording or a list of candidates, but the
+owner makes the call.)_
+
+**Independent Test**: About, Talks, and Speaker Bio are current; every draft has a decision; every
+meaningful image has alt text the owner approved; and issue #14 is closed.
+
+### Bugs
+
+- [ ] T048 [BUG] The About page is out of date (it says "currently at Slack", from 2018). Review the Talks and Speaker Bio pages too (`src/jbake/content/about.asciidoc`, `talks.asciidoc`, `speaker-bio.asciidoc`)
+  - **Test:** A manual read-through confirms roles, employers, and dates are current, and each page's `date=` is updated.
+  - _2026-10-09: the out-of-date sentences on About, Speaker Bio and Talks are quoted in [`reports/content-2026-10-09.md`](reports/content-2026-10-09.md) §I.1 (no wording proposed; the author writes it), awaiting owner._
+  - _2026-10-11: this review also covers the three `[… 2017]` link labels with no URL that show as literal text on Talks (§I.1). (The dead Vimeo embed, E6, is already gone: removed as A151 in #91.)_
+  - _2026-10-11: moved from M6 to M8 (owner's request: the tasks only the owner can do go last)._
+
+### Improvements
+
+- [ ] T022 [IMP] **Deferred 2026-10-05 (owner):** don't change fonts yet. The owner wants to settle on the *right* fonts first, and is open to optimizing font downloads afterwards (for example, Google Fonts loads 10 Open Sans + 4 Lora variants, which are used only for the nav, buttons, and header subheadings). Was: Self-host Lora and Open Sans, or drop them for the system font stack (this continues the May 2024 font changes) (`src/jbake/templates/header.ftl`, `src/scss/_variables.scss` and `_mixins.scss`, which generate `clean-blog.css` since T043)
+  - **Test:** The DevTools Network tab shows no requests to `fonts.googleapis.com` or `fonts.gstatic.com`. Headings and body text look right on home and on a post.
+  - _2026-10-11: moved from M2 to M8, because it waits on the owner's choice of fonts._
+- [ ] T053 [P] [IMP] Triage the 12-post drafts backlog: finish and publish, keep as drafts, or delete (`drafts/` after T009)
+  - **Test:** Every draft has a recorded decision (a short table in `docs/reports/drafts-triage.md`).
+  - _2026-10-11: moved from M6 to M8 (owner's request: the tasks only the owner can do go last)._
+- [ ] T054 [P] [IMP] _(Optional)_ Fix the slug typos (`relections-and-projections-2019`, `vagrant-cheatsheat`, `developer-reading-lis`), but **only** together with redirect stubs at the old URLs (`src/jbake/content/blog/`)
+  - **Test:** Each old URL redirects to the new one. `check-urls.sh` passes with the old URLs still present as stubs.
+  - _2026-10-11: moved from M6 to M8 (owner's request: the tasks only the owner can do go last)._
+- [ ] T059 [P] [IMP] Give older posts their own mastheads. On 2026-10-04, 65 of 74 published posts used the default image. This is manual, creative work: choose an image for each post, with credit, that follows the image size rule in `AGENTS.md`, or use a remote image once T037 supports it. Only add `masthead=` and `mastheadCredit=` lines, and keep each file's existing line endings (`src/jbake/content/blog/`)
+  - **Issue:** Closes #14
+  - **Test:** `for f in src/jbake/content/blog/*.*; do tr '\r' '\n' < "$f" | grep -q '^masthead=' || echo "$f"; done | wc -l` returns `0` (baseline: 65). No newly added image in `src/jbake/assets/img/masthead/` is over 400 KB. Every new masthead has a `mastheadCredit=`.
+  - _2026-10-11: moved from M6 to M8 (owner's request: the tasks only the owner can do go last)._
+- [ ] T109 [P] [IMP] Alt text in the author's words for the 34 images whose `alt` is empty, a file name, or "Profile" (report [§F](reports/content-2026-10-09.md#f-alt-text-accessibility--owner-approves-wording): proposed wording for each, F1–F34). Found by T046 (M5). The owner approves or rewrites each one; logos next to text that names the organization may get `alt=""` instead. F5 is moot (C3 removed that image) (`src/jbake/content/`)
+  - **Test:** each F item has the owner's wording (or "decorative") recorded, and `grep -rnE '<img[^>]*alt=""' src/jbake/content` plus `grep -rn 'Profile' src/jbake/content/*.asciidoc` list only images the owner marked decorative.
+- [ ] T110 [P] [IMP] Check the SlideShare embeds and links in a browser. SlideShare answers scripts with a bot challenge, so about 30 URLs (the 12 slide embeds on Talks and in posts, and the other SlideShare links) can't be checked automatically (report §I.5) (`src/jbake/content/`)
+  - **Test:** a note under this task lists each SlideShare deck as working or not, from one look in a browser; any dead one gets a T050-style fix (live replacement, snapshot, or the link removed and the text kept).
+- [ ] T111 [IMP] Verify `mikemcgarr.com` for GitHub Pages, so nobody else can claim the domain on GitHub Pages. GitHub account → Settings → Pages → Add a domain, then add the DNS `TXT` record it shows at GoDaddy (`domaincontrol.com`). Optional; came up during T068 and the owner deferred it (2026-10-05) (no repository change)
+  - **Test:** GitHub's Pages settings list `mikemcgarr.com` as **Verified**, and `dig +short TXT _github-pages-challenge-jmcgarr.mikemcgarr.com` returns the record.
+
+### Checkpoint: M8
+
+- [ ] CHK030 About, Talks, and Speaker Bio have been reviewed and are current
+- [ ] CHK032 Every draft has a triage decision
+- [ ] CHK039 Issue #14 is closed by a merged PR
+- [ ] CHK042 Every F item in report §F has the owner's alt text or a "decorative" decision (T109)
+
+---
+
 ## Backlog
 
 **Goal**: Keep reports and ideas that aren't scheduled into a milestone yet, so nothing gets lost.
@@ -650,6 +700,7 @@ Pick items up when there's new evidence or a milestone touches the same files.
   - **Decide first** (record the choice and the date here). **Markdown** is where new writing is heading (T094 made it render well; `newPost` defaults to it), it keeps every platform option open (Hugo needs it, see [`01-PLATFORM-DECISION.md`](01-PLATFORM-DECISION.md)), and it takes JRuby/AsciidoctorJ out of the build if the 14 AsciiDoc files convert too. **AsciiDoc** is the owner's format of 2014–2020 and richer, but it ties the site to Asciidoctor. Raw HTML (embeds, inline styles) passes through Markdown as-is; AsciiDoc needs `++++` passthrough blocks.
   - **Constraints:** URLs stay the same, because a format change keeps the base name, so `<name>.html` doesn't change (AGENTS.md Rule 1). Posts are the author's voice (Rule 3), so this is a **mechanical conversion**, not an edit: the rendered text must not change. Keep `date=`, `status=`, `tags=`, and every header field. Feed `<guid>`s are unchanged because they come from the URL. Archived comments (T045) attach by URI, so they're unaffected. T051 already converted the CR-only line endings to LF (2026-10-09). Do it in batches (for example by year) so each PR is reviewable.
   - _Not scheduled. Pick it up after M5/M6, or before a platform move if a re-evaluation trigger fires (T098)._
+  - _2026-10-11: the owner re-confirmed wanting this (convert the HTML posts to Markdown or AsciiDoc). M5 and M6 are done, so it can start whenever the owner picks the format. The first step is the decision above._
   - **Test:** a script compares each converted page's **visible text** (HTML tags stripped, whitespace normalized) before and after, and every page matches, or each difference is listed and approved by the owner. Images, links, and embeds are all present (counts per page are equal). `scripts/check-urls.sh` passes and the URL list is identical. `feed.xml` `<guid>`s are identical. Headless screenshots of a sample of 10 converted posts (old WordPress, AsciiDoc, and with embeds) at 1280px and 375px look right. Afterwards, `find src/jbake/content -type f | sed 's/.*\.//' | sort -u` lists only the chosen format.
 - [ ] T101 [P] [IMP] **Say clearly when the preview's port is taken.** Starting `./gradlew bakePreview` while another preview is already running (for example in a second terminal or another clone) fails with JBake's "ERROR jbake - unable to start the server" and exit value 4. It doesn't say that port 8080 is in use. Before starting, check the port in `build.gradle` and fail with "port 8080 is in use (is another preview running?)". Found 2026-10-08 during the M7 checkpoint (`build.gradle`)
   - **Test:** with one preview running, a second `./gradlew bakePreview` fails within a few seconds with a message naming port 8080. With the port free, the preview starts as before.
