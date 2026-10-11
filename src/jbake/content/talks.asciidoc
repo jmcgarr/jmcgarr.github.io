@@ -105,18 +105,15 @@ The Netflix streaming service architecture is composed of thousands microservice
 
 Presented at:
 
-- https://conferences.oreilly.com/velocity/vl-ny-2016/public/schedule/detail/53268[Velocity NY 2016]
+- https://web.archive.org/web/20190717193124/https://conferences.oreilly.com/velocity/vl-ny-2016/public/schedule/detail/53268[Velocity NY 2016]
 
 
 == Build and deploy to the cloud using Netflix OSS (2016)
-+++
-<iframe src="https://player.vimeo.com/video/193721675" width="390" height="260" frameborder="0" allow="autoplay; fullscreen" align="right" allowfullscreen></iframe>
-+++
 Getting started on AWS is easy, but building a scalable, reliable, and performant product in the cloud can be a challenge for startups and enterprises alike. Netflix has famously migrated all our services to the cloud. Along the way, we have open-sourced large portions of our platform that helped make this a reality. In this talk, Mike McGarr (Manager - Netflix Developer Productivity) will provide a survey of the Netflix OSS products available. Mike will also share patterns and lessons Netflix learned migrating to the cloud. This talk will cover tools such as Nebula, Aminator and Spinnaker. Lastly, Mike will leave you with a roadmap for how to get started with Netflix OSS on your cloud today.
 
 Presented at:
 
-- https://devops.jaxlondon.com/blog/devops-conference/build-deploy-cloud-using-netflix-oss/[JAX DevOps 2016]
+- JAX DevOps 2016
 
 == Beyond the culture deck: What you don't already know about Netflix's culture (2015)
 ++++
@@ -156,7 +153,7 @@ In this talk, I presented a survey of build and deploy tools Netflix has open so
 
 Presented at:
 
-- https://www.twilio.com/signal/2015/videos?speaker=mike-mcgarr[Twilio Signal 2015]
+- https://web.archive.org/web/20150918225706/https://www.twilio.com/signal/2015/videos?speaker=mike-mcgarr[Twilio Signal 2015]
 
 == Shepherding Change: Leading your DevOps transformation (2014)
 ++++
@@ -206,7 +203,7 @@ I gave this talk at Blackboard's 2013 DevCon conference in Las Vegas.  I used to
 
 Presented at:
 
-- http://blog.blackboard.com/devcon-2013-a-new-hope/[Blackboard DevCon 2013] - June 8/9, 2013
+- https://web.archive.org/web/20140831024221/http://blog.blackboard.com:80/devcon-2013-a-new-hope/[Blackboard DevCon 2013] - June 8/9, 2013
 
 == Introduction to Continuous Delivery (2013)
 ++++
@@ -218,18 +215,18 @@ My go to talk in the past has been an introduction to Continuous Delivery.  This
 
 **Introduction to Continuous Delivery:**
 
-- http://blog.blackboard.com/devcon-2013-a-new-hope/[Blackboard DevCon 2013] - June 8/9, 2013 - http://www.slideshare.net/jmcgarr/introduction-to-continuous-delivery-bbworlddevcon-2013[(Slides)]
-- http://www.eventbrite.com/e/mcjug-06152011-meeting-tickets-1790267739[Montgomery County JUG] June 15, 2011 - http://www.slideshare.net/jmcgarr/continuous-delivery-8341276[(Slides)]
+- https://web.archive.org/web/20140831024221/http://blog.blackboard.com:80/devcon-2013-a-new-hope/[Blackboard DevCon 2013] - June 8/9, 2013 - http://www.slideshare.net/jmcgarr/introduction-to-continuous-delivery-bbworlddevcon-2013[(Slides)]
+- https://web.archive.org/web/20141121185918/http://www.eventbrite.com:80/e/mcjug-06152011-meeting-tickets-1790267739[Montgomery County JUG] June 15, 2011 - http://www.slideshare.net/jmcgarr/continuous-delivery-8341276[(Slides)]
 
 **Continuous Delivery: Tools and Techniques:**
 
-- http://www.eventbrite.com/e/mcjug-02152012-meeting-tickets-2882149587[Montgomery Country JUG] - February 15, 2012 - http://www.slideshare.net/jmcgarr/continuous-delivery-tools-and-techniques[(Slides)]
+- Montgomery Country JUG - February 15, 2012 - http://www.slideshare.net/jmcgarr/continuous-delivery-tools-and-techniques[(Slides)]
 
 **Continuous Delivery Applied:**
 
-- AOL (internal) - May 31, 2013 - https://dl.dropboxusercontent.com/u/3118373/talks/Continuous%20Delivery%20Applied-AOL.pptx[(Slides)]
+- AOL (internal) - May 31, 2013 - (Slides)
 - https://www.meetup.com/Richmond-Java-Users-Group/[Richmond JUG] - March 20, 2013 - http://www.slideshare.net/jmcgarr/continuous-delivery-applied-richmond-j[(Slides)]
-- http://www.agilerichmond.com[Agile Richmond] - November 14, 2012 - http://www.slideshare.net/jmcgarr/continuous-delivery-applied-agile-richmond[(Slides)]
+- https://web.archive.org/web/20141010001519/http://agilerichmond.com:80/[Agile Richmond] - November 14, 2012 - http://www.slideshare.net/jmcgarr/continuous-delivery-applied-agile-richmond[(Slides)]
 - http://agiledc.org/[AgileDC 2012] - October 23, 2012 - http://www.slideshare.net/jmcgarr/continuous-delivery-applied-agiledc[(Slides)]
 - https://www.meetup.com/DC-continuous-delivery/events/80979862/[DC Continuous Delivery Meetup] - September 19, 2012 - http://www.slideshare.net/jmcgarr/continuous-delivery-applied-dc-ci-user-group[(Slides)]
 
@@ -243,7 +240,7 @@ The focus of our talk was on how Test Driven Development improves the design of 
 
 Presented at:
 
-- http://www.eventbrite.com/e/2012-dc-agile-engineering-conference-and-global-day-of-coderetreat-registration-4384492134[DC Agile Engineering] - December 7, 2012 - https://www.youtube.com/watch?v=5-K8RH0WLXg[(Video)]
+- https://web.archive.org/web/20141121224048/http://www.eventbrite.com:80/e/2012-dc-agile-engineering-conference-and-global-day-of-coderetreat-registration-4384492134[DC Agile Engineering] - December 7, 2012 - https://www.youtube.com/watch?v=5-K8RH0WLXg[(Video)]
 
 == ATDD with Concordian (2011)
 ++++
