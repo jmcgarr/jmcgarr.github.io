@@ -6,7 +6,9 @@ Source for https://www.mikemcgarr.com, built with [JBake](https://jbake.org) and
 
 Requirements
 ============
-- **JDK 21** (CI uses 21 too). `.java-version` selects it if you use [jenv](https://www.jenv.be). Works on Apple Silicon.
+- **JDK 25** (CI uses 25 too; since 2026-10-12, T113). `.java-version` selects it if you use [jenv](https://www.jenv.be). Works on Apple Silicon.
+  With sdkman and jenv: `sdk install java 25.0.4-tem`, then `jenv add ~/.sdkman/candidates/java/25.0.4-tem`.
+  JDK 21 still builds the site identically, if you need it.
 - Nothing else: `./gradlew` downloads the right Gradle version, and Gradle downloads the Sass compiler (see
   [To change the site's styles](#to-change-the-sites-styles)). No Node or Ruby.
 
@@ -157,7 +159,7 @@ Everything happens in one workflow, [`.github/workflows/gradle.yml`](.github/wor
 (shown as **"Java CI with Gradle"** under Actions). It runs on every pull request and every push to `main`.
 
 1. **Bake:** `./gradlew bake` compiles `src/scss/` into `css/clean-blog.css` with Dart Sass and renders
-   `src/jbake/` into `build/jbake/` with JBake (JDK 21). Drafts are rendered too, as `<name>-draft.html`, but only
+   `src/jbake/` into `build/jbake/` with JBake (JDK 25). Drafts are rendered too, as `<name>-draft.html`, but only
    so you can preview them locally. A Sass, template, or post error fails the build here.
 2. **Stage:** `build/jbake/` is copied to **`build/site/` without drafts**. `build/site/` is exactly what goes live.
 3. **Check:** every check below runs on `build/site/`, so what's checked is what ships.
