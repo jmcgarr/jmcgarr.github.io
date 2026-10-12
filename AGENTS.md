@@ -14,7 +14,7 @@ a promise to the people who linked to it.
 - **Styles:** the theme CSS is generated from `src/scss/` by Dart Sass inside Gradle (`compileSass`, T043). **Edit the SCSS, never `clean-blog.css`**: it isn't committed, and the build fails if one reappears under `src/jbake/assets/css/`. See README, "To change the site's styles"
 - **Branches:** `main` holds the source (the default branch; renamed from `source` in T093). `master` is the **retired** publishing branch from before T027, frozen and preserved by tag `live-2026-10`. Don't push to it.
 - **Deploys:** GitHub Actions bakes, checks, and deploys to GitHub Pages (as an artifact, no commits) on **every push to `main`**. Merging to `main` *is* publishing. A manual "Run workflow" on `main` redeploys.
-- **Current work:** follows [`docs/00-REVIVAL.md`](docs/00-REVIVAL.md). Read it before starting any task.
+- **Current work:** follows [`docs/00-REVIVAL.md`](docs/00-REVIVAL.md). Read it before starting any task. The owner's own tasks (About page, drafts, mastheads, alt text) are in [`docs/04-AUTHORS-DESK.md`](docs/04-AUTHORS-DESK.md); agents may prepare material for them, but the owner decides.
 
 ### Layout
 
