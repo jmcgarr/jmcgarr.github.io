@@ -11,7 +11,7 @@
 // With -Ppr (T061) it also commits the draft, pushes post/<slug> to origin, and opens a draft pull request
 // titled "[WIP] <title>" with the GitHub CLI (gh). Pull requests never deploy (T008), so this publishes nothing.
 //
-// A single-file Java program (JDK 21): Gradle runs it with `java scripts/NewPost.java`.
+// A single-file Java program (JDK 21 or newer): Gradle runs it with `java scripts/NewPost.java`.
 
 import java.io.IOException;
 import java.lang.ProcessBuilder.Redirect;

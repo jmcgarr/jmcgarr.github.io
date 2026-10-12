@@ -9,7 +9,7 @@ published since 2009. Other sites, search engines, RSS readers, and slide decks 
 links pointing at it. **Treat it as a live publication, not a code project.** Every published URL is
 a promise to the people who linked to it.
 
-- **Generator:** JBake 2.7, run directly by a Gradle `JavaExec` task in `build.gradle` (no JBake plugin, T096). Gradle 9.8 wrapper (T097), JDK 21 via `.java-version`
+- **Generator:** JBake 2.7, run directly by a Gradle `JavaExec` task in `build.gradle` (no JBake plugin, T096). Gradle 9.8 wrapper (T097), JDK 25 via `.java-version` (T113; JDK 21 also works)
 - **Theme:** Start Bootstrap "Clean Blog" (Bootstrap 4.1, jQuery 3.3, Font Awesome 5) as FreeMarker templates
 - **Styles:** the theme CSS is generated from `src/scss/` by Dart Sass inside Gradle (`compileSass`, T043). **Edit the SCSS, never `clean-blog.css`**: it isn't committed, and the build fails if one reappears under `src/jbake/assets/css/`. See README, "To change the site's styles"
 - **Branches:** `main` holds the source (the default branch; renamed from `source` in T093). `master` is the **retired** publishing branch from before T027, frozen and preserved by tag `live-2026-10`. Don't push to it.
