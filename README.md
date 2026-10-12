@@ -36,6 +36,10 @@ at `http://localhost:8080`; a normal `./gradlew bake` uses the real address agai
 `./gradlew bake` runs JBake 2.7 directly in its own JVM (`build.gradle`). If a template or post has an error, the
 build fails and prints JBake's message with the file and line.
 
+Gradle's configuration cache is on (`gradle.properties`, T114), so a command's first run ends with "Configuration
+cache entry stored" and later runs start with "Reusing configuration cache". Both are normal. Edits to posts,
+templates, SCSS, and `jbake.properties` are always picked up; `--no-configuration-cache` turns it off for one run.
+
 Drafts (posts with `status=draft`) are rendered for preview only, at
 `http://localhost:8080/blog/drafts/<name>-draft.html`. They are never published.
 
