@@ -263,9 +263,12 @@ tasks.register('newPost', Exec) {
     group = 'writing'
     description = 'Starts a draft post on a new post/<slug> branch: ./gradlew newPost -Ptitle="My Post Title"'
     executable = "${System.getProperty('java.home')}/bin/java"
+    // The providers are made here, while configuring, and only read when the task runs. The configuration cache
+    // (T114) can't run code that reaches the build script (`providers`) at that point.
     def options = ['title', 'tags', 'summary', 'format', 'slug', 'branch', 'pr']
+            .collectEntries { [(it): providers.gradleProperty(it)] }
     argumentProviders.add({
-        ['scripts/NewPost.java'] + options.findAll { providers.gradleProperty(it).isPresent() }
-                .collect { "--${it}=${providers.gradleProperty(it).get()}".toString() }
+        ['scripts/NewPost.java'] + options.findAll { name, value -> value.isPresent() }
+                .collect { name, value -> "--${name}=${value.get()}".toString() }
     } as CommandLineArgumentProvider)
 }
