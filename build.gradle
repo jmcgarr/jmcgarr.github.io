@@ -61,7 +61,7 @@ dependencies {
     constraints {
         jbake 'org.apache.commons:commons-text:1.15.0'               // 1.8: CVE-2022-42889
         jbake 'org.apache.commons:commons-configuration2:2.15.1'     // 2.7: CVE-2022-33980 and others
-        jbake 'org.apache.commons:commons-lang3:3.20.0'              // 3.12: CVE-2025-48924
+        jbake 'org.apache.commons:commons-lang3:3.21.0'              // 3.12: CVE-2025-48924
         jbake 'commons-beanutils:commons-beanutils:1.11.0'           // 1.9.4: CVE-2025-48734
         jbake 'commons-io:commons-io:2.22.0'                         // 2.11: CVE-2024-47554
         jbake 'org.jsoup:jsoup:1.23.2'                               // 1.14.3: CVE-2022-36033 and others
