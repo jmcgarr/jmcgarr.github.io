@@ -3,7 +3,7 @@
 **Branch**: `docs/site-revival` | **Created**: 2026-10-04 | **Status**: Draft
 **Input**: Repository review of 2026-10-03 (JBake 2.6 / Gradle 5.6.4 / Clean Blog theme)
 
-This plan brings the site back to a healthy state over nine milestones (M0–M8). Each milestone has one
+This plan brings the site back to a healthy state over eight milestones (M0–M7). Each milestone has one
 theme and can be tested on its own, so you can ship it to the live site before starting the next.
 
 ---
@@ -60,7 +60,6 @@ du -sh build/jbake                                    # published site size
 | M5 | ✅ [Polished Presentation](#m5-polished-presentation) | Valid HTML, discoverable, shares well                    | 10   | 9            |
 | M6 | ✅ [Content Care](#m6-content-care) | Accurate content; every link and image works             | 4    | 4            |
 | M7 | ✅ [Writing Flow](#m7-writing-flow) | Writing a post is pleasant: scaffold, watch, live reload | 3    | 9            |
-| M8 | [Author's Desk](#m8-authors-desk) | What only the author can write, choose or click; done last | 1    | 7            |
 | —  | [Backlog](#backlog) | Unscheduled; not reproduced or waiting on evidence       | 1    | 7            |
 
 ✅ done · ⚙️ in progress · no mark: not started
@@ -73,7 +72,7 @@ du -sh build/jbake                                    # published site size
 - **M4 is a decision gate.** It should finish before **M5**, because M5 is template work for the current JBake platform and would be thrown away if the site migrates.
 - **M6** depends only on M0 and can be picked up at any time. It's good work for spare evenings.
 - **M7** comes after M4, because its tasks depend on the platform decision (made 2026-10-07: stay on JBake). T061 also needs T008 (M1). It doesn't depend on M5 or M6.
-- **M8 goes last** (owner's choice, 2026-10-11). Its tasks need the author's own words, choices or accounts, so they don't block the other milestones.
+- **The author's own tasks** (About and Talks, drafts, mastheads, alt text, fonts) were M8 until 2026-10-12. They now live in [`04-AUTHORS-DESK.md`](04-AUTHORS-DESK.md), outside this plan (owner's request: they're the owner's own work, not shared work).
 
 ### GitHub Issues
 
@@ -91,7 +90,7 @@ Open issues on [jmcgarr/jmcgarr.github.io](https://github.com/jmcgarr/jmcgarr.gi
 | [#11](https://github.com/jmcgarr/jmcgarr.github.io/issues/11) _(closed)_ | [Gradle] Live reload? | enhancement | T064 | M7 | `Closes #11` |
 | [#12](https://github.com/jmcgarr/jmcgarr.github.io/issues/12) _(closed by `docs/close-M7`)_ | [Gradle] Add toast messages when a build is complete | enhancement | T065 | M7 | `Closes #12` |
 | [#13](https://github.com/jmcgarr/jmcgarr.github.io/issues/13) | Add a tags page to browse by topics | enhancement | T057 | M5 | `Closes #13` |
-| [#14](https://github.com/jmcgarr/jmcgarr.github.io/issues/14) | Add mastheads for older posts | enhancement | T059 | M8 | `Closes #14` |
+| [#14](https://github.com/jmcgarr/jmcgarr.github.io/issues/14) | Add mastheads for older posts | enhancement | T059 | [Author's Desk](04-AUTHORS-DESK.md) | `Closes #14` |
 | [#15](https://github.com/jmcgarr/jmcgarr.github.io/issues/15) | Fix the code snippet look and feel | bug, enhancement | T056 | M5 | `Closes #15` |
 | [#16](https://github.com/jmcgarr/jmcgarr.github.io/issues/16) | Masthead should be able to include remote images | bug | T037 | M5 | `Closes #16` |
 
@@ -489,14 +488,14 @@ Accessibility ≥ 95. Social preview validators show a title, description, and i
 
 ## M6: Content Care
 
-> **Status: done 2026-10-11.** All tasks and checkpoints CHK029, CHK031, CHK040 and CHK041 pass: every outbound link fixed or justified (T050), no broken images (T049), 0 HTML errors in post bodies (T108), every embed titled (T107), and LF line endings throughout (T051). The tasks only the author can do (About and Talks, drafts, alt text, mastheads) moved to M8.
+> **Status: done 2026-10-11.** All tasks and checkpoints CHK029, CHK031, CHK040 and CHK041 pass: every outbound link fixed or justified (T050), no broken images (T049), 0 HTML errors in post bodies (T108), every embed titled (T107), and LF line endings throughout (T051). The tasks only the author can do (About and Talks, drafts, alt text, mastheads) moved to [`04-AUTHORS-DESK.md`](04-AUTHORS-DESK.md).
 
 **Goal**: The writing is accurate and easy to read, and every link and image still works.
 _(This milestone can be done at any time after M0.)_
 
 **Independent Test**: A full `lychee` run reports 0 broken links (or documents each exception), every
 image and embed works and has a text alternative or title, post bodies have no HTML errors, and all content files use LF
-line endings. _(2026-10-11: the About, Talks and Bio review moved to M8 with the other tasks only the owner can do.)_
+line endings. _(2026-10-11: the About, Talks and Bio review moved out, with the other tasks only the owner can do; see [`04-AUTHORS-DESK.md`](04-AUTHORS-DESK.md).)_
 
 ### Bugs
 
@@ -629,56 +628,6 @@ _The owner filed #8–#12 as enhancements. T095 was found while testing for the 
   - _Evidence 2026-10-08 (T064, `feat/T064-live-reload`): empty after `./gradlew clean bake`, and after a plain `./gradlew bake` following a preview session. CI's "Check live reload is not published" step now enforces it on `build/site` (fails on a staged preview build, passes on production). Tick at the M7 checkpoint once T064 is merged._
   - _Passed 2026-10-08: on a clean clone of `main`, after a preview session, `./gradlew clean bake` → `grep -rli livereload build/jbake` finds 0 files, and the draft isn't in the staged `build/site`. CI enforces it on every build (T064's guard step)._
 - [x] CHK036 Issues #8–#12 are closed by merged PRs (`gh issue list --state open` shows none of them) _(2026-10-08: #8 by #63, #9 by #64, #11 by #65. #10 and #12 are closed by the merge of the PR that ticks this, via its `Closes` lines. It becomes true at the same moment this tick lands on `main`; checked again after the merge.)_
-
----
-
-## M8: Author's Desk
-
-**Goal**: Everything only the author can write, choose or click: current bio and talks, alt text in the
-author's words, the drafts, the old posts' header images, and the account settings only the owner can reach.
-_(Owner's request, 2026-10-11: these were spread over M2 and M6; they're collected here and done last.
-Agents can prepare material for each one, such as proposed wording or a list of candidates, but the
-owner makes the call.)_
-
-**Independent Test**: About, Talks, and Speaker Bio are current; every draft has a decision; every
-meaningful image has alt text the owner approved; and issue #14 is closed.
-
-### Bugs
-
-- [ ] T048 [BUG] The About page is out of date (it says "currently at Slack", from 2018). Review the Talks and Speaker Bio pages too (`src/jbake/content/about.asciidoc`, `talks.asciidoc`, `speaker-bio.asciidoc`)
-  - **Test:** A manual read-through confirms roles, employers, and dates are current, and each page's `date=` is updated.
-  - _2026-10-09: the out-of-date sentences on About, Speaker Bio and Talks are quoted in [`reports/content-2026-10-09.md`](reports/content-2026-10-09.md) §I.1 (no wording proposed; the author writes it), awaiting owner._
-  - _2026-10-11: this review also covers the three `[… 2017]` link labels with no URL that show as literal text on Talks (§I.1). (The dead Vimeo embed, E6, is already gone: removed as A151 in #91.)_
-  - _2026-10-11: moved from M6 to M8 (owner's request: the tasks only the owner can do go last)._
-
-### Improvements
-
-- [ ] T022 [IMP] **Deferred 2026-10-05 (owner):** don't change fonts yet. The owner wants to settle on the *right* fonts first, and is open to optimizing font downloads afterwards (for example, Google Fonts loads 10 Open Sans + 4 Lora variants, which are used only for the nav, buttons, and header subheadings). Was: Self-host Lora and Open Sans, or drop them for the system font stack (this continues the May 2024 font changes) (`src/jbake/templates/header.ftl`, `src/scss/_variables.scss` and `_mixins.scss`, which generate `clean-blog.css` since T043)
-  - **Test:** The DevTools Network tab shows no requests to `fonts.googleapis.com` or `fonts.gstatic.com`. Headings and body text look right on home and on a post.
-  - _2026-10-11: moved from M2 to M8, because it waits on the owner's choice of fonts._
-- [ ] T053 [P] [IMP] Triage the 12-post drafts backlog: finish and publish, keep as drafts, or delete (`drafts/` after T009)
-  - **Test:** Every draft has a recorded decision (a short table in `docs/reports/drafts-triage.md`).
-  - _2026-10-11: moved from M6 to M8 (owner's request: the tasks only the owner can do go last)._
-- [ ] T054 [P] [IMP] _(Optional)_ Fix the slug typos (`relections-and-projections-2019`, `vagrant-cheatsheat`, `developer-reading-lis`), but **only** together with redirect stubs at the old URLs (`src/jbake/content/blog/`)
-  - **Test:** Each old URL redirects to the new one. `check-urls.sh` passes with the old URLs still present as stubs.
-  - _2026-10-11: moved from M6 to M8 (owner's request: the tasks only the owner can do go last)._
-- [ ] T059 [P] [IMP] Give older posts their own mastheads. On 2026-10-04, 65 of 74 published posts used the default image. This is manual, creative work: choose an image for each post, with credit, that follows the image size rule in `AGENTS.md`, or use a remote image once T037 supports it. Only add `masthead=` and `mastheadCredit=` lines, and keep each file's existing line endings (`src/jbake/content/blog/`)
-  - **Issue:** Closes #14
-  - **Test:** `for f in src/jbake/content/blog/*.*; do tr '\r' '\n' < "$f" | grep -q '^masthead=' || echo "$f"; done | wc -l` returns `0` (baseline: 65). No newly added image in `src/jbake/assets/img/masthead/` is over 400 KB. Every new masthead has a `mastheadCredit=`.
-  - _2026-10-11: moved from M6 to M8 (owner's request: the tasks only the owner can do go last)._
-- [ ] T109 [P] [IMP] Alt text in the author's words for the 34 images whose `alt` is empty, a file name, or "Profile" (report [§F](reports/content-2026-10-09.md#f-alt-text-accessibility--owner-approves-wording): proposed wording for each, F1–F34). Found by T046 (M5). The owner approves or rewrites each one; logos next to text that names the organization may get `alt=""` instead. F5 is moot (C3 removed that image) (`src/jbake/content/`)
-  - **Test:** each F item has the owner's wording (or "decorative") recorded, and `grep -rnE '<img[^>]*alt=""' src/jbake/content` plus `grep -rn 'Profile' src/jbake/content/*.asciidoc` list only images the owner marked decorative.
-- [ ] T110 [P] [IMP] Check the SlideShare embeds and links in a browser. SlideShare answers scripts with a bot challenge, so about 30 URLs (the 12 slide embeds on Talks and in posts, and the other SlideShare links) can't be checked automatically (report §I.5) (`src/jbake/content/`)
-  - **Test:** a note under this task lists each SlideShare deck as working or not, from one look in a browser; any dead one gets a T050-style fix (live replacement, snapshot, or the link removed and the text kept).
-- [ ] T111 [IMP] Verify `mikemcgarr.com` for GitHub Pages, so nobody else can claim the domain on GitHub Pages. GitHub account → Settings → Pages → Add a domain, then add the DNS `TXT` record it shows at GoDaddy (`domaincontrol.com`). Optional; came up during T068 and the owner deferred it (2026-10-05) (no repository change)
-  - **Test:** GitHub's Pages settings list `mikemcgarr.com` as **Verified**, and `dig +short TXT _github-pages-challenge-jmcgarr.mikemcgarr.com` returns the record.
-
-### Checkpoint: M8
-
-- [ ] CHK030 About, Talks, and Speaker Bio have been reviewed and are current
-- [ ] CHK032 Every draft has a triage decision
-- [ ] CHK039 Issue #14 is closed by a merged PR
-- [ ] CHK042 Every F item in report §F has the owner's alt text or a "decorative" decision (T109)
 
 ---
 
