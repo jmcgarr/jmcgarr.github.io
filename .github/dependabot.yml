@@ -23,6 +23,10 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
+      # logback 1.3+ needs SLF4J 2, and JBake 2.7 uses SLF4J 1.7, so 1.2.x is the newest that works (T112).
+      # Without this, the weekly group would propose 1.5.x as a "minor" update and break the bake.
+      - dependency-name: "ch.qos.logback:*"
+        versions: [">= 1.3.0"]
     groups:
       gradle:
         patterns: ["*"]

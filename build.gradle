@@ -71,8 +71,8 @@ dependencies {
         jbake 'org.jruby:jruby:9.4.15.0'
         // Logback stays on 1.2: 1.3 and later need SLF4J 2, and JBake is built on SLF4J 1.7. 1.2.13 is the last
         // 1.2 release. Its remaining advisories have no 1.2 fix; they need a hostile logback config file (ours is
-        // gradle/jbake-logback.xml) or its network receivers, which JBake doesn't use. Don't take a Dependabot
-        // update to 1.3 or later without checking JBake's log output.
+        // gradle/jbake-logback.xml) or its network receivers, which JBake doesn't use. Dependabot is told to skip
+        // 1.3 and later (.github/dependabot.yml).
         jbake 'ch.qos.logback:logback-classic:1.2.13'
         jbake 'ch.qos.logback:logback-core:1.2.13'
         // The bake used jbake-core's Jetty 9.4.44 and commons-vfs2 2.9.0 (which pulls in hadoop-hdfs-client,
