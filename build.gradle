@@ -89,10 +89,37 @@ def jbakeDestination = layout.buildDirectory.dir('jbake').get().asFile
 // JRuby (inside AsciidoctorJ) extracts a native jffi library while baking. Keep it under build/tmp, which `clean`
 // removes, instead of the project root (T024).
 def jffiDir = layout.buildDirectory.dir('tmp/jffi').get().asFile
+
+// Newer JDKs (T113): from JDK 24, JBake's JVM prints two warnings that the bake on 21 doesn't. OrientDB's
+// concurrentlinkedhashmap calls sun.misc.Unsafe::objectFieldOffset ("will be removed in a future release"), and
+// JRuby's jffi calls System::load ("Restricted methods will be blocked in a future release"). These flags allow
+// both and silence the warnings. Each is added only on a JDK that knows it: JDK 21 refuses to start with
+// --sun-misc-unsafe-memory-access ("Unrecognized option"), which arrived in JDK 23 (JEP 471).
+// --enable-native-access is final from JDK 22 (JEP 454); 21 accepts it, but leaving it off keeps 21's command
+// line as it was. The version is that of the Java that runs JBake: the task's javaLauncher, which is the JVM
+// running Gradle (JAVA_HOME) because no toolchain is set. It is read lazily, and it's a task input.
+abstract class NewJdkJvmArgs implements CommandLineArgumentProvider {
+    @Input
+    abstract Property<Integer> getJavaVersion()
+
+    @Override
+    Iterable<String> asArguments() {
+        def version = javaVersion.get()
+        def args = []
+        if (version >= 22) { args << '--enable-native-access=ALL-UNNAMED' }
+        if (version >= 23) { args << '--sun-misc-unsafe-memory-access=allow' }
+        return args
+    }
+}
+
 def configureJBake = { JavaExec task ->
     task.mainClass = 'org.jbake.launcher.Main'
     // JRuby (AsciidoctorJ) asks for these to use native IO on modern JDKs; without them it prints a warning.
     task.jvmArgs '--add-opens', 'java.base/sun.nio.ch=ALL-UNNAMED', '--add-opens', 'java.base/java.io=ALL-UNNAMED'
+    // JDK 22+ and 23+ only (T113, see NewJdkJvmArgs above).
+    task.jvmArgumentProviders.add(objects.newInstance(NewJdkJvmArgs).tap {
+        javaVersion = task.javaLauncher.map { it.metadata.languageVersion.asInt() }
+    })
     task.systemProperty 'jffi.extract.dir', jffiDir.absolutePath
     task.systemProperty 'logback.configurationFile', file('gradle/jbake-logback.xml').absolutePath
     task.doFirst { jffiDir.mkdirs() }
