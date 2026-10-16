@@ -124,6 +124,32 @@ If you use a new header image (`masthead=`), put it in `src/jbake/assets/img/mas
 When it's ready, set `status=published` and move it to `src/jbake/content/blog/`. Its URL will be
 `/blog/<slug>.html`. Published URLs are permanent, so pick the slug carefully (see [AGENTS.md](AGENTS.md)).
 
+To convert an old post to Markdown
+==================================
+The site is converging on Markdown (revival task T102; the owner's decision of 2026-10-12). The 2009–2010 posts
+were converted in October 2026. The 2011–2013 WordPress `.html` posts, the `.asciidoc` posts and pages, and the
+drafts are still to do, in batches. A conversion is mechanical: the published page must not change, and
+`scripts/to-markdown/verify.py`, not the converter, is the proof. The tools, from `scripts/to-markdown/`:
+
+```
+python3 -m venv .venv && .venv/bin/pip install html5lib pillow   # once
+./gradlew clean bake && cp -R build/jbake /tmp/baseline            # a bake of main, before converting
+git mv src/jbake/content/blog/<slug>.html src/jbake/content/blog/<slug>.md   # commit this rename on its own
+.venv/bin/python scripts/to-markdown/convert.py --in-place src/jbake/content/blog/<slug>.md
+./gradlew clean bake
+.venv/bin/python scripts/to-markdown/verify.py /tmp/baseline build/jbake <slug>...
+```
+
+`convert.py` keeps the header byte for byte and turns the body into Markdown where the result renders the same
+with this site's flexmark settings; anything it can't express exactly (code blocks, images and paragraphs with
+classes or styles, embeds) stays raw HTML. Off-site links become plain `[text](url)` links, because the templates
+add `target="_blank"` at build time (so pages are identical, and only `feed.xml` loses that attribute).
+`verify.py` compares each page outside `<article>` byte for byte, the article and the feed item as a DOM, and
+counts of links, images, code blocks and visible text. `render.sh` renders Markdown exactly as JBake does, to
+probe an edge case, and `screenshots.sh` with `pixeldiff.py` take before-and-after screenshots of a sample of
+posts and compare them pixel by pixel. Each script's header says how to run it. URLs don't change, because JBake
+publishes `<slug>.md` at the same `/blog/<slug>.html`.
+
 To change the site's styles
 ===========================
 **Edit `src/scss/`, never `clean-blog.css`.** The theme's stylesheet, `/css/clean-blog.css`, is generated from
