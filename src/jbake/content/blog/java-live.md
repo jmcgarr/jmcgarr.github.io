@@ -1,0 +1,9 @@
+title=Article Published in Linux Insider...Java Lives
+date=2010-12-28
+type=post
+tags=Java, linux
+status=published
+~~~~~~
+I was lucky enough to have an article published in Linux Insider today on the future of Java.  I do have to say that writing an article for a publication is not as easy as writing a blog post.  I would love to tell you what it is all about, but I would rather you go and check it out for yourself!
+
+<https://www.linuxinsider.com/story/java-lives-71532.html>
