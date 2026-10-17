@@ -4,16 +4,20 @@ type=post
 tags=test
 status=draft
 ~~~~~~
-<p>I was recently asked my opinions and views on three acceptance testing frameworks for Java projects.  Rather than respond via email, I figured that my answer could make a great blog post.</p>
-<p>The goal of my assessment is help somebody choose a test automation tool that works well with a Acceptance Test Driven Development (ATDD)/Specification by Example (SBE) approach.  ATDD/SBE both require significant cultural and processes changes.  This is truly the hard part.  This won't be covered in my blog post, but might make a good post.  I recommend reaching Gojko Adzig's Specification by Example for more on the process/cultural side.</p>
-<p>For this assessment, I wanted to cover three tools in particular.  My goal was to provide my perspective on each of them, and not a recommendation.  I do think that all three of these tools are great and you</p>
-<ul>
-<li>Cucumber (JVM)</li>
-<li>FitNesse</li>
-<li>Concordion</li>
-</ul>
-<h2>Assessment Criteria</h2>
-<p>Prior to discussing each of the tools, I wanted to cover my view on what makes a good acceptance test automation tool.</p>
+I was recently asked my opinions and views on three acceptance testing frameworks for Java projects.  Rather than respond via email, I figured that my answer could make a great blog post.
+
+The goal of my assessment is help somebody choose a test automation tool that works well with a Acceptance Test Driven Development (ATDD)/Specification by Example (SBE) approach.  ATDD/SBE both require significant cultural and processes changes.  This is truly the hard part.  This won't be covered in my blog post, but might make a good post.  I recommend reaching Gojko Adzig's Specification by Example for more on the process/cultural side.
+
+For this assessment, I wanted to cover three tools in particular.  My goal was to provide my perspective on each of them, and not a recommendation.  I do think that all three of these tools are great and you
+
+- Cucumber (JVM)
+- FitNesse
+- Concordion
+
+## Assessment Criteria
+
+Prior to discussing each of the tools, I wanted to cover my view on what makes a good acceptance test automation tool.
+
 <ul>
 <li><strong>Specification Layer</strong> - This is the layer where the human readable specs are authored
 <ul>
@@ -34,11 +38,19 @@ status=draft
 <li>Publishing -</li>
 <li>Community -</li>
 </ul>
-<p>Disclaimer: I also wanted to add that I have deployed Concordion and Cucumber in production, but I have yet to implement FitNesse.  This may color my views so please, take my recommendations with a grain of salt.</p>
-<p>Cucumber</p>
-<p>&nbsp;</p>
-<p>FitNesse</p>
-<p>&nbsp;</p>
-<p>Concordion</p>
-<p>&nbsp;</p>
-<p>Conclusion</p>
+
+Disclaimer: I also wanted to add that I have deployed Concordion and Cucumber in production, but I have yet to implement FitNesse.  This may color my views so please, take my recommendations with a grain of salt.
+
+Cucumber
+
+&nbsp;
+
+FitNesse
+
+&nbsp;
+
+Concordion
+
+&nbsp;
+
+Conclusion

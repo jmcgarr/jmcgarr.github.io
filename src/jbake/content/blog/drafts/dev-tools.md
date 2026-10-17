@@ -4,27 +4,28 @@ type=post
 tags=tools
 status=draft
 ~~~~~~
-<p>Tools that I used to support the project:</p>
-<ul>
-<li>Git</li>
-<li>Gitflow</li>
-<li>Sublime Text 2</li>
-<li>Trello</li>
-<li>Pandora</li>
-</ul>
-<p>Installation Prerequisites:</p>
-<ul>
-<li>Ruby</li>
-<li>Oracle Virtual Box</li>
-<li>Vagrant</li>
-<li>librarian-puppet</li>
-</ul>
-<p>The solution includes:</p>
-<ul>
-<li>Puppet</li>
-<li>rspec</li>
-</ul>
-<p>References Projects and URLs:</p>
+Tools that I used to support the project:
+
+- Git
+- Gitflow
+- Sublime Text 2
+- Trello
+- Pandora
+
+Installation Prerequisites:
+
+- Ruby
+- Oracle Virtual Box
+- Vagrant
+- librarian-puppet
+
+The solution includes:
+
+- Puppet
+- rspec
+
+References Projects and URLs:
+
 <ul>
 <li>https://github.com/aussielunix/jenkins-appliance</li>
 <li>https://github.com/aggressivex/vagrant-startup-environment</li>

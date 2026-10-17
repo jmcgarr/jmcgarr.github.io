@@ -4,9 +4,12 @@ type=post
 tags=.NET, bdd, selenium, SpecFlow
 status=draft
 ~~~~~~
-<p>The goal of this post is capture the process I went through for putting together a Behavior Driven Development sample project for a .NET team that I am coaching.  The tool I will be using is Specflow, a .NET BDD tool that works with Cucumber's Gherkin format.  Since the project would be an example of writing executable specifications against a web application, I will also be integrating Selenium/WebDriver 2.0 into the example.  I hope this tutorial helps you get started.</p>
-<p><strong>Environment Setup</strong></p>
-<p><strong></strong>The first part is to make sure your developmennt environment has all of the right tools downloaded and installed.  Here are the list of tools you need to have installed on your development machine:</p>
+The goal of this post is capture the process I went through for putting together a Behavior Driven Development sample project for a .NET team that I am coaching.  The tool I will be using is Specflow, a .NET BDD tool that works with Cucumber's Gherkin format.  Since the project would be an example of writing executable specifications against a web application, I will also be integrating Selenium/WebDriver 2.0 into the example.  I hope this tutorial helps you get started.
+
+**Environment Setup**
+
+<strong></strong>The first part is to make sure your developmennt environment has all of the right tools downloaded and installed.  Here are the list of tools you need to have installed on your development machine:
+
 <ol>
 <li><span style="text-decoration:underline;">Visual Studio</span> (I am using 2010 Premium) - I am going to assume you have this working</li>
 <li><span style="text-decoration:underline;">NuGet</span>
@@ -25,8 +28,11 @@ status=draft
 <li>Specflow</li>
 <li>Restart Visual Studio</li>
 </ol>
+
 <div><strong>Project Setup</strong></div>
+
 <div><strong></strong>Setting up the project</div>
+
 <ol>
 <li>Create a new project in Visual Studio.  For now, I would make the project a C# Class Library.  For this example, I will will call the project BDD.NET.</li>
 <li>Delete the Class</li>
