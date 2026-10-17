@@ -1,0 +1,13 @@
+title=My Continuous Delivery talk at ALN DC
+date=2012-09-07
+type=post
+tags=presentations, continuous delivery
+status=published
+~~~~~~
+<img align="right" title="DC ALN Logo" src="/img/alndc-logo.jpg" alt="" width="299" height="143" />Last night I gave the latest installment of my <a title="Continuous Delivery at MCJUG" href="/blog/cd-at-mcjug.html" target="_blank">ever</a> <a title="Second Continuous Delivery Talk at MCJUG" href="/blog/mcjug-return.html" target="_blank">evolving</a> Continuous Delivery talk to the DC Chapter of the [Agile Project Leadership](https://web.archive.org/web/20120808024420/http://aplndc.com:80/ "Agile Leadership Network (ALN)") (ALN) group last night.  It was a great group with an attentive audience and tons of great questions.  I thoroughly enjoyed the experience and I hope I can give more talk there in the future.
+
+I want to thank the organizers of the ALN for asking me to come speak last night.  I look forward to giving more talks at ALN in the future.
+
+Also, if you happened to attend the presentation, please rate my talk at SpeakerRate.com. The slides are below, I hope you enjoyed my talk!
+
+[Slides: Continuous delivery applied](https://www.slideshare.net/slideshow/embed_code/14204775)
