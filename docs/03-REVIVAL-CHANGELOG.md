@@ -142,4 +142,4 @@ These are for the author to write or decide, and they're tracked in their own li
 - what to do with the 12 drafts
 - header images for older posts
 - alt text in the author's own words
-- someday, converting the old WordPress posts to a single format
+- converting the rest of the content to Markdown: the 2009–2010 posts were converted on 2026-10-16, and the 2011–2013 posts and the AsciiDoc pages are still to go (T102)
