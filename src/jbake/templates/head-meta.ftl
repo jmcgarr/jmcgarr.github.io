@@ -72,7 +72,8 @@
   <#if (content.summary)?has_content>
     <#assign metaDescription = metaDescriptionOf(content.summary)>
   <#elseif (content.body)?has_content>
-    <#assign metaDescription = metaDescriptionOf(content.body)>
+    <#-- embeds() first (T115), so a lone link to a video or deck is an <iframe>, which metaPlainText drops -->
+    <#assign metaDescription = metaDescriptionOf(embeds(content.body))>
   </#if>
 </#if>
 <#if !metaDescription?has_content || metaDescription == "…">

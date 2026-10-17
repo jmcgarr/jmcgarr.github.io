@@ -11,9 +11,10 @@
         <div class="col-lg-8 col-md-10 mx-auto">
 
         	<#-- The post body is block-level HTML, so it can't sit inside a <p> (T035).
-        	     Its images load lazily, so they don't hold up the header image (T075, lazy-images.ftl). -->
+        	     A lone link to a video or deck becomes the player, first (T115, embeds.ftl); the other two only
+        	     touch <img> and <a>. Its images load lazily, so they don't hold up the header image (T075, lazy-images.ftl). -->
         	<#include "lazy-images.ftl">
-        	<article>${externalLinks(lazyImages(content.body))}</article>
+        	<article>${externalLinks(lazyImages(embeds(content.body)))}</article>
 
           <#-- Plain share links: no third-party scripts, nothing loads until a reader clicks -->
           <#assign shareUrl = "${config.site_host}/${content.uri}">

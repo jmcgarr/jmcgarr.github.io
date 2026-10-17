@@ -9,6 +9,7 @@
 </#if>
     <title><#if (content.title)??><#escape x as x?xml>${content.title}</#escape><#else>Mike McGarr</#if></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <#include "embeds.ftl"><#-- embeds(): a lone link to a video or deck becomes the player (T115); head-meta.ftl and post.ftl use it -->
     <#include "head-meta.ftl"><#-- description, canonical, Open Graph and Twitter/X cards (T041, T042) -->
     <meta name="author" content="Mike McGarr">
     <meta name="keywords" content="">
