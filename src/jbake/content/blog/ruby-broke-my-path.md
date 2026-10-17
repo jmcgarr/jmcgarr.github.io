@@ -9,7 +9,7 @@ status=published
 $&gt; grails run-app
 -bash: grails: command not found
 </pre>
-First, I double checked my <em>~/.profile</em> file, where I added Grails to my PATH.  This was unchanged, but Grails was stil not being added to my PATH.<br />
+<p>First, I double checked my <em>~/.profile</em> file, where I added Grails to my PATH.  This was unchanged, but Grails was stil not being added to my PATH.</p>
 <pre>
 export GRAILS_HOME=~/Tools/grails-1.3.7
 export PATH=/opt/local/bin:/opt/local/sbin:$GRAILS_HOME/bin:$PATH

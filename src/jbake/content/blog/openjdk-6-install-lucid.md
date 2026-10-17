@@ -10,11 +10,11 @@ status=published
 $&gt; sudo apt-get install python-software-properties
 $&gt; sudo add-apt-repository &quot;deb http://archives.canonical.com/ lucid partner&quot;
 </pre>
-Once this is done, you need to update the the apt-get cache. &nbsp;You can do this with the following command:<br />
+<p>Once this is done, you need to update the the apt-get cache. &nbsp;You can do this with the following command:</p>
 <pre>
 $&gt; sudo apt-get update
 </pre>
-Now that apt-get is all up to date, you can finally install OpenJDK 6 JRE with the following command:<br />
+<p>Now that apt-get is all up to date, you can finally install OpenJDK 6 JRE with the following command:</p>
 <pre>
 $&gt; sudo apt-get install openjdk-6-jdk
 </pre>
