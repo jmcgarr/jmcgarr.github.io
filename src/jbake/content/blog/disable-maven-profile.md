@@ -4,13 +4,18 @@ type=post
 tags=build automation, Java, liquibase, maven, maven profiles, unit testing
 status=published
 ~~~~~~
-<p>I wanted to share a method for enabling a <a title="Maven" href="https://maven.apache.org/" target="_blank">Maven</a> <a title="Maven Profiles" href="https://maven.apache.org/guides/introduction/introduction-to-profiles.html" target="_blank">Build Profile</a> in the absense of a system property.  I did not see this approach documented in the current version of the Maven Build Profile documentation, so I thought I would share it.</p>
-<p>I find this approach particularly useful for turning off build features whenever you are disabling tests.  In Maven, there are two properties that will <a title="Skipping tests" href="https://maven.apache.org/surefire/maven-surefire-plugin/examples/skipping-tests.html" target="_blank">skip the execution of all tests</a>, but I prefer the "skipTests" property.</p>
-<p>As an example, let's take a Maven <a title="Maven Project Object Model" href="https://maven.apache.org/pom.html#What_is_the_POM" target="_blank">POM</a> file that runs <a title="Managing Database Changes with Liquibase" href="/blog/intro-to-liquibase.html" target="_blank">Liquibase </a>to update the database.   If you want to run a Maven install without executing the tests, then you would run the following command (Note: I am not advocating that tests be skipped, but I think this is a useful example):</p>
+I wanted to share a method for enabling a [Maven](https://maven.apache.org/ "Maven") [Build Profile](https://maven.apache.org/guides/introduction/introduction-to-profiles.html "Maven Profiles") in the absense of a system property.  I did not see this approach documented in the current version of the Maven Build Profile documentation, so I thought I would share it.
+
+I find this approach particularly useful for turning off build features whenever you are disabling tests.  In Maven, there are two properties that will [skip the execution of all tests](https://maven.apache.org/surefire/maven-surefire-plugin/examples/skipping-tests.html "Skipping tests"), but I prefer the "skipTests" property.
+
+As an example, let's take a Maven [POM](https://maven.apache.org/pom.html#What_is_the_POM "Maven Project Object Model") file that runs <a title="Managing Database Changes with Liquibase" href="/blog/intro-to-liquibase.html" target="_blank">Liquibase </a>to update the database.   If you want to run a Maven install without executing the tests, then you would run the following command (Note: I am not advocating that tests be skipped, but I think this is a useful example):
+
 <pre>
 mvn clean install -DskipTests
 </pre>
-<p>If I wanted to also disable Liquibase whenever the tests were skipped, I would configure Liquibase is a profile.  This profile would be triggered in absence of the  the "skipTests" property.  This means that when the property is not declared, Liquibase will run.  Here is how you would declare this profile:</p>
+
+If I wanted to also disable Liquibase whenever the tests were skipped, I would configure Liquibase is a profile.  This profile would be triggered in absence of the  the "skipTests" property.  This means that when the property is not declared, Liquibase will run.  Here is how you would declare this profile:
+
 <pre class="prettyprint language-xml">
 &lt;profiles&gt;
    &lt;profile&gt;
@@ -26,9 +31,13 @@ mvn clean install -DskipTests
    &lt;/profile&gt;
 &lt;/profiles&gt;
 </pre>
-<p>An alternative to this approach is to turn off the profile explicitly:</p>
+
+An alternative to this approach is to turn off the profile explicitly:
+
 <pre>
 mvn clean install -DskipTests -P !update-database
 </pre>
-<p>Using this approach does make it clear what you are trying to do, which is also an advantage.  There is an advantage in turning features on and off based on a related trigger, like a single system property.</p>
-<p>In regards to the <a title="Liquibase Maven Plugin" href="https://docs.liquibase.com/community/integration-guide-5-0-4/maven-goals" target="_blank">Liquibase Maven plugin</a>, a feature was added to <a title="Skip Liquibase Feature" href="https://liquibase.jira.com/browse/CORE-495" target="_blank">allow property based skipping</a>.  This is only available as of <a title="Liquibase 2.0 Released" href="https://web.archive.org/web/20110224023221/http://blog.liquibase.org:80/2011/01/liquibase-2-0-officially-released.html" target="_blank">Liquibase 2.0</a>.</p>
+
+Using this approach does make it clear what you are trying to do, which is also an advantage.  There is an advantage in turning features on and off based on a related trigger, like a single system property.
+
+In regards to the [Liquibase Maven plugin](https://docs.liquibase.com/community/integration-guide-5-0-4/maven-goals "Liquibase Maven Plugin"), a feature was added to [allow property based skipping](https://liquibase.jira.com/browse/CORE-495 "Skip Liquibase Feature").  This is only available as of [Liquibase 2.0](https://web.archive.org/web/20110224023221/http://blog.liquibase.org:80/2011/01/liquibase-2-0-officially-released.html "Liquibase 2.0 Released").

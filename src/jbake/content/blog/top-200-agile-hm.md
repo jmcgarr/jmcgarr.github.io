@@ -4,5 +4,6 @@ type=post
 tags=awards
 status=published
 ~~~~~~
-<p><a href="https://web.archive.org/web/20110609021113/http://agilescout.com:80/top-agile-blogs-200/"><img class="alignright" title="Top 200 Agile Blogs" src="/img/agile-top-200-blogs.png" alt="" width="125" height="125" /></a>I am happy to announce that my blog just received an honorable mention in <a title="Agile Scout" href="https://agilescout.com/" target="_blank">Agile Scout'</a>s <a title="Top 200 Agile Blogs" href="https://web.archive.org/web/20110609021113/http://agilescout.com:80/top-agile-blogs-200/" target="_blank">Top 200 Agile Blogs</a>.  I am humbled and inspired by this great honor, and it just means that I have to push harder and write more and more.  I would also like to congratulate my fellow Excellian Richard Cheng, who's blog, One More Agile Blog, has been ranked 162.  Nicely done Richard!</p>
-<p>I hope to make the Top 200 next year!</p>
+[<img class="alignright" title="Top 200 Agile Blogs" src="/img/agile-top-200-blogs.png" alt="" width="125" height="125" />](https://web.archive.org/web/20110609021113/http://agilescout.com:80/top-agile-blogs-200/)I am happy to announce that my blog just received an honorable mention in [Agile Scout'](https://agilescout.com/ "Agile Scout")s [Top 200 Agile Blogs](https://web.archive.org/web/20110609021113/http://agilescout.com:80/top-agile-blogs-200/ "Top 200 Agile Blogs").  I am humbled and inspired by this great honor, and it just means that I have to push harder and write more and more.  I would also like to congratulate my fellow Excellian Richard Cheng, who's blog, One More Agile Blog, has been ranked 162.  Nicely done Richard!
+
+I hope to make the Top 200 next year!
