@@ -1,0 +1,16 @@
+title=Grails Best Practice Resources
+date=2011-10-11
+type=post
+tags=best practices, grails, groovy
+status=published
+~~~~~~
+I have been spending some time learning [Groovy](https://groovy.apache.org/) and [Grails](https://grails.org/) recently.  As a Java developer, I find that they answer many of the problems that currently exist in the Java platform (and the .NET platform as well).  They provide an amazing, and Agile toolkit for developers to get started with.
+
+I have also found some interesting resources on Grails best practices that I would like to share.
+
+- [Grails Podcast - episode 127](https://www.grailspodcast.com/blog/id/249)
+- [Grails Package Naming (dangertree techblog)](https://www.dangertree.net/journal/grails-package-naming/)
+- [Grails Best Practice discussion on StackOverflow.com](http://stackoverflow.com/questions/6226759/best-practices-to-be-followed-while-developing-grails-application)
+- [Martin Fowler on Anemic Domain Model](https://martinfowler.com/bliki/AnemicDomainModel.html) - not directly about Grails, but food for thought when talking about Domain object design
+
+<div>As a Java developer, many of your instincts might be wrong, so it is definitely worth taking a look at these when starting with Grails.  I will likely post more as time goes on.  I hope that these resources were helpful.</div>
