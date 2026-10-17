@@ -4,15 +4,19 @@ type=post
 tags=jenkins, groovy
 status=published
 ~~~~~~
-<p>I recently needed to make the same update to a large number of Jenkins jobs.  Essentially, we decided to change our naming convention for our jobs.  A simple change.  In order to achieve this, I took advantage of the Jenkins Script Console.</p>
-<p>The Jenkins Script Console allows you to run Groovy code against Jenkins to execute a task.  The Script Console provides access to Jenkins' underlying API's, which allows you to conduct almost any task.  The Script Console is available to any running Jenkins instance at '/script' or through the menus by navigating to 'Manage Jenkins &gt; Script Console'.  In order to effectively use the Script Console, you will likely need to become familiar with <a title="Jenkins JavaDocs" href="https://javadoc.jenkins-ci.org/" target="_blank">Jenkins' API's</a>.</p>
-<p><img class="aligncenter size-large wp-image-1402" alt="Jenkins Script Console" src="/img/jenkins-script-console.png" width="594" height="533" /></p>
-<p>In my case, I wanted to execute a script that found all jobs matching a particular naming convention and rename them.  In our case, we had two naming conventions being used and we wanted them to all match.  We had jobs names that followed one of two formats:</p>
-<ul>
-<li>camel case, with underscores and dashes like:  'FUN-ArtifactName_Branch-Commit'</li>
-<li>human readable like: 'FUN-ArtifactName (Branch)'</li>
-</ul>
-<p>My goal was to rename both sets of job names to look like 'fun-artifactname_branch-commit' (lower case, underscores and dashes).  Here's the script I executed:</p>
+I recently needed to make the same update to a large number of Jenkins jobs.  Essentially, we decided to change our naming convention for our jobs.  A simple change.  In order to achieve this, I took advantage of the Jenkins Script Console.
+
+The Jenkins Script Console allows you to run Groovy code against Jenkins to execute a task.  The Script Console provides access to Jenkins' underlying API's, which allows you to conduct almost any task.  The Script Console is available to any running Jenkins instance at '/script' or through the menus by navigating to 'Manage Jenkins > Script Console'.  In order to effectively use the Script Console, you will likely need to become familiar with [Jenkins' API's](https://javadoc.jenkins-ci.org/ "Jenkins JavaDocs").
+
+<img class="aligncenter size-large wp-image-1402" alt="Jenkins Script Console" src="/img/jenkins-script-console.png" width="594" height="533" />
+
+In my case, I wanted to execute a script that found all jobs matching a particular naming convention and rename them.  In our case, we had two naming conventions being used and we wanted them to all match.  We had jobs names that followed one of two formats:
+
+- camel case, with underscores and dashes like:  'FUN-ArtifactName_Branch-Commit'
+- human readable like: 'FUN-ArtifactName (Branch)'
+
+My goal was to rename both sets of job names to look like 'fun-artifactname_branch-commit' (lower case, underscores and dashes).  Here's the script I executed:
+
 <pre class="prettyprint language-groovy">
 for (item in Hudson.instance.items) {
     name = item.name
@@ -29,5 +33,7 @@ for (item in Hudson.instance.items) {
     }
 }
 </pre>
-<p>Like I said before, you need to understand Jenkins' underlying API's. In this script, I am iterating through the items on Jenkins (formerly Hudson, hence the old class name). I then grab the name of the item of only rename those items starting with the 'FUN-' prefix. For jobs in the camel case format, they all have a 'Commit' at the end of their name. For them, I just make sure the name is lowercase. For the human readable names, I need to use the replaceFirst method to reformat the names. Also note that I need to call the renameTo() method. That's it!</p>
-<p>For more examples of Groovy scripts for the Jenkins Script Console, I recommend you check out the <a title="Jenkins Script Console Wiki Page" href="https://www.jenkins.io/doc/book/managing/script-console/" target="_blank">Jenkins Script Console wiki page</a>.</p>
+
+Like I said before, you need to understand Jenkins' underlying API's. In this script, I am iterating through the items on Jenkins (formerly Hudson, hence the old class name). I then grab the name of the item of only rename those items starting with the 'FUN-' prefix. For jobs in the camel case format, they all have a 'Commit' at the end of their name. For them, I just make sure the name is lowercase. For the human readable names, I need to use the replaceFirst method to reformat the names. Also note that I need to call the renameTo() method. That's it!
+
+For more examples of Groovy scripts for the Jenkins Script Console, I recommend you check out the [Jenkins Script Console wiki page](https://www.jenkins.io/doc/book/managing/script-console/ "Jenkins Script Console Wiki Page").

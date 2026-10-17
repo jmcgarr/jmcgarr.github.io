@@ -5,8 +5,10 @@ tags=goals
 status=published
 summary=It has been far too long since I last blogged.  There have been a number of reasons, most notably work, family and golf (yeah golf!).  But too much has happened since I last blogged…so I need to get back into it.
 ~~~~~~
-<p>It has been far too long since <a href="/blog/improving-my-shell-fu-oh-my-zsh.html" target="_blank">I last blogged</a>.  There have been a number of reasons, most notably work, family and golf (yeah golf!).  But too much has happened since I last blogged…so I need to get back into it.</p>
-<p>Before I go into all the fun things I have been doing, I figured I would do a quick status check on <a title="Goals for 2013" href="/blog/goals-for-2013.html" target="_blank">the goals I set at the beginning of the year</a>.  Let's go through them one by one:</p>
+It has been far too long since <a href="/blog/improving-my-shell-fu-oh-my-zsh.html" target="_blank">I last blogged</a>.  There have been a number of reasons, most notably work, family and golf (yeah golf!).  But too much has happened since I last blogged…so I need to get back into it.
+
+Before I go into all the fun things I have been doing, I figured I would do a quick status check on <a title="Goals for 2013" href="/blog/goals-for-2013.html" target="_blank">the goals I set at the beginning of the year</a>.  Let's go through them one by one:
+
 <ul>
 <li><strong>Reading List</strong> - Like everything else, I have slowed a down my reading a bit.  Here's what I have read so far.
 <ul>
@@ -36,4 +38,5 @@ summary=It has been far too long since I last blogged.  There have been a numbe
 <li><strong>Jenkins Plugins</strong> - Technically speaking, I was able to do this.  I had <a title="Accepted Pull Request" href="https://github.com/jenkinsci/job-dsl-plugin/pull/30" target="_blank">a pull request accepted</a> for the <a title="Jenkins Job DSL plugin" href="https://github.com/jenkinsci/job-dsl-plugin" target="_blank">Jenkins Job DSL plugin</a>.  We recently had an <a title="Twitter Feed of Innovation Day" href="https://twitter.com/search?q=%23bbinnovate13&amp;src=hash" target="_blank">Innovation Day</a> (hack event) at Blackboard and <a title="Michael Dumont" href="https://x.com/thedumontster" target="_blank">Michael Dumont</a> and I were able to add a simple feature to the <a title="Etsy Master Project Plugin" href="https://github.com/etsy/jenkins-master-project" target="_blank">Etsy Master Project Jenkins Plugin</a>.  Pull request pending.</li>
 <li><strong>Ruby</strong> - No progress to date, other than Chef work.  Hopefully I can find a window to focus on this.</li>
 </ul>
-<p>All in all, I do feel like this year is right on track, with the exception of this blog.  I have promised myself to focus more on blogging, so expect good things.</p>
+
+All in all, I do feel like this year is right on track, with the exception of this blog.  I have promised myself to focus more on blogging, so expect good things.
