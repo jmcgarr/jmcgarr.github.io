@@ -5,53 +5,64 @@ tags=git
 status=published
 summary=If you are working on a team or open source project that uses Git, it is likely that you have been introduced to the fork/pull-request model of collaboration for Git (and Mercurial).
 ~~~~~~
-If you are working on a team or open source project that uses Git, it is likely that you have been introduced to the fork/pull-request model of collaboration for Git (and Mercurial).  The https://docs.github.com/en/pull-requests/reference/pull-requests[fork/pull-request] concepts are not a part of git, but were popularized by Github.  You find most DVCS server products incorporate some variation of them.  
+If you are working on a team or open source project that uses Git, it is likely that you have been introduced to the fork/pull-request model of collaboration for Git (and Mercurial).  The [fork/pull-request](https://docs.github.com/en/pull-requests/reference/pull-requests) concepts are not a part of git, but were popularized by Github.  You find most DVCS server products incorporate some variation of them.
 
-If you find yourself forking a repository and contributing back, I found the following git commands useful.  Before we dive each of them, let's define a few terms:
+If you find yourself forking a repository and contributing back, I found the following git commands useful.  Before we dive each of them, let’s define a few terms:
 
-- *upstream repository* - this is the original git repository that you would like the changes to eventually end up
-- *origin repository* - this is the forked git repository.  It is your personal copy on the server.  
-- *local repository* - this is the local git repository on your machine.
+- **upstream repository** - this is the original git repository that you would like the changes to eventually end up
+
+- **origin repository** - this is the forked git repository.  It is your personal copy on the server.
+
+- **local repository** - this is the local git repository on your machine.
 
 I am not going to discuss the fork/pull-request model much here.
 
-== Add a upstream remote
-Once you fork the *upstream* repository, you will then clone the forked repository locally.  You will make your changes locally, push to *origin* and make your pull request.  At some point you will want to pull in the latest changes from the *upstream* repository.  In order to do this, you need to define *upstream* as a remote repository.
-----
-git remote add upstream <original repo url>
-----
+## Add a upstream remote
+Once you fork the **upstream** repository, you will then clone the forked repository locally.  You will make your changes locally, push to **origin** and make your pull request.  At some point you will want to pull in the latest changes from the **upstream** repository.  In order to do this, you need to define **upstream** as a remote repository.
 
-== Fetch all remotes
-Now that you have multiple remotes, you will want to grab the latest changes from not just *origin*, but from *upstream* as well.  You can do this with a single command that fetches changes for _all_ remote repositories:
-----
+```
+git remote add upstream <original repo url>
+```
+
+## Fetch all remotes
+Now that you have multiple remotes, you will want to grab the latest changes from not just **origin**, but from **upstream** as well.  You can do this with a single command that fetches changes for *all* remote repositories:
+
+```
 $> git fetch --all
 Fetching origin
 Fetching upstream
 ...
-----
+```
 
-== What remote repository changes need to be merged?
-Now that you fetched your changes from all remote repositories, you need to know which changes from your remote repositories need to be merged.  Once again, there's a git command for that.
-----
+## What remote repository changes need to be merged?
+Now that you fetched your changes from all remote repositories, you need to know which changes from your remote repositories need to be merged.  Once again, there’s a git command for that.
+
+```
 $> git branch -a --no-merge
 remotes/upstream/master
-----
+```
+
 This will list all the branches that have changes that need to be merged into you current branch.  The -a command ensures that you display the remote repository branches as well.  This only works after a fetch command.
 
-== Push to same branch on remote
+## Push to same branch on remote
 When you are ready to push your changes to your origin remote repo, you may find yourself typing out a long command, like this:
-----
+
+```
 git push origin feature/create-an-awesome-feature
-----
+```
+
 Rather that do this, you can just type the following:
-----
+
+```
 git push origin HEAD
-----
+```
+
 This will push the current branch to origin with the same branch name.  Handy.
 
-== Purge Remote Branches
+## Purge Remote Branches
 In a forked world, your changes to origin will likely be contributed back to the upstream project via a pull request.  Tools like Github and Stash allow you to delete the pull request branch once it has been merged into upstream/master.  Once this happens, you may want to clean out the branch locally as well.  You could delete the branch, but you will still need to fetch/merge from upstream.  Why not do them both at the same time?
-----
+
+```
 $> git branch -a
   heartbleed_fix
 * master
@@ -66,8 +77,10 @@ $> git branch -a
 * master
   remotes/origin/HEAD -> origin/master
   remotes/origin/master
-----
-The '-p' flag will prune any branches from your local Git repository that don't exist on your remote repository.  Now this will only remove the local instance of the remote repository.  You will still have your own copy of the branch, as you can see from the second 'git branch -a' command.  To get rid of the local branch, you have to delete it:
-----
+```
+
+The '-p' flag will prune any branches from your local Git repository that don’t exist on your remote repository.  Now this will only remove the local instance of the remote repository.  You will still have your own copy of the branch, as you can see from the second 'git branch -a' command.  To get rid of the local branch, you have to delete it:
+
+```
 git branch -d heartbleed_fix
-----
+```

@@ -7,25 +7,25 @@ summary=As an engineering manager at Netflix, I spend most of my time in meeting
 masthead=chantilly-library.jpg
 mastheadCredit=https://flic.kr/p/8Fxgv3
 ~~~~~~
-As an engineering manager at https://www.netflix.com[Netflix], I spend most of my time in meetings and one-on-ones. During these meetings, I collect a lot of information that’s valuable to the members of my engineering team. When my team was only four people, disseminating information was easy. It usually involved a quick hallway chat or was covered during a regular one-on-one. But late last year my team doubled in size. With the larger team, I struggled to keep everybody informed in a timely way. It became obvious that I wasn’t effectively scaling team communication and I needed to make a change.
+As an engineering manager at [Netflix](https://www.netflix.com), I spend most of my time in meetings and one-on-ones. During these meetings, I collect a lot of information that’s valuable to the members of my engineering team. When my team was only four people, disseminating information was easy. It usually involved a quick hallway chat or was covered during a regular one-on-one. But late last year my team doubled in size. With the larger team, I struggled to keep everybody informed in a timely way. It became obvious that I wasn’t effectively scaling team communication and I needed to make a change.
 
-My first instinct was to establish a weekly team meeting to share my notes and info collected from the week prior. But I was reticent to establish a weekly ceremony just to have my team sit and listen to me. I felt it would not be an effective use of both my time and theirs. I shared my dilemma with https://x.com/aglover[Andy Glover], who manages another Netflix engineering team of a similar size. Andy told me that each week he sends his team a Week-in-Review: a document containing relevant meeting notes from the week prior. I decided to give it a try.
+My first instinct was to establish a weekly team meeting to share my notes and info collected from the week prior. But I was reticent to establish a weekly ceremony just to have my team sit and listen to me. I felt it would not be an effective use of both my time and theirs. I shared my dilemma with [Andy Glover](https://x.com/aglover), who manages another Netflix engineering team of a similar size. Andy told me that each week he sends his team a Week-in-Review: a document containing relevant meeting notes from the week prior. I decided to give it a try.
 
-== What's a Week-in-Review?
+## What’s a Week-in-Review?
 
-It’s been nine months since I started writing my own “WIR”, and the impact has been significant. Here’s how it works: Each WIR is a summary of the meetings and conversations that I had over the course of a week. I don’t summarize every meeting, focusing only on the most relevant information. Each week’s entry winds up being a two to three pages https://www.google.com/docs/about/[Google Doc]. Rather than creating a new Google Doc each week, I prepend each week’s entry to the top of the prior week’s. Every WIR I’ve written for 2016 is within a single Google Doc, that now runs about 50 pages long.
+It’s been nine months since I started writing my own “WIR”, and the impact has been significant. Here’s how it works: Each WIR is a summary of the meetings and conversations that I had over the course of a week. I don’t summarize every meeting, focusing only on the most relevant information. Each week’s entry winds up being a two to three pages [Google Doc](https://www.google.com/docs/about/). Rather than creating a new Google Doc each week, I prepend each week’s entry to the top of the prior week’s. Every WIR I’ve written for 2016 is within a single Google Doc, that now runs about 50 pages long.
 
 Every Friday, I carve out a couple hours to write my WIR. I try to keep notes throughout the week, but I am not always good about this. My goal is to have my WIR waiting in everybody’s inbox no later than first thing Monday morning.
 
 Over the year, the layout I use for my WIR has evolved. Early versions wound up being just a series of paragraphs, each tackling a particular topic or meeting. I began to see patterns in my WIR and began creating sections to cover each week. My current WIR format something looks like this:
 
-image::/img/week-in-review.png[alt="Week in Review Example", link="https://docs.google.com/document/d/117EvvX8RwnYMC9HCMnbfUmIrB0oSvoRmLkjPBInFKfY"]
+[![Week in Review Example](/img/week-in-review.png)](https://docs.google.com/document/d/117EvvX8RwnYMC9HCMnbfUmIrB0oSvoRmLkjPBInFKfY)
 
-*_Click the image (or https://docs.google.com/document/d/117EvvX8RwnYMC9HCMnbfUmIrB0oSvoRmLkjPBInFKfY[here]) to view the full Google Doc._*
+**_Click the image (or [here](https://docs.google.com/document/d/117EvvX8RwnYMC9HCMnbfUmIrB0oSvoRmLkjPBInFKfY)) to view the full Google Doc._**
 
-I try to keep it light and informal in the opening paragraphs. I have settled on four sections, but these are likely to evolve over time. The *_Planning and Roadmap_* section usually makes an appearance during our quarterly planning cycle. I spend a significant portion of my time hiring, which is why I include a *_Recruiting_* section. The team is always interested in the recruiting pipeline and progress I am making. My team also has a diverse portfolio of products,so I also include a *_Product Updates_* section to keep us all on the same page. These first three sections are focused on “swirling” information internally within the team. And I usually close out each WIR with a *_Meetings and Context_* section, focused on exposing external information to the team.
+I try to keep it light and informal in the opening paragraphs. I have settled on four sections, but these are likely to evolve over time. The **_Planning and Roadmap_** section usually makes an appearance during our quarterly planning cycle. I spend a significant portion of my time hiring, which is why I include a **_Recruiting_** section. The team is always interested in the recruiting pipeline and progress I am making. My team also has a diverse portfolio of products,so I also include a **_Product Updates_** section to keep us all on the same page. These first three sections are focused on “swirling” information internally within the team. And I usually close out each WIR with a **_Meetings and Context_** section, focused on exposing external information to the team.
 
-== Why Google Docs?
+## Why Google Docs?
 
 I could use a blogging platform or just sending an email for my WIR. But Google Docs offers a ton of advantages.
 First, Google Docs’ commenting features allows my WIR to be collaborative. My team is comfortable correcting details, asking questions and merely ‘+1’ to parts they love.
@@ -34,7 +34,7 @@ Google Docs provides me strict control access control over my WIR. By limiting a
 
 Lastly, because all my WIR entries are within a single Google Doc, search is greatly simplified. My WIR has become a detailed log of every meeting and important conversation I’ve had for the past year. If I want to remember who said something or when, I can search my WIR using Ctrl-F.
 
-== Why not a team meeting?
+## Why not a team meeting?
 
 I freely admit to having a bias against meetings, so I’ll start there.
 
@@ -44,6 +44,6 @@ Meetings break flow. Everybody’s schedule is different and when they are in fl
 
 One the greatest features of a WIR is its asynchronous nature. Each member of my team has their own preferences for when, where and how often they read it. When a team member is out on vacation, it is easy for them to catch up on what they missed. I also use it as a tool for helping onboard new team members. They can read as much as they want about what our team has been doing this past year.
 
-== Conclusion
+## Conclusion
 
 There is also a small, personal benefit to the WIR. I found that whenever I finish a WIR, I have this tremendous feeling of accomplishment. I used to look back on my meeting packed calendar and think that I didn’t get very much accomplished. The act of writing my WIR helps me extract the value from each meeting. It allows me to reflect and keep things moving forward.  It makes me realize how much I “did” each week. Authoring a Week-in-Review has been simple, yet powerful management tool. If you’re trying to figure out how to share information your team needs, that only you have gathered, and you want to cut out a team meeting, give it a try. Thanks again to Andy for showing me the way.
