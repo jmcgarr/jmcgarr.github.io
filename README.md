@@ -137,10 +137,11 @@ When it's ready, set `status=published` and move it to `src/jbake/content/blog/`
 To convert an old post to Markdown
 ==================================
 The site is converging on Markdown (revival task T102; the owner's decision of 2026-10-12). Every published
-WordPress `.html` post was converted in October 2026, in batches by year, plus 7 of the 10 HTML drafts. Still
-to do: the `.asciidoc` posts and pages (they need a converter of their own; `verify.py` applies as is) and 3
-drafts with WordPress export debris. A conversion is mechanical: the published page must not change, and
-`scripts/to-markdown/verify.py`, not the converter, is the proof. The tools, from `scripts/to-markdown/`:
+WordPress `.html` post was converted in October 2026, in batches by year, plus 7 of the 10 HTML drafts, and
+the 11 AsciiDoc posts followed. Still to do: the 3 `.asciidoc` pages (About, Talks, Speaker Bio), the 2
+`.asciidoc` drafts, and 3 HTML drafts with WordPress export debris. A conversion is mechanical: the published
+page must not change, and `scripts/to-markdown/verify.py`, not the converter, is the proof. The tools, from
+`scripts/to-markdown/`:
 
 ```
 python3 -m venv .venv && .venv/bin/pip install html5lib pillow   # once
@@ -155,6 +156,12 @@ git mv src/jbake/content/blog/<slug>.html src/jbake/content/blog/<slug>.md   # c
 with this site's flexmark settings; anything it can't express exactly (code blocks, images and paragraphs with
 classes or styles, embeds) stays raw HTML. Off-site links become plain `[text](url)` links, because the templates
 add `target="_blank"` at build time (so pages are identical, and only `feed.xml` loses that attribute).
+`asciidoc-convert.py` does the same for an AsciiDoc post (`git mv x.asciidoc x.md`, then `--in-place`): it
+converts exactly the AsciiDoc the 2014–2020 posts use and refuses anything else, and its docstring records
+each decision (fenced code, loose lists, blockquotes, raw HTML only for a sidebar or an image with a width or
+a caption). Asciidoctor's wrapper `<div>`s are gone after that, so check such a post with `verify.py
+--text-only`, which lists the DOM differences and still requires the visible text, the counts, the page
+outside `<article>` and the feed item's fields to match.
 `verify.py` compares each page outside `<article>` byte for byte, the article and the feed item as a DOM, and
 counts of links, images, code blocks and visible text. `render.sh` renders Markdown exactly as JBake does, to
 probe an edge case. `screenshots.sh` (desktop, 1280px) and `phone-shots.mjs` (a real 375px phone viewport,
