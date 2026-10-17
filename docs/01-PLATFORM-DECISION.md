@@ -312,7 +312,7 @@ the [decision criteria](02-ROQ-MIGRATION.md#decision-criteria-go--no-go-after-th
   - **Issue #15** (code snippet look, existing T056): add a client-side highlighter for fenced code.
 - **AsciiDoc stays supported.** Moving new writing to Markdown is the owner's choice per post, with no
   conversion needed on JBake. Converting old AsciiDoc posts is only needed if Hugo is ever chosen.
-- **T098 (Backlog):** a yearly check of the re-evaluation triggers, next due 2027-10.
+- **T098 (Backlog):** a yearly check of the re-evaluation triggers, next due 2027-10. _Cancelled by the owner 2026-10-17: no yearly check is scheduled. The triggers above stay in this doc for whoever next looks._
 - [02-ROQ-MIGRATION.md](02-ROQ-MIGRATION.md) stays the ready plan for the first successor. A Hugo plan would be
   written only if Roq's spike fails.
 - **What we accept:**
