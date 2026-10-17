@@ -8,10 +8,10 @@ Last December, I was invited to speak at the first annual [DC Agile Engineering
 
 The focus of our talk was on how Test Driven Development improves the design of an application.  We were lucky enough that our talk was recorded, and I would like to share this talk here with you today.
 
-<iframe title="Video: Improving Designs through TDD by Mike McGarr and Sam Brown" width="640" height="360" src="//www.youtube.com/embed/5-K8RH0WLXg" frameborder="0" allowfullscreen></iframe>
+[Video: Improving Designs through TDD by Mike McGarr and Sam Brown](https://www.youtube.com/watch?v=5-K8RH0WLXg)
 
 Here are the slides for the talk:
 
-<iframe title="Slides: Improving Design Through Test Driven Development (TDD)" src="https://www.slideshare.net/slideshow/embed_code/15574515" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+[Slides: Improving Design Through Test Driven Development (TDD)](https://www.slideshare.net/slideshow/embed_code/15574515)
 
-<div style="margin-bottom:5px"> <strong> <a href="https://www.slideshare.net/slideshow/improving-design-through-test-driven-development-tdd/15574515" title="Improving Design Through Test Driven Development (TDD)" target="_blank">Improving Design Through Test Driven Development (TDD)</a> </strong> from <strong><a href="https://www.slideshare.net/excellaco" target="_blank">Excella Consulting</a></strong> </div>
+**[Improving Design Through Test Driven Development (TDD)](https://www.slideshare.net/slideshow/improving-design-through-test-driven-development-tdd/15574515 "Improving Design Through Test Driven Development (TDD)")** from **[Excella Consulting](https://www.slideshare.net/excellaco)**

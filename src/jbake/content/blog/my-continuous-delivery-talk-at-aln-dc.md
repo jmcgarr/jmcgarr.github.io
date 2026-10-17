@@ -10,4 +10,4 @@ I want to thank the organizers of the ALN for asking me to come speak last night
 
 Also, if you happened to attend the presentation, please rate my talk at SpeakerRate.com. The slides are below, I hope you enjoyed my talk!
 
-<iframe title="Slides: Continuous delivery applied" src="https://www.slideshare.net/slideshow/embed_code/14204775" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+[Slides: Continuous delivery applied](https://www.slideshare.net/slideshow/embed_code/14204775)

@@ -10,14 +10,14 @@ On Tuesday night, my meetup group ([DC Continuous Integration, Delivery and Depl
 
 For the meeting, we brought in some great speakers.  First, we had [Avleen Vig](https://x.com/avleen "Avleen Vig") and [Patrick McDonnell](https://web.archive.org/web/20130919041448/https://twitter.com/mcdonnps "Patrick McDonnell") from [Etsy](http://www.etsy.com/ "Etsy") to talk about [Ops School](http://www.opsschool.org/en/latest/ "OpsSchool").  Here's the video:
 
-<iframe title="Video: Ops School" width="640" height="360" src="//www.youtube.com/embed/0gx7oQaAy6g" frameborder="0" allowfullscreen></iframe>
+[Video: Ops School](https://www.youtube.com/watch?v=0gx7oQaAy6g)
 
 After Avleen and Patrick, [Theo Schlossnagle](https://web.archive.org/web/20130306022941/http://omniti.com/is/theo-schlossnagle "Theo Schlossnagle"), CEO of [OmniTI](https://web.archive.org/web/20130302092531/http://omniti.com/ "OmniTI")  was up next.  We were lucky enough that he gave two presentations.  The first was a short presentation on How to Tie Your Shoes the Right Way (I love the unicorns):
 
-<iframe title="Video: How To Tie Your Shoes The Right Way" width="640" height="360" src="//www.youtube.com/embed/UQ6UNhdP6Ic" frameborder="0" allowfullscreen></iframe>
+[Video: How To Tie Your Shoes The Right Way](https://www.youtube.com/watch?v=UQ6UNhdP6Ic)
 
 Next, Theo gave a great presentation on careers.  It was spot on and definitely worth watching.  Here's the video:
 
-<iframe title="Video: a career" width="640" height="360" src="//www.youtube.com/embed/qyxUIY72ywc" frameborder="0" allowfullscreen></iframe>
+[Video: a career](https://www.youtube.com/watch?v=qyxUIY72ywc)
 
 I want to send a special thank you to Nathen for making this all happen.  It was a great night.  I definitely look forward to further collaborations between DevOpsDc and my meetup.  If you are looking for the original meeting invite, here it is.  Enjoy the videos.

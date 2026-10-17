@@ -18,6 +18,6 @@ I intended to cover both the core practices as well as tools, but I ran out of t
 
 I have included a link to the slide deck I used for the presentation.  Check it out and add comments.    I hope that you enjoy it!
 
-<iframe title="Slides: Continuous Delivery" src="https://www.slideshare.net/slideshow/embed_code/8341276" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+[Slides: Continuous Delivery](https://www.slideshare.net/slideshow/embed_code/8341276)
 
-<div style="margin-bottom:5px"> <strong> <a href="https://www.slideshare.net/slideshow/continuous-delivery-8341276/8341276" title="Continuous Delivery" target="_blank">Continuous Delivery</a> </strong> from <strong><a href="https://www.slideshare.net/jmcgarr" target="_blank">Mike McGarr</a></strong> </div>
+**[Continuous Delivery](https://www.slideshare.net/slideshow/continuous-delivery-8341276/8341276 "Continuous Delivery")** from **[Mike McGarr](https://www.slideshare.net/jmcgarr)**
