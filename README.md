@@ -136,9 +136,10 @@ When it's ready, set `status=published` and move it to `src/jbake/content/blog/`
 
 To convert an old post to Markdown
 ==================================
-The site is converging on Markdown (revival task T102; the owner's decision of 2026-10-12). The 2009–2010 posts
-were converted in October 2026. The 2011–2013 WordPress `.html` posts, the `.asciidoc` posts and pages, and the
-drafts are still to do, in batches. A conversion is mechanical: the published page must not change, and
+The site is converging on Markdown (revival task T102; the owner's decision of 2026-10-12). Every published
+WordPress `.html` post was converted in October 2026, in batches by year, plus 7 of the 10 HTML drafts. Still
+to do: the `.asciidoc` posts and pages (they need a converter of their own; `verify.py` applies as is) and 3
+drafts with WordPress export debris. A conversion is mechanical: the published page must not change, and
 `scripts/to-markdown/verify.py`, not the converter, is the proof. The tools, from `scripts/to-markdown/`:
 
 ```
@@ -156,8 +157,9 @@ classes or styles, embeds) stays raw HTML. Off-site links become plain `[text](u
 add `target="_blank"` at build time (so pages are identical, and only `feed.xml` loses that attribute).
 `verify.py` compares each page outside `<article>` byte for byte, the article and the feed item as a DOM, and
 counts of links, images, code blocks and visible text. `render.sh` renders Markdown exactly as JBake does, to
-probe an edge case, and `screenshots.sh` with `pixeldiff.py` take before-and-after screenshots of a sample of
-posts and compare them pixel by pixel. Each script's header says how to run it. URLs don't change, because JBake
+probe an edge case. `screenshots.sh` (desktop, 1280px) and `phone-shots.mjs` (a real 375px phone viewport,
+which also reports any sideways scroll) take before-and-after screenshots of a sample of posts, and
+`pixeldiff.py` compares them pixel by pixel. Each script's header says how to run it. URLs don't change, because JBake
 publishes `<slug>.md` at the same `/blog/<slug>.html`.
 
 To change the site's styles
