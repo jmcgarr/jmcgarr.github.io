@@ -4,20 +4,32 @@ type=post
 tags=bundler, octopress, rake, ruby, rvm
 status=published
 ~~~~~~
-<p>I have been wanting to try <a title="Octopress" href="https://octopress.org/" target="_blank">Octopress</a> for a while, so I decided to spent my Friday night setting it up.  Unfortunately, I ran into a few issues installing and getting my environment setup, and I figured I would share my setup issues with everybody else.  I started with the instructions from the Octopress website.</p>
-<p><a href="https://octopress.org/docs/setup/" target="_blank">https://octopress.org/docs/setup/</a></p>
-<p>As you run into issues, the solutions are listed below.</p>
-<h2>RVM and Ruby Installation</h2>
-<p>First, you will need to install <a title="RVM" href="https://rvm.io/" target="_blank">RVM</a>.  I followed the instructions I found on the <a href="https://pragmaticstudio.com/blog/2010/9/23/install-rails-ruby-mac" target="_blank">Pragmatic Press article</a> for installing <a title="Ruby" href="https://www.ruby-lang.org/en/" target="_blank">Ruby</a> 1.9.  You can continue on with the <a title="Ruby on Rails" href="https://rubyonrails.org/" target="_blank">Rails</a> portion of the installation, but you don't need to for Octopress.  The only thing I would change is the version mentioned in the instructions from 1.9.3 to 1.9.2-p320, which is the version needed for Octopress.</p>
-<h2>Bundler</h2>
-<p>Once you get Ruby installed, you will also hit issues with installing bundler with <a href="https://github.com/guard/rb-fsevent" target="_blank">rb-fsevent</a>.  I found this <a href="https://github.com/guard/rb-fsevent/issues/26" target="_blank">bug report</a> that provides the <a href="https://github.com/guard/rb-fsevent/issues/26#issuecomment-4050279" target="_blank">solution</a> (mad props <a href="https://github.com/clippit" target="_blank">clippit</a>).  In short, you will need to run the following command before setting up Octopress:</p>
+I have been wanting to try [Octopress](https://octopress.org/ "Octopress") for a while, so I decided to spent my Friday night setting it up.  Unfortunately, I ran into a few issues installing and getting my environment setup, and I figured I would share my setup issues with everybody else.  I started with the instructions from the Octopress website.
+
+<https://octopress.org/docs/setup/>
+
+As you run into issues, the solutions are listed below.
+
+## RVM and Ruby Installation
+
+First, you will need to install [RVM](https://rvm.io/ "RVM").  I followed the instructions I found on the [Pragmatic Press article](https://pragmaticstudio.com/blog/2010/9/23/install-rails-ruby-mac) for installing [Ruby](https://www.ruby-lang.org/en/ "Ruby") 1.9.  You can continue on with the [Rails](https://rubyonrails.org/ "Ruby on Rails") portion of the installation, but you don't need to for Octopress.  The only thing I would change is the version mentioned in the instructions from 1.9.3 to 1.9.2-p320, which is the version needed for Octopress.
+
+## Bundler
+
+Once you get Ruby installed, you will also hit issues with installing bundler with [rb-fsevent](https://github.com/guard/rb-fsevent).  I found this [bug report](https://github.com/guard/rb-fsevent/issues/26) that provides the [solution](https://github.com/guard/rb-fsevent/issues/26#issuecomment-4050279) (mad props [clippit](https://github.com/clippit)).  In short, you will need to run the following command before setting up Octopress:
+
 <pre>
 sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/
 </pre>
-<h2>Rake</h2>
-<p>When I ran the 'rake install' command, I got the following error:</p>
+
+## Rake
+
+When I ran the 'rake install' command, I got the following error:
+
 <pre>
 $ rake install rake aborted! You have already activated rake 0.9.2.2, but your Gemfile requires rake 0.9.2. Using bundle exec may solve this.
 </pre>
-<p>There is also a <a href="https://github.com/imathis/octopress/issues/250" target="_blank">bug report</a> for this on Octopress, but it was easy enough to fix by just updating the Gemfile.lock to point to rake 0.9.2.2 instead of 0.9.2.  I imagine there is a better way to do this with Ruby, but since this is my first foray into Ruby development.</p>
-<p>That should resolve your issues.  Best of luck!</p>
+
+There is also a [bug report](https://github.com/imathis/octopress/issues/250) for this on Octopress, but it was easy enough to fix by just updating the Gemfile.lock to point to rake 0.9.2.2 instead of 0.9.2.  I imagine there is a better way to do this with Ruby, but since this is my first foray into Ruby development.
+
+That should resolve your issues.  Best of luck!

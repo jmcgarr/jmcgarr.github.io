@@ -4,8 +4,10 @@ type=post
 tags=git
 status=published
 ~~~~~~
-<p>I have been using <a title="Git" href="https://git-scm.com/" target="_blank">Git</a> for a while now and in that time, I have learned the value of using aliases.  Whenever I setup a new machine with git, adding my favorite aliases is first on my list.  I wanted to capture some of my favorite aliases here.  This will serve as not only a reference for myself, but hopefully helpful for others.</p>
-<p>The following code snippet shows the alias portion of my ~/.gitconfig.  :</p>
+I have been using [Git](https://git-scm.com/ "Git") for a while now and in that time, I have learned the value of using aliases.  Whenever I setup a new machine with git, adding my favorite aliases is first on my list.  I wanted to capture some of my favorite aliases here.  This will serve as not only a reference for myself, but hopefully helpful for others.
+
+The following code snippet shows the alias portion of my \~/.gitconfig.  :
+
 <pre>
 [alias]
  st = status -s
@@ -14,16 +16,18 @@ status=published
  rm = remote -v
  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%Creset' --abbrev-commit --date=relative
 </pre>
-<p>Here are the commands you can run to add the aliases to your global config.</p>
+
+Here are the commands you can run to add the aliases to your global config.
+
 <pre>
 $&gt; git config --global alias.st &quot;status -s&quot;
 $&gt; git config --global alias.lg &quot;log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit --date=relative&quot;
 $&gt; git config --global alias.pl &quot;pull origin master&quot;
 $&gt; git config --global alias.rm &quot;remote -v&quot;
 </pre>
-<p>Here is a list of some other git aliases:</p>
-<ul>
-<li><a href="http://superuser.com/questions/169695/what-are-your-favorite-git-aliases">http://superuser.com/questions/169695/what-are-your-favorite-git-aliases</a></li>
-<li><a href="https://www.viget.com/articles/three-magical-git-aliases">https://www.viget.com/articles/three-magical-git-aliases</a></li>
-<li><a href="https://catonmat.net/git-aliases">https://catonmat.net/git-aliases</a></li>
-</ul>
+
+Here is a list of some other git aliases:
+
+- <http://superuser.com/questions/169695/what-are-your-favorite-git-aliases>
+- <https://www.viget.com/articles/three-magical-git-aliases>
+- <https://catonmat.net/git-aliases>

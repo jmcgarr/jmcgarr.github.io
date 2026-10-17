@@ -4,13 +4,18 @@ type=post
 tags=bdd, code katas, goos, junit, legacy code, mocking, mockito, powermock, unit testing
 status=published
 ~~~~~~
-<p>I was recently asked by an old friend how they can get started writing unit tests on their existing application.  He was looking for guidance and more or less a roadmap of how to get started.  I decided to share what I sent him here.</p>
-<p>So, if there is already code written for an application that you want to add unit tests to, this is harder, but not impossible.  Essentially, the problem you will run into is the code you are trying to unit test isn't testable.</p>
-<p><b>Working Effectively with Legacy Code</b><br />
-Production code without unit tests is considered legacy code.  More than likely it will no small task adding unit tests to your existing application.  Most legacy applications were not designed to be testable.  The code has concrete dependencies that make it hard externalize during unit testing to isolate the class.</p>
-<p>I would consider reading up on how to unit test legacy code.  The seminal tome on this topic is Michael Feather's "<a href="https://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052">Working Effectively with Legacy Code</a>".  The title doesn't sound sexy, but it is essentially a guide for how to write unit tests for a legacy application.  If you don't have time for the book, you can get a preview of his thoughts and techniques in <a title="Working Effectively with Legacy Code (Presentation)" href="https://www.slideshare.net/slideshow/working-effectively-with-legacy-code-presentation/589638" target="_blank">this presentation</a> of his and in this prebook article of his thoughts.</p>
-<p><b>Roadmap</b><br />
-You can follow these steps to add unit tests to your code.  You may progress through them over the course of days or weeks.  I make assumptions that you are working on a Java application, but most of the guidance can be applied generally.</p>
+I was recently asked by an old friend how they can get started writing unit tests on their existing application.  He was looking for guidance and more or less a roadmap of how to get started.  I decided to share what I sent him here.
+
+So, if there is already code written for an application that you want to add unit tests to, this is harder, but not impossible.  Essentially, the problem you will run into is the code you are trying to unit test isn't testable.
+
+<b>Working Effectively with Legacy Code</b>\
+Production code without unit tests is considered legacy code.  More than likely it will no small task adding unit tests to your existing application.  Most legacy applications were not designed to be testable.  The code has concrete dependencies that make it hard externalize during unit testing to isolate the class.
+
+I would consider reading up on how to unit test legacy code.  The seminal tome on this topic is Michael Feather's "[Working Effectively with Legacy Code](https://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052)".  The title doesn't sound sexy, but it is essentially a guide for how to write unit tests for a legacy application.  If you don't have time for the book, you can get a preview of his thoughts and techniques in [this presentation](https://www.slideshare.net/slideshow/working-effectively-with-legacy-code-presentation/589638 "Working Effectively with Legacy Code (Presentation)") of his and in this prebook article of his thoughts.
+
+<b>Roadmap</b>\
+You can follow these steps to add unit tests to your code.  You may progress through them over the course of days or weeks.  I make assumptions that you are working on a Java application, but most of the guidance can be applied generally.
+
 <ol>
 <li><span style="text-decoration:underline;">Setting up the code</span>
 <ol>
@@ -66,4 +71,5 @@ You can follow these steps to add unit tests to your code.  You may progress th
 </ol>
 </li>
 </ol>
-<p>The process of learning to write good unit tests, how use Test Doubles, how to do TDD and finally how it all fits together can a long time to set in, but it is well worth it.</p>
+
+The process of learning to write good unit tests, how use Test Doubles, how to do TDD and finally how it all fits together can a long time to set in, but it is well worth it.

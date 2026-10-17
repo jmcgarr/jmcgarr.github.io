@@ -4,23 +4,27 @@ type=post
 tags=jmeter, performance testing
 status=published
 ~~~~~~
-<p>I have had a lot of success using <a title="JMeter" href="https://jmeter.apache.org/index.html" target="_blank">JMeter</a> to provide quick performance tests, and this guide will help you get started with JMeter.  I have used JMeter with success on web applications, web services and databases, and I find that it works extremely well.  I have even used JMeter on .NET projects.  This doesn't cover performance testing best practices.  I will save those for another post.</p>
-<h2>Download and install the Java SDK</h2>
-<ol>
-<li>Download the SDK from Oracle <a title="Java SE Development Kit 6 Update 27" href="https://www.oracle.com/java/technologies/javase-java-archive-javase6-downloads.html#jdk-6u27-oth-JPR" target="_blank">here </a>(Note: Recommend Java SE 6 update 27.  I've had issues with update 29)</li>
-<li>Run the installer.  Take note of the install location</li>
-<li>Add $java_install_dir/bin/ to your system path</li>
-</ol>
-<h2>Install JMeter</h2>
-<ol>
-<li>Download JMeter from Apache's website: <a title="JMeter Downloads" href="https://jmeter.apache.org/download_jmeter.cgi" target="_blank">https://jmeter.apache.org/download_jmeter.cgi</a></li>
-<li>Unzip to a location on your machine.</li>
-<li>Add $jmeter_install_dir/bin to your path (Note: if you are using Windows, then I recommend just creating a shortcut to $jmeter_install_dir/bin/jmeter.bat)</li>
-<li>Run the bin/jmeter command and you should see JMeter open a window.</li>
-</ol>
+I have had a lot of success using [JMeter](https://jmeter.apache.org/index.html "JMeter") to provide quick performance tests, and this guide will help you get started with JMeter.  I have used JMeter with success on web applications, web services and databases, and I find that it works extremely well.  I have even used JMeter on .NET projects.  This doesn't cover performance testing best practices.  I will save those for another post.
+
+## Download and install the Java SDK
+
+1. Download the SDK from Oracle <a title="Java SE Development Kit 6 Update 27" href="https://www.oracle.com/java/technologies/javase-java-archive-javase6-downloads.html#jdk-6u27-oth-JPR" target="_blank">here </a>(Note: Recommend Java SE 6 update 27.  I've had issues with update 29)
+2. Run the installer.  Take note of the install location
+3. Add $java_install_dir/bin/ to your system path
+
+## Install JMeter
+
+1. Download JMeter from Apache's website: [https\://jmeter.apache.org/download_jmeter.cgi](https://jmeter.apache.org/download_jmeter.cgi "JMeter Downloads")
+2. Unzip to a location on your machine.
+3. Add $jmeter_install_dir/bin to your path (Note: if you are using Windows, then I recommend just creating a shortcut to $jmeter_install_dir/bin/jmeter.bat)
+4. Run the bin/jmeter command and you should see JMeter open a window.
+
 <div><img title="jmeter-window" src="/img/jmeter-window.png" alt="" width="614" height="402" /></div>
-<h2>Recording a Script</h2>
-<p>The following instructions will setup JMeter to record a performance script that you can use for replay.  This is the fastest way of setting up a performance test script.</p>
+
+## Recording a Script
+
+The following instructions will setup JMeter to record a performance script that you can use for replay.  This is the fastest way of setting up a performance test script.
+
 <ol>
 <li>Right-click on Test Plan and then select Add &gt; Threads (Users) &gt;  and Create a ThreadGroup</li>
 <li>Right-click on the Workbench then select Add &gt; Non-Test Elements &gt; HTTP Proxy Server
@@ -46,10 +50,15 @@ status=published
 <li>Start clicking through your application (make sure JMeter is recording your clicks)</li>
 <li>Save the recording.</li>
 </ol>
-<h2>Adding Listeners</h2>
-<p>JMeter uses listeners to record the results of the performance test.  Take a look at the various types of listeners <a title="JMeter Listeners" href="https://jmeter.apache.org/usermanual/listeners.html" target="_blank">here</a> and add one by right clicking on the Thread Group and adding a Listener there.</p>
-<h2>Running a Performance Test</h2>
-<p>Once your script is recorded and you have added listeners, make sure you save your script.  Now you can run it!</p>
+
+## Adding Listeners
+
+JMeter uses listeners to record the results of the performance test.  Take a look at the various types of listeners [here](https://jmeter.apache.org/usermanual/listeners.html "JMeter Listeners") and add one by right clicking on the Thread Group and adding a Listener there.
+
+## Running a Performance Test
+
+Once your script is recorded and you have added listeners, make sure you save your script.  Now you can run it!
+
 <ol>
 <li>Open up the ThreadGroup node and make the following changes:
 <ol>
@@ -60,5 +69,7 @@ status=published
 <li>In the menu, click Run, Start.</li>
 <li>Sit back and watch JMeter ramp up!</li>
 </ol>
-<h2>Final Thoughts</h2>
-<p>This post is intended to get you started with a simple JMeter performance test.  I also only focused on using JMeter to performance test a web application.  JMeter can performance test web apps, databases, JMS servers, email servers, LDAP servers, web services, and much more.  I recommend taking a look at JMeter's manual, available <a title="JMeter Manual" href="https://jmeter.apache.org/usermanual/index.html" target="_blank">here</a>.</p>
+
+## Final Thoughts
+
+This post is intended to get you started with a simple JMeter performance test.  I also only focused on using JMeter to performance test a web application.  JMeter can performance test web apps, databases, JMS servers, email servers, LDAP servers, web services, and much more.  I recommend taking a look at JMeter's manual, available [here](https://jmeter.apache.org/usermanual/index.html "JMeter Manual").
