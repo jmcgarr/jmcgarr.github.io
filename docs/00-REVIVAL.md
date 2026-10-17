@@ -372,14 +372,15 @@ _None. This milestone is a decision gate._
   - **Test:** The record has Context, Options, Decision, and Consequences sections, and its status is **Accepted**.
   - _2026-10-07 (`docs/T033-platform-decision`): draft written, [`01-PLATFORM-DECISION.md`](01-PLATFORM-DECISION.md). Owner's requirements: **Java first, Go second, no frameworks in dynamic languages (Ruby, JS/TS, Python)**, and good **Markdown** support (he's considering moving off AsciiDoc). It compares JBake, Roq, and Hugo in depth; Eleventy and Astro are excluded by the language rule. **Proposed: stay on JBake and turn on modern Markdown (one tested config line); successor order Roq, then Hugo.** New evidence: the current setup works on Gradle 9.8.0; JBake 2.7.0 runs without the unmaintained plugin via `JavaExec` with identical output; JBake's default Markdown settings mangle tables, footnotes, and line wraps; a missing `summary=` breaks the build with a misleading error. **Tick when the owner accepts** (Status → Accepted)._
   - _**Accepted by the owner 2026-10-07.** Decision: stay on JBake and turn on modern Markdown; successor order Roq, then Hugo. Follow-up tasks T094–T098 added (M7 and Backlog)._
-- [ ] T034 [IMP] _(Only if migrating. For Roq, this is Phase 1 of [`02-ROQ-MIGRATION.md`](02-ROQ-MIGRATION.md), T076–T081, which also covers tag URLs, feed `<guid>`s, and AsciiDoc fidelity)_ Run a spike: port three representative posts (one HTML, one AsciiDoc, one Markdown) plus the archive page to the chosen platform (separate branch)
+- [x] T034 **Cancelled (owner decision, 2026-10-17).** [IMP] _(Only if migrating. For Roq, this is Phase 1 of [`02-ROQ-MIGRATION.md`](02-ROQ-MIGRATION.md), T076–T081, which also covers tag URLs, feed `<guid>`s, and AsciiDoc fidelity)_ Run a spike: port three representative posts (one HTML, one AsciiDoc, one Markdown) plus the archive page to the chosen platform (separate branch)
   - **Test:** `scripts/check-urls.sh`, run against the spike output, keeps all four URLs. A side-by-side visual check against the live pages looks right.
   - _**Not applicable (2026-10-07):** the accepted decision is to stay on JBake, so there's no migration spike. If a re-evaluation trigger in [`01-PLATFORM-DECISION.md`](01-PLATFORM-DECISION.md) fires, the Roq spike (T076–T081) runs instead._
+  - _**Cancelled by the owner 2026-10-17.** The site stays on JBake, and the migration work lives in its own option doc, [`02-ROQ-MIGRATION.md`](02-ROQ-MIGRATION.md) (T076–T081). Ticked so it no longer shows as open work; the task is kept, not renumbered._
 
 ### Checkpoint: M4
 
 - [x] CHK023 `docs/01-PLATFORM-DECISION.md` exists with status Accepted _(2026-10-07)_
-- [ ] CHK024 If migrating: the spike preserves URLs, and M5 has been re-scoped for the new platform (M5 tasks assume JBake/FreeMarker) **Not applicable 2026-10-07:** staying on JBake, so M5 stands as written.
+- [x] CHK024 If migrating: the spike preserves URLs, and M5 has been re-scoped for the new platform (M5 tasks assume JBake/FreeMarker) **Not applicable 2026-10-07:** staying on JBake, so M5 stands as written. **Cancelled with T034 by the owner 2026-10-17**, so M4 is closed.
 
 ---
 
