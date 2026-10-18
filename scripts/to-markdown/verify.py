@@ -2,7 +2,7 @@
 """verify.py: prove that converted posts publish exactly what they did before (T102).
 
 Usage:
-    .venv/bin/python verify.py [--report FILE] [--strict-feed] <baseline_build_dir> <new_build_dir> <slug>...
+    .venv/bin/python verify.py [--report FILE] [--strict-feed] [--text-only] <baseline_build_dir> <new_build_dir> <slug>...
 
     <baseline_build_dir>  a copy of build/jbake baked from main before the conversion
     <new_build_dir>       build/jbake baked after it
@@ -24,6 +24,15 @@ For each slug it checks four things, and the slug passes only if all four do:
     build time, so they must be identical. --strict-feed turns the allowance off.
  4. Counts, as a cross-check, on the article and on the feed body: links, images, iframes, pre, code,
     headings, and the visible text (tags stripped, whitespace normalized) are equal.
+
+--text-only (for the AsciiDoc posts, T102, whose Asciidoctor wrapper <div>s are gone by design): the DOM
+comparisons of 2 and 3 don't decide the result; their differences are listed under "DOM differences" for
+the reviewer to classify. What must still hold for a slug to pass: 1 (outside <article> byte-identical);
+the article's visible text identical; the counts of links, images, iframes, headings, <pre> blocks and
+inline <code> (code outside <pre>) equal (the total <code> count is shown but not required: a fenced block
+is <pre><code>, a listing block was a bare <pre>); the feed item's title, link, pubDate and guid identical;
+and the feed description's visible text identical. A zero-width space (U+200B, which Asciidoctor puts after
+every ellipsis) is ignored in the text comparison and counted per slug as "U+200B dropped", so it is seen.
 
 Whitespace rules for the DOM comparison (what "same text" means). They follow how a browser lays text
 out (CSS Text 3, white-space: normal), so two bodies that compare equal render the same:
@@ -62,6 +71,7 @@ ATOMS = {"img", "iframe", "object", "embed", "video", "audio", "input", "svg", "
 HEADINGS = {"h1", "h2", "h3", "h4", "h5", "h6"}
 MAX_DIFFS = 40
 ALLOW_TARGET_DROP = True
+TEXT_ONLY = False
 
 
 class Node:
@@ -333,9 +343,9 @@ def visible_text(n):
 
 
 def counts_of(n):
-    c = {"links": 0, "images": 0, "iframes": 0, "pre": 0, "code": 0, "headings": 0}
+    c = {"links": 0, "images": 0, "iframes": 0, "pre": 0, "code": 0, "inline code": 0, "headings": 0}
 
-    def walk(x):
+    def walk(x, in_pre):
         for k in x.children:
             if k.tag in (None, "#comment"):
                 continue
@@ -349,13 +359,29 @@ def counts_of(n):
                 c["pre"] += 1
             elif k.tag == "code":
                 c["code"] += 1
+                if not in_pre:
+                    c["inline code"] += 1
             elif k.tag in HEADINGS:
                 c["headings"] += 1
-            walk(k)
+            walk(k, in_pre or k.tag == "pre")
 
-    walk(n)
-    c["text chars"] = len(visible_text(n))
+    walk(n, False)
+    c["text chars"] = len(text_for_compare(visible_text(n)))
     return c
+
+
+ZWSP = "\u200b"
+
+
+def text_for_compare(t):
+    """--text-only: U+200B is invisible; it is counted separately, not compared."""
+    return t.replace(ZWSP, "") if TEXT_ONLY else t
+
+
+def counts_equal(a, b):
+    """--text-only: the total <code> count may differ (bare <pre> → <pre><code>); everything else must match."""
+    skip = {"code"} if TEXT_ONLY else set()
+    return all(a[k] == b[k] for k in a if k not in skip)
 
 
 def compare_bodies(base_html, new_html, where, allow_target_drop=False):
@@ -407,7 +433,8 @@ def read(path):
 def check(slug, base_dir, new_dir, base_feed, new_feed):
     rel = slug if slug.endswith(".html") else f"blog/{slug}.html"
     res = {"slug": slug, "rel": rel, "outside": "?", "article": "?", "feed": "?", "counts": "?",
-           "details": [], "notes": [], "count_rows": [], "accepted": 0, "accepted_paths": []}
+           "details": [], "notes": [], "count_rows": [], "accepted": 0, "accepted_paths": [], "dom": [],
+           "zwsp": 0, "text": "?"}
     ok = True
     bp, np_ = os.path.join(base_dir, rel), os.path.join(new_dir, rel)
     if not os.path.exists(bp) or not os.path.exists(np_):
@@ -431,11 +458,18 @@ def check(slug, base_dir, new_dir, base_feed, new_feed):
                 res["details"].append(f"{name}, line {ln}: `{bx}` → `{by}`")
     # 2. article DOM
     diffs, notes, ca, cb, ta, tb, _ = compare_bodies(pa[1], pb[1], "article")
-    res["article"] = "identical" if not diffs else f"**{len(diffs)}{'+' if len(diffs) >= MAX_DIFFS else ''} differences**"
-    ok &= not diffs
-    res["details"] += [f"`{p}`: {d}" for p, d in diffs]
-    res["notes"] += [f"`{p}`: {d}" for p, d in notes]
-    count_ok = ca == cb and ta == tb
+    res["zwsp"] += ta.count(ZWSP) - tb.count(ZWSP)
+    ta, tb = text_for_compare(ta), text_for_compare(tb)
+    if TEXT_ONLY:
+        res["article"] = "identical" if not diffs else f"{len(diffs)}{'+' if len(diffs) >= MAX_DIFFS else ''} (listed)"
+        res["dom"] += [f"`{p}`: {d}" for p, d in diffs]
+        res["text"] = "identical" if ta == tb else "**differs**"
+    else:
+        res["article"] = "identical" if not diffs else f"**{len(diffs)}{'+' if len(diffs) >= MAX_DIFFS else ''} differences**"
+        ok &= not diffs
+        res["details"] += [f"`{p}`: {d}" for p, d in diffs]
+        res["notes"] += [f"`{p}`: {d}" for p, d in notes]
+    count_ok = counts_equal(ca, cb) and ta == tb
     for k in ca:
         res["count_rows"].append(("article", k, ca[k], cb[k]))
     if ta != tb:
@@ -458,15 +492,22 @@ def check(slug, base_dir, new_dir, base_feed, new_feed):
                                                        allow_target_drop=ALLOW_TARGET_DROP)
         res["accepted"] = len(acc)
         res["accepted_paths"] = acc
-        fok &= not fd
-        res["details"] += [f"feed `{p}`: {d}" for p, d in fd]
-        res["notes"] += [f"feed `{p}`: {d}" for p, d in fn]
+        res["zwsp"] += fta.count(ZWSP) - ftb.count(ZWSP)
+        fta, ftb = text_for_compare(fta), text_for_compare(ftb)
+        if TEXT_ONLY:
+            res["dom"] += [f"feed `{p}`: {d}" for p, d in fd]
+        else:
+            fok &= not fd
+            res["details"] += [f"feed `{p}`: {d}" for p, d in fd]
+            res["notes"] += [f"feed `{p}`: {d}" for p, d in fn]
         for k in fa:
             res["count_rows"].append(("feed", k, fa[k], fb[k]))
         if fta != ftb:
             x, y = text_window(fta, ftb)
             res["details"].append(f"feed visible text: `{x}` → `{y}`")
-        count_ok &= fa == fb and fta == ftb
+            if TEXT_ONLY:
+                res["text"] = "**differs**"
+        count_ok &= counts_equal(fa, fb) and fta == ftb
         res["feed"] = "identical" if fok else "**differs**"
         ok &= fok
     res["counts"] = "equal" if count_ok else "**differ**"
@@ -484,9 +525,13 @@ def main():
     ap.add_argument("--report", help="write the Markdown report here (default: stdout)")
     ap.add_argument("--strict-feed", action="store_true",
                     help="no Option B allowance: a dropped target=\"_blank\" in feed.xml is a difference")
+    ap.add_argument("--text-only", action="store_true",
+                    help="DOM differences are listed, not failures; visible text, counts, the page outside "
+                         "<article> and the feed item's fields still must match (see the header)")
     args = ap.parse_args()
-    global ALLOW_TARGET_DROP
+    global ALLOW_TARGET_DROP, TEXT_ONLY
     ALLOW_TARGET_DROP = not args.strict_feed
+    TEXT_ONLY = args.text_only
     for d in (args.base, args.new):
         if not os.path.isdir(d):
             print(f"not a directory: {d}", file=sys.stderr)
@@ -501,16 +546,27 @@ def main():
     out = []
     passed = sum(r["ok"] for r in results)
     total_accepted = sum(r["accepted"] for r in results)
-    out.append(f"# verify.py: {passed} of {len(results)} identical"
-               f"{f' ({total_accepted} accepted Option B feed differences)' if total_accepted else ''}\n")
-    out.append(f"Baseline `{args.base}`, new `{args.new}`.\n")
-    out.append("| Slug | Outside `<article>` | Article DOM | Feed item | Accepted (Option B) | Counts | Result |")
-    out.append("|---|---|---|---|---|---|---|")
+    if TEXT_ONLY:
+        out.append(f"# verify.py --text-only: {passed} of {len(results)} pass (visible text, counts, page outside "
+                   f"<article>, feed item fields){f' ({total_accepted} accepted Option B feed differences)' if total_accepted else ''}\n")
+        out.append(f"Baseline `{args.base}`, new `{args.new}`. DOM differences are listed per slug, not judged.\n")
+        out.append("| Slug | Outside `<article>` | Visible text | Counts | Feed item | DOM differences (article + feed) | U+200B dropped | Result |")
+        out.append("|---|---|---|---|---|---|---|---|")
+        for r in results:
+            out.append(f"| `{r['slug']}` | {r['outside']} | {r['text']} | {r['counts']} | {r['feed']} | {len(r['dom'])} | "
+                       f"{r['zwsp']} | {'pass' if r['ok'] else '**FAILS**'} |")
+    else:
+        out.append(f"# verify.py: {passed} of {len(results)} identical"
+                   f"{f' ({total_accepted} accepted Option B feed differences)' if total_accepted else ''}\n")
+        out.append(f"Baseline `{args.base}`, new `{args.new}`.\n")
+        out.append("| Slug | Outside `<article>` | Article DOM | Feed item | Accepted (Option B) | Counts | Result |")
+        out.append("|---|---|---|---|---|---|---|")
+        for r in results:
+            out.append(f"| `{r['slug']}` | {r['outside']} | {r['article']} | {r['feed']} | {r['accepted']} | {r['counts']} | "
+                       f"{'identical' if r['ok'] else '**DIFFERS**'} |")
     for r in results:
-        out.append(f"| `{r['slug']}` | {r['outside']} | {r['article']} | {r['feed']} | {r['accepted']} | {r['counts']} | "
-                   f"{'identical' if r['ok'] else '**DIFFERS**'} |")
-    for r in results:
-        out.append(f"\n## `{r['rel']}`: {'identical' if r['ok'] else 'DIFFERS'}\n")
+        verdict = ("pass" if r["ok"] else "FAILS") if TEXT_ONLY else ("identical" if r["ok"] else "DIFFERS")
+        out.append(f"\n## `{r['rel']}`: {verdict}\n")
         if r["count_rows"]:
             out.append("| Where | Count | Before | After |")
             out.append("|---|---|---|---|")
@@ -525,11 +581,14 @@ def main():
         if r["notes"]:
             out.append("\nNotes (whitespace a browser drops when it lays out the line; not a difference):\n")
             out += [f"- {d}" for d in r["notes"]]
+        if r["dom"]:
+            out.append(f"\nDOM differences ({len(r['dom'])}, listed for review; --text-only doesn't judge them):\n")
+            out += [f"- {d}" for d in r["dom"]]
     text = "\n".join(out) + "\n"
     if args.report:
         with open(args.report, "w", encoding="utf-8") as f:
             f.write(text)
-        print(f"{passed} of {len(results)} identical; {total_accepted} accepted (Option B); report: {args.report}")
+        print(f"{passed} of {len(results)} {'pass' if TEXT_ONLY else 'identical'}; {total_accepted} accepted (Option B); report: {args.report}")
         for r in results:
             if not r["ok"]:
                 print(f"  DIFFERS: {r['slug']}")
