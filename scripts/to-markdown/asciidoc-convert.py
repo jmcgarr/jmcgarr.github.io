@@ -37,18 +37,25 @@ What it does:
     source (a link macro in the source is a link). That is the text Asciidoctor rendered
     ("&#8212; Author<br><cite>Source</cite>"); the look changes from a right-aligned attribution to the
     quote's own style.
-  - Sidebar blocks (`****`) have no Markdown form, so they keep Asciidoctor's markup as raw HTML, with
-    the content inside as Markdown: `<div class="sidebarblock"><div class="content"><div class="title">T
-    </div>`, a blank line, the Markdown, a blank line, `</div></div>`. asciidoctor.css (loaded on every
-    page) styles the box, so it looks as it did.
+  - Sidebar blocks (`****`) have no Markdown form, so they become a Bootstrap card, HTML in the
+    Markdown with the content inside as Markdown: `<div class="card bg-light mb-4"><div class="card-body">`,
+    `<p class="card-title">Title</p>` (when the block has a `.Title`), a blank line, the Markdown, a blank
+    line, `</div></div>`. Nothing from asciidoctor.css is needed (owner's decision 2026-10-18: no
+    Asciidoctor markup or styles in Markdown posts); `_content.scss` styles the title as Asciidoctor did
+    and trims the card's first and last margins.
   - `image::` becomes `![alt](src)`, or `[![alt](src)](link)` with `link=`. Asciidoctor's default alt
     (the file name without its extension, hyphens and underscores as spaces) is written out when the macro
     has none. `window=_blank` on the link is dropped: the template's externalLinks() adds target="_blank"
     to every off-site link at build time (Option B, the owner's decision of 2026-10-12). An image with a
-    width, an `align`, or a title/caption has no Markdown form and keeps Asciidoctor's markup as raw
-    HTML, one line each: `<div class="imageblock text-center"><div class="content"><img src alt width>
-    </div><div class="title">caption</div></div>`. A `[#id]` on it is dropped unless something refers
-    to it (nothing does).
+    width or an `align` has no Markdown form and is written as HTML in the Markdown, the way the converted
+    WordPress posts carry their sized images, with Bootstrap's own classes and nothing from asciidoctor.css
+    (owner's decision 2026-10-18): `<p class="text-center"><img src alt width="500"></p>` on one line
+    (`text-center` only for `align="center"`; the `<p>` gives it a paragraph's spacing, as `![alt](src)`
+    would). With a title/caption it is a Bootstrap figure on four lines: `<figure class="figure d-block
+    text-center">`, the `<img class="figure-img">` (inside its `<a>` with `link=`), `<figcaption
+    class="figure-caption">caption</figcaption>`, `</figure>`; `_content.scss` styles the caption as
+    Asciidoctor did (bold, dark red). A `[#id]` on it is dropped unless something refers to it (nothing
+    does).
   - `---` (Markdown-style thematic break, which Asciidoctor accepts) stays `---`.
   - Inline: `*strong*`, `**strong**`, `_em_`, `__em__` (constrained and unconstrained, nested either way)
     become `**`/`*` or `__`/`_` delimiters, whichever CommonMark's flanking rules accept next to the
@@ -692,10 +699,11 @@ class Converter:
         for b in inner:
             if b.kind not in ("md", "list"):
                 self.err(b.line, "only paragraphs and lists are supported in a sidebar")
-        head = '<div class="sidebarblock"><div class="content">'
+        # a Bootstrap card (owner's decision 2026-10-18), not Asciidoctor's .sidebarblock
+        head = '<div class="card bg-light mb-4"><div class="card-body">'
         if title is not None:
             try:
-                head += '<div class="title">' + Inline(self).plain(title) + "</div>"
+                head += '\n<p class="card-title">' + Inline(self).plain(title) + "</p>"
             except Unsupported as e:
                 self.err(i - 1, str(e))
         return head + "\n\n" + self.join(inner).rstrip("\n") + "\n\n</div></div>"
@@ -739,19 +747,24 @@ class Converter:
                     self.err(i, f"link URL Markdown can't hold: {link}")
                 md = f"[{md}]({link})"
             return "md", md
-        # raw HTML, as Asciidoctor rendered it (lazy-images.ftl adds loading/decoding at build time)
-        cls = "imageblock" + (" text-center" if align == "center" else "")
-        img = f'<img src="{html.escape(target)}" alt="{html.escape(alt)}"' + (f' width="{html.escape(width)}"' if width else "") + ">"
+        # HTML in the Markdown with Bootstrap's classes (owner's decision 2026-10-18; lazy-images.ftl
+        # adds loading/decoding and externalLinks() the target at build time)
+        center = ' class="text-center"' if align == "center" else ""
+        attrs = f'src="{html.escape(target)}" alt="{html.escape(alt)}"' + (f' width="{html.escape(width)}"' if width else "")
+        if title is None:
+            img = f"<img {attrs}>"
+            if link:
+                img = f'<a href="{html.escape(link)}">{img}</a>'
+            return "raw", f"<p{center}>{img}</p>"
+        img = f'<img {attrs} class="figure-img">'
         if link:
-            img = f'<a class="image" href="{html.escape(link)}">{img}</a>'
-        out = f'<div class="{cls}">\n<div class="content">\n{img}\n</div>\n'
-        if title is not None:
-            try:
-                out += '<div class="title">' + html.escape(replacements(caption), quote=False) + Inline(self).plain(title) + "</div>\n"
-            except Unsupported as e:
-                self.err(i, str(e))
-        out += "</div>"
-        return "raw", out
+            img = f'<a href="{html.escape(link)}">{img}</a>'
+        try:
+            cap = html.escape(replacements(caption), quote=False) + Inline(self).plain(title)
+        except Unsupported as e:
+            self.err(i, str(e))
+        return "raw", (f'<figure class="figure d-block{" text-center" if align == "center" else ""}">\n{img}\n'
+                       f'<figcaption class="figure-caption">{cap}</figcaption>\n</figure>')
 
     def list(self, i, end, marker):
         items = []

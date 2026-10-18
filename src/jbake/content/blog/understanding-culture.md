@@ -24,11 +24,7 @@ In it’s simplest form, culture can be viewed as the **expected and accepted be
 
 ### Visualizing culture
 
-<div class="imageblock text-center">
-<div class="content">
-<img src="/img/culture.png" alt="Organizational Culture" width="500">
-</div>
-</div>
+<p class="text-center"><img src="/img/culture.png" alt="Organizational Culture" width="500"></p>
 
 Being a visual learner, I had a strong desire to depict culture visually.  The picture above is my attempt to do so.  The green triangle on top represents the four elements of organizational culture: values, behavior, process and tools. The concepts lower on the pyramid are foundational to concepts higher on the pyramid.
 
@@ -60,11 +56,7 @@ There are two types of organizational values: stated and unstated values.  **Sta
 
 If unstated values conflict with stated values, this could represent a problem for the culture.  An organization that rewards behavior opposed to stated values indicates an unhealthy culture.  Hopefully this is obvious to everybody.  I will steal the example used in the [Netflix culture deck](https://www.slideshare.net/slideshow/culture-1798664/1798664) of [Enron](https://en.wikipedia.org/wiki/Enron).  Nuff said.
 
-<div class="imageblock text-center">
-<div class="content">
-<img src="/img/netflix-culture-enron.png" alt="Netflix Culture Deck on Enron" width="500">
-</div>
-</div>
+<p class="text-center"><img src="/img/netflix-culture-enron.png" alt="Netflix Culture Deck on Enron" width="500"></p>
 
 Unstated values that don’t conflict with stated values can be fascinating.  Is this a sign that the company culture is evolving and stated organizational values haven’t caught up?  Is this an indicator of a potent subculture spreading it’s values?  Or is the organization unaware or unwilling to accept this emergent cultural value?
 
@@ -95,11 +87,7 @@ An individual joins an organization with personal values.  These personal values
 
 The strength of an organization’s culture can be measured by its response to rogue individual behaviors.  A strong culture will provide swift feedback to the individual.  A strong culture will also prune its ranks based on how well an individual aligns with its values.  A great example of this is Netflix’s response to brilliant jerks.
 
-<div class="imageblock text-center">
-<div class="content">
-<img src="/img/netflix-culture-jerks.png" alt="Netflix Culture Deck on Brilliant Jerks" width="500">
-</div>
-</div>
+<p class="text-center"><img src="/img/netflix-culture-jerks.png" alt="Netflix Culture Deck on Brilliant Jerks" width="500"></p>
 
 ## The whole is greater than the sum of it’s parts
 

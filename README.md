@@ -126,6 +126,27 @@ link inside a longer paragraph stays a link. For example (each on a paragraph of
 [Slides: Continuous Delivery](https://www.slideshare.net/slideshow/embed_code/8341276)
 ```
 
+A plain image is `![alt text](/img/picture.png)`. Markdown can't size or centre one, so for that write the
+`<img>` tag itself on a line of its own, as the older posts do, with Bootstrap's own classes (no custom CSS to
+add): a width and `text-center` for a centred image, a `figure` for a caption, a `card` for an aside. The
+figure caption and the card title are styled in `src/scss/_content.scss`. For example:
+
+```
+<p class="text-center"><img src="/img/culture.png" alt="Organizational Culture" width="500"></p>
+
+<figure class="figure d-block text-center">
+<a href="https://example.com/source"><img src="/img/model.png" alt="The model" width="500" class="figure-img"></a>
+<figcaption class="figure-caption">Figure 1: The model (source: Example)</figcaption>
+</figure>
+
+<div class="card bg-light mb-4"><div class="card-body">
+<p class="card-title">A story</p>
+
+The aside's text, in Markdown, between blank lines.
+
+</div></div>
+```
+
 If you use a new header image (`masthead=`), put it in `src/jbake/assets/img/masthead/` (≤ 1920px wide) and run
 `scripts/masthead-variants.py` (needs Pillow: `pip install pillow`) to create its phone and tablet sizes.
 `masthead=` also takes a full `https://` URL (a remote image, used as-is at every width, so pick one around
@@ -158,8 +179,8 @@ classes or styles, embeds) stays raw HTML. Off-site links become plain `[text](u
 add `target="_blank"` at build time (so pages are identical, and only `feed.xml` loses that attribute).
 `asciidoc-convert.py` does the same for an AsciiDoc post (`git mv x.asciidoc x.md`, then `--in-place`): it
 converts exactly the AsciiDoc the 2014–2020 posts use and refuses anything else, and its docstring records
-each decision (fenced code, loose lists, blockquotes, raw HTML only for a sidebar or an image with a width or
-a caption). Asciidoctor's wrapper `<div>`s are gone after that, so check such a post with `verify.py
+each decision (fenced code, loose lists, blockquotes, and for a sidebar or an image with a width or a caption
+the Bootstrap markup shown under "To write a post", so nothing depends on `asciidoctor.css`). Asciidoctor's wrapper `<div>`s are gone after that, so check such a post with `verify.py
 --text-only`, which lists the DOM differences and still requires the visible text, the counts, the page
 outside `<article>` and the feed item's fields to match.
 `verify.py` compares each page outside `<article>` byte for byte, the article and the feed item as a DOM, and
