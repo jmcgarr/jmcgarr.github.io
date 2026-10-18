@@ -149,5 +149,3 @@ These are for the author to write or decide, and they're tracked in their own li
 - what to do with the 12 drafts
 - header images for older posts
 - alt text in the author's own words
-- whether to delete the unused AsciiDoc stylesheet (`/css/asciidoctor.css`), which stays published only because its
-  address was (the one open point of T102, in [`00-REVIVAL.md`](00-REVIVAL.md))
