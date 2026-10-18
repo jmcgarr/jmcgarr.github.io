@@ -52,8 +52,8 @@ Start a draft with one command, from a clean working tree:
 ./gradlew newPost -Ptitle="My Post Title" -Ptags="management, leadership" -Psummary="A short teaser."
 ```
 It creates `src/jbake/content/blog/drafts/my-post-title.md` with the header below filled in (`status=draft`,
-today's date) and switches to a new branch `post/my-post-title` made from `main`. Options: `-Pformat=asciidoc`
-for AsciiDoc, `-Pslug=...` to choose the URL slug yourself, and `-Pbranch=false` to stay on the current branch.
+today's date) and switches to a new branch `post/my-post-title` made from `main`. Options: `-Pslug=...` to
+choose the URL slug yourself, and `-Pbranch=false` to stay on the current branch.
 It refuses a slug that's already a draft, a post, or a published URL, and warns when a tag differs only by
 capitalization from an existing one (that would make a second tag page).
 
@@ -69,7 +69,7 @@ with `-Pbranch=false`.
 
 To create one by hand instead, make `src/jbake/content/blog/drafts/<slug>.md`, starting with a header like this.
 It's JBake's `key=value` format ending in `~~~~~~`, not YAML front matter. Every post and page on the site is
-Markdown (since T102, 2026-10-18); `-Pformat=asciidoc` still exists but AsciiDoc is on its way out:
+Markdown (since T102, 2026-10-18), and Markdown is the only format the build renders:
 
 ```
 title=My Post Title
@@ -164,9 +164,11 @@ To convert an old post to Markdown
 The site converged on Markdown in October 2026 (revival task T102; the owner's decision of 2026-10-12). Every
 published WordPress `.html` post was converted in batches by year, then the HTML drafts, the 11 AsciiDoc posts,
 and last (2026-10-18) the 3 AsciiDoc pages (About, Talks, Speaker Bio) and the 2 AsciiDoc drafts: every file
-under `src/jbake/content/` is `.md` now. A conversion is mechanical: the published page must not change, and
-`scripts/to-markdown/verify.py`, not the converter, is the proof. The tools, kept for the record and for any
-page that comes back in another format, from `scripts/to-markdown/`:
+under `src/jbake/content/` is `.md` now, and since the same day the build renders nothing else: AsciidoctorJ
+(with JRuby) is out of `build.gradle`, and `asciidoctor.css` is no longer loaded (the few rules every page relied
+on from it live in `src/scss/_legacy-asciidoctor.scss`). A conversion is mechanical: the published page must not
+change, and `scripts/to-markdown/verify.py`, not the converter, is the proof. The tools, kept for the record and
+for any page that comes back in another format, from `scripts/to-markdown/`:
 
 ```
 python3 -m venv .venv && .venv/bin/pip install html5lib pillow   # once
@@ -181,7 +183,8 @@ git mv src/jbake/content/blog/<slug>.html src/jbake/content/blog/<slug>.md   # c
 with this site's flexmark settings; anything it can't express exactly (code blocks, images and paragraphs with
 classes or styles, embeds) stays raw HTML. Off-site links become plain `[text](url)` links, because the templates
 add `target="_blank"` at build time (so pages are identical, and only `feed.xml` loses that attribute).
-`asciidoc-convert.py` does the same for an AsciiDoc file (`git mv x.asciidoc x.md`, then `--in-place`): it
+`asciidoc-convert.py` did the same for an AsciiDoc file (`git mv x.asciidoc x.md`, then `--in-place`); it is
+kept for history, the last AsciiDoc file having been converted on 2026-10-18 (the build can't render one now). It
 converts exactly the AsciiDoc the 2014–2020 posts and the three pages used and refuses anything else, and its
 docstring records each decision (fenced code, loose lists, blockquotes, a bare URL as an autolink, a `++++`
 block holding a titled YouTube or SlideShare iframe as a T115 embed link, and for a sidebar or an image with a

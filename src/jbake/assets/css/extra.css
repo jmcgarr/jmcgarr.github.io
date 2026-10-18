@@ -50,7 +50,7 @@
    lines that already fit don't change. Not set on the whole page: beside a floated image, Chrome
    would split words instead of moving them below the image. Code blocks still scroll inside
    themselves (code.css), and video embeds shrink to the column (images already do, in
-   asciidoctor.css). */
+   src/scss/_legacy-asciidoctor.scss). */
 .photo-credit,
 article p,
 article li,
@@ -78,8 +78,9 @@ header.masthead {
 }
 
 /* Archive and tag pages (T104): the outer list holds one <li> per month (its <h2> and its list of
-   posts). No marker on those items, and the same indent as the old markup (asciidoctor.css gives
-   "ul li ul" 1.25em; the old "ul ul" got 1.5em), so it looks unchanged. */
+   posts). No marker on those items, and the same indent as the old markup (the list rules kept in
+   src/scss/_legacy-asciidoctor.scss give "ul li ul" 1.25em; the old "ul ul" got 1.5em), so it looks
+   unchanged. */
 .archive-months {
   list-style: none;
 }
@@ -94,7 +95,7 @@ header.masthead {
 }
 .topics-list {
   list-style: none;
-  margin-left: 0; /* flush with the headings (asciidoctor.css indents every ul by 1.5em) */
+  margin-left: 0; /* flush with the headings (_legacy-asciidoctor.scss indents every ul by 1.5em) */
   padding-left: 0;
 }
 .topics-list li {
@@ -119,7 +120,7 @@ header.masthead {
 /* --- end Topics page --- */
 /* ---- Accessibility (T046) ---------------------------------------------------------------------- */
 /* Archive and tag pages: each month's heading is an <h2> (an <h4> skipped two levels after the
-   page's <h1>). Keep the <h4> size: Bootstrap's 1.5rem, and asciidoctor.css's 1.4375em from 768px. */
+   page's <h1>). Keep the <h4> size: Bootstrap's 1.5rem, and _legacy-asciidoctor.scss's 1.4375em from 768px. */
 .archive-months > li > h2 {
   font-size: 1.5rem;
 }

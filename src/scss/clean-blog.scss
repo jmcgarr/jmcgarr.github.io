@@ -14,3 +14,5 @@
 @use "contact";
 @use "footer";
 @use "bootstrap-overrides";
+// Last, as asciidoctor.css was loaded after this stylesheet until T102 (see the partial)
+@use "legacy-asciidoctor";

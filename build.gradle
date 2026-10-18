@@ -16,13 +16,17 @@ repositories {
 
 configurations {
     jbake {
-        // jbake-core 2.7.0 brings every template engine JBake supports. This site only uses FreeMarker (*.ftl),
-        // so leave out the others and their libraries, some of which have advisories (T112). JBake only loads
-        // an engine whose classes are on the classpath, and skips the rest. Groovy is used by nothing else.
+        // jbake-core 2.7.0 brings every template engine and content parser JBake supports. This site only uses
+        // FreeMarker (*.ftl) and Markdown (*.md, flexmark), so leave out the others and their libraries, some of
+        // which have advisories (T112). JBake only loads an engine whose classes are on the classpath, and skips
+        // the rest. Groovy is used by nothing else.
         exclude group: 'org.thymeleaf'           // Thymeleaf (*.thyme), with ognl, javassist, attoparser
         exclude group: 'io.pebbletemplates'      // Pebble (*.peb)
         exclude group: 'de.neuland-bfi'          // Jade4j (*.jade), with commons-jexl
         exclude group: 'org.codehaus.groovy'     // Groovy templates (*.gsp, *.tpl): groovy, -templates, -xml, -dateutil
+        // AsciiDoc (*.asciidoc, *.adoc) left with T102 (2026-10-18): every post and page is Markdown. AsciidoctorJ
+        // brought JRuby, its native jffi/jnr libraries, ASM, jcodings and joni, all of them gone with it.
+        exclude group: 'org.asciidoctor'         // AsciidoctorJ, with JRuby and its 20-odd libraries
     }
     // The preview also needs JBake's web server (Jetty) and file watcher (commons-vfs2) (T062, T100). jbake-core
     // brings both anyway, because JBake's launcher needs Jetty even for a plain bake (T112).
@@ -45,7 +49,6 @@ dependencies {
     // the ones the site doesn't use are excluded above (T112). Dependabot keeps these current (minor/patch);
     // check each update by comparing a bake against main.
     jbake 'org.freemarker:freemarker:2.3.35'                         // templates (*.ftl)
-    jbake 'org.asciidoctor:asciidoctorj:2.5.13'                      // *.asciidoc
     jbake 'com.vladsch.flexmark:flexmark:0.64.8'                     // *.md
     jbake 'com.vladsch.flexmark:flexmark-profile-pegdown:0.64.8'     // markdown.extensions in jbake.properties
     jbake 'info.picocli:picocli:4.7.7'                               // JBake's command-line launcher
@@ -66,9 +69,6 @@ dependencies {
         jbake 'commons-io:commons-io:2.22.0'                         // 2.11: CVE-2024-47554
         jbake 'org.jsoup:jsoup:1.23.2'                               // 1.14.3: CVE-2022-36033 and others
         jbake 'org.yaml:snakeyaml:2.7'                               // 1.30: CVE-2022-1471 and others (*.yaml, data/)
-        // JRuby (inside AsciidoctorJ): 9.4.7.0 has CVE-2025-46551. Stay on 9.4, the line AsciidoctorJ 2.5 is
-        // built for (JRuby 10 is a major upgrade, which Dependabot skips).
-        jbake 'org.jruby:jruby:9.4.15.0'
         // Logback stays on 1.2: 1.3 and later need SLF4J 2, and JBake is built on SLF4J 1.7. 1.2.13 is the last
         // 1.2 release. Its remaining advisories have no 1.2 fix; they need a hostile logback config file (ours is
         // gradle/jbake-logback.xml) or its network receivers, which JBake doesn't use. Dependabot is told to skip
@@ -86,14 +86,16 @@ dependencies {
 // The bake and the preview both run JBake's own launcher in a fresh JVM (T096), with these settings.
 def jbakeSource = file('src/jbake')
 def jbakeDestination = layout.buildDirectory.dir('jbake').get().asFile
-// JRuby (inside AsciidoctorJ) extracts a native jffi library while baking. Keep it under build/tmp, which `clean`
-// removes, instead of the project root (T024).
+// jffi (jnr-ffi, which OrientDB's jnr-posix brings; JRuby used to bring it too, until T102 removed AsciidoctorJ)
+// extracts its native library to a temporary file while loading (and removes it afterwards). Keep that under
+// build/tmp, which `clean` removes, instead of the project root (T024).
 def jffiDir = layout.buildDirectory.dir('tmp/jffi').get().asFile
 
 // Newer JDKs (T113): from JDK 24, JBake's JVM prints two warnings that the bake on 21 doesn't. OrientDB's
 // concurrentlinkedhashmap calls sun.misc.Unsafe::objectFieldOffset ("will be removed in a future release"), and
-// JRuby's jffi calls System::load ("Restricted methods will be blocked in a future release"). These flags allow
-// both and silence the warnings. Each is added only on a JDK that knows it: JDK 21 refuses to start with
+// jffi (loaded by OrientDB's jnr-posix) calls System::load ("Restricted methods will be blocked in a future
+// release"). These flags allow both and silence the warnings; a bake without either still warns (checked on
+// JDK 25 after T102 removed JRuby). Each is added only on a JDK that knows it: JDK 21 refuses to start with
 // --sun-misc-unsafe-memory-access ("Unrecognized option"), which arrived in JDK 23 (JEP 471).
 // --enable-native-access is final from JDK 22 (JEP 454); 21 accepts it, but leaving it off keeps 21's command
 // line as it was. The version is that of the Java that runs JBake: the task's javaLauncher, which is the JVM
@@ -114,9 +116,8 @@ abstract class NewJdkJvmArgs implements CommandLineArgumentProvider {
 
 def configureJBake = { JavaExec task ->
     task.mainClass = 'org.jbake.launcher.Main'
-    // JRuby (AsciidoctorJ) asks for these to use native IO on modern JDKs; without them it prints a warning.
-    task.jvmArgs '--add-opens', 'java.base/sun.nio.ch=ALL-UNNAMED', '--add-opens', 'java.base/java.io=ALL-UNNAMED'
-    // JDK 22+ and 23+ only (T113, see NewJdkJvmArgs above).
+    // JDK 22+ and 23+ only (T113, see NewJdkJvmArgs above). The two --add-opens flags JRuby wanted went with
+    // AsciidoctorJ (T102): without them the bake prints nothing extra on JDK 21 or 25.
     task.jvmArgumentProviders.add(objects.newInstance(NewJdkJvmArgs).tap {
         javaVersion = task.javaLauncher.map { it.metadata.languageVersion.asInt() }
     })
@@ -331,16 +332,18 @@ tasks.register('bakePreview') {
 
 // Starts a new draft post on its own post/<slug> branch (T060, issue #8). The logic is scripts/NewPost.java,
 // a single-file Java program, so it can also run without Gradle: java scripts/NewPost.java --title="My Post".
-//   ./gradlew newPost -Ptitle="My Post Title" [-Ptags="a, b"] [-Psummary="..."] [-Pformat=md|asciidoc]
-//                     [-Pslug=my-post] [-Pbranch=false] [-Ppr]
+//   ./gradlew newPost -Ptitle="My Post Title" [-Ptags="a, b"] [-Psummary="..."] [-Pslug=my-post]
+//                     [-Pbranch=false] [-Ppr]
 // -Ppr (T061) also commits the draft, pushes the branch, and opens a draft "[WIP] <title>" PR with gh.
+// The draft is Markdown; the -Pformat=asciidoc option left with AsciiDoc (T102, 2026-10-18).
 tasks.register('newPost', Exec) {
     group = 'writing'
     description = 'Starts a draft post on a new post/<slug> branch: ./gradlew newPost -Ptitle="My Post Title"'
     executable = "${System.getProperty('java.home')}/bin/java"
     // The providers are made here, while configuring, and only read when the task runs. The configuration cache
     // (T114) can't run code that reaches the build script (`providers`) at that point.
-    def options = ['title', 'tags', 'summary', 'format', 'slug', 'branch', 'pr']
+    // 'format' is passed on only so that a -Pformat=asciidoc from habit gets NewPost's clear refusal (T102).
+    def options = ['title', 'tags', 'summary', 'slug', 'branch', 'pr', 'format']
             .collectEntries { [(it): providers.gradleProperty(it)] }
     argumentProviders.add({
         ['scripts/NewPost.java'] + options.findAll { name, value -> value.isPresent() }

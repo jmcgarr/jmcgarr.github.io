@@ -1,10 +1,10 @@
 // Starts a new draft post (revival tasks T060 and T061, issue #8). Run it through Gradle:
 //
 //   ./gradlew newPost -Ptitle="My Post Title" [-Ptags="management, leadership"] [-Psummary="A teaser."]
-//                     [-Pformat=md|asciidoc] [-Pslug=my-post] [-Pbranch=false] [-Ppr]
+//                     [-Pslug=my-post] [-Pbranch=false] [-Ppr]
 //
-// It creates src/jbake/content/blog/drafts/<slug>.md (or .asciidoc) with the JBake header filled in and
-// status=draft, on a new branch post/<slug> made from main. Drafts render for local preview only and are never
+// It creates src/jbake/content/blog/drafts/<slug>.md (Markdown, the site's only format since T102) with the
+// JBake header filled in and status=draft, on a new branch post/<slug> made from main. Drafts render for local preview only and are never
 // published (T009). It refuses to reuse a slug that exists as a draft, a post, or a published URL, because
 // published URLs are permanent (AGENTS.md, Rule 1).
 //
@@ -34,7 +34,7 @@ public class NewPost {
     static final Path BLOG = Path.of("src/jbake/content/blog");
     static final Path DRAFTS = BLOG.resolve("drafts");
     static final Path PUBLISHED_URLS = Path.of("docs/baseline/urls.txt");
-    static final List<String> EXTENSIONS = List.of("md", "asciidoc", "adoc", "html");
+    static final List<String> EXTENSIONS = List.of("md", "html");   // formats JBake would still render
 
     public static void main(String[] args) throws Exception {
         Map<String, String> opts = parse(args);
@@ -42,9 +42,8 @@ public class NewPost {
         if (title.isEmpty()) {
             fail("A title is required: ./gradlew newPost -Ptitle=\"My Post Title\"");
         }
-        String format = opts.getOrDefault("format", "md");
-        if (!format.equals("md") && !format.equals("asciidoc")) {
-            fail("-Pformat must be md or asciidoc, not '" + format + "'.");
+        if (opts.containsKey("format")) {
+            fail("-Pformat is gone: every post is Markdown (T102, 2026-10-18), so the draft is always <slug>.md.");
         }
         String slug = opts.containsKey("slug") ? opts.get("slug").strip() : slugify(title);
         if (!slug.matches("[a-z0-9]+(-[a-z0-9]+)*")) {
@@ -91,7 +90,7 @@ public class NewPost {
             gitOrFail("switch", "--quiet", "--create", branchName, "main");
         }
 
-        Path file = DRAFTS.resolve(slug + "." + format);
+        Path file = DRAFTS.resolve(slug + ".md");
         String header = String.join("\n",
                 "title=" + title,
                 "date=" + LocalDate.now(),

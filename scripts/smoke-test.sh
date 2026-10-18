@@ -26,8 +26,8 @@ checks=(
   "index.html 200"                                     # home page
   "about.html 200"
   "archive.html 200"
-  "blog/roadmaps.html 200"                             # a post (AsciiDoc)
-  "blog/a-roadmap-unit-testing.html 200"               # a legacy WordPress post
+  "blog/roadmaps.html 200"                             # a post written in AsciiDoc (2014–2020), Markdown since T102
+  "blog/a-roadmap-unit-testing.html 200"               # a post imported from WordPress, Markdown since T102
   "tags/.NET.html 200"                                 # hidden-file name: the one #47 lost
   "tags/acceptance%20test.html 200"                    # an old tag URL with a space: now a redirect stub (T039)
   "tags/acceptance-test.html 200"                      # ...and the tag page it points to

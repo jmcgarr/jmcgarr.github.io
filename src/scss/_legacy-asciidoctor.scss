@@ -1,0 +1,102 @@
+// What every page relied on from asciidoctor.css (T102, 2026-10-18).
+//
+// Asciidoctor's stylesheet (assets/css/asciidoctor.css, 511 lines) was loaded on every page from 2014 until T102
+// took AsciiDoc out of the build and the <link> out of header.ftl. Most of it styles markup no page has any more
+// (section wrappers, listing blocks, admonitions, a table of contents...), but a few of its rules are plain
+// element selectors that shaped every page: images, lists, quotes, inline code, heading sizes and the font
+// smoothing. Those are kept here, with their values copied exactly, so the site looks as it did. They were found
+// by scanning every baked page for the elements and classes the stylesheet names, then confirmed by before/after
+// screenshots of a sample of pages at 1280px and 375px.
+//
+// This partial is the last one in clean-blog.scss, so it sits after the theme's rules as asciidoctor.css did
+// (and before extra.css). The file asciidoctor.css itself stays published at /css/asciidoctor.css, because that
+// is a published URL (AGENTS.md, Rule 1); nothing loads it. Left out as having no effect on this site: `dl`,
+// `abbr`, `table`, `blockquote cite`, the form controls, the print styles, and Asciidoctor's own classes.
+
+// `.antialiased, body`: thinner text on macOS and iOS (Bootstrap doesn't set it)
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+// `img, object, embed { max-width: 100%; height: auto }`: a wide image shrinks to the column (no sideways
+// scroll on phones), and one with width *and* height attributes keeps its proportions when it shrinks
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+// Heading sizes from 768px up (Bootstrap's are 2.5/2/1.75/1.5rem with line-height 1.2). The masthead headings
+// and the home page's post titles have their own sizes in the theme and are unaffected.
+@media only screen and (min-width: 768px) {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.4;
+  }
+  h1 {
+    font-size: 2.15em;
+  }
+  h2 {
+    font-size: 1.9em;
+  }
+  h3 {
+    font-size: 1.6875em;
+  }
+  h4 {
+    font-size: 1.4375em;
+  }
+}
+
+// Lists: indented by their own margin on top of the browser's padding, a looser line height, and a small gap
+// between the paragraphs of a loose list item (the site's `p` has 30px margins). The rules follow the order of
+// the originals, which matters where two have the same specificity: `ol` is 1.75em, a nested `ul li ol` 1.5em.
+ul,
+ol {
+  line-height: 1.6;
+  margin-bottom: 1.25em;
+  margin-left: 1.5em;
+}
+ul li ul,
+ul li ol,
+ol li ul,
+ol li ol {
+  margin-left: 1.25em;
+  margin-bottom: 0;
+}
+ol {
+  margin-left: 1.75em;
+}
+ul li ol {
+  margin-left: 1.5em;
+}
+ol > li p,
+ul > li p {
+  margin-bottom: 0.625em;
+}
+
+// Quotes: a thin grey rule on the left, its own grey text (over _global.scss's $gray-600, as the later
+// stylesheet did), looser lines. _global.scss keeps the italics.
+blockquote {
+  margin: 0 0 1.25em;
+  padding: 0.5625em 1.25em 0 1.1875em;
+  border-left: 1px solid #dddddd;
+}
+blockquote,
+blockquote p {
+  line-height: 1.6;
+  color: #6f6f6f;
+}
+
+// Inline code: a light grey box on one line (code blocks are styled by assets/css/code.css)
+*:not(pre) > code {
+  font-size: 0.9375em;
+  padding: 1px 3px 0;
+  white-space: nowrap;
+  background-color: #f2f2f2;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  text-shadow: none;
+}
