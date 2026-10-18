@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Logging for the bake (T096). jbake-core ships logback without a configuration, which logs everything at
      DEBUG. Keep JBake's start/finish summary and every warning or error from JBake and the templates; silence
-     known noise from the embedded OrientDB (in-memory default password, no JavaScript engine) and JRuby. -->
+     known noise from the embedded OrientDB (in-memory default password, no JavaScript engine) and from JBake's
+     parser registry (below). -->
 <configuration>
   <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
@@ -12,7 +13,10 @@
   <!-- Preview (T062): the server's address and each change the watcher picks up -->
   <logger name="org.jbake.launcher" level="INFO"/>
   <logger name="com.orientechnologies" level="ERROR"/>
-  <logger name="FilenoUtil" level="ERROR"/>
+  <!-- JBake registers a parser for every extension it knows and warns once, at startup, that it can't load
+       one for [ad, adoc, asciidoc]: AsciidoctorJ left the classpath with T102 (build.gradle), and no content
+       uses those extensions. Errors still show, and a page that fails to render fails CI's URL check. -->
+  <logger name="org.jbake.parser.Engines" level="ERROR"/>
   <root level="WARN">
     <appender-ref ref="CONSOLE"/>
   </root>
