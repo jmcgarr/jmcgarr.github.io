@@ -21,12 +21,10 @@ Before exploring how I use the three horizons model, I will provide an intro to 
 
 I was introduced to the McKinnsey three horizon model while reading [Lean Enterprise](https://www.amazon.com/Lean-Enterprise-Performance-Organizations-Innovate/dp/1449368425). The three horizons model proposes that leaders should think about investments in the company’s product portfolio across three separate horizons. Each horizon provides different timeframes on expected returns, as well as differing levels of risk.
 
-<div class="imageblock text-center">
-<div class="content">
-<a class="image" href="https://www.amazon.com/Lean-Enterprise-Performance-Organizations-Innovate/dp/1449368425"><img src="/img/three-horizons-lean-enterprise.png" alt="Three Horizons" width="500"></a>
-</div>
-<div class="title">Figure 1: Three Horizon model (source: Lean Enterprise)</div>
-</div>
+<figure class="figure d-block text-center">
+<a href="https://www.amazon.com/Lean-Enterprise-Performance-Organizations-Innovate/dp/1449368425"><img src="/img/three-horizons-lean-enterprise.png" alt="Three Horizons" width="500" class="figure-img"></a>
+<figcaption class="figure-caption">Figure 1: Three Horizon model (source: Lean Enterprise)</figcaption>
+</figure>
 
 - The first horizon is the company’s current dominant product in the market. Investments in first horizon products are expected to yield returns sometime within the next 12 months. Apple’s improvements to the iPhone, their dominant product, is an example of first horizon investments.
 
@@ -44,11 +42,7 @@ The specific ratios don’t matter for the purposes of this post. Each company w
 
 ## Rolling horizons
 
-<div class="imageblock text-center">
-<div class="content">
-<img src="/img/three-horizons-mcgarr.png" alt="Three horizons">
-</div>
-</div>
+<p class="text-center"><img src="/img/three-horizons-mcgarr.png" alt="Three horizons"></p>
 
 In the above visualization, the y-axis represents the amount of investment into a given horizon, and the x-axis represents time. As you can see, the curve of the horizons overlapping, implying concurrent investment. As time progresses, your investment in each horizon should increase or decrease. I expect the that real life curves aren’t as consistent as I’ve drawn them.
 

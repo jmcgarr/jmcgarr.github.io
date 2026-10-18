@@ -101,7 +101,8 @@ Getting started isn’t easy, but here are some pointers:
 
 Having a good blog with a lot of content is hard work, but well worth it.
 
-<div class="sidebarblock"><div class="content"><div class="title">A story on blogging</div>
+<div class="card bg-light mb-4"><div class="card-body">
+<p class="card-title">A story on blogging</p>
 
 To further punctuate the value of blogging, let me tell a story.  Over two years ago, I was working in consulting and looking to break out.  I was meeting with [Steve Feldman](https://x.com/PerfForensics) from [Blackboard](https://www.blackboard.com) for coffee.  When I showed up, he pulled out a piece of paper and put it front of me saying, "I want you to come to Blackboard and do this."  On that piece of paper was a blog entry that I had written in [May of 2011 about ALM](https://www.mikemcgarr.com/blog/alm.html).  I was floored.  I took the job because I was being asked to implement a vision I laid out my blog.
 
