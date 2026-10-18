@@ -124,6 +124,13 @@ Every old page address still works. Where an address had to change, the old one 
 - **Dependabot** proposes dependency updates every week.
 - **Safer build tools:** the libraries the build uses with known security problems went from 23 to 4,
   and those 4 have no fix available. (They only run while building the site, never on the live site.)
+- **One format for everything (October 16–18, 2026):** every post, page and draft is Markdown now. The 62
+  posts imported from WordPress in 2013, the 11 posts written in AsciiDoc between 2014 and 2020, the About,
+  Talks and Speaker Bio pages and the 12 drafts were converted mechanically, a batch at a time, with each
+  published page checked for identical text, and screenshots compared, before and after. The AsciiDoc
+  tools (a Ruby runtime inside Java, 19 libraries) then left the build, and the AsciiDoc stylesheet every
+  page used to download is no longer loaded; the handful of its rules the site relied on moved into the
+  theme's own styles, so the pages look the same.
 - **A platform review** compared staying on JBake with Hugo, Astro, Eleventy and Roq, and decided to stay
   ([`01-PLATFORM-DECISION.md`](01-PLATFORM-DECISION.md)). It will be checked again every year.
 
@@ -142,4 +149,5 @@ These are for the author to write or decide, and they're tracked in their own li
 - what to do with the 12 drafts
 - header images for older posts
 - alt text in the author's own words
-- converting the rest of the content to Markdown: every old WordPress post was converted between 2026-10-16 and 2026-10-17, and the AsciiDoc posts and pages are still to go (T102)
+- whether to delete the unused AsciiDoc stylesheet (`/css/asciidoctor.css`), which stays published only because its
+  address was (the one open point of T102, in [`00-REVIVAL.md`](00-REVIVAL.md))
