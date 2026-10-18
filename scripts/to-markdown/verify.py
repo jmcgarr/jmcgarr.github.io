@@ -7,7 +7,11 @@ Usage:
     <baseline_build_dir>  a copy of build/jbake baked from main before the conversion
     <new_build_dir>       build/jbake baked after it
     <slug>                a post's base name ("java-live" checks blog/java-live.html), or a path
-                          relative to the build dir ending in .html (for example "about.html")
+                          relative to the build dir ending in .html (for example "about.html", or
+                          "blog/drafts/<name>-draft.html" for a draft's preview page). A page from
+                          page.ftl has no <article>: its body is the bare <div> inside the column div,
+                          and "outside <article>" means outside that wrapper. Pages and drafts have no
+                          feed item, which is shown as "not in feed" and is not a failure.
 
 For each slug it checks four things, and the slug passes only if all four do:
 
@@ -398,12 +402,26 @@ def compare_bodies(base_html, new_html, where, allow_target_drop=False):
     return diffs, notes, counts_of(na), counts_of(nb), visible_text(na), visible_text(nb), accepted or []
 
 
+PAGE_WRAPPER = re.compile(r'<div class="col-lg-8 col-md-10 mx-auto">\s*<div>')
+DIV_TAG = re.compile(r"<(/?)div\b")
+
+
 def split_article(page):
+    """(before, body, after). A post's body is <article>…</article>. A page (page.ftl, no <article>) has
+    its body in a bare <div> right inside the column div; its end is found by counting div nesting."""
     s = page.find("<article>")
     e = page.rfind("</article>")
-    if s < 0 or e < 0:
+    if s >= 0 and e >= 0:
+        return page[:s], page[s + len("<article>"):e], page[e:]
+    m = PAGE_WRAPPER.search(page)
+    if not m:
         return None
-    return page[:s], page[s + len("<article>"):e], page[e:]
+    depth = 1
+    for t in DIV_TAG.finditer(page, m.end()):
+        depth += -1 if t.group(1) else 1
+        if depth == 0:
+            return page[:m.end()], page[m.end():t.start()], page[t.start():]
+    return None
 
 
 def first_line_diff(a, b):
@@ -443,8 +461,8 @@ def check(slug, base_dir, new_dir, base_feed, new_feed):
         return res
     pa, pb = split_article(read(bp)), split_article(read(np_))
     if pa is None or pb is None:
-        res["details"].append("no <article> element in the page")
-        res.update(outside="no article", ok=False)
+        res["details"].append("no <article> element or page body wrapper in the page")
+        res.update(outside="no body", ok=False)
         return res
     # 1. outside the article
     if pa[0] == pb[0] and pa[2] == pb[2]:

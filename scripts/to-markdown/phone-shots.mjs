@@ -5,8 +5,9 @@
 //
 // Usage: node --experimental-websocket phone-shots.mjs <out_dir> <base_url> <slug>...
 //   base_url  where the build is served, for example http://localhost:8202 (jwebserver -p 8202 -d <build>)
-//   slug      a post's base name ("java-live" shoots /blog/java-live.html), or "drafts/<name>-draft"
-// Writes <out_dir>/<slug>-375.png and prints, per page, the document's scroll width against the viewport:
+//   slug      a post's base name ("java-live" shoots /blog/java-live.html), or "drafts/<name>-draft", or a
+//             path ending in .html relative to the site root ("about.html", "blog/drafts/<name>-draft.html")
+// Writes <out_dir>/<slug>-375.png ("/" as "-", no ".html") and prints, per page, the document's scroll width against the viewport:
 // "fits" or "SIDEWAYS SCROLL" (a page that scrolls sideways on a phone is a bug; T046 fixed 253 of them).
 // Compare before/after directories with pixeldiff.py. Chrome is started on DevTools port 9333 with a
 // throwaway profile in <out_dir>/.chrome-cdp and stopped at the end. Node 21+ (22+ needs no flag).
@@ -34,8 +35,10 @@ try {
   if (!ready) throw new Error(`Chrome did not open DevTools on port ${PORT}`);
   let failures = 0;
   for (const slug of slugs) {
-    const url = `${base.replace(/\/$/, "")}/blog/${slug}.html`;
-    const file = path.join(out, `${slug.replace(/\//g, "-")}-375.png`);
+    const rel = slug.endsWith(".html") ? slug : `blog/${slug}.html`;
+    const url = `${base.replace(/\/$/, "")}/${rel}`;
+    const name = slug.endsWith(".html") ? rel.slice(0, -".html".length) : slug;
+    const file = path.join(out, `${name.replace(/\//g, "-")}-375.png`);
     try {
       await shoot(url, file);
     } catch (e) {
