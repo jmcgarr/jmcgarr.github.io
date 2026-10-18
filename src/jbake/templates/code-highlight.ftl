@@ -9,8 +9,7 @@
 </#if></#macro>
 <#-- The inline script runs before Prism (deferred) and puts every code block in the form Prism expects,
      <pre><code class="language-x">, without touching post content:
-     - legacy WordPress posts: <pre class="prettyprint language-x"> with no <code>; bare <pre>
-     - AsciiDoc listing blocks (----): <pre> with no language
+     - the converted WordPress posts' raw HTML: <pre class="prettyprint language-x"> with no <code>; bare <pre>
      - Markdown fenced code: already <pre><code class="language-x">, used as is
      A block with no language is treated as markup if it starts with "<", otherwise as a shell command. -->
 <#macro codeHighlightJs><#if hasCodeBlock>

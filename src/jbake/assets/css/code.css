@@ -1,11 +1,10 @@
 /* Code blocks (T056). Loaded only on pages that contain a <pre> (see templates/code-highlight.ftl).
-   Applies to legacy WordPress <pre> blocks, AsciiDoc listing blocks, and Markdown fenced code alike, with or
-   without JavaScript. Token colors are for PrismJS (vendor/prism/), a light theme to suit Clean Blog; every
-   color has at least 4.5:1 contrast on the block background. */
+   Applies to the converted WordPress posts' raw <pre> blocks and Markdown fenced code alike, with or without
+   JavaScript (the AsciiDoc listing-block selectors left with AsciiDoc, T102). Token colors are for PrismJS
+   (vendor/prism/), a light theme to suit Clean Blog; every color has at least 4.5:1 contrast on the block
+   background. */
 
-pre,
-.literalblock > .content > pre,
-.listingblock > .content > pre {
+pre {
   margin: 0 0 1.5rem;
   padding: 0.875rem 1rem;
   overflow-x: auto; /* long lines scroll inside the block instead of widening the page */
@@ -29,16 +28,12 @@ pre,
 }
 
 @media (min-width: 768px) {
-  pre,
-  .literalblock > .content > pre,
-  .listingblock > .content > pre {
+  pre {
     font-size: 0.9375rem;
   }
 }
 
-pre > code,
-.literalblock > .content > pre > code,
-.listingblock > .content > pre > code {
+pre > code {
   display: block;
   padding: 0;
   font-family: inherit;
@@ -47,12 +42,6 @@ pre > code,
   white-space: inherit;
   background: none;
   border: 0;
-}
-
-/* AsciiDoc listings: the block already has its own bottom margin. */
-.listingblock > .content > pre,
-.literalblock > .content > pre {
-  margin-bottom: 0;
 }
 
 /* PrismJS tokens */

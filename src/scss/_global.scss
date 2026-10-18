@@ -17,6 +17,15 @@ p {
   }
 }
 
+// A link in a list item of a post or page is underlined like one in a paragraph: a Markdown list is tight
+// unless blank lines separate its items, so a one-item list (the Talks page has 18) renders `<li><a>` with no
+// `<p>` for the rule above to match (owner's decision, 2026-10-18, T102). The site's own lists in the main
+// column, the archive and tag pages' months and the Topics page, keep their plain links; the navbar and the
+// footer are outside <main>.
+main li a:not(.archive-months a, .topics-list a) {
+  text-decoration: underline;
+}
+
 h1,
 h2,
 h3,
