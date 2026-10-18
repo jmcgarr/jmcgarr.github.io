@@ -9,7 +9,8 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-8 col-md-10 mx-auto">
-				<div>${externalLinks(content.body)}</div>
+				<#-- A lone link to a video or deck becomes the player, first (T115, embeds.ftl), as in post.ftl: the Talks page has 18 -->
+				<div>${externalLinks(embeds(content.body))}</div>
 			</div>
 		</div>
 	</div>
