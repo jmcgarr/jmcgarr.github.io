@@ -60,7 +60,7 @@ du -sh build/jbake                                    # published site size
 | M5 | ✅ [Polished Presentation](#m5-polished-presentation) | Valid HTML, discoverable, shares well                    | 10   | 9            |
 | M6 | ✅ [Content Care](#m6-content-care) | Accurate content; every link and image works             | 4    | 4            |
 | M7 | ✅ [Writing Flow](#m7-writing-flow) | Writing a post is pleasant: scaffold, watch, live reload | 3    | 9            |
-| —  | [Backlog](#backlog) | Unscheduled; not reproduced or waiting on evidence       | 1    | 7            |
+| —  | ✅ [Backlog](#backlog) | Unscheduled; not reproduced or waiting on evidence       | 1    | 7            |
 
 ✅ done · ⚙️ in progress · no mark: not started
 
