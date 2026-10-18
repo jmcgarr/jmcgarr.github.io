@@ -14,7 +14,8 @@ Then bake and run verify.py against a baseline bake (`verify.py --text-only`: As
 <div>s are gone, so the DOM differs by design; the visible text, the counts and the page outside
 <article> must not). verify.py, not this script, is the proof.
 
-It is a converter for exactly the AsciiDoc the 11 posts of 2014-2020 use, not for AsciiDoc in general.
+It is a converter for exactly the AsciiDoc the 11 posts of 2014-2020, the 3 pages (About, Talks, Speaker
+Bio) and the 2 AsciiDoc drafts use, not for AsciiDoc in general.
 Anything outside that subset stops it with an error naming the file and line, and nothing is written for
 that file. No guessing: a construct Asciidoctor would have rendered in a way this script doesn't reproduce
 is refused rather than passed through.
@@ -55,7 +56,32 @@ What it does:
     text-center">`, the `<img class="figure-img">` (inside its `<a>` with `link=`), `<figcaption
     class="figure-caption">caption</figcaption>`, `</figure>`; `_content.scss` styles the caption as
     Asciidoctor did (bold, dark red). A `[#id]` on it is dropped unless something refers to it (nothing
-    does).
+    does). A third positional attribute is the `height`, kept as `height="250"`. `role="right"` or
+    `role="left"` (the pages' floated photos) has no Markdown form either: the `<img>` gets Bootstrap's
+    `float-right ml-3 mb-3` (or `float-left mr-3 mb-3`), inside a `<p>` (with its `<a>` when there is a
+    `link=`), on one line, in place of Asciidoctor's floated `.imageblock.right` or `.image.right` span and
+    its `asciidoctor.css` margins. An inline image macro (`image:`, one colon) that is a paragraph on its own,
+    which Asciidoctor rendered as `<p><span class="image"><img></span></p>`, is converted like the block
+    macro: `![alt](src)` when it is plain, the `<p><img>` form when it has a width, height or role. One
+    inside a paragraph's text is refused. A target may be site-relative (`img/x.jpg`, as the pages have it)
+    or absolute (`/img/x.jpg`); it is kept as written.
+  - Passthrough blocks (`++++`) are looked at, not passed through blindly. One that holds exactly one
+    `<iframe>` of a YouTube video (`youtube.com/embed/ID`) or a SlideShare deck
+    (`slideshare.net/slideshow/embed_code/N`) with a `title` becomes a T115 embed: a Markdown link alone in
+    a paragraph, `[title](URL)`, which embeds.ftl renders as the responsive, titled player at build time
+    (owner's decision 2026-10-17; page.ftl runs embeds() too since the pages were converted). The URL is the
+    iframe's src with `https:` added to a protocol-relative `//www.slideshare.net/…`. The iframe's other
+    attributes (width, height, frameborder, align, marginwidth, marginheight, scrolling, style,
+    allowfullscreen) are dropped: the player is sized by Bootstrap's `.embed-responsive`, so a 390×260
+    player floated right becomes a full-width one (a visible change, listed for the owner). An iframe with
+    no title is refused (the embed needs the title as the link text). Any other passthrough content is
+    kept as the same HTML in the Markdown, on the same lines, when CommonMark would read it as an HTML
+    block (its first line starts a block-level tag and it has no blank line); the script names each such
+    block on stderr so it is reported. Anything else is refused.
+  - A bare URL in text (`https://…` with no `[text]`), which Asciidoctor autolinks, becomes a Markdown
+    autolink, `<https://…>`, with the same visible text; the URL ends where Asciidoctor's does (not at a
+    trailing `,`, `.`, `?`, `!` or `)`). Asciidoctor's `class="bare"` on the link has no style and is
+    dropped.
   - `---` (Markdown-style thematic break, which Asciidoctor accepts) stays `---`.
   - Inline: `*strong*`, `**strong**`, `_em_`, `__em__` (constrained and unconstrained, nested either way)
     become `**`/`*` or `__`/`_` delimiters, whichever CommonMark's flanking rules accept next to the
@@ -74,12 +100,13 @@ What it does:
     line break). LF line endings.
 
 Known limits (it stops with an error naming the file and line, and writes nothing for that file):
-  nested lists, ordered lists, description lists, tables, admonitions, passthrough (`++++`), literal
-  (`....`), example (`====`) and open (`--`) blocks, `[[anchors]]`, `[role]` prefixes, backslash escapes,
-  footnotes, inline images, bare URLs (Asciidoctor and flexmark autolink them differently), monospace
-  (`` ` ``), hard line breaks (" +"), attribute references ({name}), a paragraph that starts with a space
-  (a literal paragraph), a `.Title` on a block other than an image or a sidebar, an image title without
-  a `caption=`, and the replacements listed above.
+  nested lists, ordered lists, description lists, tables, admonitions, literal (`....`), example (`====`)
+  and open (`--`) blocks, a passthrough block (`++++`) that is neither a titled YouTube/SlideShare iframe
+  nor an HTML block, `[[anchors]]`, `[role]` prefixes, backslash escapes, footnotes, an inline image
+  inside a paragraph's text, an image `role` other than left or right, monospace (`` ` ``), hard line
+  breaks (" +"), attribute references ({name}), a paragraph that starts with a space (a literal
+  paragraph), a `.Title` on a block other than an image or a sidebar, an image title without a
+  `caption=`, and the replacements listed above.
 """
 import argparse
 import html
@@ -99,8 +126,25 @@ RX_EM_CON = re.compile(r"(^|[^\w;:}])(\\)?(?:\[([^\]]+)\])?_(\S|\S.*?\S)_(?!\w)"
 RX_MONO_CON = re.compile(r"(^|[^\w;:\"'`}])(\\)?(?:\[([^\]]+)\])?`(\S|\S.*?\S)`(?![`\w])", re.S | re.M)
 # Link macros: https://…[text], link:…[text] (the text may hold quoted-text markers, \x01…\x02).
 RX_LINK = re.compile(r"(^|link:|[\s>\(\)\[\];\"'\x01\x02])(\\?)((?:https?|ftp)://[^\s\[\]<>]+|(?<=link:)[^\s\[\]<>]+)\[([^\]]*)\]", re.M)
-RX_BARE_URL = re.compile(r"(?:^|[^\w/\[])((?:https?|ftp)://[^\s\[\]<>]+)")
+# A bare URL, ending where Asciidoctor's InlineLinkRx ends it (not at a trailing , . ? ! or closing paren).
+RX_BARE_URL = re.compile(r"(?:^|(?<=[\s>\(\)\[\];\"']))((?:https?|ftp)://[^\s\[\]<]*[^\s,.?!\[\]<\)])")
 RX_XREF = re.compile(r"<<([^<>,]+?)(?:,\s*([^<>]*?))?>>")
+# An inline image macro (one colon) on a line of its own; inside text it is refused.
+RX_INLINE_IMAGE = re.compile(r"^image:([^:\s\[]\S*?)\[(.*)\]$")
+RX_PASS = re.compile(r"^\+{4,}$")
+# One <iframe> in a passthrough block (a space or nothing between the tags), and the embeds.ftl URL forms.
+RX_IFRAME = re.compile(r"^<iframe\s+([^<>]*?)\s*>\s*</iframe>$", re.S)
+RX_HTML_ATTR = re.compile(r"([\w-]+)(?:=\"([^\"]*)\")?")
+RX_EMBED_SRC = re.compile(r"^(?:https?:)?//(?:www\.)?(?:(youtube\.com/embed/[\w-]+)|(slideshare\.net/slideshow/embed_code/(?:key/)?[\w-]+))$")
+# CommonMark's HTML block start condition 6 (block-level tag names), for passthrough content kept as HTML.
+HTML_BLOCK_TAGS = {
+    "address", "article", "aside", "base", "basefont", "blockquote", "body", "caption", "center", "col",
+    "colgroup", "dd", "details", "dialog", "dir", "div", "dl", "dt", "fieldset", "figcaption", "figure",
+    "footer", "form", "frame", "frameset", "h1", "h2", "h3", "h4", "h5", "h6", "head", "header", "hr",
+    "html", "iframe", "legend", "li", "link", "main", "menu", "menuitem", "nav", "noframes", "ol",
+    "optgroup", "option", "p", "param", "section", "source", "summary", "table", "tbody", "td", "tfoot",
+    "th", "thead", "title", "tr", "track", "ul",
+}
 RX_REFUSED_REPL = re.compile(r"(?:\w--(?=\w)|(?:^|\s)--(?:\s|$)|->|=>|<-|<=|\((?:C|R|TM)\)|\"`|`\"|'`|`'|\\)", re.M)
 RX_ELLIPSIS = re.compile(r"\.\.\.")
 RX_APOS = re.compile(r"(?<=[^\W_])'(?=[^\W\d_])")
@@ -254,9 +298,10 @@ class Inline:
                 raise Unsupported(f"link with empty text: {url}")
             return lead + self.ph(("link", url, text))
         s = RX_LINK.sub(link, s)
-        bare = RX_BARE_URL.search(s)
-        if bare:
-            raise Unsupported(f"bare URL (autolinked by Asciidoctor): {bare.group(1)}")
+        if re.search(r"(?<![\w:])image:[^:\s]", s):
+            raise Unsupported("inline image inside a paragraph's text")
+        # a bare URL (Asciidoctor autolinks it) becomes a Markdown autolink with the same text
+        s = RX_BARE_URL.sub(lambda m: self.ph(("autolink", m.group(1), "")), s)
 
         def xref(m):
             target, text = m.group(1).strip(), m.group(2)
@@ -325,6 +370,10 @@ class Inline:
                 if inner == "" or "\n" in inner or inner.strip(COLLAPSIBLE) != inner:
                     raise Unsupported(f"link text Markdown can't hold: {inner!r}")
                 parts.append(f"[{inner}]({url})")
+            elif n[0] == "autolink":
+                if re.search(r"[\s<>\\\x00-\x1f]", n[1]):
+                    raise Unsupported(f"bare URL that a Markdown autolink can't hold: {n[1]}")
+                parts.append(f"<{n[1]}>")
             else:
                 raise Unsupported(f"node {n[0]}")
         return "".join(parts)
@@ -337,6 +386,8 @@ class Inline:
                     return v[0]
             elif n[0] in ("strong", "em"):
                 return "*"
+            elif n[0] == "autolink":
+                return "<"
             else:
                 return "["
         return after
@@ -424,14 +475,14 @@ RX_IMAGE = re.compile(r"^image::(\S+?)\[(.*)\]$")
 RX_ATTR = re.compile(r"^\[(.*)\]$")
 RX_TITLE = re.compile(r"^\.([^\s.].*)$")
 RX_REFUSE = [
-    (re.compile(r"^\+{4,}$"), "passthrough block"), (re.compile(r"^\.{4,}$"), "literal block"),
+    (re.compile(r"^\.{4,}$"), "literal block"),
     (re.compile(r"^={4,}$"), "example block"), (re.compile(r"^--$"), "open block"),
     (re.compile(r"^\|==="), "table"), (re.compile(r"^(NOTE|TIP|IMPORTANT|WARNING|CAUTION):"), "admonition"),
     (re.compile(r"^//"), "comment"), (re.compile(r"^:\w[\w-]*:"), "document attribute"),
     (re.compile(r"^include::"), "include"), (re.compile(r"^\[\["), "anchor [[...]]"),
     (re.compile(r"^(\*{2,}|-{2,}|\.{1,5}) \S"), "nested or ordered list item"),
     (re.compile(r"^\d+\. "), "numbered list item"), (re.compile(r"^\s+\S"), "indented line (literal paragraph)"),
-    (re.compile(r"^\+$"), "list continuation"), (re.compile(r"^image:[^:]"), "inline image"),
+    (re.compile(r"^\+$"), "list continuation"),
     (re.compile(r"footnote:"), "footnote"), (re.compile(r"\{\w[\w-]*\}"), "attribute reference"),
     (re.compile(r" \+$"), "hard line break"), (re.compile(r"\S::(\s|$)"), "description list"),
 ]
@@ -441,7 +492,7 @@ def is_block_start(line):
     """A line that ends the paragraph before it (delimiters, headings, items, macros, attribute lines)."""
     return bool(RX_LISTING.match(line) or RX_QUOTE.match(line) or RX_SIDEBAR.match(line) or RX_HEADING.match(line)
                 or RX_LIST_ITEM.match(line) or RX_IMAGE.match(line) or RX_ATTR.match(line) or RX_HR.match(line)
-                or RX_TITLE.match(line))
+                or RX_TITLE.match(line) or RX_PASS.match(line))
 
 
 class Block:
@@ -457,7 +508,7 @@ class Converter:
         self.lines = body.split("\n")
         self.heading_ids = {}
         self.needs_id = set()
-        self.stats = {"markdown": 0, "markdown_with_inline_html": 0, "raw_html": 0}
+        self.stats = {"markdown": 0, "markdown_with_inline_html": 0, "raw_html": 0, "html_kept": []}
         self.scan_headings()
 
     # -- pre-scan: which section titles do xrefs point at? --------------------------------------------
@@ -565,9 +616,23 @@ class Converter:
                 out.append(Block("raw", self.sidebar(i, self.lines[i + 1:j], title), i, lead))
                 i = j + 1
                 continue
+            if RX_PASS.match(ln):
+                j = self.find_close(i, end, ln)
+                self.check_no_pending(i, pending)
+                out.append(Block(*self.passthrough(i, self.lines[i + 1:j]), i, lead))
+                i = j + 1
+                continue
             m = RX_IMAGE.match(ln)
             if m:
                 kind, md = self.image(i, m.group(1), m.group(2), pending)
+                pending.update(title=None, attrs={}, attr_line=None, id=None, quote=None, source=None)
+                out.append(Block(kind, md, i, lead))
+                i += 1
+                continue
+            # an inline image macro that is a whole paragraph (the pages' photos): converted like a block one
+            m = RX_INLINE_IMAGE.match(ln)
+            if m and (i + 1 >= end or self.lines[i + 1].strip() == "" or is_block_start(self.lines[i + 1])):
+                kind, md = self.image(i, m.group(1), m.group(2), pending, inline=True)
                 pending.update(title=None, attrs={}, attr_line=None, id=None, quote=None, source=None)
                 out.append(Block(kind, md, i, lead))
                 i += 1
@@ -708,23 +773,64 @@ class Converter:
                 self.err(i - 1, str(e))
         return head + "\n\n" + self.join(inner).rstrip("\n") + "\n\n</div></div>"
 
-    def image(self, i, target, attrlist, pending):
+    def passthrough(self, i, lines):
+        """A `++++` block: a titled YouTube/SlideShare iframe becomes a T115 embed link; other content that
+        CommonMark reads as an HTML block is kept as it is (and named on stderr); the rest is refused."""
+        text = "\n".join(lines).strip("\n")
+        if text.strip() == "":
+            self.err(i, "empty passthrough block")
+        m = RX_IFRAME.match(text.strip())
+        if m:
+            attrs = {}
+            for am in RX_HTML_ATTR.finditer(m.group(1)):
+                attrs[am.group(1).lower()] = html.unescape(am.group(2)) if am.group(2) is not None else ""
+            src = attrs.get("src", "")
+            em = RX_EMBED_SRC.match(src)
+            if not em:
+                self.err(i, f"iframe that isn't a YouTube or SlideShare embed: src={src!r}")
+            title = attrs.get("title", "").strip()
+            if not title:
+                self.err(i, "iframe without a title (the embed link needs it as its text)")
+            if re.search(r"[\\\[\]\n<>]", title) or RX_REFUSED_REPL.search(title):
+                self.err(i, f"iframe title Markdown can't hold as link text: {title!r}")
+            url = "https://www." + (em.group(1) or em.group(2))
+            return "embed", f"[{escape_text(title)}]({url})"
+        first = text.lstrip().split("\n", 1)[0]
+        tm = re.match(r"^<(/?)([A-Za-z][A-Za-z0-9-]*)(?=[\s/>]|$)", first)
+        if not tm or tm.group(2).lower() not in HTML_BLOCK_TAGS:
+            self.err(i, f"passthrough content that isn't an HTML block: {first[:60]!r}")
+        if re.search(r"\n[ \t]*\n", text):
+            self.err(i, "passthrough HTML with a blank line (it would end the HTML block)")
+        self.stats["html_kept"].append(f"body line {i + 1}: {first[:60]}")
+        return "raw", text
+
+    def image(self, i, target, attrlist, pending, inline=False):
+        """A block image macro, or (inline=True) an inline one that is a paragraph of its own."""
         pos, named = parse_attrlist(attrlist)
         named = {**pending["attrs"], **named}
         if pending["quote"] or pending["source"]:
             self.err(i, "quote/source attribute on an image")
         for k in named:
-            if k not in ("alt", "link", "window", "align", "caption", "width"):
+            if k not in ("alt", "link", "window", "align", "caption", "width", "height", "role"):
                 self.err(i, f"image attribute {k}=")
-        if len(pos) > 2:
-            self.err(i, "image with a height")
+        if len(pos) > 3:
+            self.err(i, f"image with more than three positional attributes: [{attrlist}]")
         alt = named.get("alt", pos[0] if pos else None)
         if alt is None:
             alt = re.sub(r"[-_]", " ", re.sub(r"\.[^.]*$", "", target.rsplit("/", 1)[-1]))
         width = named.get("width", pos[1] if len(pos) > 1 else None)
+        height = named.get("height", pos[2] if len(pos) > 2 else None)
+        for k, v in (("width", width), ("height", height)):
+            if v is not None and not re.fullmatch(r"\d+", v):
+                self.err(i, f"image {k} that isn't a number: {v!r}")
         align = named.get("align")
         if align not in (None, "center"):
             self.err(i, f"image align={align}")
+        role = named.get("role")
+        if role not in (None, "left", "right"):
+            self.err(i, f"image role={role}")
+        if role and align:
+            self.err(i, "image with both a role and an align")
         link = named.get("link")
         title = pending["title"]
         caption = named.get("caption")
@@ -732,13 +838,15 @@ class Converter:
             self.err(i, "image title without caption= (Asciidoctor would number it)")
         if caption is not None and title is None:
             self.err(i, "caption= without a title")
-        if not re.match(r"^/img/[\w./-]+$", target):
+        if inline and (title is not None or pending["id"]):
+            self.err(i, "title or id on an inline image")
+        if not re.match(r"^/?img/[\w./-]+$", target):
             self.err(i, f"image target outside /img/: {target}")
         if "window" in named and not link:
             self.err(i, "window= without link=")
         if pending["id"] and pending["id"] in self.needs_id:
             self.err(i, "image id that an xref points at")
-        if width is None and align is None and title is None:
+        if width is None and height is None and align is None and role is None and title is None:
             if re.search(r"[\\\[\]\n]", alt):
                 self.err(i, f"alt text Markdown can't hold: {alt!r}")
             md = f"![{escape_text(alt)}]({target})"
@@ -748,14 +856,20 @@ class Converter:
                 md = f"[{md}]({link})"
             return "md", md
         # HTML in the Markdown with Bootstrap's classes (owner's decision 2026-10-18; lazy-images.ftl
-        # adds loading/decoding and externalLinks() the target at build time)
+        # adds loading/decoding and externalLinks() the target at build time). A floated image (role=)
+        # gets Bootstrap's float and margin utilities on the <img>, in place of asciidoctor.css's
+        # .imageblock.right / .image.right.
         center = ' class="text-center"' if align == "center" else ""
-        attrs = f'src="{html.escape(target)}" alt="{html.escape(alt)}"' + (f' width="{html.escape(width)}"' if width else "")
+        attrs = f'src="{html.escape(target)}" alt="{html.escape(alt)}"' + (f' width="{width}"' if width else "") \
+            + (f' height="{height}"' if height else "")
         if title is None:
-            img = f"<img {attrs}>"
+            cls = {"right": ' class="float-right ml-3 mb-3"', "left": ' class="float-left mr-3 mb-3"', None: ""}[role]
+            img = f"<img {attrs}{cls}>"
             if link:
                 img = f'<a href="{html.escape(link)}">{img}</a>'
             return "raw", f"<p{center}>{img}</p>"
+        if role:
+            self.err(i, "floated image with a caption")
         img = f'<img {attrs} class="figure-img">'
         if link:
             img = f'<a href="{html.escape(link)}">{img}</a>'
@@ -810,7 +924,7 @@ class Converter:
         for b in blocks:
             if prev is not None:
                 n = b.blank_before
-                spaced = ("fence", "raw", "list", "quote", "hr")
+                spaced = ("fence", "raw", "list", "quote", "hr", "embed")
                 if n == 0 and (b.kind in spaced or prev.kind in spaced):
                     n = 1
                 out.append("\n" * n)
@@ -875,6 +989,8 @@ def main():
                 f.write(out)
         print(f"{os.path.basename(path)}\t{stats['markdown']}\t{stats['markdown_with_inline_html']}\t{stats['raw_html']}",
               file=sys.stderr)
+        for note in stats["html_kept"]:
+            print(f"  {os.path.basename(path)}: passthrough kept as HTML, {note}", file=sys.stderr)
     return 1 if failed else 0
 
 
