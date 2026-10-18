@@ -9,8 +9,8 @@
 // screenshots of a sample of pages at 1280px and 375px.
 //
 // This partial is the last one in clean-blog.scss, so it sits after the theme's rules as asciidoctor.css did
-// (and before extra.css). The file asciidoctor.css itself stays published at /css/asciidoctor.css, because that
-// is a published URL (AGENTS.md, Rule 1); nothing loads it. Left out as having no effect on this site: `dl`,
+// (and before extra.css). The file asciidoctor.css itself was deleted on 2026-10-18 with the owner's approval
+// (its URL is on docs/baseline/expected-removals.txt, AGENTS.md Rule 1). Left out as having no effect on this site: `dl`,
 // `abbr`, `table`, `blockquote cite`, the form controls, the print styles, and Asciidoctor's own classes.
 
 // `.antialiased, body`: thinner text on macOS and iOS (Bootstrap doesn't set it)

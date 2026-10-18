@@ -25,3 +25,8 @@ blog/drafts/unit-testing-from-zero-to-hero-draft.html
 #   vendor/jquery/** except jquery.min.js (incl. *.map, slim builds)
 #   js/clean-blog.js, js/contact_me*.js, js/jqBootstrapValidation*.js, css/clean-blog.min.css
 #   scss/** (moved to src/scss/, kept as source for T043, no longer published)
+
+# 2026-10-18, T102 (approved by the owner 2026-10-18): the AsciiDoc stylesheet, unused since #133 stopped loading
+# it on every page (the few rules the site relied on are in src/scss/_legacy-asciidoctor.scss). Not an HTML page,
+# so check-urls.sh doesn't track it; recorded here because /css/asciidoctor.css was a published URL (Rule 1).
+#   css/asciidoctor.css
