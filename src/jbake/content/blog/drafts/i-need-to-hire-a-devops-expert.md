@@ -7,11 +7,12 @@ summary=I have heard this a number of times recently from friends and colleagues
 ~~~~~~
 I have heard this a number of times recently from friends and colleagues.  They come to me asking if I know of anybody or if I have any recommendations on how to hire a DevOps expert.
 
-== What problem are you trying to solve?
+## What problem are you trying to solve?
 
 My first question to them is, what are you really trying to solve with this expert?
 
-****
+<div class="card bg-light mb-4"><div class="card-body">
+
 "We have a quality issues"
 
 "We need to make production operations a first class requirement"
@@ -19,10 +20,11 @@ My first question to them is, what are you really trying to solve with this expe
 "We want to focus on continuous integration"
 
 "We need to automate more tests"
-****
 
-Each of these are important, but none of these says DevOps.  Well, not DevOps specifically.  In order to create a DevOps culture you will need to do all these things.  
+</div></div>
 
-== Do you really need a DevOps expert?
+Each of these are important, but none of these says DevOps.  Well, not DevOps specifically.  In order to create a DevOps culture you will need to do all these things.
 
-Anybody informed on what DevOps is knows that DevOps is a philosophy, a way of thinking, but most of all, it's part of your culture. Can hiring a single person change your culture?  Well, yes and no.  If you are a two person team, then adding a third person to the team will definitely change your culture, whether you like it or not.
+## Do you really need a DevOps expert?
+
+Anybody informed on what DevOps is knows that DevOps is a philosophy, a way of thinking, but most of all, it’s part of your culture. Can hiring a single person change your culture?  Well, yes and no.  If you are a two person team, then adding a third person to the team will definitely change your culture, whether you like it or not.

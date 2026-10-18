@@ -1,0 +1,259 @@
+title=Talks
+date=2014-09-01
+type=page
+status=published
+masthead=/img/qcon_crowd.jpg
+~~~~~~
+
+## Cultures, Microcultures and Finding your Way (2019)
+
+<p><a href="https://www.infoq.com/presentations/microcultures-organizational-culture/"><img src="/img/qcon-microcultures-talk.jpg" alt="QCon Keynote" width="390" height="250" class="float-right ml-3 mb-3"></a></p>
+
+Mike McGarr explores the essence of organizational culture and how it impacts our work. He talks about the microcultures that can exist within an organization that provide layers of influence in our lives and job satisfaction.
+
+Presented at:
+
+- [QCon SF 2019 (Keynote)](https://www.infoq.com/presentations/microcultures-organizational-culture/)
+
+## Discovering Culture through Artifacts (2019)
+
+<p><a href="https://www.infoq.com/presentations/discovery-organizational-culture-artifacts/"><img src="/img/discovering-culture-artifacts.jpg" alt="QCon London" width="390" height="250" class="float-right ml-3 mb-3"></a></p>
+
+Mike McGarr shares an approach to discovering organizational culture through its artifacts. He shares his model for understanding culture and the key artifacts that allow building an understanding of an organization’s culture. He also shares a wealth of "experiences" (that’s code for failures) that have shaped his approach to discovering culture.
+
+Presented at:
+
+- [QCon London 2019](https://www.infoq.com/presentations/discovery-organizational-culture-artifacts/)
+
+## Better DevEx at Netflix: Polyglot and Containers (2018)
+
+<p><a href="https://www.infoq.com/presentations/netflix-polyglot-containers"><img src="/img/qcon-ny-talk.jpg" alt="QCon NY" width="390" height="250" class="float-right ml-3 mb-3"></a></p>
+
+Mike McGarr talks about the evolution of developer tooling at Netflix, focusing on command line tools they built to address evolving needs around programming languages, containers and more. He shares lessons learned while trying to support diverse programming languages and environments within a centralized team.
+
+Presented at:
+
+- [QCon NY 2018](https://www.infoq.com/presentations/netflix-polyglot-containers)
+
+## Productivity Engineering: Surviving DevOps (2018)
+
+[Video: Productivity Engineering - Surviving DevOps](https://www.youtube.com/embed/cmbavBi_SLY)
+
+The software industry has seen an influx of technologies and techniques, including DevOps, cloud, Agile, microservices, machine learning, big data, containers and more. Organizations are becoming flatter and engineers are being asked to do more than ever before. All of this contributes to an increase in cognitive load for engineers.
+
+Mike McGarr (Manager, Netflix Developer Productivity) will talk about the challenges that arise from DevOps cultures like Netflix, and their approach to tackling these problems. Mike will provide some advice on how growing companies interested in DevOps can reduce cognitive load and maximize business value.
+
+Presented at:
+
+- Excella Consulting
+
+## Continuously Integrating Distributed Code at Netflix (2017)
+
+[Video: Continuously Integrating Distributed Code at Netflix - Atlassian Summit U.S. 2017](https://www.youtube.com/embed/Gw6QWlreY0w)
+
+Three years ago Netflix migrated all of its source code to Git for version control. This change furthered the independence of our engineering teams enabling them to manage, build, test and deploy with little friction. But the more distributed our source code becomes, the harder it can be to assess the impact of a change or understand the state of the world. Making a simple change to a shared library could have impact to dozens of critical services so the more feedback engineers can gain, the better. But how do you run an expensive operation against every single git repository within your organization?
+
+Presented at:
+
+- \[Atlassian Summit 2017\]
+
+## Dependencies, distributed code and engineering velocity (2017)
+
+[Video: Netflix - Dependencies, Distributed Code and Engineering Velocity - Mike McGarr (2017)](https://www.youtube.com/embed/k_mPS_1JpXM)
+
+Most software engineers loathe and fear debugging dependency update issues. They are common challenges in the modern enterprise environment. The proliferation of git repositories, the sharing of reusable code and rise of the microservice all conspire to make organization-wide binary integration a nightmare.
+
+At Netflix, engineers are not immune to the cost of dependency updates. Library owners publish new versions of their code without a comprehensive understanding of the organizational impact. Application owners ingest new library versions that can fail in obvious or subtle ways, leading to decreased confidence and slower organizational velocity. But these are problems we understand, and tooling can help.
+
+Presented at:
+
+- \[Gradle Summit 2017\]
+
+## The rise of polyglot programming (2017)
+
+[Video: The Rise of Polyglot at Netflix](https://www.youtube.com/embed/W3HkCF0jBZA)
+
+A quick scan of Netlfix’s GitHub repository informs you that Netflix’s cloud deployment platform is built for JVM applications (and continues to serve the company well). But as Netflix evolves, languages and platforms like Node.js and Python have become more popular and are increasingly used in critical systems. Netflix needed to start thinking about building tools to support this polyglot world.
+
+Mike McGarr discusses the early days of Netflix’s polyglot journey and where the company is going in the future. Mike explores the various tools and approaches Netflix employs to provide first-class support for a variety of languages and platforms and shares the challenges of supporting a polyglot codebase as well as lessons learned for enterprises embarking on this journey.
+
+Presented at:
+
+- [Velocity NY 2017](https://conferences.oreilly.com/velocity/vl-ny-2017/public/schedule/detail/61524.html)
+
+- [DevOpsCon 2017](https://www.youtube.com/watch?v=W3HkCF0jBZA)
+
+## Dependencies, Monorepos and beyond (2017)
+
+[Video: Dependency Hell, Monorepos and beyond](https://www.youtube.com/embed/VNqmHJtItCs)
+
+Dependency hell. Two words that many software engineers know and loathe. Unfortunately, Netflix engineers are not immune to the cost of dependency hell. Library owners publish new versions of their code without a comprehensive understand of the organizational impact. Application owners ingest new library versions that can fail in obvious or subtle ways, leading to decreased confidence and slower organizational velocity. In this talk, Mike McGarr (Manager, Developer Productivity at Netflix) will talk about the challenges of shared code, dependency hell and some existing solutions. He will then share the approach that Netflix is moving towards to decrease the cost of dependency hell.
+
+Presented at:
+
+- \[DevOpsCon 2017\]
+
+## Containers: How they add to a proven cloud-native architecture (2016)
+
+<https://www.oreilly.com/library/view/velocity-2016-/9781491944653/video261555.html>
+
+This was a talk I gave with Andrew Spyker (Netflix) in 2016.
+
+The Netflix streaming service architecture is composed of thousands microservices, is cloud native, employs DevOps for continuous deployment of immutable instances, is designed from the ground up for failure and chaos injection, and runs a global footprint at the scale required to power one-third of all Internet download traffic. Netflix has been doing this on the Amazon cloud with virtual machines for over five years, blazing a trail for similar architectures. In the last year, it invested in containers for batch-style jobs and started to experiment with integrating them into its service-style application workflows. Mike McGarr and Andrew Spyker explain the potential containers have to help Netflix create a more productive development experience while simultaneously deepening its control over resource management. Contrary to many other container advocates, Netflix is investing in containers even though it already has mature CI/CD workflows and elastic/ephemeral infrastructure. Join Mike and Andrew to see why Netflix is moving forward with containers, how it can leverage its existing operational machinery, and how it’s running containers with a similar guarantee of high availability.
+
+Presented at:
+
+- [Velocity NY 2016](https://web.archive.org/web/20190717193124/https://conferences.oreilly.com/velocity/vl-ny-2016/public/schedule/detail/53268)
+
+
+## Build and deploy to the cloud using Netflix OSS (2016)
+Getting started on AWS is easy, but building a scalable, reliable, and performant product in the cloud can be a challenge for startups and enterprises alike. Netflix has famously migrated all our services to the cloud. Along the way, we have open-sourced large portions of our platform that helped make this a reality. In this talk, Mike McGarr (Manager - Netflix Developer Productivity) will provide a survey of the Netflix OSS products available. Mike will also share patterns and lessons Netflix learned migrating to the cloud. This talk will cover tools such as Nebula, Aminator and Spinnaker. Lastly, Mike will leave you with a roadmap for how to get started with Netflix OSS on your cloud today.
+
+Presented at:
+
+- JAX DevOps 2016
+
+## Beyond the culture deck: What you don’t already know about Netflix’s culture (2015)
+
+[Video: DOES15 - Mike McGarr - Beyond the Culture Deck: What You Don’t Already Know About Netflix](https://www.youtube.com/embed/3hULyTAESBE)
+
+A significant chunk of DevOps rhetoric centers around “unicorn” companies like Netflix, Etsy, Facebook and many more. They are held up as the models enterprises should emulate. But what makes a place like Netflix so special? What does life inside a unicorn company look like? Is the famous Netflix culture deck true to life or just hype? Most importantly, what lessons can I take back to my employer?
+
+In this talk, I’ll share with you the reality of working at Netflix. I’ll share details about how people work at Netflix, how we communicate, how we are organized, how work is prioritized, how we manage risk, how we build teams and how our culture plays a central role in everything we do. Lastly, Mike will share what are the important lessons that every manager and executive should learn about Netflix’s culture.
+
+[Slides](https://www.slideshare.net/slideshow/beyond-the-culture-deck-what-you-dont-already-know-about-netflix/54317588)
+
+Presented at:
+
+- [DevOps Enterprise Summit 2015](https://web.archive.org/web/20151024054123/http://devopsenterprise.io:80/sessions/beyond-the-culture-deck-what-you-dont-already-know-about-netflix/) - [(Video)](https://www.youtube.com/watch?v=3hULyTAESBE)
+
+- [Nike Tech Talks](https://niketechtalks-dec2015.splashthat.com/)
+
+
+## A centralized team in a decentralized world (2015)
+
+[Video: OSCON 2015: A centralized team in a decentralized world: Engineering Tools at Netflix](https://www.youtube.com/embed/mWwVLRALhaE)
+
+In this presentation, I discuss the various forces at play that create tension for centralized teams like Netflix’s Engineering Tools team.  I share some of the challenges we face balancing out customer needs with support issues.  I also share how we remain innovative while throttling the rate of change we impose on our customers.
+
+[Slides](https://www.slideshare.net/slideshow/centralized-team-in-a-decentralized-world-engineering-tools-at-netflix/49333797)
+
+Presented at:
+
+- [OSCON 2015](https://web.archive.org/web/20150520222236/http://www.oscon.com:80/open-source-2015/public/schedule/detail/42183) - [(Video)](https://www.youtube.com/watch?v=mWwVLRALhaE)
+
+- [Gradle Summit 2015](https://web.archive.org/web/20150319054924/http://gradlesummit.com/conference/santa_clara/2015/06/session?id=33638) - [(Video)](https://www.youtube.com/watch?v=mRVZ3-qkfFg)
+
+- [ALM Summit 2015](https://www.alm-forum.com/s15/presenters#mikem)
+
+## Build and deploy to the cloud using Netflix OSS (2015)
+
+[Video: Using Netflix OSS to manage deployments to AWS - Mike McGarr (Netflix)](https://www.youtube.com/embed/y2VTnNnzrwk)
+
+In this talk, I presented a survey of build and deploy tools Netflix has open sourced.  I discuss the patterns Netflix uses to manage deployments at scale, and the tools you can use to build your own Netflix OSS cloud.  I even do some live coding!
+
+Presented at:
+
+- [Twilio Signal 2015](https://web.archive.org/web/20150918225706/https://www.twilio.com/signal/2015/videos?speaker=mike-mcgarr)
+
+## Shepherding Change: Leading your DevOps transformation (2014)
+
+[Slides: Shepherding Change: Leading your DevOps transformation](https://www.slideshare.net/slideshow/embed_code/41736337)
+
+In this presentation, I cover the field of organizational change management and how the practices from this field can be used to drive a DevOps transformation.  The marriage of these two fields has been a growing passion of mine.
+
+Presented at:
+
+- [DevOpsDC, November 18, 2014](https://www.meetup.com/DevOpsDC/events/217434472/)
+
+## Zero to the Cloud with @NetflixOSS (2014)
+
+[Slides: Zero to the Cloud with @NetflixOSS](https://www.slideshare.net/slideshow/embed_code/41684570)
+
+In this presentation, I provide survey of the NetflixOSS tools.  In addition to cover a wide variety of tools, I also dive into the patterns and approaches that Netflix uses to effectively deploy, scale and maintain a resilient cloud presence.
+
+Presented at:
+
+- [AWS DC Meetup - November 17, 2014](https://www.meetup.com/AWS-Washington-DC-Meet-Up/events/217681072/)
+
+## Engineering Tools at Netflix: Enabling Continuous Delivery (2014)
+
+[Slides: Engineering Tools at Netflix: Enabling Continuous Delivery](https://www.slideshare.net/slideshow/embed_code/40130240)
+
+The Engineering Tools team is a responsible for building tools that support Netflix’s cloud deployment infrastructure.  This talk covers Netflix’s approach to building, baking and deploying software to AWS, and the tools we use to make this possible.
+
+Presented at:
+
+- [Bay Area Infracoders - October 9, 2014](https://www.meetup.com/Bay-Area-Infracoders/events/210267462/)
+
+## Implementing DevOps (2014)
+
+[Slides: Implementing DevOps](https://www.slideshare.net/slideshow/embed_code/38581512)
+
+I was asked by the CIO of USPTO to give a presentation on adopting DevOps.  The talk is intended for a federal government audience in mind, but is applicable to anybody interested in getting started.  I cover the basics of DevOps, anchored in Gene Kim’s Three Ways.  I also provide a series of DevOps prescriptions for organizations interested in getting started.
+
+Presented at:
+
+- USPTO (internal) - June 9, 2014
+
+## Infrastructure as Code (2013)
+
+[Slides: Infrastructure as Code](https://www.slideshare.net/slideshow/embed_code/24144601)
+
+I gave this talk at Blackboard’s 2013 DevCon conference in Las Vegas.  I used to talk to introduce Blackboard’s customers to better ways to manage their server infrastructure.  This talk cover the core concepts for automating your servers, as well provides some examples using Chef and Jenkins.  I plan on striping the DevCon branding and making this a more generic talk in the future.
+
+Presented at:
+
+- [Blackboard DevCon 2013](https://web.archive.org/web/20140831024221/http://blog.blackboard.com:80/devcon-2013-a-new-hope/) - June 8/9, 2013
+
+## Introduction to Continuous Delivery (2013)
+
+[Slides: Continuous delivery applied (RJUG)](https://www.slideshare.net/slideshow/embed_code/17452976)
+
+I have given a variety of talks on the subject of Continuous Delivery.  This talk has evolved over time, but it is also based on the premise of teaching others about implementing Continuous Delivery.
+
+My go to talk in the past has been an introduction to Continuous Delivery.  This talk has evolved over the years, but essentially provides tips and advice for how to get started with Continuous Delivery.  It covers a variety of techniques and tools available for engineers to start playing with immediately.
+
+**Introduction to Continuous Delivery:**
+
+- [Blackboard DevCon 2013](https://web.archive.org/web/20140831024221/http://blog.blackboard.com:80/devcon-2013-a-new-hope/) - June 8/9, 2013 - [(Slides)](https://www.slideshare.net/slideshow/introduction-to-continuous-delivery-bbworlddevcon-2013/24144779)
+
+- [Montgomery County JUG](https://web.archive.org/web/20141121185918/http://www.eventbrite.com:80/e/mcjug-06152011-meeting-tickets-1790267739) June 15, 2011 - [(Slides)](https://www.slideshare.net/slideshow/continuous-delivery-8341276/8341276)
+
+**Continuous Delivery: Tools and Techniques:**
+
+- Montgomery Country JUG - February 15, 2012 - [(Slides)](https://www.slideshare.net/slideshow/continuous-delivery-tools-and-techniques/12026922)
+
+**Continuous Delivery Applied:**
+
+- AOL (internal) - May 31, 2013 - (Slides)
+
+- [Richmond JUG](https://www.meetup.com/Richmond-Java-Users-Group/) - March 20, 2013 - [(Slides)](https://www.slideshare.net/slideshow/continuous-delivery-applied-richmond-j/17452976)
+
+- [Agile Richmond](https://web.archive.org/web/20141010001519/http://agilerichmond.com:80/) - November 14, 2012 - [(Slides)](https://www.slideshare.net/slideshow/continuous-delivery-applied-agile-richmond/15200632)
+
+- [AgileDC 2012](https://web.archive.org/web/20141216191652/http://agiledc.org/) - October 23, 2012 - [(Slides)](https://www.slideshare.net/slideshow/continuous-delivery-applied-agiledc/14871013)
+
+- [DC Continuous Delivery Meetup](https://www.meetup.com/DC-continuous-delivery/events/80979862/) - September 19, 2012 - [(Slides)](https://www.slideshare.net/slideshow/continuous-delivery-applied-dc-ci-user-group/14358624)
+
+## Improving Design through TDD (2012)
+
+[Slides: Improving Design Through Test Driven Development (TDD)](https://www.slideshare.net/slideshow/embed_code/15574515)
+
+In late 2012, I was invited to speak at the first annual DC Agile Engineering Conference.  For this conference, I collaborated with a former colleague of mine, Sam Brown on one of my talks.  Sam and I are both proponents of Test Driven Development and practiced it together on projects, so it made sense for us to talk about TDD.
+
+The focus of our talk was on how Test Driven Development improves the design of an application.  We were lucky enough that our talk was [recorded](https://www.youtube.com/watch?v=5-K8RH0WLXg).
+
+Presented at:
+
+- [DC Agile Engineering](https://web.archive.org/web/20141121224048/http://www.eventbrite.com:80/e/2012-dc-agile-engineering-conference-and-global-day-of-coderetreat-registration-4384492134) - December 7, 2012 - [(Video)](https://www.youtube.com/watch?v=5-K8RH0WLXg)
+
+## ATDD with Concordian (2011)
+
+[Slides: ATDD with Concordion](https://www.slideshare.net/slideshow/embed_code/8341499)
+
+This is the first bit of public speaking I did was a lightning talk at a local meetup in the DC area.  Our team had been building an acceptance testing infrastructure using Concordion and I thought this was a great venue to start speaking.  I hope to expand on the topic in a larger presentation soon.
+
+Presented at:
+
+- [DC Agile Software Testing Group](https://www.meetup.com/dcast-io/events/17021962/) - April 26, 2011

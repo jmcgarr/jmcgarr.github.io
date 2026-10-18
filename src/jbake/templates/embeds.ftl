@@ -14,6 +14,9 @@
      TEXT, already HTML-escaped by the Markdown renderer, becomes the iframe's title (what a screen reader
      announces). Bootstrap's .embed-responsive classes size the player to the column at every width. A link
      inside a longer paragraph, a link to any other site, and everything else in the body are left alone.
+     So is a list item that is only such a link (a loose list renders it as <li>\n<p><a>…</a></p>, which
+     the (?<!<li>\n) lookbehind skips): on the Talks page the "Presented at" lists link to the videos, and
+     a link in a list is a reference, not an embed (T102, 2026-10-18).
      Running it twice gives the same result: the output has no <p><a> left to match.
      post.ftl uses it on the post body, innermost, before lazyImages() and externalLinks() (which only touch
      <img> and <a>). head-meta.ftl feeds it the body before taking the meta description, which drops
@@ -21,8 +24,8 @@
      feed readers get the titled link instead of a player: that's intended. -->
 <#function embeds html>
   <#-- 1. YouTube: the video ID is group 1, the link text group 2 -->
-  <#local html = html?replace(r'(?i)<p>\s*<a href="https?://(?:www\.|m\.)?(?:youtube\.com/(?:watch\?(?:[^"&]*&(?:amp;)?)*v=|embed/)|youtu\.be/)([\w-]+)[^"]*"[^>]*>([^<]*)</a>\s*</p>', r'<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" title="$2" src="https://www.youtube.com/embed/$1" allowfullscreen loading="lazy"></iframe></div>', "r")>
+  <#local html = html?replace(r'(?i)(?<!<li>\n)<p>\s*<a href="https?://(?:www\.|m\.)?(?:youtube\.com/(?:watch\?(?:[^"&]*&(?:amp;)?)*v=|embed/)|youtu\.be/)([\w-]+)[^"]*"[^>]*>([^<]*)</a>\s*</p>', r'<div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" title="$2" src="https://www.youtube.com/embed/$1" allowfullscreen loading="lazy"></iframe></div>', "r")>
   <#-- 2. SlideShare: "N" or "key/KEY" is group 1, the link text group 2 -->
-  <#local html = html?replace(r'(?i)<p>\s*<a href="https?://(?:www\.)?slideshare\.net/slideshow/embed_code/((?:key/)?[\w-]+)[^"]*"[^>]*>([^<]*)</a>\s*</p>', r'<div class="embed-responsive embed-responsive-4by3"><iframe class="embed-responsive-item" title="$2" src="https://www.slideshare.net/slideshow/embed_code/$1" allowfullscreen loading="lazy"></iframe></div>', "r")>
+  <#local html = html?replace(r'(?i)(?<!<li>\n)<p>\s*<a href="https?://(?:www\.)?slideshare\.net/slideshow/embed_code/((?:key/)?[\w-]+)[^"]*"[^>]*>([^<]*)</a>\s*</p>', r'<div class="embed-responsive embed-responsive-4by3"><iframe class="embed-responsive-item" title="$2" src="https://www.slideshare.net/slideshow/embed_code/$1" allowfullscreen loading="lazy"></iframe></div>', "r")>
   <#return html>
 </#function>

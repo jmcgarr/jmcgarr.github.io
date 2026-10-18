@@ -67,9 +67,9 @@ creates anything. Pull requests never deploy, so the PR is safe to push to as yo
 PR step fails, nothing is undone and the error lists the commands to finish by hand. `-Ppr` can't be combined
 with `-Pbranch=false`.
 
-To create one by hand instead, make `src/jbake/content/blog/drafts/<slug>.md` (Markdown) or `<slug>.asciidoc`
-(AsciiDoc), starting with a header like this. It's JBake's `key=value` format ending in `~~~~~~`, not YAML front
-matter:
+To create one by hand instead, make `src/jbake/content/blog/drafts/<slug>.md`, starting with a header like this.
+It's JBake's `key=value` format ending in `~~~~~~`, not YAML front matter. Every post and page on the site is
+Markdown (since T102, 2026-10-18); `-Pformat=asciidoc` still exists but AsciiDoc is on its way out:
 
 ```
 title=My Post Title
@@ -117,8 +117,9 @@ Write links normally. Links to other sites open in a new tab automatically (the 
 `rel="noopener noreferrer"` and a screen reader hint at build time), so there's nothing to add by hand.
 
 To embed a YouTube video or a SlideShare deck, put a link to it on a line of its own, with the title as the link
-text, and the site turns it into a player at build time (`embeds.ftl`, T115). The feed shows the link instead. A
-link inside a longer paragraph stays a link. For example (each on a paragraph of its own):
+text, and the site turns it into a player at build time (`embeds.ftl`, T115, on posts and pages). The feed shows
+the link instead. A link inside a longer paragraph stays a link, and so does a list item that is only a link (the
+Talks page lists its videos that way). For example (each on a paragraph of its own):
 
 ```
 [Video: Ops School](https://www.youtube.com/watch?v=0gx7oQaAy6g)
@@ -126,13 +127,16 @@ link inside a longer paragraph stays a link. For example (each on a paragraph of
 [Slides: Continuous Delivery](https://www.slideshare.net/slideshow/embed_code/8341276)
 ```
 
-A plain image is `![alt text](/img/picture.png)`. Markdown can't size or centre one, so for that write the
+A plain image is `![alt text](/img/picture.png)`. Markdown can't size, centre or float one, so for that write the
 `<img>` tag itself on a line of its own, as the older posts do, with Bootstrap's own classes (no custom CSS to
-add): a width and `text-center` for a centred image, a `figure` for a caption, a `card` for an aside. The
-figure caption and the card title are styled in `src/scss/_content.scss`. For example:
+add): a width and `text-center` for a centred image, `float-right ml-3 mb-3` (or `float-left mr-3 mb-3`) for a
+photo the text wraps around, as the About and Talks pages have, a `figure` for a caption, a `card` for an aside.
+The figure caption and the card title are styled in `src/scss/_content.scss`. For example:
 
 ```
 <p class="text-center"><img src="/img/culture.png" alt="Organizational Culture" width="500"></p>
+
+<p><img src="/img/me.jpg" alt="Me" width="300" height="300" class="float-right ml-3 mb-3"></p>
 
 <figure class="figure d-block text-center">
 <a href="https://example.com/source"><img src="/img/model.png" alt="The model" width="500" class="figure-img"></a>
@@ -157,12 +161,12 @@ When it's ready, set `status=published` and move it to `src/jbake/content/blog/`
 
 To convert an old post to Markdown
 ==================================
-The site is converging on Markdown (revival task T102; the owner's decision of 2026-10-12). Every published
-WordPress `.html` post was converted in October 2026, in batches by year, plus 7 of the 10 HTML drafts, and
-the 11 AsciiDoc posts followed. Still to do: the 3 `.asciidoc` pages (About, Talks, Speaker Bio), the 2
-`.asciidoc` drafts, and 3 HTML drafts with WordPress export debris. A conversion is mechanical: the published
-page must not change, and `scripts/to-markdown/verify.py`, not the converter, is the proof. The tools, from
-`scripts/to-markdown/`:
+The site converged on Markdown in October 2026 (revival task T102; the owner's decision of 2026-10-12). Every
+published WordPress `.html` post was converted in batches by year, then the HTML drafts, the 11 AsciiDoc posts,
+and last (2026-10-18) the 3 AsciiDoc pages (About, Talks, Speaker Bio) and the 2 AsciiDoc drafts: every file
+under `src/jbake/content/` is `.md` now. A conversion is mechanical: the published page must not change, and
+`scripts/to-markdown/verify.py`, not the converter, is the proof. The tools, kept for the record and for any
+page that comes back in another format, from `scripts/to-markdown/`:
 
 ```
 python3 -m venv .venv && .venv/bin/pip install html5lib pillow   # once
@@ -177,18 +181,22 @@ git mv src/jbake/content/blog/<slug>.html src/jbake/content/blog/<slug>.md   # c
 with this site's flexmark settings; anything it can't express exactly (code blocks, images and paragraphs with
 classes or styles, embeds) stays raw HTML. Off-site links become plain `[text](url)` links, because the templates
 add `target="_blank"` at build time (so pages are identical, and only `feed.xml` loses that attribute).
-`asciidoc-convert.py` does the same for an AsciiDoc post (`git mv x.asciidoc x.md`, then `--in-place`): it
-converts exactly the AsciiDoc the 2014–2020 posts use and refuses anything else, and its docstring records
-each decision (fenced code, loose lists, blockquotes, and for a sidebar or an image with a width or a caption
-the Bootstrap markup shown under "To write a post", so nothing depends on `asciidoctor.css`). Asciidoctor's wrapper `<div>`s are gone after that, so check such a post with `verify.py
---text-only`, which lists the DOM differences and still requires the visible text, the counts, the page
-outside `<article>` and the feed item's fields to match.
-`verify.py` compares each page outside `<article>` byte for byte, the article and the feed item as a DOM, and
-counts of links, images, code blocks and visible text. `render.sh` renders Markdown exactly as JBake does, to
-probe an edge case. `screenshots.sh` (desktop, 1280px) and `phone-shots.mjs` (a real 375px phone viewport,
-which also reports any sideways scroll) take before-and-after screenshots of a sample of posts, and
-`pixeldiff.py` compares them pixel by pixel. Each script's header says how to run it. URLs don't change, because JBake
-publishes `<slug>.md` at the same `/blog/<slug>.html`.
+`asciidoc-convert.py` does the same for an AsciiDoc file (`git mv x.asciidoc x.md`, then `--in-place`): it
+converts exactly the AsciiDoc the 2014–2020 posts and the three pages used and refuses anything else, and its
+docstring records each decision (fenced code, loose lists, blockquotes, a bare URL as an autolink, a `++++`
+block holding a titled YouTube or SlideShare iframe as a T115 embed link, and for a sidebar or an image with a
+width, a height, a caption or a left/right role the Bootstrap markup shown under "To write a post", so nothing
+depends on `asciidoctor.css`). Asciidoctor's wrapper `<div>`s are gone after that, so check such a file with
+`verify.py --text-only`, which lists the DOM differences and still requires the visible text, the counts, the
+page outside the body and the feed item's fields to match.
+`verify.py` compares each page outside `<article>` (for a page from `page.ftl`, outside its body `<div>`) byte
+for byte, the article and the feed item as a DOM, and counts of links, images, code blocks and visible text; it
+takes a post slug or a path such as `about.html` or `blog/drafts/<name>-draft.html`. `render.sh` renders
+Markdown exactly as JBake does, to probe an edge case. `screenshots.sh` (desktop, 1280px) and `phone-shots.mjs`
+(a real 375px phone viewport, which also reports any sideways scroll) take before-and-after screenshots of a
+sample of posts or pages (a slug or a path, as for `verify.py`), and `pixeldiff.py` compares them pixel by
+pixel. Each script's header says how to run it. URLs don't change, because JBake publishes `<slug>.md` at the
+same `/blog/<slug>.html` (and `about.md` at `/about.html`).
 
 To change the site's styles
 ===========================

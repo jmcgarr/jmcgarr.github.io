@@ -1,6 +1,9 @@
 #!/bin/sh
 # Full-page-ish headless Chrome screenshots of posts served at http://localhost:8202, at 1280px (desktop).
 # Usage: [PORT=8203] screenshots.sh <out_dir> <slug>...
+#   A slug is a post's base name ("java-live" shoots /blog/java-live.html), or a path ending in .html
+#   relative to the site root ("about.html", "blog/drafts/<name>-draft.html") for a page or a draft; the
+#   file is named after it with "/" as "-" and without ".html" ("blog-drafts-<name>-draft-1280.png").
 #   Serve the build first, for example: jwebserver -p 8202 -d /abs/path/to/build/site
 #   (Never use port 8080: it's the owner's preview.) PORT in the environment picks another port, for a
 #   second run alongside the first.
@@ -14,12 +17,16 @@ PORT="${PORT:-8202}"
 CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 mkdir -p "$OUT/.chrome"
 for slug in "$@"; do
+  case "$slug" in
+    *.html) path="$slug"; name="$(printf '%s' "${slug%.html}" | tr / -)" ;;
+    *) path="blog/$slug.html"; name="$slug" ;;
+  esac
   for spec in 1280x9000; do
     w=${spec%x*}; h=${spec#*x}
     gtimeout 45 "$CHROME" --headless=new --disable-gpu --hide-scrollbars --mute-audio \
       --no-first-run --no-default-browser-check --user-data-dir="$OUT/.chrome" \
       --force-device-scale-factor=1 --window-size="$w,$h" --virtual-time-budget=8000 \
-      --screenshot="$OUT/$slug-$w.png" "http://localhost:$PORT/blog/$slug.html" >/dev/null 2>&1
+      --screenshot="$OUT/$name-$w.png" "http://localhost:$PORT/$path" >/dev/null 2>&1
     echo "$slug $w: $?"
   done
 done
