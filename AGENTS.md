@@ -101,7 +101,11 @@ dropping the color profile, and strip camera metadata. See T016 in the revival p
 - **Never commit directly to `main` or `master`.** A push to `main` deploys the live site.
 - One task, or one tightly related group of tasks, per branch. Don't mix unrelated work.
 - Changes reach `main` only through a pull request that the owner reviews and merges.
-- Don't push branches or open PRs unless asked.
+- **Finish every change by pushing the branch and opening a PR** (owner's standing instruction, 2026-10-18). Don't
+  leave finished work as local commits. Each PR is based on `main` and shows only its own changes: never stack a
+  branch on another unmerged PR. If two changes touch the same file, open the second PR only after the first merges.
+- **After a PR merges, pull `main` before starting anything else** (`git switch main && git pull --ff-only`), and
+  start the next branch from that updated `main`. Delete the merged local branch.
 
 ### Branch names
 
@@ -164,6 +168,7 @@ Before you say a change is finished:
 - [ ] If the work came from a revival task, its checkbox is ticked in `docs/00-REVIVAL.md` **on the same branch**, and its `Test:` line was actually run
 - [ ] If the task has an `Issue:` line, the commit message (and PR description) carries the matching `Closes #N` / `Refs #N` line (Rule 5)
 - [ ] You report what you verified and what you didn't. Never claim a test passed if you didn't run it.
+- [ ] The branch is pushed and a PR against `main` is open (Rule 2). After it merges, `main` is pulled before the next task
 
 ---
 
