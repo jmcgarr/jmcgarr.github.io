@@ -6,6 +6,7 @@ build/
 *.iws
 .gradletasknamecache
 .idea/
+.vscode/
 output/
 
 # Native libraries JRuby/jffi may extract during a bake (should land in build/tmp/jffi)
