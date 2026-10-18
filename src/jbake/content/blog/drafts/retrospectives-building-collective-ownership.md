@@ -4,4 +4,4 @@ type=post
 tags=retrospectives, agile
 status=draft
 ~~~~~~
-Over the past year, I have been lucky enough to join teams who are interested in transitioning to Agile.  In most cases, I would serve as not only an Agile Coach, but the team's ScrumMaster.  Introducing a team to Agile, Scrum and all it's concepts is extremely challenging
+Over the past year, I have been lucky enough to join teams who are interested in transitioning to Agile.  In most cases, I would serve as not only an Agile Coach, but the team’s ScrumMaster.  Introducing a team to Agile, Scrum and all it’s concepts is extremely challenging
