@@ -3,7 +3,7 @@ plugins {
     // Compiles src/scss into the theme CSS (T043) with Dart Sass, the reference Sass compiler, through its Java
     // host (de.larsgrefer.sass:sass-embedded-host). No Node or Ruby: the host's jar bundles Dart Sass for macOS,
     // Linux, and Windows, unpacks the one for this machine into a temp folder, and talks to it over stdin/stdout.
-    id 'io.freefair.sass-base' version '9.8.0'
+    id 'io.freefair.sass-base' version '9.8.2'
 }
 
 // JBake runs directly (T096) instead of through the Gradle plugin `org.jbake.site`. That plugin is unmaintained
