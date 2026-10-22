@@ -1,0 +1,268 @@
+# Build logic as a Gradle plugin
+
+**Branch**: `docs/T123-gradle-plugin-plan` | **Created**: 2026-10-22 | **Status**: Draft
+
+A backlog plan to move the custom build logic out of `build.gradle` into a Gradle plugin: first one that lives in
+this repository (an included build under `build-logic/`), later, once its shape has settled, a standalone plugin
+in its own repository. **Backlog, not scheduled** (owner's request, 2026-10-22): it comes after the Review Flow
+plan ([`05-REVIEW-FLOW.md`](05-REVIEW-FLOW.md)) and starts when the owner says so. It uses the same conventions
+([`AGENTS.md`](../AGENTS.md), "Tasks and checklists"); task IDs continue from T123 and checkpoints from CHK047.
+
+## Context
+
+`build.gradle` is 383 lines. In 2026-10 it was a 30-line application of the JBake plugin. The revival plan
+([`completed/00-REVIVAL.md`](completed/00-REVIVAL.md)) replaced that plugin and then kept adding, one task at a
+time, each piece justified on its own:
+
+| Lines (2026-10-22) | What | From |
+|---|---|---|
+| 1–7 | `base` and `io.freefair.sass-base` plugins | T043 |
+| 9–84 | The `jbake` and `jbakePreview` configurations: four excluded template engines, the lz4 substitution, nine version constraints, and the comments that explain each advisory | T096, T112, T102 |
+| 86–127 | Paths, the jffi temp dir, `NewJdkJvmArgs` (JDK 22+/23+ flags), and `configureJBake`, shared by the bake and the preview | T024, T096, T113 |
+| 129–146 | Case-redirect stubs and `copyTree` | T055 |
+| 148–174 | `compileSass` and `checkNoHandEditedCss` | T043 |
+| 176–198 | `bake`: JBake in a fresh JVM, then the CSS and (on Linux) the stubs copied in | T096, T043, T055 |
+| 200–273 | `SassPreviewWatcher`, a build service with its own thread and Dart Sass compiler | T043 |
+| 275–331 | `preview` and `bakePreview`: port check, watcher, live-reload property | T062, T100, T101, T064 |
+| 333–352 | `newPost`, an `Exec` of `scripts/NewPost.java` with `-P` options passed through | T060, T061 |
+| 354–383 | `reviewChanges`, the same shape for `scripts/ReviewChanges.java`, with exit codes mapped to messages | T117 |
+
+Nothing in it is wrong. The problem is the form: two abstract classes, three closures that act as functions, a
+build service, two Gradle `Exec` wrappers with the same argument-passing idiom, and the site's dependency pins, all
+in one Groovy script with no tests and no types beyond what Groovy infers. Every addition means reading the whole
+file to find where it goes, and the configuration cache (T114) adds a rule the script must follow in places it is
+easy to miss (`newPost` needed a fix for it). The next pieces the Review Flow plan adds (`openPr`, T121) would
+grow it again.
+
+Two kinds of thing are mixed in the file:
+
+- **Build logic**: how to run JBake, compile Sass, serve a preview, watch SCSS, add redirect stubs, pass options to
+  a script. This is the same for any JBake site built this way, and it is the part that belongs in a plugin.
+- **Site configuration**: which JBake version and engines, the version pins and their advisories, the source and
+  output directories, the published CSS path, the preview port. This belongs in `build.gradle`, and it is short.
+
+## Options
+
+**Where the plugin lives (Phase 1)**
+
+| Option | For | Against |
+|---|---|---|
+| `buildSrc/` | Gradle's oldest convention; nothing to wire in `settings.gradle` | Any change invalidates every task's up-to-date state; can't be published or reused; Gradle itself now recommends included builds |
+| **Included build `build-logic/`** (`pluginManagement { includeBuild 'build-logic' }` in `settings.gradle`) | Same checkout, same PR; a real Gradle project with its own tests; promotes to a standalone plugin by moving the folder; configuration-cache friendly | One more directory and a second `build.gradle`; Dependabot needs a second entry |
+| Standalone plugin now (own repository, published) | The end state in one step | Publishing, versioning and a release flow before the plugin has a stable shape; every tweak is a release; two repositories to keep in step while it is still changing |
+
+**Language**
+
+| Option | For | Against |
+|---|---|---|
+| **Java** with `java-gradle-plugin` | The owner's language; `NewPost.java` and `ReviewChanges.java` already are; Gradle's own API is Java; lazy properties and `@Input` annotations are explicit | More lines than Groovy |
+| Groovy (precompiled script plugin or classes) | Closest to the current file | Keeps the dynamic typing that made the file hard to read; the configuration-cache rules are easier to break unnoticed |
+| Kotlin DSL / Kotlin | Good tooling | A new language in the repository for one file's worth of logic |
+
+**How to prove nothing changed**
+
+- Byte-identical output: bake on `main` and on the branch, `diff -r` the two `build/jbake` trees apart from
+  `feed.xml`'s timestamps. Every slice below has this as its test. The revival used it for T096, T112 and T113.
+- Gradle TestKit functional tests in `build-logic/src/test`: a fixture site of two posts, one page and one SCSS
+  file under `build-logic/src/test/fixtures/site`, baked by `GradleRunner` with the configuration cache on. The
+  tests assert the output files exist, the CSS was copied in, the stubs appear only on a case-sensitive filesystem,
+  the hand-edited-CSS guard fails, and `--configuration-cache` reports reuse on the second run.
+
+## Decision
+
+**Phase 1: an included build in Java, `build-logic/`, with one convention plugin, id `jbake-site`,** applied by
+`build.gradle`. The plugin registers the tasks the site has today, with the same names, groups, descriptions and
+behavior, configured through a small extension:
+
+```groovy
+plugins {
+    id 'jbake-site'
+}
+
+jbakeSite {
+    source = file('src/jbake')                  // default
+    caseRedirects = file('src/case-redirects')  // default; empty dir = none
+    scss {
+        entry = file('src/scss/clean-blog.scss')
+        publishedPath = 'css/clean-blog.css'
+    }
+    scripts {                                   // single-file Java programs run as tasks
+        register('newPost', 'scripts/NewPost.java') { options = ['title', 'tags', 'summary', 'slug', 'branch', 'pr', 'format'] }
+        register('reviewChanges', 'scripts/ReviewChanges.java') { options = ['base', 'all', 'strict', 'online']; dependsOn 'bake' }
+    }
+}
+
+dependencies {
+    jbake 'org.jbake:jbake-core:2.7.0'
+    // ...the engines, the preview libraries and the constraints, with their comments, as today
+}
+```
+
+What stays in `build.gradle`: the plugin application, the extension block, and the `dependencies` block with its
+pins and advisory comments (the configurations themselves, the engine exclusions and the lz4 substitution move into
+the plugin, because they are about *how JBake is run*, not which versions; the exclusions stay overridable). What
+moves: everything else, as Java classes under `build-logic/src/main/java/com/mikemcgarr/jbakesite/`:
+`JbakeSitePlugin`, `JbakeSiteExtension`, `NewJdkJvmArgs`, `SassPreviewWatcher`, `ScriptTask` (the `Exec` idiom
+both script tasks share, with the exit-code mapping), and small helpers for `copyTree`, the port check and the
+hand-edited-CSS guard.
+
+The single-file scripts stay as they are in Phase 1. They keep working without Gradle (`java scripts/NewPost.java`),
+which the README promises, and moving them into the plugin is a separate decision (T130).
+
+**Phase 2, sketched only: a standalone plugin** in its own repository, published to the Gradle Plugin Portal (or
+GitHub Packages if the owner prefers private). Not started until Phase 1 has run for a while. For it, the plugin
+must become generic: no `www.mikemcgarr.com` anywhere (the site host is JBake's `site.host` already), no fixed
+`clean-blog.css` name, the case-redirect convention described rather than assumed (or dropped: a site without
+`src/case-redirects` gets nothing), the script tasks as a general "run a single-file Java program with `-P`
+options" feature, and documentation for someone who isn't the owner. **What would trigger it:** a second site to
+build the same way, a wish to share it, or the `build-logic/` folder going three months without a change.
+
+## Consequences
+
+- **The site's output does not change.** Rule 1 is untouched: no URL, file or byte of `build/jbake` moves. Every
+  slice is tested by a byte-identical bake, and CI's gates run unchanged.
+- **The configuration cache keeps working.** A plugin written in Java with `Property`/`Provider` inputs is the
+  shape Gradle designs the cache for; the TestKit tests run with it on, so a regression shows up in `build-logic`'s
+  own tests before it reaches a bake.
+- **Dependabot** needs a second `gradle` entry for `directory: /build-logic` in `.github/dependabot.yml`, with the
+  same major-version ignore. Without it, the Sass host and Gradle plugin API versions there never get PRs.
+- **`build.gradle` shrinks** to the plugin application, the extension block and the dependency pins: about 90
+  lines, most of them the pins and the advisory comments that document them.
+- **The single-file scripts could move into the plugin** as real classes with tests and shared helpers (`run`,
+  `git`, `fail` are copied between `NewPost.java` and `ReviewChanges.java` today; `OpenPr.java` would copy them
+  again). The loss is running them without Gradle. T130 records that decision; nothing in Phase 1 depends on it.
+- **A second Gradle project to understand.** `build-logic/` has its own `build.gradle` (Java, `java-gradle-plugin`,
+  the Sass host as an implementation dependency, JUnit and TestKit for tests) and its own build directory. The
+  README's "How the site is built" section explains it.
+- **Not a platform change.** The site stays on JBake ([`01-PLATFORM-DECISION.md`](01-PLATFORM-DECISION.md)). The
+  plugin wraps the way JBake is run today; it does not re-open how the site is generated.
+- **The included build is compiled on every invocation that needs it**, including `bake` in CI. Compiling a
+  handful of Java classes adds a few seconds once per daemon; Gradle caches it afterwards.
+
+## Tasks
+
+Task format and ticking rules: [`AGENTS.md`](../AGENTS.md), "Tasks and checklists". IDs continue the plan
+numbering (T122 and CHK046 were the last used, in `05-REVIEW-FLOW.md`).
+
+### M10: Build logic as a plugin
+
+**Goal**: `build.gradle` says what the site is (source, CSS, scripts, dependency pins) and a plugin in
+`build-logic/` says how it is built, with tests of its own, and the site's output is byte-identical throughout.
+
+**Independent Test**: on a clean clone of `main`, `./gradlew clean bake` produces a `build/jbake` identical
+(`diff -r`, apart from `feed.xml`'s timestamps) to one baked at the commit before M10 started; `./gradlew bake`
+twice in a row prints "Reusing configuration cache"; `./gradlew :build-logic:test` passes; `wc -l build.gradle`
+is under 120.
+
+**Order**: T123 first, then T124–T128 one at a time, each its own PR (a slice is done when its bake is
+byte-identical and CI is green). T129 can start after T124 and grow with each slice. T131 after T128. T130 is a
+decision, any time after T127. T132 closes the milestone.
+
+**The byte-identical check**, used by every slice's Test (the revival's method from T096):
+
+```sh
+git switch main && ./gradlew clean bake -q && cp -R build/jbake /tmp/bake-main
+git switch <branch> && ./gradlew clean bake -q
+diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
+```
+
+#### Improvements
+
+- [ ] T123 [IMP] **Scaffold the included build.** `build-logic/` with `settings.gradle`, a `build.gradle` applying
+  `java-gradle-plugin` (JDK 21 toolchain, matching `.java-version`'s fallback), an empty `JbakeSitePlugin` with id
+  `jbake-site` and an empty `JbakeSiteExtension`; `pluginManagement { includeBuild 'build-logic' }` in the root
+  `settings.gradle`; `plugins { id 'jbake-site' }` in `build.gradle`, with everything else still in the script;
+  a `build-logic` entry in `.github/dependabot.yml` (`settings.gradle`, `build.gradle`, `build-logic/`,
+  `.github/dependabot.yml`)
+  - **Test:** the byte-identical check passes. `./gradlew bake` twice prints "Reusing configuration cache" on the
+    second run. `./gradlew :build-logic:build` succeeds. CI on the PR is green.
+- [ ] T124 [IMP] **Move the theme CSS.** `compileSass` (the Sass host becomes a dependency of `build-logic`, so the
+  `io.freefair.sass-base` plugin leaves the root `plugins` block), the hand-edited-CSS guard, and the copy of the
+  compiled CSS into the bake, driven by `jbakeSite.scss { entry; publishedPath }` (`build-logic/`, `build.gradle`,
+  `src/scss/` unchanged)
+  - **Test:** the byte-identical check passes, including `css/clean-blog.css`. Putting a `clean-blog.css` under
+    `src/jbake/assets/css/` makes `./gradlew bake` fail with the T043 message; removing it restores the bake. A Sass
+    syntax error in `_variables.scss` fails the build with Dart Sass's message.
+- [ ] T125 [IMP] **Move the JBake run.** The `jbake` and `jbakePreview` configurations with the engine exclusions and
+  the lz4 substitution, `NewJdkJvmArgs`, the jffi and logback settings, the case-redirect copy with its
+  case-sensitivity check, and the `bake` task, driven by `jbakeSite.source` and `jbakeSite.caseRedirects`. The
+  `dependencies` block with the pins stays in `build.gradle` (`build-logic/`, `build.gradle`, `gradle/jbake-logback.xml`)
+  - **Test:** the byte-identical check passes on macOS and, through CI, on Linux (the stubs under
+    `src/case-redirects` are in the Linux bake and `scripts/check-urls.sh` passes there). On JDK 21 and JDK 25 a
+    clean bake prints no JVM warning. `./gradlew dependencies --configuration jbake` lists the same resolved
+    versions as on `main` (diff the two listings).
+- [ ] T126 [IMP] **Move the preview.** `SassPreviewWatcher` as a Java build service, the port check (reading
+  `server.hostname`/`server.port` from `jbake.properties`), the live-reload system property, and the `preview` and
+  `bakePreview` tasks (`build-logic/`, `build.gradle`)
+  - **Test:** `./gradlew clean bakePreview` serves http://localhost:8080, a saved post shows in the open page
+    within about 2 s, a saved SCSS change recompiles the CSS (the log says so), a Sass error keeps the last good
+    CSS, Ctrl+C leaves no process, and a second preview fails with the port message (T101). After the preview,
+    `./gradlew clean bake` output has no live-reload script (`grep -rli livereload build/jbake` is empty).
+- [ ] T127 [IMP] **Move the script tasks.** One `ScriptTask` type (a single-file Java program run with the Gradle
+  JVM's `java`, `-P` options passed as `--name=value`, exit codes mapped to one-line failures), registered from
+  `jbakeSite.scripts { register(name, path) { options; dependsOn } }`; `newPost` and `reviewChanges` become two
+  entries (`build-logic/`, `build.gradle`; `scripts/*.java` unchanged)
+  - **Test:** `./gradlew newPost -Ptitle="M10 Test"` creates the draft on `post/m10-test` as before (then delete
+    the branch and the file). `./gradlew reviewChanges` on a clean tree prints "Nothing to review"; with the #139
+    About file (`git show 756245f:src/jbake/content/about.md > src/jbake/content/about.md`) it fails with the same
+    one-line message as on `main`. `./gradlew newPost` with no title fails with NewPost's own message, not a stack trace.
+- [ ] T128 [IMP] **Shrink `build.gradle`.** Remove every helper, class and comment that moved; keep the dependency
+  pins and their advisory comments; add a short header comment pointing at `build-logic/` and this plan
+  (`build.gradle`)
+  - **Test:** `wc -l build.gradle` is under 120. The byte-identical check passes. `./gradlew tasks --group writing`
+    and `--group build` list the same tasks with the same descriptions as on `main`.
+- [ ] T129 [IMP] **TestKit tests for the plugin.** A fixture site under `build-logic/src/test/fixtures/site` (two
+  posts, one page, one tag, `clean-blog.scss` with one partial, one case-redirect stub) and `GradleRunner` tests,
+  run with `--configuration-cache`: the bake renders the pages and copies the CSS; the stubs appear when the
+  filesystem is case-sensitive and are skipped with the message when it isn't; the hand-edited-CSS guard fails;
+  a script task passes `-P` options through and maps exit 1 to a failure; the second run reuses the cache
+  (`build-logic/src/test/`)
+  - **Test:** `./gradlew :build-logic:test` passes locally and in CI (add it to the workflow before "Bake with
+    Gradle"). Breaking the CSS copy on purpose fails exactly the test that covers it.
+- [ ] T130 [IMP] _(Decision)_ **Move `NewPost.java` and `ReviewChanges.java` into the plugin, or keep them as
+  single-file programs.** For: one place, shared `run`/`git`/`fail` helpers (copied between the two today, and
+  `OpenPr.java` would copy them a third time), unit tests. Against: `java scripts/X.java` without Gradle stops
+  working, and the README promises it. Record the decision and, if moving, add a task per script
+  (`docs/06-GRADLE-PLUGIN.md`)
+  - **Test:** a dated note under this task records the decision and why, with the owner's say.
+- [ ] T131 [IMP] **Docs.** README "How the site is built and deployed" describes `build-logic/` (what is in the
+  plugin, what is in `build.gradle`, how to run its tests); AGENTS.md's Generator line and Layout tree mention
+  `build-logic/`; the T096/T112/T113 notes in the archived revival plan are left as history (`README.md`,
+  `AGENTS.md`)
+  - **Test:** a new reader can find, from the README alone, where `bake` is defined and how to run the plugin's
+    tests. `scripts/check-docs-not-published.sh` still passes.
+- [ ] T132 [IMP] _(Decision)_ **Phase 2: standalone plugin, or not yet.** After Phase 1 has run for a while, check
+  the triggers above (a second site, a wish to share, three quiet months) and decide. If yes, a new numbered doc
+  plans the extraction: repository, publishing (Plugin Portal or GitHub Packages), what becomes generic, and how
+  this repository consumes a published version (`docs/`)
+  - **Test:** a dated note under this task records the decision and the trigger that fired, or that none did.
+
+#### Checkpoint: M10
+
+- [ ] CHK047 A clean bake on `main` is byte-identical (apart from `feed.xml`'s timestamps) to the bake at the commit
+  before T123, on macOS and on Linux (CI's `build/site`, compared through the `check-urls.sh` and link checks plus
+  one manual `diff -r` of a downloaded artifact)
+- [ ] CHK048 `./gradlew bake` twice in a row prints "Reusing configuration cache"; `bakePreview`, `newPost` and
+  `reviewChanges` run with no configuration-cache problems reported
+- [ ] CHK049 `./gradlew :build-logic:test` passes and runs in CI before the bake
+- [ ] CHK050 `wc -l build.gradle` is under 120, and `.github/dependabot.yml` has the `build-logic` entry
+- [ ] CHK051 T130 and T132 each have a recorded decision
+
+### GitHub Issues
+
+No open issue maps to this plan. The one open issue, [#14](https://github.com/jmcgarr/jmcgarr.github.io/issues/14)
+(mastheads for older posts), is T059 in [`04-AUTHORS-DESK.md`](04-AUTHORS-DESK.md). If the owner files an issue
+for the plugin work, add its row here with the task and the `Closes #N` line, per AGENTS.md Rule 5.
+
+| Issue | Title | GitHub label | Task(s) | Milestone | Put in the resolving PR |
+|---|---|---|---|---|---|
+| _none yet_ | | | | | |
+
+## Notes
+
+- _2026-10-22: written at the owner's request, as backlog. The owner's framing: "In looking at the `build.gradle`
+  file, it has expanded quite a bit with some additional complexity derived from the various custom tasks we've
+  added over time. It's pretty unwieldy. Let's add a project to backlog to extract all of this complexity into a
+  gradle plugin. At first, this plugin should be hosted within the project. Then, once we refine the functionality,
+  we can then extract it into another plugin." Phase 1 is the in-repository plugin (T123–T131); Phase 2 is the
+  standalone one (T132 decides when)._
