@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # Fails if anything from docs/ (planning and internal docs) has leaked into the
-# baked site. See docs/00-REVIVAL.md, task T004.
+# baked site. See docs/completed/00-REVIVAL.md, task T004.
 #
 # Usage: scripts/check-docs-not-published.sh [site-dir]   (default: build/jbake)
 
@@ -30,7 +30,7 @@ if [[ -n "$md_files" ]]; then
   failed=1
 fi
 
-# Marker string from docs/00-REVIVAL.md. -I skips binary files (images, fonts).
+# Marker string from docs/completed/00-REVIVAL.md. -I skips binary files (images, fonts).
 marker_files="$(grep -rIl 'REVIVAL' "$site_dir" || true)"
 if [[ -n "$marker_files" ]]; then
   echo "FAIL: planning-doc marker 'REVIVAL' found in:"

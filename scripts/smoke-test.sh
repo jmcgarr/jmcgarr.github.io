@@ -41,7 +41,7 @@ checks=(
   "img/masthead/hawaii-960.jpg 200"                    # ...and its phone variant (T071)
   "fonts/open-sans/open-sans-normal-latin.woff2 200"   # self-hosted font (T073)
   "blog/drafts/acceptance-test-driven-development-draft.html 404"   # drafts never go live
-  "docs/00-REVIVAL.md 404"                             # docs/ never goes live
+  "docs/completed/00-REVIVAL.md 404"                             # docs/ never goes live
   "$@"
 )
 

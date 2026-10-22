@@ -313,7 +313,9 @@ real page and redirect to itself.
 More
 ====
 - [AGENTS.md](AGENTS.md): working rules for this repo (URLs, branches, drafts, issues)
-- [docs/00-REVIVAL.md](docs/00-REVIVAL.md): the current improvement plan
+- [docs/05-REVIEW-FLOW.md](docs/05-REVIEW-FLOW.md): the current plan (checking a change before it ships)
+- [docs/04-AUTHORS-DESK.md](docs/04-AUTHORS-DESK.md): the owner's own to-do list
+- [docs/completed/00-REVIVAL.md](docs/completed/00-REVIVAL.md): the 2026 revival plan, done (its changelog: [docs/03-REVIVAL-CHANGELOG.md](docs/03-REVIVAL-CHANGELOG.md))
 
 Optional mastheads
 ==================
