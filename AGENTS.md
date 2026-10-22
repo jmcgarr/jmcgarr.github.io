@@ -38,6 +38,7 @@ build/jbake/              Generated output (git-ignored)
 ./gradlew clean bake          # build the site into build/jbake
 ./gradlew clean bakePreview   # build + serve at http://localhost:8080, rebuild on save, and reload the open page (drafts at /blog/drafts/<name>-draft.html)
 ./gradlew newPost -Ptitle="My Post"   # start a draft on a new post/<slug> branch (see README)
+./gradlew reviewChanges       # check the pages this branch changed: Markdown links, local links and images, header (T117; see README)
 ```
 
 **Publishing happens only through CI** after a change is merged to `main`. There's no local publish command.
@@ -162,6 +163,7 @@ Co-Authored-By: …
 Before you say a change is finished:
 
 - [ ] `./gradlew clean bake` succeeds with no new warnings
+- [ ] `./gradlew reviewChanges` reports no errors for the change (T117). Warnings are the author's call; say which ones you left
 - [ ] You checked the affected pages in `./gradlew clean bakePreview` (home, one post, About, Archive at minimum for template changes)
 - [ ] No URL was removed or changed without approval (Rule 1 check)
 - [ ] `docs/` content is not in `build/jbake` (`test ! -e build/jbake/docs`)
