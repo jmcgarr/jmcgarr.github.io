@@ -3,7 +3,7 @@
 **Branch**: `docs/revival-changelog` | **Created**: 2026-10-12 | **Status**: Accepted
 
 The owner's own to-do list for the site: everything only the author can write, choose or click. These tasks
-were milestone M8 of the [revival plan](00-REVIVAL.md). On 2026-10-12 the owner moved them into this doc,
+were milestone M8 of the [revival plan](completed/00-REVIVAL.md). On 2026-10-12 the owner moved them into this doc,
 because it's the owner's own work rather than shared work with an agent. They keep their task and checkpoint IDs
 (`T###`, `CHK###`) from the revival plan, and new ones continue that numbering. The conventions are the same
 ([`AGENTS.md`](../AGENTS.md)): every change on its own branch and PR, every task with a `Test:` line, and ticks

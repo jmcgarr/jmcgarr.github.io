@@ -293,7 +293,7 @@ the [decision criteria](02-ROQ-MIGRATION.md#decision-criteria-go--no-go-after-th
 - **M4 closes without a spike.** T034 and CHK024 don't apply. Mark them "not applicable: staying on JBake".
 - **M5 (polish) proceeds on JBake and FreeMarker** as written. Keeping template changes small and CSS-first
   limits rework if a migration happens later.
-- **Follow-up tasks, added to [the plan](00-REVIVAL.md) on 2026-10-07:**
+- **Follow-up tasks, added to [the plan](completed/00-REVIVAL.md) on 2026-10-07:**
   - **T094 [IMP] Modern Markdown on JBake** (`src/jbake/jbake.properties`, `README.md`):
     - set the tested `markdown.extensions` line (with or without `SMARTYPANTS`, the owner's call)
     - add a Markdown example to the README's new-post section

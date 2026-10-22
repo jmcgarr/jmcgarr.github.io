@@ -6,7 +6,7 @@ This blog has been online since 2009. By October 2026 it hadn't been touched in 
 tools were years out of date, and publishing had quietly broken. Between **October 4 and October 12, 2026**,
 the site was brought back to good health in about 90 small, reviewed pull requests. This is the
 plain-language list of what changed. The detailed plan, with every task and how it was tested, is in
-[`00-REVIVAL.md`](00-REVIVAL.md).
+[`00-REVIVAL.md`](completed/00-REVIVAL.md).
 
 One rule held throughout: **no link anyone made to this site over the last 15 years was broken.**
 Every old page address still works. Where an address had to change, the old one now redirects to the new one.

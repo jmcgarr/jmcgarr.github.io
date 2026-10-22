@@ -43,7 +43,7 @@ npx -y lighthouse@12 <url> --chrome-flags="--headless=new" \
 |---|---|---|
 | `http://` links in content | **559** | `grep -roE 'http://[^"'"'"' )<>]+' src/jbake/content \| wc -l` |
 | Content files with CR-only line endings | 63 | `grep -rlU $'\r' src/jbake/content \| wc -l` |
-| Tags differing only by case | 2 (`devops`/`DevOps`, `groovy`/`Groovy`) | see T055 in [`00-REVIVAL.md`](../00-REVIVAL.md) |
+| Tags differing only by case | 2 (`devops`/`DevOps`, `groovy`/`Groovy`) | see T055 in [`00-REVIVAL.md`](../completed/00-REVIVAL.md) |
 
 ## Observations
 

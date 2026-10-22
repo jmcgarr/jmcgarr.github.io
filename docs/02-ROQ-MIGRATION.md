@@ -4,7 +4,7 @@
 
 This is a plan for **possibly** replacing JBake with [Roq](https://iamroq.dev), the Quarkus static site
 generator. The owner isn't ready to switch. This doc lets the M4 platform decision
-([T033](00-REVIVAL.md#m4-chart-the-future)) weigh Roq on facts, and makes the switch low-risk if chosen.
+([T033](completed/00-REVIVAL.md#m4-chart-the-future)) weigh Roq on facts, and makes the switch low-risk if chosen.
 Nothing here runs until the owner decides to migrate.
 
 Task IDs continue the revival plan's sequence (T076+) and follow its conventions
