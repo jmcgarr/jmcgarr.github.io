@@ -847,6 +847,15 @@ public class ReviewChanges {
         boolean exists = Files.isRegularFile(target)
                 || Files.isRegularFile(CASE_REDIRECTS.resolve(sitePath))
                 || publishedUrls.contains(sitePath);
+        // A bake never deletes: a file removed from src/jbake/assets keeps a stale copy in the site until a clean bake.
+        // So anything that isn't rendered or generated must still have its source.
+        boolean generated = sitePath.endsWith(".html") || sitePath.endsWith(".xml") || sitePath.startsWith("css/");
+        boolean stale = exists && !generated && !Files.isRegularFile(ASSETS.resolve(sitePath))
+                && !Files.isRegularFile(CASE_REDIRECTS.resolve(sitePath)) && !publishedUrls.contains(sitePath);
+        if (stale) {
+            return "nothing at /" + sitePath + " in src/jbake/assets any more (the copy in " + site + " is left over from an"
+                    + " earlier bake).";
+        }
         if (!exists && Files.isDirectory(target) && Files.isRegularFile(target.resolve("index.html"))) {
             exists = true;
             sitePath = sitePath + "/index.html";
