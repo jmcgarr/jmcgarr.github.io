@@ -55,7 +55,7 @@ Three years ago Netflix migrated all of its source code to Git for version contr
 
 Presented at:
 
-- \[Atlassian Summit 2017\]
+- [Atlassian Summit 2017](https://www.youtube.com/watch?v=Gw6QWlreY0w)
 
 ## Dependencies, distributed code and engineering velocity (2017)
 
@@ -67,7 +67,7 @@ At Netflix, engineers are not immune to the cost of dependency updates. Library 
 
 Presented at:
 
-- \[Gradle Summit 2017\]
+- [Gradle Summit 2017](https://www.youtube.com/watch?v=k_mPS_1JpXM)
 
 ## The rise of polyglot programming (2017)
 
@@ -85,13 +85,13 @@ Presented at:
 
 ## Dependencies, Monorepos and beyond (2017)
 
-[Video: Dependency Hell, Monorepos and beyond](https://www.youtube.com/embed/VNqmHJtItCs)
+[Video: Dependency Hell, Monorepos and beyond](https://www.youtube.com/watch?v=VNqmHJtItCs)
 
 Dependency hell. Two words that many software engineers know and loathe. Unfortunately, Netflix engineers are not immune to the cost of dependency hell. Library owners publish new versions of their code without a comprehensive understand of the organizational impact. Application owners ingest new library versions that can fail in obvious or subtle ways, leading to decreased confidence and slower organizational velocity. In this talk, Mike McGarr (Manager, Developer Productivity at Netflix) will talk about the challenges of shared code, dependency hell and some existing solutions. He will then share the approach that Netflix is moving towards to decrease the cost of dependency hell.
 
 Presented at:
 
-- \[DevOpsCon 2017\]
+- [DevOpsCon 2017](https://www.youtube.com/watch?v=VNqmHJtItCs)
 
 ## Containers: How they add to a proven cloud-native architecture (2016)
 
