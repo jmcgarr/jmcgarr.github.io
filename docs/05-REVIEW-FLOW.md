@@ -1,6 +1,6 @@
 # Review Flow: check a change before it ships
 
-**Branch**: `docs/review-flow-spec` | **Created**: 2026-10-21 | **Status**: Draft
+**Branch**: `docs/review-flow-spec` | **Created**: 2026-10-21 | **Status**: Accepted (owner, 2026-10-21; decisions in [Notes](#notes))
 
 A plan to add one command, `./gradlew reviewChanges`, that reviews **the pages a branch changed** for broken
 Markdown, missing links and images, stale front matter, and (as advice, never as a failure) spelling. The same
@@ -21,8 +21,8 @@ same day. Nothing in the build or the CI gates could have caught it:
 - The other gates (URLs still exist, drafts and docs not published, masthead variants, feed and sitemap XML) are
   about the site as a whole, not about what a change did to it.
 
-The same shape of defect is already on the live site: the three `\[… 2017\]` labels on Talks (tracked in T048,
-[`04-AUTHORS-DESK.md`](04-AUTHORS-DESK.md)). And the things a reviewer *would* check on a changed page have no
+The same shape of defect sat on the live site for years: the three `\[… 2017\]` labels on Talks (noted under T048 in
+[`04-AUTHORS-DESK.md`](04-AUTHORS-DESK.md), made plain text in #142 on 2026-10-21). And the things a reviewer *would* check on a changed page have no
 tool today: does every link on it still answer, does every image exist, did the page's `date=` move (it is the
 sitemap's `lastmod`), is a new tag spelled like an existing one, is a word misspelled.
 
@@ -70,21 +70,22 @@ Each check has an ID so a task, a report line and a suppression can name it.
 | ID | Check | Where it looks | Would have caught |
 |---|---|---|---|
 | E1 | **Markdown link syntax.** `]` directly followed by `http`, `www.` or `/` (missing `(`); `] (` (a space before the URL); `[text]()` and `[]()`; link text with leading or trailing whitespace (`[ US Marine Corps]`); an unmatched `[` or `]` outside code spans, fenced blocks and `\[` escapes | changed `.md` files, by line | #139's Booz Allen link, the `[ US Marine Corps]` space |
-| E2 | **Rendered leftovers.** Visible text (not inside `<code>`, `<pre>` or `<script>`) containing `](`, `]http`, or a `[` … `]` pair | the rendered pages, by element | #139 again, and the three `\[… 2017\]` labels on Talks the moment that page is next edited |
+| E2 | **Rendered leftovers.** Visible text (not inside `<code>`, `<pre>` or `<script>`) containing `](`, `]http`, or a `[` … `]` pair | the rendered pages, by element | #139 again, and the three `\[… 2017\]` labels Talks had until #142 |
 | E3 | **Local links and assets resolve.** Every `href`, `src` and `srcset` that is same-origin or relative points at a file in `build/jbake` (or at a URL in `docs/baseline/urls.txt`, for the case-redirect stubs that only exist on Linux); `#fragment` links point at an `id` on that page | the rendered pages | a renamed image, a typo in a post's own slug, a link to a draft |
-| E4 | **Front matter is complete.** `title`, `date` (ISO), `type` (`post`/`page`), `status` (`draft`/`published`), the `~~~~~~` separator, no CR line endings, and `summary` on a published post (T095 made its absence harmless on the home page, but the feed and share cards still want it) | changed `.md` files | a post that would bake but publish half-formed |
+| E4 | **Front matter is complete.** `title`, `date` (ISO), `type` (`post`/`page`), `status` (`draft`/`published`), the `~~~~~~` separator, no CR line endings, and `summary` on a post that is **new in the diff** (T095 made its absence harmless on the home page, but the feed and share cards still want it; an existing post without one gets W7, because 60 of 74 published posts have none) | changed `.md` files | a post that would bake but publish half-formed |
 | E5 | **Images fit the rules.** A new or changed file under `src/jbake/assets/img/` is ≤ 1920 px wide and ≤ 400 KB (AGENTS.md Rule 4), a photo is a JPEG, and a new masthead has its 960 and 1440 variants (`scripts/masthead-variants.py --check` already fails CI for this; here it fails locally, before the push) | changed image files | a 4 MB phone photo |
 
 **Warnings (listed, never fail)**
 
 | ID | Check | Where it looks | Notes |
 |---|---|---|---|
-| W1 | **External links answer.** `HEAD`, then `GET` on a method-not-allowed, 10 s timeout, a browser-like `User-Agent`; 4xx, 5xx, timeouts and TLS failures are listed with their status | links on the changed pages only | Off with `--offline`. CI's site-wide lychee stays offline because of the link count and flakiness; a changed page has a handful of links. Hosts that answer scripts with a bot challenge (SlideShare, LinkedIn, X) are listed as "not checkable" rather than as failures |
+| W1 | **External links answer.** `HEAD`, then `GET` on a method-not-allowed, 10 s timeout, a browser-like `User-Agent`; 4xx, 5xx, timeouts and TLS failures are listed with their status | links on the changed pages only | **Off by default locally**, on with `--online` / `-Ponline` (owner, 2026-10-21: local runs stay fast and work offline). **Always on in CI**, so a dead link is still caught before merge. CI's site-wide lychee stays offline because of the link count and flakiness; a changed page has a handful of links. Hosts that answer scripts with a bot challenge (SlideShare, LinkedIn, X) are listed as "not checkable" rather than as failures |
 | W2 | **A changed page's `date=` did not move.** The page's only use of `date` is the sitemap `lastmod` | changed `type=page` files | Suggests today's date. Posts are exempt: their date is the publication date and must not change (Rule 3) |
 | W3 | **A tag is spelled or cased unlike an existing tag** (`DevOps` next to `devops`), or is new | changed `.md` files | The same check `newPost` makes (`NewPost.warnAboutTagSpellings`); a new tag makes a new `/tags/` page and is worth a second look |
 | W4 | **An `<img>` has no `alt`, or `alt` is a file name** | changed `.md` files | T109 wording is the owner's; the check only points |
-| W5 | **Spelling.** Words that are known misspellings (`grammer`, `teh`, `recieve`), from the codespell dictionary of common mistakes, minus a project ignore list for names (`McGarr`, `Kaanapali`, `Lana'i`, `Gradle`…) | changed `.md` files, by line | Only if `codespell` is installed; otherwise one line says it was skipped and how to install it. A dictionary of *mistakes* fits a blog: it never flags a name it doesn't know, unlike a full-dictionary checker. It would not have flagged "routed" (a real word) or "Housing and Development" (a fact), and this plan does not promise to |
+| W5 | **Spelling** _(deferred by the owner 2026-10-21, see T120)_. Words that are known misspellings (`grammer`, `teh`, `recieve`), from the codespell dictionary of common mistakes, minus a project ignore list for names (`McGarr`, `Kaanapali`, `Lana'i`, `Gradle`…) | changed `.md` files, by line | Only if `codespell` is installed; otherwise one line says it was skipped and how to install it. A dictionary of *mistakes* fits a blog: it never flags a name it doesn't know, unlike a full-dictionary checker. It would not have flagged "routed" (a real word) or "Housing and Development" (a fact), and this plan does not promise to |
 | W6 | **A published URL would change.** A changed file under `src/jbake/content/` or `src/jbake/assets/` that is a rename or a delete (Rule 1) | the diff | `scripts/check-urls.sh` already fails CI for this; here it is a warning before the push, with the Rule 1 wording |
+| W7 | **An existing published post has no `summary=`** | changed `type=post` files that already exist on `main` | The feed and share cards use it. Adding one is the author's call; a new post without one is E4 |
 
 Grammar is **not** in scope. Vale with the write-good style is a one-binary option, LanguageTool is better and far
 heavier, and neither would have caught the two real wording slips on About (a department's name, a missing word).
@@ -102,7 +103,7 @@ ERROR E1 src/jbake/content/about.md:16
 WARN  W2 src/jbake/content/about.md:4
   This page changed but date=2014-08-30 did not. The sitemap reports it as lastmod. Today is 2026-10-21.
 
-Reviewed 1 changed page (about.html). 1 error, 1 warning. 23 external links checked, all answered.
+Reviewed 1 changed page (about.html). 1 error, 1 warning. External links not checked (-Ponline).
 ```
 
 Exit codes: `0` nothing to fix, `1` at least one error (or a warning with `--strict`), `2` usage or environment
@@ -132,19 +133,23 @@ Options considered for the checks and rejected or deferred:
 ### The three entry points
 
 1. **`./gradlew reviewChanges`** (group `writing`, next to `newPost` and `bakePreview`): `dependsOn bake`, runs the
-   script against `main`. Options as Gradle properties, like `newPost`: `-Pbase=<ref>`, `-Poffline`, `-Pstrict`,
+   script against `main`. Options as Gradle properties, like `newPost`: `-Pbase=<ref>`, `-Ponline`, `-Pstrict`,
    `-Pall` (review every page, not just changed ones; for a baseline run and for template work).
 2. **CI**, a step after "Check local links and assets" in the `build` job, on `pull_request` only, with
    `fetch-depth: 0` so the merge base exists: `java scripts/ReviewChanges.java --base origin/$GITHUB_BASE_REF`.
    Errors fail the job; the deploy job already needs `build` to pass, so on a push to `main` nothing changes (the
    step is skipped there: a push has no base to diff against, and the PR already ran it).
-3. **`./gradlew openPr`**: for a branch whose work is committed, run `reviewChanges`, and only if it passes push the
-   branch and open the PR with `gh pr create` (title from `-Ptitle`, or the branch's first commit subject; body
-   from a template that includes the review's summary line and the `Closes #N` lines found in the commits). If the
-   review fails, nothing is pushed and the report says what to fix. Reuses the readiness checks and the
+3. **`./gradlew openPr`**: run `reviewChanges`, and only if it passes push the branch and open a **ready** (not
+   draft) PR with `gh pr create` (title from `-Ptitle`, or the branch's first commit subject; body from a template
+   that includes the review's summary line and the `Closes #N` lines found in the commits). If the review fails,
+   nothing is pushed and the report says what to fix. **Uncommitted work** (owner's decision 2026-10-21): the
+   command first prints the list of changed and untracked files it would commit (`git status --short`, limited to
+   `src/`, `docs/`, `scripts/`, `README.md`, `AGENTS.md`, `build.gradle` and `.github/`). Without `-Pmessage` it
+   stops there, so the author sees the list before anything is committed, and says to re-run with
+   `-Pmessage="…"`. With `-Pmessage` it commits exactly the listed files with that message and goes on. A file
+   outside those paths is listed as "not included" and left alone. Reuses the readiness checks and the
    stop-and-explain pattern of `NewPost.checkReadyToOpenPr` and `commitPushAndOpenPr`, as a second single-file
-   program `scripts/OpenPr.java`. It refuses to run on `main` (Rule 2) and never commits for you: committing is
-   the author's step, and a `--pr` that swept up uncommitted files would be the "rides along" problem T061 avoided.
+   program `scripts/OpenPr.java`. It refuses to run on `main` (Rule 2).
 
 ### Suppressions
 
@@ -157,8 +162,8 @@ visible. There is no global off switch for an error check; a check that is wrong
 - A PR with a rendering defect in changed prose is red before the owner reads it. The owner's review time goes to
   the words, where only the owner can judge.
 - Local and CI runs give the same answer from the same code, so "it passed for me" means it will pass there.
-- New dependencies: none for the errors. codespell for spelling, optional, installed by CI (`pip install codespell`,
-  seconds) and suggested locally. The CI job gains one step and `fetch-depth: 0` (the repo is small).
+- New dependencies: none. Spelling (codespell) is deferred (T120). The CI job gains one step and `fetch-depth: 0`
+  (the repo is small).
 - The review inspects **only changed pages** by design. Defects already live (Talks' three labels) surface when
   that page is next touched, or on a `-Pall` run. The first `-Pall` run is a checkpoint below and its findings go
   to the Author's Desk or to a fix PR.
@@ -180,13 +185,13 @@ only after it passes.
 **Independent Test**: as in [Goal](#goal) above: `756245f` fails locally and in CI on the Booz Allen link with the
 right file and line; a clean `main` passes.
 
-**Order**: T117 first; T118 and T119/T120 can follow in parallel; T121 last, since it depends on the review's
-exit codes. T122 is a decision, any time.
+**Order**: T117 first; T118 and T119 can follow in parallel; T121 last, since it depends on the review's exit
+codes. T120 and T122 are decisions, any time.
 
 #### Improvements
 
 - [ ] T117 [IMP] **The review script and Gradle task.** `scripts/ReviewChanges.java` with the change scoping,
-  checks E1–E5 and W2–W4, W6 (everything that needs no network and no external tool), the report format, exit
+  checks E1–E5 and W2–W4, W6, W7 (everything that needs no network and no external tool), the report format, exit
   codes and suppressions above; `./gradlew reviewChanges` (`dependsOn bake`) with `-Pbase`, `-Pstrict`, `-Pall`;
   a "To review a change" section in the README and `reviewChanges` added to the Definition of Done in
   `AGENTS.md` (`scripts/ReviewChanges.java`, `build.gradle`, `README.md`, `AGENTS.md`)
@@ -194,34 +199,41 @@ exit codes. T122 is a decision, any time.
     exits 1 and reports E1 on `about.md` with the Booz Allen line and E2 on `about.html`, plus W2 for the unmoved
     date. On the same branch, seed `<img src="img/does-not-exist.jpg">` into a post and a `tags=Devops` line: E3
     and W3 are reported. On a clean `main` with no changes, it prints "nothing changed" and exits 0.
-    `./gradlew reviewChanges -Pall` on `main` lists exactly the three Talks labels under E2 and nothing else under
-    E1–E5 (anything else it lists is either a real finding, recorded in the task note, or a false positive fixed
-    before ticking). `./gradlew clean bake` output is unchanged.
+    Editing an old post without `summary=` reports W7, not E4; a new draft without one reports E4.
+    `./gradlew reviewChanges -Pall` on `main` lists nothing under E1–E5 (the Talks labels went in #142); anything
+    it does list is either a real finding, recorded in the task note, or a false positive fixed before ticking.
+    `./gradlew clean bake` output is unchanged.
 - [ ] T118 [IMP] **The CI check.** A step in `.github/workflows/` on `pull_request` that runs the script against
   the PR's base with annotations and a step summary; `fetch-depth: 0` on the checkout (`.github/workflows/`)
   - **Test:** a test PR with `756245f` cherry-picked shows a red "Review changed pages" step, an inline annotation
     on the `about.md` line in the Files tab, and the report in the job summary. Pushing the fix from #140 to that
     PR turns it green. A push to `main` runs no review step. The test PR is closed, not merged.
-- [ ] T119 [P] [IMP] **External links on changed pages (W1).** `HttpClient` with the limits above, `--offline` /
-  `-Poffline`, the "not checkable" host list, and CI running online (`scripts/ReviewChanges.java`,
-  `.github/workflows/`)
+- [ ] T119 [P] [IMP] **External links on changed pages (W1).** `HttpClient` with the limits above, off by default
+  and on with `--online` / `-Ponline`, the "not checkable" host list, and CI always running online
+  (`scripts/ReviewChanges.java`, `.github/workflows/`)
   - **Test:** a throwaway change adding `[gone](https://www.mikemcgarr.com/no-such-page.html)` to a post reports
-    W1 with `404` and still exits 0; `-Poffline` reports nothing for W1 and says so. A SlideShare link in a changed
+    W1 with `404` under `-Ponline` and still exits 0; without `-Ponline` the report has one line saying external
+    links were not checked and how to turn them on. A SlideShare link in a changed
     post is listed as "not checkable", not as a failure. The whole W1 pass on a 30-link page takes under 60 s.
-- [ ] T120 [P] [IMP] **Spelling (W5).** Run codespell on the changed `.md` files when it is installed, with a
-  `.codespellrc` carrying the ignore list seeded from the names and terms in the current posts (built by running
-  it once over all content and reviewing the hits); CI installs it; the local report says how to install it when
-  it is missing (`scripts/ReviewChanges.java`, `.codespellrc`, `.github/workflows/`, `README.md`)
-  - **Test:** a throwaway change with "grammer" in a post reports W5 with the suggestion "grammar" and exits 0;
-    the About page, Talks and the 2026 posts report no W5 hits on `-Pall`; with codespell uninstalled, the report
-    has one "skipped" line and the exit code is unchanged.
-- [ ] T121 [IMP] **`./gradlew openPr`.** `scripts/OpenPr.java` as designed above: refuse on `main`, refuse with
-  uncommitted changes, run the review, stop before the push on errors, else push and `gh pr create` with the
-  title, body template, `Closes` lines and the review summary (`scripts/OpenPr.java`, `build.gradle`, `README.md`)
+- [ ] T120 [IMP] _(Decision, deferred)_ **Spelling (W5).** The design: run codespell on the changed `.md` files when
+  it is installed, with a `.codespellrc` carrying the ignore list seeded from the names and terms in the current
+  posts; CI installs it; the local report says how to install it when it is missing. **Deferred by the owner on
+  2026-10-21**: not now; revisit once T117–T119 have run on a few PRs. If taken up, the test is: a throwaway
+  change with "grammer" in a post reports W5 with the suggestion "grammar" and exits 0; About, Talks and the 2026
+  posts report no W5 hits on `-Pall`; with codespell uninstalled, the report has one "skipped" line and the exit
+  code is unchanged (`scripts/ReviewChanges.java`, `.codespellrc`, `.github/workflows/`, `README.md`)
+  - **Test:** a dated note under this task records the decision (take it up, or not) and why.
+- [ ] T121 [IMP] **`./gradlew openPr`.** `scripts/OpenPr.java` as designed above: refuse on `main`; with
+  uncommitted work, list the files and stop unless `-Pmessage` is given, then commit exactly those files; run the
+  review; stop before the push on errors; else push and `gh pr create` (ready, not draft) with the title, body
+  template, `Closes` lines and the review summary (`scripts/OpenPr.java`, `build.gradle`, `README.md`)
   - **Test:** on a branch with `756245f` cherry-picked, `./gradlew openPr` exits 1, prints the E1 finding, and
-    `git status -sb` shows the branch has no upstream (nothing pushed). After fixing the link,
-    `./gradlew openPr -Ptitle="Test PR"` pushes and opens a PR whose body contains "Reviewed 1 changed page" and
-    whose base is `main`. On `main`, it refuses with a one-line message naming Rule 2. The test PR is closed.
+    `git status -sb` shows the branch has no upstream (nothing pushed). With an uncommitted edit to a post and no
+    `-Pmessage`, it prints that file under "would commit" and stops without committing; with
+    `-Pmessage="Edit"`, `git log -1 --stat` shows a commit with only that file. After fixing the link,
+    `./gradlew openPr -Ptitle="Test PR"` pushes and opens a PR whose body contains "Reviewed 1 changed page",
+    whose base is `main`, and for which `gh pr view --json isDraft` returns `false`. On `main`, it refuses with a
+    one-line message naming Rule 2. The test PR is closed.
 - [ ] T122 [IMP] _(Decision)_ **Grammar checking: Vale, LanguageTool, or neither.** Try Vale with the write-good
   and proselint styles on the 2026 posts and About; count true findings against noise. Record the decision here.
   If adopted, it becomes W7 in a later task, advisory only (`docs/05-REVIEW-FLOW.md`)
@@ -255,3 +267,10 @@ for the review flow, add its row here with the task and the `Closes #N` line, pe
   process that links the pages changed, checking for broken links and images, spelling and grammar and other
   issues. It should work locally too. Maybe a companion to `newPost` that will `reviewChanges`, or add it to a
   `createPR` command, stopping it before it is pushed." That is T117, T118 and T121; grammar is T122._
+- _2026-10-21 (later): **the owner's decisions**, after skimming the plan. (1) The script is single-file Java, like
+  `NewPost.java`. (2) The CI step blocks from day one. (3) External links are off by default locally and on with
+  `-Ponline`; CI always checks them. (4) A missing `summary=` is E4 only for a post new in the diff and W7 for an
+  existing one (60 of 74 published posts have none). (5) `openPr` lists uncommitted files first, commits them only
+  with `-Pmessage`, and opens a ready PR. (6) Spelling is deferred (T120 is a decision now). (7) `02-ROQ-MIGRATION.md`
+  and `03-REVIVAL-CHANGELOG.md` stay at the top level of `docs/`. (8) The three Talks labels became plain text (#142)
+  rather than waiting for T048, so the first `-Pall` run has a clean E2._
