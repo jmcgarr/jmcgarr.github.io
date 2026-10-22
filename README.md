@@ -159,6 +159,31 @@ If you use a new header image (`masthead=`), put it in `src/jbake/assets/img/mas
 When it's ready, set `status=published` and move it to `src/jbake/content/blog/`. Its URL will be
 `/blog/<slug>.html`. Published URLs are permanent, so pick the slug carefully (see [AGENTS.md](AGENTS.md)).
 
+To review a change
+==================
+Before opening a pull request, check the pages you changed:
+```
+./gradlew reviewChanges
+```
+It bakes the site, lists every file that differs from `main` (committed or not), and reviews the Markdown and the
+rendered pages (T117, design in [docs/05-REVIEW-FLOW.md](docs/05-REVIEW-FLOW.md)). **Errors** fail the command:
+a `[link]` followed by a bare URL or with a space before its `(` (E1), brackets left in the rendered text (E2), a
+link or image that points at nothing in the baked site (E3), an incomplete header, a CR line ending or a new post
+without a `summary=` (E4), an image over 400 KB or 1920 px, or a masthead without its 960 and 1440 variants (E5).
+**Warnings** are listed and never fail: a changed page whose `date=` did not move (W2; it's the sitemap's
+`lastmod`), a tag spelled unlike an existing one (W3), an image without alt text (W4), a deleted or renamed
+published URL (W6, AGENTS.md Rule 1), an existing post without a summary (W7). Each finding names the file and
+line, and the fix when it's mechanical. With no changes under `src/jbake`, it says so and passes.
+
+Options: `-Pbase=<branch>` diffs against another branch, `-Pall` reviews every page (a baseline), `-Pstrict`
+fails on warnings too. Without Gradle, after a bake: `java scripts/ReviewChanges.java`. A finding that's right in
+general but wrong for one line is suppressed by a comment on the line before it, and the report counts those:
+```
+<!-- review: ignore E2, the brackets are intended -->
+```
+Links in a draft are resolved from `blog/`, where the post will live, so a relative link that only works in the
+preview is caught. External links aren't checked yet (T119), and spelling is deferred (T120).
+
 To convert an old post to Markdown
 ==================================
 The site converged on Markdown in October 2026 (revival task T102; the owner's decision of 2026-10-12). Every

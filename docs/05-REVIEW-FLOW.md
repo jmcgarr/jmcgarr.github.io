@@ -190,7 +190,7 @@ codes. T120 and T122 are decisions, any time.
 
 #### Improvements
 
-- [ ] T117 [IMP] **The review script and Gradle task.** `scripts/ReviewChanges.java` with the change scoping,
+- [x] T117 [IMP] **The review script and Gradle task.** `scripts/ReviewChanges.java` with the change scoping,
   checks E1–E5 and W2–W4, W6, W7 (everything that needs no network and no external tool), the report format, exit
   codes and suppressions above; `./gradlew reviewChanges` (`dependsOn bake`) with `-Pbase`, `-Pstrict`, `-Pall`;
   a "To review a change" section in the README and `reviewChanges` added to the Definition of Done in
@@ -203,6 +203,24 @@ codes. T120 and T122 are decisions, any time.
     `./gradlew reviewChanges -Pall` on `main` lists nothing under E1–E5 (the Talks labels went in #142); anything
     it does list is either a real finding, recorded in the task note, or a false positive fixed before ticking.
     `./gradlew clean bake` output is unchanged.
+  - _Done 2026-10-22 (`feat/T117-review-changes`). `scripts/ReviewChanges.java` (single-file Java, like `NewPost.java`) and
+    `./gradlew reviewChanges` (`dependsOn bake`; `-Pbase`, `-Pall`, `-Pstrict`; `-Ponline` accepted and ignored until T119).
+    **Test passed**, with two differences from the text above: the About line is 14, not 16, and W2 was proved with a
+    prose-only edit to Speaker Bio, because `main`'s About already has today's date since #140, so the cherry-picked
+    header no longer leaves the date unmoved. The #139 About file (`git show 756245f:…/about.md`) gives E1 on line 14
+    ("[Booz Allen Hamilton]" followed by the URL, fix shown), E1 for the padded "[ US Marine Corps]", and E2 mapped
+    back to the same source line; a seeded `<img src="img/does-not-exist.jpg">` and `tags=…, Devops` in a post give E3
+    (resolved from `blog/`) and W3 ("already used as [devops]") plus W4; an edit to `alm.md` gives W7; a new draft with
+    `summary=` empty gives E4, and `[world] (url)` / `[gone]()` in it give E1 (and E3 for the empty href); a masthead
+    copy without variants and a 2000 px PNG give E5; `git rm` of a post and `git mv` of an image give W6. A suppression
+    comment is honoured and counted. A clean tree prints "Nothing to review" and exits 0; errors exit 1, and the Gradle
+    task turns that into a one-line failure; `--strict` exits 1 on warnings. **`-Pall` on `main`: 0 errors, 8 warnings**
+    on all 89 pages: the 8 are W4, the eight `alt="<file name>"` images the content report lists for T109 (the owner's
+    wording; recorded there already, so CHK044 needs nothing more for them). Three false positives were fixed during the run: raw `<pre>` blocks in old posts are skipped
+    by E1 (`maven-cobertura-and-aspectj`), brackets the author escaped as `\[…\]` are not E2 (`test-method-names`), and
+    a draft's own canonical link to its future URL is not E3. Also learned: E2 and E3 skip the archived Disqus comments
+    (readers' text); a renamed or deleted image pulls in the pages that still reference its old name; and because a
+    bake never deletes, E3 also requires an asset's source file to exist, or a stale copy in `build/jbake` hides the break._
 - [ ] T118 [IMP] **The CI check.** A step in `.github/workflows/` on `pull_request` that runs the script against
   the PR's base with annotations and a step summary; `fetch-depth: 0` on the checkout (`.github/workflows/`)
   - **Test:** a test PR with `756245f` cherry-picked shows a red "Review changed pages" step, an inline annotation
