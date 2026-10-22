@@ -7,6 +7,8 @@ this repository (an included build under `build-logic/`), later, once its shape 
 in its own repository. **Backlog, not scheduled** (owner's request, 2026-10-22): it comes after the Review Flow
 plan ([`05-REVIEW-FLOW.md`](05-REVIEW-FLOW.md)) and starts when the owner says so. It uses the same conventions
 ([`AGENTS.md`](../AGENTS.md), "Tasks and checklists"); task IDs continue from T123 and checkpoints from CHK047.
+The plugin's public surface, the names a user types, follows the JBake Gradle plugin's conventions where they
+exist ([the standard](#the-public-surface-the-standard), T133).
 
 ## Context
 
@@ -40,6 +42,16 @@ Two kinds of thing are mixed in the file:
   a script. This is the same for any JBake site built this way, and it is the part that belongs in a plugin.
 - **Site configuration**: which JBake version and engines, the version pins and their advisories, the source and
   output directories, the published CSS path, the preview port. This belongs in `build.gradle`, and it is short.
+
+**What predates the revival, and what duplicates it.** From 2014 to 2026-10 the build was the JBake Gradle plugin
+(`org.jbake.site`, unmaintained since 2022, removed in T096). It gave the repository the names still in use: the
+tasks **`bake`** and **`bakePreview`**, and a **`jbake`** dependency configuration for JBake's own classpath. T096
+kept those on purpose ("keep the familiar command"). The revival then added two names beside them: the `preview`
+task (T062), which `bakePreview` only `dependsOn`, and the `jbakePreview` configuration (T062, T112), which
+`extendsFrom jbake` and adds Jetty and commons-vfs2 pins. Checked 2026-10-22: `./gradlew dependencies` resolves
+`jbake` and `jbakePreview` to the **same 77 artifacts**, because jbake-core brings Jetty and commons-vfs2 itself and
+T112 aligned the pins. So the site has two names for one preview task and two names for one classpath. The owner's
+instruction (2026-10-22): consolidate on the standard for JBake where one exists, and define one where it doesn't.
 
 ## Options
 
@@ -106,6 +118,28 @@ moves: everything else, as Java classes under `build-logic/src/main/java/com/mik
 both script tasks share, with the exit-code mapping), and small helpers for `copyTree`, the port check and the
 hand-edited-CSS guard.
 
+### The public surface (the standard)
+
+The names a user types, in `./gradlew …` and in `build.gradle`, are the plugin's contract. Where the JBake Gradle
+plugin had a convention, this plugin keeps it, because it is what JBake users know and what this repository has
+used since 2014. Where it had none, this table defines one. T133 applies it; the README, AGENTS.md and the CI
+comments follow.
+
+| Name | Kind | Today | In the plugin | Why |
+|---|---|---|---|---|
+| `bake` | task, group `jbake` | exists (group `build`) | **kept** | The JBake plugin's name since 2014 |
+| `bakePreview` | task, group `jbake` | exists, but only `dependsOn 'preview'` (group `documentation`) | **kept, as the real task** | The JBake plugin's name; the old build configured its `port` here |
+| `preview` | task | exists (T062): the real preview | **removed** | A second name for `bakePreview`. Mentioned twice in the README and once in a CI comment; those change with it |
+| `jbake` | configuration | exists | **kept, the only one** | The JBake plugin's name for JBake's classpath; the pins live here |
+| `jbakePreview` | configuration | exists, `extendsFrom jbake` | **removed** | Resolves to the same 77 artifacts; its two pins move into `jbake` |
+| `newPost`, `reviewChanges`, later `openPr` | tasks, group `writing` | exist (group `writing`) | **kept** | Authoring tasks, not JBake's; one group of their own |
+| `compileSass` | task, no group | exists (group `build`) | **kept, hidden** | An implementation detail of `bake`; `./gradlew tasks` doesn't list it |
+| `jbakeSite { … }` | extension | none | **new** | Modelled on the JBake plugin's `jbake { srcDirName; destDirName }`, typed as directories. Not named `jbake`, which is the configuration |
+| `jbake.properties` | JBake's own config | exists | **unchanged** | Site settings JBake reads itself (host, port, extensions) stay JBake's, not the extension's |
+
+Two task groups, then: **`jbake`** for generating and previewing the site, **`writing`** for the author's
+commands. `./gradlew tasks` shows exactly those two groups' tasks and nothing else of ours.
+
 The single-file scripts stay as they are in Phase 1. They keep working without Gradle (`java scripts/NewPost.java`),
 which the README promises, and moving them into the plugin is a separate decision (T130).
 
@@ -136,6 +170,9 @@ build the same way, a wish to share it, or the `build-logic/` folder going three
   README's "How the site is built" section explains it.
 - **Not a platform change.** The site stays on JBake ([`01-PLATFORM-DECISION.md`](01-PLATFORM-DECISION.md)). The
   plugin wraps the way JBake is run today; it does not re-open how the site is generated.
+- **Two names go away**: the `preview` task and the `jbakePreview` configuration (T133). Neither is a published URL
+  or a documented command beyond two README sentences and a CI comment, which T133 updates. `./gradlew bakePreview`,
+  the documented command, keeps working throughout.
 - **The included build is compiled on every invocation that needs it**, including `bake` in CI. Compiling a
   handful of Java classes adds a few seconds once per daemon; Gradle caches it afterwards.
 
@@ -154,7 +191,8 @@ numbering (T122 and CHK046 were the last used, in `05-REVIEW-FLOW.md`).
 twice in a row prints "Reusing configuration cache"; `./gradlew :build-logic:test` passes; `wc -l build.gradle`
 is under 120.
 
-**Order**: T123 first, then T124–T128 one at a time, each its own PR (a slice is done when its bake is
+**Order**: T133 first; it needs no plugin and can run before M10 is scheduled, on its own, if the owner wants
+the duplicates gone sooner. Then T123, then T124–T128 one at a time, each its own PR (a slice is done when its bake is
 byte-identical and CI is green). T129 can start after T124 and grow with each slice. T131 after T128. T130 is a
 decision, any time after T127. T132 closes the milestone.
 
@@ -183,7 +221,7 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
   - **Test:** the byte-identical check passes, including `css/clean-blog.css`. Putting a `clean-blog.css` under
     `src/jbake/assets/css/` makes `./gradlew bake` fail with the T043 message; removing it restores the bake. A Sass
     syntax error in `_variables.scss` fails the build with Dart Sass's message.
-- [ ] T125 [IMP] **Move the JBake run.** The `jbake` and `jbakePreview` configurations with the engine exclusions and
+- [ ] T125 [IMP] **Move the JBake run.** The `jbake` configuration (the only one after T133) with the engine exclusions and
   the lz4 substitution, `NewJdkJvmArgs`, the jffi and logback settings, the case-redirect copy with its
   case-sensitivity check, and the `bake` task, driven by `jbakeSite.source` and `jbakeSite.caseRedirects`. The
   `dependencies` block with the pins stays in `build.gradle` (`build-logic/`, `build.gradle`, `gradle/jbake-logback.xml`)
@@ -192,8 +230,8 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
     clean bake prints no JVM warning. `./gradlew dependencies --configuration jbake` lists the same resolved
     versions as on `main` (diff the two listings).
 - [ ] T126 [IMP] **Move the preview.** `SassPreviewWatcher` as a Java build service, the port check (reading
-  `server.hostname`/`server.port` from `jbake.properties`), the live-reload system property, and the `preview` and
-  `bakePreview` tasks (`build-logic/`, `build.gradle`)
+  `server.hostname`/`server.port` from `jbake.properties`), the live-reload system property, and the `bakePreview`
+  task (the only preview task after T133) (`build-logic/`, `build.gradle`)
   - **Test:** `./gradlew clean bakePreview` serves http://localhost:8080, a saved post shows in the open page
     within about 2 s, a saved SCSS change recompiles the CSS (the log says so), a Sass error keeps the last good
     CSS, Ctrl+C leaves no process, and a second preview fails with the port message (T101). After the preview,
@@ -209,8 +247,8 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
 - [ ] T128 [IMP] **Shrink `build.gradle`.** Remove every helper, class and comment that moved; keep the dependency
   pins and their advisory comments; add a short header comment pointing at `build-logic/` and this plan
   (`build.gradle`)
-  - **Test:** `wc -l build.gradle` is under 120. The byte-identical check passes. `./gradlew tasks --group writing`
-    and `--group build` list the same tasks with the same descriptions as on `main`.
+  - **Test:** `wc -l build.gradle` is under 120. The byte-identical check passes. `./gradlew tasks --group jbake`
+    and `--group writing` list exactly the surface table's tasks, with the same descriptions as after T133.
 - [ ] T129 [IMP] **TestKit tests for the plugin.** A fixture site under `build-logic/src/test/fixtures/site` (two
   posts, one page, one tag, `clean-blog.scss` with one partial, one case-redirect stub) and `GradleRunner` tests,
   run with `--configuration-cache`: the bake renders the pages and copies the CSS; the stubs appear when the
@@ -231,6 +269,20 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
   `AGENTS.md`)
   - **Test:** a new reader can find, from the README alone, where `bake` is defined and how to run the plugin's
     tests. `scripts/check-docs-not-published.sh` still passes.
+- [ ] T133 [IMP] **Consolidate on the standard: one preview task, one configuration, two groups.** Apply the surface
+  table in `build.gradle` as it is today, before any plugin exists: register the real preview task as `bakePreview`
+  and drop `preview`; move the Jetty and commons-vfs2 pins into `jbake` and drop `jbakePreview` (the resolution
+  strategy then applies once); put `bake` and `bakePreview` in group `jbake`, leave `newPost` and `reviewChanges` in
+  `writing`, and give `compileSass` no group; update the two README sentences and the CI comment that say
+  `./gradlew preview`; add the surface table's summary to the README's "How the site is built" (`build.gradle`,
+  `README.md`, `.github/workflows/gradle.yml`). Added 2026-10-22 at the owner's request; it is the first slice
+  because every later one builds on these names
+  - **Test:** the byte-identical check passes. `./gradlew dependencies --configuration jbake` lists the same 77
+    resolved artifacts and versions as `--configuration jbakePreview` did on `main` (save that listing first).
+    `./gradlew clean bakePreview` serves http://localhost:8080 with live reload and SCSS recompile as before, and
+    `./gradlew preview` fails with Gradle's "task 'preview' not found". `./gradlew tasks` shows a `Jbake tasks`
+    group with `bake` and `bakePreview`, a `Writing tasks` group with `newPost` and `reviewChanges`, and no
+    `compileSass`. `grep -rn 'gradlew preview\|jbakePreview' README.md AGENTS.md .github build.gradle` is empty.
 - [ ] T132 [IMP] _(Decision)_ **Phase 2: standalone plugin, or not yet.** After Phase 1 has run for a while, check
   the triggers above (a second site, a wish to share, three quiet months) and decide. If yes, a new numbered doc
   plans the extraction: repository, publishing (Plugin Portal or GitHub Packages), what becomes generic, and how
@@ -247,6 +299,8 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
 - [ ] CHK049 `./gradlew :build-logic:test` passes and runs in CI before the bake
 - [ ] CHK050 `wc -l build.gradle` is under 120, and `.github/dependabot.yml` has the `build-logic` entry
 - [ ] CHK051 T130 and T132 each have a recorded decision
+- [ ] CHK052 `./gradlew tasks` lists exactly the surface table (groups `jbake` and `writing`), and `preview` and
+  `jbakePreview` appear nowhere outside the archived docs (T133)
 
 ### GitHub Issues
 
@@ -266,3 +320,10 @@ for the plugin work, add its row here with the task and the `Closes #N` line, pe
   gradle plugin. At first, this plugin should be hosted within the project. Then, once we refine the functionality,
   we can then extract it into another plugin." Phase 1 is the in-repository plugin (T123–T131); Phase 2 is the
   standalone one (T132 decides when)._
+- _2026-10-22 (later): **the standard.** The owner, on the open question of the `jbake`/`jbakePreview` configurations:
+  "I am fairly certain these tasks predated the current revival project. If their use has been supplanted by new
+  tasks (like preview), we should merge or consolidate on the standard for jbake. If there is none, we should define
+  one." Checked: they are configurations, not tasks, and both are the revival's (T062/T096/T112); what predates it
+  is the JBake plugin's `bake`, `bakePreview` and `jbake` names. The two configurations resolve identically (77
+  artifacts each), and `preview` duplicates `bakePreview`. Hence the surface table above and T133, which can run
+  before the rest of M10._
