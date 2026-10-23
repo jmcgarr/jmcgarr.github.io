@@ -20,7 +20,7 @@ export PATH=/opt/local/bin:/opt/local/sbin:$GRAILS_HOME/bin:$PATH
 
 Ok, so *.profile* was no longer being run when I opened Terminal.  Interesting.  Now if you are a Unix sys admin, the solution will seem immediately apparent.  I had a strong suspicion that the issue was that some _\~/.bash\*_ files were being run instead of the *.profile*.  I Googled around and learned more about how about the differences between *\~/.bash_profile*, *\~/.bash_login*, *\~/.bashrc*, and my *\~/.profile*.
 
-Turns out my suspicion was correct.  The Ruby RVM installation had created a *.bashrc*, and now when my Bash shell logged in, it only ran the _.bash\*_ files and not my *.profile*.  In order to fix this, I had to tell Bash to load both my *.profile* and my *.bashrc*.  A simple way to do this was to add the following two lines to my *\~/.bash_profile*:<br />
+Turns out my suspicion was correct.  The Ruby RVM installation had created a *.bashrc*, and now when my Bash shell logged in, it only ran the _.bash\*_ files and not my *.profile*.  In order to fix this, I had to tell Bash to load both my *.profile* and my *.bashrc*.  A simple way to do this was to add the following two lines to my *\~/.bash_profile*:
 
 ```bash
 . ~/.profile
