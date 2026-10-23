@@ -221,11 +221,19 @@ codes. T120 and T122 are decisions, any time.
     a draft's own canonical link to its future URL is not E3. Also learned: E2 and E3 skip the archived Disqus comments
     (readers' text); a renamed or deleted image pulls in the pages that still reference its old name; and because a
     bake never deletes, E3 also requires an asset's source file to exist, or a stale copy in `build/jbake` hides the break._
-- [ ] T118 [IMP] **The CI check.** A step in `.github/workflows/` on `pull_request` that runs the script against
+- [x] T118 [IMP] **The CI check.** A step in `.github/workflows/` on `pull_request` that runs the script against
   the PR's base with annotations and a step summary; `fetch-depth: 0` on the checkout (`.github/workflows/`)
   - **Test:** a test PR with `756245f` cherry-picked shows a red "Review changed pages" step, an inline annotation
     on the `about.md` line in the Files tab, and the report in the job summary. Pushing the fix from #140 to that
     PR turns it green. A push to `main` runs no review step. The test PR is closed, not merged.
+  - _2026-10-22: done in #146. The step runs `java scripts/ReviewChanges.java --base="origin/$GITHUB_BASE_REF"` after
+    the lychee step, `if: github.event_name == 'pull_request'`, on a `fetch-depth: 0` checkout. Test PR #147 (based
+    on #146's branch, About as #139 shipped it): run 39879798105 red, "Review changed pages" failed with three
+    annotations on `src/jbake/content/about.md:14` (E1 Booz Allen, E1 `[ US Marine Corps]`, E2) and the report in
+    the job summary; after pushing the fixed page, run 39879950034 green ("Nothing to review", the PR's net diff
+    is empty). #147 closed, branch deleted. #146's own run (no content change) passed the step the same way. The
+    "push to `main` runs no step" clause follows from the `if:` and is checked on the run that #146's merge
+    triggers; it could not run before the merge._
 - [ ] T119 [P] [IMP] **External links on changed pages (W1).** `HttpClient` with the limits above, off by default
   and on with `--online` / `-Ponline`, the "not checkable" host list, and CI always running online
   (`scripts/ReviewChanges.java`, `.github/workflows/`)
