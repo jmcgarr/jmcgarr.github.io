@@ -2,7 +2,7 @@
 
 **Status**: Done | **Run**: 2026-10-11, ahead of the 2027-10 schedule (owner's request) | **Against**: `main` at `dced3b6`
 
-The yearly check of the re-evaluation triggers in [`01-PLATFORM-DECISION.md`](../01-PLATFORM-DECISION.md#decision).
+The yearly check of the re-evaluation triggers in [`01-PLATFORM-DECISION.md`](../archive/01-PLATFORM-DECISION.md#decision).
 **No trigger fired. Verdict: stay on JBake; don't start the Roq spike.**
 Security comes closest: the libraries this site names are clean, but jbake-core 2.7.0 pulls in vulnerable
 transitive libraries, a few with no public fix. They run only at build time, and most can be fixed in our own `build.gradle` (T112).

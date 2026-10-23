@@ -1,6 +1,6 @@
 # Platform Decision: Stay on JBake or Migrate
 
-**Branch**: `docs/T033-platform-decision` | **Created**: 2026-10-07 | **Status**: Accepted (2026-10-07)
+**Branch**: `docs/T033-platform-decision` | **Created**: 2026-10-07 | **Status**: Accepted (2026-10-07); reaffirmed and archived 2026-10-23
 
 Revival task T033 (M4).
 - **Compared in depth:** staying on **JBake**, moving to **Roq** (Java), or moving to **Hugo** (Go).
@@ -23,7 +23,7 @@ release pages, registries, docs, and source on the same date (see [Sources](#sou
    - tables
    - fenced code with syntax highlighting
    - footnotes, task lists, strikethrough
-3. **URLs:** every published URL is permanent ([AGENTS.md](../AGENTS.md) Rule 1). Details under
+3. **URLs:** every published URL is permanent ([AGENTS.md](../../AGENTS.md) Rule 1). Details under
    [What any platform must preserve](#what-any-platform-must-preserve).
 
 ### Why JBake in the first place
@@ -33,7 +33,7 @@ release pages, registries, docs, and source on the same date (see [Sources](#sou
 - He moved the blog to JBake in **April 2014** (first commit 2014-04-13, "Copying from github.com/jmcgarr/blog")
   and wrote in a 2014 post: "*I am loving JBake*".
 - He'd tried the Ruby route first. In May 2012, setting up Octopress led to
-  [Ruby Broke my $PATH](../src/jbake/content/blog/ruby-broke-my-path.html), when RVM hijacked his Grails setup.
+  [Ruby Broke my $PATH](../../src/jbake/content/blog/ruby-broke-my-path.md), when RVM hijacked his Grails setup.
 
 ### How this site uses JBake (measured)
 
@@ -96,7 +96,7 @@ markdown.extensions=AUTOLINKS,FENCED_CODE_BLOCKS,DEFINITIONS,TABLES,STRIKETHROUG
 
 Any migration must prove it meets all of these:
 
-1. **All 272 published URLs** in [`baseline/urls.txt`](baseline/urls.txt), served at the same paths:
+1. **All 272 published URLs** in [`baseline/urls.txt`](../baseline/urls.txt), served at the same paths:
    - posts `/blog/<name>.html`
    - pages such as `/about.html`
    - **181 tag pages** `/tags/<tag>.html`, of which **48 have spaces** (`tags/acceptance test.html`), **9 have
@@ -256,6 +256,11 @@ Both were assessed, and both fail requirement 1 (JavaScript/TypeScript on Node).
 > **Accepted by the owner on 2026-10-07: A. Stay on JBake now, and turn on modern Markdown.**
 > **Successor order if a trigger fires: Roq (Java) first, then Hugo (Go).**
 
+> **Update, 2026-10-23 (owner): staying on JBake for now.** The revival finished on JBake (modern Markdown, T094;
+> JBake 2.7 run by Gradle without the dead plugin, T096; Gradle 9, T097; live reload, M7), none of the re-evaluation
+> triggers below has fired, and no migration is scheduled. This record and the Roq plan ([02-ROQ-MIGRATION.md](02-ROQ-MIGRATION.md))
+> move to `docs/archive/`. The decision stands as written; the triggers remain the list to check if JBake ever becomes a problem.
+
 **Why:**
 
 1. **It meets all three requirements today.**
@@ -293,7 +298,7 @@ the [decision criteria](02-ROQ-MIGRATION.md#decision-criteria-go--no-go-after-th
 - **M4 closes without a spike.** T034 and CHK024 don't apply. Mark them "not applicable: staying on JBake".
 - **M5 (polish) proceeds on JBake and FreeMarker** as written. Keeping template changes small and CSS-first
   limits rework if a migration happens later.
-- **Follow-up tasks, added to [the plan](completed/00-REVIVAL.md) on 2026-10-07:**
+- **Follow-up tasks, added to [the plan](00-REVIVAL.md) on 2026-10-07:**
   - **T094 [IMP] Modern Markdown on JBake** (`src/jbake/jbake.properties`, `README.md`):
     - set the tested `markdown.extensions` line (with or without `SMARTYPANTS`, the owner's call)
     - add a Markdown example to the README's new-post section
@@ -329,9 +334,9 @@ Checked 2026-10-07.
   - Content and template inventory (`src/jbake/`).
   - `docs/baseline/urls.txt` (272 URLs, 181 tags).
   - Git history (first commit 2014-04-13).
-  - Posts: [the-modern-tech-resume.asciidoc](../src/jbake/content/blog/the-modern-tech-resume.asciidoc) (line 69),
-    [ruby-broke-my-path.html](../src/jbake/content/blog/ruby-broke-my-path.html),
-    [octopress-on-os.html](../src/jbake/content/blog/octopress-on-os.html).
+  - Posts: [the-modern-tech-resume.asciidoc](../../src/jbake/content/blog/the-modern-tech-resume.md) (line 69),
+    [ruby-broke-my-path.html](../../src/jbake/content/blog/ruby-broke-my-path.md),
+    [octopress-on-os.html](../../src/jbake/content/blog/octopress-on-os.md).
 - **Scratch-clone tests (not committed):**
   - Gradle 9.8.0 with plugin 5.5.0: identical output.
   - Plugin 5.5.0 with JBake 2.7.0: fails (`org/apache/commons/configuration/MapConfiguration`).
