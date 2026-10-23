@@ -184,6 +184,11 @@ general but wrong for one line is suppressed by a comment on the line before it,
 Links in a draft are resolved from `blog/`, where the post will live, so a relative link that only works in the
 preview is caught. External links aren't checked yet (T119), and spelling is deferred (T120).
 
+CI runs the same review on every pull request (T118, the "Review changed pages" step in
+[`.github/workflows/gradle.yml`](.github/workflows/gradle.yml)), against the PR's base branch. An error fails the
+job and appears as an annotation on the line in the PR's Files tab; the whole report is in the job summary. A push
+to `main` skips the step: the PR already ran it.
+
 To convert an old post to Markdown
 ==================================
 The site converged on Markdown in October 2026 (revival task T102; the owner's decision of 2026-10-12). Every
