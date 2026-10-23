@@ -6,7 +6,7 @@ status=published
 ~~~~~~
 I have been playing with [Vagrant](https://developer.hashicorp.com/vagrant "Vagrant") and [Puppet](https://www.puppet.com/community/open-source/open-source-puppet "Puppet") a lot recently and I had some trouble getting [OpenJDK 6](https://openjdk.org/projects/jdk6/ "OpenJDK 6") to install on [Ubuntu 10.04 (Lucid Lynx)](https://old-releases.ubuntu.com/releases/lucid/ "Ubuntu 10.04").  Since I had so much trouble finding the consolidated answer, I've decided to post my solution here.
 
-The problem stems from the fact I want to install OpenJDK via a [Debian package](https://www.debian.org/distrib/packages "Debian package").  Lucid Lynx's default [apt](https://ubuntu.com/server/docs/how-to/software/package-management/ "AptGet") setup doesn't include the correct repositories needed to install OpenJDK.  To get this to work, you need to add the correct repository to apt.  I accomplished this by using the 'add-apt-repository' python library, like so:<br />
+The problem stems from the fact I want to install OpenJDK via a [Debian package](https://www.debian.org/distrib/packages "Debian package").  Lucid Lynx's default [apt](https://ubuntu.com/server/docs/how-to/software/package-management/ "AptGet") setup doesn't include the correct repositories needed to install OpenJDK.  To get this to work, you need to add the correct repository to apt.  I accomplished this by using the 'add-apt-repository' python library, like so:
 
 ```bash
 $> sudo apt-get install python-software-properties
