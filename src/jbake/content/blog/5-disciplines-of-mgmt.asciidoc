@@ -1,0 +1,99 @@
+title=The 5 Disciplines of Engineering Management
+date=2023-08-21
+type=post
+tags=engineering management, leadership
+status=published
+summary=TBD
+~~~~~~
+
+I was recently asked by two first time engineering managers for advice on how to be effective in their role. In providing both of them guidance, I realized that I had a fairly structured framework for thinking about the work of an engineering manager. I see the role of an engineering manager divided between five separate disciplines. This model is likely wrong and incomplete, but I https://en.wikipedia.org/wiki/All_models_are_wrong[do find it useful]. I do tend to think in models as it helps make complex problems (like being an EM) easier to think about. However, not all things fit into this model.
+
+There are five disciplines that an :
+
+* Why does your team exist? (Strategy)
+* What is your team building? (Product)
+* How will they build it? (Technology)
+* Who will build it? (People)
+* When will it get built? (Process)
+
+Not all problems fit into these five disciplines, but they are good enough. Let’s discuss.
+
+== Strategy (Why?)
+
+> Why does the team exist? What problems are they trying to solve? What does success look like?
+
+Identifying a problem space and figuring out if a team should exist...and what they should do. Making the pitch for this team to exist. Building a deck to present to executives to try and get funding. Establishing the team. For first time managers, your leadership will define this for you. But you should definitely be aware of your team’s reason for being.
+
+Practices for this discipline include:
+
+* Team charter
+* RFCs and proposals
+* Peer networking
+* Industry networking
+* Quarterly planning and roadmapping
+* Executive presentations
+* Wardley Mapping
+* Product Portfolio Management
+
+== Product (What?)
+
+> What are you building? What are you buying? What are the most important features?
+
+Who are your customers and what should their experience be? This role is often shared with product-savvy engineers, designers and product managers. Unfortunately, most EM’s will have limited to no access to people in these roles. It is often an overlooked EM skillset. EM’s who are effective find ways to provide this capability to the team, even if it is in limited capacity.
+
+Practices for this discipline include:
+
+* Requirements gathering
+* Customer interviews
+* Persona building
+
+== Technology (How?)
+> Architecture. Programming languages. Database schemas.
+
+This is the nitty gritty fun stuff. While being able to be a successful engineer is a requirement of most EM’s, most companies expect very little technology knowledge from an EM on a daily basis.
+
+Despite this primarily being the domain of the engineer, there are still practices that an EM can assist with:
+
+* RFC processes
+* Technical discussions
+* Technical councils
+
+== People (Who?)
+
+> Who is on the team? Hiring. Performance management. Terminations.
+
+This is the area that most people think of when they think of people or engineering management. And if you’ve never managed people before, this is the hardest to get right.
+
+Practices that are part of this discipline include:
+
+* Hiring
+* Career management
+* Coaching
+* Networking
+* Promotion packets
+* Feedback and Performance Management
+* Firing and managing people out
+
+== Process (When?)
+
+> When will a feature ship? How does a team coordinate their work?
+
+You will often encounter the question...when will your team be able to deliver? It’s a hard question to answer and most answers are wrong (software estimation is hard). When focusing on processes, you are really focusing on coordination work within the team, prioritization and roadmaps. You could be focusing your time on JIRA, or some other tool. No matter what you do
+here, you should be focused on shipping the work and unblocking the team...and not on the process of Scrum, Kanban or any other approach. My personal quote on process is:
+
+> Use processes to solve realized problems, and then work aggressively to get rid of it.
+
+Meaning...your process is almost always in service of some greater good...and the process itself should never be the goal. Warnings abound.
+
+Practices within this discipline include:
+
+* Scrummastering (god help us all)
+* OKRs and roadmaps
+* Sticky notes on physical board (my personal favorite)
+* Team culture
+
+== Not always equal
+
+You will also find that the amount of emphasis put on each of these disciplines varies not only by company culture, but also level. For instance, front line managers at Apple are expected to code, whereas at Slack, engineering managers spend little to no time on the code. As you move up the leadership hierarchy, the emphasis put on each of these disciplines varies greatly. Directors should be more focused on strategy than first time managers, who are likely more concerned with technology and implementation details.
+
+Some disciplines are always important, but scale with each level. For instance, the processes you define as a VP might impact company-wide hiring practices, whereas an EM will be more focused on Kanban, Scrum and coordinate daily tickets.
