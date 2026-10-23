@@ -3,6 +3,7 @@ date=2012-10-22
 type=post
 tags=agile richmond, agiledc, continuous delivery, Excella Consulting, tdd
 status=published
+summary=I haven't posted in a while, but I wanted to share some upcoming talks I will be giving before the end of the new year.
 ~~~~~~
 I haven't posted in a while, but I wanted to share some upcoming talks I will be giving before the end of the new year.
 

@@ -3,6 +3,7 @@ date=2011-04-21
 type=post
 tags=.NET, code katas, coding dojo, Excella Consulting, groovy, Java, pair programming, ping pong, Scala, software craftsmanship, tdd
 status=published
+summary=The Software Craftsmanship movement is creating quite a stir in the software development community, with experts on both sides of the fence arguing its value.
 ~~~~~~
 <img class="alignright" title="Clean Code Logo" src="/img/clean-code-badge.png" alt="Clean Code" width="200" height="200" />The [Software Craftsmanship movement](https://manifesto.softwarecraftsmanship.org/ "Manifest for Software Craftsmanship") is creating quite a [stir](https://www.infoq.com/news/2011/02/north-craftsmanship-manifesto "Software Craftsmanship criticisms") in the software development community, with experts on both sides of the fence arguing its value.   At [Excella Consulting](https://www.excella.com/ "Excella Consulting"), we have embraced the Software Craftsmanship movement and feel that the benefits of writing [clean code](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882 "Clean Code, the book") does not conflict with the needs of our customers.  Our desire to continuously learn and improve how we write code has led us to gather regularly for [Coding Dojos](https://codingdojo.org/ "What is a Code Dojo?").
 

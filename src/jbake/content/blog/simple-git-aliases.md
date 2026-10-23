@@ -3,6 +3,7 @@ date=2012-05-02
 type=post
 tags=git
 status=published
+summary=I have been using Git for a while now and in that time, I have learned the value of using aliases.  Whenever I setup a new machine with git, adding my favorite aliases is first on my list.
 ~~~~~~
 I have been using [Git](https://git-scm.com/ "Git") for a while now and in that time, I have learned the value of using aliases.  Whenever I setup a new machine with git, adding my favorite aliases is first on my list.  I wanted to capture some of my favorite aliases here.  This will serve as not only a reference for myself, but hopefully helpful for others.
 

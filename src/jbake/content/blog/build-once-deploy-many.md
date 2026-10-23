@@ -3,6 +3,7 @@ date=2010-09-09
 type=post
 tags=ant, build automation, continuous integration, deployments, hudson, ivy, Java, maven, nexus, operations, subversion
 status=published
+summary=It is not uncommon to find a development team building their application binary from source every time they deploy a new version of their application to an environment.  While this approach works (and depending on the technology, may be necessary), it introduces significant opportunities for errors and makes debugging a failed deployment increasingly difficult.
 ~~~~~~
 It is not uncommon to find a development team building their application binary from source every time they deploy a new version of their application to an environment.  While this approach works (and depending on the technology, may be necessary), it introduces significant opportunities for errors and makes debugging a failed deployment increasingly difficult.  By migrating to a **_Build Once, Deploy Many_** approach, your team can simplify their deployment process, by making it repeatable and easier to debug.
 

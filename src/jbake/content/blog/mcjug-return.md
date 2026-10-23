@@ -3,6 +3,7 @@ date=2012-02-17
 type=post
 tags=build automation, continuous delivery, continuous integration, deployment automation, infrastructure management, mcjug, monitoring, public speaking, static code analysis, technical debt, test automation, version control
 status=published
+summary=On Wednesday night, I returned to the Montgomery County Java User's Group (MCJUG) to give a follow-up to last year's Continuous Delivery talk.  This week, I focused on the tools and techniques that a developer, team and organization can use to migrate to Continuous Delivery.
 ~~~~~~
 On Wednesday night, I returned to the [Montgomery County Java User's Group (MCJUG)](https://sites.google.com/site/mcjugmd/home "MCJUG") to give a follow-up to last year's <a title="CD at MCJUG" href="/blog/cd-at-mcjug.html" target="_blank">Continuous Delivery talk</a>.  This week, I focused on the tools and techniques that a developer, team and organization can use to migrate to [Continuous Delivery](https://continuousdelivery.com/ "Continuous Delivery website").  The subject areas which I touch on are:
 

@@ -3,6 +3,7 @@ date=2010-11-02
 type=post
 tags=eclipse, mac osx, productivity, vim
 status=published
+summary=Earlier this year, I read Neal Ford's book, The Productive Programmer.  It is a great book and a short read as well, so I highly recommend it.
 ~~~~~~
 Earlier this year, I read [Neal Ford](https://www.nealford.com/)'s book, [The Productive Programmer](http://oreilly.com/catalog/9780596519544).  It is a great book and a short read as well, so I highly recommend it.  In this book, Ford talks about ways to make yourself more productive and the book contains a wealth of useful tips.  This inspirational text got me thinking how I could increase my own productivity.  As a result, I made a few changes; one that has been extremely helpful is expanding my use of keyboard shortcuts, also known as hotkeys.
 

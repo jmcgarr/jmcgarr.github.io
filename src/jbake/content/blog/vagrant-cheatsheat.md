@@ -3,6 +3,7 @@ date=2012-09-06
 type=post
 tags=cheatsheet, vagrant
 status=published
+summary=I have been using Vagrant on and off for a while and I find myself forgetting some of the commands.  Instead of looking through Vagrant documentation to find the specific commands that I was looking for, I decided to capture the commands here.
 ~~~~~~
 I have been using Vagrant on and off for a while and I find myself forgetting some of the commands.  Instead of looking through Vagrant documentation to find the specific commands that I was looking for, I decided to capture the commands here.  I hope that this reference helps somebody out.
 

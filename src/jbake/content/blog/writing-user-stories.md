@@ -3,6 +3,7 @@ date=2012-05-04
 type=post
 tags=agile, INVEST, requirements, testing, user stories
 status=published
+summary=A friend recently asked me if I had any advise on how to write user stories.  While I don't claim to be an expert on writing user stories, I knew enough to guide him.  Here's what I came up with.
 ~~~~~~
 A friend recently asked me if I had any advise on how to write [user stories](https://en.wikipedia.org/wiki/User_story "User Story (Wikipedia)").  While I don't claim to be an expert on writing user stories, I knew enough to guide him.  Here's what I came up with.
 

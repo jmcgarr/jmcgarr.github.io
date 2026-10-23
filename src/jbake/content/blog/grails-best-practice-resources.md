@@ -3,6 +3,7 @@ date=2011-10-11
 type=post
 tags=best practices, grails, groovy
 status=published
+summary=I have been spending some time learning Groovy and Grails recently.  As a Java developer, I find that they answer many of the problems that currently exist in the Java platform (and the .NET platform as well).
 ~~~~~~
 I have been spending some time learning [Groovy](https://groovy.apache.org/) and [Grails](https://grails.org/) recently.  As a Java developer, I find that they answer many of the problems that currently exist in the Java platform (and the .NET platform as well).  They provide an amazing, and Agile toolkit for developers to get started with.
 

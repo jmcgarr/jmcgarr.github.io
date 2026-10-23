@@ -3,6 +3,7 @@ date=2012-02-20
 type=post
 tags=books
 status=published
+summary=I recently had an interesting conversation with a developer about unit testing, object-oriented design and in general, how to write good code.  Our discussion went around in circles, and I found myself where I usually end up in conversations like this, quoting experts like Martin Fowler, Uncle Bob, and numerous others.
 ~~~~~~
 I recently had an interesting conversation with a developer about unit testing, object-oriented design and in general, how to write good code.  Our discussion went around in circles, and I found myself where I usually end up in conversations like this, quoting experts like [Martin Fowler](https://martinfowler.com/ "Martin Fowler's website"), [Uncle Bob](https://x.com/unclebobmartin "Uncle Bob on Twitter"), and numerous others.  Having had the conversation numerous times before, I decided it was about time I compile a list of my favorite books that all developer's should read.  This is not intended to be a comprehensive list of the greatest books ever, but merely books that I have found invaluable to contributing to better code and projects.
 

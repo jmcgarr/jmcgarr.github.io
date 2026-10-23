@@ -3,6 +3,7 @@ date=2012-05-07
 type=post
 tags=jmeter, performance testing
 status=published
+summary=I have had a lot of success using JMeter to provide quick performance tests, and this guide will help you get started with JMeter.  I have used JMeter with success on web applications, web services and databases, and I find that it works extremely well.
 ~~~~~~
 I have had a lot of success using [JMeter](https://jmeter.apache.org/index.html "JMeter") to provide quick performance tests, and this guide will help you get started with JMeter.  I have used JMeter with success on web applications, web services and databases, and I find that it works extremely well.  I have even used JMeter on .NET projects.  This doesn't cover performance testing best practices.  I will save those for another post.
 

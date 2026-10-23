@@ -3,6 +3,7 @@ date=2010-06-28
 type=post
 tags=configuration management, database, Java, liquibase
 status=published
+summary=I love discovering a new tool, especially when it completely changes the way you approach developing software.  Liquibase is one of those tools.
 ~~~~~~
 I love discovering a new tool, especially when it completely changes the way you approach developing software.  [Liquibase](https://www.liquibase.com/community "Liquibase") is one of those tools.  Once I came across their site and started reading more about it and how simple it was, I started to reflect back on all the failed production migrations I had in the past, and I shed a tear for all the weekend hours I lost.  No longer will that be the case!
 

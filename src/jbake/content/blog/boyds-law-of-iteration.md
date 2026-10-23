@@ -3,6 +3,7 @@ date=2013-02-15
 type=post
 tags=boyd's law, continuous delivery, devops
 status=published
+summary=My boss Steve asked me the other day why I have never posted anything about Boyd's Law of Iteration.
 ~~~~~~
 My boss [Steve](https://x.com/PerfForensics "Steve Feldman") asked me the other day why I have never posted anything about Boyd's Law of Iteration.  "Your blog's name is 'Early and Often', right?".  He's right, I have no excuse.
 

@@ -3,6 +3,7 @@ date=2011-03-04
 type=post
 tags=agile, alm, ant, bdd, buildr, checkstyle, chef, cobertura, code quality, continuous delivery, crap4j, deployment pipelines, easyb, findbugs, foss, git, go, gradle, hudson, Java, jbehave, jenkins, jmeter, jmock, junit, liquibase, maven, mercurial, mockito, pmd, puppet, scrum, selenium, subversion, tdd
 status=published
+summary=Last week, I was asked to give my opinion on Application Lifecycle Management or ALM.  Specifically, I was asked how can teams effectively manage their design, development, test and deploy processes as well as pick the right tools for the job.
 ~~~~~~
 Last week, I was asked to give my opinion on Application Lifecycle Management or ALM.  Specifically, I was asked how can teams effectively manage their design, development, test and deploy processes as well as pick the right tools for the job.  Here is the answer I gave:
 

@@ -3,6 +3,7 @@ date=2011-12-17
 type=post
 tags=.NET, ant, dependency management, gradle, maven, Nuget
 status=published
+summary=I have been a Java developer for over 10 years, during which I have used Maven or one of it's successors (Gradle or Ant+Ivy) for build and dependency management.  It was obvious to me early on that Maven's dependency management was its killer feature.
 ~~~~~~
 I have been a [Java](https://www.oracle.com/java/technologies/java-se-glance.html "Java") developer for over 10 years, during which I have used [Maven](https://maven.apache.org/ "Maven") or one of it's successors ([Gradle](https://gradle.org/ "Gradle") or [Ant](https://ant.apache.org/ "Ant")+[Ivy](https://ant.apache.org/ivy/ "Apache Ivy")) for build and dependency management.  It was obvious to me early on that Maven's [dependency management](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html "Dependency Management") was its killer feature.  I began evangelizing Maven and converting teams to use it.  The days of checking .jar files into version control were over, and I rejoiced!
 

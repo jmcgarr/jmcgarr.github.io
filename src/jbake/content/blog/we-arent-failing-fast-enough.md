@@ -3,6 +3,7 @@ date=2012-03-30
 type=post
 tags=fail fast, feedback, grails, groovy, infinitest
 status=published
+summary=I am sure many of you have read Jeff Atwoods' last two blog posts regarding WYSIWIG and visualizing failing faster.
 ~~~~~~
 I am sure many of you have read [Jeff Atwood](https://blog.codinghorror.com/ "Jeff Atwood at CodingHorror.com")s' last two blog posts regarding [WYSIWIG](https://blog.codinghorror.com/what-you-cant-see-you-cant-get/ "Coding Horror - What you can't see you can't get") and [visualizing failing faster](https://blog.codinghorror.com/visualizing-code-to-fail-faster/ "Coding Horror - Visualizing Code to fail faster").  If you haven't, I definitely recommend reading both, playing with [Glimpse](https://www.aviz.fr/gliimpse/ "The Glimpse Project"), and watching [Bret Victor](https://worrydream.com/ "Bret Victor")'s video on [Inventing on Principle](https://worrydream.com/InventingOnPrinciple/ "Bret Victor - Inventing on Principle").
 

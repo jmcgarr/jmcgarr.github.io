@@ -2,6 +2,7 @@ title=Justifying Dual Monitors
 date=2009-12-04
 tags=productivity
 status=published
+summary=When I asked my management for dual monitors for our development team, I was promptly asked to provide justification for the request.  I hope the research I used for to support my case is helpful to others who may find themselves in the same boat.
 type=post
 ~~~~~~
 When I asked my management for dual monitors for our development team, I was promptly asked to provide justification for the request.  I hope the research I used for to support my case is helpful to others who may find themselves in the same boat.

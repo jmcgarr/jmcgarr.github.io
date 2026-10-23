@@ -3,6 +3,7 @@ date=2011-06-24
 type=post
 tags=integration testing, testing, unit testing
 status=published
+summary=I have been doing more and more testing recently and I wanted to start capturing some of my thoughts on testing.  An important topic is the differences between a unit test and an integration test.
 ~~~~~~
 I have been doing more and more testing recently and I wanted to start capturing some of my thoughts on testing.  An important topic is the differences between a unit test and an integration test.  I feel like this is pretty straight forward, but is still worth clarifying, since I feel like it is done incorrectly way too often.  My definition of each breaks down as follows:
 

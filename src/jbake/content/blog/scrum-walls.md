@@ -3,6 +3,7 @@ date=2010-12-07
 type=post
 tags=agile, jira, scrum, scrum walls
 status=published
+summary=I'm lucky enough to have spent the last two years immersed in a culture that strongly endorses Agile Software Development.  Not only does my employer, Excella Consulting, strongly believe in Agile, we also have a number of strong Agile experts who are significant contributors to both the local and national Agile community.
 ~~~~~~
 <div>
 

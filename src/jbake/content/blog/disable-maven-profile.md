@@ -3,6 +3,7 @@ date=2011-02-09
 type=post
 tags=build automation, Java, liquibase, maven, maven profiles, unit testing
 status=published
+summary=I wanted to share a method for enabling a Maven Build Profile in the absense of a system property.  I did not see this approach documented in the current version of the Maven Build Profile documentation, so I thought I would share it.
 ~~~~~~
 I wanted to share a method for enabling a [Maven](https://maven.apache.org/ "Maven") [Build Profile](https://maven.apache.org/guides/introduction/introduction-to-profiles.html "Maven Profiles") in the absense of a system property.  I did not see this approach documented in the current version of the Maven Build Profile documentation, so I thought I would share it.
 

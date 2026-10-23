@@ -3,6 +3,7 @@ date=2010-02-10
 type=post
 tags=checkstyle, coding standards, continuous integration, eclipse, hudson, Java
 status=published
+summary=While most teams recognize the importance of coding standards, I have witnessed too many development teams who define a set of coding standards, yet do not enforce them.  If you are not enforcing the coding standard, then you have no way of knowing your team's compliance with the standard and its effectiveness is negated.
 ~~~~~~
 While most teams recognize the importance of coding standards, I have witnessed too many development teams who define a set of coding standards, yet do not enforce them.  If you are not enforcing the coding standard, then you have no way of knowing your team's compliance with the standard and its effectiveness is negated.  In this article, I hope to share some of my experiences with enforcing coding standards on software development projects.
 

@@ -3,6 +3,7 @@ date=2013-03-19
 type=post
 tags=bash, oh-my-zsh, shell-fu, zsh
 status=published
+summary=I have been recently diving head first into the wonderful world of the shell.  Having spent a fair amount of my career on Windows machines at work (even though I have been using Mac's at home for 6+ years), it's only in the past year that I have made the full switch to 100% Mac for work and home.
 ~~~~~~
 I have been recently diving head first into the wonderful world of the shell.  Having spent a fair amount of my career on Windows machines at work (even though I have been using Mac's at home for 6+ years), it's only in the past year that I have made the full switch to 100% Mac for work and home.  I have found that this has enabled me to focus on learning more about the shell.  (no more cmd for me!)
 

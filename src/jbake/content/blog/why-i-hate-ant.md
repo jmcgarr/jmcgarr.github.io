@@ -3,6 +3,7 @@ date=2010-02-15
 type=post
 tags=ant, Java, maven
 status=published
+summary=OK, let me address the title of this blog before the whole Java open source community jumps down my throat.  I do not really hate Ant, in fact Ant is a great and invaluable tool.
 ~~~~~~
 OK, let me address the title of this blog before the whole Java open source community jumps down my throat.  I do not really hate Ant, in fact Ant is a great and invaluable tool.  Ant helps simplify building and deploying Java applications.  It is extremely powerful and flexible and allows you to do pretty much anything you want as part of your build process.  Ant's flexibility is what has helped it gain popularity in the Java community, and this flexibility is at the core of my Ant critique.
 

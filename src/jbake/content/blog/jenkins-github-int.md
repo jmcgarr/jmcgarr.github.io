@@ -3,6 +3,7 @@ date=2011-12-30
 type=post
 tags=git, github, jenkins
 status=published
+summary=I've been trying to setup a Jenkins build of a private GitHub project recently and found it wasn't as straight forward as I thought.  GitHub provides a feature called Deploy Keys, which are SSH keys used to authenticate servers to your GitHub repository.
 ~~~~~~
 I've been trying to setup a [Jenkins](https://www.jenkins.io/ "Jenkins CI Server") build of a private [GitHub](https://github.com/ "GitHub") project recently and found it wasn't as straight forward as I thought.  GitHub provides a feature called [Deploy Keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys "Github's Deploy Keys"), which are SSH keys used to authenticate servers to your GitHub repository.  Here's how I set them up.
 

@@ -3,6 +3,7 @@ date=2012-04-30
 type=post
 tags=code freeze, deployment pipelines, tags, version control
 status=published
+summary=A project manager recently told me that he wanted to implement a code freeze prior to user acceptance testing.  This request struck me as odd since I don’t recall having implemented a code freeze on a project in years.
 ~~~~~~
 A project manager recently told me that he wanted to implement a code freeze prior to user acceptance testing.  This request struck me as odd since I don’t recall having implemented a code freeze on a project in years.  My immediate response was that we do not need a code freeze.  All checked in code is tested for its production readiness via a deployment pipeline.
 
