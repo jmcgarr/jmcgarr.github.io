@@ -3,6 +3,7 @@ date=2012-09-08
 type=post
 tags=apt-get, debian, openjdk, puppet, ubuntu, vagrant
 status=published
+summary=I have been playing with Vagrant and Puppet a lot recently and I had some trouble getting OpenJDK 6 to install on Ubuntu 10.04 (Lucid Lynx).  Since I had so much trouble finding the consolidated answer, I've decided to post my solution here.
 ~~~~~~
 I have been playing with [Vagrant](https://developer.hashicorp.com/vagrant "Vagrant") and [Puppet](https://www.puppet.com/community/open-source/open-source-puppet "Puppet") a lot recently and I had some trouble getting [OpenJDK 6](https://openjdk.org/projects/jdk6/ "OpenJDK 6") to install on [Ubuntu 10.04 (Lucid Lynx)](https://old-releases.ubuntu.com/releases/lucid/ "Ubuntu 10.04").  Since I had so much trouble finding the consolidated answer, I've decided to post my solution here.
 

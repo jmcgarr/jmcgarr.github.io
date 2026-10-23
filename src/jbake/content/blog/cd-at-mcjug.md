@@ -3,6 +3,7 @@ date=2011-06-17
 type=post
 tags=agile, build pipelines, configuration management, continuous delivery, continuous integration, mcjug, presentations, testing
 status=published
+summary=This past Wednesday night, I gave a presentation to the Montgomery Country Java User's Group on Continuous Delivery.  I was lucky enough to be given the opportunity to speak to a smart and attentive audience, and I look forward to going back and giving another presentation in the future.
 ~~~~~~
 This past Wednesday night, I gave a presentation to the [Montgomery Country Java User's Group](https://sites.google.com/site/mcjugmd/home "Montgomery County Java User's Group") on Continuous Delivery.  I was lucky enough to be given the opportunity to speak to a  smart and attentive audience, and I look forward to going back and giving another presentation in the future.  I want to thank [Victor Semenov](https://x.com/victorsemenov "Victor Semenov at Twitter"), who organizes the MCJUG, for setting this up.
 

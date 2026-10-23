@@ -3,6 +3,7 @@ date=2012-05-06
 type=post
 tags=bash, grails, octopress, ruby, rvm
 status=published
+summary=Yesterday I spent some time getting Ruby up and running on my Mac, with the intent of playing with Octopress.  Today, I wanted to go back to a Grails app I had been working on, when I realized that Grails was no longer in my PATH.
 ~~~~~~
 Yesterday I spent some time <a title="Octopress on OS X" href="/blog/octopress-on-os.html" target="_blank">getting Ruby up and running on my Mac</a>, with the intent of playing with [Octopress](https://octopress.org/ "Octopress").  Today, I wanted to go back to a [Grails](https://grails.org/ "Grails") app I had been working on, when I realized that Grails was no longer in my PATH.  Somehow, my PATH variable had been "hijacked" by the [Ruby](https://www.ruby-lang.org/en/ "Ruby") or [RVM](https://rvm.io/ "Ruby RVM") installs.  I immediately started to investigate the issue.
 

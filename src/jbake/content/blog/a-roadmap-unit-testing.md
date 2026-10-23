@@ -3,6 +3,7 @@ date=2012-12-04
 type=post
 tags=bdd, code katas, goos, junit, legacy code, mocking, mockito, powermock, unit testing
 status=published
+summary=I was recently asked by an old friend how they can get started writing unit tests on their existing application.  He was looking for guidance and more or less a roadmap of how to get started.  I decided to share what I sent him here.
 ~~~~~~
 I was recently asked by an old friend how they can get started writing unit tests on their existing application.  He was looking for guidance and more or less a roadmap of how to get started.  I decided to share what I sent him here.
 

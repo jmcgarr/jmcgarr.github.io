@@ -3,6 +3,7 @@ date=2012-01-16
 type=post
 tags=continuous delivery, css3, github, github pages, html5, impress.js, mcjug, prezi, ruby, showoff, sinatra
 status=published
+summary=Next month, I am giving a follow-up of my Continuous Delivery talk to the Montgomery County Java User's Group.  In preparing for this talk, I decided that challenge myself by using a presentation tool other than PowerPoint.
 ~~~~~~
 Next month, I am giving a follow-up of my <a title="Continuous Delivery Talk" href="/blog/cd-at-mcjug.html" target="_blank">Continuous Delivery talk</a> to the [Montgomery County Java User's Group](https://sites.google.com/site/mcjugmd/home "MCJUG").  In preparing for this talk, I decided that challenge myself by using a presentation tool other than PowerPoint.  In fact, I decided to avoid any desktop variant and try some of the next generation web-based presentation tools.
 

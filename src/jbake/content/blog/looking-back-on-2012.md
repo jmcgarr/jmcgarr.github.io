@@ -3,6 +3,7 @@ date=2013-02-04
 type=post
 tags=continuous delivery, Excella Consulting
 status=published
+summary=2012 has been an exciting year, full of change and merriment. Here's my retrospective.
 ~~~~~~
 2012 has been an exciting year, full of change and merriment. Here's my retrospective.
 

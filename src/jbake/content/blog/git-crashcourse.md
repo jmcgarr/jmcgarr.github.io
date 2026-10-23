@@ -3,6 +3,7 @@ date=2012-05-03
 type=post
 tags=git, tutorial
 status=published
+summary=Our current team has decided to adopt Git and some members aren't familiar with it.  I wanted to put together a short introduction to the Git command line for these team members.
 ~~~~~~
 Our current team has decided to adopt Git and some members aren't familiar with it.  I wanted to put together a short introduction to the [Git](https://git-scm.com/ "Git") command line for these team members.  The goal is to make team members productive immediately, while learning the nuances of Git over time.  My introduction assumes that you have Git installed and setup.  For installation instructions, go to <https://git-scm.com/>.  For instructions on configuring Git, I recommend [Github](https://github.com/ "GitHub")'s tutorials for [Windows](https://docs.github.com/en/get-started/git-basics/set-up-git "Setup Github (Windows)"), [OS X](https://docs.github.com/en/get-started/git-basics/set-up-git "Setup GitHub (Mac)") and [Linux](https://docs.github.com/en/get-started/git-basics/set-up-git "Setup GitHub (Linux)").
 

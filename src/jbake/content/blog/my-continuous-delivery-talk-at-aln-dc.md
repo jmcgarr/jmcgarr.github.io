@@ -3,6 +3,7 @@ date=2012-09-07
 type=post
 tags=presentations, continuous delivery
 status=published
+summary=Last night I gave the latest installment of my ever evolving Continuous Delivery talk to the DC Chapter of the Agile Project Leadership (ALN) group last night.  It was a great group with an attentive audience and tons of great questions.
 ~~~~~~
 <img align="right" title="DC ALN Logo" src="/img/alndc-logo.jpg" alt="Agile Leadership Network DC Metro Area logo" width="299" height="143" />Last night I gave the latest installment of my <a title="Continuous Delivery at MCJUG" href="/blog/cd-at-mcjug.html" target="_blank">ever</a> <a title="Second Continuous Delivery Talk at MCJUG" href="/blog/mcjug-return.html" target="_blank">evolving</a> Continuous Delivery talk to the DC Chapter of the [Agile Project Leadership](https://web.archive.org/web/20120808024420/http://aplndc.com:80/ "Agile Leadership Network (ALN)") (ALN) group last night.  It was a great group with an attentive audience and tons of great questions.  I thoroughly enjoyed the experience and I hope I can give more talk there in the future.
 

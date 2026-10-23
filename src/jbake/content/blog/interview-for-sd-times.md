@@ -3,5 +3,6 @@ date=2010-06-18
 type=post
 tags=general, Java
 status=published
+summary=I was recently interviewed by the Software Development Times on my opinions Java 7, the OpenJDK, Java EE 7 and the future of Java.  The article was recently published in this month's issue of the SD Times.
 ~~~~~~
 I was recently interviewed by the Software Development Times on my opinions Java 7, the OpenJDK, Java EE 7 and the future of Java.  The article was recently published in this month's issue of the SD Times.  If you are interested in viewing the article, check out the PDF version of the SD Times here, just flip to page 22.  You have to sign-up for an account, but that takes but a second.  Enjoy and let me know your thoughts!

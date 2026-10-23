@@ -3,6 +3,7 @@ date=2010-04-19
 type=post
 tags=facebook, rss, twitter
 status=published
+summary=Do you want to get smarter on technology topics?  Me too!  In fact, in the software industry, there is way too much to learn and I am constantly adding to my "Learn This" list.
 ~~~~~~
 Do you want to get smarter on technology topics?  Me too!  In fact, in the software industry, there is way too much to learn and I am constantly adding to my "Learn This" list.  This list is useful (and sometimes daunting), and I try to work hard to widdle it down.  But my "Learn This" list is subjects and topics that I am aware of.  What about areas of software innovation that I am unaware of that might be useful for me to learn...how does one find out about the new and exciting?
 

@@ -3,6 +3,7 @@ date=2012-05-05
 type=post
 tags=bundler, octopress, rake, ruby, rvm
 status=published
+summary=I have been wanting to try Octopress for a while, so I decided to spent my Friday night setting it up.  Unfortunately, I ran into a few issues installing and getting my environment setup, and I figured I would share my setup issues with everybody else.
 ~~~~~~
 I have been wanting to try [Octopress](https://octopress.org/ "Octopress") for a while, so I decided to spent my Friday night setting it up.  Unfortunately, I ran into a few issues installing and getting my environment setup, and I figured I would share my setup issues with everybody else.  I started with the instructions from the Octopress website.
 

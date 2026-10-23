@@ -3,6 +3,7 @@ date=2010-05-07
 type=post
 tags=bdd, easyb, eclipse, Java, jbehave, junit, maven, tdd, unit testing
 status=published
+summary=Last year I was asked to give a one day workshop on how to write unit tests.  I put together a presentation and workshop format and it was a huge success.
 ~~~~~~
 Last year I was asked to give a one day workshop on how to write unit tests.  I put together a presentation and workshop format and it was a huge success.  The team quickly took to not only writing unit tests but was able to quickly utilize mock frameworks and other testing tools.  The team's code coverage for the application quickly increased and management was pleased.  I recently took another look at this presentation to see if I wanted to revise anything and I thought I would share some of the thoughts here.  These guidelines are intended to get somebody started with unit testing quickly, but could be a welcome refresher for somebody who has been writing tests for a while.
 

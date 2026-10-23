@@ -3,6 +3,7 @@ date=2013-02-21
 type=post
 tags=book review, continuous delivery, devops, lean
 status=published
+summary=I recently completed 'The Phoenix Project: A Novel About IT, DevOps, and Helping Your Business Win' and thought I would write a review.  I mainly wanted to capture notes and thoughts about the book for myself.
 ~~~~~~
 <img align="left" alt="Hardcover copy of The Phoenix Project by Gene Kim, Kevin Behr and George Spafford" src="/img/thephoenixproject.jpg" width="300" height="225" />I recently completed '[The Phoenix Project: A Novel About IT, DevOps, and Helping Your Business Win](https://itrevolution.com/product/the-phoenix-project/ "The Phoenix Project Book")' and thought I would write a review.  I mainly wanted to capture notes and thoughts about the book for myself.
 

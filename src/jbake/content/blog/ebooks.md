@@ -3,6 +3,7 @@ date=2011-02-24
 type=post
 tags=amazon, cloud, ebooks, kindle, productivity
 status=published
+summary=I've recently fallen in love with reading books on my iPad.  When I first bought my iPad, I was nervous about reading a book on it since in general I hate reading on a computer screen.
 ~~~~~~
 <img class="alignright size-full wp-image-712" title="kindleapp" src="/img/kindleapp.jpg" alt="Amazon Kindle App" width="175" height="175" />I've recently fallen in love with reading books on my [iPad](https://www.apple.com/ipad/ "Apple iPad").  When I first bought my iPad, I was nervous about reading a book on it since in general I hate reading on a computer screen.  Plus, my friends rave about the Amazon Kindle and the great reading experience it offers.  Eventually, I decided to take the plunge and ordered an eBook for the [Amazon Kindle iPad app](https://www.amazon.com/kindle-dbs/fd/kcp "Amazon Kindle iPad app").  After reading a few chapters, I found myself falling completely in love with reading books this way.  Of course, there are disadvantages as well as advantages of this relatively new medium.
 

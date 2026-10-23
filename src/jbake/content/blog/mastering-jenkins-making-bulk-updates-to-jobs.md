@@ -3,6 +3,7 @@ date=2013-03-11
 type=post
 tags=jenkins, groovy
 status=published
+summary=I recently needed to make the same update to a large number of Jenkins jobs.  Essentially, we decided to change our naming convention for our jobs.  A simple change.  In order to achieve this, I took advantage of the Jenkins Script Console.
 ~~~~~~
 I recently needed to make the same update to a large number of Jenkins jobs.  Essentially, we decided to change our naming convention for our jobs.  A simple change.  In order to achieve this, I took advantage of the Jenkins Script Console.
 

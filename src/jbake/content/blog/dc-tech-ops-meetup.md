@@ -3,6 +3,7 @@ date=2013-02-21
 type=post
 tags=dc continuous integration, devops, devopsdc, opsschool, presentations
 status=published
+summary=On Tuesday night, my meetup group (DC Continuous Integration, Delivery and Deployment Group) joined forces with a number of other groups to present the most awesome gathering we have ever known.
 ~~~~~~
 On Tuesday night, my meetup group ([DC Continuous Integration, Delivery and Deployment Group](https://www.meetup.com/DC-continuous-integration/ "DC Continuous Integration, Delivery, & Deployment Group")) joined forces with a number of other groups to present the most awesome gathering we have ever known.  The meeting was the brainchild of [Nathen Harvey](http://www.nathenharvey.com/ "Nathen Harvey"), who runs the [DevOpsDC](https://www.meetup.com/DevOpsDC/ "DevOpsDC") and [MongoDC](https://web.archive.org/web/20130309132026/http://www.meetup.com/Washington-DC-MongoDB-Users-Group/ "MongoDC") user groups and works for [OpsCode](https://www.chef.io/ "OpsCode") as their Technical Community Manager.  Nathen sent an email with the subject of 'DC Tech Ops Meetup Alliance (aka the Super Friends)'...how could I not be in.
 

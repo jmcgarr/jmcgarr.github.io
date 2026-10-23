@@ -3,6 +3,7 @@ date=2012-05-01
 type=post
 tags=sonar, technical debt
 status=published
+summary=I recently joined a development team where I was asked to help improve the team’s code quality and engineering practices.  Soon after joining the team, I noticed numerous code quality issues that needed to be addressed.
 ~~~~~~
 I recently joined a development team where I was asked to help improve the team’s code quality and engineering practices.  Soon after joining the team, I noticed numerous code quality issues that needed to be addressed.  In order to justify the effort to improve code quality to non-technical decision makers, I needed a quantitative method for measuring the quality of the source code and possibly the technical debt.  I had heard a lot about a tool called [Sonar](https://www.sonarsource.com/products/sonarqube/ "Sonar"), so I decided to give a try.  It proved to be more than up to challenge and helped me quickly demonstrate the risk due to code quality the team had incurred.\
 <strong>\

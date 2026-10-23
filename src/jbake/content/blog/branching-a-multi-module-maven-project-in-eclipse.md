@@ -3,6 +3,7 @@ date=2010-02-16
 type=post
 tags=eclipse, maven, subversion
 status=published
+summary=I was impressed last year when I found that the M2eclipse Eclipse plugin handled multi-module projects checked out of Subversion using Subclipse with ease.  Eclipse does not natively support a nested multi-module project structure recommended by Maven, and getting the two to work well together has historically been a pain.
 ~~~~~~
 I was impressed last year when I found that the [M2eclipse](https://eclipse.dev/m2e/) [Eclipse](https://www.eclipse.org/) plugin handled multi-module projects checked out of [Subversion](https://subversion.apache.org/) using [Subclipse](https://github.com/subclipse/subclipse) with ease.  Eclipse does [not natively support](https://bugs.eclipse.org/bugs/show_bug.cgi?id=35973) a nested multi-module project structure [recommended by Maven](https://maven.apache.org/guides/getting-started/index.html#How_do_I_build_more_than_one_project_at_once), and getting the two to work well together has historically been a pain.  M2eclipse has solved this by "mapping" the child modules of the project you are importing to sibling projects in your Eclipse workspace.  For example, lets take the following multi-module Maven project:
 

@@ -3,6 +3,7 @@ date=2012-05-27
 type=post
 tags=groovy, vim
 status=published
+summary=I just discovered how to turn on syntax highlighting by default on Vim.
 ~~~~~~
 I just discovered how to turn on syntax highlighting by default on Vim.  All you have to do is add the following line to your \~/.vimrc file:
 

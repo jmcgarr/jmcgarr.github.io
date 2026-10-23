@@ -3,6 +3,7 @@ date=2011-09-14
 type=post
 tags=artifactory, branching, continuous integration, dvcs, git, gitflow, github, gradle, Java, jenkins
 status=published
+summary=I came across an interesting blog post by James Carr discussing his workflow when building Java applications.  In general, I think that the stack and process he mentions is top notch.
 ~~~~~~
 I came across an [interesting blog post](https://web.archive.org/web/20110926011039/http://blog.james-carr.org:80/2011/09/09/my-current-java-workflow/ "James Carr - My Current Java Workflow") by James Carr discussing his workflow when building Java applications.  In general, I think that the stack and process he mentions is top notch.  I love [Gradle](https://www.gradle.org/ "Gradle"), [Jenkins](https://www.jenkins.io/ "Jenkins"), [Artifactory](https://jfrog.com/artifactory/ "Artifactory") and [Git](https://git-scm.com/ "Git")/[GitHub](https://github.com/ "GitHub").  I have been playing with or using in production all of these tools and they are amazing.  I especially like how the article provides a tutorial on how to setup your project to look just like his, something I will definitely try.
 

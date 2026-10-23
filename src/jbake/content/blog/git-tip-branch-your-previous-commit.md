@@ -3,6 +3,7 @@ date=2012-08-21
 type=post
 tags=git
 status=published
+summary=I just made a commit (6452234) to master, but realized that is should have been committed to a branch and I want master pointing at a previous commit (bb5331e).  How do I resolve this?
 ~~~~~~
 I just made a commit (6452234) to master, but realized that is should have been committed to a branch and I want master pointing at a previous commit (bb5331e).  How do I resolve this?
 

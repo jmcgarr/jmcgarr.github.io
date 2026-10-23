@@ -3,6 +3,7 @@ date=2010-01-04
 type=post
 tags=aspectj, cobertura, Java, maven
 status=published
+summary=I recently ran into an issue running Cobertura code coverage reports on my Maven2 project.  It appears that Cobertura is not being run, since the code coverage reports always showed 0% code coverage in spite of the existence of numerous unit tests.
 ~~~~~~
 I recently ran into an issue running Cobertura code coverage reports on my Maven2 project.  It appears that Cobertura is not being run, since the code coverage reports always showed 0% code coverage in spite of the existence of numerous unit tests.  This problem had appeared early in the project and seemed to disappear magically, so I wrote it off.  Now that it is back, I was determined to find the answer, and I have.
 

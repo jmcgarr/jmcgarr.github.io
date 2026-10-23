@@ -3,6 +3,7 @@ date=2009-09-24
 type=post
 tags=google calendar, iphone
 status=published
+summary=As a proud iPhone owner, I have tried to integrate my phone with just about every aspect of my life, which of course includes all my calendars.  I also have been using Google Calendar for a long time and I love how easy it is to create multiple calendars and share them with friends and family.
 ~~~~~~
 As a proud iPhone owner, I have tried to integrate my phone with just about every aspect of my life, which of course includes all my calendars.  I also have been using Google Calendar for a long time and I love how easy it is to create multiple calendars and share them with friends and family.  I also have my work Outlook calendar I want to synchronize with my iPhone.  This sounds simple enough, right?
 
