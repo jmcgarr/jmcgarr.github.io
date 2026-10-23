@@ -4,7 +4,7 @@ type=post
 tags=book review, continuous delivery, devops, lean
 status=published
 ~~~~~~
-<img align="left" alt="thePhoenixProject" src="/img/thephoenixproject.jpg" width="300" height="225" />I recently completed '[The Phoenix Project: A Novel About IT, DevOps, and Helping Your Business Win](https://itrevolution.com/product/the-phoenix-project/ "The Phoenix Project Book")' and thought I would write a review.  I mainly wanted to capture notes and thoughts about the book for myself.
+<img align="left" alt="Hardcover copy of The Phoenix Project by Gene Kim, Kevin Behr and George Spafford" src="/img/thephoenixproject.jpg" width="300" height="225" />I recently completed '[The Phoenix Project: A Novel About IT, DevOps, and Helping Your Business Win](https://itrevolution.com/product/the-phoenix-project/ "The Phoenix Project Book")' and thought I would write a review.  I mainly wanted to capture notes and thoughts about the book for myself.
 
 **The Story**
 
@@ -26,7 +26,7 @@ Throughout the book, Erik squires Bill in the  "[Three Ways](https://itrevoluti
 
 If you have studied Agile or Lean, you will find these sound familiar.  It's my understanding that Kevin, Gene and George's other book, [the Visible Ops Handbook](https://www.amazon.com/The-Visible-Ops-Handbook-Implementing/dp/0975568612/ref=sr_1_1?ie=UTF8&qid=1361375322&sr=8-1&keywords=the+visible+ops+handbook "The Visible Ops Handbook") goes into more depth on the "Three Ways".  I have been told it's a nice companion to the Phoenix Project, and I plan on reading it.
 
-**<img align="left" alt="250px-ObiWanHS-SWE" src="/img/250px-obiwanhs-swe.jpg" width="138" height="185" />Realistic?**
+**<img align="left" alt="Alec Guinness as Obi-Wan Kenobi" src="/img/250px-obiwanhs-swe.jpg" width="138" height="185" />Realistic?**
 
 There were definitely times that the book felt more fiction than realistic.  When the sky was falling, Bill somehow stumbled upon the correct solution to the problem on the first go.  Yes the process of improving Parts Unlimited was iterative, but Bill never seemed to be offtrack.  And that was of course due to the help on his own personal [Obi Wan Kenobi](https://en.wikipedia.org/wiki/Obi-Wan_Kenobi "Obi Wan Kenobi") (aka Erik).  Erik played the role of the wise Jedi master beautifully, through his cryptic guidance of Bill towards the "Three Ways".  I looked at Erik's guidance of Bill as a great lesson for individuals trying to transform your team by yourself.  Seek help.  You can do it on your own, but employing an expert will make your life much easier.
 

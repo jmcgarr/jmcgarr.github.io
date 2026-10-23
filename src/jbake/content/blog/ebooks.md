@@ -22,7 +22,7 @@ With an eBook, you highlight text using the eReader your notes from each passage
 
 Additionally, since my eBook is cloud persistent, I can access all my highlights and notes are available from other computers.  I can access them from another Kindle app or log into [kindle.amazon.com](https://web.archive.org/web/20110222041302/https://kindle.amazon.com/ "Kindle at Amazon.com").  This is a powerful tool and it should not be underestimated, especially if you are a studious software developer.
 
-**<img class="alignleft size-full wp-image-710" title="ipad" src="/img/ipad.jpg" alt="" width="252" height="252" />Advantage #4: Books as Hypermedia**
+**<img class="alignleft size-full wp-image-710" title="ipad" src="/img/ipad.jpg" alt="An Apple iPad" width="252" height="252" />Advantage #4: Books as Hypermedia**
 
 The Internet is composed of hypermedia, which is defined as documents on the web that link to other documents, audio, video, images through hyperlinks.  Web browsers are our conduits to hypermedia, allowing us to jump back and forth between documents via their hyperlinks.  These documents and their hyperlinks intertwine to form the World Wide Web.
 

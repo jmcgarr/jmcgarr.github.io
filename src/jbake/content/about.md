@@ -7,7 +7,7 @@ masthead=hawaii.jpg
 mastheadCredit=Me, Lana'i from Kaanapali
 ~~~~~~
 
-<p><img src="img/me_qcon_panel_sq.jpg" alt="Profile" width="300" height="300" class="float-right ml-3 mb-3"></p>
+<p><img src="img/me_qcon_panel_sq.jpg" alt="Mike McGarr speaking on a panel at QCon" width="300" height="300" class="float-right ml-3 mb-3"></p>
 
 I am a software engineering leader, who’s been building software and leading teams since 2001. I am passionate about growing engineering teams, especially those focused on developing core infrastructure components essential to the operation of the engineering teams. My area of research and curiosity centers on how organizational culture is developed, cultivated and shaped and devour as much as I can on this subject. My technical background is strongly rooted in Java, as well as developer productivity.
 

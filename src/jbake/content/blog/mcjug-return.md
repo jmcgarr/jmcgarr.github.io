@@ -22,7 +22,7 @@ After my presentation, [Ben Muschko](https://github.com/bmuschko "Ben Muschko at
 
 For those interested in getting a copy of my slides, you can download the PDF from my GitHub account.
 
-<p style="text-align:left;"><a href="https://github.com/jmcgarr/presentations/blob/master/continuousDeliveryTools-mcjug-20120215/Continuous%20Delivery%20-%20Tools%20and%20Techniques.pdf?raw=true"><img class="aligncenter" title="Click to download a PDF of the slides." src="/img/cd-tools-techniques.png" alt="" width="576" height="432" /></a></p>
+<p style="text-align:left;"><a href="https://github.com/jmcgarr/presentations/blob/master/continuousDeliveryTools-mcjug-20120215/Continuous%20Delivery%20-%20Tools%20and%20Techniques.pdf?raw=true"><img class="aligncenter" title="Click to download a PDF of the slides." src="/img/cd-tools-techniques.png" alt="Continuous Delivery: Tools and Techniques slides (PDF)" width="576" height="432" /></a></p>
 
 <p style="text-align:left;"><a title="Download PDF" href="https://github.com/jmcgarr/presentations/blob/master/continuousDeliveryTools-mcjug-20120215/Continuous%20Delivery%20-%20Tools%20and%20Techniques.pdf?raw=true" target="_blank">Click here to download slides as PDF</a></p>
 

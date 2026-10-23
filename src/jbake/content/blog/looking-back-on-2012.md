@@ -6,11 +6,11 @@ status=published
 ~~~~~~
 2012 has been an exciting year, full of change and merriment. Here's my retrospective.
 
-## Excella Consulting<img align="right" alt="excella" src="/img/excella.png" width="150" height="150" />
+## Excella Consulting<img align="right" alt="Excella Consulting logo" src="/img/excella.png" width="150" height="150" />
 
 The majority of 2012 I spent working at Excella Consulting, a great local IT and Agile consulting firm. While there, I worked on advancing their Java Center of Excellence.  I enjoyed my stay there and learned a lot from everybody.  I worked with some great clients and had a blast.  Excella is a bunch of smart individuals and I highly recommend hiring them or working for them.  They are a great place to work.
 
-## <img align="left" alt="speaking" src="/img/speaking.jpg" width="300" height="179" />Public Speaking
+## <img align="left" alt="Mike McGarr presenting a 'Deployment Pipelines' slide to an audience" src="/img/speaking.jpg" width="300" height="179" />Public Speaking
 
 One of the highlights of 2012 has to be the number of public speaking engagements I had throughout the year. Most of my talks centered on my favorite topic, Continuous Delivery. I was able to speak at not only user groups, but a couple of conferences as well. Here's a quick run-down of the public speaking engagements I had in 2012:
 
@@ -24,7 +24,7 @@ One of the highlights of 2012 has to be the number of public speaking engagement
 
 It is hard to pick my favorite speaking engagement. It was an honor to speak at Agile DC and a lot of fun being a part of the first DC Agile Engineering Conference. It was also awesome to go to Richmond to speak. I love the crowd at MCJUG as well.
 
-## The DC Continuous Integration, Delivery and Deployment Meetup<img align="right" alt="cd_book_web1" src="/img/cd_book_web1.jpg" width="148" height="200" />
+## The DC Continuous Integration, Delivery and Deployment Meetup<img align="right" alt="Cover of Continuous Delivery by Jez Humble and David Farley" src="/img/cd_book_web1.jpg" width="148" height="200" />
 
 In 2012, I started the <a href="https://www.meetup.com/DC-continuous-integration/" rel="nofollow">DC Continuous Integration, Delivery and Deployment Meetup</a>. This has been an awesome experience and a lot of fun to get not only my friends to speak, but also some industry big wigs. The group meets once a month to discuss real-life war stories. While we have only had four meetings, it has been an awesome experience that I hope to build on in 2013. Please join the group and come out and have fun. I am hoping to have future meetings at BB HQ.
 
@@ -36,7 +36,7 @@ Our first meeting of 2013 is tomorrow night, where Sanjeev Sharma from IBM will 
 
 While I do enjoy blogging, I was only able to compose 20 blog posts in 2012. That's a pretty low number all things considered. My blog did get some decent traffic, with a total of 25K views over the year. Unfortunately, my most popular posts were not from this year, but from previous years. I hope to double the number of posts in 2013.
 
-<p style="text-align:center;"><img class="size-medium wp-image-1335 aligncenter" alt="steve-feldman" src="/img/steve-feldman.png" width="300" height="184" /><br />
+<p style="text-align:center;"><img class="size-medium wp-image-1335 aligncenter" alt="A grid of photos of many different people, all from a Google Image Search for Stephen Feldman" src="/img/steve-feldman.png" width="300" height="184" /><br />
 <sub>All pictures of Stephen Feldman from Google Image Search.</sub></p>
 
 ## Meeting Steve
