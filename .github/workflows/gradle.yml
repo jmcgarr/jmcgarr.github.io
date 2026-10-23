@@ -19,7 +19,10 @@ jobs:
       contents: read
 
     steps:
+    # fetch-depth: 0 fetches the whole history, so the review step below can find a PR's merge base with main.
     - uses: actions/checkout@v7
+      with:
+        fetch-depth: 0
     - name: Set up JDK 25
       uses: actions/setup-java@v6
       with:
@@ -107,6 +110,15 @@ jobs:
           'build/site/**/*.html'
         fail: true
         jobSummary: true
+
+    # Reviews only the pages this PR changed, from the sources: Markdown links written wrong, brackets left in the
+    # rendered text, links and images that point at nothing, the header, image sizes (T118; design in
+    # docs/05-REVIEW-FLOW.md). The same check as `./gradlew reviewChanges` locally. Errors fail the job and show as
+    # annotations on the PR's Files tab; the report is in the job summary. A push to main has no base to diff
+    # against and the PR already ran it, so the step is skipped there.
+    - name: Review changed pages
+      if: github.event_name == 'pull_request'
+      run: java scripts/ReviewChanges.java --base="origin/$GITHUB_BASE_REF"
 
     # Package the staged site for GitHub Pages. include-hidden-files is required: the action drops files whose
     # names start with "." by default, and the site has published pages like that (tags/.NET.html, T067).
