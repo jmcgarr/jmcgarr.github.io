@@ -13,7 +13,7 @@ exist ([the standard](#the-public-surface-the-standard), T133).
 ## Context
 
 `build.gradle` is 383 lines. In 2026-10 it was a 30-line application of the JBake plugin. The revival plan
-([`completed/00-REVIVAL.md`](completed/00-REVIVAL.md)) replaced that plugin and then kept adding, one task at a
+([`archive/00-REVIVAL.md`](archive/00-REVIVAL.md)) replaced that plugin and then kept adding, one task at a
 time, each piece justified on its own:
 
 | Lines (2026-10-22) | What | From |
@@ -168,7 +168,7 @@ build the same way, a wish to share it, or the `build-logic/` folder going three
 - **A second Gradle project to understand.** `build-logic/` has its own `build.gradle` (Java, `java-gradle-plugin`,
   the Sass host as an implementation dependency, JUnit and TestKit for tests) and its own build directory. The
   README's "How the site is built" section explains it.
-- **Not a platform change.** The site stays on JBake ([`01-PLATFORM-DECISION.md`](01-PLATFORM-DECISION.md)). The
+- **Not a platform change.** The site stays on JBake ([`01-PLATFORM-DECISION.md`](archive/01-PLATFORM-DECISION.md)). The
   plugin wraps the way JBake is run today; it does not re-open how the site is generated.
 - **Two names go away**: the `preview` task and the `jbakePreview` configuration (T133). Neither is a published URL
   or a documented command beyond two README sentences and a CI comment, which T133 updates. `./gradlew bakePreview`,
