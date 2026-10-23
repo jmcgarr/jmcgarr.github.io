@@ -21,12 +21,12 @@ Markdown, so an alt-text change is always an `alt="…"` edit. The findings them
 author's words, the drafts, the old posts' header images, and the account settings only the owner can reach.
 Agents can prepare material for each task, such as proposed wording or a list of candidates, but the owner makes the call.
 
-**Independent Test**: About, Talks, and Speaker Bio are current; every draft has a decision; every
+**Independent Test**: About and Talks are current (Speaker Bio was removed 2026-10-22); every draft has a decision; every
 meaningful image has alt text the owner approved; and issue #14 is closed.
 
 ### Bugs
 
-- [ ] T048 [BUG] The About page is out of date (it says "currently at Slack", from 2018). Review the Talks and Speaker Bio pages too (`src/jbake/content/about.md`, `talks.md`, `speaker-bio.md`; Markdown since T102, see README, "To write a post")
+- [x] T048 [BUG] The About page is out of date (it says "currently at Slack", from 2018). Review the Talks and Speaker Bio pages too (`src/jbake/content/about.md`, `talks.md`, `speaker-bio.md`; Markdown since T102, see README, "To write a post")
   - **Test:** A manual read-through confirms roles, employers, and dates are current, and each page's `date=` is updated.
   - _2026-10-09: the out-of-date sentences on About, Speaker Bio and Talks are quoted in [`reports/content-2026-10-09.md`](reports/content-2026-10-09.md) §I.1 (no wording proposed; the author writes it), awaiting owner._
   - _2026-10-11: this review also covers the three `[… 2017]` link labels with no URL that show as literal text on Talks (§I.1). (The dead Vimeo embed, E6, is already gone: removed as A151 in #91.)_
@@ -34,6 +34,7 @@ meaningful image has alt text the owner approved; and issue #14 is closed.
   - _2026-10-21: **About is done** (#139, owner's rewrite: current through X, the Moonshot Factory; the Slack, Netflix, Blackboard and D.C. paragraphs condensed to one). A follow-up PR fixed the Booz Allen Hamilton link, which was missing its `(` and rendered as literal brackets plus a bare URL, and set About's `date=` to 2026-10-21 (its only use is the sitemap `lastmod`). **Still open:** Speaker Bio (`speaker-bio.md` line 11 still says "currently leads Slack's Frontend Infrastructure team"; its `date=` is `2014-11-03`), Talks (`talks.md`: the three `\[… 2017\]` labels at lines 58, 70 and 94, and `date=2014-09-01`). Two things on About for the owner to confirm, not changed: HUD's name is "Housing and Urban Development" (the page says "Housing and Development"), and "shaped and devour as much as I can" reads as if a word is missing (both pre-date or come from the owner's text)._
   - _2026-10-21 (later): **the three Talks labels link to their recordings now** (`fix/T048-talks-labels`; the owner found the videos while reviewing the review-flow plan): `\[Atlassian Summit 2017\]`, `\[Gradle Summit 2017\]` and `\[DevOpsCon 2017\]` are Markdown links to the YouTube recordings (`watch?v=` form, like the existing DevOpsCon link on the page; list items are not turned into players by `embeds.ftl`, so they render as links). Nothing else on the page changed. **Still open:** Speaker Bio's sentence and date, and Talks' `date=2014-09-01`._
   - _2026-10-18: the three pages are Markdown now (#132, prose unchanged), so edit `about.md`, `talks.md` and `speaker-bio.md`. Checked the same day: About still says "currently a Senior Engineering Manager at Slack" (line 14), Speaker Bio "currently leads Slack's Frontend Infrastructure team" (line 11), and the page dates are still `2014-08-30`, `2014-11-03` and `2014-09-01`. The three labels on Talks are now `\[Atlassian Summit 2017\]` (line 58), `\[Gradle Summit 2017\]` (line 70) and `\[DevOpsCon 2017\]` (line 94); they still render as literal brackets and need a URL each, or the brackets removed._
+  - _2026-10-22: **done.** The owner removed the Speaker Bio page (no longer doing public speaking): `speaker-bio.md` deleted, a redirect stub at `/speaker-bio.html` points to `/about.html` (`src/jbake/assets/speaker-bio.html`, Rule 1), nothing on the site linked to it, and Talks' `date=` is 2026-10-21 (its last content change, #142). The two About wording questions above remain the owner's._
 
 ### Improvements
 
@@ -45,9 +46,10 @@ meaningful image has alt text the owner approved; and issue #14 is closed.
   - **Test:** Every draft has a recorded decision (a short table in `docs/reports/drafts-triage.md`).
   - _2026-10-11: moved from M6 to M8 (owner's request: the tasks only the owner can do go last)._
   - _2026-10-18: still 12 drafts, all Markdown now (#124, #128, #132). #128 removed the WordPress export debris but kept the author's own placeholder notes verbatim, unclosed `[` and all (`\[might want to add an example here` in `acceptance-test-driven-development.md`, `\[sourcecode` / `\[/sourcecode` in `evolving-features-into-acceptance-tests.md`, `\[Insert Picture with …` in `maven-pipelines.md`): they are part of this triage. Preview any draft at `http://localhost:8080/blog/drafts/<name>-draft.html` with `./gradlew bakePreview`._
-- [ ] T054 [P] [IMP] _(Optional)_ Fix the slug typos (`relections-and-projections-2019`, `vagrant-cheatsheat`, `developer-reading-lis`), but **only** together with redirect stubs at the old URLs (`src/jbake/content/blog/`)
+- [x] T054 **Won't do (owner decision, 2026-10-22).** [P] [IMP] _(Optional)_ Fix the slug typos (`relections-and-projections-2019`, `vagrant-cheatsheat`, `developer-reading-lis`), but **only** together with redirect stubs at the old URLs (`src/jbake/content/blog/`)
   - **Test:** Each old URL redirects to the new one. `scripts/check-urls.sh` passes with the old URLs still present as stubs.
   - _2026-10-11: moved from M6 to M8 (owner's request: the tasks only the owner can do go last)._
+  - _2026-10-22: closed, won't do: the owner keeps the slugs as they are; the three URLs stay as published._
 - [ ] T059 [P] [IMP] Give older posts their own mastheads. On 2026-10-04, 65 of 74 published posts used the default image (still 65 on 2026-10-18). This is manual, creative work: choose an image for each post, with credit, that follows the image size rule in `AGENTS.md`, or use a remote image (`masthead=` takes a full URL, or a site path starting with `/`, since T037). Only add `masthead=` and `mastheadCredit=` lines to each post's `key=value` header. After adding a local image, run `scripts/masthead-variants.py` to make its 960px and 1440px variants; CI fails without them (remote mastheads need none) (`src/jbake/content/blog/`, `src/jbake/assets/img/masthead/`)
   - **Issue:** Closes #14
   - **Test:** `grep -L '^masthead=' src/jbake/content/blog/*.md | wc -l` returns `0` (baseline: 65). No newly added image in `src/jbake/assets/img/masthead/` is over 400 KB. Every new masthead has a `mastheadCredit=`. `python3 scripts/masthead-variants.py --check` exits 0.
@@ -56,8 +58,9 @@ meaningful image has alt text the owner approved; and issue #14 is closed.
 - [ ] T109 [P] [IMP] Alt text in the author's words for the 34 images whose `alt` is empty, a file name, or "Profile" (report [§F](reports/content-2026-10-09.md#f-alt-text-accessibility--owner-approves-wording): proposed wording for each, F1–F34). Found by T046 (M5). The owner approves or rewrites each one; logos next to text that names the organization may get `alt=""` instead. F5 is moot (C3 removed that image) (`src/jbake/content/`)
   - **Test:** each F item has the owner's wording (or "decorative") recorded, and `grep -rnE '<img[^>]*alt=""' src/jbake/content` plus `grep -rn 'Profile' src/jbake/content/*.*` list only images the owner marked decorative.
   - _2026-10-18: all 33 remaining items are still open (17 empty, 8 file-name, 8 "Profile"; counted after T102). Each is an HTML `<img>` tag in a Markdown file now, so every fix is the `alt="…"` value only; the report's AsciiDoc `image:` instructions no longer apply, and its `.html` and `.asciidoc` file names are the same base names with `.md`. The Test's second grep covers `*.*` for the same reason. The F items and their proposed wording are unchanged._
-- [ ] T110 [P] [IMP] Check the SlideShare embeds and links in a browser. SlideShare answers scripts with a bot challenge, so about 30 URLs (the 12 slide embeds on Talks and in posts, and the other SlideShare links) can't be checked automatically (report §I.5) (`src/jbake/content/`)
+- [x] T110 [P] [IMP] Check the SlideShare embeds and links in a browser. SlideShare answers scripts with a bot challenge, so about 30 URLs (the 12 slide embeds on Talks and in posts, and the other SlideShare links) can't be checked automatically (report §I.5) (`src/jbake/content/`)
   - **Test:** a note under this task lists each SlideShare deck as working or not, from one look in a browser; any dead one gets a T050-style fix (live replacement, snapshot, or the link removed and the text kept).
+  - _2026-10-22: closed as done by the owner, who checked the SlideShare decks in a browser; no dead deck was reported, so no T050-style fix was needed._
   - _2026-10-18: every embed is a Markdown link now, rendered as a player at build time (T115; #125 for the posts, #132 for Talks): 8 SlideShare embeds on Talks and 4 in posts make the 12, and the content holds 30 distinct SlideShare URLs in all. The decks' URLs did not change; check them on the live site in a browser as before._
 - [ ] T116 [P] [IMP] _(Optional)_ Two posts end a paragraph with a stray `<br />` from WordPress, right before a code block, which T102 kept because the conversion was mechanical: `openjdk-6-install-lucid.md` ("like so:<br />") and `ruby-broke-my-path.md` ("bash_profile*:<br />"). Remove the two tags, or keep them (`src/jbake/content/blog/`)
   - **Test:** `grep -n '<br />$' src/jbake/content/blog/openjdk-6-install-lucid.md src/jbake/content/blog/ruby-broke-my-path.md` lists nothing, and each page looks the same apart from one blank line less above the code block.
@@ -66,7 +69,7 @@ meaningful image has alt text the owner approved; and issue #14 is closed.
 
 ### Checkpoint
 
-- [ ] CHK030 About, Talks, and Speaker Bio have been reviewed and are current
+- [x] CHK030 About and Talks have been reviewed and are current; the Speaker Bio page was removed (owner, 2026-10-22)
 - [ ] CHK032 Every draft has a triage decision
 - [ ] CHK039 Issue #14 is closed by a merged PR
 - [ ] CHK042 Every F item in report §F has the owner's alt text or a "decorative" decision (T109)

@@ -1,5 +1,5 @@
 title=Talks
-date=2014-09-01
+date=2026-10-21
 type=page
 status=published
 masthead=/img/qcon_crowd.jpg
