@@ -4,7 +4,7 @@ type=post
 tags=build automation, build scripts, gradle, maven
 status=published
 ~~~~~~
-[<img align="right" alt="" src="https://imgs.xkcd.com/comics/rtfm.png" width="245" height="304" />](https://xkcd.com/293/) I recently ran across some project code that when checked out of version control, failed with an obscure warning.  After some digging around in the code, I realized the script made a reference to an external plugin library.  I had no clue where to acquire this library or setup this build.  I had to reach out to other developers to find out what was causing the failure.  The dependency turned out that a second project needed to be checked out from source control and added to the PATH.  I was also told that I should have [RTFM](https://en.wikipedia.org/wiki/RTFM "Read the Fucking Manual").
+[<img align="right" alt="xkcd comic 'RTFM': a man calls 911 after his toaster stabs him, and the operator asks whether he read the toaster's man page first" src="https://imgs.xkcd.com/comics/rtfm.png" width="245" height="304" />](https://xkcd.com/293/) I recently ran across some project code that when checked out of version control, failed with an obscure warning.  After some digging around in the code, I realized the script made a reference to an external plugin library.  I had no clue where to acquire this library or setup this build.  I had to reach out to other developers to find out what was causing the failure.  The dependency turned out that a second project needed to be checked out from source control and added to the PATH.  I was also told that I should have [RTFM](https://en.wikipedia.org/wiki/RTFM "Read the Fucking Manual").
 
 **No External Dependencies**
 

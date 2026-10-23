@@ -50,7 +50,7 @@ Additionally, you will note in the below screenshot, that my prompt says '(maste
 
 The next thing I checked out were the plugins.  OMZ comes with a bunch of plugins.  These plugins add shell magic for specific frameworks, like auto-complete and additional context information.  Of course you can see that these plugins are building upon Zsh's awesome auto-complete features.  For example, I added the vagrant OMZ plugin and when I type 'vagrant \<tab>', it presents me with a list of the available commands for vagrant.
 
-<img class="aligncenter size-large" alt="ohmyzsh-vagrant" src="/img/ohmyzsh-vagrant.png" width="594" height="256" />
+<img class="aligncenter size-large" alt="Terminal: typing 'vagrant' and pressing Tab lists Vagrant's commands (box, destroy, halt, init, up and more) with a description of each" src="/img/ohmyzsh-vagrant.png" width="594" height="256" />
 
 Enabling/disabling a plugin is as simple as editing the \~/.zshrc file and updating the following line.  As you can see, I enabled the vagrant, knife and gradle plugins (git enabled by default).
 

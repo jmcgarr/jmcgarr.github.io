@@ -6,7 +6,7 @@ status=published
 ~~~~~~
 It is not uncommon to find a development team building their application binary from source every time they deploy a new version of their application to an environment.  While this approach works (and depending on the technology, may be necessary), it introduces significant opportunities for errors and makes debugging a failed deployment increasingly difficult.  By migrating to a **_Build Once, Deploy Many_** approach, your team can simplify their deployment process, by making it repeatable and easier to debug.
 
-<p style="text-align:center;"><img class="aligncenter" title="Build Once Deploy Many" src="/img/build-once-deploy-many.png" alt="" width="487" height="235" /></p>
+<p style="text-align:center;"><img class="aligncenter" title="Build Once Deploy Many" src="/img/build-once-deploy-many.png" alt="Diagram: source code from version control is built once by the build script on the continuous integration server into a binary stored in a binary repository, and a deploy script deploys that binary to production, test and development" width="487" height="235" /></p>
 
 In my experience, if you are rebuilding the application from source every time you deploy, it makes it harder to isolate deployment issues.  Specifically, it is hard to tell if the problem is the result of  a build time issue (the developer's responsibility), or a runtime environment issue (the sysadmin's responsibility).   So, when a deployment does fail, the inevitable battle between developers and sysadmins ensues, with fingers pointing at each other and denial emails flying.  Hopefully you work in a collaborative environment where there isn't contention between developers and sysadmins, but I still argue, there is a better way.
 

@@ -19,7 +19,7 @@ I have had a lot of success using [JMeter](https://jmeter.apache.org/index.html 
 3. Add $jmeter_install_dir/bin to your path (Note: if you are using Windows, then I recommend just creating a shortcut to $jmeter_install_dir/bin/jmeter.bat)
 4. Run the bin/jmeter command and you should see JMeter open a window.
 
-<div><img title="jmeter-window" src="/img/jmeter-window.png" alt="" width="614" height="402" /></div>
+<div><img title="jmeter-window" src="/img/jmeter-window.png" alt="The Apache JMeter 2.6 window with an empty Test Plan and WorkBench" width="614" height="402" /></div>
 
 ## Recording a Script
 
