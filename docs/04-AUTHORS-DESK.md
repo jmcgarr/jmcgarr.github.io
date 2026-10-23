@@ -42,10 +42,11 @@ meaningful image has alt text the owner approved; and issue #14 is closed.
   - **Test:** the decision is recorded in a note under this task. If the fonts change: the DevTools Network tab shows only same-origin font requests (none to `fonts.googleapis.com` or `fonts.gstatic.com`), and the nav, headings and body text look right on home and on a post.
   - _2026-10-11: moved from M2 to M8, because it waits on the owner's choice of fonts._
   - _2026-10-18: rewritten to match the site. T073 (2026-10-06) self-hosted Open Sans, so the old Test ("no requests to Google Fonts") already passes and no longer proves anything about this task; the old description still said Google Fonts loads 10 Open Sans and 4 Lora variants._
-- [ ] T053 [P] [IMP] Triage the 12-post drafts backlog: finish and publish, keep as drafts, or delete (`src/jbake/content/blog/drafts/`; rendered for local preview only since T009)
+- [x] T053 [P] [IMP] Triage the 12-post drafts backlog: finish and publish, keep as drafts, or delete (`src/jbake/content/blog/drafts/`; rendered for local preview only since T009)
   - **Test:** Every draft has a recorded decision (a short table in `docs/reports/drafts-triage.md`).
   - _2026-10-11: moved from M6 to M8 (owner's request: the tasks only the owner can do go last)._
   - _2026-10-18: still 12 drafts, all Markdown now (#124, #128, #132). #128 removed the WordPress export debris but kept the author's own placeholder notes verbatim, unclosed `[` and all (`\[might want to add an example here` in `acceptance-test-driven-development.md`, `\[sourcecode` / `\[/sourcecode` in `evolving-features-into-acceptance-tests.md`, `\[Insert Picture with …` in `maven-pipelines.md`): they are part of this triage. Preview any draft at `http://localhost:8080/blog/drafts/<name>-draft.html` with `./gradlew bakePreview`._
+  - _2026-10-23: **done** (owner). 11 drafts deleted, 1 kept to work on (`retrospectives-building-collective-ownership.md`); the decisions are in [`reports/drafts-triage-2026-10-23.md`](reports/drafts-triage-2026-10-23.md) (dated, per the `docs/reports/` naming convention, where the Test said `drafts-triage.md`). Drafts were never published, so no URL changed; the smoke test's "drafts never go live" probe now uses the remaining draft._
 - [x] T054 **Won't do (owner decision, 2026-10-22).** [P] [IMP] _(Optional)_ Fix the slug typos (`relections-and-projections-2019`, `vagrant-cheatsheat`, `developer-reading-lis`), but **only** together with redirect stubs at the old URLs (`src/jbake/content/blog/`)
   - **Test:** Each old URL redirects to the new one. `scripts/check-urls.sh` passes with the old URLs still present as stubs.
   - _2026-10-11: moved from M6 to M8 (owner's request: the tasks only the owner can do go last)._
@@ -72,6 +73,6 @@ meaningful image has alt text the owner approved; and issue #14 is closed.
 ### Checkpoint
 
 - [x] CHK030 About and Talks have been reviewed and are current; the Speaker Bio page was removed (owner, 2026-10-22)
-- [ ] CHK032 Every draft has a triage decision
+- [x] CHK032 Every draft has a triage decision (T053, 2026-10-23)
 - [ ] CHK039 Issue #14 is closed by a merged PR
 - [x] CHK042 Every F item in report §F has the owner's alt text or a "decorative" decision (T109)
