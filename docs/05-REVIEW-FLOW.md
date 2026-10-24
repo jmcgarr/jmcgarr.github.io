@@ -6,7 +6,7 @@ A plan to add one command, `./gradlew reviewChanges`, that reviews **the pages a
 Markdown, missing links and images, stale front matter, and (as advice, never as a failure) spelling. The same
 check runs in CI on every pull request, so a PR with a defect turns red before the owner merges it, and a later
 `./gradlew openPr` runs it before anything is pushed. It continues the revival plan
-([`completed/00-REVIVAL.md`](completed/00-REVIVAL.md), done 2026-10-18) and uses its conventions: task IDs
+([`archive/00-REVIVAL.md`](archive/00-REVIVAL.md), done 2026-10-18) and uses its conventions: task IDs
 continue from T117 and checkpoints from CHK043; the format is in [`AGENTS.md`](../AGENTS.md), "Tasks and checklists".
 
 ## Context
@@ -298,5 +298,6 @@ for the review flow, add its row here with the task and the `Closes #N` line, pe
   `-Ponline`; CI always checks them. (4) A missing `summary=` is E4 only for a post new in the diff and W7 for an
   existing one (60 of 74 published posts have none). (5) `openPr` lists uncommitted files first, commits them only
   with `-Pmessage`, and opens a ready PR. (6) Spelling is deferred (T120 is a decision now). (7) `02-ROQ-MIGRATION.md`
-  and `03-REVIVAL-CHANGELOG.md` stay at the top level of `docs/`. (8) The three Talks labels became plain text (#142)
+  and `03-REVIVAL-CHANGELOG.md` stay at the top level of `docs/` (on 2026-10-23 the owner decided to stay on JBake and moved
+  `02-ROQ-MIGRATION.md` to `docs/archive/`, the renamed `completed/`; `03` stays). (8) The three Talks labels became plain text (#142)
   rather than waiting for T048, so the first `-Pall` run has a clean E2._

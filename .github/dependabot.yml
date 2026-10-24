@@ -15,7 +15,7 @@ updates:
       prefix: "chore(actions)"
 
   # Gradle dependencies (JBake and its engines, T096) and the wrapper. Major upgrades of JBake/Gradle are
-  # planned work (see docs/01-PLATFORM-DECISION.md), so only minor/patch updates come here.
+  # planned work (see docs/archive/01-PLATFORM-DECISION.md), so only minor/patch updates come here.
   - package-ecosystem: gradle
     directory: /
     schedule:

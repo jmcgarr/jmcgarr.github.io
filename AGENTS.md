@@ -14,7 +14,7 @@ a promise to the people who linked to it.
 - **Styles:** the theme CSS is generated from `src/scss/` by Dart Sass inside Gradle (`compileSass`, T043). **Edit the SCSS, never `clean-blog.css`**: it isn't committed, and the build fails if one reappears under `src/jbake/assets/css/`. See README, "To change the site's styles"
 - **Branches:** `main` holds the source (the default branch; renamed from `source` in T093). `master` is the **retired** publishing branch from before T027, frozen and preserved by tag `live-2026-10`. Don't push to it.
 - **Deploys:** GitHub Actions bakes, checks, and deploys to GitHub Pages (as an artifact, no commits) on **every push to `main`**. Merging to `main` *is* publishing. A manual "Run workflow" on `main` redeploys.
-- **Current work:** follows [`docs/05-REVIEW-FLOW.md`](docs/05-REVIEW-FLOW.md) (checking a change before it ships). Read it before starting any task. The 2026 revival plan is done and archived at [`docs/completed/00-REVIVAL.md`](docs/completed/00-REVIVAL.md); its task IDs, notes and GitHub Issues table remain the record of that work. The owner's own tasks (About page, drafts, mastheads, alt text) are in [`docs/04-AUTHORS-DESK.md`](docs/04-AUTHORS-DESK.md); agents may prepare material for them, but the owner decides.
+- **Current work:** follows [`docs/05-REVIEW-FLOW.md`](docs/05-REVIEW-FLOW.md) (checking a change before it ships). Read it before starting any task. The 2026 revival plan is done and archived at [`docs/archive/00-REVIVAL.md`](docs/archive/00-REVIVAL.md); its task IDs, notes and GitHub Issues table remain the record of that work. The owner's own tasks (About page, drafts, mastheads, alt text) are in [`docs/04-AUTHORS-DESK.md`](docs/04-AUTHORS-DESK.md); agents may prepare material for them, but the owner decides.
 
 ### Layout
 
@@ -139,7 +139,7 @@ dropping the color profile, and strip camera metadata. See T016 in the revival p
 ## Rule 5: Link work to GitHub issues
 
 The repo's [GitHub issues](https://github.com/jmcgarr/jmcgarr.github.io/issues) are mapped to plan tasks in the
-GitHub Issues table of the plan that owns the task ([`docs/05-REVIEW-FLOW.md`](docs/05-REVIEW-FLOW.md#github-issues) for current work; the archived [revival plan](docs/completed/00-REVIVAL.md#github-issues) for the 2026 revival). A task that resolves an issue has an `Issue:` line.
+GitHub Issues table of the plan that owns the task ([`docs/05-REVIEW-FLOW.md`](docs/05-REVIEW-FLOW.md#github-issues) for current work; the archived [revival plan](docs/archive/00-REVIVAL.md#github-issues) for the 2026 revival). A task that resolves an issue has an `Issue:` line.
 
 - **Before starting work,** run `gh issue list`. If an open issue isn't in the map, add a task and a map row for it first, on a `docs/` branch.
 - **When a change completes a task with `Issue: Closes #N`,** put `Closes #N` on its own line in the commit message **and** the PR description. Use one keyword per issue (`Closes #3` and `Closes #16` on separate lines). `Closes #3, #16` closes only #3.
@@ -189,7 +189,7 @@ Before you say a change is finished:
 
 - Top-level docs are numbered: **`NN-SHORT-NAME.md`**, with a two-digit sequence and an UPPER-KEBAB-CASE name (for example `00-REVIVAL.md`, `01-PLATFORM-DECISION.md`).
 - Numbers are assigned in creation order and **never reused or renumbered**. If a doc is replaced, mark it superseded rather than deleting it.
-- **`docs/completed/`** holds numbered docs whose Status is **Done**, moved there unchanged apart from their relative links (the revival plan, 2026-10-21). A doc keeps its number there, and that number stays taken. Decision records stay at the top level even when their work is done, because they are still in force.
+- **`docs/archive/`** (named `docs/completed/` until 2026-10-23) holds numbered docs that are finished: plans whose Status is **Done**, and decision records the owner has settled. They move there unchanged apart from their relative links and a dated update (the revival plan on 2026-10-21; the platform decision and the Roq migration plan on 2026-10-23, when the owner decided to stay on JBake). A doc keeps its number there, and that number stays taken. An archived decision record is still in force unless its Status says Superseded.
 - Subdirectories:
   - `docs/baseline/`: snapshots of the live site (`urls.txt`, `metrics.md`, `expected-removals.txt`). Only update them at a milestone checkpoint, and say so in the commit message.
   - `docs/reports/`: generated, point-in-time reports named `<topic>-YYYY-MM-DD.md` (for example `links-2026-10-15.md`). Don't edit them after creating them; make a new dated one instead.
@@ -231,5 +231,5 @@ Platform and architecture decisions (for example `01-PLATFORM-DECISION.md`) use 
 
 ### Style
 
-- Use GitHub-flavored Markdown with relative links between docs (`[plan](05-REVIEW-FLOW.md)`, `[revival](completed/00-REVIVAL.md)`).
+- Use GitHub-flavored Markdown with relative links between docs (`[plan](05-REVIEW-FLOW.md)`, `[revival](archive/00-REVIVAL.md)`).
 - Use real file paths and runnable commands. Keep prose short.

@@ -1,14 +1,18 @@
 # Option: Migrate from JBake to Roq (Quarkus)
 
-**Branch**: `docs/roq-migration-plan` | **Created**: 2026-10-06 | **Status**: Draft (not scheduled: the first successor if a trigger in [01-PLATFORM-DECISION.md](01-PLATFORM-DECISION.md) fires, Accepted 2026-10-07)
+**Branch**: `docs/roq-migration-plan` | **Created**: 2026-10-06 | **Status**: Shelved (owner decision 2026-10-23: staying on JBake; archived, not scheduled). Still the first successor if a trigger in [01-PLATFORM-DECISION.md](01-PLATFORM-DECISION.md) fires
 
 This is a plan for **possibly** replacing JBake with [Roq](https://iamroq.dev), the Quarkus static site
 generator. The owner isn't ready to switch. This doc lets the M4 platform decision
-([T033](completed/00-REVIVAL.md#m4-chart-the-future)) weigh Roq on facts, and makes the switch low-risk if chosen.
+([T033](00-REVIVAL.md#m4-chart-the-future)) weigh Roq on facts, and makes the switch low-risk if chosen.
 Nothing here runs until the owner decides to migrate.
 
+> **Update, 2026-10-23 (owner): staying on JBake for now.** The platform decision was reaffirmed and this plan was
+> moved to `docs/archive/` unchanged, as the ready reference should a re-evaluation trigger ever fire. Its task IDs
+> (T076–T093) stay taken.
+
 Task IDs continue the revival plan's sequence (T076+) and follow its conventions
-([`AGENTS.md`](../AGENTS.md)). Every task has a `Test:` line, and published URLs are permanent (Rule 1).
+([`AGENTS.md`](../../AGENTS.md)). Every task has a `Test:` line, and published URLs are permanent (Rule 1).
 
 ---
 
@@ -96,7 +100,7 @@ Work on a throwaway branch `spike/roq` in a separate folder (`roq-spike/`), so t
 - [ ] T081 [IMP] AsciiDoc fidelity: render the AsciiDoc posts with the pure-Java plugin, and with the JRuby plugin if needed (`roq-spike/`)
   - **Test:** side-by-side screenshots (JBake vs Roq) show the same images and sizes, roles (`role="right"`), headings, links (`window=_blank`), and code blocks. Record which plugin is required.
 
-**Checkpoint, decide:** record the results in `docs/01-PLATFORM-DECISION.md` (T033) against the decision criteria above. Stop here if the answer is no.
+**Checkpoint, decide:** record the results in `docs/archive/01-PLATFORM-DECISION.md` (T033) against the decision criteria above. Stop here if the answer is no.
 
 ## Phase 2: Content migration
 

@@ -2,7 +2,7 @@
 #
 # Compares the HTML pages in the baked site against the URL inventory of the
 # live site, so a change can't silently remove a published URL.
-# See docs/completed/00-REVIVAL.md, task T006, and AGENTS.md (Rule 1).
+# See docs/archive/00-REVIVAL.md, task T006, and AGENTS.md (Rule 1).
 #
 #   missing = in docs/baseline/urls.txt, not in the build, not an expected removal  -> FAIL
 #   new     = in the build, not in the baseline                                     -> info only
