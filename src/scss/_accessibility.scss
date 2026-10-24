@@ -1,0 +1,36 @@
+// Phones and keyboards: no sideways scrolling on narrow screens (T103) and the "Skip to main content" link
+// (T046, templates/header.ftl). Every page. Moved here from extra.css in T134. The other T046 rules sit with
+// what they style: the photo credit's backdrop in _masthead.scss, the post date's grey in _post.scss, the
+// archive headings' size in _lists.scss.
+@use "variables" as *;
+
+// No sideways scrolling on phones (T103). A URL or other word too long for a whole line (links and file
+// paths in posts, bare URLs on pages; the photo credit is in _masthead.scss) wraps instead of widening the
+// page; lines that already fit don't change. Not set on the whole page: beside a floated image, Chrome
+// would split words instead of moving them below the image. Code blocks still scroll inside themselves
+// (code.scss), and video embeds shrink to the column (images already do, in _legacy-asciidoctor.scss).
+article p,
+article li,
+article a {
+  overflow-wrap: break-word;
+}
+article p:has(img[align]),
+article p:has(img[align]) a {
+  overflow-wrap: normal;
+}
+iframe {
+  max-width: 100%;
+}
+
+// "Skip to main content" (header.ftl): hidden until focused, then shown above the fixed navbar
+.skip-link.sr-only-focusable:focus {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 1040;
+  padding: 0.5rem 1rem;
+  background-color: $white;
+  color: $gray-900;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 0 2px $primary;
+}

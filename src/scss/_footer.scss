@@ -1,4 +1,5 @@
-// Styling for the footer
+// The footer in templates/footer.ftl: the social icons and the two copyright lines. Every page. From the
+// Clean Blog template, plus the X icon's sizing (T047), moved here from an inline style in T134.
 footer {
   padding: 50px 0 65px;
   .list-inline {
@@ -9,5 +10,14 @@ footer {
     font-size: 14px;
     margin-bottom: 0;
     text-align: center;
+  }
+  // The X logo is an inline SVG (Font Awesome 5.3 has no X icon, T047), sized and centred in its circle
+  // like the Font Awesome icons next to it (.fa-stack-1x sets left: 0, top: 0 and width: 100%)
+  .fa-stack svg {
+    width: 1em;
+    height: 1em;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
 }

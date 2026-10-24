@@ -11,7 +11,7 @@ a promise to the people who linked to it.
 
 - **Generator:** JBake 2.7, run directly by a Gradle `JavaExec` task in `build.gradle` (no JBake plugin, T096). Gradle 9.8 wrapper (T097), JDK 25 via `.java-version` (T113; JDK 21 also works)
 - **Theme:** Start Bootstrap "Clean Blog" (Bootstrap 4.1, jQuery 3.3, Font Awesome 5) as FreeMarker templates
-- **Styles:** the theme CSS is generated from `src/scss/` by Dart Sass inside Gradle (`compileSass`, T043). **Edit the SCSS, never `clean-blog.css`**: it isn't committed, and the build fails if one reappears under `src/jbake/assets/css/`. See README, "To change the site's styles"
+- **Styles:** all of the site's own CSS (`clean-blog.css`, `fonts.css`, `code.css`) is generated from `src/scss/` by Dart Sass inside Gradle (`compileSass`, T043, T134). **Edit the SCSS, never the CSS**: it isn't committed, and the build fails if a hand-written copy (or the old `extra.css`) reappears under `src/jbake/assets/css/`. See README, "To change the site's styles"
 - **Branches:** `main` holds the source (the default branch; renamed from `source` in T093). `master` is the **retired** publishing branch from before T027, frozen and preserved by tag `live-2026-10`. Don't push to it.
 - **Deploys:** GitHub Actions bakes, checks, and deploys to GitHub Pages (as an artifact, no commits) on **every push to `main`**. Merging to `main` *is* publishing. A manual "Run workflow" on `main` redeploys.
 - **Current work:** follows [`docs/05-REVIEW-FLOW.md`](docs/05-REVIEW-FLOW.md) (checking a change before it ships). Read it before starting any task. The 2026 revival plan is done and archived at [`docs/archive/00-REVIVAL.md`](docs/archive/00-REVIVAL.md); its task IDs, notes and GitHub Issues table remain the record of that work. The owner's own tasks (About page, drafts, mastheads, alt text) are in [`docs/04-AUTHORS-DESK.md`](docs/04-AUTHORS-DESK.md); agents may prepare material for them, but the owner decides.
@@ -27,7 +27,7 @@ src/jbake/templates/      FreeMarker templates (*.ftl)
 src/jbake/assets/         Copied to the site root as-is. EVERYTHING here is published.
 src/jbake/jbake.properties
 src/case-redirects/       Redirect stubs added to the site by the bake on Linux only (T055). Also published.
-src/scss/                 SCSS for the theme (not published). Compiled to /css/clean-blog.css on every build (T043)
+src/scss/                 SCSS for the site's CSS (not published). Compiled to /css/clean-blog.css, /css/fonts.css and /css/code.css on every build (T043, T134)
 docs/                     Planning and internal docs. NEVER published (see "docs/ conventions")
 build/jbake/              Generated output (git-ignored)
 ```

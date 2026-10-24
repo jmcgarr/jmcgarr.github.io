@@ -1,19 +1,22 @@
-// What every page relied on from asciidoctor.css (T102, 2026-10-18).
+// What every page relied on from asciidoctor.css (T102, 2026-10-18): images, lists, quotes, inline code,
+// heading sizes and the font smoothing. Every page.
 //
 // Asciidoctor's stylesheet (assets/css/asciidoctor.css, 511 lines) was loaded on every page from 2014 until T102
-// took AsciiDoc out of the build and the <link> out of header.ftl. Most of it styles markup no page has any more
+// took AsciiDoc out of the build and the <link> out of header.ftl. Most of it styled markup no page has any more
 // (section wrappers, listing blocks, admonitions, a table of contents...), but a few of its rules are plain
-// element selectors that shaped every page: images, lists, quotes, inline code, heading sizes and the font
-// smoothing. Those are kept here, with their values copied exactly, so the site looks as it did. They were found
-// by scanning every baked page for the elements and classes the stylesheet names, then confirmed by before/after
-// screenshots of a sample of pages at 1280px and 375px.
+// element selectors that shaped every page. Those are kept here, with their values copied exactly, so the site
+// looks as it did. They were found by scanning every baked page for the elements and classes the stylesheet
+// names, then confirmed by before/after screenshots of a sample of pages at 1280px and 375px.
 //
-// This partial is the last one in clean-blog.scss, so it sits after the theme's rules as asciidoctor.css did
-// (and before extra.css). The file asciidoctor.css itself was deleted on 2026-10-18 with the owner's approval
-// (its URL is on docs/baseline/expected-removals.txt, AGENTS.md Rule 1). Left out as having no effect on this site: `dl`,
-// `abbr`, `table`, `blockquote cite`, the form controls, the print styles, and Asciidoctor's own classes.
+// This partial comes after the theme's partials in clean-blog.scss, as asciidoctor.css was loaded after this
+// stylesheet. The file asciidoctor.css itself was deleted on 2026-10-18 with the owner's approval (its URL is on
+// docs/baseline/expected-removals.txt, AGENTS.md Rule 1). Left out as having no effect on this site: `dl`,
+// `abbr`, `table`, `blockquote cite`, the form controls, the print styles, Asciidoctor's own classes, and (T134)
+// the nested-list combinations `ul li ol` and `ol li ul`, which no page has.
+@use "mixins" as *;
 
-// `.antialiased, body`: thinner text on macOS and iOS (Bootstrap doesn't set it)
+// `.antialiased, body`: thinner text on macOS and iOS (Bootstrap doesn't set it). Non-standard, with no
+// unprefixed form, so the prefix stays.
 body {
   -webkit-font-smoothing: antialiased;
 }
@@ -27,7 +30,7 @@ img {
 
 // Heading sizes from 768px up (Bootstrap's are 2.5/2/1.75/1.5rem with line-height 1.2). The masthead headings
 // and the home page's post titles have their own sizes in the theme and are unaffected.
-@media only screen and (min-width: 768px) {
+@include media-up(md) {
   h1,
   h2,
   h3,
@@ -52,7 +55,7 @@ img {
 
 // Lists: indented by their own margin on top of the browser's padding, a looser line height, and a small gap
 // between the paragraphs of a loose list item (the site's `p` has 30px margins). The rules follow the order of
-// the originals, which matters where two have the same specificity: `ol` is 1.75em, a nested `ul li ol` 1.5em.
+// the originals, which matters where two have the same specificity: `ol` is 1.75em, a nested list 1.25em.
 ul,
 ol {
   line-height: 1.6;
@@ -60,8 +63,6 @@ ol {
   margin-left: 1.5em;
 }
 ul li ul,
-ul li ol,
-ol li ul,
 ol li ol {
   margin-left: 1.25em;
   margin-bottom: 0;
@@ -69,16 +70,12 @@ ol li ol {
 ol {
   margin-left: 1.75em;
 }
-ul li ol {
-  margin-left: 1.5em;
-}
 ol > li p,
 ul > li p {
   margin-bottom: 0.625em;
 }
 
-// Quotes: a thin grey rule on the left, its own grey text (over _global.scss's $gray-600, as the later
-// stylesheet did), looser lines. _global.scss keeps the italics.
+// Quotes: a thin grey rule on the left, its own grey text, looser lines. _global.scss keeps the italics.
 blockquote {
   margin: 0 0 1.25em;
   padding: 0.5625em 1.25em 0 1.1875em;
@@ -90,7 +87,7 @@ blockquote p {
   color: #6f6f6f;
 }
 
-// Inline code: a light grey box on one line (code blocks are styled by assets/css/code.css)
+// Inline code: a light grey box on one line (code blocks are styled by code.scss, on the pages that have one)
 *:not(pre) > code {
   font-size: 0.9375em;
   padding: 1px 3px 0;

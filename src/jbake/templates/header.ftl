@@ -21,17 +21,15 @@
     <!-- Custom fonts for this template -->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <#-- Only the Open Sans styles the CSS actually uses: 300 (header subheadings), 300 italic (post dates),
-         800 (nav). Lora is not loaded: its only rule (.post-heading .meta) matches nothing on the site.
-         Self-hosted (T073): the same font files Google Fonts serves, so no third-party request blocks
-         rendering. The Latin normal file is preloaded because every page's nav uses it. -->
+         800 (nav); owner's decision 2026-10-24 (T022) to keep this mix. Self-hosted (T073): the same font
+         files Google Fonts serves, so no third-party request blocks rendering; the rules are compiled from
+         src/scss/fonts.scss (T134). The Latin normal file is preloaded because every page's nav uses it. -->
     <link rel="preload" href="/fonts/open-sans/open-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link href="/css/fonts.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
+    <#-- The theme and the site's own rules, compiled from src/scss/ (T043). The site-specific additions that
+         were a separate extra.css are in the same file since T134. -->
     <link href="/css/clean-blog.css" rel="stylesheet">
-
-    <!-- previous styles -->
-    <link href="/css/extra.css" rel="stylesheet">
 <#-- Code block styles, only on pages with code (T056) -->
 <#include "code-highlight.ftl">
 <@codeHighlightCss/>

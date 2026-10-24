@@ -1,0 +1,54 @@
+// The site's own lists: the month lists on the Archive and tag pages (templates/archive.ftl, tags.ftl; T104)
+// and the Topics page (templates/tags-index.ftl, tags/index.html; T057). Moved here from extra.css in T134.
+@use "variables" as *;
+@use "mixins" as *;
+
+// Archive and tag pages (T104): the outer list holds one <li> per month (its <h2> and its list of posts).
+// No marker on those items, and the same indent as the old markup (_legacy-asciidoctor.scss gives
+// "ul li ul" 1.25em; the old "ul ul" got 1.5em), so it looks unchanged.
+.archive-months {
+  list-style: none;
+}
+.archive-months > li > ul {
+  margin-left: 1.5em;
+}
+// Each month's heading is an <h2> (an <h4> skipped two levels after the page's <h1>, T046). Keep the <h4>
+// size: Bootstrap's 1.5rem, and _legacy-asciidoctor.scss's 1.4375em from 768px.
+.archive-months > li > h2 {
+  font-size: 1.5rem;
+}
+@include media-up(md) {
+  .archive-months > li > h2 {
+    font-size: 1.4375em;
+  }
+}
+
+// Topics page (T057): every tag with its post count, in columns from 576px
+.topics-heading {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+}
+.topics-list {
+  list-style: none;
+  margin-left: 0; // flush with the headings (_legacy-asciidoctor.scss indents every ul by 1.5em)
+  padding-left: 0;
+}
+.topics-list li {
+  break-inside: avoid;
+  margin-bottom: 0.25rem;
+}
+.topics-count {
+  color: $text-muted;
+  white-space: nowrap;
+}
+@include media-up(sm) {
+  .topics-list {
+    columns: 2;
+    column-gap: 2rem;
+  }
+}
+@include media-up(lg) {
+  .topics-list {
+    columns: 3;
+  }
+}

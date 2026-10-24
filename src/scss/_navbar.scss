@@ -1,4 +1,6 @@
-// Styling for the navbar
+// The navigation bar, #mainNav in templates/menu.ftl: Open Sans 800 uppercase links, white over the masthead
+// from 992px, and the scroll-up reveal, where js/clean-blog.min.js adds .is-fixed and .is-visible while the
+// reader scrolls (the rules nothing matches until then). Every page. From the Clean Blog template.
 @use "variables" as *;
 @use "mixins" as *;
 
@@ -6,7 +8,7 @@
   position: absolute;
   border-bottom: 1px solid $gray-200;
   background-color: white;
-  @include sans-serif-font;
+  font-family: $font-family-open-sans;
   .navbar-brand {
     font-weight: 800;
     color: $gray-800;
@@ -28,7 +30,7 @@
       }
     }
   }
-  @media only screen and (min-width: 992px) {
+  @include media-up(lg) {
     border-bottom: 1px solid transparent;
     background: transparent;
     .navbar-brand {
@@ -52,21 +54,14 @@
       }
     }
   }
-  @media only screen and (min-width: 992px) {
-    -webkit-transition: background-color 0.2s;
+  @include media-up(lg) {
     transition: background-color 0.2s;
-    /* Force Hardware Acceleration in WebKit */
-    -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
-    -webkit-backface-visibility: hidden;
     &.is-fixed {
       /* when the user scrolls down, we hide the header right above the viewport */
       position: fixed;
-      top: -67px;
-      -webkit-transition: -webkit-transform 0.2s;
-      transition: -webkit-transform 0.2s;
+      top: -$nav-height;
       transition: transform 0.2s;
-      transition: transform 0.2s, -webkit-transform 0.2s;
       border-bottom: 1px solid $white; // was darken($white, .05), which rounded to white
       background-color: rgba($white, 0.9);
       .navbar-brand {
@@ -90,7 +85,6 @@
     }
     &.is-visible {
       /* if the user changes the scrolling direction, we show the header */
-      -webkit-transform: translate3d(0, 100%, 0);
       transform: translate3d(0, 100%, 0);
     }
   }

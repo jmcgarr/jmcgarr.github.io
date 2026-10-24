@@ -233,18 +233,27 @@ same `/blog/<slug>.html` (and `about.md` at `/about.html`).
 
 To change the site's styles
 ===========================
-**Edit `src/scss/`, never `clean-blog.css`.** The theme's stylesheet, `/css/clean-blog.css`, is generated from
-`src/scss/clean-blog.scss` and its partials (`_variables.scss` for colors and fonts, `_global.scss`, `_navbar.scss`,
-`_masthead.scss`, ...) on every build (T043). It isn't in the repository: `./gradlew compileSass` writes it to
-`build/generated/sass/css/clean-blog.css`, and `bake` and `preview` copy it into the site at the same URL as always.
-A Sass error fails the build (and CI) with the file and line. The build also refuses to run if a
-`src/jbake/assets/css/clean-blog.css` reappears, since JBake would publish it and it would go stale.
+**Edit `src/scss/`, never the CSS.** All of the site's own CSS is generated from `src/scss/` on every build (T043,
+T134). Each file there whose name doesn't start with `_` is an entry, published at `/css/<name>.css`:
 
-While `./gradlew preview` runs, saving a file in `src/scss/` recompiles the CSS within about a second and the open
+| Entry | Published as | What it is |
+|---|---|---|
+| `clean-blog.scss` | `/css/clean-blog.css`, every page | The theme and the site's own rules, as partials in the cascade order the file lists: tokens in `_variables.scss` (colors, fonts, sizes, breakpoints), the `media-up` breakpoint mixin in `_mixins.scss`, then `_global`, `_navbar`, `_masthead`, `_post`, `_content`, `_footer`, `_legacy-asciidoctor`, `_comments`, `_lists`, `_accessibility`. Each partial's header says what it styles and which template. The site-specific additions that were a separate `extra.css` live here since T134 |
+| `fonts.scss` | `/css/fonts.css`, every page | The 30 `@font-face` rules for the self-hosted Open Sans (T073), generated from a map of Google's subsets |
+| `code.scss` | `/css/code.css`, pages with a code block | Code blocks and the Prism token colors (T056) |
+
+None of the CSS is in the repository: `./gradlew compileSass` writes it to `build/generated/sass/css/`, and `bake` and
+`preview` copy it into the site at the same URLs as always. A Sass error fails the build (and CI) with the file and
+line. The build also refuses to run if a hand-written `clean-blog.css`, `fonts.css`, `code.css` or `extra.css`
+reappears under `src/jbake/assets/css/`, since JBake would publish it and it would go stale.
+
+While `./gradlew preview` runs, saving a file in `src/scss/` recompiles every entry within about a second and the open
 page reloads. A Sass error there is printed in the terminal, and the page keeps the last good CSS.
 
-Small site-specific additions that aren't part of the theme go in `src/jbake/assets/css/extra.css`, which is
-plain CSS and published as-is.
+A new rule goes in the partial that styles that part of the page (or a new partial, added to `clean-blog.scss` in
+cascade order); a new color or size goes in `_variables.scss`. To prove a refactor changed nothing visible, use the
+screenshot-and-pixel-diff method in [`docs/reports/css-review-2026-10-24.md`](docs/reports/css-review-2026-10-24.md),
+"How to verify".
 
 **The compiler** is [Dart Sass](https://sass-lang.com/dart-sass/), the reference Sass implementation, run from
 Gradle by the [freefair Sass plugin](https://plugins.gradle.org/plugin/io.freefair.sass-base) through its
@@ -265,7 +274,7 @@ How the site is built and deployed
 Everything happens in one workflow, [`.github/workflows/gradle.yml`](.github/workflows/gradle.yml)
 (shown as **"Java CI with Gradle"** under Actions). It runs on every pull request and every push to `main`.
 
-1. **Bake:** `./gradlew bake` compiles `src/scss/` into `css/clean-blog.css` with Dart Sass and renders
+1. **Bake:** `./gradlew bake` compiles `src/scss/` into `css/clean-blog.css`, `css/fonts.css` and `css/code.css` with Dart Sass and renders
    `src/jbake/` into `build/jbake/` with JBake (JDK 25). Drafts are rendered too, as `<name>-draft.html`, but only
    so you can preview them locally. A Sass, template, or post error fails the build here.
 2. **Stage:** `build/jbake/` is copied to **`build/site/` without drafts**. `build/site/` is exactly what goes live.

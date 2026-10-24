@@ -4,11 +4,14 @@
    (vendor/prism/), a light theme to suit Clean Blog; every color has at least 4.5:1 contrast on the block
    background. */
 
+// Published as /css/code.css, compiled from here since T134 (it was a hand-written file under
+// src/jbake/assets/css/). Its palette is Prism's, kept local to this file; the breakpoint is the site's.
+@use "mixins" as *;
+
 pre {
   margin: 0 0 1.5rem;
   padding: 0.875rem 1rem;
   overflow-x: auto; /* long lines scroll inside the block instead of widening the page */
-  -webkit-overflow-scrolling: touch;
   font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-size: 0.875rem;
   line-height: 1.6;
@@ -20,14 +23,12 @@ pre {
   word-wrap: normal;
   overflow-wrap: normal;
   word-break: normal;
-  -moz-tab-size: 4;
   tab-size: 4;
-  -webkit-hyphens: none;
   hyphens: none;
   text-shadow: none;
 }
 
-@media (min-width: 768px) {
+@include media-up(md) {
   pre {
     font-size: 0.9375rem;
   }

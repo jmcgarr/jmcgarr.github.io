@@ -4,15 +4,27 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-clean-blog/blob/master/LICENSE)
  */
 
-// The site's theme stylesheet. The build compiles this file to /css/clean-blog.css (T043): edit the partials
-// here, never the CSS. Dart Sass runs inside Gradle (`./gradlew compileSass`, part of every bake and preview).
+// The site's theme stylesheet, published as /css/clean-blog.css on every page (templates/header.ftl, after
+// Bootstrap, Font Awesome and fonts.css). The build compiles it with Dart Sass inside Gradle (T043,
+// `./gradlew compileSass`, part of every bake and preview): edit the partials, never the CSS. The other two
+// entries in this folder are fonts.scss (/css/fonts.css) and code.scss (/css/code.css).
+//
+// The order below is the cascade, and it matters where two rules have the same specificity:
+//   1. The Clean Blog template, top of the page downwards: page-wide elements, navbar, masthead, the home
+//      page's post list, in-post blocks, footer.
+//   2. legacy-asciidoctor: the element rules every page relied on from asciidoctor.css, which was loaded
+//      after the theme until T102. Its blockquote colour and list margins override the theme's.
+//   3. The site's own additions, which lived in extra.css (loaded last of all) until T134 folded them in:
+//      archived comments, the archive/tag/Topics lists, phone wrapping and the skip link. The masthead's
+//      additions (photo credit, responsive image) are in _masthead.scss: nothing later touches them.
+// Tokens are in _variables.scss, the breakpoint mixin in _mixins.scss.
 @use "global";
 @use "navbar";
 @use "masthead";
 @use "post";
 @use "content";
-@use "contact";
 @use "footer";
-@use "bootstrap-overrides";
-// Last, as asciidoctor.css was loaded after this stylesheet until T102 (see the partial)
 @use "legacy-asciidoctor";
+@use "comments";
+@use "lists";
+@use "accessibility";
