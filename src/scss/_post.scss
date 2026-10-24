@@ -1,5 +1,8 @@
-// Styling for the post page
+// The post list on the home page, .post-preview in templates/index.ftl: the linked title and the date line
+// under it. From the Clean Blog template. (The template's rules for a linked subtitle and a linked date
+// matched nothing in index.ftl and went in T134; the summaries have always had the body weight.)
 @use "variables" as *;
+@use "mixins" as *;
 
 .post-preview {
   > a {
@@ -14,27 +17,15 @@
       margin-top: 30px;
       margin-bottom: 10px;
     }
-    > .post-subtitle {
-      font-weight: 300;
-      margin: 0 0 10px;
-    }
   }
   > .post-meta {
     font-size: 18px;
     font-style: italic;
     margin-top: 0;
-    color: $gray-600;
-    > a {
-      text-decoration: none;
-      color: $gray-900;
-      &:focus,
-      &:hover {
-        text-decoration: underline;
-        color: $primary;
-      }
-    }
+    // Bootstrap's muted grey, 4.69:1 on white (T046); the template's #868e96 was 3.32:1
+    color: $text-muted;
   }
-  @media only screen and (min-width: 768px) {
+  @include media-up(md) {
     > a {
       > .post-title {
         font-size: 36px;

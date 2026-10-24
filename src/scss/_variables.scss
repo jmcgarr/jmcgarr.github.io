@@ -1,40 +1,40 @@
-// Variables
+// Tokens: every colour, font stack and size the partials share (T134). Only values the site uses live here;
+// the Clean Blog template's full Bootstrap palette went with the dead rules in T134. A value here must
+// equal what the compiled CSS served before (the pixel diff in docs/reports/css-review-2026-10-24.md is
+// the test): change one and the look changes.
 
+// Colours. The greys are Bootstrap 4.1.3's (the vendored build), as the theme always meant them.
 $white:    #fff !default;
-$gray-100: #f8f9fa !default;
-$gray-200: #e9ecef !default;
-$gray-300: #dee2e6 !default;
-$gray-400: #ced4da !default;
-$gray-500: #adb5bd !default;
-$gray-600: #868e96 !default;
-$gray-700: #495057 !default;
-$gray-800: #343a40 !default;
-$gray-900: #212529 !default;
-$black:    #000 !default;
+$gray-200: #e9ecef !default;   // navbar bottom border, archived-comment reply rule
+$gray-600: #6c757d !default;   // Bootstrap's muted text (text-muted): 4.69:1 on white (T046)
+$gray-800: #343a40 !default;   // navbar text on phones
+$gray-900: #212529 !default;   // body text, links, the masthead overlay
+$primary:  #0085A1 !default;   // Clean Blog teal: link hover, selection
+$text-muted: $gray-600 !default;
 
-$blue:    #007bff !default;
-$indigo:  #6610f2 !default;
-$purple:  #6f42c1 !default;
-$pink:    #e83e8c !default;
-$red:     #dc3545 !default;
-$orange:  #fd7e14 !default;
-$yellow:  #ffc107 !default;
-$green:   #28a745 !default;
-$teal:    #0085A1 !default;
-$cyan:    #17a2b8 !default;
+// The masthead's background before its photo loads (and if it fails). Bootstrap 4.0's $gray-600, which the
+// template was built with; 4.1.3 darkened it to #6c757d. Kept so the colour doesn't change (review item D3).
+$masthead-fallback: #868e96 !default;
 
-$primary:       $teal !default;
-$secondary:     $gray-600 !default;
-$success:       $green !default;
-$info:          $cyan !default;
-$warning:       $yellow !default;
-$danger:        $red !default;
-$light:         $gray-100 !default;
-$dark:          $gray-800 !default;
+// Asciidoctor's dark red for figure captions and card titles (_content.scss, T102)
+$asciidoctor-red: #7a2518 !default;
 
-// Button hover color: darken($primary, 7.5%) as the original 2018 build rounded it. Written out because Dart
-// Sass now keeps fractional channels (rgb(0%, 39.77%, 48.14%)) and its global darken() is deprecated.
-$primary-hover: #00657b !default;
+// Sizes
+$nav-height: 67px !default;          // #mainNav's height from 992px: the hidden-nav offset in _navbar.scss
+$masthead-padding: 150px !default;   // above and below the masthead heading (December 2019: was 200px)
 
-// Body text font (May 2024): the system UI font of each platform. Replaced the template's Lora.
+// Breakpoints: Bootstrap 4's grid (its SCSS isn't in the repo, only the compiled vendor CSS). Used through
+// the media-up mixin in _mixins.scss.
+$grid-breakpoints: (sm: 576px, md: 768px, lg: 992px, xl: 1200px) !default;
+// Two breakpoints that are not Bootstrap's. $masthead-lg is where the full-size header image replaces the
+// 1440px variant (T071): it must match the <link rel="preload" media="…"> queries in templates/masthead.ftl,
+// which name the same 576px and 1280px. $phone-narrow is the widest "below 375px" (iPhone SE class) for the
+// masthead title wrapping rule (T103).
+$masthead-lg: 1280px !default;
+$phone-narrow: 374.98px !default;
+
+// Fonts. Body text and headings: the system UI font of each platform (May 2024, replaced the template's
+// Lora). Open Sans (self-hosted, fonts.scss, T073): only the navbar (800) and the masthead subheading
+// (300; the post date inside it is 300 italic). Owner's decision 2026-10-24 (T022): keep this mix.
 $font-family-system: -apple-system, BlinkMacSystemFont, "Avenir Next", Avenir, "Nimbus Sans L", Roboto, "Noto Sans", "Segoe UI", Arial, Helvetica, "Helvetica Neue", sans-serif !default;
+$font-family-open-sans: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif !default;

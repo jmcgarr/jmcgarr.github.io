@@ -1,11 +1,12 @@
-// Global styling for this template
+// Page-wide element styles: body text, paragraphs, headings, links, quotes and text selection. Every page
+// (every template). From the Clean Blog template; the body font moved to the system stack in May 2024.
 @use "variables" as *;
 @use "mixins" as *;
 
 body {
   color: $gray-900;
   // May 2024: the system font at 1.15rem (was Lora at 20px)
-  @include system-font;
+  font-family: $font-family-system;
   font-size: 1.15rem;
 }
 
@@ -45,32 +46,10 @@ a {
   }
 }
 
+// Quotes are italic; their colour, rule and spacing are in _legacy-asciidoctor.scss (its colour always won
+// over the template's grey, so the grey went in T134)
 blockquote {
   font-style: italic;
-  color: $gray-600;
-}
-
-.section-heading {
-  font-size: 36px;
-  font-weight: 700;
-  margin-top: 60px;
-}
-
-.caption {
-  font-size: 14px;
-  font-style: italic;
-  display: block;
-  margin: 0;
-  padding: 10px;
-  text-align: center;
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-}
-
-::-moz-selection {
-  color: $white;
-  background: $primary;
-  text-shadow: none;
 }
 
 ::selection {
@@ -80,11 +59,6 @@ blockquote {
 }
 
 img::selection {
-  color: $white;
-  background: transparent;
-}
-
-img::-moz-selection {
   color: $white;
   background: transparent;
 }

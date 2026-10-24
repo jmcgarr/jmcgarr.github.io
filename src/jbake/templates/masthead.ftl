@@ -32,7 +32,7 @@
 
       <#-- Responsive header image (T071): phones get the 960px variant, tablets and small laptops 1440px,
            larger screens the full image. Variants come from scripts/masthead-variants.py. The CSS
-           (extra.css) picks one by width, and the preloads use the same media queries so each browser
+           (src/scss/_masthead.scss) picks one by width, and the preloads use the same media queries so each browser
            fetches exactly one image, early. Remote (http) mastheads have no variants. -->
       <#if mastheadURL?starts_with("http")>
         <#assign mastheadSm = mastheadURL mastheadMd = mastheadURL>
@@ -72,7 +72,7 @@
           <div class="row justify-content-between">
             <div class="col-4"></div>
             <div class="col-4 text-right">
-              <#-- The span gets a faint dark backdrop (extra.css), so the credit stays readable on bright photos (T046) -->
+              <#-- The span gets a faint dark backdrop (src/scss/_masthead.scss), so the credit stays readable on bright photos (T046) -->
               <p class="photo-credit"><span class="photo-credit-text">Photo credit:
                 <#if mastheadCredit?starts_with("http")>
                   <a href="${mastheadCredit}" target="_blank">${mastheadCredit}</a>

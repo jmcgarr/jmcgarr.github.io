@@ -1,15 +1,34 @@
-// Styling for the masthead
+// The page header, header.masthead in templates/masthead.ftl: the photo (one of three sizes by viewport
+// width, T071), its dark overlay, the centred title and subheading, and the photo credit (T046). Every
+// page. From the Clean Blog template, plus the masthead rules that lived in extra.css until T134.
 @use "variables" as *;
 @use "mixins" as *;
 
 header.masthead {
-  // TIP: Background images are set within the HTML using inline CSS!
   margin-bottom: 50px;
   background: no-repeat center center;
-  background-color: $gray-600;
+  background-color: $masthead-fallback;
   background-attachment: scroll;
   position: relative;
-  @include background-cover;
+  background-size: cover;
+  // Responsive header image (T071). The URLs are the custom properties masthead.ftl sets on the <header>;
+  // the breakpoints must match its preload media queries (sm and $masthead-lg). After the `background`
+  // shorthand above, which resets background-image.
+  background-image: var(--masthead-sm);
+  // A long word in a title may hang into the column's padding without being split, but it must not widen
+  // the page (at 375px, one title overhangs by 2px). Below 375px, split such a word rather than clip it (T103).
+  overflow-x: clip;
+  @include media-up(sm) {
+    background-image: var(--masthead-md);
+  }
+  @media (min-width: $masthead-lg) {
+    background-image: var(--masthead-lg);
+  }
+  @media (max-width: $phone-narrow) {
+    h1 {
+      overflow-wrap: break-word;
+    }
+  }
   .overlay {
     position: absolute;
     top: 0;
@@ -19,18 +38,10 @@ header.masthead {
     background-color: $gray-900;
     opacity: 0.5;
   }
-  .page-heading,
-  .post-heading,
-  .site-heading {
-    // December 2019: 150px at the top (was 200px), on phones and wider screens
-    padding: 150px 0 150px;
+  .page-heading {
+    // December 2019: 150px at the top (was 200px), on phones and wider screens alike
+    padding: $masthead-padding 0 $masthead-padding;
     color: white;
-    @media only screen and (min-width: 768px) {
-      padding: 150px 0;
-    }
-  }
-  .page-heading,
-  .site-heading {
     text-align: center;
     h1 {
       font-size: 50px;
@@ -42,45 +53,36 @@ header.masthead {
       line-height: 1.1;
       display: block;
       margin: 10px 0 0;
-      @include sans-serif-font;
+      font-family: $font-family-open-sans;
     }
-    @media only screen and (min-width: 768px) {
+    @include media-up(md) {
       h1 {
         font-size: 80px;
       }
     }
   }
-  .post-heading {
-    h1 {
-      font-size: 35px;
-    }
-    .meta,
-    .subheading {
-      line-height: 1.1;
-      display: block;
-    }
-    .subheading {
-      font-size: 24px;
-      font-weight: 600;
-      margin: 10px 0 30px;
-      @include sans-serif-font;
-    }
-    .meta {
-      font-size: 20px;
-      font-weight: 300;
-      font-style: italic;
-      @include serif-font;
-      a {
-        color: $white;
-      }
-    }
-    @media only screen and (min-width: 768px) {
-      h1 {
-        font-size: 55px;
-      }
-      .subheading {
-        font-size: 30px;
-      }
-    }
+}
+
+// Photo credit (T046): white, right-aligned, on a faint backdrop in the overlay's colour right behind the
+// text, so it reaches 4.5:1 on any photo (white text over the overlay and this backdrop is 4.88:1 even on a
+// pure white pixel; a text-shadow alone stayed under 4:1 on thin 14px text). The backdrop is painted only:
+// an inline element's background, vertical padding (it fills the line's 21px, so it also covers the
+// underline) and sideways box-shadows don't move anything. #d2d1d1, the colour before T046, was as low as
+// 2.1:1 on bright photos. A long URL in the credit wraps instead of widening the page (T103).
+.photo-credit {
+  font-size: 14px;
+  margin-bottom: 0;
+  text-align: right;
+  color: $white;
+  overflow-wrap: break-word;
+  a {
+    color: $white;
   }
+}
+.photo-credit-text {
+  padding: 2px 0;
+  background-color: rgba($gray-900, 0.3);
+  box-shadow: 0.25em 0 0 rgba($gray-900, 0.3), -0.25em 0 0 rgba($gray-900, 0.3);
+  -webkit-box-decoration-break: clone; // Safari has only the prefixed form
+  box-decoration-break: clone;
 }

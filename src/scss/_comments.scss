@@ -1,0 +1,37 @@
+// Read-only comments archived from Disqus (T045): the <details> block under a post, templates/post.ftl and
+// templates/archived-comments/. Posts that had comments. Moved here from extra.css in T134.
+@use "variables" as *;
+
+.archived-comments {
+  margin: 0 0 2rem;
+  font-size: 0.95rem;
+}
+.archived-comments summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.archived-comment-list,
+.archived-comment-replies {
+  list-style: none;
+  padding-left: 0;
+}
+.archived-comment-replies {
+  margin-left: 1.25rem;
+  padding-left: 1rem;
+  border-left: 2px solid $gray-200;
+}
+.archived-comment {
+  margin-top: 1.25rem;
+}
+.archived-comment-meta {
+  margin: 0;
+  color: $text-muted;
+}
+.archived-comment-body p {
+  margin: 0.4rem 0;
+}
+.archived-comment-note {
+  margin-top: 1.5rem;
+  color: $text-muted;
+  font-style: italic;
+}

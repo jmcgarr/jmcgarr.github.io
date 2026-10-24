@@ -1,70 +1,16 @@
-// Mixins
+// Mixins shared by the partials (T134). The template's button-variant, serif-font (Lora) and sans-serif-font
+// mixins went in T134: nothing included the first two, and the third is the $font-family-open-sans token.
+@use "sass:map";
 @use "variables" as *;
 
-// Bootstrap Button Variant
-@mixin button-variant($color, $background, $border) {
-  color: $color;
-  border-color: $border;
-  background-color: $background;
-  &.focus,
-  &:focus {
-    color: $color;
-    border-color: darken($border, 25%);
-    background-color: darken($background, 10%);
-  }
-  &:hover {
-    color: $color;
-    border-color: darken($border, 12%);
-    background-color: darken($background, 10%);
-  }
-  &.active,
-  &:active,
-  .open > &.dropdown-toggle {
-    color: $color;
-    border-color: darken($border, 12%);
-    background-color: darken($background, 10%);
-    &.focus,
-    &:focus,
-    &:hover {
-      color: $color;
-      border-color: darken($border, 25%);
-      background-color: darken($background, 17%);
-    }
-  }
-  &.active,
-  &:active,
-  .open > &.dropdown-toggle {
-    background-image: none;
-  }
-  &.disabled,
-  &[disabled],
-  fieldset[disabled] & {
-    &.focus,
-    &:focus,
-    &:hover {
-      border-color: $border;
-      background-color: $background;
-    }
-  }
-  .badge {
-    color: $background;
-    background-color: $color;
+// @include media-up(md) { … }: a min-width query at one of the $grid-breakpoints (sm, md, lg, xl)
+@mixin media-up($name) {
+  @media (min-width: map.get($grid-breakpoints, $name)) {
+    @content;
   }
 }
-// Vendor prefixes: only the ones the 2018 build's autoprefixer kept (and the site has served since).
+
+// Links: the theme's short colour transition
 @mixin transition-all() {
-  -webkit-transition: all 0.2s;
   transition: all 0.2s;
-}
-@mixin background-cover() {
-  background-size: cover;
-}
-@mixin serif-font() {
-  font-family: 'Lora', 'Times New Roman', serif;
-}
-@mixin sans-serif-font() {
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-@mixin system-font() {
-  font-family: $font-family-system;
 }

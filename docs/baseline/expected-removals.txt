@@ -30,3 +30,9 @@ blog/drafts/unit-testing-from-zero-to-hero-draft.html
 # it on every page (the few rules the site relied on are in src/scss/_legacy-asciidoctor.scss). Not an HTML page,
 # so check-urls.sh doesn't track it; recorded here because /css/asciidoctor.css was a published URL (Rule 1).
 #   css/asciidoctor.css
+
+# 2026-10-24, T134 (approved by the owner 2026-10-24): the site-specific stylesheet extra.css, loaded on every
+# page since 2014. Its 31 rules are compiled into /css/clean-blog.css from src/scss/ now (same selectors and
+# declarations, see docs/reports/css-review-2026-10-24.md, item A2), and header.ftl no longer links it. Not an
+# HTML page, so check-urls.sh doesn't track it; recorded here because /css/extra.css was a published URL (Rule 1).
+#   css/extra.css

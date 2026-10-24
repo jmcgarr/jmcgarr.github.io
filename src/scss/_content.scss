@@ -1,17 +1,19 @@
 // Blocks that posts write as HTML inside their Markdown (README, "To write a post"): a sized or centred
 // image in a `<p class="text-center">`, a captioned image as a Bootstrap figure, an aside as a Bootstrap
 // card. Bootstrap does the layout; these few rules keep the look the AsciiDoc posts had before T102
-// converted them (2026-10-18), so nothing depends on asciidoctor.css.
+// converted them (2026-10-18), so nothing depends on asciidoctor.css. Posts (templates/post.ftl).
+@use "variables" as *;
+
 article {
   // Asciidoctor's image caption: bold, its dark red, left-aligned (even under a centred image)
   .figure-caption {
-    color: #7a2518;
+    color: $asciidoctor-red;
     font-weight: bold;
     text-align: left;
   }
   // Asciidoctor's sidebar title: light, its dark red, larger than the text
   .card-title {
-    color: #7a2518;
+    color: $asciidoctor-red;
     font-size: 1.6875em;
     font-weight: 300;
     line-height: 1.6;

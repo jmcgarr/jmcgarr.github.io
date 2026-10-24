@@ -207,6 +207,19 @@ public class ReviewChanges {
         return stem + (fm.isDraft() ? "-draft.html" : ".html");
     }
 
+    /** The Markdown a page is baked from (pageFor in reverse), or null for a template-only page such as index.html. */
+    static Path sourceOf(String page) {
+        if (!page.endsWith(".html")) {
+            return null;
+        }
+        String stem = page.substring(0, page.length() - ".html".length());
+        if (stem.startsWith("blog/drafts/") && stem.endsWith("-draft")) {
+            stem = stem.substring(0, stem.length() - "-draft".length());
+        }
+        Path source = CONTENT.resolve(stem + ".md");
+        return Files.isRegularFile(source) ? source : null;
+    }
+
     /** For a template change: the four pages the Definition of Done names, plus the newest and the oldest post. */
     static List<String> samplePages() throws IOException {
         List<String> pages = new ArrayList<>(List.of("index.html", "archive.html", "tags/index.html", "about.html"));
@@ -658,9 +671,14 @@ public class ReviewChanges {
         }
         reviewedPages.add(page);
         String html = Files.readString(file, StandardCharsets.UTF_8);
-        String[] sourceLines = source == null ? new String[0]
-                : Files.readString(source.path, StandardCharsets.UTF_8).split("\n", -1);
-        String sourceFile = source == null ? null : source.path.toString();
+        // The page's Markdown, when it has one: the change that made it, or, for a page pulled in by a template,
+        // image or asset change, the file it is baked from. Without it, brackets the author escaped as \[…\] were
+        // reported as E2 (found in T134, when deleting an asset pulled in such a page), and a finding couldn't
+        // point at its source line.
+        Path sourcePath = source != null ? source.path : sourceOf(page);
+        String[] sourceLines = sourcePath == null ? new String[0]
+                : Files.readString(sourcePath, StandardCharsets.UTF_8).split("\n", -1);
+        String sourceFile = sourcePath == null ? null : sourcePath.toString();
         // Links in a draft are resolved from where the post will live when published (blog/), not from blog/drafts/
         String pageDir = page.contains("/") ? page.substring(0, page.lastIndexOf('/') + 1) : "";
         if (pageDir.equals("blog/drafts/")) {
