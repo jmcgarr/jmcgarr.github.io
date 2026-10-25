@@ -3,7 +3,7 @@ date=2026-10-24
 type=post
 tags=writing, claude, jbake
 status=published
-masthead=maui-sunset.png
+masthead=maui-sunset.jpg
 mastheadCredit=Self, Hawaii, 2021
 summary=It has been six and a half years since my last blog post. The global pandemic upended not only the world, but also my personal priorities. I found myself no longer interested in writing or public speaking. Like many of us, I was trying to make sense of the new world order, and professional investment took a backseat. This persisted for years. Over those years, so much changed. I changed jobs, twice. My elementary schooler was now in high school. We fully renovated our house. Oh, and generative AI became a thing. It feels like everything has changed...and with these changes, I found that I wanted to write again.
 ~~~~~~
