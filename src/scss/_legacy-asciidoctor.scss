@@ -1,4 +1,4 @@
-// What every page relied on from asciidoctor.css (T102, 2026-10-18): images, lists, quotes, inline code,
+// What every page relied on from asciidoctor.css (T102, 2026-10-18): images, lists, quotes,
 // heading sizes and the font smoothing. Every page.
 //
 // Asciidoctor's stylesheet (assets/css/asciidoctor.css, 511 lines) was loaded on every page from 2014 until T102
@@ -12,7 +12,8 @@
 // stylesheet. The file asciidoctor.css itself was deleted on 2026-10-18 with the owner's approval (its URL is on
 // docs/baseline/expected-removals.txt, AGENTS.md Rule 1). Left out as having no effect on this site: `dl`,
 // `abbr`, `table`, `blockquote cite`, the form controls, the print styles, Asciidoctor's own classes, and (T134)
-// the nested-list combinations `ul li ol` and `ol li ul`, which no page has.
+// the nested-list combinations `ul li ol` and `ol li ul`, which no page has. Asciidoctor's inline code box
+// (`*:not(pre) > code`, grey with a border) lived here until T136 restyled it in _content.scss.
 @use "mixins" as *;
 
 // `.antialiased, body`: thinner text on macOS and iOS (Bootstrap doesn't set it). Non-standard, with no
@@ -90,15 +91,4 @@ blockquote,
 blockquote p {
   line-height: 1.6;
   color: #6f6f6f;
-}
-
-// Inline code: a light grey box on one line (code blocks are styled by code.scss, on the pages that have one)
-*:not(pre) > code {
-  font-size: 0.9375em;
-  padding: 1px 3px 0;
-  white-space: nowrap;
-  background-color: #f2f2f2;
-  border: 1px solid #cccccc;
-  border-radius: 4px;
-  text-shadow: none;
 }

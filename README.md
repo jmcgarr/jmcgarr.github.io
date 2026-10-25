@@ -248,7 +248,7 @@ T134). Each file there whose name doesn't start with `_` is an entry, published 
 |---|---|---|
 | `clean-blog.scss` | `/css/clean-blog.css`, every page | The theme and the site's own rules, as partials in the cascade order the file lists: tokens in `_variables.scss` (colors, fonts, sizes, breakpoints), the `media-up` breakpoint mixin in `_mixins.scss`, then `_global`, `_navbar`, `_masthead`, `_post`, `_content`, `_footer`, `_legacy-asciidoctor`, `_comments`, `_lists`, `_accessibility`. Each partial's header says what it styles and which template. The site-specific additions that were a separate `extra.css` live here since T134 |
 | `fonts.scss` | `/css/fonts.css`, every page | The 30 `@font-face` rules for the self-hosted Open Sans (T073), generated from a map of Google's subsets |
-| `code.scss` | `/css/code.css`, pages with a code block | Code blocks and the Prism token colors (T056) |
+| `code.scss` | `/css/code.css`, pages with a code block | Code blocks and the Prism token colors (T056), the language label and the copy button that `templates/code-highlight.ftl` adds (T136) |
 
 None of the CSS is in the repository: `./gradlew compileSass` writes it to `build/generated/sass/css/`, and `bake` and
 `preview` copy it into the site at the same URLs as always. A Sass error fails the build (and CI) with the file and

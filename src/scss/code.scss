@@ -1,25 +1,38 @@
-/* Code blocks (T056). Loaded only on pages that contain a <pre> (see templates/code-highlight.ftl).
+/* Code blocks (T056, T136). Loaded only on pages that contain a <pre> (see templates/code-highlight.ftl).
    Applies to the converted WordPress posts' raw <pre> blocks and Markdown fenced code alike, with or without
-   JavaScript (the AsciiDoc listing-block selectors left with AsciiDoc, T102). Token colors are for PrismJS
-   (vendor/prism/), a light theme to suit Clean Blog; every color has at least 4.5:1 contrast on the block
-   background. */
+   JavaScript. Token colors are for PrismJS (vendor/prism/), a light theme to suit Clean Blog; every color has
+   at least 4.5:1 contrast on the block background. */
 
-// Published as /css/code.css, compiled from here since T134 (it was a hand-written file under
-// src/jbake/assets/css/). Its palette is Prism's, kept local to this file; the breakpoint is the site's.
+// Published as /css/code.css, compiled from here since T134. The block's colours, radius and monospace stack
+// are tokens in _variables.scss (T136); the Prism token palette is kept local to this file. Inline code
+// (`like this`) is styled in _content.scss, because it appears on pages that have no block.
+//
+// Layout (T136): the <pre> is the frame (border, background, corners) and the positioning box for the
+// language label and the copy button, which sit in its top-right corner. The scrolling happens one level
+// down, in the <code> the script (or Markdown) puts inside it: it is pulled out to the frame's edge with
+// negative margins and given the padding back, so a long line scrolls under the label and button instead
+// of carrying them away. A bare <pre> with no <code> (a legacy block before the script has run, or with
+// JavaScript off) scrolls itself; it has no label or button to keep still.
+@use "variables" as *;
 @use "mixins" as *;
 
+$code-pad-y: 1rem;
+$code-pad-x: 1.25rem;
+
 pre {
+  position: relative;
   margin: 0 0 1.5rem;
-  padding: 0.875rem 1rem;
-  overflow-x: auto; /* long lines scroll inside the block instead of widening the page */
-  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  padding: $code-pad-y $code-pad-x;
+  overflow-x: auto; // long lines scroll inside the block instead of widening the page
+  scrollbar-width: thin;
+  font-family: $font-family-mono;
   font-size: 0.875rem;
   line-height: 1.6;
-  color: #24292e;
-  background: #f6f8fa;
-  border: 1px solid #e1e4e8;
-  border-radius: 6px;
-  white-space: pre;
+  color: $code-text;
+  background: $code-bg;
+  border: 1px solid $code-border;
+  border-radius: $code-radius;
+  white-space: pre; // commands and diffs stay exact: no wrapping
   word-wrap: normal;
   overflow-wrap: normal;
   word-break: normal;
@@ -36,7 +49,10 @@ pre {
 
 pre > code {
   display: block;
-  padding: 0;
+  margin: (-$code-pad-y) (-$code-pad-x);
+  padding: $code-pad-y $code-pad-x;
+  overflow-x: auto;
+  scrollbar-width: thin;
   font-family: inherit;
   font-size: inherit;
   color: inherit;
@@ -45,12 +61,103 @@ pre > code {
   border: 0;
 }
 
+// The label and the button share a $code-corner-high strip along the top of the block. A block that shows
+// the label (or, where there is no hover, the button) grows that much taller, so the first line of code is
+// never painted over: a long line scrolls under nothing.
+$code-corner-top: 0.375rem;
+$code-corner-high: 1.5rem;
+$code-strip: $code-corner-top + $code-corner-high + 0.375rem; // padding-top of a block with something in its corner
+
+// The language label: the block's language, as the script found it in the block's own class (never the
+// guess it makes for an unlabelled block, which gets no data-lang). Small uppercase grey text, top right.
+// Inert to the pointer.
+pre[data-lang] {
+  padding-top: $code-strip;
+}
+pre[data-lang]::before {
+  content: attr(data-lang);
+  position: absolute;
+  top: $code-corner-top;
+  right: 0.75rem;
+  font-size: 0.6875rem;
+  line-height: $code-corner-high;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: $code-muted;
+  pointer-events: none;
+}
+
+// The copy button (added by the script in code-highlight.ftl): top right, shown while the pointer is over
+// the block or the button has focus, and always where there is no hover (touch screens, coarse pointers).
+// It shows an inline SVG clipboard icon, then the word "Copied" for a moment after a click.
+.copy-code {
+  position: absolute;
+  top: $code-corner-top;
+  right: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: $code-corner-high;
+  height: $code-corner-high;
+  margin: 0;
+  padding: 0 0.25rem;
+  font-family: $font-family-system;
+  font-size: 0.75rem;
+  line-height: 1;
+  color: $code-muted;
+  background: $white;
+  border: 1px solid $code-border;
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s, color 0.15s;
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  &:hover {
+    color: $code-text;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $primary;
+    outline-offset: 1px;
+  }
+}
+
+pre:hover .copy-code,
+.copy-code:focus,
+.copy-code.is-copied {
+  opacity: 1;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .copy-code {
+    opacity: 1;
+  }
+  pre.has-copy {
+    padding-top: $code-strip;
+  }
+}
+
+// With a copy button in the corner, the label moves left to sit beside it
+pre.has-copy[data-lang]::before {
+  right: 0.5rem + $code-corner-high + 0.625rem;
+}
+
 /* PrismJS tokens */
 .token.comment,
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  color: #5c6670;
+  color: $code-muted;
   font-style: italic;
 }
 .token.punctuation {
@@ -95,7 +202,7 @@ pre > code {
 }
 .token.operator,
 .token.entity {
-  color: #24292e;
+  color: $code-text;
 }
 .token.important,
 .token.bold {
