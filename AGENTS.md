@@ -39,6 +39,8 @@ build/jbake/              Generated output (git-ignored)
 ./gradlew clean bakePreview   # build + serve at http://localhost:8080, rebuild on save, and reload the open page (drafts at /blog/drafts/<name>-draft.html)
 ./gradlew newPost -Ptitle="My Post"   # start a draft on a new post/<slug> branch (see README)
 ./gradlew reviewChanges       # check the pages this branch changed: Markdown links, local links and images, header (T117; see README)
+./gradlew check               # the standard Gradle verification task: bake + reviewChanges
+./gradlew prepareImage -Pimage=src/jbake/assets/img/masthead/photo.png   # make a hand-added image fit the image rules (see README)
 ```
 
 **Publishing happens only through CI** after a change is merged to `main`. There's no local publish command.
@@ -81,8 +83,10 @@ name stay the same, because the output is still `<name>.html`.
 image, re-encode a JPEG in place under the same name. For a photo saved as PNG, add a new `<name>.jpg`,
 point the pages at it, and replace `<name>.png` with a small fallback copy. Convert to sRGB before
 dropping the color profile, and strip camera metadata. See T016 in the revival plan for the exact method.
-**Header (masthead) images** also need 960px and 1440px variants for phones and tablets: run
-`scripts/masthead-variants.py` after adding or changing one (it needs Pillow). CI fails without them.
+`./gradlew prepareImage -Pimage=<path>` (`scripts/prepare-image.py`) does all of this for an image added by
+hand; a PNG that is already in `main` keeps its URL as the fallback.
+**Header (masthead) images** also need 960px and 1440px variants for phones and tablets: `prepare-image.py`
+makes them, or run `scripts/masthead-variants.py` alone after adding or changing one. CI fails without them.
 
 ### When a URL change is approved
 
@@ -163,7 +167,7 @@ Co-Authored-By: …
 Before you say a change is finished:
 
 - [ ] `./gradlew clean bake` succeeds with no new warnings
-- [ ] `./gradlew reviewChanges` reports no errors for the change (T117). Warnings are the author's call; say which ones you left
+- [ ] `./gradlew reviewChanges` (or `./gradlew check`) reports no errors for the change (T117). Warnings are the author's call; say which ones you left
 - [ ] You checked the affected pages in `./gradlew clean bakePreview` (home, one post, About, Archive at minimum for template changes)
 - [ ] No URL was removed or changed without approval (Rule 1 check)
 - [ ] `docs/` content is not in `build/jbake` (`test ! -e build/jbake/docs`)

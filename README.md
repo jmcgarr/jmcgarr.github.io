@@ -151,8 +151,16 @@ The aside's text, in Markdown, between blank lines.
 </div></div>
 ```
 
-If you use a new header image (`masthead=`), put it in `src/jbake/assets/img/masthead/` (≤ 1920px wide) and run
-`scripts/masthead-variants.py` (needs Pillow: `pip install pillow`) to create its phone and tablet sizes.
+If you use a new header image (`masthead=`), put it in `src/jbake/assets/img/masthead/` and run
+```
+./gradlew prepareImage -Pimage=src/jbake/assets/img/masthead/<name>.png
+```
+(or `.jpg`). It converts the image to sRGB, strips the camera metadata, resizes it to ≤ 1920px and ≤ 400 KB, turns a
+photo PNG into a `.jpg` and points the post at it, and creates the phone and tablet sizes
+(`scripts/masthead-variants.py` does that last step alone). The same command prepares an in-post image, capped at
+1000px; add `-Ppng` to keep a screenshot or graphic as PNG, `-PdryRun` to see what it would do, `-Pwidth=N` for
+another cap. The work is `scripts/prepare-image.py`, which the task runs with `uv` when it is installed (`uv`
+fetches Pillow by itself) and with `python3` otherwise (then `pip install pillow` first).
 `masthead=` also takes a full `https://` URL (a remote image, used as-is at every width, so pick one around
 1920px wide), or a site path such as `/img/qcon_crowd.jpg` for an image elsewhere under `src/jbake/assets/`.
 
@@ -165,7 +173,7 @@ Before opening a pull request, check the pages you changed:
 ```
 ./gradlew reviewChanges
 ```
-It bakes the site, lists every file that differs from `main` (committed or not), and reviews the Markdown and the
+(`./gradlew check`, Gradle's standard verification task, runs the same review.) It bakes the site, lists every file that differs from `main` (committed or not), and reviews the Markdown and the
 rendered pages (T117, design in [docs/05-REVIEW-FLOW.md](docs/05-REVIEW-FLOW.md)). **Errors** fail the command:
 a `[link]` followed by a bare URL or with a space before its `(` (E1), brackets left in the rendered text (E2), a
 link or image that points at nothing in the baked site (E3), an incomplete header, a CR line ending or a new post
