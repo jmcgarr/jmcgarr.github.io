@@ -1,5 +1,5 @@
 title=Reviving my Website with Claude
-date=2026-10-24
+date=2026-10-25
 type=post
 tags=writing, claude, jbake
 status=published
