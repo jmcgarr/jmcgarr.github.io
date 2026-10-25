@@ -2,11 +2,14 @@
 
 **Branch**: `docs/revival-changelog` | **Created**: 2026-10-12 | **Status**: Done
 
+> **Update, 2026-10-25 (owner): archived.** Its Status is Done, so this changelog moved to `docs/archive/`, where
+> finished numbered docs live, unchanged apart from its relative links. It keeps its number, 03.
+
 This blog has been online since 2009. By October 2026 it hadn't been touched in two years, the build
 tools were years out of date, and publishing had quietly broken. Between **October 4 and October 12, 2026**,
 the site was brought back to good health in about 90 small, reviewed pull requests. This is the
 plain-language list of what changed. The detailed plan, with every task and how it was tested, is in
-[`00-REVIVAL.md`](archive/00-REVIVAL.md).
+[`00-REVIVAL.md`](00-REVIVAL.md).
 
 One rule held throughout: **no link anyone made to this site over the last 15 years was broken.**
 Every old page address still works. Where an address had to change, the old one now redirects to the new one.
@@ -132,7 +135,7 @@ Every old page address still works. Where an address had to change, the old one 
   page used to download is no longer loaded; the handful of its rules the site relied on moved into the
   theme's own styles, so the pages look the same.
 - **A platform review** compared staying on JBake with Hugo, Astro, Eleventy and Roq, and decided to stay
-  ([`01-PLATFORM-DECISION.md`](archive/01-PLATFORM-DECISION.md)). It will be checked again every year.
+  ([`01-PLATFORM-DECISION.md`](01-PLATFORM-DECISION.md)). It will be checked again every year.
 
 ## Writing is pleasant again
 
@@ -144,7 +147,7 @@ Every old page address still works. Where an address had to change, the old one 
 ## Still to come
 
 These are for the author to write or decide, and they're tracked in their own list,
-[`04-AUTHORS-DESK.md`](04-AUTHORS-DESK.md):
+[`04-AUTHORS-DESK.md`](../04-AUTHORS-DESK.md):
 - an up-to-date About page and speaker bio
 - what to do with the 12 drafts
 - header images for older posts
