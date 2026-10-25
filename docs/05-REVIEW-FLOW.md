@@ -301,3 +301,6 @@ for the review flow, add its row here with the task and the `Closes #N` line, pe
   and `03-REVIVAL-CHANGELOG.md` stay at the top level of `docs/` (on 2026-10-23 the owner decided to stay on JBake and moved
   `02-ROQ-MIGRATION.md` to `docs/archive/`, the renamed `completed/`; `03` stays). (8) The three Talks labels became plain text (#142)
   rather than waiting for T048, so the first `-Pall` run has a clean E2._
+- _2026-10-25: `03-REVIVAL-CHANGELOG.md` moved to `docs/archive/` at the owner's request, now that its Status is Done
+  (the "`03` stays" in item (7) above was the position on 2026-10-23). Its relative links were adjusted for the new
+  location; the number stays 03._
