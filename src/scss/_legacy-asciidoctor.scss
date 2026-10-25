@@ -62,6 +62,11 @@ ol {
   margin-bottom: 1.25em;
   margin-left: 1.5em;
 }
+// Bulleted lists sit closer to the text (owner, 2026-10-25). The browser's default 40px padding-left still
+// holds the bullets, so the whole indent is 40px + this margin. `ol` keeps 1.75em below.
+ul {
+  margin-left: 0.30em;
+}
 ul li ul,
 ol li ol {
   margin-left: 1.25em;
