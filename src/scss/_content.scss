@@ -2,6 +2,7 @@
 // image in a `<p class="text-center">`, a captioned image as a Bootstrap figure, an aside as a Bootstrap
 // card. Bootstrap does the layout; these few rules keep the look the AsciiDoc posts had before T102
 // converted them (2026-10-18), so nothing depends on asciidoctor.css. Posts (templates/post.ftl).
+// Inline code, which any page can have, is at the end.
 @use "variables" as *;
 
 article {
@@ -27,4 +28,18 @@ article {
   .card-body > :last-child {
     margin-bottom: 0;
   }
+}
+
+// Inline code (`like this`, T136): a light grey box with soft corners, in the text's own colour (not
+// Bootstrap's pink, which is 3.4:1 on the grey), kept on one line. Code blocks are code.scss, on the pages
+// that have one; this rule is here because a page can have inline code and no block.
+*:not(pre) > code {
+  padding: 0.1em 0.3em;
+  font-family: $font-family-mono;
+  font-size: 0.9em;
+  color: inherit;
+  white-space: nowrap;
+  background-color: $code-inline-bg;
+  border-radius: 4px;
+  text-shadow: none;
 }

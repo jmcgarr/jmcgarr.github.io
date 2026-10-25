@@ -19,6 +19,16 @@ $masthead-fallback: #868e96 !default;
 // Asciidoctor's dark red for figure captions and card titles (_content.scss, T102)
 $asciidoctor-red: #7a2518 !default;
 
+// Code (T136). The block's greys are the GitHub-like light palette T056 chose; every Prism token colour in
+// code.scss has at least 4.5:1 contrast on $code-bg, and $code-muted (the label, the copy button, comments)
+// reads as muted there at 5.5:1. Inline code keeps its lighter Asciidoctor grey.
+$code-text:      #24292e !default;   // block text, and the operator tokens
+$code-bg:        #f6f8fa !default;   // block background
+$code-border:    #e1e4e8 !default;   // block border, copy button border
+$code-muted:     #5c6670 !default;   // language label, copy button, comment tokens
+$code-inline-bg: #f2f2f2 !default;   // inline code (`like this`) background, every page
+$code-radius:    8px !default;       // block corners; inline code and the copy button use 4px
+
 // Sizes
 $nav-height: 67px !default;          // #mainNav's height from 992px: the hidden-nav offset in _navbar.scss
 $masthead-padding: 150px !default;   // above and below the masthead heading (December 2019: was 200px)
@@ -38,3 +48,6 @@ $phone-narrow: 374.98px !default;
 // (300; the post date inside it is 300 italic). Owner's decision 2026-10-24 (T022): keep this mix.
 $font-family-system: -apple-system, BlinkMacSystemFont, "Avenir Next", Avenir, "Nimbus Sans L", Roboto, "Noto Sans", "Segoe UI", Arial, Helvetica, "Helvetica Neue", sans-serif !default;
 $font-family-open-sans: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif !default;
+// Code, inline and in blocks (T136): the platform's UI monospace where there is one (SF Mono, Cascadia
+// Mono, …), then the fonts the old stack named
+$font-family-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace !default;
