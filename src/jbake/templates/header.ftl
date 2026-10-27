@@ -18,17 +18,20 @@
     <!-- Bootstrap core CSS -->
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom fonts for this template -->
-    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <#-- Only the Open Sans styles the CSS actually uses: 300 (header subheadings), 300 italic (post dates),
          800 (nav); owner's decision 2026-10-24 (T022) to keep this mix. Self-hosted (T073): the same font
-         files Google Fonts serves, so no third-party request blocks rendering; the rules are compiled from
-         src/scss/fonts.scss (T134). The Latin normal file is preloaded because every page's nav uses it. -->
+         files Google Fonts serves, so no third-party request blocks rendering; the @font-face rules open
+         clean-blog.css (src/scss/_fonts.scss, T135; they were /css/fonts.css until then). The Latin normal
+         file is preloaded because every page's nav uses it, and the Latin italic on posts, whose masthead
+         date is the only italic Open Sans on the site (T135). -->
     <link rel="preload" href="/fonts/open-sans/open-sans-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link href="/css/fonts.css" rel="stylesheet">
+<#if ((content.type)!"") == "post">
+    <link rel="preload" href="/fonts/open-sans/open-sans-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
+</#if>
 
     <#-- The theme and the site's own rules, compiled from src/scss/ (T043). The site-specific additions that
-         were a separate extra.css are in the same file since T134. -->
+         were a separate extra.css are in the same file since T134, the font rules since T135. The footer and
+         menu icons are inline SVGs (T047, T135), so no icon font is loaded. -->
     <link href="/css/clean-blog.css" rel="stylesheet">
 <#-- Code block styles, only on pages with code (T056) -->
 <#include "code-highlight.ftl">
