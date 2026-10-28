@@ -80,7 +80,7 @@ jobs:
 
     # Every header image in use needs its 960/1440px variants (T071), or phones get a blank header
     - name: Check masthead variants
-      run: python3 scripts/masthead-variants.py --check
+      run: java scripts/PrepareImage.java --check-variants
 
     # Quality gates (T031). On Linux check-urls.sh is strict (case-sensitive), so it catches what macOS bakes can't.
     - name: Check published URLs still exist
@@ -89,7 +89,7 @@ jobs:
     # Old tag URLs (with spaces, or capitalized twins) are redirect stubs (T039, T055). Each must point at a real
     # tag page. On Linux the 2 case-only stubs (src/case-redirects/) are added by the bake, and checked here too.
     - name: Check old tag URLs redirect
-      run: python3 scripts/tag-redirects.py --check build/site
+      run: java scripts/TagRedirects.java --check build/site
 
     - name: Validate feed and sitemap XML
       run: |

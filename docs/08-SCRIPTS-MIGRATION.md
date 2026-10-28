@@ -171,7 +171,7 @@ T140. Phase B (T141–T143) runs inside M10 after T127 and T129 exist. Decisions
 
 #### Phase A: no Python (independent of the plugin)
 
-- [ ] T137 [IMP] **Retire the one-off conversion and comment tooling.** Delete `scripts/disqus-archive.py`,
+- [x] T137 [IMP] **Retire the one-off conversion and comment tooling.** Delete `scripts/disqus-archive.py`,
   `scripts/to-markdown/convert.py`, `asciidoc-convert.py`, `verify.py`, `render.sh`, `Render.java`; move
   `screenshots.sh`, `phone-shots.mjs` to `scripts/visual/` (and `pixeldiff.py` with them, until T138); drop the
   `scripts/to-markdown/*` and `.venv/` lines from `.gitignore`. README: replace "To convert an old post to
@@ -180,14 +180,34 @@ T140. Phase B (T141–T143) runs inside M10 after T127 and T129 exist. Decisions
   (`scripts/`, `.gitignore`, `README.md`, `AGENTS.md`, `src/jbake/templates/post.ftl`)
   - **Test:** the byte-identical check passes (the `.ftl` edit is a FreeMarker comment). `git ls-files scripts`
     lists 10 files, none under `to-markdown/`. `scripts/check-docs-not-published.sh` passes on a bake.
-- [ ] T138 [IMP] **`PixelDiff.java`.** `scripts/visual/PixelDiff.java`, a single-file program with
+  - _2026-10-27: **done** (`chore/T137-T140-no-python`, D1 taken on the plan's recommendation, see Blockers). The six
+    one-offs are deleted; `screenshots.sh`, `phone-shots.mjs` and (until T138) `pixeldiff.py` moved to `scripts/visual/`.
+    Neither moved tool had a path of its own to fix, and both ran from the new folder (4 pages at 1280 px with
+    `screenshots.sh`, 2 at 375 px with `phone-shots.mjs`, against `jwebserver` on port 8202). README's conversion
+    section is three sentences of history under the same heading (the archived revival plan names it); AGENTS.md
+    line 26 and `post.ftl` line 31 say T045 and the Disqus export. **Test passed:** a clean bake is byte-identical to
+    one of `origin/main` (496 files, every SHA-256 equal; `feed.xml` equal apart from its two build timestamps), and
+    `scripts/check-docs-not-published.sh build/jbake` is OK. One correction to the Test line: `git ls-files scripts`
+    lists **11** files, not 10 (17 − 6 deleted: 8 at the top level, 3 under `visual/`), none under `to-markdown/`._
+- [x] T138 [IMP] **`PixelDiff.java`.** `scripts/visual/PixelDiff.java`, a single-file program with
   `pixeldiff.py`'s interface (`<before> <after> [<diff_out>]`, same per-file line, exit 1 on a difference, the
   red-on-grey diff image); delete `pixeldiff.py`; the script headers of `screenshots.sh` and `phone-shots.mjs`
   name it; README "To change the site's styles" gives the Java command (`scripts/visual/`, `README.md`)
   - **Test:** on the `/tmp/css-before` and `/tmp/css-after` folders from the CSS review method (or two freshly
     shot folders), `java scripts/visual/PixelDiff.java` reports the same per-file counts and bounding boxes as
     `pixeldiff.py` did from a venv with Pillow, and exits 0 for identical folders, 1 otherwise.
-- [ ] T139 [IMP] **`TagRedirects.java`.** `scripts/TagRedirects.java` with both modes (`--check <site>` and write),
+  - _2026-10-27: **done**. `scripts/visual/PixelDiff.java` (ImageIO, `getRGB`; about 120 lines with its header) keeps
+    `pixeldiff.py`'s interface, per-file lines and exit codes, and reproduces Pillow's numbers exactly: the bounding
+    box is of any-channel differences (`getbbox`), the count and the red mask use Pillow's luma rounding of the
+    difference (`convert("L")`), as its header explains. **Test passed** on two freshly shot folders of 6 pages (4 at
+    1280 px, 2 at 375 px, from a bake of `origin/main`) and a third folder with deliberate differences: on the identical
+    pair both programs print `identical (0 pixels differ)` six times and exit 0; on the differing pair both print the
+    same `missing in`, `size (375, 3743) vs (375, 2123)`, `1187667 pixels differ, bounding box (274, 175, 1005, 4111)`
+    and `944589 pixels differ, bounding box (0, 0, 1280, 2632)` lines and exit 1, and the two red-on-grey diff images
+    each wrote are pixel-identical to Pillow's (checked with PixelDiff itself). The Python ran as
+    `uv run --with pillow python3 -I scripts/visual/pixeldiff.py` before it was deleted. Not verified: the
+    `/tmp/css-before` and `/tmp/css-after` folders of the CSS review no longer existed; fresh shots were used._
+- [x] T139 [IMP] **`TagRedirects.java`.** `scripts/TagRedirects.java` with both modes (`--check <site>` and write),
   the `RENAMES` map, the `?url_path`-compatible percent-encoder and `html.escape` equivalents; delete
   `tag-redirects.py`; CI line 92 becomes `java scripts/TagRedirects.java --check build/site`; update README (two
   places), AGENTS.md line 69, `jbake.properties` line 5, `tag-names.ftl` line 10 (`scripts/`,
@@ -197,7 +217,24 @@ T140. Phase B (T141–T143) runs inside M10 after T127 and T129 exist. Decisions
     regenerate byte for byte. `--check build/site` prints the same counts as the Python version on the same bake
     ("59 old tag URLs ... 57 redirect stubs, 2 not checkable here" on macOS) and passes on Linux in CI. Removing a
     stub makes it fail with "missing from the build"; editing a stub's target makes it fail with "redirects to".
-- [ ] T140 [IMP] **`PrepareImage.java`, with the masthead variants inside it.** `scripts/PrepareImage.java`:
+  - _2026-10-27: **done**. `scripts/TagRedirects.java` carries both modes, `RENAMES`, a hand-rolled `?url_path`
+    percent-encoder (the unreserved set plus `/-_.!~*'()`, uppercase hex, `'` → `%27` in the href only) and
+    `html.escape`/`unescape` equivalents; `java.net.URLEncoder` was not used. The stub marker still reads
+    `scripts/tag-redirects.py`: the 59 stubs are committed bytes, so the marker is kept as history rather than
+    rewritten (the Java header says why). **Test passed (Rule 1 gate):** write mode on a clean tree printed
+    "59 tag redirect stubs (0 written, 59 already up to date)" and `git status` stayed clean; with
+    `tags/acceptance test.html` deleted it wrote that one stub back and `git status` was clean again (byte for byte).
+    `--check build/jbake` on the same bake prints output identical to the Python's, line for line (`diff` empty:
+    "229 old tag URLs (181 baseline, 48 hyphenated since T039): 170 real tag pages, 57 redirect stubs, 2 not checkable
+    here", 176 tag names checked; the Test line's "59 old tag URLs" was the plan's shorthand for the 59 stubs). On a
+    copy of the bake with one stub removed and another's target edited it fails with
+    "tags/acceptance test.html: missing from the build" and "tags/unit testing.html: redirects to tags/unit-tests.html,
+    expected tags/unit-testing.html" (plus the canonical line). CI's step is `java scripts/TagRedirects.java --check
+    build/site`; README (table, local checks, the old-tag-URLs paragraph), AGENTS.md line 69, `jbake.properties`
+    line 5, `tag-names.ftl` line 10 and the `build.gradle` comment at line 130 name the Java program. The bake is
+    byte-identical (the two template/properties edits are comments). Not verified: the Linux run of `--check` with the
+    two case-only stubs present happens in CI on this PR._
+- [x] T140 [IMP] **`PrepareImage.java`, with the masthead variants inside it.** `scripts/PrepareImage.java`:
   `prepare-image.py`'s options and steps per the table above (bicubic resize; no ICC profile written; D2 decides
   the fallback PNG), plus `--variants <image>` (make the 960/1440 variants, never overwriting) and
   `--check-variants` (every masthead in use has both). Delete `prepare-image.py` and `masthead-variants.py`.
@@ -215,6 +252,30 @@ T140. Phase B (T141–T143) runs inside M10 after T127 and T129 exist. Decisions
     repoints the post's `masthead=`, and the three JPEGs contain no `Exif`, `ICC_PROFILE` or XMP marker and are
     progressive (`java` probe or `file`); `./gradlew reviewChanges` reports no E5. `-PdryRun` changes nothing
     (`git status` clean). The 28 committed variants are untouched (`git status` clean after `--check-variants`).
+  - _2026-10-27: **done** (D2 taken on the plan's recommendation, see Blockers). `scripts/PrepareImage.java` (about
+    560 lines with its header) has `prepare-image.py`'s options (`--dry-run`, `--png`, `--jpeg`, `--width N`,
+    `--keep-source`, and Gradle's `--name=value` spellings) and steps, plus `--variants <image>` (missing variants
+    only, never overwriting) and `--check-variants`; `build.gradle`'s task is the `newPost`-shaped `java` Exec; CI's
+    step is `java scripts/PrepareImage.java --check-variants`; `ReviewChanges.java`'s two E5 hints, README ("To write
+    a post", "Run the same checks locally", "Requirements"), AGENTS.md lines 86 and 89, `head-meta.ftl`, `masthead.ftl`,
+    `.gitignore` and a dated note under T059 in `archive/04-AUTHORS-DESK.md` follow; `07-FRONT-MATTER.md`'s two rows
+    name the Java program too. Accepted as the plan said: bicubic resampling (in halving steps, so a 4000 px photo
+    doesn't alias) and no ICC profile in new JPEGs. ImageIO's PNG reader doesn't apply an `iCCP` chunk, so the program
+    tags the pixels with it itself before `ColorConvertOp`; a photo PNG that is already in `main` is refused with
+    "convert it by hand or add the quantizer" and nothing is changed. **Test passed:** `git ls-files '*.py'` is empty;
+    `--check-variants` passes on the branch ("OK: all 15 mastheads in use have 960/1440px variants") and fails naming
+    `src/jbake/assets/img/masthead/egypt-960.jpg` with that file moved aside. On a scratch commit with
+    `maui-sunset.png` from `da470cc^` under `img/masthead/`, the post pointing at it and the three committed Maui
+    JPEGs removed, `./gradlew prepareImage -Pimage=... -PdryRun` printed the plan and left `git status` clean; the real
+    run wrote `maui-sunset.jpg` 1920×691 at q82, 130 KB (Pillow's: 132 KB), `-960` 960×346 (43 KB) and `-1440`
+    1440×518 (80 KB), repointed `masthead=`, removed the never-published PNG; the three JPEGs have `ffc2` (SOF2,
+    progressive) and no `Exif`, `ICC_PROFILE` or `ns.adobe.com/xap` bytes (Pillow's committed file carries an
+    `ICC_PROFILE`), and `./gradlew reviewChanges -Pbase=origin/main` reported 0 errors (no E5; three W6 for the
+    scratch's own deleted-then-regenerated tracked files). The scratch commit was dropped and the committed Maui
+    files restored; the 28 committed variants are untouched (`git status` clean). A clean bake is byte-identical
+    (the two template edits are comments). Not verified: a PNG or JPEG with an embedded non-sRGB profile (none was at
+    hand; the `ColorConvertOp` path is the plan's probe), and the Linux run of `--check-variants`, which CI does on
+    this PR._
 
 #### Phase B: into the plugin (inside M10, after T127 and T129)
 
@@ -261,6 +322,8 @@ Nothing blocks the "no Python" goal technically. Four decisions shape it:
   (T137). The alternative, porting them to Java "for the record", costs ~2,500 lines of Python to translate for
   tools that cannot run again (no Disqus export; no non-Markdown engine). Recommendation: retire; git history is the
   record.
+  - _2026-10-27: **retire**, taken on the plan's recommendation to start Phase A (T137); the owner can overrule. The
+    six files are in git history (`git log -- scripts/to-markdown scripts/disqus-archive.py`)._
 - **D2: the option B fallback PNG.** The JDK has no colour quantizer. Options: (a) write a small median-cut with
   Floyd–Steinberg in `PrepareImage.java` (~100 lines, no dependency); (b) a library (verify which Java PNG
   quantizers are maintained before choosing); (c) shell out to `pngquant` when installed; (d) drop the step, since
@@ -268,6 +331,9 @@ Nothing blocks the "no Python" goal technically. Four decisions shape it:
   `london-alley.png`, `london-view.png`, `santa-cruz.png`) are already 800–1024 px, 256-colour fallbacks from T016
   that no page references (checked 2026-10-25). A never-published PNG is simply removed, as today. Recommendation: (d) now, with a clear
   refusal message ("this PNG is published; convert it by hand or add the quantizer"), and (a) if the case arises.
+  - _2026-10-27: **(d)**, taken on the plan's recommendation to start Phase A (T140); the owner can overrule.
+    `PrepareImage.java` refuses a photo PNG that is in `main` ("convert it by hand or add the quantizer") and removes
+    a never-published one after conversion, as before. (a) stays the answer if the case ever arises._
 - **D3: scope of `checkSite`.** Only the three scripted checks (T141 as written), or also the inline CI steps
   (drafts, CR line endings, live-reload marker) so CI is `./gradlew bake checkSite` plus lychee and xmllint.
   The inline steps are five lines of shell each and already run on `build/site`; moving them is tidy, not
@@ -296,3 +362,6 @@ Test uses working.
   shell)? The ideal end state is NO Python in the repo at all"). Research only: no script, `build.gradle` or
   workflow was changed. The `javax.imageio` table comes from a probe run on this machine's JDK 25.0.4 against two
   committed mastheads; the probe wrote only to a scratch folder._
+- _2026-10-27: Phase A started at the owner's request, on one branch (`chore/T137-T140-no-python`, one commit per
+  task). D1 and D2 are taken on the plan's own recommendations, pending the owner's confirmation; D3 and D4 wait for
+  Phase B._

@@ -10,7 +10,8 @@ Requirements
   With sdkman and jenv: `sdk install java 25.0.4-tem`, then `jenv add ~/.sdkman/candidates/java/25.0.4-tem`.
   JDK 21 still builds the site identically, if you need it.
 - Nothing else: `./gradlew` downloads the right Gradle version, and Gradle downloads the Sass compiler (see
-  [To change the site's styles](#to-change-the-sites-styles)). No Node or Ruby.
+  [To change the site's styles](#to-change-the-sites-styles)). No Node or Ruby, and nothing to install for the
+  tools under `scripts/`: they are single-file Java programs (`java scripts/<Name>.java`) and shell.
 
 To preview
 ==========
@@ -157,10 +158,12 @@ If you use a new header image (`masthead=`), put it in `src/jbake/assets/img/mas
 ```
 (or `.jpg`). It converts the image to sRGB, strips the camera metadata, resizes it to ≤ 1920px and ≤ 400 KB, turns a
 photo PNG into a `.jpg` and points the post at it, and creates the phone and tablet sizes
-(`scripts/masthead-variants.py` does that last step alone). The same command prepares an in-post image, capped at
-1000px; add `-Ppng` to keep a screenshot or graphic as PNG, `-PdryRun` to see what it would do, `-Pwidth=N` for
-another cap. The work is `scripts/prepare-image.py`, which the task runs with `uv` when it is installed (`uv`
-fetches Pillow by itself) and with `python3` otherwise (then `pip install pillow` first).
+(`java scripts/PrepareImage.java --variants <image>` does that last step alone, and never overwrites a variant). The
+same command prepares an in-post image, capped at 1000px; add `-Ppng` to keep a screenshot or graphic as PNG,
+`-PdryRun` to see what it would do, `-Pwidth=N` for another cap. The work is `scripts/PrepareImage.java`, a single-file
+Java program like `newPost`'s (T140, 2026-10-27; before that a script that needed an image library installed), so nothing is installed. It
+refuses a photo PNG that is already published (its URL must keep a PNG, and the JDK has no colour quantizer for the
+small fallback): convert such a one by hand, as T016 did.
 `masthead=` also takes a full `https://` URL (a remote image, used as-is at every width, so pick one around
 1920px wide), or a site path such as `/img/qcon_crowd.jpg` for an image elsewhere under `src/jbake/assets/`.
 
@@ -199,45 +202,16 @@ to `main` skips the step: the PR already ran it.
 
 To convert an old post to Markdown
 ==================================
-The site converged on Markdown in October 2026 (revival task T102; the owner's decision of 2026-10-12). Every
-published WordPress `.html` post was converted in batches by year, then the HTML drafts, the 11 AsciiDoc posts,
-and last (2026-10-18) the 3 AsciiDoc pages (About, Talks, Speaker Bio) and the 2 AsciiDoc drafts: every file
-under `src/jbake/content/` is `.md` now, and since the same day the build renders nothing else: AsciidoctorJ
-(with JRuby) is out of `build.gradle`, and `asciidoctor.css` is no longer loaded (the few rules every page relied
-on from it live in `src/scss/_legacy-asciidoctor.scss`). A conversion is mechanical: the published page must not
-change, and `scripts/to-markdown/verify.py`, not the converter, is the proof. The tools, kept for the record and
-for any page that comes back in another format, from `scripts/to-markdown/`:
-
-```
-python3 -m venv .venv && .venv/bin/pip install html5lib pillow   # once
-./gradlew clean bake && cp -R build/jbake /tmp/baseline            # a bake of main, before converting
-git mv src/jbake/content/blog/<slug>.html src/jbake/content/blog/<slug>.md   # commit this rename on its own
-.venv/bin/python scripts/to-markdown/convert.py --in-place src/jbake/content/blog/<slug>.md
-./gradlew clean bake
-.venv/bin/python scripts/to-markdown/verify.py /tmp/baseline build/jbake <slug>...
-```
-
-`convert.py` keeps the header byte for byte and turns the body into Markdown where the result renders the same
-with this site's flexmark settings; anything it can't express exactly (code blocks, images and paragraphs with
-classes or styles, embeds) stays raw HTML. Off-site links become plain `[text](url)` links, because the templates
-add `target="_blank"` at build time (so pages are identical, and only `feed.xml` loses that attribute).
-`asciidoc-convert.py` did the same for an AsciiDoc file (`git mv x.asciidoc x.md`, then `--in-place`); it is
-kept for history, the last AsciiDoc file having been converted on 2026-10-18 (the build can't render one now). It
-converts exactly the AsciiDoc the 2014–2020 posts and the three pages used and refuses anything else, and its
-docstring records each decision (fenced code, loose lists, blockquotes, a bare URL as an autolink, a `++++`
-block holding a titled YouTube or SlideShare iframe as a T115 embed link, and for a sidebar or an image with a
-width, a height, a caption or a left/right role the Bootstrap markup shown under "To write a post", so nothing
-depends on `asciidoctor.css`). Asciidoctor's wrapper `<div>`s are gone after that, so check such a file with
-`verify.py --text-only`, which lists the DOM differences and still requires the visible text, the counts, the
-page outside the body and the feed item's fields to match.
-`verify.py` compares each page outside `<article>` (for a page from `page.ftl`, outside its body `<div>`) byte
-for byte, the article and the feed item as a DOM, and counts of links, images, code blocks and visible text; it
-takes a post slug or a path such as `about.html` or `blog/drafts/<name>-draft.html`. `render.sh` renders
-Markdown exactly as JBake does, to probe an edge case. `screenshots.sh` (desktop, 1280px) and `phone-shots.mjs`
-(a real 375px phone viewport, which also reports any sideways scroll) take before-and-after screenshots of a
-sample of posts or pages (a slug or a path, as for `verify.py`), and `pixeldiff.py` compares them pixel by
-pixel. Each script's header says how to run it. URLs don't change, because JBake publishes `<slug>.md` at the
-same `/blog/<slug>.html` (and `about.md` at `/about.html`).
+There is nothing to convert: every file under `src/jbake/content/` has been Markdown since 2026-10-18, and the build
+renders nothing else (revival task T102, the owner's decision of 2026-10-12), after the 63 WordPress-era HTML posts,
+the 11 AsciiDoc posts, the 3 AsciiDoc pages and the drafts were converted in batches, each proved against a bake of
+`main` so that no published page changed. The converters (`convert.py`, `asciidoc-convert.py`), their proof
+(`verify.py`) and the flexmark probe (`render.sh`, `Render.java`) were one-off tools in `scripts/to-markdown/`, retired
+on 2026-10-27 (T137 in [docs/08-SCRIPTS-MIGRATION.md](docs/08-SCRIPTS-MIGRATION.md)) because a page in another format
+can't come back without first re-adding an engine; `git log -- scripts/to-markdown` has them, and the T102 notes in
+[docs/archive/00-REVIVAL.md](docs/archive/00-REVIVAL.md) record each batch. The screenshot tools that came with them
+(`screenshots.sh`, `phone-shots.mjs` and the pixel diff) are still used to prove a style change moved no pixels, and
+live in `scripts/visual/` (see [To change the site's styles](#to-change-the-sites-styles)).
 
 To change the site's styles
 ===========================
@@ -267,7 +241,16 @@ page reloads. A Sass error there is printed in the terminal, and the page keeps 
 A new rule goes in the partial that styles that part of the page (or a new partial, added to `clean-blog.scss` in
 cascade order); a new color or size goes in `_variables.scss`. To prove a refactor changed nothing visible, use the
 screenshot-and-pixel-diff method in [`docs/reports/css-review-2026-10-24.md`](docs/reports/css-review-2026-10-24.md),
-"How to verify".
+"How to verify": shoot the same pages from a bake of `main` and from the branch with `scripts/visual/screenshots.sh`
+(1280px, headless Chrome) and `scripts/visual/phone-shots.mjs` (a real 375px viewport, Node), then compare the two
+folders pixel by pixel with
+```
+java scripts/visual/PixelDiff.java /tmp/css-before /tmp/css-after /tmp/css-diff
+```
+It prints `identical (0 pixels differ)` per page and exits 0, or the count and bounding box of the differing pixels
+and exits 1, writing a red-on-grey image per differing page into the third folder. (The report, written on 2026-10-24,
+names the tools' old folder `scripts/to-markdown/` and the old `pixeldiff.py`; they moved to `scripts/visual/` and the
+diff is Java since 2026-10-27, T137 and T138. Nothing to install.)
 
 **The compiler** is [Dart Sass](https://sass-lang.com/dart-sass/), the reference Sass implementation, run from
 Gradle by the [freefair Sass plugin](https://plugins.gradle.org/plugin/io.freefair.sass-base) through its
@@ -310,7 +293,7 @@ Everything happens in one workflow, [`.github/workflows/gradle.yml`](.github/wor
 | Docs are not published | Anything from `docs/` (planning notes) going live |
 | Masthead variants | A header image missing its 960/1440px sizes (phones would get a blank header) |
 | Published URLs still exist (`scripts/check-urls.sh`) | Removing or renaming any page that's live (strict on CI's Linux runner) |
-| Old tag URLs redirect (`scripts/tag-redirects.py --check`) | An old tag URL that's missing, or whose redirect stub points at a page that isn't there; a tag page that shows its tag differently from the posts |
+| Old tag URLs redirect (`scripts/TagRedirects.java --check`) | An old tag URL that's missing, or whose redirect stub points at a page that isn't there; a tag page that shows its tag differently from the posts |
 | Feed and sitemap XML | A broken `feed.xml` or `sitemap.xml` |
 | Local links and assets (lychee) | Broken internal links, or missing images, CSS, JS, or fonts |
 
@@ -339,8 +322,8 @@ Gradle. Each runs the same build and checks, and never deploys.
 rm -rf build/site && rsync -a --prune-empty-dirs --exclude '*-draft.html' build/jbake/ build/site/
 scripts/check-docs-not-published.sh build/site   # docs/ must never reach the site
 scripts/check-urls.sh build/site                 # no published URL may disappear
-python3 scripts/tag-redirects.py --check build/site   # old tag URLs are tag pages or working redirects
-python3 scripts/masthead-variants.py --check     # header images have their phone/tablet sizes
+java scripts/TagRedirects.java --check build/site   # old tag URLs are tag pages or working redirects
+java scripts/PrepareImage.java --check-variants  # header images have their phone/tablet sizes
 xmllint --noout build/site/feed.xml build/site/sitemap.xml
 ```
 The link checker (lychee) runs in CI. To run it locally, install [lychee](https://lychee.cli.rs) and see the
@@ -348,18 +331,18 @@ The link checker (lychee) runs in CI. To run it locally, install [lychee](https:
 
 **Old tag URLs (T039, T055):** tag pages used to be published with spaces (`/tags/acceptance test.html`), and two
 tags had a capitalized twin (`/tags/DevOps.html`, `/tags/Groovy.html`). Those 50 URLs are now small redirect pages
-(meta refresh, `rel=canonical`, `noindex`, and a visible link) to the new pages, made by `scripts/tag-redirects.py`
-from `docs/baseline/urls.txt` and committed: 48 in `src/jbake/assets/tags/`, and the 2 capitalized ones in
-`src/case-redirects/tags/`. Run the script again if a tag in that list stops being used, and keep its stubs.
+(meta refresh, `rel=canonical`, `noindex`, and a visible link) to the new pages, made by `scripts/TagRedirects.java`
+(`java scripts/TagRedirects.java`, nothing to install; `tag-redirects.py` until T139, 2026-10-27) from `docs/baseline/urls.txt` and committed: 48 in `src/jbake/assets/tags/`, and the 2 capitalized ones in
+`src/case-redirects/tags/`. Run the program again if a tag in that list stops being used, and keep its stubs.
 **Merging or renaming a tag** (needs the owner's approval, AGENTS.md Rule 1): add `old → new` to `RENAMES` in the
-script, edit the posts' `tags=` lines, and run the script. It writes a stub at every old URL of the old tag: the
+program, edit the posts' `tags=` lines, and run it. It writes a stub at every old URL of the old tag: the
 baseline one and, for a tag with a space, the hyphenated page published since T039 (`tags/google-calender.html`).
 `--check` covers those hyphenated URLs too (derived from the baseline, which they aren't in). The 2026-10-09 merges
 and typo fixes (report §H) added 9 stubs and repointed 3, for 59 in all.
 **macOS caveat:** macOS filesystems ignore case, so `tags/DevOps.html` and `tags/devops.html` are the same file
 there. `./gradlew bake` therefore adds `src/case-redirects/` only when `build/jbake` is case-sensitive (Linux, as
 in CI and on GitHub Pages) and says so when it skips them. A local bake on a Mac has the real `devops` and `groovy`
-pages but not those 2 stubs, and `check-urls.sh` and `tag-redirects.py --check` report them as "can't check here".
+pages but not those 2 stubs, and `check-urls.sh` and `TagRedirects.java --check` report them as "can't check here".
 They're not JBake assets on purpose: JBake copies assets after rendering, so on a Mac the stub would overwrite the
 real page and redirect to itself.
 

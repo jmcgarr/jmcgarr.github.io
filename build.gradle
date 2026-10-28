@@ -127,7 +127,7 @@ def configureJBake = { JavaExec task ->
 }
 
 // Redirect stubs whose names differ from a real page only by letter case, such as tags/DevOps.html → tags/devops.html
-// (T055, made by scripts/tag-redirects.py). They can't be JBake assets: on a case-insensitive filesystem (macOS)
+// (T055, made by scripts/TagRedirects.java). They can't be JBake assets: on a case-insensitive filesystem (macOS)
 // both names are one file, and JBake copies assets after rendering, so the stub would replace the real page. The
 // bake adds them only when build/jbake is case-sensitive, as on Linux, where CI builds and GitHub Pages serves.
 def caseRedirects = file('src/case-redirects')
@@ -374,30 +374,22 @@ tasks.register('newPost', Exec) {
 
 // Prepares an image added by hand under src/jbake/assets/img/ (sRGB, no camera metadata, the Rule 4 size and
 // weight, a photo PNG turned into a JPEG that the pages are pointed at, the 960/1440 masthead variants). The
-// logic is scripts/prepare-image.py; this task runs it with uv when uv is on the PATH (uv fetches Pillow on its
-// own, from the script's inline metadata) and with python3 otherwise (which then needs `pip install pillow`).
+// logic is scripts/PrepareImage.java, a single-file Java program (T140), so it also runs without Gradle:
+// java scripts/PrepareImage.java <image>, --variants <image> (the variants alone), --check-variants (what CI runs).
 //   ./gradlew prepareImage -Pimage=src/jbake/assets/img/masthead/photo.png[,other.jpg] [-PdryRun] [-Ppng|-Pjpeg]
 //                          [-Pwidth=1000] [-PkeepSource]
 tasks.register('prepareImage', Exec) {
     group = 'writing'
     description = 'Prepares a hand-added image for the site (sRGB, metadata, size, masthead variants): ./gradlew prepareImage -Pimage=<path>'
-    def image = providers.gradleProperty('image')
-    def flags = ['dryRun': '--dry-run', 'png': '--png', 'jpeg': '--jpeg', 'keepSource': '--keep-source']
-            .collectEntries { name, flag -> [(flag): providers.gradleProperty(name)] }
-    def width = providers.gradleProperty('width')
-    def path = providers.environmentVariable('PATH').orElse('')
-    def uv = path.map { p ->
-        p.split(File.pathSeparator).collect { new File(it, 'uv') }.find { it.isFile() && it.canExecute() }
-    }
-    executable = uv.map { it.absolutePath }.orElse('python3').get()
+    executable = "${System.getProperty('java.home')}/bin/java"
+    def options = ['image', 'dryRun', 'png', 'jpeg', 'width', 'keepSource']
+            .collectEntries { [(it): providers.gradleProperty(it)] }
     argumentProviders.add({
-        if (!image.isPresent()) {
+        if (!options.image.isPresent()) {
             throw new GradleException('Say which image: ./gradlew prepareImage -Pimage=src/jbake/assets/img/masthead/photo.png')
         }
-        (uv.isPresent() ? ['run', '--quiet'] : []) + ['scripts/prepare-image.py'] +
-                flags.findAll { flag, value -> value.isPresent() }.keySet().toList() +
-                (width.isPresent() ? ['--width', width.get()] : []) +
-                image.get().split(',').collect { it.trim() }.findAll { it }
+        ['scripts/PrepareImage.java'] + options.findAll { name, value -> value.isPresent() }
+                .collect { name, value -> "--${name}=${value.get()}".toString() }
     } as CommandLineArgumentProvider)
 }
 
