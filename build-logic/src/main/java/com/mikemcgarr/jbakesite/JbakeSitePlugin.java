@@ -8,6 +8,7 @@ import org.gradle.api.file.Directory;
 import org.gradle.api.file.ProjectLayout;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.provider.ProviderFactory;
+import org.gradle.api.services.BuildServiceRegistry;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.TaskProvider;
 
@@ -19,24 +20,31 @@ import org.gradle.api.tasks.TaskProvider;
  * class registers each slice's tasks with the names the site has used since 2014. T123 created it; T124 added the
  * theme CSS: {@code compileSass} ({@link CompileSassTask}) and {@code checkNoHandEditedCss}
  * ({@link CheckNoHandEditedCssTask}); T125 the {@code jbake} configuration ({@link JbakeClasspath}) and
- * {@code bake} ({@link BakeTask}).
+ * {@code bake} ({@link BakeTask}); T126 {@code bakePreview} ({@link BakePreviewTask}) with its SCSS watcher
+ * ({@link SassPreviewWatcher}).
  */
 public final class JbakeSitePlugin implements Plugin<Project> {
 
     /** The name of the extension, {@code jbakeSite}, as it reads in {@code build.gradle}. */
     public static final String EXTENSION_NAME = "jbakeSite";
 
-    /** The task group of the tasks that generate and preview the site: {@code bake}, and {@code bakePreview} with T126. */
+    /** The task group of the tasks that generate and preview the site: {@code bake} and {@code bakePreview}. */
     public static final String JBAKE_GROUP = "jbake";
 
     /** The task that bakes the site. */
     public static final String BAKE_TASK_NAME = "bake";
+
+    /** The task that bakes, serves and rebuilds on save. */
+    public static final String BAKE_PREVIEW_TASK_NAME = "bakePreview";
 
     /** The task that compiles the SCSS entries. No group: an implementation detail of the bake and the preview. */
     public static final String COMPILE_SASS_TASK_NAME = "compileSass";
 
     /** The task that fails the build if hand-written CSS is back under the assets. */
     public static final String CHECK_NO_HAND_EDITED_CSS_TASK_NAME = "checkNoHandEditedCss";
+
+    /** The SCSS watcher's name in Gradle's shared build services. */
+    static final String SCSS_WATCHER_SERVICE_NAME = "sassPreviewWatcher";
 
     /** Where {@code compileSass} writes, under the build directory; the published directory is appended. */
     private static final String COMPILED_CSS_DIRECTORY = "generated/sass";
@@ -58,6 +66,7 @@ public final class JbakeSitePlugin implements Plugin<Project> {
         TaskProvider<CompileSassTask> compileSass = registerThemeCss(site, tasks, layout);
         configureJbakeTasks(site, jbake, tasks, layout, project.getProviders());
         registerBake(site, compileSass, tasks, layout);
+        registerBakePreview(site, compileSass, tasks, layout, project.getGradle().getSharedServices());
     }
 
     private static void setDefaults(JbakeSiteExtension site, ProjectLayout layout) {
@@ -126,6 +135,27 @@ public final class JbakeSitePlugin implements Plugin<Project> {
             task.getThemeCss().from(compileSass.flatMap(CompileSassTask::getDestinationDirectory));
             task.getThemeCssPublishedDir().set(site.getScss().getPublishedDir());
             task.getCaseRedirects().set(site.getCaseRedirects());
+        });
+    }
+
+    private static void registerBakePreview(JbakeSiteExtension site, TaskProvider<CompileSassTask> compileSass,
+            TaskContainer tasks, ProjectLayout layout, BuildServiceRegistry services) {
+        ScssExtension scss = site.getScss();
+        Provider<SassPreviewWatcher> watcher = services.registerIfAbsent(SCSS_WATCHER_SERVICE_NAME, SassPreviewWatcher.class, spec -> {
+            spec.getParameters().getSourceDir().set(scss.getSource());
+            spec.getParameters().getTargetDir().set(site.getDestination().dir(scss.getPublishedDir()));
+            spec.getParameters().getPublishedDir().set(scss.getPublishedDir());
+            spec.getParameters().getSourceName().set(scss.getSource()
+                    .map(source -> ProjectPaths.relativize(layout.getProjectDirectory(), source.getAsFile())));
+        });
+        tasks.register(BAKE_PREVIEW_TASK_NAME, BakePreviewTask.class, task -> {
+            task.setGroup(JBAKE_GROUP);
+            task.setDescription("Bakes, serves http://localhost:8080, rebuilds on save, and reloads the open page (Ctrl+C to stop).");
+            task.getDestination().set(site.getDestination());
+            task.getThemeCss().from(compileSass.flatMap(CompileSassTask::getDestinationDirectory));
+            task.getThemeCssPublishedDir().set(scss.getPublishedDir());
+            task.getScssWatcher().set(watcher);
+            task.usesService(watcher);
         });
     }
 }

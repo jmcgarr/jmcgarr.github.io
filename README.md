@@ -317,10 +317,12 @@ doesn't list it. `clean` and `check` are Gradle's own; `check` runs `bake` and `
 
 **Where the tasks are defined** (since 2026-10-27, [`docs/06-GRADLE-PLUGIN.md`](docs/06-GRADLE-PLUGIN.md)): the
 build logic is moving out of `build.gradle` into the site's own Gradle plugin, `jbake-site`, in **`build-logic/`**,
-an included build written in Java with its own tests (`./gradlew :build-logic:build` compiles and tests it). So far
-the plugin defines `compileSass` and the hand-edited-CSS guard, `checkNoHandEditedCss`, both configured by the
-`jbakeSite { scss { ... } }` block at the top of `build.gradle`; `bake`, `bakePreview` and the `writing` tasks are
-still in `build.gradle` until their slices move. The full description comes with the last slice.
+an included build written in Java with its own tests (`./gradlew :build-logic:build` compiles and tests it). The
+plugin defines `bake` and `bakePreview` (JBake's launcher in a fresh JVM, the CSS and case-redirect copies, the port
+check and the SCSS watcher), `compileSass` and the hand-edited-CSS guard `checkNoHandEditedCss`, and the `jbake`
+configuration; all of it configured by the `jbakeSite { ... }` block at the top of `build.gradle`, where the JBake
+version pins also stay. The `writing` tasks are still in `build.gradle` until their slice moves. The full description
+comes with the last slice.
 
 **GitHub settings and DNS this depends on:**
 - **Settings → Pages → Build and deployment → Source: "GitHub Actions".**

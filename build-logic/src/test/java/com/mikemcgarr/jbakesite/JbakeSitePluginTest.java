@@ -73,6 +73,29 @@ class JbakeSitePluginTest {
     }
 
     @Test
+    void registersBakePreviewInTheJbakeGroupWithTheScssWatcher() {
+        BakePreviewTask preview = (BakePreviewTask) project.getTasks().getByName(JbakeSitePlugin.BAKE_PREVIEW_TASK_NAME);
+
+        assertEquals(JbakeSitePlugin.JBAKE_GROUP, preview.getGroup());
+        assertEquals("Bakes, serves http://localhost:8080, rebuilds on save, and reloads the open page (Ctrl+C to stop).",
+                preview.getDescription());
+        assertEquals(projectFile("src/jbake"), preview.getSource().get().getAsFile());
+        assertEquals(projectFile("build/jbake"), preview.getDestination().get().getAsFile());
+        assertEquals(Set.of(projectFile("build/generated/sass/css")), preview.getThemeCss().getFiles());
+        assertEquals("css", preview.getThemeCssPublishedDir().get());
+        assertEquals(NewJdkJvmArgs.forCurrentJvm(), preview.getJvmArguments().get());
+        assertEquals(Set.of(JbakeSitePlugin.CHECK_NO_HAND_EDITED_CSS_TASK_NAME, JbakeSitePlugin.COMPILE_SASS_TASK_NAME),
+                dependenciesOf(preview));
+        assertTrue(preview.getOutputs().getFiles().isEmpty(), "no outputs: the preview runs every time");
+
+        SassPreviewWatcher watcher = preview.getScssWatcher().get();
+        assertEquals(projectFile("src/scss"), watcher.getParameters().getSourceDir().get().getAsFile());
+        assertEquals(projectFile("build/jbake/css"), watcher.getParameters().getTargetDir().get().getAsFile());
+        assertEquals("css", watcher.getParameters().getPublishedDir().get());
+        assertEquals("src/scss", watcher.getParameters().getSourceName().get(), "as the log lines name it");
+    }
+
+    @Test
     void theExtensionIsReadLazily() {
         site.getSource().set(projectFile("site"));
         site.getDestination().set(projectFile("out"));
@@ -99,6 +122,11 @@ class JbakeSitePluginTest {
         assertEquals(projectFile("stubs"), bake.getCaseRedirects().get().getAsFile());
         assertEquals(projectFile("logging.xml"), bake.getLogbackConfiguration().get().getAsFile());
         assertEquals("assets/styles", bake.getThemeCssPublishedDir().get());
+
+        BakePreviewTask preview = (BakePreviewTask) project.getTasks().getByName(JbakeSitePlugin.BAKE_PREVIEW_TASK_NAME);
+        assertEquals(projectFile("out"), preview.getDestination().get().getAsFile());
+        assertEquals(projectFile("out/assets/styles"), preview.getScssWatcher().get().getParameters().getTargetDir().get().getAsFile());
+        assertEquals("styles", preview.getScssWatcher().get().getParameters().getSourceName().get());
     }
 
     private Set<String> dependenciesOf(Task task) {

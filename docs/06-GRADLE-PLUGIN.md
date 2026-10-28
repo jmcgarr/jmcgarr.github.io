@@ -330,13 +330,42 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
     case-sensitive and the macOS message prints otherwise, a second run is UP-TO-DATE and reuses the configuration cache,
     a changed post rebakes, and the `dependencies` report shows the lz4 substitution and none of the excluded groups).
     Not verified locally: the Linux bake with the stubs and `scripts/check-urls.sh` (CI)._
-- [ ] T126 [IMP] **Move the preview.** `SassPreviewWatcher` as a Java build service, the port check (reading
+- [x] T126 [IMP] **Move the preview.** `SassPreviewWatcher` as a Java build service, the port check (reading
   `server.hostname`/`server.port` from `jbake.properties`), the live-reload system property, and the `bakePreview`
   task (the only preview task after T133) (`build-logic/`, `build.gradle`)
   - **Test:** `./gradlew clean bakePreview` serves http://localhost:8080, a saved post shows in the open page
     within about 2 s, a saved SCSS change recompiles the CSS (the log says so), a Sass error keeps the last good
     CSS, Ctrl+C leaves no process, and a second preview fails with the port message (T101). After the preview,
     `./gradlew clean bake` output has no live-reload script (`grep -rli livereload build/jbake` is empty).
+  - _2026-10-28: **done** (same branch as T125, the second commit). In the plugin: `BakePreviewTask` (`bakePreview`, a
+    `JbakeTask` like the bake: the port check, the compiled CSS put in place, the watcher started, then JBake `-b -s` with
+    `preview.livereload=true` in its JVM; no outputs, so it runs every time; depends on the guard, and on `compileSass`
+    through its CSS input), `SassPreviewWatcher` (the build service in Java, the same behaviour: a daemon thread stamps
+    the SCSS files every 0.5 s, recompiles every entry with the plugin's `SassCompiler.compileAll` into temporary files
+    that are moved into the served CSS directory atomically, keeps the last good CSS and prints Dart Sass's message on an
+    error, and the same four log lines, the SCSS directory named through a `sourceName` parameter set to its
+    project-relative path, `src/scss`) and `PreviewPort` (`server.hostname`/`server.port` from `jbake.properties`, JBake's
+    defaults `localhost`/8820, a bad port names the file; the probe socket binds with address reuse as Jetty does and fails
+    with the T101 message, which names `src/jbake/jbake.properties` through the task's `ProjectLayout`). `build.gradle`
+    now holds the plugin application, the `jbakeSite { }` block, the `dependencies { jbake … }` pins with their comments
+    and the three writing tasks (T127's), 174 lines; the Groovy watcher, the port check, the paths, `configureJBake` and
+    `NewJdkJvmArgs` are gone from it. **Judgment calls:** the `bakePreview` description keeps its literal text (the
+    address would have to be read from `jbake.properties` at configuration time to compute it); the watcher is registered
+    by the plugin with `registerIfAbsent` and the task declares `usesService`; no TestKit test of the live server, which
+    would need the port (T129 may), `PreviewPort` is unit-tested against a socket that really listens. **Test passed:**
+    `./gradlew clean bakePreview` served http://localhost:8080 after 3 s with the live-reload script; a line appended to a
+    draft showed in the served page 0.4 s later (JBake's watcher); a comment appended to `_variables.scss` logged
+    "src/scss changed: recompiled /css/clean-blog.css, /css/code.css" 0.2 s later, the CSS byte-identical to before; `$oops: ;`
+    there logged "src/scss changed, but Sass failed (the preview keeps the last good CSS):" with Dart Sass's message and
+    `cmp` showed the served CSS unchanged; a second `./gradlew bakePreview` while the first ran failed with "Port 8080 is
+    already in use (is another bakePreview running?). Stop it, or set server.port in src/jbake/jbake.properties."; Ctrl+C
+    (SIGINT to the gradlew client) ended the client with 130 and within 1 s there was no JBake JVM and nothing listening on
+    8080; the next `./gradlew clean bake` has no `livereload` (`grep -rli` empty) and is byte-identical to the base
+    commit's (only `feed.xml`); `./gradlew bake` twice prints "Reusing configuration cache" and `:bake UP-TO-DATE`;
+    `./gradlew tasks` shows the Jbake group (`bake`, `bakePreview`) and the Writing group as after T133; `:build-logic:check`
+    passes with 45 tests (T125's 39, `PreviewPortTest` and the preview's wiring); `check -Pbase=origin/main` 0 errors;
+    `test ! -e build/jbake/docs` and `scripts/check-docs-not-published.sh` pass; no CR line endings. Not verified
+    locally: the Linux bake (CI)._
 - [ ] T127 [IMP] **Move the script tasks.** One `ScriptTask` type (a single-file Java program run with the Gradle
   JVM's `java`, `-P` options passed as `--name=value`, exit codes mapped to one-line failures), registered from
   `jbakeSite.scripts { register(name, path) { options; dependsOn } }`; `newPost` and `reviewChanges` become two

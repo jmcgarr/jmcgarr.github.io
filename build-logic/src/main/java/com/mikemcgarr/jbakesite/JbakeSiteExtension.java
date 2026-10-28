@@ -19,7 +19,7 @@ public abstract class JbakeSiteExtension {
     /**
      * JBake's source directory: {@code content/}, {@code templates/}, {@code assets/} and {@code jbake.properties}.
      * Default {@code src/jbake}. The bake renders it ({@link BakeTask}), the preview serves it
-     * ({@code bakePreview}, T126), and the CSS guard watches its assets folder ({@link CheckNoHandEditedCssTask}).
+     * ({@link BakePreviewTask}), and the CSS guard watches its assets folder ({@link CheckNoHandEditedCssTask}).
      *
      * @return the directory
      */
