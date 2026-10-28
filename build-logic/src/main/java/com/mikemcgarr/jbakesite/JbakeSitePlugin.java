@@ -1,5 +1,6 @@
 package com.mikemcgarr.jbakesite;
 
+import com.mikemcgarr.jbakesite.review.ReviewChangesTask;
 import com.mikemcgarr.jbakesite.verification.CheckMastheadVariantsTask;
 import com.mikemcgarr.jbakesite.verification.CheckTagRedirectsTask;
 import com.mikemcgarr.jbakesite.writing.NewPostTask;
@@ -30,9 +31,11 @@ import org.gradle.language.base.plugins.LifecycleBasePlugin;
  * ({@link CheckNoHandEditedCssTask}); T125 the {@code jbake} configuration ({@link JbakeClasspath}) and
  * {@code bake} ({@link BakeTask}); T126 {@code bakePreview} ({@link BakePreviewTask}) with its SCSS watcher
  * ({@link SassPreviewWatcher}); T127 (with the T130 decision) the four single-file programs of {@code scripts/} as
- * task classes: the {@code writing} group's {@code newPost} ({@link NewPostTask}), {@code reviewChanges},
- * {@code prepareImage} and {@code tagRedirects}, and the {@code verification} group's {@code checkTagRedirects} and
- * {@code checkMastheadVariants}, which {@code check} runs with the review.
+ * task classes: the {@code writing} group's {@code newPost} ({@link NewPostTask}), {@code reviewChanges}
+ * ({@link ReviewChangesTask}), {@code prepareImage} ({@link PrepareImageTask}) and {@code tagRedirects}
+ * ({@link TagRedirectsTask}), and the {@code verification} group's {@code checkTagRedirects}
+ * ({@link CheckTagRedirectsTask}) and {@code checkMastheadVariants} ({@link CheckMastheadVariantsTask}), which
+ * {@code check} runs with the review.
  *
  * <p>The plugin applies Gradle's {@code base} plugin for {@code clean} and the {@code check} lifecycle task.
  */
@@ -58,6 +61,9 @@ public final class JbakeSitePlugin implements Plugin<Project> {
 
     /** The task that starts a draft post on a new branch. */
     public static final String NEW_POST_TASK_NAME = "newPost";
+
+    /** The task that reviews the pages a branch changed. */
+    public static final String REVIEW_CHANGES_TASK_NAME = "reviewChanges";
 
     /** The task that makes a hand-added image fit the image rules. */
     public static final String PREPARE_IMAGE_TASK_NAME = "prepareImage";
@@ -228,6 +234,19 @@ public final class JbakeSitePlugin implements Plugin<Project> {
             task.getPr().set(providers.gradleProperty("pr"));
             task.getFormat().set(providers.gradleProperty("format"));
         });
+        TaskProvider<ReviewChangesTask> reviewChanges = tasks.register(REVIEW_CHANGES_TASK_NAME, ReviewChangesTask.class, task -> {
+            task.setGroup(WRITING_GROUP);
+            task.setDescription("Reviews the pages this branch changed for broken Markdown, links and images: ./gradlew reviewChanges [-Pall]");
+            task.dependsOn(BAKE_TASK_NAME);
+            task.getSite().set(site.getDestination());
+            task.getBase().set(providers.gradleProperty("base"));
+            task.getAll().set(providers.gradleProperty("all"));
+            task.getStrict().set(providers.gradleProperty("strict"));
+            task.getOnline().set(providers.gradleProperty("online"));
+        });
+        // `./gradlew check` (the standard verification task) runs the review, so a bake plus the review is one command
+        // and the hand-edited-CSS guard (checkNoHandEditedCss, which bake runs first) comes with it.
+        tasks.named(LifecycleBasePlugin.CHECK_TASK_NAME, check -> check.dependsOn(reviewChanges));
         tasks.register(PREPARE_IMAGE_TASK_NAME, PrepareImageTask.class, task -> {
             task.setGroup(WRITING_GROUP);
             task.setDescription("Prepares a hand-added image for the site (sRGB, metadata, size, masthead variants): ./gradlew prepareImage -Pimage=<path>");
