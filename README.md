@@ -367,7 +367,7 @@ More
 ====
 - [AGENTS.md](AGENTS.md): working rules for this repo (URLs, branches, drafts, issues)
 - [docs/05-REVIEW-FLOW.md](docs/05-REVIEW-FLOW.md): the current plan (checking a change before it ships)
-- [docs/04-AUTHORS-DESK.md](docs/04-AUTHORS-DESK.md): the owner's own to-do list
+- [docs/archive/04-AUTHORS-DESK.md](docs/archive/04-AUTHORS-DESK.md): the owner's own to-do list, closed and archived 2026-10-27
 - [docs/07-FRONT-MATTER.md](docs/07-FRONT-MATTER.md): front matter for VS Code authoring, three options (Draft, owner to choose)
 - [docs/archive/00-REVIVAL.md](docs/archive/00-REVIVAL.md): the 2026 revival plan, done (its changelog: [docs/archive/03-REVIVAL-CHANGELOG.md](docs/archive/03-REVIVAL-CHANGELOG.md))
 

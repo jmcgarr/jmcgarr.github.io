@@ -147,7 +147,7 @@ Every old page address still works. Where an address had to change, the old one 
 ## Still to come
 
 These are for the author to write or decide, and they're tracked in their own list,
-[`04-AUTHORS-DESK.md`](../04-AUTHORS-DESK.md):
+[`04-AUTHORS-DESK.md`](04-AUTHORS-DESK.md):
 - an up-to-date About page and speaker bio
 - what to do with the 12 drafts
 - header images for older posts

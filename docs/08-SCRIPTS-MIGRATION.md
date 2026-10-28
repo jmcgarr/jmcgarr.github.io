@@ -6,7 +6,7 @@ A plan for the 17 tracked files under `scripts/`: which of them belong in the pe
 ([`06-GRADLE-PLUGIN.md`](06-GRADLE-PLUGIN.md)), and how to get to **no Python in the repository**, the owner's
 stated end state (2026-10-25). Research only so far; the owner decides ([Decisions needed](#blockers-and-owner-decisions)).
 Conventions as in [`AGENTS.md`](../AGENTS.md), "Tasks and checklists"; task IDs continue from T136
-([`04-AUTHORS-DESK.md`](04-AUTHORS-DESK.md)) and checkpoints from CHK052 ([`06-GRADLE-PLUGIN.md`](06-GRADLE-PLUGIN.md)).
+([`archive/04-AUTHORS-DESK.md`](archive/04-AUTHORS-DESK.md)) and checkpoints from CHK052 ([`06-GRADLE-PLUGIN.md`](06-GRADLE-PLUGIN.md)).
 
 ## Context
 
@@ -54,7 +54,7 @@ Risk: none to output (comments only); the bake stays byte-identical.
 (templates), and makes or checks the `-960` and `-1440` JPEG variants. Recurring: CI line 83 (`--check`);
 `prepare-image.py` imports it for the generate step; README; AGENTS.md line 89; `ReviewChanges.java` names it in
 two fix hints (lines 399 and 417); `head-meta.ftl` line 8 and `masthead.ftl` line 34 mention it; T059's Test in
-`04-AUTHORS-DESK.md` runs it. Pillow (`Image`, `ImageCms`). **Fits the plugin** in both modes: `--check` is a
+`archive/04-AUTHORS-DESK.md` runs it. Pillow (`Image`, `ImageCms`). **Fits the plugin** in both modes: `--check` is a
 verification task (file names and regexes only, no imaging; `ReviewChanges.checkVariants` already does it for
 changed pages), and generation belongs with `prepareImage`. Replacement: Java, see [the image work](#the-image-work-pillow-against-javaximageio).
 Risk: generation writes image bytes, but **never overwrites an existing variant** (its docstring); the 28
@@ -205,9 +205,9 @@ T140. Phase B (T141–T143) runs inside M10 after T127 and T129 exist. Decisions
   `png`, `jpeg`, `width`, `keepSource` passed as `--name=value`; CI line 83 becomes
   `java scripts/PrepareImage.java --check-variants`; `ReviewChanges.java` lines 399 and 417 recommend the new
   command; README "To write a post" and "Run the same checks locally", AGENTS.md lines 86 and 89, `head-meta.ftl`
-  line 8, `masthead.ftl` line 34, T059's Test in `04-AUTHORS-DESK.md`; remove `__pycache__/` from `.gitignore`;
+  line 8, `masthead.ftl` line 34, T059's Test in `archive/04-AUTHORS-DESK.md`; remove `__pycache__/` from `.gitignore`;
   README "Requirements" is true again (`scripts/`, `build.gradle`, `.github/workflows/gradle.yml`, `README.md`,
-  `AGENTS.md`, `docs/04-AUTHORS-DESK.md`, `src/jbake/templates/head-meta.ftl`, `masthead.ftl`, `.gitignore`)
+  `AGENTS.md`, `docs/archive/04-AUTHORS-DESK.md`, `src/jbake/templates/head-meta.ftl`, `masthead.ftl`, `.gitignore`)
   - **Test:** `git ls-files '*.py'` is empty. `java scripts/PrepareImage.java --check-variants` passes on `main`
     and fails naming the file after `-960.jpg` of one masthead is moved aside. On a copy of
     `maui-sunset.png` from `git show da470cc^:...` placed under `img/masthead/` on a scratch branch,
@@ -287,7 +287,7 @@ Test uses working.
 
 | Issue | Title | GitHub label | Task(s) | Milestone | Put in the resolving PR |
 |---|---|---|---|---|---|
-| [#14](https://github.com/jmcgarr/jmcgarr.github.io/issues/14) | Add mastheads for older posts | enhancement | T140 (the masthead tooling T059 depends on; T059 itself is in `04-AUTHORS-DESK.md`) | M11 | `Refs #14` |
+| [#14](https://github.com/jmcgarr/jmcgarr.github.io/issues/14) | Add mastheads for older posts | enhancement | T140 (the masthead tooling T059 depends on; T059 itself is in `archive/04-AUTHORS-DESK.md`) | M11 | `Refs #14` |
 
 ## Notes
 
