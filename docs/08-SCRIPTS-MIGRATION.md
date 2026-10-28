@@ -282,7 +282,7 @@ T140. Phase B (T141–T143) runs inside M10 after T127 and T129 exist. Decisions
 _2026-10-27: Phase B is PR (6) in M10's order (`06-GRADLE-PLUGIN.md`), together with T121 `openPr`; T142 is
 superseded by the T130 decision there._
 
-- [ ] T141 [IMP] **Verification tasks in the plugin.** `checkDocsNotPublished`, `checkUrls` (inputs: site dir,
+- [x] T141 [IMP] **Verification tasks in the plugin.** `checkDocsNotPublished`, `checkUrls` (inputs: site dir,
   baseline file, expected-removals file; the macOS case-collision warning kept) and `checkMastheadVariants`
   (content and template roots, masthead dir) as Java tasks in `build-logic/`, each with a TestKit test in the
   fixture site; an aggregate `checkSite` task that stages `build/jbake` minus drafts into `build/site` and runs
@@ -299,6 +299,46 @@ superseded by the T130 decision there._
     `check` runs, with TestKit tests on the fixture site; CI calls them. T141's scope is now `checkUrls`,
     `checkDocsNotPublished` and the `checkSite` aggregate. For T143: the four Java programs are already gone, so
     `smoke-test.sh` and `scripts/visual/` are what will be left._
+  - _2026-10-28: **done** (`chore/T141-T143-T121-checks-openpr`, PR 6 of M10's order, with T143 and T121). In the
+    plugin's `verification` package: `UrlCheck` (the port of `check-urls.sh`: the `.html` pages of the site against
+    the baseline minus the expected removals; missing fails, new is information, a baseline URL that matches a built
+    page case-insensitively is the macOS warning when the home page's `INDEX.HTML` twin exists, as the script tested)
+    with `CheckUrlsTask` (`checkUrls`: `-PsiteDir`, the baseline from `jbakeSite.publishedUrls`, the removals from the
+    new `jbakeSite.expectedRemovals`, default `docs/baseline/expected-removals.txt`, and `-Pstrict`, which reports a
+    case collision as missing even on a Mac; the script had no flag, Linux made it strict); `DocsNotPublishedCheck`
+    (the port of `check-docs-not-published.sh`: a `docs` entry, Markdown outside `vendor/`, the `REVIVAL` marker in a
+    text file, where a NUL byte in the first 32 KiB means binary, as `grep -I`) with `CheckDocsNotPublishedTask`
+    (`checkDocsNotPublished`, `-PsiteDir`); and the lifecycle task `checkSite`, which depends on `checkUrls`,
+    `checkDocsNotPublished`, `checkTagRedirects` and `checkMastheadVariants`. `check` depends on `checkSite` and,
+    directly as before, on `reviewChanges`: the review is about the change and CI runs it on pull requests only (a
+    push to `main` has no base), `checkSite` is about the site and runs on every push, so the two stay apart
+    (**decision**, recorded here). The `-P` flag reading moved from `ReviewChangesTask` to `SiteToolTask.flag`, shared.
+    Every message is the script's, line for line; what a script wrote to standard error (the exit-2 `ERROR:` lines,
+    the Rule 1 and Rule 4 sentences after a `FAIL`) is the task's failure message, so it reads under "What went
+    wrong". **D3:** the inline CI steps (drafts, CR line endings, live reload) stay shell. **CI:** the four steps
+    (docs, masthead variants, URLs, tag redirects) are one step, `./gradlew checkSite -PsiteDir=build/site`, strict on
+    Linux as before. **Equivalence (Rule 1 gate), shell against Java on the same macOS bake, 2026-10-28:** on
+    `build/jbake` both print the same 11 expected removals, 56 new URLs, the WARNING for `tags/DevOps.html` and
+    `tags/Groovy.html`, and `OK: all 272 baseline URLs accounted for in build/jbake`, exit 0; on a copy with
+    `about.html` deleted both print the same lists then `FAIL: published URLs missing from the build (1):`, `  !
+    about.html`, `Restore them, add redirect stubs, or (with approval) list them in docs/baseline/expected-removals.txt.`,
+    exit 1; on a copy with `blog/brand-new-page.html` added both list 57 new URLs with it and pass; the docs check
+    prints `OK: no docs/ content in build/jbake` on the bake and, on the copy with `docs/x.md` holding the marker,
+    the same three `FAIL:` lines naming `build/eq-c/docs` and `build/eq-c/docs/x.md` twice, then `docs/ content must
+    never be published. See AGENTS.md (Rule 4).`, exit 1. `diff` of the shell output against the task's lines was
+    empty in every case apart from Gradle's own lines (JBake's four bake lines when `bake` reran, and "Get more help").
+    The Linux half of the comparison is this PR's CI run, where `checkSite` is strict and the 2 case-only stubs are in
+    the bake. **Tests:** `UrlCheckTest` (the comparison, the removals file with comments and blanks, the pages of a
+    bake, pass with removals and new URLs, fail with the Rule 1 sentence, the case-collision warning or failure by
+    filesystem, the two exit-2 cases), `DocsNotPublishedCheckTest` (clean, the three failures at once with the Rule 4
+    sentence, binary files, no site), the plugin wiring (`checkSite`'s and `check`'s dependencies, the extension's two
+    new properties), and in `SiteToolsFunctionalTest`: `checkUrls` passes on the fixture (6 baseline URLs), fails on a
+    staged copy without `about.html` naming it, passes when `about.html` is in `expected-removals.txt`;
+    `checkDocsNotPublished` passes and fails on a leaked `docs/x.md`; `checkSite` runs the four and not the review;
+    `check` runs the review and every check. 160 tests (145 before). **Test passed** as written, apart from the
+    masthead case, which T127 covered: `./gradlew checkSite` passes on macOS with the case warning; deleting
+    `about.html` from a copy fails `checkUrls` naming `about.html`; `docs/x.md` fails `checkDocsNotPublished`; the bake
+    is byte-identical to the base commit's (`diff -rq`: only `feed.xml`, 496 files). Not verified locally: CI (Linux)._
 - [x] T142 **Superseded (2026-10-27).** [IMP] **Register the Java scripts through `jbakeSite.scripts`.** `prepareImage` (options `image`,
   `dryRun`, `png`, `jpeg`, `width`, `keepSource`) and `tagRedirects` (`check`, `dependsOn 'bake'`) join `newPost`
   and `reviewChanges`; the special-cased `Exec` from T140 goes; `06-GRADLE-PLUGIN.md`'s table (lines 29–30) and

@@ -280,7 +280,8 @@ Everything happens in one workflow, [`.github/workflows/gradle.yml`](.github/wor
    `src/jbake/` into `build/jbake/` with JBake (JDK 25). Drafts are rendered too, as `<name>-draft.html`, but only
    so you can preview them locally. A Sass, template, or post error fails the build here.
 2. **Stage:** `build/jbake/` is copied to **`build/site/` without drafts**. `build/site/` is exactly what goes live.
-3. **Check:** every check below runs on `build/site/`, so what's checked is what ships.
+3. **Check:** every check below runs on `build/site/`, so what's checked is what ships. The four plugin checks are
+   one step, `./gradlew checkSite -PsiteDir=build/site`.
 4. **Upload:** `build/site/` is packaged as the GitHub Pages artifact (pushes and manual runs on `main` only).
 5. **Deploy:** a separate `deploy` job publishes the artifact to GitHub Pages (pushes and manual runs on
    `main` only, never two at once).
@@ -295,10 +296,10 @@ Everything happens in one workflow, [`.github/workflows/gradle.yml`](.github/wor
 |---|---|
 | Drafts are not published | Unfinished `*-draft.html` posts going live |
 | Live reload is not published | The preview's live-reload script (marker `livereload`) going live |
-| Docs are not published | Anything from `docs/` (planning notes) going live |
-| Masthead variants (`./gradlew checkMastheadVariants`) | A header image missing its 960/1440px sizes (phones would get a blank header) |
-| Published URLs still exist (`scripts/check-urls.sh`) | Removing or renaming any page that's live (strict on CI's Linux runner) |
+| Published URLs still exist (`./gradlew checkUrls`) | Removing or renaming any page that's live (strict on CI's Linux runner) |
+| Docs are not published (`./gradlew checkDocsNotPublished`) | Anything from `docs/` (planning notes) going live |
 | Old tag URLs redirect (`./gradlew checkTagRedirects`) | An old tag URL that's missing, or whose redirect stub points at a page that isn't there; a tag page that shows its tag differently from the posts |
+| Masthead variants (`./gradlew checkMastheadVariants`) | A header image missing its 960/1440px sizes (phones would get a blank header) |
 | Feed and sitemap XML | A broken `feed.xml` or `sitemap.xml` |
 | Local links and assets (lychee) | Broken internal links, or missing images, CSS, JS, or fonts |
 
@@ -315,13 +316,17 @@ JBake's libraries are on one Gradle configuration, `jbake`, where `build.gradle`
 | `reviewChanges` | `writing` | Reviews the pages this branch changed: Markdown, links, images, header (runs `bake` first) |
 | `prepareImage` | `writing` | Prepares a hand-added image: sRGB, metadata, size, masthead variants (`-Pimage=<path>`; `-Pvariants` for the variants alone) |
 | `tagRedirects` | `writing` | Writes any missing or outdated redirect stub for an old tag URL, never deleting one (on an approved tag rename) |
-| `checkTagRedirects` | `verification` | Checks that every old tag URL in the baked site is a tag page or a redirect stub to one (CI: `-PsiteDir=build/site`) |
+| `checkSite` | `verification` | Runs the four checks below, what CI runs on the staged site (CI: `-PsiteDir=build/site`) |
+| `checkUrls` | `verification` | Checks that every published URL in `docs/baseline/urls.txt` is still a page in the baked site, or an approved removal in `docs/baseline/expected-removals.txt` (AGENTS.md Rule 1); `-Pstrict` fails on the case-only twins a Mac can't bake |
+| `checkDocsNotPublished` | `verification` | Checks that nothing from `docs/` is in the baked site: no `docs/`, no Markdown outside `vendor/`, no `REVIVAL` marker (Rule 4) |
+| `checkTagRedirects` | `verification` | Checks that every old tag URL in the baked site is a tag page or a redirect stub to one |
 | `checkMastheadVariants` | `verification` | Checks that every header image in use has its 960 and 1440px variants |
 
 Two tasks have no group, so `./gradlew tasks` doesn't list them: `compileSass` (the SCSS to CSS step) and
 `checkNoHandEditedCss` (the guard that fails the build if a hand-written copy of the generated CSS is back under
 `src/jbake/assets/css/`). Both run as part of `bake` and `bakePreview`. `clean` and `check` are Gradle's own;
-`check` runs `bake`, `reviewChanges`, `checkTagRedirects` and `checkMastheadVariants`.
+`check` runs `bake`, `reviewChanges` and `checkSite` (the review is about the change, `checkSite` about the site, so
+CI can run `checkSite` on every push and the review on pull requests only, where there is a base to diff against).
 
 ### Where the build is defined: `build.gradle` and `build-logic/`
 
@@ -351,7 +356,7 @@ October 2026, M10):
 | | `CompileSassTask`, `SassCompiler`, `SassEntries`, `SassCompileException`, `SassPreviewWatcher`, `CheckNoHandEditedCssTask`, `FileTrees` | The theme CSS: Dart Sass through its Java host, the entry convention, the preview's SCSS watcher, the guard |
 | `writing` | `NewPostTask`/`NewPost`/`NewPostOptions`, `PrepareImageTask`/`PrepareImage`/`PrepareImageOptions`/`Images`/`MastheadVariants`, `TagRedirectsTask`/`TagRedirects` | The `writing` group: each task is a thin class that reads its `-P` options and runs a plain logic class |
 | `review` | `ReviewChangesTask`, `Review`, `Changes`, `Pages`, `MarkdownChecks`, `PageChecks`, `ImageChecks`, `RemovalChecks`, `Report`, and the helpers `Change`, `Finding`, `Findings`, `HtmlTags`, `Suppressions`, `ReviewOptions`, `ReviewResult` | `reviewChanges`: one class per group of checks, as [docs/05-REVIEW-FLOW.md](docs/05-REVIEW-FLOW.md) lays them out |
-| `verification` | `CheckTagRedirectsTask`, `CheckMastheadVariantsTask` | The `verification` group: the checks `check` and CI run |
+| `verification` | `CheckUrlsTask`/`UrlCheck`, `CheckDocsNotPublishedTask`/`DocsNotPublishedCheck`, `CheckTagRedirectsTask`, `CheckMastheadVariantsTask` | The `verification` group: the checks `checkSite`, `check` and CI run (the first two were shell scripts until T141/T143) |
 | `internal` | `Git`, `ProcessRunner`, `CommandRunner`, `ToolFailure`, `FrontMatter`, `Tags`, `SiteLayout`, `JbakeProperties`, `ImageRules` | Shared by the writing and verification tools: running git and gh, reading a post's header, the site's paths, the image limits |
 
 `SiteToolTask` (package `jbakesite`) is the base of the writing and verification tasks: it hands each tool the
@@ -369,7 +374,8 @@ out anyway, so the paths are in one place:
 | `source` | `src/jbake` | JBake's source: `content/`, `templates/`, `assets/`, `jbake.properties` |
 | `destination` | `build/jbake` | Where the bake writes and what the preview serves; CI deploys it minus drafts |
 | `caseRedirects` | `src/case-redirects` | Redirect stubs that differ from a real page only by letter case, copied in after JBake, on a case-sensitive filesystem only (T055); an empty or missing directory means none |
-| `publishedUrls` | `docs/baseline/urls.txt` | The baseline of published URLs the writing tools read (`newPost` refuses a published slug; the review and the tag redirects use it) |
+| `publishedUrls` | `docs/baseline/urls.txt` | The baseline of published URLs: `checkUrls` fails when one is missing from the bake; the writing tools read it too (`newPost` refuses a published slug; the review and the tag redirects use it) |
+| `expectedRemovals` | `docs/baseline/expected-removals.txt` | Published URLs removed on purpose, with the owner's approval (Rule 1); `checkUrls` accepts a missing URL only when it is listed here. A missing file means none |
 | `tagRenames` | the owner's list of 2026-10-09 | Old tag to new, as written in the posts; every old URL of the old tag gets a redirect stub (Rule 1: never remove one) |
 | `logbackConfiguration` | unset (the bundled file) | A logback configuration for JBake's JVM |
 | `scss.source` | `src/scss` | The SCSS; each `<name>.scss` not starting with `_` is an entry |

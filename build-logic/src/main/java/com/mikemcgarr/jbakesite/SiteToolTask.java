@@ -5,19 +5,22 @@ import com.mikemcgarr.jbakesite.internal.SiteLayout;
 import com.mikemcgarr.jbakesite.internal.ToolFailure;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Locale;
 import javax.inject.Inject;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.GradleException;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.ProjectLayout;
 import org.gradle.api.file.RegularFileProperty;
+import org.gradle.api.provider.Property;
 import org.gradle.api.tasks.Internal;
 
 /**
  * What the writing and verification tasks share (T127): where the site's sources are, as the {@code jbakeSite}
  * extension says ({@link JbakeSitePlugin} wires every subclass), handed to the tool as a {@link SiteLayout}; the
- * site's published address from {@code jbake.properties}; and the mapping of a tool's {@link ToolFailure} (the
- * message the single-file program printed before exiting) to a build failure with that message.
+ * site's published address from {@code jbake.properties}; the reading of a {@code -P} flag ({@link #flag}); and the
+ * mapping of a tool's {@link ToolFailure} (the message the single-file program printed before exiting) to a build
+ * failure with that message.
  *
  * <p>The directories are {@link Internal}: the tools validate them themselves, with the programs' messages, and
  * most of these tasks are untracked or have no outputs, so they run every time anyway.
@@ -104,6 +107,26 @@ public abstract class SiteToolTask extends DefaultTask {
         } catch (ToolFailure e) {
             throw new GradleException(e.getMessage(), e);
         }
+    }
+
+    /**
+     * Reads a {@code -P} flag: on when given without a value ({@code -Pstrict}) or as {@code true}, off as
+     * {@code false} or when not given; anything else is a usage error.
+     *
+     * @param property the task property the Gradle property is wired to
+     * @param name the property's name, for the message
+     * @return whether the flag is on
+     * @throws ToolFailure exit 2 for any other value
+     */
+    protected static boolean flag(Property<String> property, String name) {
+        if (!property.isPresent()) {
+            return false;
+        }
+        return switch (property.get().strip().toLowerCase(Locale.ROOT)) {
+            case "", "true" -> true;
+            case "false" -> false;
+            default -> throw ToolFailure.couldNotRun("-P" + name + " takes no value (or true/false), not '" + property.get() + "'.");
+        };
     }
 
     /** A tool's work, for {@link #runTool}. */

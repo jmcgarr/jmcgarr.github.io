@@ -77,23 +77,17 @@ jobs:
         fi
         echo "OK: no live-reload script in the deploy contents"
 
-    # docs/ holds internal planning docs and must never reach the live site (see AGENTS.md)
-    - name: Check docs are not published
-      run: scripts/check-docs-not-published.sh build/site
-
-    # Every header image in use needs its 960/1440px variants (T071), or phones get a blank header
-    - name: Check masthead variants
-      run: ./gradlew checkMastheadVariants
-
-    # Quality gates (T031). On Linux check-urls.sh is strict (case-sensitive), so it catches what macOS bakes can't.
-    - name: Check published URLs still exist
-      run: scripts/check-urls.sh build/site
-
-    # Old tag URLs (with spaces, or capitalized twins) are redirect stubs (T039, T055). Each must point at a real
-    # tag page. On Linux the 2 case-only stubs (src/case-redirects/) are added by the bake, and checked here too.
-    # The task checks the staged site (what is deployed), not the bake it depends on, which is up to date here.
-    - name: Check old tag URLs redirect
-      run: ./gradlew checkTagRedirects -PsiteDir=build/site
+    # The plugin's checks of the staged site (what is deployed), not of the bake they depend on, which is up to date
+    # here (docs/08-SCRIPTS-MIGRATION.md, T141; the same as `./gradlew checkSite` locally):
+    #   checkUrls              every published URL (docs/baseline/urls.txt) is still a page, or an approved removal
+    #                          (T006, Rule 1). Linux is case-sensitive, so this is strict here and catches what a
+    #                          macOS bake can't: the 2 case-only tag stubs
+    #   checkDocsNotPublished  nothing from docs/ (internal planning docs) reached the site (T004, Rule 4)
+    #   checkTagRedirects      old tag URLs (with spaces, or capitalized twins) are redirect stubs to a real tag page
+    #                          (T039, T055); the 2 case-only stubs (src/case-redirects/) are in a Linux bake
+    #   checkMastheadVariants  every header image in use has its 960/1440px variants (T071), or phones get a blank header
+    - name: Check the staged site (URLs, docs, tag redirects, masthead variants)
+      run: ./gradlew checkSite -PsiteDir=build/site
 
     - name: Validate feed and sitemap XML
       run: |
