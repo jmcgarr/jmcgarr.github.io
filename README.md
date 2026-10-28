@@ -253,11 +253,13 @@ names the tools' old folder `scripts/to-markdown/` and the old `pixeldiff.py`; t
 diff is Java since 2026-10-27, T137 and T138. Nothing to install.)
 
 **The compiler** is [Dart Sass](https://sass-lang.com/dart-sass/), the reference Sass implementation, run from
-Gradle by the [freefair Sass plugin](https://plugins.gradle.org/plugin/io.freefair.sass-base) through its
-Java host, [`sass-embedded-host`](https://github.com/larsgrefer/dart-sass-java). No Node, Ruby, or separate install:
+Gradle by the site's own build plugin (`build-logic/`, see [How the site is built and
+deployed](#how-the-site-is-built-and-deployed)) through its Java host,
+[`sass-embedded-host`](https://github.com/larsgrefer/dart-sass-java). No Node, Ruby, or separate install:
 the host's jar (about 49 MB, from Maven Central, cached by Gradle) carries Dart Sass for macOS, Linux, and Windows.
 On first use it unpacks the one for your machine into the system temp folder and runs it as a helper process (a
-small Dart runtime plus the compiler), talking to it over stdin/stdout. Dependabot keeps the plugin current.
+small Dart runtime plus the compiler), talking to it over stdin/stdout. Dependabot keeps the host current (it was
+the freefair Sass plugin's dependency until T124).
 
 To publish
 ==========
@@ -312,6 +314,13 @@ plugin's names, kept since 2014 ([`docs/06-GRADLE-PLUGIN.md`](docs/06-GRADLE-PLU
 
 `compileSass` (the SCSS to CSS step) has no group: it runs as part of `bake` and `bakePreview`, so `./gradlew tasks`
 doesn't list it. `clean` and `check` are Gradle's own; `check` runs `bake` and `reviewChanges`.
+
+**Where the tasks are defined** (since 2026-10-27, [`docs/06-GRADLE-PLUGIN.md`](docs/06-GRADLE-PLUGIN.md)): the
+build logic is moving out of `build.gradle` into the site's own Gradle plugin, `jbake-site`, in **`build-logic/`**,
+an included build written in Java with its own tests (`./gradlew :build-logic:build` compiles and tests it). So far
+the plugin defines `compileSass` and the hand-edited-CSS guard, `checkNoHandEditedCss`, both configured by the
+`jbakeSite { scss { ... } }` block at the top of `build.gradle`; `bake`, `bakePreview` and the `writing` tasks are
+still in `build.gradle` until their slices move. The full description comes with the last slice.
 
 **GitHub settings and DNS this depends on:**
 - **Settings → Pages → Build and deployment → Source: "GitHub Actions".**
