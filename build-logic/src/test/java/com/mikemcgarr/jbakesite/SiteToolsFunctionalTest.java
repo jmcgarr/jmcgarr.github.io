@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.time.LocalDate;
 import java.util.Objects;
 import java.util.stream.Stream;
 import javax.imageio.ImageIO;
@@ -62,16 +61,10 @@ class SiteToolsFunctionalTest {
 
         assertEquals(TaskOutcome.SUCCESS, result.task(":newPost").getOutcome());
         Path draft = projectDir.resolve("src/jbake/content/blog/drafts/a-third-post.md");
-        assertEquals(String.join("\n",
-                "title=A Third Post",
-                "date=" + LocalDate.now(),
-                "type=post",
-                "tags=fixture, testing",
-                "status=draft",
-                "summary=A teaser.",
-                "~~~~~~",
-                "",
-                ""), Files.readString(draft), "every -P option in the header");
+        String header = Files.readString(draft);
+        // The date is today's by the task's own clock; a regex, so a run that straddles midnight can't fail on it
+        assertTrue(header.matches("(?s)title=A Third Post\ndate=\\d{4}-\\d{2}-\\d{2}\ntype=post\ntags=fixture, testing\n"
+                + "status=draft\nsummary=A teaser.\n~~~~~~\n\n"), "every -P option in the header: " + header);
         String output = result.getOutput();
         assertTrue(output.contains("Created src/jbake/content/blog/drafts/a-third-post.md (status=draft, never published)"), output);
         assertFalse(output.contains("Switched to the new branch"), "-Pbranch=false stays on main: " + output);

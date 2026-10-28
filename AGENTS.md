@@ -31,7 +31,7 @@ src/scss/                 SCSS for the site's CSS (not published). Compiled to /
 docs/                     Planning and internal docs. NEVER published (see "docs/ conventions")
 build.gradle              What the site is: the plugin applied, the jbakeSite { } block, JBake's version pins with their reasons
 build-logic/              How it is built: the jbake-site Gradle plugin (Java), every ./gradlew task below, its tests and fixture site (see README, "Where the build is defined")
-scripts/                  Shell only: the deploy checks CI runs (check-urls.sh, check-docs-not-published.sh; until T143), smoke-test.sh, and visual/ (screenshot and pixel-diff tools)
+scripts/                  Shell checks and the visual tools: check-urls.sh and check-docs-not-published.sh (the deploy checks CI runs, until T143), smoke-test.sh (after a deploy), and visual/ (screenshots.sh, phone-shots.mjs for Node, PixelDiff.java: the screenshot-and-pixel-diff proof for style changes)
 build/jbake/              Generated output (git-ignored)
 ```
 

@@ -337,17 +337,20 @@ October 2026, M10):
   (`settings.gradle`: `pluginManagement { includeBuild 'build-logic' }`) written in Java 21 with its own tests. Every
   task in the table above is a class there, so **`bake` is defined in
   `build-logic/src/main/java/com/mikemcgarr/jbakesite/BakeTask.java`**, registered by `JbakeSitePlugin.java` in the
-  same package. Gradle compiles the plugin on the first invocation that needs it (a few seconds, once per daemon).
+  same package. Gradle builds the plugin like any other project it includes: its compiled classes live in
+  `build-logic/build/` and are reused by every later invocation, across daemons, until a source under `build-logic/`
+  changes; then that one build recompiles the plugin (a few seconds) before the site's tasks run.
 
-**What is in the plugin** (`build-logic/src/main/java/com/mikemcgarr/jbakesite/`, by package):
+**What is in the plugin** (`build-logic/src/main/java/com/mikemcgarr/jbakesite/`, by package; every class, with the
+`review` package's helpers summed up):
 
 | Package | Classes | What they do |
 |---|---|---|
 | `jbakesite` | `JbakeSitePlugin`, `JbakeSiteExtension`, `ScssExtension`, `JbakeClasspathExtension` | Registers every task and the `jbake` configuration; the `jbakeSite { }` block and its defaults |
-| | `JbakeTask`, `BakeTask`, `BakePreviewTask`, `JbakeClasspath`, `NewJdkJvmArgs`, `CaseRedirects`, `PreviewPort` | The `jbake` group: JBake's launcher in a fresh JVM (the JVM flags newer JDKs need, jffi's temp dir, logback), the bake with the CSS and case-redirect copies, the preview with its port check |
+| | `JbakeTask`, `BakeTask`, `BakePreviewTask`, `JbakeClasspath`, `NewJdkJvmArgs`, `CaseRedirects`, `PreviewPort`, `ProjectPaths` | The `jbake` group: JBake's launcher in a fresh JVM (the JVM flags newer JDKs need, jffi's temp dir, logback), the bake with the CSS and case-redirect copies, the preview with its port check |
 | | `CompileSassTask`, `SassCompiler`, `SassEntries`, `SassCompileException`, `SassPreviewWatcher`, `CheckNoHandEditedCssTask`, `FileTrees` | The theme CSS: Dart Sass through its Java host, the entry convention, the preview's SCSS watcher, the guard |
-| `writing` | `NewPostTask`/`NewPost`, `PrepareImageTask`/`PrepareImage`/`Images`/`MastheadVariants`, `TagRedirectsTask`/`TagRedirects` | The `writing` group: each task is a thin class that reads its `-P` options and runs a plain logic class |
-| `review` | `ReviewChangesTask`, `Review`, `Changes`, `Pages`, `MarkdownChecks`, `PageChecks`, `ImageChecks`, `RemovalChecks`, `Report`, ... | `reviewChanges`: one class per group of checks, as [docs/05-REVIEW-FLOW.md](docs/05-REVIEW-FLOW.md) lays them out |
+| `writing` | `NewPostTask`/`NewPost`/`NewPostOptions`, `PrepareImageTask`/`PrepareImage`/`PrepareImageOptions`/`Images`/`MastheadVariants`, `TagRedirectsTask`/`TagRedirects` | The `writing` group: each task is a thin class that reads its `-P` options and runs a plain logic class |
+| `review` | `ReviewChangesTask`, `Review`, `Changes`, `Pages`, `MarkdownChecks`, `PageChecks`, `ImageChecks`, `RemovalChecks`, `Report`, and the helpers `Change`, `Finding`, `Findings`, `HtmlTags`, `Suppressions`, `ReviewOptions`, `ReviewResult` | `reviewChanges`: one class per group of checks, as [docs/05-REVIEW-FLOW.md](docs/05-REVIEW-FLOW.md) lays them out |
 | `verification` | `CheckTagRedirectsTask`, `CheckMastheadVariantsTask` | The `verification` group: the checks `check` and CI run |
 | `internal` | `Git`, `ProcessRunner`, `CommandRunner`, `ToolFailure`, `FrontMatter`, `Tags`, `SiteLayout`, `JbakeProperties`, `ImageRules` | Shared by the writing and verification tools: running git and gh, reading a post's header, the site's paths, the image limits |
 

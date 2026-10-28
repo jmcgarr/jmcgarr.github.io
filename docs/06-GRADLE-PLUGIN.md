@@ -475,8 +475,11 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
     tests. **Test passed:** `./gradlew :build-logic:test` passes, 145 tests (142 before this task; 17 of them TestKit:
     4 + 6 + 7); with `copyThemeCssInto(destination)` commented out in `BakeTask`, `--continue` reports "145 tests
     completed, 1 failed", `bakesThePagesCopiesTheCssInAndAddsTheStubsWhereItCan` (`NoSuchFileException:
-    build/jbake/css/clean-blog.css`), and nothing else; reverted. Not verified locally: the Linux run (CI, where the
-    stub branch of the bake test is the case-sensitive one)._
+    build/jbake/css/clean-blog.css`), and nothing else; reverted. By design, not in TestKit: `prepareImage`'s `-P`
+    pass-through is covered at unit level only (`PrepareImageTest` on the options; the TestKit pass-through case is
+    `newPost`'s), and `bakePreview` has no TestKit test because it needs a free port and a running server with
+    timing, so there is no flakiness risk from either. Not verified locally: the Linux run (CI, where the stub
+    branch of the bake test is the case-sensitive one)._
 - [x] T130 [IMP] _(Decision)_ **Move `NewPost.java` and `ReviewChanges.java` into the plugin, or keep them as
   single-file programs.** For: one place, shared `run`/`git`/`fail` helpers (copied between the two today, and
   `OpenPr.java` would copy them a third time), unit tests. Against: `java scripts/X.java` without Gradle stops
@@ -548,14 +551,15 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
 
 #### Checkpoint: M10
 
-- [x] CHK047 A clean bake on `main` is byte-identical (apart from `feed.xml`'s timestamps) to the bake at the commit
+- [ ] CHK047 A clean bake on `main` is byte-identical (apart from `feed.xml`'s timestamps) to the bake at the commit
   before T123, on macOS and on Linux (CI's `build/site`, compared through the `check-urls.sh` and link checks plus
   one manual `diff -r` of a downloaded artifact)
-  - _2026-10-28, macOS: `clean bake` of `chore/T128-T129-T131-shrink-tests-docs` (T123–T131 all in) against a `clean
-    bake` of 360bef7, the T133 merge and the last commit before T123, in a detached worktree: `diff -rq` prints only
-    `feed.xml`, 496 files each, `cmp` of `css/clean-blog.css` and `css/code.css` identical. Linux: CI's gates
-    (`check-urls.sh` strict, `checkTagRedirects`, lychee) ran green on every M10 PR; the manual `diff -r` of a
-    downloaded artifact was not done, so the Linux half rests on those checks._
+  - _Partially verified 2026-10-28, on the branch `chore/T128-T129-T131-shrink-tests-docs` (T123–T131 all in, not
+    yet on `main`): a macOS `clean bake` of the branch is byte-identical to the bake at 360bef7 (the T133 merge, the
+    last commit before T123, baked in a detached worktree): `diff -rq` prints only `feed.xml`, 496 files each, `cmp`
+    of `css/clean-blog.css` and `css/code.css` identical. Linux: CI's gates (`check-urls.sh` strict,
+    `checkTagRedirects`, lychee) ran green on every M10 PR, but the manual `diff -r` of a downloaded artifact is not
+    done yet; it is done after this PR merges, against `main`, and ticks the box._
 - [x] CHK048 `./gradlew bake` twice in a row prints "Reusing configuration cache"; `bakePreview`, `newPost` and
   `reviewChanges` run with no configuration-cache problems reported
   - _2026-10-28: `bake` twice: the second prints "Reusing configuration cache." and `:bake UP-TO-DATE`.
