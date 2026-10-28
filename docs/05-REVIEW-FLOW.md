@@ -261,7 +261,7 @@ criteria. M9 is done when T121 and CHK045 are; CHK043, CHK044 and CHK046 passed 
   - **Test:** a dated note under this task records the decision (take it up, or not) and why.
   - _2026-10-27: made an **optional improvement** by the owner: not part of M9's done criteria, no decision due. If
     taken up later, the design and test above stand._
-- [ ] T121 [IMP] **`./gradlew openPr`.** `scripts/OpenPr.java` as designed above: refuse on `main`; with
+- [x] T121 [IMP] **`./gradlew openPr`.** `scripts/OpenPr.java` as designed above: refuse on `main`; with
   uncommitted work, list the files and stop unless `-Pmessage` is given, then commit exactly those files; run the
   review; stop before the push on errors; else push and `gh pr create` (ready, not draft) with the title, body
   template, `Closes` lines and the review summary (`scripts/OpenPr.java`, `build.gradle`, `README.md`)
@@ -275,6 +275,42 @@ criteria. M9 is done when T121 and CHK045 are; CHK043, CHK044 and CHK046 passed 
   - _2026-10-27: **confirmed by the owner, to be built.** Scheduled after T127 in
     [`06-GRADLE-PLUGIN.md`](06-GRADLE-PLUGIN.md) (the plugin's `ScriptTask`), so `openPr` is written once, as a
     plugin script task, instead of as a `build.gradle` Exec that T127 would then move. CHK045 waits with it._
+  - _2026-10-28: **done** (`chore/T141-T143-T121-checks-openpr`, PR 6 of M10's order in `06-GRADLE-PLUGIN.md`). Born as a
+    plugin class, not `scripts/OpenPr.java`: package `writing`, `OpenPr` (the flow), `OpenPrOptions` (`-Ptitle`,
+    `-Pmessage`, `-Pcloses`, `-Prefs`, `-PdryRun`) and `OpenPrTask` (`openPr`, group `writing`, `dependsOn bake`),
+    following `NewPost`'s structure; `GitHubCli` holds the gh readiness checks and the stop-and-explain helpers that
+    `NewPost.checkReadyToOpenPr` and `commitPushAndOpenPr` had, now shared (`NewPost`'s messages are unchanged). The
+    review runs in-process through the `review` package's new public entry point, `ReviewRunner` (with
+    `ReviewOutcome`: passed, and the report's summary line), which `reviewChanges` now goes through too; nothing else
+    of the package became public. **The flow, as designed:** refuses on `main` and `master` with one line naming Rule
+    2 (and refuses a detached HEAD); lists the uncommitted work as `git status --porcelain` prints it under "Would
+    commit:" (files under `src/`, `docs/`, `scripts/`, `.github/`, `README.md`, `AGENTS.md`, `build.gradle`, and, added
+    for M10, `build-logic/`, `settings.gradle`, `CLAUDE.md`), the rest under "Not included (… left as they are)", and
+    stops there without `-Pmessage`, before gh is even asked; with `-Pmessage` it runs the readiness checks (gh
+    installed and logged in, origin, the repository, the committer, `main` pushed), then `git add -- <the listed
+    paths>` (never `-A`; both sides of a rename) and `git commit --quiet -m <message>`, plus a second `-m` with the
+    lines of the new `jbakeSite.commitTrailers` (default none: the tool is the owner's, so no attribution is built in;
+    a session that wants `Co-Authored-By:` lines sets them in `build.gradle`); runs the review against `main`, the
+    same scope as `reviewChanges`, and stops before the push on errors; pushes with `--set-upstream origin <branch>`
+    and runs `gh pr create --repo <owner/name> --base main --head <branch> --title … --body-file …` (ready, not
+    draft), printing the URL. **Title:** `-Ptitle`, else the subject of the branch's first commit after the merge
+    base with `main` (for a one-commit branch, that commit's). **Description** (the template, fixed here since the
+    design left it open): "## What changed" with a bullet per commit subject; "## Review" with the summary line
+    ("Reviewed 1 page (about.html) from 1 changed file. 0 errors, 1 warning. …", or the clean-tree sentence) and a
+    line saying `openPr` ran `reviewChanges` and CI runs it again; then one `Closes #N`/`Refs #N` line per issue from
+    `-Pcloses`, `-Prefs` and every such line in the commit messages, each once (Rule 5). A failed push or `gh pr
+    create` says what is in place and the commands that finish, as `newPost -Ppr` does. `-PdryRun` does everything
+    but commit, push and open, and prints the pull request it would open. **Tests:** `OpenPrTest` with a scripted git
+    and gh for every branch of the flow (main and master; no checkout, detached, no main; the listing and the stop
+    without a message, before any gh call; with a message, `git add` of exactly the listed files and the commit with
+    and without trailers, after the readiness checks; review errors stop before the push; the push and `gh pr create`
+    with their arguments and order; the title; nothing to open; gh missing, logged out, no origin, unpushed main;
+    failed push and failed PR; the dry run; the issue lines; the description; the committed paths), one case on a real
+    working tree, `ReviewRunnerTest`, the plugin wiring, and TestKit on the fixture: `openPr` on `main` refuses
+    naming Rule 2, and on a branch with an edited page and a scratch file prints the two lists and commits nothing.
+    **Test passed** on a throwaway branch of this repository, 2026-10-28 (the results are in the pull request's
+    description and in the agent's report; the test PR was closed and its branch deleted): see the note below once
+    the real run is recorded._
 - [ ] T122 [IMP] _(Optional, later)_ **Grammar checking: Vale, LanguageTool, or neither.** Try Vale with the write-good
   and proselint styles on the 2026 posts and About; count true findings against noise. Record the decision here.
   If adopted, it becomes W7 in a later task, advisory only (`docs/05-REVIEW-FLOW.md`)

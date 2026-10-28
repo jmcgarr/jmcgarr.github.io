@@ -30,7 +30,8 @@ import java.util.Set;
  *
  * <p>External links (W1) are task T119. Spelling (W5) is deferred (T120). A finding that is right for the site but
  * wrong for one line is suppressed by an HTML comment on the line before it ({@link Suppressions}). It never changes
- * a file. {@link Report} prints what it found; {@link ReviewResult#failed} says whether the task fails.
+ * a file. {@link Report} prints what it found; {@link ReviewResult#failed} says whether the task fails;
+ * {@link ReviewRunner} is how the rest of the plugin runs it.
  */
 final class Review {
 
@@ -61,6 +62,17 @@ final class Review {
     }
 
     /**
+     * The sentence for a clean tree, printed in place of a report.
+     *
+     * @param base the branch the changes were looked for against
+     * @return the sentence
+     */
+    String nothingToReview(String base) {
+        return "Nothing to review: no changes under " + site.display(site.source()) + " or " + site.display(site.caseRedirects())
+                + " since the merge base with " + base + ".";
+    }
+
+    /**
      * Runs the review.
      *
      * @param options what to review
@@ -87,8 +99,7 @@ final class Review {
         Changes changes = new Changes(site, git, options.base().strip());
         List<Change> changed = options.all() ? changes.everything() : changes.changed();
         if (changed.isEmpty()) {
-            out.println("Nothing to review: no changes under " + site.display(site.source()) + " or "
-                    + site.display(site.caseRedirects()) + " since the merge base with " + changes.base() + ".");
+            out.println(nothingToReview(changes.base()));
             return ReviewResult.nothing();
         }
 

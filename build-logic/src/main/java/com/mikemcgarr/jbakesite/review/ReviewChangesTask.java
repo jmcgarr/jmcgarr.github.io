@@ -106,10 +106,8 @@ public abstract class ReviewChangesTask extends SiteToolTask {
         runTool(() -> {
             ReviewOptions options = new ReviewOptions(getBase().getOrElse("main"), flag(getAll(), "all"),
                     flag(getStrict(), "strict"), flag(getOnline(), "online"));
-            Review review = new Review(site, bakedSite, siteHost(site), git, Clock.systemDefaultZone(), System.out);
-            ReviewResult result = review.run(options);
-            new Report(System.out, env).print(result);
-            if (result.failed(options.strict())) {
+            ReviewRunner review = new ReviewRunner(site, bakedSite, siteHost(site), git, Clock.systemDefaultZone(), System.out, env);
+            if (!review.run(options).passed()) {
                 throw new GradleException("The review found errors (listed above). Fix them, or suppress one with"
                         + " <!-- review: ignore E2, why --> on the line before it.");
             }

@@ -161,38 +161,16 @@ final class NewPost {
     }
 
     /**
-     * Checks everything -Ppr needs before anything is created: gh is installed and logged in, it can find the
-     * GitHub repository, there's an origin to push to, git knows who is committing, and main has nothing
-     * unpushed (it would ride along in the post's PR). Returns the repository as owner/name.
+     * Checks everything -Ppr needs before anything is created ({@link GitHubCli}): gh is installed and logged in,
+     * there's an origin to push to, gh can find the GitHub repository, git knows who is committing, and main has
+     * nothing unpushed (it would ride along in the post's PR). Returns the repository as owner/name.
      */
     private String checkReadyToOpenPr() throws IOException, InterruptedException {
-        Result version = runner.run(List.of("gh", "--version"), Stderr.MERGE);
-        if (version == null) {
-            throw fail("-Ppr needs the GitHub CLI (gh), and it isn't installed or isn't on the PATH. "
-                    + "Install it (https://cli.github.com), run gh auth login, then try again.");
-        }
-        Result auth = runner.run(List.of("gh", "auth", "status"), Stderr.MERGE);
-        if (auth.exit() != 0) {
-            throw fail("-Ppr needs the GitHub CLI to be logged in, and gh auth status says it isn't:\n"
-                    + indent(auth.output()) + "\nRun gh auth login, then try again.");
-        }
-        if (git.output("remote", "get-url", "origin").isEmpty()) {
-            throw fail("-Ppr pushes the post branch to origin, and this repository has no origin remote.");
-        }
-        Result repo = runner.run(List.of("gh", "repo", "view", "--json", "nameWithOwner", "--jq", ".nameWithOwner"), Stderr.MERGE);
-        if (repo.exit() != 0 || repo.output().isEmpty()) {
-            throw fail("-Ppr couldn't find the GitHub repository with gh repo view:\n" + indent(repo.output()));
-        }
-        if (git.output("var", "GIT_COMMITTER_IDENT").isEmpty()) {
-            throw fail("-Ppr commits the draft, and git doesn't know your name and email. Set them with "
-                    + "git config user.name and git config user.email, then try again.");
-        }
-        String unpushed = git.output("rev-list", "--count", "refs/remotes/origin/main..refs/heads/main");
-        if (!unpushed.isEmpty() && !unpushed.equals("0")) {
-            throw fail("Your local main has " + unpushed + " commit(s) that aren't on origin/main. They would end up "
-                    + "in the post's pull request. Push or reset main first.");
-        }
-        return repo.output();
+        GitHubCli gh = new GitHubCli(git, runner, "-Ppr");
+        String repo = gh.repository("the post branch");
+        gh.committerKnown("the draft");
+        gh.mainIsPushed("the post's pull request");
+        return repo;
     }
 
     /**
@@ -240,43 +218,26 @@ final class NewPost {
                 "-m", "Created with ./gradlew newPost -Ppr. It has status=draft, so it renders for local preview "
                         + "only and isn't published.");
         if (!runner.runVisibly(add) || !runner.runVisibly(commit)) {
-            throw stopAfter("Committing the draft failed (see the git output above). The draft file is in place on "
+            throw GitHubCli.stopAfter("Committing the draft failed (see the git output above). The draft file is in place on "
                     + branchName + ", uncommitted.", List.of(add, commit, push, openPr));
         }
         out.println("Committed " + shownFile + " on " + branchName);
 
         if (!runner.runVisibly(push)) {
-            throw stopAfter("The draft is committed on " + branchName + ", but pushing it to origin failed "
+            throw GitHubCli.stopAfter("The draft is committed on " + branchName + ", but pushing it to origin failed "
                     + "(see the git output above).", List.of(push, openPr));
         }
         out.println("Pushed " + branchName + " to origin");
 
         Result created = runner.run(openPr, Stderr.SHOW);
         if (created == null || created.exit() != 0) {
-            throw stopAfter(branchName + " is committed and pushed, but opening the pull request failed"
+            throw GitHubCli.stopAfter(branchName + " is committed and pushed, but opening the pull request failed"
                     + (created == null ? " (gh didn't run)." : " (see the gh output above)."), List.of(openPr));
         }
         String url = created.output().lines().filter(l -> l.startsWith("https://")).reduce((a, b) -> b)
                 .orElse(created.output());
         out.println("Opened the draft pull request \"" + prTitle + "\": " + url);
         return url;
-    }
-
-    /** Explains a failed step and lists the commands that finish the job. Nothing is undone. */
-    private static ToolFailure stopAfter(String what, List<List<String>> remaining) {
-        StringBuilder msg = new StringBuilder(what).append(" Nothing was undone. To finish, run:");
-        for (List<String> cmd : remaining) {
-            msg.append("\n  ").append(String.join(" ", cmd.stream().map(NewPost::shellQuote).toList()));
-        }
-        return fail(msg.toString());
-    }
-
-    static String shellQuote(String s) {
-        return s.matches("[A-Za-z0-9_./:=@+,-]+") ? s : "'" + s.replace("'", "'\\''") + "'";
-    }
-
-    static String indent(String text) {
-        return text.lines().map(l -> "  " + l).reduce((a, b) -> a + "\n" + b).orElse("  (no output)");
     }
 
     /**

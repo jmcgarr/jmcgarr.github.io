@@ -11,6 +11,7 @@ import com.mikemcgarr.jbakesite.verification.CheckMastheadVariantsTask;
 import com.mikemcgarr.jbakesite.verification.CheckTagRedirectsTask;
 import com.mikemcgarr.jbakesite.verification.CheckUrlsTask;
 import com.mikemcgarr.jbakesite.writing.NewPostTask;
+import com.mikemcgarr.jbakesite.writing.OpenPrTask;
 import com.mikemcgarr.jbakesite.writing.PrepareImageTask;
 import com.mikemcgarr.jbakesite.writing.TagRedirects;
 import com.mikemcgarr.jbakesite.writing.TagRedirectsTask;
@@ -148,8 +149,9 @@ class JbakeSitePluginTest {
         ReviewChangesTask review = (ReviewChangesTask) project.getTasks().getByName(JbakeSitePlugin.REVIEW_CHANGES_TASK_NAME);
         PrepareImageTask prepareImage = (PrepareImageTask) project.getTasks().getByName(JbakeSitePlugin.PREPARE_IMAGE_TASK_NAME);
         TagRedirectsTask tagRedirects = (TagRedirectsTask) project.getTasks().getByName(JbakeSitePlugin.TAG_REDIRECTS_TASK_NAME);
+        OpenPrTask openPr = (OpenPrTask) project.getTasks().getByName(JbakeSitePlugin.OPEN_PR_TASK_NAME);
 
-        for (SiteToolTask task : List.of(newPost, review, prepareImage, tagRedirects)) {
+        for (SiteToolTask task : List.of(newPost, review, prepareImage, tagRedirects, openPr)) {
             assertEquals(JbakeSitePlugin.WRITING_GROUP, task.getGroup(), task.getName());
             assertEquals(projectFile("src/jbake"), task.getSource().get().getAsFile(), task.getName());
             assertEquals(projectFile("src/case-redirects"), task.getCaseRedirects().get().getAsFile(), task.getName());
@@ -165,6 +167,19 @@ class JbakeSitePluginTest {
         assertEquals("Prepares a hand-added image for the site (sRGB, metadata, size, masthead variants): ./gradlew prepareImage -Pimage=<path>",
                 prepareImage.getDescription());
         assertEquals(TagRedirects.RENAMES, tagRedirects.getTagRenames().get());
+        assertEquals(Set.of(JbakeSitePlugin.BAKE_TASK_NAME), dependenciesOf(openPr), "the review it runs reads the bake");
+        assertEquals(projectFile("build/jbake"), openPr.getSite().get().getAsFile());
+        assertEquals(List.of(), openPr.getCommitTrailers().get());
+        assertFalse(openPr.getMessage().isPresent(), "no -Pmessage on this project");
+    }
+
+    @Test
+    void theOpenPrTaskFollowsTheExtensionsCommitTrailers() {
+        site.getCommitTrailers().set(List.of("Co-Authored-By: Pair <pair@example.test>"));
+
+        OpenPrTask openPr = (OpenPrTask) project.getTasks().getByName(JbakeSitePlugin.OPEN_PR_TASK_NAME);
+
+        assertEquals(List.of("Co-Authored-By: Pair <pair@example.test>"), openPr.getCommitTrailers().get());
     }
 
     @Test
