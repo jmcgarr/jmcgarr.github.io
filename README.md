@@ -450,16 +450,21 @@ Gradle. Each runs the same build and checks, and never deploys.
 
 **Run the same checks locally:**
 ```
-./gradlew clean bake
+./gradlew clean checkSite
+```
+It bakes and runs the four plugin checks on `build/jbake`: `checkUrls` (no published URL may disappear),
+`checkDocsNotPublished` (docs/ must never reach the site), `checkTagRedirects` (old tag URLs are tag pages or
+working redirects) and `checkMastheadVariants` (header images have their phone/tablet sizes). `./gradlew check` runs
+them too, plus `reviewChanges`. To check exactly what CI deploys, stage the bake without drafts first and point the
+checks at it, as the workflow does:
+```
 rm -rf build/site && rsync -a --prune-empty-dirs --exclude '*-draft.html' build/jbake/ build/site/
-scripts/check-docs-not-published.sh build/site   # docs/ must never reach the site
-scripts/check-urls.sh build/site                 # no published URL may disappear
-./gradlew checkTagRedirects -PsiteDir=build/site   # old tag URLs are tag pages or working redirects
-./gradlew checkMastheadVariants                   # header images have their phone/tablet sizes
+./gradlew checkSite -PsiteDir=build/site
 xmllint --noout build/site/feed.xml build/site/sitemap.xml
 ```
 The link checker (lychee) runs in CI. To run it locally, install [lychee](https://lychee.cli.rs) and see the
-"Check local links and assets" step in the workflow for its options.
+"Check local links and assets" step in the workflow for its options. Until T143 (2026-10-28) the URL and docs checks
+were two shell scripts under `scripts/`; the tasks print the same lines.
 
 **Old tag URLs (T039, T055):** tag pages used to be published with spaces (`/tags/acceptance test.html`), and two
 tags had a capitalized twin (`/tags/DevOps.html`, `/tags/Groovy.html`). Those 59 URLs (50 until the 2026-10-09 tag merges) are now small redirect pages
@@ -475,7 +480,7 @@ and typo fixes (report §H) added 9 stubs and repointed 3, for 59 in all.
 **macOS caveat:** macOS filesystems ignore case, so `tags/DevOps.html` and `tags/devops.html` are the same file
 there. `./gradlew bake` therefore adds `src/case-redirects/` only when `build/jbake` is case-sensitive (Linux, as
 in CI and on GitHub Pages) and says so when it skips them. A local bake on a Mac has the real `devops` and `groovy`
-pages but not those 2 stubs, and `check-urls.sh` and `TagRedirects.java --check` report them as "can't check here".
+pages but not those 2 stubs, and `checkUrls` and `checkTagRedirects` report them as "can't check here".
 They're not JBake assets on purpose: JBake copies assets after rendering, so on a Mac the stub would overwrite the
 real page and redirect to itself.
 

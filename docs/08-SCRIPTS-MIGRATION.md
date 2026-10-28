@@ -349,7 +349,7 @@ superseded by the T130 decision there._
   - _2026-10-27: **superseded** by T130's decision in `06-GRADLE-PLUGIN.md`: the four programs move into the plugin
     as task classes (T127), so there is nothing to register and no `jbakeSite.scripts` block. The surface rows went
     into `06`'s table the same day._
-- [ ] T143 [IMP] **Remove the shell checks and finish the docs.** After T141 has run green in CI for at least one
+- [x] T143 [IMP] **Remove the shell checks and finish the docs.** After T141 has run green in CI for at least one
   merged content PR: delete `check-docs-not-published.sh` and `check-urls.sh` (D4), point AGENTS.md Rule 1 step 3
   (line 95) and the design doc's T125 test (line 229) at `./gradlew checkUrls`, and make README "Run the same
   checks locally" one command; `smoke-test.sh`, `scripts/visual/` and the four Java programs are what's left
@@ -357,6 +357,24 @@ superseded by the T130 decision there._
   - **Test:** `git ls-files scripts` lists `NewPost.java`, `ReviewChanges.java`, `PrepareImage.java`,
     `TagRedirects.java`, `smoke-test.sh` and `visual/{PixelDiff.java,screenshots.sh,phone-shots.mjs}` and nothing
     else; `grep -rn 'check-urls.sh\|check-docs-not-published.sh' README.md AGENTS.md docs/0*.md .github` is empty.
+  - _2026-10-28: **done** (same branch as T141, the next commit; D4, the owner's decision of 2026-10-27, "go": one
+    implementation per check). The "after T141 has run green in CI for at least one merged content PR" wait was
+    replaced, with the coordinator's instruction, by the equivalence check recorded under T141 (shell against Java on
+    the same bake, on a bake with a page removed and on one with a page added, identical output and exit codes), since
+    the two implementations would otherwise have shared one PR's CI run anyway. `scripts/check-urls.sh` and
+    `scripts/check-docs-not-published.sh` are deleted (`git rm`); `git ls-files scripts` is `smoke-test.sh` and
+    `visual/{PixelDiff.java,phone-shots.mjs,screenshots.sh}`, the four Java programs having moved into the plugin in
+    T127. AGENTS.md: Rule 1 step 3 is `./gradlew checkUrls`, with what it compares and when it warns rather than
+    fails; the Layout tree's `scripts/` line and the Commands block (`checkSite`). README: "Run the same checks
+    locally" is `./gradlew clean checkSite`, with the staged-site variant CI uses; the check table and the macOS
+    caveat name the tasks. `06-GRADLE-PLUGIN.md`: dated notes under T125's Test line and CHK047 instead of rewrites;
+    `05-REVIEW-FLOW.md`'s W6 row likewise. The review's W6 finding ends "CI's checkUrls fails otherwise." instead of
+    naming the script (a deliberate string change; `ReviewTest` follows). **Test:** `git ls-files scripts` as above
+    (the Test line's list predates T127's move of the Java programs); the grep over README.md, AGENTS.md and `.github`
+    is empty; in `docs/0*.md` the two names remain only where they are the subject: this plan's findings, table and
+    notes, and the dated notes added by this task. `docs/baseline/expected-removals.txt`'s comments still say
+    "check-urls.sh doesn't track it" about non-HTML URLs; a baseline file changes only at a milestone checkpoint,
+    and the sentence stays true of the task._
 
 #### Checkpoint: M11
 
@@ -364,6 +382,9 @@ superseded by the T130 decision there._
   _(passed: both commands empty on `main` after #166 merged; confirmed by the owner on 2026-10-27)_
 - [ ] CHK054 A clean bake on `main` is byte-identical (apart from `feed.xml`'s timestamps) to the bake at the commit before T137; the 59 tag stubs and the 28 masthead variants are unchanged in git since then
 - [ ] CHK055 CI runs no script outside `scripts/*.java`, `scripts/smoke-test.sh` and Gradle tasks, and is green on Linux
+  _(2026-10-28: the first half holds since T143: `.github/workflows/gradle.yml` runs Gradle tasks, inline shell (the
+  D3 steps: drafts, CR line endings, live reload, xmllint), lychee and `scripts/smoke-test.sh`, and `scripts/*.java`
+  no longer exists outside `visual/`. The Linux run is pending this PR's CI; the owner ticks after it is green)_
 - [x] CHK056 D1–D4 each have a dated decision in the Notes
   _(2026-10-27: D1 and D2 recorded with Phase A, D3 and D4 decided by the owner the same day; see Blockers and Notes)_
 
