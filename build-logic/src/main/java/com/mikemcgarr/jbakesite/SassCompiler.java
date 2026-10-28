@@ -7,6 +7,8 @@ import de.larsgrefer.sass.embedded.SassCompilerFactory;
 import de.larsgrefer.sass.embedded.logging.Slf4jLoggingHandler;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import org.slf4j.Logger;
 
 /**
@@ -70,6 +72,24 @@ public final class SassCompiler implements AutoCloseable {
         } catch (SassCompilationFailedException e) {
             throw new SassCompileException(e.getCompileFailure().getFormatted());
         }
+    }
+
+    /**
+     * Compiles every entry in a directory ({@link SassEntries#in}), all of them before anything is returned, so an
+     * error in one leaves the caller with nothing half done: {@code compileSass} writes the result, and the
+     * preview's watcher swaps it in while keeping the last good CSS on an error.
+     *
+     * @param sourceDir the SCSS directory
+     * @return each entry's CSS file name ({@link SassEntries#cssName}) to its CSS, in entry order
+     * @throws SassCompileException for a Sass error in any entry, with Dart Sass's message
+     * @throws IOException if the directory can't be read or the compiler process fails
+     */
+    public Map<String, String> compileAll(Path sourceDir) throws SassCompileException, IOException {
+        Map<String, String> compiled = new LinkedHashMap<>();
+        for (Path entry : SassEntries.in(sourceDir)) {
+            compiled.put(SassEntries.cssName(entry), compile(entry));
+        }
+        return compiled;
     }
 
     /**

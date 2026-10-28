@@ -22,9 +22,10 @@ import org.gradle.api.tasks.TaskAction;
 /**
  * {@code checkNoHandEditedCss}, the guard the bake and the preview run first (T043, T134, T135; in the plugin since
  * T124). The site's CSS used to be hand-edited under JBake's assets, and the bake would still publish a copy that
- * came back there, silently going stale (the bake replaces it with the compiled one). So the task fails when any
- * file under the assets' CSS folder has the name of an entry's CSS ({@link SassEntries#cssName}) or of a retired
- * stylesheet, and says what to do: move the change into the SCSS and delete the file.
+ * came back there, silently going stale (the bake replaces it with the compiled one). So the task fails when a
+ * {@code .css} file directly in the assets' CSS folder (not in a subfolder, as the guard in {@code build.gradle}
+ * checked) has the name of an entry's CSS ({@link SassEntries#cssName}) or of a retired stylesheet, and says what
+ * to do: move the change into the SCSS and delete the file.
  *
  * <p>The task has no outputs, so it runs on every build; it is cheap.
  */
@@ -32,10 +33,6 @@ public abstract class CheckNoHandEditedCssTask extends DefaultTask {
 
     /** What the message ends with: the fix. */
     static final String FIX = "Move any change into the SCSS, then delete this file.";
-
-    /** Created by Gradle as {@code checkNoHandEditedCss}; {@link JbakeSitePlugin} wires it to the extension. */
-    public CheckNoHandEditedCssTask() {
-    }
 
     /**
      * The SCSS directory, for the entries whose CSS names are guarded.
@@ -47,7 +44,7 @@ public abstract class CheckNoHandEditedCssTask extends DefaultTask {
     public abstract DirectoryProperty getScssSource();
 
     /**
-     * The files under the assets' CSS folder, where the generated CSS must not be. Usually none.
+     * The {@code .css} files directly in the assets' CSS folder, where the generated CSS must not be. Usually none.
      *
      * @return the files
      */

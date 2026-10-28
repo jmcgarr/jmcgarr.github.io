@@ -47,4 +47,7 @@ tasks.withType(Test).configureEach {
 
 tasks.withType(Javadoc).configureEach {
     options.encoding = 'UTF-8'
+    // Every doclint check except "missing": Gradle creates the extensions and tasks through their implicit
+    // constructors, which doclint would otherwise want documented
+    options.addBooleanOption('Xdoclint:all,-missing', true)
 }

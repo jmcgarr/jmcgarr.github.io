@@ -1,9 +1,10 @@
 package com.mikemcgarr.jbakesite;
 
+import java.nio.file.Path;
+import java.util.List;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.file.Directory;
-import java.util.List;
 import org.gradle.api.file.ProjectLayout;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.tasks.TaskContainer;
@@ -34,10 +35,6 @@ public final class JbakeSitePlugin implements Plugin<Project> {
     /** JBake's assets folder under its source directory, copied to the site root as it is. */
     private static final String ASSETS_FOLDER = "assets";
 
-    /** Created by Gradle for {@code plugins { id 'jbake-site' }}. */
-    public JbakeSitePlugin() {
-    }
-
     @Override
     public void apply(Project project) {
         JbakeSiteExtension site = project.getExtensions().create(EXTENSION_NAME, JbakeSiteExtension.class);
@@ -54,8 +51,18 @@ public final class JbakeSitePlugin implements Plugin<Project> {
         scss.getPublishedDir().convention("css");
         scss.getRetiredCss().convention(List.of());
         scss.getHandEditedCssExplanation().convention(scss.getSource().map(source ->
-                "the site's CSS is compiled from the SCSS in " + source.getAsFile()
+                "the site's CSS is compiled from the SCSS in " + relativeToProject(projectDirectory, source)
                         + "; JBake would publish this copy, and it would go stale."));
+    }
+
+    /**
+     * A directory as a project-relative path when it is under the project, so that a task input built from it is
+     * the same on every machine; the absolute path otherwise.
+     */
+    private static String relativeToProject(Directory projectDirectory, Directory directory) {
+        Path project = projectDirectory.getAsFile().toPath();
+        Path path = directory.getAsFile().toPath();
+        return path.startsWith(project) ? project.relativize(path).toString() : path.toString();
     }
 
     private static void registerThemeCss(JbakeSiteExtension site, TaskContainer tasks, ProjectLayout layout) {

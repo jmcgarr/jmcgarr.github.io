@@ -157,9 +157,9 @@ def caseRedirects = file('src/case-redirects')
 // The theme CSS, from the plugin (jbakeSite.scss above): compileSass writes it to build/generated/sass/css, and the
 // bake and the preview copy it into build/jbake/css after JBake has run, so nothing JBake copies can replace it
 // (FileTrees, also the plugin's, keeps relative paths and replaces files). Both run checkNoHandEditedCss first.
-def sassSource = jbakeSite.scss.source.get().asFile
+// Providers, read when the tasks run: the extension can still change after this line.
 def themeCss = tasks.named('compileSass', CompileSassTask).flatMap { it.destinationDirectory }
-def siteCss = new File(jbakeDestination, jbakeSite.scss.publishedDir.get())
+def siteCss = layout.buildDirectory.dir(jbakeSite.scss.publishedDir.map { "jbake/$it" })
 
 // Bakes src/jbake into build/jbake (drafts included, as <name>-draft.html; CI leaves them out of the deploy).
 tasks.register('bake', JavaExec) {
@@ -175,7 +175,7 @@ tasks.register('bake', JavaExec) {
     args jbakeSource.absolutePath, jbakeDestination.absolutePath, '-b'
     doLast {
         // After JBake, so nothing JBake copies can replace it
-        FileTrees.copy(themeCss.get().asFile.toPath(), siteCss.toPath())
+        FileTrees.copy(themeCss.get().asFile.toPath(), siteCss.get().asFile.toPath())
         if (java.nio.file.Files.exists(jbakeDestination.toPath().resolve('INDEX.HTML'))) {
             logger.lifecycle('Case-insensitive filesystem: left out the redirect stubs in src/case-redirects ' +
                     '(they would replace the real pages with the same name in another case). CI adds them.')
@@ -195,6 +195,7 @@ abstract class SassPreviewWatcher implements BuildService<Params>, AutoCloseable
     interface Params extends BuildServiceParameters {
         DirectoryProperty getSourceDir()
         DirectoryProperty getTargetDir()
+        Property<String> getPublishedDir()   // for the log lines: an entry is published at /<publishedDir>/<name>.css
     }
 
     // Not private: Gradle runs a generated subclass, and Groovy closures there can't see private fields.
@@ -205,6 +206,7 @@ abstract class SassPreviewWatcher implements BuildService<Params>, AutoCloseable
     void start() {
         def sourceDir = parameters.sourceDir.get().asFile.toPath()
         def targetDir = parameters.targetDir.get().asFile.toPath()
+        def url = { String cssName -> "/${parameters.publishedDir.get()}/$cssName" }
         thread = Thread.startDaemon('scss-preview-watcher') {
             def compiler = null
             try {
@@ -215,7 +217,7 @@ abstract class SassPreviewWatcher implements BuildService<Params>, AutoCloseable
                 } }
                 def seen = stamp()
                 LOG.lifecycle('Watching src/scss: a saved change recompiles every entry ' +
-                        "(${SassEntries.in(sourceDir).collect { '/css/' + SassEntries.cssName(it) }.join(', ')}).")
+                        "(${SassEntries.in(sourceDir).collect { url(SassEntries.cssName(it)) }.join(', ')}).")
                 while (!stopping) {
                     Thread.sleep(500)
                     def now = stamp()
@@ -223,10 +225,8 @@ abstract class SassPreviewWatcher implements BuildService<Params>, AutoCloseable
                     seen = now
                     try {
                         if (compiler == null) { compiler = SassCompiler.start(LOG) }
-                        // Compile every entry first, then write: an error in one leaves all of them as they were
-                        def compiled = SassEntries.in(sourceDir).collectEntries { entry ->
-                            [(SassEntries.cssName(entry)): compiler.compile(entry)]
-                        }
+                        // Every entry is compiled before anything is written: an error in one leaves all as they were
+                        def compiled = compiler.compileAll(sourceDir)
                         java.nio.file.Files.createDirectories(targetDir)
                         compiled.each { name, css ->
                             def temp = java.nio.file.Files.createTempFile(targetDir, name, '.tmp')
@@ -235,7 +235,7 @@ abstract class SassPreviewWatcher implements BuildService<Params>, AutoCloseable
                                     java.nio.file.StandardCopyOption.REPLACE_EXISTING,
                                     java.nio.file.StandardCopyOption.ATOMIC_MOVE)
                         }
-                        LOG.lifecycle("src/scss changed: recompiled ${compiled.keySet().collect { '/css/' + it }.join(', ')}")
+                        LOG.lifecycle("src/scss changed: recompiled ${compiled.keySet().collect { url(it) }.join(', ')}")
                     } catch (SassCompileException e) {
                         LOG.error("src/scss changed, but Sass failed (the preview keeps the last good CSS):\n" + e.message)
                     }
@@ -258,8 +258,9 @@ abstract class SassPreviewWatcher implements BuildService<Params>, AutoCloseable
     }
 }
 def sassPreviewWatcher = gradle.sharedServices.registerIfAbsent('sassPreviewWatcher', SassPreviewWatcher) {
-    parameters.sourceDir = sassSource
+    parameters.sourceDir = jbakeSite.scss.source
     parameters.targetDir = siteCss
+    parameters.publishedDir = jbakeSite.scss.publishedDir
 }
 
 // Local preview, `./gradlew bakePreview` (T062, T100; the JBake plugin's task name since 2014, the one preview task
@@ -304,7 +305,7 @@ tasks.register('bakePreview', JavaExec) {
     usesService(sassPreviewWatcher)
     doFirst {
         checkPreviewPortFree()
-        FileTrees.copy(themeCss.get().asFile.toPath(), siteCss.toPath())
+        FileTrees.copy(themeCss.get().asFile.toPath(), siteCss.get().asFile.toPath())
         sassPreviewWatcher.get().start()
     }
     // Live reload (T064): templates see this as config.preview_livereload, and header.ftl then adds a small

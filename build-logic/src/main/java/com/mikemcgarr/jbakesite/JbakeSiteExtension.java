@@ -13,10 +13,6 @@ import org.gradle.api.tasks.Nested;
  */
 public abstract class JbakeSiteExtension {
 
-    /** Created by Gradle when the plugin is applied; configure it in {@code build.gradle}. */
-    public JbakeSiteExtension() {
-    }
-
     /**
      * JBake's source directory: {@code content/}, {@code templates/}, {@code assets/} and {@code jbake.properties}.
      * Default {@code src/jbake}. T124 uses it to find the assets folder the CSS guard watches; T125 will bake it.

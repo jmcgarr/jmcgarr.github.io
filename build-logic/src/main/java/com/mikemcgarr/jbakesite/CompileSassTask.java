@@ -3,8 +3,6 @@ package com.mikemcgarr.jbakesite;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
 import org.gradle.api.DefaultTask;
@@ -31,10 +29,6 @@ import org.gradle.api.tasks.TaskAction;
  */
 @CacheableTask
 public abstract class CompileSassTask extends DefaultTask {
-
-    /** Created by Gradle as {@code compileSass}; {@link JbakeSitePlugin} wires it to the extension. */
-    public CompileSassTask() {
-    }
 
     /**
      * The SCSS directory: the entries, and the partials they use.
@@ -70,18 +64,13 @@ public abstract class CompileSassTask extends DefaultTask {
     public void compile() throws IOException {
         Path source = getSource().get().getAsFile().toPath();
         Path destination = getDestinationDirectory().get().getAsFile().toPath();
-        List<Path> entries = SassEntries.in(source);
 
-        Map<String, String> compiled = new LinkedHashMap<>();
+        Map<String, String> compiled;
         try (SassCompiler compiler = SassCompiler.start(getLogger())) {
             getLogger().info("Compiling {} with {}", source, compiler.version());
-            for (Path entry : entries) {
-                try {
-                    compiled.put(SassEntries.cssName(entry), compiler.compile(entry));
-                } catch (SassCompileException e) {
-                    throw new GradleException(e.getMessage());
-                }
-            }
+            compiled = compiler.compileAll(source);
+        } catch (SassCompileException e) {
+            throw new GradleException(e.getMessage(), e);
         }
 
         getFileSystemOperations().delete(spec -> spec.delete(destination));
@@ -89,7 +78,7 @@ public abstract class CompileSassTask extends DefaultTask {
         for (Map.Entry<String, String> css : compiled.entrySet()) {
             Files.writeString(destination.resolve(css.getKey()), css.getValue());
         }
-        getLogger().info("Compiled {} into {}: {}", entries.size() == 1 ? "1 entry" : entries.size() + " entries",
+        getLogger().info("Compiled {} into {}: {}", compiled.size() == 1 ? "1 entry" : compiled.size() + " entries",
                 destination, String.join(", ", compiled.keySet()));
     }
 }

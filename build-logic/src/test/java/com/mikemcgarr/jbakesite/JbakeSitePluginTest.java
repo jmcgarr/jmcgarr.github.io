@@ -1,14 +1,12 @@
 package com.mikemcgarr.jbakesite;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.util.List;
 import org.gradle.api.Project;
-import org.gradle.api.Task;
 import org.gradle.testfixtures.ProjectBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,7 +31,8 @@ class JbakeSitePluginTest {
         assertEquals(projectFile("src/scss"), site.getScss().getSource().get().getAsFile());
         assertEquals("css", site.getScss().getPublishedDir().get());
         assertEquals(List.of(), site.getScss().getRetiredCss().get());
-        assertTrue(site.getScss().getHandEditedCssExplanation().get().contains(projectFile("src/scss").getPath()));
+        assertEquals("the site's CSS is compiled from the SCSS in src/scss; JBake would publish this copy, and it would go stale.",
+                site.getScss().getHandEditedCssExplanation().get(), "a project-relative path: the same task input on every machine");
     }
 
     @Test
@@ -43,14 +42,6 @@ class JbakeSitePluginTest {
         assertNull(task.getGroup(), "an implementation detail of bake, hidden from `gradlew tasks` (T133)");
         assertEquals(projectFile("src/scss"), task.getSource().get().getAsFile());
         assertEquals(projectFile("build/generated/sass/css"), task.getDestinationDirectory().get().getAsFile());
-    }
-
-    @Test
-    void registersTheHandEditedCssGuard() {
-        Task task = project.getTasks().getByName(JbakeSitePlugin.CHECK_NO_HAND_EDITED_CSS_TASK_NAME);
-
-        assertNotNull(task);
-        assertTrue(task instanceof CheckNoHandEditedCssTask);
     }
 
     @Test
@@ -71,7 +62,7 @@ class JbakeSitePluginTest {
         assertEquals(projectFile("build/generated/sass/assets/styles"), compile.getDestinationDirectory().get().getAsFile());
         assertEquals(projectFile("styles"), guard.getScssSource().get().getAsFile());
         assertEquals(List.of("old.css"), guard.getRetiredCss().get());
-        assertTrue(guard.getExplanation().get().contains(projectFile("styles").getPath()));
+        assertTrue(guard.getExplanation().get().contains("in styles;"), guard.getExplanation().get());
     }
 
     private File projectFile(String path) {

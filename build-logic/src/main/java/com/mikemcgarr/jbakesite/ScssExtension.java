@@ -16,10 +16,6 @@ import org.gradle.api.provider.Property;
  */
 public abstract class ScssExtension {
 
-    /** Created by Gradle for the {@code jbakeSite} extension; configure it in {@code build.gradle}. */
-    public ScssExtension() {
-    }
-
     /**
      * The SCSS directory. Default {@code src/scss}.
      *

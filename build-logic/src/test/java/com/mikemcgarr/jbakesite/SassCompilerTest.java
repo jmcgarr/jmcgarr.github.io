@@ -50,6 +50,27 @@ class SassCompilerTest {
     }
 
     @Test
+    void compileAllCompilesEveryEntryInOrderAndNoPartial() throws Exception {
+        Files.writeString(scss.resolve("_variables.scss"), "$gray: #808080;\n");
+        Files.writeString(scss.resolve("code.scss"), "pre { color: red; }\n");
+        Files.writeString(scss.resolve("clean-blog.scss"), "@use 'variables';\nbody { color: variables.$gray; }\n");
+
+        var compiled = compiler.compileAll(scss);
+
+        assertEquals(java.util.List.of("clean-blog.css", "code.css"), java.util.List.copyOf(compiled.keySet()));
+        assertEquals("body {\n  color: #808080;\n}", compiled.get("clean-blog.css"));
+        assertEquals("pre {\n  color: red;\n}", compiled.get("code.css"));
+    }
+
+    @Test
+    void compileAllFailsAsAWholeOnOneBadEntry() throws IOException {
+        Files.writeString(scss.resolve("good.scss"), "a { color: red; }\n");
+        Files.writeString(scss.resolve("bad.scss"), "a { color: ; }\n");
+
+        assertThrows(SassCompileException.class, () -> compiler.compileAll(scss));
+    }
+
+    @Test
     void aSassErrorCarriesDartSassMessageWithTheFileAndLine() throws IOException {
         Files.writeString(scss.resolve("_variables.scss"), "$gray: #808080;\n$oops: ;\n");
         Files.writeString(scss.resolve("site.scss"), "@use 'variables';\n");

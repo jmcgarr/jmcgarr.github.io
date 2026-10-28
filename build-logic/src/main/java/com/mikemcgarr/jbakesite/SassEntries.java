@@ -26,7 +26,8 @@ public final class SassEntries {
      * Lists the entries in a directory, sorted by name.
      *
      * @param source the SCSS directory
-     * @return the entries, as paths under {@code source}; empty when the directory doesn't exist
+     * @return the entries, as paths under {@code source}; empty when the directory doesn't exist (the preview's
+     *         watcher and tests can see that; the tasks' {@code @InputDirectory} validation fails first)
      * @throws IOException if the directory can't be read
      */
     public static List<Path> in(Path source) throws IOException {
