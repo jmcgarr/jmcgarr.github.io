@@ -1,4 +1,6 @@
 pluginManagement {
+  // The site's own build plugin, `jbake-site`, lives in build-logic/ (docs/06-GRADLE-PLUGIN.md, T123)
+  includeBuild 'build-logic'
   repositories {
     mavenLocal()
     gradlePluginPortal()

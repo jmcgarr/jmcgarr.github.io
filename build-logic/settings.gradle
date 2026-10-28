@@ -1,0 +1,3 @@
+// The site's build plugin, an included build (docs/06-GRADLE-PLUGIN.md, T123). The root settings.gradle includes it
+// with pluginManagement { includeBuild 'build-logic' }, so build.gradle can apply `jbake-site` by id.
+rootProject.name = 'build-logic'

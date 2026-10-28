@@ -1,5 +1,8 @@
 plugins {
     id 'base'   // provides `clean`
+    // The site's build logic as a plugin (docs/06-GRADLE-PLUGIN.md, M10): the included build in build-logic/, which
+    // the tasks below move into one slice at a time, with tests. Configured by the jbakeSite { } block.
+    id 'jbake-site'
     // Compiles src/scss into the theme CSS (T043) with Dart Sass, the reference Sass compiler, through its Java
     // host (de.larsgrefer.sass:sass-embedded-host). No Node or Ruby: the host's jar bundles Dart Sass for macOS,
     // Linux, and Windows, unpacks the one for this machine into a temp folder, and talks to it over stdin/stdout.

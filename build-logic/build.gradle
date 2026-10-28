@@ -1,0 +1,43 @@
+// The `jbake-site` Gradle plugin: the site's build logic as Java classes with tests, applied by the root build.gradle
+// (docs/06-GRADLE-PLUGIN.md, M10). This file is the plugin's own build: what it is compiled with and tested by. The
+// site's dependency pins stay in the root build.gradle.
+plugins {
+    id 'java-gradle-plugin'
+}
+
+repositories {
+    mavenCentral()
+}
+
+// Compiled for Java 21 (the JDK .java-version falls back to) on whatever JDK runs Gradle, 21 or 25, so the build
+// never asks for a toolchain the machine may not have. `release` also keeps the code to the Java 21 API.
+tasks.withType(JavaCompile).configureEach {
+    options.release = 21
+    options.encoding = 'UTF-8'
+    options.compilerArgs.add('-Xlint:all')
+    options.compilerArgs.add('-Werror')
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:6.1.3')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+gradlePlugin {
+    plugins {
+        jbakeSite {
+            id = 'jbake-site'
+            implementationClass = 'com.mikemcgarr.jbakesite.JbakeSitePlugin'
+        }
+    }
+}
+
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+    testLogging.exceptionFormat = 'full'
+}
+
+tasks.withType(Javadoc).configureEach {
+    options.encoding = 'UTF-8'
+}

@@ -32,3 +32,19 @@ updates:
         patterns: ["*"]
     commit-message:
       prefix: "chore(gradle)"
+
+  # The build plugin in build-logic/ (docs/06-GRADLE-PLUGIN.md, T123): the Sass host, JUnit and whatever else the
+  # plugin itself depends on. Same rules as the site's Gradle entry above; its own group, so a plugin update is a
+  # separate PR from a JBake one.
+  - package-ecosystem: gradle
+    directory: /build-logic
+    schedule:
+      interval: weekly
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+    groups:
+      build-logic:
+        patterns: ["*"]
+    commit-message:
+      prefix: "chore(build-logic)"
