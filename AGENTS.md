@@ -42,7 +42,8 @@ build/jbake/              Generated output (git-ignored)
 ./gradlew clean bakePreview   # build + serve at http://localhost:8080, rebuild on save, and reload the open page (drafts at /blog/drafts/<name>-draft.html)
 ./gradlew newPost -Ptitle="My Post"   # start a draft on a new post/<slug> branch (see README)
 ./gradlew reviewChanges       # check the pages this branch changed: Markdown links, local links and images, header (T117; see README)
-./gradlew check               # the standard Gradle verification task: bake + reviewChanges + checkTagRedirects + checkMastheadVariants (the checks CI runs)
+./gradlew check               # the standard Gradle verification task: bake + reviewChanges + checkSite
+./gradlew checkSite           # the checks CI runs on the baked site: checkUrls (Rule 1), checkDocsNotPublished (Rule 4), checkTagRedirects, checkMastheadVariants (T141)
 ./gradlew prepareImage -Pimage=src/jbake/assets/img/masthead/photo.png   # make a hand-added image fit the image rules (see README)
 ./gradlew tagRedirects        # write the redirect stubs for old tag URLs; only after an approved tag rename (Rule 1; see README)
 ./gradlew :build-logic:check  # the plugin's own tests, after any change under build-logic/

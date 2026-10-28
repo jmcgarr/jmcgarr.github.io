@@ -4,12 +4,10 @@ import com.mikemcgarr.jbakesite.SiteToolTask;
 import com.mikemcgarr.jbakesite.internal.Git;
 import com.mikemcgarr.jbakesite.internal.ProcessRunner;
 import com.mikemcgarr.jbakesite.internal.SiteLayout;
-import com.mikemcgarr.jbakesite.internal.ToolFailure;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.time.Clock;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 import javax.inject.Inject;
 import org.gradle.api.GradleException;
@@ -116,17 +114,5 @@ public abstract class ReviewChangesTask extends SiteToolTask {
                         + " <!-- review: ignore E2, why --> on the line before it.");
             }
         });
-    }
-
-    /** A flag is on when given without a value or as true, off as false; anything else is a usage error. */
-    private static boolean flag(Property<String> property, String name) {
-        if (!property.isPresent()) {
-            return false;
-        }
-        return switch (property.get().strip().toLowerCase(Locale.ROOT)) {
-            case "", "true" -> true;
-            case "false" -> false;
-            default -> throw ToolFailure.couldNotRun("-P" + name + " takes no value (or true/false), not '" + property.get() + "'.");
-        };
     }
 }

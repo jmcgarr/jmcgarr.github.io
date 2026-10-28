@@ -3,6 +3,7 @@ package com.mikemcgarr.jbakesite;
 import org.gradle.api.Action;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.RegularFileProperty;
+import org.gradle.api.provider.ListProperty;
 import org.gradle.api.provider.MapProperty;
 import org.gradle.api.tasks.Nested;
 
@@ -14,7 +15,8 @@ import org.gradle.api.tasks.Nested;
  * each slice adds what it needs (T124: {@link #getScss() scss} and {@link #getSource() source}; T125:
  * {@link #getDestination() destination}, {@link #getCaseRedirects() caseRedirects},
  * {@link #getLogbackConfiguration() logbackConfiguration} and {@link #getClasspath() classpath}; T127:
- * {@link #getPublishedUrls() publishedUrls} and {@link #getTagRenames() tagRenames}).
+ * {@link #getPublishedUrls() publishedUrls} and {@link #getTagRenames() tagRenames}; T141:
+ * {@link #getExpectedRemovals() expectedRemovals}; T121: {@link #getCommitTrailers() commitTrailers}).
  */
 public abstract class JbakeSiteExtension {
 
@@ -55,6 +57,24 @@ public abstract class JbakeSiteExtension {
      * @return the file
      */
     public abstract RegularFileProperty getPublishedUrls();
+
+    /**
+     * The published URLs removed on purpose, one site-relative path per line with {@code #} comments, each with the
+     * owner's approval (AGENTS.md Rule 1). {@code checkUrls} accepts a baseline URL that is missing from the bake
+     * only when it is listed here. Default {@code docs/baseline/expected-removals.txt}; a missing file means none.
+     *
+     * @return the file
+     */
+    public abstract RegularFileProperty getExpectedRemovals();
+
+    /**
+     * Trailer lines {@code openPr} appends to the commit it makes from uncommitted work ({@code -Pmessage}), after a
+     * blank line, such as {@code Co-Authored-By: Name <email>}; the commit message is the author's own otherwise.
+     * Default: none.
+     *
+     * @return the lines
+     */
+    public abstract ListProperty<String> getCommitTrailers();
 
     /**
      * Tags merged into another tag or renamed on purpose, old to new, both as written in the posts' {@code tags=}
