@@ -1,0 +1,5 @@
+index.html
+about.html
+blog/first-post.html
+tags/fixture.html
+tags/acceptance test.html

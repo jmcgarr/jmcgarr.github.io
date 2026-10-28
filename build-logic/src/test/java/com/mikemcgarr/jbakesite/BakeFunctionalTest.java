@@ -19,7 +19,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 /**
  * Gradle TestKit: {@code bake} end to end on the fixture site ({@code src/test/fixtures/site}: one post, one page,
- * one SCSS entry with a partial, one case-redirect stub), with the configuration cache on, as the site runs it.
+ * one SCSS entry with a partial, one case-redirect stub, two tag pages and a tag redirect stub), with the configuration
+ * cache on, as the site runs it.
  * JBake really runs, in a fresh JVM on the {@code jbake} configuration the fixture's {@code build.gradle} pins, so
  * the first run downloads JBake's libraries into TestKit's own Gradle home. Covers what {@link BakeTask} and
  * {@link JbakeClasspath} document (T125); T129 owns the rest of the functional tests.
@@ -53,7 +54,7 @@ class BakeFunctionalTest {
         assertEquals(TaskOutcome.SUCCESS, result.task(":compileSass").getOutcome());
         assertEquals(TaskOutcome.SUCCESS, result.task(":checkNoHandEditedCss").getOutcome());
         assertEquals(TaskOutcome.SUCCESS, result.task(":bake").getOutcome());
-        assertTrue(result.getOutput().contains("Baked 3 items"), result.getOutput());
+        assertTrue(result.getOutput().contains("Baked 5 items"), "index, two pages, two tag pages: " + result.getOutput());
         assertTrue(Files.readString(site("index.html")).contains("<a href=\"blog/first-post.html\">First Post</a>"));
         assertTrue(Files.readString(site("blog/first-post.html")).contains("<p>The first post.</p>"));
         assertTrue(Files.readString(site("about.html")).contains("<h1>About</h1>"), "the real page, never the stub");
