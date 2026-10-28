@@ -1,18 +1,18 @@
 # Build logic as a Gradle plugin
 
-**Branch**: `docs/T123-gradle-plugin-plan` | **Created**: 2026-10-22 | **Status**: Draft
+**Branch**: `docs/T123-gradle-plugin-plan` | **Created**: 2026-10-22 | **Status**: Accepted (owner, 2026-10-27; decisions in [Notes](#notes))
 
 A backlog plan to move the custom build logic out of `build.gradle` into a Gradle plugin: first one that lives in
 this repository (an included build under `build-logic/`), later, once its shape has settled, a standalone plugin
 in its own repository. **Backlog, not scheduled** (owner's request, 2026-10-22): it comes after the Review Flow
-plan ([`05-REVIEW-FLOW.md`](05-REVIEW-FLOW.md)) and starts when the owner says so. It uses the same conventions
+plan ([`05-REVIEW-FLOW.md`](05-REVIEW-FLOW.md)) and starts when the owner says so (it did: accepted and started on 2026-10-27, see [Notes](#notes)). It uses the same conventions
 ([`AGENTS.md`](../AGENTS.md), "Tasks and checklists"); task IDs continue from T123 and checkpoints from CHK047.
 The plugin's public surface, the names a user types, follows the JBake Gradle plugin's conventions where they
 exist ([the standard](#the-public-surface-the-standard), T133).
 
 ## Context
 
-`build.gradle` is 383 lines. In 2026-10 it was a 30-line application of the JBake plugin. The revival plan
+`build.gradle` is 383 lines (431 on 2026-10-27, after T140 added the `prepareImage` task). In 2026-10 it was a 30-line application of the JBake plugin. The revival plan
 ([`archive/00-REVIVAL.md`](archive/00-REVIVAL.md)) replaced that plugin and then kept adding, one task at a
 time, each piece justified on its own:
 
@@ -98,10 +98,9 @@ jbakeSite {
         entry = file('src/scss/clean-blog.scss')
         publishedPath = 'css/clean-blog.css'
     }
-    scripts {                                   // single-file Java programs run as tasks
-        register('newPost', 'scripts/NewPost.java') { options = ['title', 'tags', 'summary', 'slug', 'branch', 'pr', 'format'] }
-        register('reviewChanges', 'scripts/ReviewChanges.java') { options = ['base', 'all', 'strict', 'online']; dependsOn 'bake' }
-    }
+    // The writing tasks (newPost, reviewChanges, prepareImage, openPr) and the check tasks are the plugin's
+    // own classes since the T130 decision of 2026-10-27, so there is nothing to register here. Until then this
+    // sketch had a `scripts { register(name, path) { options; dependsOn } }` block for single-file programs.
 }
 
 dependencies {
@@ -133,15 +132,20 @@ comments follow.
 | `jbake` | configuration | exists | **kept, the only one** | The JBake plugin's name for JBake's classpath; the pins live here |
 | `jbakePreview` | configuration | exists, `extendsFrom jbake` | **removed** | Resolves to the same 77 artifacts; its two pins move into `jbake` |
 | `newPost`, `reviewChanges`, later `openPr` | tasks, group `writing` | exist (group `writing`) | **kept** | Authoring tasks, not JBake's; one group of their own |
+| `prepareImage` | task, group `writing` | exists (T140, 2026-10-27) | **kept** | Authoring, like the others |
+| `checkSite`, `checkUrls`, `checkDocsNotPublished`, `checkMastheadVariants`, `checkTagRedirects` | tasks, group `verification` | shell scripts and CI steps | **new** (Phase B of [`08-SCRIPTS-MIGRATION.md`](08-SCRIPTS-MIGRATION.md), 2026-10-27) | Gradle's own group for checks; `check` depends on `checkSite` |
+| `scripts/` | directory | four single-file Java programs and shell | **emptied to `smoke-test.sh` and `visual/`** (T127, T130, T143) | The programs become plugin classes; the smoke test runs after deploy without a JDK |
 | `compileSass` | task, no group | exists (group `build`) | **kept, hidden** | An implementation detail of `bake`; `./gradlew tasks` doesn't list it |
 | `jbakeSite { … }` | extension | none | **new** | Modelled on the JBake plugin's `jbake { srcDirName; destDirName }`, typed as directories. Not named `jbake`, which is the configuration |
 | `jbake.properties` | JBake's own config | exists | **unchanged** | Site settings JBake reads itself (host, port, extensions) stay JBake's, not the extension's |
 
 Two task groups, then: **`jbake`** for generating and previewing the site, **`writing`** for the author's
-commands. `./gradlew tasks` shows exactly those two groups' tasks and nothing else of ours.
+commands. `./gradlew tasks` shows exactly those two groups' tasks and nothing else of ours. _2026-10-27: plus
+Gradle's standard **`verification`** group for the check tasks of Phase B, which `check` runs._
 
 The single-file scripts stay as they are in Phase 1. They keep working without Gradle (`java scripts/NewPost.java`),
-which the README promises, and moving them into the plugin is a separate decision (T130).
+which the README promises, and moving them into the plugin is a separate decision (T130). _Decided 2026-10-27:
+they move into the plugin as task classes (T130, done in T127's PR); the no-Gradle use goes with them._
 
 **Phase 2, sketched only: a standalone plugin** in its own repository, published to the Gradle Plugin Portal (or
 GitHub Packages if the owner prefers private). Not started until Phase 1 has run for a while. For it, the plugin
@@ -196,6 +200,12 @@ the duplicates gone sooner. Then T123, then T124–T128 one at a time, each its 
 byte-identical and CI is green). T129 can start after T124 and grow with each slice. T131 after T128. T130 is a
 decision, any time after T127. T132 closes the milestone.
 
+_2026-10-27 (owner): a few larger PRs rather than one per slice, each merged before the next because they all touch
+`build.gradle`: (1) T133; (2) T123 + T124; (3) T125 + T126; (4) T127 + T130, the four programs moving in as task
+classes; (5) T128 + T129 + T131; (6) Phase B of [`08-SCRIPTS-MIGRATION.md`](08-SCRIPTS-MIGRATION.md) (T141, T143;
+T142 is superseded) together with T121 `openPr` from [`05-REVIEW-FLOW.md`](05-REVIEW-FLOW.md). Every PR still passes
+the byte-identical check, and the plugin's Java gets a code review before the owner sees it._
+
 **The byte-identical check**, used by every slice's Test (the revival's method from T096):
 
 ```sh
@@ -244,6 +254,10 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
     the branch and the file). `./gradlew reviewChanges` on a clean tree prints "Nothing to review"; with the #139
     About file (`git show 756245f:src/jbake/content/about.md > src/jbake/content/about.md`) it fails with the same
     one-line message as on `main`. `./gradlew newPost` with no title fails with NewPost's own message, not a stack trace.
+  - _2026-10-27: with T130 decided (move), T127 moves the four programs (`NewPost`, `ReviewChanges`, `PrepareImage`,
+    `TagRedirects`) into `build-logic/` as task classes with shared helpers and unit tests, instead of wrapping them
+    as `Exec`s; the `-P` option passing and the exit-code mapping stay as described. CI's
+    `java scripts/ReviewChanges.java` and `java scripts/TagRedirects.java --check` steps become Gradle tasks._
 - [ ] T128 [IMP] **Shrink `build.gradle`.** Remove every helper, class and comment that moved; keep the dependency
   pins and their advisory comments; add a short header comment pointing at `build-logic/` and this plan
   (`build.gradle`)
@@ -257,12 +271,17 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
   (`build-logic/src/test/`)
   - **Test:** `./gradlew :build-logic:test` passes locally and in CI (add it to the workflow before "Bake with
     Gradle"). Breaking the CSS copy on purpose fails exactly the test that covers it.
-- [ ] T130 [IMP] _(Decision)_ **Move `NewPost.java` and `ReviewChanges.java` into the plugin, or keep them as
+- [x] T130 [IMP] _(Decision)_ **Move `NewPost.java` and `ReviewChanges.java` into the plugin, or keep them as
   single-file programs.** For: one place, shared `run`/`git`/`fail` helpers (copied between the two today, and
   `OpenPr.java` would copy them a third time), unit tests. Against: `java scripts/X.java` without Gradle stops
   working, and the README promises it. Record the decision and, if moving, add a task per script
   (`docs/06-GRADLE-PLUGIN.md`)
   - **Test:** a dated note under this task records the decision and why, with the owner's say.
+  - _2026-10-27: **move** (owner: "the Java scripts should be moved to the plugin. Move them to the gradle plugin as
+    java files"). Since 2026-10-22 the count grew to four programs (`PrepareImage`, `TagRedirects` joined in Phase A of
+    `08`), each copying the same helpers, and `OpenPr` would be a fifth. Consequences: `java scripts/X.java` without
+    Gradle stops working and the README promise goes (T131); the helpers exist once, with unit tests; `OpenPr`
+    (T121) is born as a plugin class. The move itself is T127's PR._
 - [ ] T131 [IMP] **Docs.** README "How the site is built and deployed" describes `build-logic/` (what is in the
   plugin, what is in `build.gradle`, how to run its tests); AGENTS.md's Generator line and Layout tree mention
   `build-logic/`; the T096/T112/T113 notes in the archived revival plan are left as history (`README.md`,
@@ -327,3 +346,7 @@ for the plugin work, add its row here with the task and the `Closes #N` line, pe
   is the JBake plugin's `bake`, `bakePreview` and `jbake` names. The two configurations resolve identically (77
   artifacts each), and `preview` duplicates `bakePreview`. Hence the surface table above and T133, which can run
   before the rest of M10._
+- _2026-10-27: **accepted and started** (owner). Decisions the same day: T130 is "move" (above); the work goes in a
+  few larger PRs in the order given under M10; the check tasks of Phase B of `08-SCRIPTS-MIGRATION.md` take Gradle's
+  `verification` group and run under `check`; T121 (`openPr`, `05-REVIEW-FLOW.md`) is built here after T127. The
+  owner's bar for the plugin: "solid, well organized clean Java code". T133 started first, on its own branch._

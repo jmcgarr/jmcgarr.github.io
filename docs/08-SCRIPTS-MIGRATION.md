@@ -279,6 +279,9 @@ T140. Phase B (T141–T143) runs inside M10 after T127 and T129 exist. Decisions
 
 #### Phase B: into the plugin (inside M10, after T127 and T129)
 
+_2026-10-27: Phase B is PR (6) in M10's order (`06-GRADLE-PLUGIN.md`), together with T121 `openPr`; T142 is
+superseded by the T130 decision there._
+
 - [ ] T141 [IMP] **Verification tasks in the plugin.** `checkDocsNotPublished`, `checkUrls` (inputs: site dir,
   baseline file, expected-removals file; the macOS case-collision warning kept) and `checkMastheadVariants`
   (content and template roots, masthead dir) as Java tasks in `build-logic/`, each with a TestKit test in the
@@ -291,13 +294,16 @@ T140. Phase B (T141–T143) runs inside M10 after T127 and T129 exist. Decisions
     (strict); deleting `build/jbake/about.html` before it fails `checkUrls` naming `about.html`; adding
     `build/jbake/docs/x.md` fails `checkDocsNotPublished`; moving a `-1440` variant aside fails
     `checkMastheadVariants`. `./gradlew :build-logic:test` covers each. The byte-identical check passes.
-- [ ] T142 [IMP] **Register the Java scripts through `jbakeSite.scripts`.** `prepareImage` (options `image`,
+- [x] T142 **Superseded (2026-10-27).** [IMP] **Register the Java scripts through `jbakeSite.scripts`.** `prepareImage` (options `image`,
   `dryRun`, `png`, `jpeg`, `width`, `keepSource`) and `tagRedirects` (`check`, `dependsOn 'bake'`) join `newPost`
   and `reviewChanges`; the special-cased `Exec` from T140 goes; `06-GRADLE-PLUGIN.md`'s table (lines 29–30) and
   extension sketch (lines 100–104) gain the two rows (`build.gradle`, `docs/06-GRADLE-PLUGIN.md`)
   - **Test:** `./gradlew prepareImage -Pimage=<path> -PdryRun` and `./gradlew tagRedirects -Pcheck` run the
     programs with the same arguments as before (`--info` shows the command line); `./gradlew tasks --group writing`
     lists `newPost`, `reviewChanges`, `prepareImage`, `tagRedirects`; `wc -l build.gradle` is still under 120.
+  - _2026-10-27: **superseded** by T130's decision in `06-GRADLE-PLUGIN.md`: the four programs move into the plugin
+    as task classes (T127), so there is nothing to register and no `jbakeSite.scripts` block. The surface rows went
+    into `06`'s table the same day._
 - [ ] T143 [IMP] **Remove the shell checks and finish the docs.** After T141 has run green in CI for at least one
   merged content PR: delete `check-docs-not-published.sh` and `check-urls.sh` (D4), point AGENTS.md Rule 1 step 3
   (line 95) and the design doc's T125 test (line 229) at `./gradlew checkUrls`, and make README "Run the same
@@ -309,10 +315,12 @@ T140. Phase B (T141–T143) runs inside M10 after T127 and T129 exist. Decisions
 
 #### Checkpoint: M11
 
-- [ ] CHK053 `git ls-files '*.py'` is empty, and `grep -rni 'python\|pillow\|uv run' build.gradle .github README.md AGENTS.md` is empty
+- [x] CHK053 `git ls-files '*.py'` is empty, and `grep -rni 'python\|pillow\|uv run' build.gradle .github README.md AGENTS.md` is empty
+  _(passed: both commands empty on `main` after #166 merged; confirmed by the owner on 2026-10-27)_
 - [ ] CHK054 A clean bake on `main` is byte-identical (apart from `feed.xml`'s timestamps) to the bake at the commit before T137; the 59 tag stubs and the 28 masthead variants are unchanged in git since then
 - [ ] CHK055 CI runs no script outside `scripts/*.java`, `scripts/smoke-test.sh` and Gradle tasks, and is green on Linux
-- [ ] CHK056 D1–D4 each have a dated decision in the Notes
+- [x] CHK056 D1–D4 each have a dated decision in the Notes
+  _(2026-10-27: D1 and D2 recorded with Phase A, D3 and D4 decided by the owner the same day; see Blockers and Notes)_
 
 ## Blockers and owner decisions
 
@@ -338,9 +346,13 @@ Nothing blocks the "no Python" goal technically. Four decisions shape it:
   (drafts, CR line endings, live-reload marker) so CI is `./gradlew bake checkSite` plus lychee and xmllint.
   The inline steps are five lines of shell each and already run on `build/site`; moving them is tidy, not
   necessary.
+  - _2026-10-27: **the three scripted checks first** (owner, on the recommendation): T141 as written; the inline CI
+    steps may follow later if it turns out tidy._
 - **D4: keep shell twins.** Whether `check-urls.sh` and `check-docs-not-published.sh` stay after T141 as a
   Gradle-free fallback, or go (T143). Recommendation: go, once a content PR has merged green with the plugin tasks;
   two implementations of the Rule 1 gate would drift.
+  - _2026-10-27: **go** (owner): the shell twins are deleted in T143 so each check has one implementation. No
+    published URL is affected; `check-urls.sh` is a tool, not a page._
 
 Two things to accept rather than decide: new images will be resampled bicubically, not with Lanczos (no visible
 difference at these sizes; the committed images are not re-encoded), and new JPEGs will carry no sRGB profile
@@ -365,3 +377,6 @@ Test uses working.
 - _2026-10-27: Phase A started at the owner's request, on one branch (`chore/T137-T140-no-python`, one commit per
   task). D1 and D2 are taken on the plan's own recommendations, pending the owner's confirmation; D3 and D4 wait for
   Phase B._
+- _2026-10-27 (later): Phase A merged (#166); CHK053 confirmed by the owner. D3 (scripted checks first) and D4 (delete
+  the shell twins) decided by the owner; T142 superseded, since the programs move into the plugin as classes
+  (`06-GRADLE-PLUGIN.md`, T130). Phase B runs as the last PR of M10._
