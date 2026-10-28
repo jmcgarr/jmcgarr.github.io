@@ -446,7 +446,7 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
     `prepareImage`, `reviewChanges`, `tagRedirects`) and Verification (`check`, `checkMastheadVariants`,
     `checkTagRedirects`) with the descriptions of the T133 and T127 notes, `clean` still under Build, and no
     `compileSass`._
-- [ ] T129 [IMP] **TestKit tests for the plugin.** A fixture site under `build-logic/src/test/fixtures/site` (two
+- [x] T129 [IMP] **TestKit tests for the plugin.** A fixture site under `build-logic/src/test/fixtures/site` (two
   posts, one page, one tag, `clean-blog.scss` with one partial, one case-redirect stub) and `GradleRunner` tests,
   run with `--configuration-cache`: the bake renders the pages and copies the CSS; the stubs appear when the
   filesystem is case-sensitive and are skipped with the message when it isn't; the hand-edited-CSS guard fails;
@@ -454,6 +454,29 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
   (`build-logic/src/test/`)
   - **Test:** `./gradlew :build-logic:test` passes locally and in CI (add it to the workflow before "Bake with
     Gradle"). Breaking the CSS copy on purpose fails exactly the test that covers it.
+  - _2026-10-28: **done** (same branch as T128). The tests grew with each slice (T124's `JbakeSitePluginFunctionalTest`,
+    T125's `BakeFunctionalTest`, T127's `SiteToolsFunctionalTest`, all `GradleRunner` with `--configuration-cache`);
+    this task audited them against the list above and filled the gaps. **The fixture** now matches the text: two posts
+    (`first-post.md`, tagged `fixture` and `acceptance test` for the tag redirect stub of T127's tests, and the new
+    `second-post.md`, tagged `fixture`, so one tag page lists both), one page, `clean-blog.scss` (was `site.scss`;
+    the generic-name case lives on in `JbakeSitePluginFunctionalTest`, which writes its own `site.scss`) with the
+    `_variables.scss` partial, the `About.html` case-redirect stub, and `blog/second-post.html` in its baseline.
+    **New cases:** the hand-edited-CSS guard as a TestKit run (a `clean-blog.css` under the fixture's assets fails
+    `:checkNoHandEditedCss` with the plugin's default sentence naming `src/scss`, `:bake` never starts, nothing is
+    baked, and deleting the file restores the bake; until now only a `ProjectBuilder` test covered the guard);
+    `newPost -Ptitle -Ptags -Psummary -Pbranch=false` writes the draft with every option in its header and the
+    `site.host` of the fixture's `jbake.properties` in its last line (the `-P` pass-through); `newPost` with no title
+    fails the task with the program's one-line message and no `ToolFailure` in the output (exit 1 mapped to a
+    failure). The bake test also asserts the second post, the shared tag page and the stylesheet link. Already
+    covered and kept: the stubs by filesystem case-sensitivity (the macOS message or the stub beside the real page),
+    UP-TO-DATE and "Reusing configuration cache." on the second run, a changed post rebaked, a JBake error, the
+    `jbake` configuration's exclusions and substitution, the review, both checks, `tagRedirects`, `check`. **CI**
+    has run `./gradlew :build-logic:check bake` since T124's PR; the step comment now says that includes the TestKit
+    tests. **Test passed:** `./gradlew :build-logic:test` passes, 145 tests (142 before this task; 17 of them TestKit:
+    4 + 6 + 7); with `copyThemeCssInto(destination)` commented out in `BakeTask`, `--continue` reports "145 tests
+    completed, 1 failed", `bakesThePagesCopiesTheCssInAndAddsTheStubsWhereItCan` (`NoSuchFileException:
+    build/jbake/css/clean-blog.css`), and nothing else; reverted. Not verified locally: the Linux run (CI, where the
+    stub branch of the bake test is the case-sensitive one)._
 - [x] T130 [IMP] _(Decision)_ **Move `NewPost.java` and `ReviewChanges.java` into the plugin, or keep them as
   single-file programs.** For: one place, shared `run`/`git`/`fail` helpers (copied between the two today, and
   `OpenPr.java` would copy them a third time), unit tests. Against: `java scripts/X.java` without Gradle stops

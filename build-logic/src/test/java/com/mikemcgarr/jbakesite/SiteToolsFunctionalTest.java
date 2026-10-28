@@ -1,6 +1,7 @@
 package com.mikemcgarr.jbakesite;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.mikemcgarr.jbakesite.internal.TestRepositories;
@@ -9,6 +10,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.stream.Stream;
 import javax.imageio.ImageIO;
@@ -21,9 +23,10 @@ import org.junit.jupiter.api.io.TempDir;
 
 /**
  * Gradle TestKit: the tasks that moved in from {@code scripts/} in T127, on the fixture site with the configuration
- * cache on: {@code reviewChanges} (clean tree, then a broken page), {@code checkTagRedirects}, {@code tagRedirects}
- * and {@code checkMastheadVariants}. The fixture is copied into a temporary directory and made a git repository with
- * one commit on {@code main}, as the review needs.
+ * cache on: {@code newPost} (the {@code -P} options passed through, and a refusal mapped to a build failure),
+ * {@code reviewChanges} (clean tree, then a broken page), {@code checkTagRedirects}, {@code tagRedirects} and
+ * {@code checkMastheadVariants}. The fixture is copied into a temporary directory and made a git repository with
+ * one commit on {@code main}, as the review and {@code newPost} need (T129).
  */
 class SiteToolsFunctionalTest {
 
@@ -48,6 +51,48 @@ class SiteToolsFunctionalTest {
         Files.writeString(projectDir.resolve(".gitignore"), "build/\n.gradle/\n");
         TestRepositories.init(projectDir);
         TestRepositories.commitAll(projectDir, "the fixture site");
+    }
+
+    @Test
+    void newPostPassesItsOptionsThroughAndWritesTheDraft() throws IOException {
+        Files.createDirectories(projectDir.resolve("src/jbake/content/blog/drafts"));
+
+        BuildResult result = runner("newPost", "-Ptitle=A Third Post", "-Ptags=fixture, testing", "-Psummary=A teaser.",
+                "-Pbranch=false").build();
+
+        assertEquals(TaskOutcome.SUCCESS, result.task(":newPost").getOutcome());
+        Path draft = projectDir.resolve("src/jbake/content/blog/drafts/a-third-post.md");
+        assertEquals(String.join("\n",
+                "title=A Third Post",
+                "date=" + LocalDate.now(),
+                "type=post",
+                "tags=fixture, testing",
+                "status=draft",
+                "summary=A teaser.",
+                "~~~~~~",
+                "",
+                ""), Files.readString(draft), "every -P option in the header");
+        String output = result.getOutput();
+        assertTrue(output.contains("Created src/jbake/content/blog/drafts/a-third-post.md (status=draft, never published)"), output);
+        assertFalse(output.contains("Switched to the new branch"), "-Pbranch=false stays on main: " + output);
+        assertTrue(output.contains("It will live at https://fixture.example/blog/a-third-post.html (permanent)."),
+                "site.host from the fixture's jbake.properties: " + output);
+    }
+
+    @Test
+    void newPostWithoutATitleFailsWithTheToolsMessageAndNoStackTrace() throws IOException {
+        Path drafts = projectDir.resolve("src/jbake/content/blog/drafts");
+        Files.createDirectories(drafts);
+
+        BuildResult result = runner("newPost").buildAndFail();
+
+        assertEquals(TaskOutcome.FAILED, result.task(":newPost").getOutcome(), "exit 1 of the program is a failed task");
+        String output = result.getOutput();
+        assertTrue(output.contains("> A title is required: ./gradlew newPost -Ptitle=\"My Post Title\""), output);
+        assertFalse(output.contains("ToolFailure"), "the message, not the exception: " + output);
+        try (Stream<Path> files = Files.list(drafts)) {
+            assertEquals(0, files.count(), "nothing written");
+        }
     }
 
     @Test
