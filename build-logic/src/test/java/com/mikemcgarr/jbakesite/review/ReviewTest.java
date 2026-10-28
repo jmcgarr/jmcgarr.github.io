@@ -300,10 +300,10 @@ class ReviewTest {
         assertEquals(List.of(
                 "W6 src/jbake/assets/img/old.png Deleting this file removes the published URL /img/old.png. Published URLs are permanent (AGENTS.md Rule 1):"
                         + " this needs the owner's approval, a redirect stub at the old path, and a line in docs/baseline/expected-removals.txt."
-                        + " CI's check-urls.sh fails otherwise.",
+                        + " CI's checkUrls fails otherwise.",
                 "W6 src/jbake/content/blog/other.md Renaming this file removes the published URL /blog/other.html. Published URLs are permanent (AGENTS.md Rule 1):"
                         + " this needs the owner's approval, a redirect stub at the old path, and a line in docs/baseline/expected-removals.txt."
-                        + " CI's check-urls.sh fails otherwise."),
+                        + " CI's checkUrls fails otherwise."),
                 messages);
         assertEquals(List.of("blog/renamed.html"), result.reviewedPages());
     }

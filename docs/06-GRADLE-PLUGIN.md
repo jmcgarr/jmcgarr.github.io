@@ -291,6 +291,8 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
     `src/case-redirects` are in the Linux bake and `scripts/check-urls.sh` passes there). On JDK 21 and JDK 25 a
     clean bake prints no JVM warning. `./gradlew dependencies --configuration jbake` lists the same resolved
     versions as on `main` (diff the two listings).
+  - _2026-10-28: `scripts/check-urls.sh` in this Test line is `./gradlew checkUrls` since T141/T143 of
+    `08-SCRIPTS-MIGRATION.md` (CI runs it in the `checkSite` step); the test itself is unchanged._
   - _2026-10-28: **done** (`chore/T125-T126-plugin-bake-preview`, PR 3 of the owner's order, with T126). In the plugin,
     package `com.mikemcgarr.jbakesite`: `JbakeClasspath` (creates the `jbake` configuration: declarable and resolvable, not
     consumable; the five group exclusions and the lz4 substitution are applied as it resolves, read from
@@ -552,8 +554,8 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
 #### Checkpoint: M10
 
 - [ ] CHK047 A clean bake on `main` is byte-identical (apart from `feed.xml`'s timestamps) to the bake at the commit
-  before T123, on macOS and on Linux (CI's `build/site`, compared through the `check-urls.sh` and link checks plus
-  one manual `diff -r` of a downloaded artifact)
+  before T123, on macOS and on Linux (CI's `build/site`, compared through the `check-urls.sh` (`./gradlew checkUrls`
+  since T143) and link checks plus one manual `diff -r` of a downloaded artifact)
   - _Partially verified 2026-10-28, on the branch `chore/T128-T129-T131-shrink-tests-docs` (T123–T131 all in, not
     yet on `main`): a macOS `clean bake` of the branch is byte-identical to the bake at 360bef7 (the T133 merge, the
     last commit before T123, baked in a detached worktree): `diff -rq` prints only `feed.xml`, 496 files each, `cmp`
