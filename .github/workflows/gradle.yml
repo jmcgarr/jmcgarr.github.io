@@ -64,7 +64,7 @@ jobs:
         fi
         echo "OK: no CR line endings in content, templates, or SCSS"
 
-    # The preview's live-reload script (T064) is only for `./gradlew preview`. Its marker must never go live.
+    # The preview's live-reload script (T064) is only for `./gradlew bakePreview`. Its marker must never go live.
     - name: Check live reload is not published
       run: |
         test -d build/site

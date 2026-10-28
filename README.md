@@ -18,9 +18,9 @@ To preview
 ```
 ./gradlew clean bakePreview
 ```
-Then open http://localhost:8080. Stop it with `Ctrl+C`. (`./gradlew preview` does the same.) If port 8080 is
-already in use, for example by a preview in another terminal, it stops right away and says so; stop the other one, or
-set `server.port` in `src/jbake/jbake.properties`.
+Then open http://localhost:8080. Stop it with `Ctrl+C`. If port 8080 is already in use, for example by a preview in
+another terminal, it stops right away and says so; stop the other one, or set `server.port` in
+`src/jbake/jbake.properties`.
 
 **It rebuilds on save, and the open page reloads itself.** While the preview runs, saving a post, a template
 (`src/jbake/templates/`), an asset such as CSS (`src/jbake/assets/`), or the theme's SCSS (`src/scss/`) rebuilds the
@@ -224,7 +224,7 @@ T134). Each file there whose name doesn't start with `_` is an entry, published 
 | `code.scss` | `/css/code.css`, pages with a code block | Code blocks and the Prism token colors (T056), the language label and the copy button that `templates/code-highlight.ftl` adds (T136) |
 
 None of the CSS is in the repository: `./gradlew compileSass` writes it to `build/generated/sass/css/`, and `bake` and
-`preview` copy it into the site at the same URLs as always. A Sass error fails the build (and CI) with the file and
+`bakePreview` copy it into the site at the same URLs as always. A Sass error fails the build (and CI) with the file and
 line. The build also refuses to run if a hand-written `clean-blog.css`, `code.css`, `fonts.css` or `extra.css`
 reappears under `src/jbake/assets/css/`, since JBake would publish it and it would go stale (the last two were
 folded into `clean-blog.css` in T134 and T135, and their URLs are on `docs/baseline/expected-removals.txt`).
@@ -235,7 +235,7 @@ The footer and menu icons are inline SVGs from Font Awesome Free (CC BY 4.0) in 
 `src/jbake/assets/vendor/fontawesome-free/` are still published because they are published URLs (Rule 1); nothing
 on the site links them.
 
-While `./gradlew preview` runs, saving a file in `src/scss/` recompiles every entry within about a second and the open
+While `./gradlew bakePreview` runs, saving a file in `src/scss/` recompiles every entry within about a second and the open
 page reloads. A Sass error there is printed in the terminal, and the page keeps the last good CSS.
 
 A new rule goes in the partial that styles that part of the page (or a new partial, added to `clean-blog.scss` in
@@ -296,6 +296,22 @@ Everything happens in one workflow, [`.github/workflows/gradle.yml`](.github/wor
 | Old tag URLs redirect (`scripts/TagRedirects.java --check`) | An old tag URL that's missing, or whose redirect stub points at a page that isn't there; a tag page that shows its tag differently from the posts |
 | Feed and sitemap XML | A broken `feed.xml` or `sitemap.xml` |
 | Local links and assets (lychee) | Broken internal links, or missing images, CSS, JS, or fonts |
+
+**The Gradle tasks** (`./gradlew tasks` lists them in two groups, T133). `bake` and `bakePreview` are the JBake Gradle
+plugin's names, kept since 2014 ([`docs/06-GRADLE-PLUGIN.md`](docs/06-GRADLE-PLUGIN.md), "The public surface"); the
+`writing` tasks are this site's own. All of JBake's libraries are on one Gradle configuration, `jbake`, where
+`build.gradle` pins their versions.
+
+| Task | Group | What it does |
+|---|---|---|
+| `bake` | `jbake` | Bakes the site from `src/jbake/` into `build/jbake/` (what CI deploys, minus drafts) |
+| `bakePreview` | `jbake` | Bakes, serves http://localhost:8080, rebuilds on save, and reloads the open page |
+| `newPost` | `writing` | Starts a draft post on a new `post/<slug>` branch: `./gradlew newPost -Ptitle="My Post"` |
+| `reviewChanges` | `writing` | Reviews the pages this branch changed: Markdown, links, images, header (runs `bake` first) |
+| `prepareImage` | `writing` | Prepares a hand-added image: sRGB, metadata, size, masthead variants (`-Pimage=<path>`) |
+
+`compileSass` (the SCSS to CSS step) has no group: it runs as part of `bake` and `bakePreview`, so `./gradlew tasks`
+doesn't list it. `clean` and `check` are Gradle's own; `check` runs `bake` and `reviewChanges`.
 
 **GitHub settings and DNS this depends on:**
 - **Settings → Pages → Build and deployment → Source: "GitHub Actions".**
