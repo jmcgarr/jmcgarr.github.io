@@ -290,7 +290,7 @@ Everything happens in one workflow, [`.github/workflows/gradle.yml`](.github/wor
 | Docs are not published | Anything from `docs/` (planning notes) going live |
 | Masthead variants | A header image missing its 960/1440px sizes (phones would get a blank header) |
 | Published URLs still exist (`scripts/check-urls.sh`) | Removing or renaming any page that's live (strict on CI's Linux runner) |
-| Old tag URLs redirect (`scripts/tag-redirects.py --check`) | An old tag URL that's missing, or whose redirect stub points at a page that isn't there; a tag page that shows its tag differently from the posts |
+| Old tag URLs redirect (`scripts/TagRedirects.java --check`) | An old tag URL that's missing, or whose redirect stub points at a page that isn't there; a tag page that shows its tag differently from the posts |
 | Feed and sitemap XML | A broken `feed.xml` or `sitemap.xml` |
 | Local links and assets (lychee) | Broken internal links, or missing images, CSS, JS, or fonts |
 
@@ -319,7 +319,7 @@ Gradle. Each runs the same build and checks, and never deploys.
 rm -rf build/site && rsync -a --prune-empty-dirs --exclude '*-draft.html' build/jbake/ build/site/
 scripts/check-docs-not-published.sh build/site   # docs/ must never reach the site
 scripts/check-urls.sh build/site                 # no published URL may disappear
-python3 scripts/tag-redirects.py --check build/site   # old tag URLs are tag pages or working redirects
+java scripts/TagRedirects.java --check build/site   # old tag URLs are tag pages or working redirects
 python3 scripts/masthead-variants.py --check     # header images have their phone/tablet sizes
 xmllint --noout build/site/feed.xml build/site/sitemap.xml
 ```
@@ -328,18 +328,18 @@ The link checker (lychee) runs in CI. To run it locally, install [lychee](https:
 
 **Old tag URLs (T039, T055):** tag pages used to be published with spaces (`/tags/acceptance test.html`), and two
 tags had a capitalized twin (`/tags/DevOps.html`, `/tags/Groovy.html`). Those 50 URLs are now small redirect pages
-(meta refresh, `rel=canonical`, `noindex`, and a visible link) to the new pages, made by `scripts/tag-redirects.py`
-from `docs/baseline/urls.txt` and committed: 48 in `src/jbake/assets/tags/`, and the 2 capitalized ones in
-`src/case-redirects/tags/`. Run the script again if a tag in that list stops being used, and keep its stubs.
+(meta refresh, `rel=canonical`, `noindex`, and a visible link) to the new pages, made by `scripts/TagRedirects.java`
+(`java scripts/TagRedirects.java`, nothing to install; a Python script until T139, 2026-10-27) from `docs/baseline/urls.txt` and committed: 48 in `src/jbake/assets/tags/`, and the 2 capitalized ones in
+`src/case-redirects/tags/`. Run the program again if a tag in that list stops being used, and keep its stubs.
 **Merging or renaming a tag** (needs the owner's approval, AGENTS.md Rule 1): add `old → new` to `RENAMES` in the
-script, edit the posts' `tags=` lines, and run the script. It writes a stub at every old URL of the old tag: the
+program, edit the posts' `tags=` lines, and run it. It writes a stub at every old URL of the old tag: the
 baseline one and, for a tag with a space, the hyphenated page published since T039 (`tags/google-calender.html`).
 `--check` covers those hyphenated URLs too (derived from the baseline, which they aren't in). The 2026-10-09 merges
 and typo fixes (report §H) added 9 stubs and repointed 3, for 59 in all.
 **macOS caveat:** macOS filesystems ignore case, so `tags/DevOps.html` and `tags/devops.html` are the same file
 there. `./gradlew bake` therefore adds `src/case-redirects/` only when `build/jbake` is case-sensitive (Linux, as
 in CI and on GitHub Pages) and says so when it skips them. A local bake on a Mac has the real `devops` and `groovy`
-pages but not those 2 stubs, and `check-urls.sh` and `tag-redirects.py --check` report them as "can't check here".
+pages but not those 2 stubs, and `check-urls.sh` and `TagRedirects.java --check` report them as "can't check here".
 They're not JBake assets on purpose: JBake copies assets after rendering, so on a Mac the stub would overwrite the
 real page and redirect to itself.
 

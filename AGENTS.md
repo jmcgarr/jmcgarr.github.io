@@ -66,7 +66,7 @@ that specific change.
 
 **Tags:** keep a tag's spelling and casing the same in every post (lowercase unless it's a name). `DevOps` and
 `devops` make two tag pages that each list only some posts. The old tag URLs with spaces, and `tags/DevOps.html`
-and `tags/Groovy.html`, are redirect stubs made by `scripts/tag-redirects.py` (see README). They are published
+and `tags/Groovy.html`, are redirect stubs made by `scripts/TagRedirects.java` (see README). They are published
 URLs: never delete one.
 
 So all of the following **change or remove a published URL**, and each needs explicit approval:

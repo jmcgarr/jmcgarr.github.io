@@ -207,7 +207,7 @@ T140. Phase B (T141–T143) runs inside M10 after T127 and T129 exist. Decisions
     each wrote are pixel-identical to Pillow's (checked with PixelDiff itself). The Python ran as
     `uv run --with pillow python3 -I scripts/visual/pixeldiff.py` before it was deleted. Not verified: the
     `/tmp/css-before` and `/tmp/css-after` folders of the CSS review no longer existed; fresh shots were used._
-- [ ] T139 [IMP] **`TagRedirects.java`.** `scripts/TagRedirects.java` with both modes (`--check <site>` and write),
+- [x] T139 [IMP] **`TagRedirects.java`.** `scripts/TagRedirects.java` with both modes (`--check <site>` and write),
   the `RENAMES` map, the `?url_path`-compatible percent-encoder and `html.escape` equivalents; delete
   `tag-redirects.py`; CI line 92 becomes `java scripts/TagRedirects.java --check build/site`; update README (two
   places), AGENTS.md line 69, `jbake.properties` line 5, `tag-names.ftl` line 10 (`scripts/`,
@@ -217,6 +217,23 @@ T140. Phase B (T141–T143) runs inside M10 after T127 and T129 exist. Decisions
     regenerate byte for byte. `--check build/site` prints the same counts as the Python version on the same bake
     ("59 old tag URLs ... 57 redirect stubs, 2 not checkable here" on macOS) and passes on Linux in CI. Removing a
     stub makes it fail with "missing from the build"; editing a stub's target makes it fail with "redirects to".
+  - _2026-10-27: **done**. `scripts/TagRedirects.java` carries both modes, `RENAMES`, a hand-rolled `?url_path`
+    percent-encoder (the unreserved set plus `/-_.!~*'()`, uppercase hex, `'` → `%27` in the href only) and
+    `html.escape`/`unescape` equivalents; `java.net.URLEncoder` was not used. The stub marker still reads
+    `scripts/tag-redirects.py`: the 59 stubs are committed bytes, so the marker is kept as history rather than
+    rewritten (the Java header says why). **Test passed (Rule 1 gate):** write mode on a clean tree printed
+    "59 tag redirect stubs (0 written, 59 already up to date)" and `git status` stayed clean; with
+    `tags/acceptance test.html` deleted it wrote that one stub back and `git status` was clean again (byte for byte).
+    `--check build/jbake` on the same bake prints output identical to the Python's, line for line (`diff` empty:
+    "229 old tag URLs (181 baseline, 48 hyphenated since T039): 170 real tag pages, 57 redirect stubs, 2 not checkable
+    here", 176 tag names checked; the Test line's "59 old tag URLs" was the plan's shorthand for the 59 stubs). On a
+    copy of the bake with one stub removed and another's target edited it fails with
+    "tags/acceptance test.html: missing from the build" and "tags/unit testing.html: redirects to tags/unit-tests.html,
+    expected tags/unit-testing.html" (plus the canonical line). CI's step is `java scripts/TagRedirects.java --check
+    build/site`; README (table, local checks, the old-tag-URLs paragraph), AGENTS.md line 69, `jbake.properties`
+    line 5, `tag-names.ftl` line 10 and the `build.gradle` comment at line 130 name the Java program. The bake is
+    byte-identical (the two template/properties edits are comments). Not verified: the Linux run of `--check` with the
+    two case-only stubs present happens in CI on this PR._
 - [ ] T140 [IMP] **`PrepareImage.java`, with the masthead variants inside it.** `scripts/PrepareImage.java`:
   `prepare-image.py`'s options and steps per the table above (bicubic resize; no ICC profile written; D2 decides
   the fallback PNG), plus `--variants <image>` (make the 960/1440 variants, never overwriting) and
