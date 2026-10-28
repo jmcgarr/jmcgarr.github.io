@@ -70,19 +70,23 @@ final class Report {
             }
             sb.append('\n');
         }
+        return sb.append(summary(result)).append('\n').toString();
+    }
+
+    /** The report's last line: what was reviewed and the counts, without a line break. */
+    static String summary(ReviewResult result) {
         List<String> reviewed = result.reviewedPages();
         String pages = reviewed.isEmpty() ? "no pages" : reviewed.size() + (reviewed.size() == 1 ? " page (" : " pages (")
                 + String.join(", ", reviewed.size() > 6 ? List.of(String.join(", ", reviewed.subList(0, 6)), "…") : reviewed) + ")";
         long errors = result.errors();
         long warnings = result.warnings();
         int changedFiles = result.changedFiles();
-        sb.append("Reviewed ").append(pages)
-                .append(result.all() ? "" : " from " + changedFiles + " changed file" + (changedFiles == 1 ? "" : "s"))
-                .append(". ").append(errors).append(" error").append(errors == 1 ? "" : "s")
-                .append(", ").append(warnings).append(" warning").append(warnings == 1 ? "" : "s")
-                .append(result.suppressed() > 0 ? ", " + result.suppressed() + " suppressed" : "")
-                .append(". External links not checked (T119).\n");
-        return sb.toString();
+        return "Reviewed " + pages
+                + (result.all() ? "" : " from " + changedFiles + " changed file" + (changedFiles == 1 ? "" : "s"))
+                + ". " + errors + " error" + (errors == 1 ? "" : "s")
+                + ", " + warnings + " warning" + (warnings == 1 ? "" : "s")
+                + (result.suppressed() > 0 ? ", " + result.suppressed() + " suppressed" : "")
+                + ". External links not checked (T119).";
     }
 
     /** GitHub Actions workflow commands, one per finding, so the findings show on the PR's files. */

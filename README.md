@@ -203,6 +203,27 @@ CI runs the same review on every pull request (T118, the "Review changed pages" 
 job and appears as an annotation on the line in the PR's Files tab; the whole report is in the job summary. A push
 to `main` skips the step: the PR already ran it.
 
+To open a pull request
+======================
+When the change is ready, one command reviews it, pushes the branch and opens the pull request (T121, design in
+[docs/05-REVIEW-FLOW.md](docs/05-REVIEW-FLOW.md), "The three entry points"):
+```
+./gradlew openPr
+```
+It refuses to run on `main` or `master` (AGENTS.md Rule 2: every change goes on its own branch). With uncommitted
+work it first prints the files it **would commit** (changed and untracked files under `src/`, `docs/`, `scripts/`,
+`build-logic/`, `.github/`, and `README.md`, `AGENTS.md`, `CLAUDE.md`, `build.gradle`, `settings.gradle`; anything
+else is listed as not included and left alone) and stops, so you see the list before anything is committed. Re-run
+with `-Pmessage="…"` to commit exactly those files with that message (plus the trailer lines in
+`jbakeSite.commitTrailers`, none by default). Then it bakes and runs the same review as `./gradlew reviewChanges`
+against `main`; on an error nothing is pushed and the report says what to fix. If the review passes it pushes the
+branch (`git push --set-upstream origin <branch>`) and opens a **ready** pull request against `main` with the
+[GitHub CLI](https://cli.github.com) (logged in, checked first), printing its URL. The title is `-Ptitle`, or the
+subject of the branch's first commit; the description lists the commits, carries the review's summary line
+("Reviewed 1 page (about.html) from 1 changed file. 0 errors, 0 warnings. …") and one `Closes #N` or `Refs #N` line
+per issue from `-Pcloses=3,16`, `-Prefs=14` and the commit messages (AGENTS.md Rule 5). `-PdryRun` does everything but
+commit, push and open, and prints the pull request it would open.
+
 To convert an old post to Markdown
 ==================================
 There is nothing to convert: every file under `src/jbake/content/` has been Markdown since 2026-10-18, and the build
@@ -266,7 +287,7 @@ the freefair Sass plugin's dependency until T124).
 
 To publish
 ==========
-There is no manual publish step. Open a pull request against `main`. When it's merged,
+There is no manual publish step. Open a pull request against `main` (`./gradlew openPr` does, after the review). When it's merged,
 [GitHub Actions](.github/workflows/gradle.yml) bakes the site, runs the checks, and **deploys it to GitHub Pages**.
 Pull requests run the same build and checks but never deploy. To redeploy (for example, to roll back by
 re-running an older run), use **Actions → Java CI with Gradle → Run workflow** on `main`.
@@ -314,6 +335,7 @@ JBake's libraries are on one Gradle configuration, `jbake`, where `build.gradle`
 | `bakePreview` | `jbake` | Bakes, serves http://localhost:8080, rebuilds on save, and reloads the open page |
 | `newPost` | `writing` | Starts a draft post on a new `post/<slug>` branch: `./gradlew newPost -Ptitle="My Post"` |
 | `reviewChanges` | `writing` | Reviews the pages this branch changed: Markdown, links, images, header (runs `bake` first) |
+| `openPr` | `writing` | Reviews this branch's changes, then pushes it and opens a pull request against `main` (`-Ptitle`, `-Pmessage` for uncommitted work, `-Pcloses`, `-Prefs`, `-PdryRun`) |
 | `prepareImage` | `writing` | Prepares a hand-added image: sRGB, metadata, size, masthead variants (`-Pimage=<path>`; `-Pvariants` for the variants alone) |
 | `tagRedirects` | `writing` | Writes any missing or outdated redirect stub for an old tag URL, never deleting one (on an approved tag rename) |
 | `checkSite` | `verification` | Runs the four checks below, what CI runs on the staged site (CI: `-PsiteDir=build/site`) |
@@ -354,8 +376,8 @@ October 2026, M10):
 | `jbakesite` | `JbakeSitePlugin`, `JbakeSiteExtension`, `ScssExtension`, `JbakeClasspathExtension` | Registers every task and the `jbake` configuration; the `jbakeSite { }` block and its defaults |
 | | `JbakeTask`, `BakeTask`, `BakePreviewTask`, `JbakeClasspath`, `NewJdkJvmArgs`, `CaseRedirects`, `PreviewPort`, `ProjectPaths` | The `jbake` group: JBake's launcher in a fresh JVM (the JVM flags newer JDKs need, jffi's temp dir, logback), the bake with the CSS and case-redirect copies, the preview with its port check |
 | | `CompileSassTask`, `SassCompiler`, `SassEntries`, `SassCompileException`, `SassPreviewWatcher`, `CheckNoHandEditedCssTask`, `FileTrees` | The theme CSS: Dart Sass through its Java host, the entry convention, the preview's SCSS watcher, the guard |
-| `writing` | `NewPostTask`/`NewPost`/`NewPostOptions`, `PrepareImageTask`/`PrepareImage`/`PrepareImageOptions`/`Images`/`MastheadVariants`, `TagRedirectsTask`/`TagRedirects` | The `writing` group: each task is a thin class that reads its `-P` options and runs a plain logic class |
-| `review` | `ReviewChangesTask`, `Review`, `Changes`, `Pages`, `MarkdownChecks`, `PageChecks`, `ImageChecks`, `RemovalChecks`, `Report`, and the helpers `Change`, `Finding`, `Findings`, `HtmlTags`, `Suppressions`, `ReviewOptions`, `ReviewResult` | `reviewChanges`: one class per group of checks, as [docs/05-REVIEW-FLOW.md](docs/05-REVIEW-FLOW.md) lays them out |
+| `writing` | `NewPostTask`/`NewPost`/`NewPostOptions`, `OpenPrTask`/`OpenPr`/`OpenPrOptions`, `GitHubCli` (the gh readiness checks both share), `PrepareImageTask`/`PrepareImage`/`PrepareImageOptions`/`Images`/`MastheadVariants`, `TagRedirectsTask`/`TagRedirects` | The `writing` group: each task is a thin class that reads its `-P` options and runs a plain logic class |
+| `review` | `ReviewChangesTask`, `ReviewRunner`/`ReviewOutcome` (the entry point `reviewChanges` and `openPr` call), `Review`, `Changes`, `Pages`, `MarkdownChecks`, `PageChecks`, `ImageChecks`, `RemovalChecks`, `Report`, and the helpers `Change`, `Finding`, `Findings`, `HtmlTags`, `Suppressions`, `ReviewOptions`, `ReviewResult` | `reviewChanges`: one class per group of checks, as [docs/05-REVIEW-FLOW.md](docs/05-REVIEW-FLOW.md) lays them out |
 | `verification` | `CheckUrlsTask`/`UrlCheck`, `CheckDocsNotPublishedTask`/`DocsNotPublishedCheck`, `CheckTagRedirectsTask`, `CheckMastheadVariantsTask` | The `verification` group: the checks `checkSite`, `check` and CI run (the first two were shell scripts until T141/T143) |
 | `internal` | `Git`, `ProcessRunner`, `CommandRunner`, `ToolFailure`, `FrontMatter`, `Tags`, `SiteLayout`, `JbakeProperties`, `ImageRules` | Shared by the writing and verification tools: running git and gh, reading a post's header, the site's paths, the image limits |
 
@@ -377,6 +399,7 @@ out anyway, so the paths are in one place:
 | `publishedUrls` | `docs/baseline/urls.txt` | The baseline of published URLs: `checkUrls` fails when one is missing from the bake; the writing tools read it too (`newPost` refuses a published slug; the review and the tag redirects use it) |
 | `expectedRemovals` | `docs/baseline/expected-removals.txt` | Published URLs removed on purpose, with the owner's approval (Rule 1); `checkUrls` accepts a missing URL only when it is listed here. A missing file means none |
 | `tagRenames` | the owner's list of 2026-10-09 | Old tag to new, as written in the posts; every old URL of the old tag gets a redirect stub (Rule 1: never remove one) |
+| `commitTrailers` | none | Lines `openPr` appends, after a blank line, to the commit it makes from uncommitted work with `-Pmessage` (`Co-Authored-By: …`); the message itself is the author's |
 | `logbackConfiguration` | unset (the bundled file) | A logback configuration for JBake's JVM |
 | `scss.source` | `src/scss` | The SCSS; each `<name>.scss` not starting with `_` is an entry |
 | `scss.publishedDir` | `css` | An entry `<name>.scss` is published at `/<publishedDir>/<name>.css`; the same folder under the assets is the one the guard watches |

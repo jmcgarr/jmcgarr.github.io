@@ -26,7 +26,7 @@ import org.junit.jupiter.api.io.TempDir;
  * cache on: {@code newPost} (the {@code -P} options passed through, and a refusal mapped to a build failure),
  * {@code reviewChanges} (clean tree, then a broken page), {@code checkTagRedirects}, {@code tagRedirects} and
  * {@code checkMastheadVariants}; since T141 {@code checkUrls}, {@code checkDocsNotPublished} and the {@code checkSite}
- * aggregate. The fixture is copied into a temporary directory and made a git repository with one commit on
+ * aggregate; since T121 {@code openPr} as far as it goes without GitHub. The fixture is copied into a temporary directory and made a git repository with one commit on
  * {@code main}, as the review and {@code newPost} need (T129).
  */
 class SiteToolsFunctionalTest {
@@ -228,6 +228,36 @@ class SiteToolsFunctionalTest {
                 ":checkMastheadVariants", ":checkSite", ":check"}) {
             assertEquals(TaskOutcome.SUCCESS, result.task(task).getOutcome(), task);
         }
+    }
+
+    @Test
+    void openPrRefusesOnMainNamingRuleTwo() {
+        BuildResult result = runner("openPr").buildAndFail();
+
+        assertEquals(TaskOutcome.FAILED, result.task(":openPr").getOutcome());
+        assertTrue(result.getOutput().contains("> You're on main: every change goes on its own branch off main, never on main itself"
+                + " (AGENTS.md, Rule 2). Run git switch -c <type>/<short-description>, then ./gradlew openPr."), result.getOutput());
+        assertFalse(result.getOutput().contains("ToolFailure"), result.getOutput());
+    }
+
+    @Test
+    void openPrListsTheUncommittedWorkAndStopsWithoutAMessage() throws IOException, InterruptedException {
+        TestRepositories.git(projectDir, "switch", "--quiet", "--create", "post/edit");
+        Path about = projectDir.resolve("src/jbake/content/about.md");
+        Files.writeString(about, Files.readString(about) + "\nAn edit.\n");
+        Files.writeString(projectDir.resolve("notes.txt"), "scratch\n");
+
+        BuildResult result = runner("openPr").buildAndFail();
+
+        assertEquals(TaskOutcome.FAILED, result.task(":openPr").getOutcome());
+        String output = result.getOutput();
+        assertTrue(output.contains("Would commit:\n   M src/jbake/content/about.md\n"
+                + "Not included (outside the paths openPr commits; left as they are):\n  ?? notes.txt\n"), output);
+        assertTrue(output.contains("> Nothing was committed or pushed. Re-run with -Pmessage=\"<what and why>\" to commit the files listed above"
+                + " with that message, or commit them yourself first."), output);
+        assertEquals("M src/jbake/content/about.md\n?? notes.txt", TestRepositories.git(projectDir, "status", "--porcelain"),
+                "nothing committed (the helper trims git's output, hence the missing leading space)");
+        assertEquals("the fixture site", TestRepositories.git(projectDir, "log", "-1", "--format=%s"));
     }
 
     /** Bakes and copies the bake to {@code build/site}, as CI stages it, so a test can break the copy. */
