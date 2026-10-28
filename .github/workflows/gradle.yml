@@ -80,7 +80,7 @@ jobs:
 
     # Every header image in use needs its 960/1440px variants (T071), or phones get a blank header
     - name: Check masthead variants
-      run: python3 scripts/masthead-variants.py --check
+      run: java scripts/PrepareImage.java --check-variants
 
     # Quality gates (T031). On Linux check-urls.sh is strict (case-sensitive), so it catches what macOS bakes can't.
     - name: Check published URLs still exist

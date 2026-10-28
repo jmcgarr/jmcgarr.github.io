@@ -234,7 +234,7 @@ T140. Phase B (T141–T143) runs inside M10 after T127 and T129 exist. Decisions
     line 5, `tag-names.ftl` line 10 and the `build.gradle` comment at line 130 name the Java program. The bake is
     byte-identical (the two template/properties edits are comments). Not verified: the Linux run of `--check` with the
     two case-only stubs present happens in CI on this PR._
-- [ ] T140 [IMP] **`PrepareImage.java`, with the masthead variants inside it.** `scripts/PrepareImage.java`:
+- [x] T140 [IMP] **`PrepareImage.java`, with the masthead variants inside it.** `scripts/PrepareImage.java`:
   `prepare-image.py`'s options and steps per the table above (bicubic resize; no ICC profile written; D2 decides
   the fallback PNG), plus `--variants <image>` (make the 960/1440 variants, never overwriting) and
   `--check-variants` (every masthead in use has both). Delete `prepare-image.py` and `masthead-variants.py`.
@@ -252,6 +252,30 @@ T140. Phase B (T141–T143) runs inside M10 after T127 and T129 exist. Decisions
     repoints the post's `masthead=`, and the three JPEGs contain no `Exif`, `ICC_PROFILE` or XMP marker and are
     progressive (`java` probe or `file`); `./gradlew reviewChanges` reports no E5. `-PdryRun` changes nothing
     (`git status` clean). The 28 committed variants are untouched (`git status` clean after `--check-variants`).
+  - _2026-10-27: **done** (D2 taken on the plan's recommendation, see Blockers). `scripts/PrepareImage.java` (about
+    560 lines with its header) has `prepare-image.py`'s options (`--dry-run`, `--png`, `--jpeg`, `--width N`,
+    `--keep-source`, and Gradle's `--name=value` spellings) and steps, plus `--variants <image>` (missing variants
+    only, never overwriting) and `--check-variants`; `build.gradle`'s task is the `newPost`-shaped `java` Exec; CI's
+    step is `java scripts/PrepareImage.java --check-variants`; `ReviewChanges.java`'s two E5 hints, README ("To write
+    a post", "Run the same checks locally", "Requirements"), AGENTS.md lines 86 and 89, `head-meta.ftl`, `masthead.ftl`,
+    `.gitignore` and a dated note under T059 in `archive/04-AUTHORS-DESK.md` follow; `07-FRONT-MATTER.md`'s two rows
+    name the Java program too. Accepted as the plan said: bicubic resampling (in halving steps, so a 4000 px photo
+    doesn't alias) and no ICC profile in new JPEGs. ImageIO's PNG reader doesn't apply an `iCCP` chunk, so the program
+    tags the pixels with it itself before `ColorConvertOp`; a photo PNG that is already in `main` is refused with
+    "convert it by hand or add the quantizer" and nothing is changed. **Test passed:** `git ls-files '*.py'` is empty;
+    `--check-variants` passes on the branch ("OK: all 15 mastheads in use have 960/1440px variants") and fails naming
+    `src/jbake/assets/img/masthead/egypt-960.jpg` with that file moved aside. On a scratch commit with
+    `maui-sunset.png` from `da470cc^` under `img/masthead/`, the post pointing at it and the three committed Maui
+    JPEGs removed, `./gradlew prepareImage -Pimage=... -PdryRun` printed the plan and left `git status` clean; the real
+    run wrote `maui-sunset.jpg` 1920×691 at q82, 130 KB (Pillow's: 132 KB), `-960` 960×346 (43 KB) and `-1440`
+    1440×518 (80 KB), repointed `masthead=`, removed the never-published PNG; the three JPEGs have `ffc2` (SOF2,
+    progressive) and no `Exif`, `ICC_PROFILE` or `ns.adobe.com/xap` bytes (Pillow's committed file carries an
+    `ICC_PROFILE`), and `./gradlew reviewChanges -Pbase=origin/main` reported 0 errors (no E5; three W6 for the
+    scratch's own deleted-then-regenerated tracked files). The scratch commit was dropped and the committed Maui
+    files restored; the 28 committed variants are untouched (`git status` clean). A clean bake is byte-identical
+    (the two template edits are comments). Not verified: a PNG or JPEG with an embedded non-sRGB profile (none was at
+    hand; the `ColorConvertOp` path is the plan's probe), and the Linux run of `--check-variants`, which CI does on
+    this PR._
 
 #### Phase B: into the plugin (inside M10, after T127 and T129)
 
@@ -307,6 +331,9 @@ Nothing blocks the "no Python" goal technically. Four decisions shape it:
   `london-alley.png`, `london-view.png`, `santa-cruz.png`) are already 800–1024 px, 256-colour fallbacks from T016
   that no page references (checked 2026-10-25). A never-published PNG is simply removed, as today. Recommendation: (d) now, with a clear
   refusal message ("this PNG is published; convert it by hand or add the quantizer"), and (a) if the case arises.
+  - _2026-10-27: **(d)**, taken on the plan's recommendation to start Phase A (T140); the owner can overrule.
+    `PrepareImage.java` refuses a photo PNG that is in `main` ("convert it by hand or add the quantizer") and removes
+    a never-published one after conversion, as before. (a) stays the answer if the case ever arises._
 - **D3: scope of `checkSite`.** Only the three scripted checks (T141 as written), or also the inline CI steps
   (drafts, CR line endings, live-reload marker) so CI is `./gradlew bake checkSite` plus lychee and xmllint.
   The inline steps are five lines of shell each and already run on `build/site`; moving them is tidy, not

@@ -10,7 +10,8 @@ Requirements
   With sdkman and jenv: `sdk install java 25.0.4-tem`, then `jenv add ~/.sdkman/candidates/java/25.0.4-tem`.
   JDK 21 still builds the site identically, if you need it.
 - Nothing else: `./gradlew` downloads the right Gradle version, and Gradle downloads the Sass compiler (see
-  [To change the site's styles](#to-change-the-sites-styles)). No Node or Ruby.
+  [To change the site's styles](#to-change-the-sites-styles)). No Node or Ruby, and nothing to install for the
+  tools under `scripts/`: they are single-file Java programs (`java scripts/<Name>.java`) and shell.
 
 To preview
 ==========
@@ -157,10 +158,12 @@ If you use a new header image (`masthead=`), put it in `src/jbake/assets/img/mas
 ```
 (or `.jpg`). It converts the image to sRGB, strips the camera metadata, resizes it to ≤ 1920px and ≤ 400 KB, turns a
 photo PNG into a `.jpg` and points the post at it, and creates the phone and tablet sizes
-(`scripts/masthead-variants.py` does that last step alone). The same command prepares an in-post image, capped at
-1000px; add `-Ppng` to keep a screenshot or graphic as PNG, `-PdryRun` to see what it would do, `-Pwidth=N` for
-another cap. The work is `scripts/prepare-image.py`, which the task runs with `uv` when it is installed (`uv`
-fetches Pillow by itself) and with `python3` otherwise (then `pip install pillow` first).
+(`java scripts/PrepareImage.java --variants <image>` does that last step alone, and never overwrites a variant). The
+same command prepares an in-post image, capped at 1000px; add `-Ppng` to keep a screenshot or graphic as PNG,
+`-PdryRun` to see what it would do, `-Pwidth=N` for another cap. The work is `scripts/PrepareImage.java`, a single-file
+Java program like `newPost`'s (T140, 2026-10-27; before that a script that needed an image library installed), so nothing is installed. It
+refuses a photo PNG that is already published (its URL must keep a PNG, and the JDK has no colour quantizer for the
+small fallback): convert such a one by hand, as T016 did.
 `masthead=` also takes a full `https://` URL (a remote image, used as-is at every width, so pick one around
 1920px wide), or a site path such as `/img/qcon_crowd.jpg` for an image elsewhere under `src/jbake/assets/`.
 
@@ -246,7 +249,7 @@ java scripts/visual/PixelDiff.java /tmp/css-before /tmp/css-after /tmp/css-diff
 ```
 It prints `identical (0 pixels differ)` per page and exits 0, or the count and bounding box of the differing pixels
 and exits 1, writing a red-on-grey image per differing page into the third folder. (The report, written on 2026-10-24,
-names the tools' old folder `scripts/to-markdown/` and a Python `pixeldiff.py`; they moved to `scripts/visual/` and the
+names the tools' old folder `scripts/to-markdown/` and the old `pixeldiff.py`; they moved to `scripts/visual/` and the
 diff is Java since 2026-10-27, T137 and T138. Nothing to install.)
 
 **The compiler** is [Dart Sass](https://sass-lang.com/dart-sass/), the reference Sass implementation, run from
@@ -320,7 +323,7 @@ rm -rf build/site && rsync -a --prune-empty-dirs --exclude '*-draft.html' build/
 scripts/check-docs-not-published.sh build/site   # docs/ must never reach the site
 scripts/check-urls.sh build/site                 # no published URL may disappear
 java scripts/TagRedirects.java --check build/site   # old tag URLs are tag pages or working redirects
-python3 scripts/masthead-variants.py --check     # header images have their phone/tablet sizes
+java scripts/PrepareImage.java --check-variants  # header images have their phone/tablet sizes
 xmllint --noout build/site/feed.xml build/site/sitemap.xml
 ```
 The link checker (lychee) runs in CI. To run it locally, install [lychee](https://lychee.cli.rs) and see the
@@ -329,7 +332,7 @@ The link checker (lychee) runs in CI. To run it locally, install [lychee](https:
 **Old tag URLs (T039, T055):** tag pages used to be published with spaces (`/tags/acceptance test.html`), and two
 tags had a capitalized twin (`/tags/DevOps.html`, `/tags/Groovy.html`). Those 50 URLs are now small redirect pages
 (meta refresh, `rel=canonical`, `noindex`, and a visible link) to the new pages, made by `scripts/TagRedirects.java`
-(`java scripts/TagRedirects.java`, nothing to install; a Python script until T139, 2026-10-27) from `docs/baseline/urls.txt` and committed: 48 in `src/jbake/assets/tags/`, and the 2 capitalized ones in
+(`java scripts/TagRedirects.java`, nothing to install; `tag-redirects.py` until T139, 2026-10-27) from `docs/baseline/urls.txt` and committed: 48 in `src/jbake/assets/tags/`, and the 2 capitalized ones in
 `src/case-redirects/tags/`. Run the program again if a tag in that list stops being used, and keep its stubs.
 **Merging or renaming a tag** (needs the owner's approval, AGENTS.md Rule 1): add `old → new` to `RENAMES` in the
 program, edit the posts' `tags=` lines, and run it. It writes a stub at every old URL of the old tag: the

@@ -83,10 +83,10 @@ name stay the same, because the output is still `<name>.html`.
 image, re-encode a JPEG in place under the same name. For a photo saved as PNG, add a new `<name>.jpg`,
 point the pages at it, and replace `<name>.png` with a small fallback copy. Convert to sRGB before
 dropping the color profile, and strip camera metadata. See T016 in the revival plan for the exact method.
-`./gradlew prepareImage -Pimage=<path>` (`scripts/prepare-image.py`) does all of this for an image added by
+`./gradlew prepareImage -Pimage=<path>` (`scripts/PrepareImage.java`) does all of this for an image added by
 hand; a PNG that is already in `main` keeps its URL as the fallback.
-**Header (masthead) images** also need 960px and 1440px variants for phones and tablets: `prepare-image.py`
-makes them, or run `scripts/masthead-variants.py` alone after adding or changing one. CI fails without them.
+**Header (masthead) images** also need 960px and 1440px variants for phones and tablets: `prepareImage`
+makes them, or run `java scripts/PrepareImage.java --variants <image>` alone after adding one. CI fails without them.
 
 ### When a URL change is approved
 

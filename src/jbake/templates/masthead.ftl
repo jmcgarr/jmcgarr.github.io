@@ -31,7 +31,7 @@
       </#if>
 
       <#-- Responsive header image (T071): phones get the 960px variant, tablets and small laptops 1440px,
-           larger screens the full image. Variants come from scripts/masthead-variants.py. The CSS
+           larger screens the full image. Variants come from scripts/PrepareImage.java. The CSS
            (src/scss/_masthead.scss) picks one by width, and the preloads use the same media queries so each browser
            fetches exactly one image, early. Remote (http) mastheads have no variants. -->
       <#if mastheadURL?starts_with("http")>

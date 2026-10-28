@@ -396,7 +396,7 @@ public class ReviewChanges {
         Path image = name.startsWith("/") ? ASSETS.resolve(name.substring(1)) : ASSETS.resolve("img/masthead").resolve(name);
         if (!Files.isRegularFile(image)) {
             add(true, "E5", c.path.toString(), fm.lines.get("masthead"), "masthead=" + name + " isn't in " + image.getParent() + ".",
-                    "Add the image there, then run scripts/masthead-variants.py");
+                    "Add the image there, then run java scripts/PrepareImage.java --variants <image>");
             return;
         }
         checkVariants(image, c.path.toString(), fm.lines.get("masthead"));
@@ -414,7 +414,7 @@ public class ReviewChanges {
         }
         if (!missing.isEmpty()) {
             add(true, "E5", file, line, "The masthead " + image.getFileName() + " has no " + String.join(" or ", missing)
-                    + " variant for phones and tablets (CI fails without them).", "python3 scripts/masthead-variants.py");
+                    + " variant for phones and tablets (CI fails without them).", "java scripts/PrepareImage.java --variants " + image);
         }
     }
 

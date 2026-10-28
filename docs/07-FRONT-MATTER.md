@@ -62,8 +62,7 @@ Any format change touches all of these:
 |---|---|
 | `scripts/NewPost.java` | Writes the header of a new draft (the `"~~~~~~"` line) and stops reading tags at it |
 | `scripts/ReviewChanges.java` | `SEPARATOR = "~~~~~~"`; the E4 check reads the front matter and reports a missing separator or key |
-| `scripts/masthead-variants.py` | Finds mastheads with the regex `^masthead=(.+)$` |
-| `scripts/prepare-image.py` | Rewrites `^masthead=<old>$` to the new image name |
+| `scripts/PrepareImage.java` | Finds mastheads with the regex `^masthead=(.+)$` and rewrites `^masthead=<old>$` to the new image name (the Python `masthead-variants.py` and `prepare-image.py` until T140, 2026-10-27) |
 | `README.md`, `AGENTS.md` | Describe the format; AGENTS.md Rule 3: "Front matter is `key=value` lines ending with a `~~~~~~` separator" |
 | `src/jbake/content/` | 78 files carry the header: 75 published posts, 2 pages (`about.md`, `talks.md`), 1 draft |
 
@@ -174,7 +173,7 @@ Steps:
 3. Convert all 78 files; prove it with the before/after bake `diff -r` (empty) and the URL list unchanged.
 4. Switch `bake` and `preview` in `build.gradle` to the launcher.
 5. Update `scripts/NewPost.java` (write YAML), `scripts/ReviewChanges.java` (E4 reads YAML), the `masthead=` regexes
-   in `scripts/masthead-variants.py` and `scripts/prepare-image.py` (now `masthead:`), README and AGENTS.md Rule 3.
+   in `scripts/PrepareImage.java` (now `masthead:`), README and AGENTS.md Rule 3.
 6. Add `.markdownlint-cli2.jsonc` if markdownlint still needs a `frontMatter` setting (its default already matches a
    `---` block).
 
