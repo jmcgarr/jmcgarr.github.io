@@ -246,14 +246,20 @@ T134). Each file there whose name doesn't start with `_` is an entry, published 
 
 | Entry | Published as | What it is |
 |---|---|---|
-| `clean-blog.scss` | `/css/clean-blog.css`, every page | The theme and the site's own rules, as partials in the cascade order the file lists: tokens in `_variables.scss` (colors, fonts, sizes, breakpoints), the `media-up` breakpoint mixin in `_mixins.scss`, then `_global`, `_navbar`, `_masthead`, `_post`, `_content`, `_footer`, `_legacy-asciidoctor`, `_comments`, `_lists`, `_accessibility`. Each partial's header says what it styles and which template. The site-specific additions that were a separate `extra.css` live here since T134 |
-| `fonts.scss` | `/css/fonts.css`, every page | The 30 `@font-face` rules for the self-hosted Open Sans (T073), generated from a map of Google's subsets |
+| `clean-blog.scss` | `/css/clean-blog.css`, every page | The theme and the site's own rules, as partials in the cascade order the file lists: tokens in `_variables.scss` (colors, fonts, sizes, breakpoints), the `media-up` breakpoint mixin in `_mixins.scss`, then `_fonts` (the 30 `@font-face` rules for the self-hosted Open Sans, T073, generated from a map of Google's subsets; a separate `fonts.css` until T135), `_global`, `_navbar`, `_masthead`, `_post`, `_content`, `_footer`, `_legacy-asciidoctor`, `_comments`, `_lists`, `_accessibility`. Each partial's header says what it styles and which template. The site-specific additions that were a separate `extra.css` live here since T134 |
 | `code.scss` | `/css/code.css`, pages with a code block | Code blocks and the Prism token colors (T056), the language label and the copy button that `templates/code-highlight.ftl` adds (T136) |
 
 None of the CSS is in the repository: `./gradlew compileSass` writes it to `build/generated/sass/css/`, and `bake` and
 `preview` copy it into the site at the same URLs as always. A Sass error fails the build (and CI) with the file and
-line. The build also refuses to run if a hand-written `clean-blog.css`, `fonts.css`, `code.css` or `extra.css`
-reappears under `src/jbake/assets/css/`, since JBake would publish it and it would go stale.
+line. The build also refuses to run if a hand-written `clean-blog.css`, `code.css`, `fonts.css` or `extra.css`
+reappears under `src/jbake/assets/css/`, since JBake would publish it and it would go stale (the last two were
+folded into `clean-blog.css` in T134 and T135, and their URLs are on `docs/baseline/expected-removals.txt`).
+
+A page loads two stylesheets, Bootstrap's and `clean-blog.css`, and a page with a code block `code.css` as well.
+The footer and menu icons are inline SVGs from Font Awesome Free (CC BY 4.0) in `templates/footer.ftl` and
+`menu.ftl`, so no icon font or stylesheet is loaded (T047, T135). The Font Awesome files under
+`src/jbake/assets/vendor/fontawesome-free/` are still published because they are published URLs (Rule 1); nothing
+on the site links them.
 
 While `./gradlew preview` runs, saving a file in `src/scss/` recompiles every entry within about a second and the open
 page reloads. A Sass error there is printed in the terminal, and the page keeps the last good CSS.
@@ -282,7 +288,7 @@ How the site is built and deployed
 Everything happens in one workflow, [`.github/workflows/gradle.yml`](.github/workflows/gradle.yml)
 (shown as **"Java CI with Gradle"** under Actions). It runs on every pull request and every push to `main`.
 
-1. **Bake:** `./gradlew bake` compiles `src/scss/` into `css/clean-blog.css`, `css/fonts.css` and `css/code.css` with Dart Sass and renders
+1. **Bake:** `./gradlew bake` compiles `src/scss/` into `css/clean-blog.css` and `css/code.css` with Dart Sass and renders
    `src/jbake/` into `build/jbake/` with JBake (JDK 25). Drafts are rendered too, as `<name>-draft.html`, but only
    so you can preview them locally. A Sass, template, or post error fails the build here.
 2. **Stage:** `build/jbake/` is copied to **`build/site/` without drafts**. `build/site/` is exactly what goes live.

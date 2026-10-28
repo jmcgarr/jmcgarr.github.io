@@ -5,11 +5,13 @@
  */
 
 // The site's theme stylesheet, published as /css/clean-blog.css on every page (templates/header.ftl, after
-// Bootstrap, Font Awesome and fonts.css). The build compiles it with Dart Sass inside Gradle (T043,
-// `./gradlew compileSass`, part of every bake and preview): edit the partials, never the CSS. The other two
-// entries in this folder are fonts.scss (/css/fonts.css) and code.scss (/css/code.css).
+// Bootstrap; the only other stylesheet a page loads). The build compiles it with Dart Sass inside Gradle
+// (T043, `./gradlew compileSass`, part of every bake and preview): edit the partials, never the CSS. The
+// other entry in this folder is code.scss (/css/code.css, pages with a code block).
 //
 // The order below is the cascade, and it matters where two rules have the same specificity:
+//   0. fonts: the Open Sans @font-face rules, which were their own stylesheet (/css/fonts.css, loaded
+//      before this one) until T135. First so the fonts are declared before any rule names them.
 //   1. The Clean Blog template, top of the page downwards: page-wide elements, navbar, masthead, the home
 //      page's post list, in-post blocks, footer.
 //   2. legacy-asciidoctor: the element rules every page relied on from asciidoctor.css, which was loaded
@@ -18,6 +20,7 @@
 //      archived comments, the archive/tag/Topics lists, phone wrapping and the skip link. The masthead's
 //      additions (photo credit, responsive image) are in _masthead.scss: nothing later touches them.
 // Tokens are in _variables.scss, the breakpoint mixin in _mixins.scss.
+@use "fonts";
 @use "global";
 @use "navbar";
 @use "masthead";

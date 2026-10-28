@@ -36,3 +36,10 @@ blog/drafts/unit-testing-from-zero-to-hero-draft.html
 # declarations, see docs/reports/css-review-2026-10-24.md, item A2), and header.ftl no longer links it. Not an
 # HTML page, so check-urls.sh doesn't track it; recorded here because /css/extra.css was a published URL (Rule 1).
 #   css/extra.css
+
+# 2026-10-27, T135 (approved by the owner 2026-10-27): the Open Sans stylesheet fonts.css, loaded on every page
+# since T073 (2026-10-06). Its 30 @font-face rules open /css/clean-blog.css now (src/scss/_fonts.scss, the first
+# partial of clean-blog.scss; same rules, same font files at the same URLs), and header.ftl no longer links it.
+# Not an HTML page, so check-urls.sh doesn't track it; recorded here because /css/fonts.css was a published URL
+# (Rule 1). No stub was left, by the owner's decision.
+#   css/fonts.css

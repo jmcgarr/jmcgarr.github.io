@@ -2,13 +2,15 @@
    css2?family=Open+Sans:ital,wght@0,300;0,800;1,300 (2026-10-06): one variable-font file per style and
    language subset. Licensed under the SIL Open Font License 1.1, see /fonts/open-sans/OFL.txt. */
 
-// Published as /css/fonts.css on every page (templates/header.ftl, which also preloads the Latin normal
-// file). Compiled from here since T134 (it was a hand-written file under src/jbake/assets/css/): the 30
-// @font-face rules are the three styles the site uses (300 italic for post dates, 300 for the masthead
-// subheading, 800 for the navbar; see $font-family-open-sans in _variables.scss) times Google's ten script
-// subsets. A browser fetches a subset's file only for a page that contains its characters, so English
-// pages fetch the two Latin files. The 300 and 800 upright weights share one variable-font file per subset.
-// The ranges are quoted so Sass copies them verbatim.
+// The first partial of clean-blog.scss, so the @font-face rules open /css/clean-blog.css on every page
+// (T135; until then they were their own stylesheet, /css/fonts.css, hand-written under
+// src/jbake/assets/css/ before T134 and compiled from here after it). templates/header.ftl preloads the
+// Latin normal file on every page and the Latin italic on posts. The 30 @font-face rules are the three
+// styles the site uses (300 italic for post dates, 300 for the masthead subheading, 800 for the navbar; see
+// $font-family-open-sans in _variables.scss) times Google's ten script subsets. A browser fetches a
+// subset's file only for a page that contains its characters, so English pages fetch the two Latin files.
+// The 300 and 800 upright weights share one variable-font file per subset. The ranges are quoted so Sass
+// copies them verbatim.
 
 // (style, weight) in the order Google lists them
 $styles: (italic 300, normal 300, normal 800);

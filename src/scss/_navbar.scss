@@ -19,6 +19,16 @@
     padding: 13px;
     text-transform: uppercase;
     color: $gray-800;
+    // The bars icon after "Menu", an inline SVG since T135, in the box the Font Awesome glyph it replaces
+    // had: 1em tall, 448/512 wide, and 2px of the 12px below the baseline (measured in Chrome on the
+    // webfont; -0.125em, which Font Awesome's own SVG framework uses, made the line box and the navbar
+    // half a pixel taller on phones)
+    svg {
+      display: inline-block;
+      width: 0.875em;
+      height: 1em;
+      vertical-align: -0.16667em;
+    }
   }
   .navbar-nav {
     > li.nav-item {

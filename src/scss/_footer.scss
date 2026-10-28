@@ -1,5 +1,10 @@
 // The footer in templates/footer.ftl: the social icons and the two copyright lines. Every page. From the
-// Clean Blog template, plus the X icon's sizing (T047), moved here from an inline style in T134.
+// Clean Blog template. The icons are inline SVGs (the X logo since T047, the circles, LinkedIn and GitHub
+// since T135, when the Font Awesome stylesheet stopped loading), so the few Font Awesome 5.3.1 layout
+// rules the markup relied on live here, under the class names the markup kept: .fa-stack is a 2em square,
+// .fa-stack-2x the circle that fills it, .fa-stack-1x the 1em mark on top, .fa-inverse white.
+@use "variables" as *;
+
 footer {
   padding: 50px 0 65px;
   .list-inline {
@@ -11,13 +16,34 @@ footer {
     margin-bottom: 0;
     text-align: center;
   }
-  // The X logo is an inline SVG (Font Awesome 5.3 has no X icon, T047), sized and centred in its circle
-  // like the Font Awesome icons next to it (.fa-stack-1x sets left: 0, top: 0 and width: 100%)
+  // Font Awesome's .fa-stack, and the font-size from its .fa-lg (whose line-height and vertical-align
+  // .fa-stack always overrode)
+  .fa-stack {
+    display: inline-block;
+    position: relative;
+    width: 2em;
+    height: 2em;
+    line-height: 2em;
+    vertical-align: middle;
+  }
+  .fa-lg {
+    font-size: 1.33333em;
+  }
+  // Every icon is centred in the stack, 1em tall like a Font Awesome glyph (the X icon's sizing from T047,
+  // moved here in T134); the circle behind it is 2em, as .fa-stack-2x made its glyph
   .fa-stack svg {
-    width: 1em;
-    height: 1em;
+    position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    width: 1em;
+    height: 1em;
+    &.fa-stack-2x {
+      width: 2em;
+      height: 2em;
+    }
+  }
+  .fa-inverse {
+    color: $white;
   }
 }
