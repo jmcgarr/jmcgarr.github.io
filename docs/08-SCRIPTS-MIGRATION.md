@@ -171,7 +171,7 @@ T140. Phase B (T141–T143) runs inside M10 after T127 and T129 exist. Decisions
 
 #### Phase A: no Python (independent of the plugin)
 
-- [ ] T137 [IMP] **Retire the one-off conversion and comment tooling.** Delete `scripts/disqus-archive.py`,
+- [x] T137 [IMP] **Retire the one-off conversion and comment tooling.** Delete `scripts/disqus-archive.py`,
   `scripts/to-markdown/convert.py`, `asciidoc-convert.py`, `verify.py`, `render.sh`, `Render.java`; move
   `screenshots.sh`, `phone-shots.mjs` to `scripts/visual/` (and `pixeldiff.py` with them, until T138); drop the
   `scripts/to-markdown/*` and `.venv/` lines from `.gitignore`. README: replace "To convert an old post to
@@ -180,6 +180,15 @@ T140. Phase B (T141–T143) runs inside M10 after T127 and T129 exist. Decisions
   (`scripts/`, `.gitignore`, `README.md`, `AGENTS.md`, `src/jbake/templates/post.ftl`)
   - **Test:** the byte-identical check passes (the `.ftl` edit is a FreeMarker comment). `git ls-files scripts`
     lists 10 files, none under `to-markdown/`. `scripts/check-docs-not-published.sh` passes on a bake.
+  - _2026-10-27: **done** (`chore/T137-T140-no-python`, D1 taken on the plan's recommendation, see Blockers). The six
+    one-offs are deleted; `screenshots.sh`, `phone-shots.mjs` and (until T138) `pixeldiff.py` moved to `scripts/visual/`.
+    Neither moved tool had a path of its own to fix, and both ran from the new folder (4 pages at 1280 px with
+    `screenshots.sh`, 2 at 375 px with `phone-shots.mjs`, against `jwebserver` on port 8202). README's conversion
+    section is three sentences of history under the same heading (the archived revival plan names it); AGENTS.md
+    line 26 and `post.ftl` line 31 say T045 and the Disqus export. **Test passed:** a clean bake is byte-identical to
+    one of `origin/main` (496 files, every SHA-256 equal; `feed.xml` equal apart from its two build timestamps), and
+    `scripts/check-docs-not-published.sh build/jbake` is OK. One correction to the Test line: `git ls-files scripts`
+    lists **11** files, not 10 (17 − 6 deleted: 8 at the top level, 3 under `visual/`), none under `to-markdown/`._
 - [ ] T138 [IMP] **`PixelDiff.java`.** `scripts/visual/PixelDiff.java`, a single-file program with
   `pixeldiff.py`'s interface (`<before> <after> [<diff_out>]`, same per-file line, exit 1 on a difference, the
   red-on-grey diff image); delete `pixeldiff.py`; the script headers of `screenshots.sh` and `phone-shots.mjs`
@@ -261,6 +270,8 @@ Nothing blocks the "no Python" goal technically. Four decisions shape it:
   (T137). The alternative, porting them to Java "for the record", costs ~2,500 lines of Python to translate for
   tools that cannot run again (no Disqus export; no non-Markdown engine). Recommendation: retire; git history is the
   record.
+  - _2026-10-27: **retire**, taken on the plan's recommendation to start Phase A (T137); the owner can overrule. The
+    six files are in git history (`git log -- scripts/to-markdown scripts/disqus-archive.py`)._
 - **D2: the option B fallback PNG.** The JDK has no colour quantizer. Options: (a) write a small median-cut with
   Floyd–Steinberg in `PrepareImage.java` (~100 lines, no dependency); (b) a library (verify which Java PNG
   quantizers are maintained before choosing); (c) shell out to `pngquant` when installed; (d) drop the step, since
@@ -296,3 +307,6 @@ Test uses working.
   shell)? The ideal end state is NO Python in the repo at all"). Research only: no script, `build.gradle` or
   workflow was changed. The `javax.imageio` table comes from a probe run on this machine's JDK 25.0.4 against two
   committed mastheads; the probe wrote only to a scratch folder._
+- _2026-10-27: Phase A started at the owner's request, on one branch (`chore/T137-T140-no-python`, one commit per
+  task). D1 and D2 are taken on the plan's own recommendations, pending the owner's confirmation; D3 and D4 wait for
+  Phase B._

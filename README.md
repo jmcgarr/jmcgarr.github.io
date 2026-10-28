@@ -199,45 +199,16 @@ to `main` skips the step: the PR already ran it.
 
 To convert an old post to Markdown
 ==================================
-The site converged on Markdown in October 2026 (revival task T102; the owner's decision of 2026-10-12). Every
-published WordPress `.html` post was converted in batches by year, then the HTML drafts, the 11 AsciiDoc posts,
-and last (2026-10-18) the 3 AsciiDoc pages (About, Talks, Speaker Bio) and the 2 AsciiDoc drafts: every file
-under `src/jbake/content/` is `.md` now, and since the same day the build renders nothing else: AsciidoctorJ
-(with JRuby) is out of `build.gradle`, and `asciidoctor.css` is no longer loaded (the few rules every page relied
-on from it live in `src/scss/_legacy-asciidoctor.scss`). A conversion is mechanical: the published page must not
-change, and `scripts/to-markdown/verify.py`, not the converter, is the proof. The tools, kept for the record and
-for any page that comes back in another format, from `scripts/to-markdown/`:
-
-```
-python3 -m venv .venv && .venv/bin/pip install html5lib pillow   # once
-./gradlew clean bake && cp -R build/jbake /tmp/baseline            # a bake of main, before converting
-git mv src/jbake/content/blog/<slug>.html src/jbake/content/blog/<slug>.md   # commit this rename on its own
-.venv/bin/python scripts/to-markdown/convert.py --in-place src/jbake/content/blog/<slug>.md
-./gradlew clean bake
-.venv/bin/python scripts/to-markdown/verify.py /tmp/baseline build/jbake <slug>...
-```
-
-`convert.py` keeps the header byte for byte and turns the body into Markdown where the result renders the same
-with this site's flexmark settings; anything it can't express exactly (code blocks, images and paragraphs with
-classes or styles, embeds) stays raw HTML. Off-site links become plain `[text](url)` links, because the templates
-add `target="_blank"` at build time (so pages are identical, and only `feed.xml` loses that attribute).
-`asciidoc-convert.py` did the same for an AsciiDoc file (`git mv x.asciidoc x.md`, then `--in-place`); it is
-kept for history, the last AsciiDoc file having been converted on 2026-10-18 (the build can't render one now). It
-converts exactly the AsciiDoc the 2014–2020 posts and the three pages used and refuses anything else, and its
-docstring records each decision (fenced code, loose lists, blockquotes, a bare URL as an autolink, a `++++`
-block holding a titled YouTube or SlideShare iframe as a T115 embed link, and for a sidebar or an image with a
-width, a height, a caption or a left/right role the Bootstrap markup shown under "To write a post", so nothing
-depends on `asciidoctor.css`). Asciidoctor's wrapper `<div>`s are gone after that, so check such a file with
-`verify.py --text-only`, which lists the DOM differences and still requires the visible text, the counts, the
-page outside the body and the feed item's fields to match.
-`verify.py` compares each page outside `<article>` (for a page from `page.ftl`, outside its body `<div>`) byte
-for byte, the article and the feed item as a DOM, and counts of links, images, code blocks and visible text; it
-takes a post slug or a path such as `about.html` or `blog/drafts/<name>-draft.html`. `render.sh` renders
-Markdown exactly as JBake does, to probe an edge case. `screenshots.sh` (desktop, 1280px) and `phone-shots.mjs`
-(a real 375px phone viewport, which also reports any sideways scroll) take before-and-after screenshots of a
-sample of posts or pages (a slug or a path, as for `verify.py`), and `pixeldiff.py` compares them pixel by
-pixel. Each script's header says how to run it. URLs don't change, because JBake publishes `<slug>.md` at the
-same `/blog/<slug>.html` (and `about.md` at `/about.html`).
+There is nothing to convert: every file under `src/jbake/content/` has been Markdown since 2026-10-18, and the build
+renders nothing else (revival task T102, the owner's decision of 2026-10-12), after the 63 WordPress-era HTML posts,
+the 11 AsciiDoc posts, the 3 AsciiDoc pages and the drafts were converted in batches, each proved against a bake of
+`main` so that no published page changed. The converters (`convert.py`, `asciidoc-convert.py`), their proof
+(`verify.py`) and the flexmark probe (`render.sh`, `Render.java`) were one-off tools in `scripts/to-markdown/`, retired
+on 2026-10-27 (T137 in [docs/08-SCRIPTS-MIGRATION.md](docs/08-SCRIPTS-MIGRATION.md)) because a page in another format
+can't come back without first re-adding an engine; `git log -- scripts/to-markdown` has them, and the T102 notes in
+[docs/archive/00-REVIVAL.md](docs/archive/00-REVIVAL.md) record each batch. The screenshot tools that came with them
+(`screenshots.sh`, `phone-shots.mjs` and the pixel diff) are still used to prove a style change moved no pixels, and
+live in `scripts/visual/` (see [To change the site's styles](#to-change-the-sites-styles)).
 
 To change the site's styles
 ===========================
