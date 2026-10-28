@@ -216,7 +216,7 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
 
 #### Improvements
 
-- [ ] T123 [IMP] **Scaffold the included build.** `build-logic/` with `settings.gradle`, a `build.gradle` applying
+- [x] T123 [IMP] **Scaffold the included build.** `build-logic/` with `settings.gradle`, a `build.gradle` applying
   `java-gradle-plugin` (JDK 21 toolchain, matching `.java-version`'s fallback), an empty `JbakeSitePlugin` with id
   `jbake-site` and an empty `JbakeSiteExtension`; `pluginManagement { includeBuild 'build-logic' }` in the root
   `settings.gradle`; `plugins { id 'jbake-site' }` in `build.gradle`, with everything else still in the script;
@@ -224,13 +224,65 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
   `.github/dependabot.yml`)
   - **Test:** the byte-identical check passes. `./gradlew bake` twice prints "Reusing configuration cache" on the
     second run. `./gradlew :build-logic:build` succeeds. CI on the PR is green.
-- [ ] T124 [IMP] **Move the theme CSS.** `compileSass` (the Sass host becomes a dependency of `build-logic`, so the
+  - _2026-10-27: **done** (`chore/T123-T124-plugin-scaffold-sass`, PR 2 of the owner's order, with T124). `build-logic/`
+    is an included build (`settings.gradle` names it `build-logic`; `build.gradle` applies `java-gradle-plugin`, JUnit
+    6.1.3 with `useJUnitPlatform`, `gradleTestKit()` for the functional tests, `-Xlint:all -Werror` less the `classfile`
+    group, which the Sass host's jar trips, and javadoc with `-Xdoclint:all,-missing`, since Gradle creates the
+    extensions and tasks through implicit constructors) with the plugin `jbake-site`, class `com.mikemcgarr.jbakesite.JbakeSitePlugin`,
+    and the `jbakeSite` extension (`JbakeSiteExtension`). The root `settings.gradle` has `pluginManagement { includeBuild
+    'build-logic' }` with its repositories kept; `build.gradle` applies `jbake-site` beside `base`; `.github/dependabot.yml`
+    has a second `gradle` entry for `/build-logic` (weekly, semver-major ignored, group `build-logic`, prefix
+    `chore(build-logic)`). `.gitignore` already covers `build-logic/build/` and `build-logic/.gradle/` (its `build/` and
+    `.gradle/` patterns match at any depth). **Deviation:** the plugin is compiled with `options.release = 21` on whatever
+    JDK runs Gradle (21 or 25), not a JDK 21 *toolchain*: a toolchain would make Gradle look for, or download, a JDK the
+    machine may not have, and the release flag gives the same guarantee (Java 21 bytecode and API) without it. **Test
+    passed** at the scaffold commit (3c28496): the bake was byte-identical to the base (`diff -rq`: only `feed.xml`), the
+    second `bake` printed "Reusing configuration cache", `:build-logic:build` passed. Not verified locally: CI (Linux)._
+- [x] T124 [IMP] **Move the theme CSS.** `compileSass` (the Sass host becomes a dependency of `build-logic`, so the
   `io.freefair.sass-base` plugin leaves the root `plugins` block), the hand-edited-CSS guard, and the copy of the
   compiled CSS into the bake, driven by `jbakeSite.scss { entry; publishedPath }` (`build-logic/`, `build.gradle`,
   `src/scss/` unchanged)
   - **Test:** the byte-identical check passes, including `css/clean-blog.css`. Putting a `clean-blog.css` under
     `src/jbake/assets/css/` makes `./gradlew bake` fail with the T043 message; removing it restores the bake. A Sass
     syntax error in `_variables.scss` fails the build with Dart Sass's message.
+  - _2026-10-27: **done** (same branch as T123). In the plugin, package `com.mikemcgarr.jbakesite`: `CompileSassTask`
+    (`compileSass`, cacheable: compiles every entry, then writes exactly the entries' CSS to
+    `build/generated/sass/<publishedDir>`), `CheckNoHandEditedCssTask` (`checkNoHandEditedCss`: fails when a file under
+    `<source>/assets/<publishedDir>` has an entry's CSS name or a retired name; message unchanged from T043), `SassCompiler`
+    (Dart Sass through `de.larsgrefer.sass:sass-embedded-host:4.6.1`, the version freefair 9.8.2 pulled, with the site's
+    options: expanded, no source map, written as-is), `SassCompileException` (Dart Sass's formatted message),
+    `SassEntries` (the convention: top-level `<name>.scss` not starting with `_` → `<name>.css`), `FileTrees` (the
+    `copyTree` closure, now shared by the CSS copy and the case-redirect copy) and `ScssExtension`.
+    `SassCompiler.compileAll(dir)` compiles every entry before anything is returned; the task writes its result and
+    the preview's watcher atomically swaps it in, so the compile-then-write logic exists once (code review). `io.freefair.sass-base`
+    is gone from `build.gradle`. **The extension** reads `jbakeSite { scss { source; publishedDir; retiredCss;
+    handEditedCssExplanation } }`: a directory convention rather than the sketch's single `entry`/`publishedPath`, because
+    the site has two entries and the README already states the convention ("each file not starting with `_` is an entry,
+    published at `/css/<name>.css`"); `retiredCss` and `handEditedCssExplanation` carry the site-specific part of the
+    guard (the retired names and the T043/T134/T135 sentence), so the plugin's message is the same text as before while
+    the plugin itself knows no file names. `jbakeSite.source` (default `src/jbake`) arrived early, for the guard's assets
+    folder. **What stayed in `build.gradle` until T125/T126:** `bake` (now `dependsOn checkNoHandEditedCss`, takes
+    `compileSass`'s output as its `themeCss` input, and copies it with `FileTrees.copy` after JBake, as before),
+    `bakePreview` (same, plus the watcher) and `SassPreviewWatcher`, whose own Dart Sass setup is replaced by the plugin's
+    `SassCompiler` and `SassEntries`, so the preview compiles with exactly the task's options; the extension is read
+    lazily there (`parameters.sourceDir = jbakeSite.scss.source`, the site's CSS directory as a provider of
+    `build/jbake/<publishedDir>`, and the watcher's `/css/` log prefix from `publishedDir`). 19 unit tests (JUnit 6, with
+    `ProjectBuilder` for the plugin wiring and the guard; the real Dart Sass on small SCSS) and 4 TestKit tests in a temp
+    build with the configuration cache on: the CSS is compiled and the guard runs; a Sass error in a partial fails
+    `compileSass` with Dart Sass's `file line:col` message and writes nothing; a second run is `UP-TO-DATE` and prints
+    "Reusing configuration cache"; a renamed entry leaves no stale CSS. **CI** runs `./gradlew :build-logic:check bake` on
+    every PR (the "Bake with Gradle" step), so the plugin's unit tests and `validatePlugins` gate the bake from this PR
+    on; T129's "add it to the workflow" is thereby done for the check, and T129 still owns the fixture site and the
+    remaining functional tests. **Test passed:** the bake is byte-identical
+    to the base commit's (`diff -rq`: only `feed.xml`; `cmp` of `css/clean-blog.css` and `css/code.css` identical); a
+    `clean-blog.css` under `src/jbake/assets/css/` fails `bake` in `:checkNoHandEditedCss` with the T043 message word for
+    word, and the bake passes once it is deleted; `$oops: ;` in `_variables.scss` fails `:compileSass` with Dart Sass's
+    message (the caret, `_variables.scss 55:8`, the `@use` trace); `./gradlew bake` twice reuses the configuration cache;
+    `:build-logic:build` and `:build-logic:javadoc` pass with no warnings; `./gradlew tasks` shows the Jbake and Writing
+    groups exactly as after T133 and no `compileSass`; `clean bakePreview` served :8080, recompiled both entries on a saved
+    partial (the watcher path) and stopped cleanly, and the next `clean bake` has no `livereload`; `check -Pbase=origin/main`
+    0 errors; `test ! -e build/jbake/docs` and `scripts/check-docs-not-published.sh` pass; no CR line endings. Not
+    verified locally: the Linux bake (CI). CI still runs no `:build-logic:test`; that step is T129's._
 - [ ] T125 [IMP] **Move the JBake run.** The `jbake` configuration (the only one after T133) with the engine exclusions and
   the lz4 substitution, `NewJdkJvmArgs`, the jffi and logback settings, the case-redirect copy with its
   case-sensitivity check, and the `bake` task, driven by `jbakeSite.source` and `jbakeSite.caseRedirects`. The

@@ -1,9 +1,39 @@
+import com.mikemcgarr.jbakesite.CompileSassTask
+import com.mikemcgarr.jbakesite.FileTrees
+import com.mikemcgarr.jbakesite.SassCompileException
+import com.mikemcgarr.jbakesite.SassCompiler
+import com.mikemcgarr.jbakesite.SassEntries
+
 plugins {
     id 'base'   // provides `clean`
-    // Compiles src/scss into the theme CSS (T043) with Dart Sass, the reference Sass compiler, through its Java
-    // host (de.larsgrefer.sass:sass-embedded-host). No Node or Ruby: the host's jar bundles Dart Sass for macOS,
-    // Linux, and Windows, unpacks the one for this machine into a temp folder, and talks to it over stdin/stdout.
-    id 'io.freefair.sass-base' version '9.8.2'
+    // The site's build logic as a plugin (docs/06-GRADLE-PLUGIN.md, M10): the included build in build-logic/, which
+    // the tasks below move into one slice at a time, with tests. Configured by the jbakeSite { } block.
+    id 'jbake-site'
+}
+
+// What the site is; how it is built is the plugin's. Only the theme CSS so far (T124); the bake and the preview
+// follow (T125, T126).
+jbakeSite {
+    // The site's CSS (T043, issue #7; T134, T135). src/scss is the source of truth: the plugin's compileSass turns
+    // every entry there (a .scss file whose name doesn't start with "_": clean-blog.scss, code.scss) into
+    // build/generated/sass/css/<name>.css with Dart Sass, and the bake and the preview copy those into build/jbake,
+    // so each is published at the same URL as before: /css/clean-blog.css, /css/code.css (the font rules are part
+    // of clean-blog.css since T135; /css/fonts.css is a removed URL, listed in docs/baseline/expected-removals.txt).
+    // The CSS is not committed, so it can't drift from the SCSS. Partials (_*.scss) are only compiled through the
+    // entries. A Sass error fails the build, and CI.
+    scss {
+        source = file('src/scss')   // default
+        publishedDir = 'css'        // default: an entry <name>.scss is published at /css/<name>.css
+        // The CSS used to be hand-edited in src/jbake/assets/css/. The plugin's checkNoHandEditedCss stops a copy
+        // from coming back there, where JBake would publish it and it would silently go stale (the bake replaces it
+        // with the compiled one). Guarded: the compiled name of every entry, and these retired files: the old
+        // minified theme CSS, and the two stylesheets folded into clean-blog.scss's partials, extra.css (T134) and
+        // fonts.css (T135); their URLs are on docs/baseline/expected-removals.txt.
+        retiredCss = ['clean-blog.min.css', 'extra.css', 'fonts.css']
+        handEditedCssExplanation = "the site's CSS is generated from src/scss now (T043, T134, T135): " +
+                '/css/clean-blog.css and /css/code.css are compiled from the entry of the same name, and extra.css ' +
+                'and fonts.css are part of clean-blog.css.'
+    }
 }
 
 // JBake runs directly (T096) instead of through the Gradle plugin `org.jbake.site`. That plugin is unmaintained
@@ -124,79 +154,34 @@ def configureJBake = { JavaExec task ->
 // bake adds them only when build/jbake is case-sensitive, as on Linux, where CI builds and GitHub Pages serves.
 def caseRedirects = file('src/case-redirects')
 
-// Copies every file under one folder into another, keeping relative paths and replacing existing files.
-def copyTree = { File from, File to ->
-    def source = from.toPath()
-    def destination = to.toPath()
-    java.nio.file.Files.walk(source).withCloseable { paths ->
-        paths.filter { java.nio.file.Files.isRegularFile(it) }.each { file ->
-            def target = destination.resolve(source.relativize(file).toString())
-            java.nio.file.Files.createDirectories(target.parent)
-            java.nio.file.Files.copy(file, target, java.nio.file.StandardCopyOption.REPLACE_EXISTING)
-        }
-    }
-}
-
-// The site's CSS (T043, issue #7; T134, T135). src/scss is the source of truth: compileSass turns every entry
-// there (a .scss file whose name doesn't start with "_": clean-blog.scss, code.scss) into
-// build/generated/sass/css/<name>.css, and the bake and the preview copy those into build/jbake, so each is
-// published at the same URL as before: /css/clean-blog.css, /css/code.css (the font rules are part of
-// clean-blog.css since T135; /css/fonts.css is a removed URL, listed in docs/baseline/expected-removals.txt).
-// The CSS is not committed, so it can't drift from the SCSS. Partials (_*.scss) are only compiled through the
-// entries. A Sass error fails the build, and CI.
-def sassSource = file('src/scss')
-def sassOutput = layout.buildDirectory.dir('generated/sass').get().asFile
-def sassCssDir = 'css'   // where the compiled files go, inside sassOutput and inside build/jbake
-def sassEntries = { sassSource.listFiles().findAll { it.name ==~ /[^_].*\.scss/ }.sort() }
-// No group: an implementation detail of bake and bakePreview, so `./gradlew tasks` doesn't list it (T133).
-tasks.register('compileSass', io.freefair.gradle.plugins.sass.SassCompile) {
-    description = 'Compiles the entries in src/scss into build/generated/sass/css/*.css with Dart Sass.'
-    source = sassSource
-    destinationDir = new File(sassOutput, sassCssDir)
-    outputStyle = 'EXPANDED'      // readable, like the CSS the site served before T043
-    sourceMapEnabled = false      // no .map file and no sourceMappingURL comment in the published CSS
-}
-
-// The CSS used to be hand-edited in src/jbake/assets/css/. Stop a copy from coming back there: JBake would
-// publish it and it would silently go stale (the bake replaces it with the compiled one). Guarded: the
-// compiled name of every entry, the old minified theme CSS, and the two stylesheets folded into
-// clean-blog.scss's partials, extra.css (T134) and fonts.css (T135); their URLs are on
-// docs/baseline/expected-removals.txt.
-def generatedCssSources = {
-    def names = sassEntries().collect { it.name.replaceFirst(/\.scss$/, '.css') } + ['clean-blog.min.css', 'extra.css', 'fonts.css']
-    names.collect { new File(jbakeSource, "assets/css/$it") }
-}
-def checkNoHandEditedCss = {
-    def found = generatedCssSources().findAll { it.exists() }
-    if (found) {
-        throw new GradleException("${found*.path.join(', ')}: the site's CSS is generated from src/scss now " +
-                '(T043, T134, T135): /css/clean-blog.css and /css/code.css are compiled from the entry of the same ' +
-                'name, and extra.css and fonts.css are part of clean-blog.css. Move any change into the SCSS, then ' +
-                'delete this file.')
-    }
-}
+// The theme CSS, from the plugin (jbakeSite.scss above): compileSass writes it to build/generated/sass/css, and the
+// bake and the preview copy it into build/jbake/css after JBake has run, so nothing JBake copies can replace it
+// (FileTrees, also the plugin's, keeps relative paths and replaces files). Both run checkNoHandEditedCss first.
+// Providers, read when the tasks run: the extension can still change after this line.
+def themeCss = tasks.named('compileSass', CompileSassTask).flatMap { it.destinationDirectory }
+def siteCss = layout.buildDirectory.dir(jbakeSite.scss.publishedDir.map { "jbake/$it" })
 
 // Bakes src/jbake into build/jbake (drafts included, as <name>-draft.html; CI leaves them out of the deploy).
 tasks.register('bake', JavaExec) {
     group = 'jbake'
     description = 'Bakes the site from src/jbake into build/jbake with JBake.'
     configureJBake(it)
+    dependsOn 'checkNoHandEditedCss'
     inputs.dir(jbakeSource)
     inputs.dir(caseRedirects)
-    inputs.files(tasks.named('compileSass')).withPropertyName('themeCss')
+    inputs.files(themeCss).withPropertyName('themeCss')
     outputs.dir(jbakeDestination)
     classpath = configurations.jbake
     args jbakeSource.absolutePath, jbakeDestination.absolutePath, '-b'
-    doFirst { checkNoHandEditedCss() }
     doLast {
         // After JBake, so nothing JBake copies can replace it
-        copyTree(sassOutput, jbakeDestination)
+        FileTrees.copy(themeCss.get().asFile.toPath(), siteCss.get().asFile.toPath())
         if (java.nio.file.Files.exists(jbakeDestination.toPath().resolve('INDEX.HTML'))) {
             logger.lifecycle('Case-insensitive filesystem: left out the redirect stubs in src/case-redirects ' +
                     '(they would replace the real pages with the same name in another case). CI adds them.')
             return
         }
-        copyTree(caseRedirects, jbakeDestination)
+        FileTrees.copy(caseRedirects.toPath(), jbakeDestination.toPath())
     }
 }
 
@@ -204,11 +189,13 @@ tasks.register('bake', JavaExec) {
 // src/scss changes (it checks every 0.5 s). Every entry is recompiled (T134), since a partial such as
 // _mixins.scss can feed any of them. JBake's own watcher only covers src/jbake. The page's live reload notices
 // the new CSS and reloads. A Sass error is printed and the last good CSS stays, for every entry. Gradle closes
-// this service, and the Dart Sass process with it, when the preview stops.
+// this service, and the Dart Sass process with it, when the preview stops. The entries and the compiler are the
+// plugin's (SassEntries, SassCompiler, T124), the same ones compileSass uses, so the preview's CSS is the bake's.
 abstract class SassPreviewWatcher implements BuildService<Params>, AutoCloseable {
     interface Params extends BuildServiceParameters {
         DirectoryProperty getSourceDir()
         DirectoryProperty getTargetDir()
+        Property<String> getPublishedDir()   // for the log lines: an entry is published at /<publishedDir>/<name>.css
     }
 
     // Not private: Gradle runs a generated subclass, and Groovy closures there can't see private fields.
@@ -219,6 +206,7 @@ abstract class SassPreviewWatcher implements BuildService<Params>, AutoCloseable
     void start() {
         def sourceDir = parameters.sourceDir.get().asFile.toPath()
         def targetDir = parameters.targetDir.get().asFile.toPath()
+        def url = { String cssName -> "/${parameters.publishedDir.get()}/$cssName" }
         thread = Thread.startDaemon('scss-preview-watcher') {
             def compiler = null
             try {
@@ -227,28 +215,18 @@ abstract class SassPreviewWatcher implements BuildService<Params>, AutoCloseable
                         "$it ${java.nio.file.Files.getLastModifiedTime(it).toMillis()} ${java.nio.file.Files.size(it)}"
                     }.join('\n')
                 } }
-                // The entries, as compileSass sees them: every .scss in src/scss not named like a partial
-                def entries = { java.nio.file.Files.list(sourceDir).withCloseable { paths ->
-                    paths.filter { it.fileName.toString() ==~ /[^_].*\.scss/ }.sorted().collect { it.toFile() }
-                } }
                 def seen = stamp()
                 LOG.lifecycle('Watching src/scss: a saved change recompiles every entry ' +
-                        "(${entries().collect { '/css/' + it.name.replaceFirst(/\.scss$/, '.css') }.join(', ')}).")
+                        "(${SassEntries.in(sourceDir).collect { url(SassEntries.cssName(it)) }.join(', ')}).")
                 while (!stopping) {
                     Thread.sleep(500)
                     def now = stamp()
                     if (now == seen) { continue }
                     seen = now
                     try {
-                        if (compiler == null) {
-                            compiler = de.larsgrefer.sass.embedded.SassCompilerFactory.bundled()
-                            compiler.outputStyle = com.sass_lang.embedded_protocol.OutputStyle.EXPANDED
-                            compiler.generateSourceMaps = false
-                        }
-                        // Compile every entry first, then write: an error in one leaves all of them as they were
-                        def compiled = entries().collectEntries { entry ->
-                            [(entry.name.replaceFirst(/\.scss$/, '.css')): compiler.compileFile(entry).css]
-                        }
+                        if (compiler == null) { compiler = SassCompiler.start(LOG) }
+                        // Every entry is compiled before anything is written: an error in one leaves all as they were
+                        def compiled = compiler.compileAll(sourceDir)
                         java.nio.file.Files.createDirectories(targetDir)
                         compiled.each { name, css ->
                             def temp = java.nio.file.Files.createTempFile(targetDir, name, '.tmp')
@@ -257,10 +235,9 @@ abstract class SassPreviewWatcher implements BuildService<Params>, AutoCloseable
                                     java.nio.file.StandardCopyOption.REPLACE_EXISTING,
                                     java.nio.file.StandardCopyOption.ATOMIC_MOVE)
                         }
-                        LOG.lifecycle("src/scss changed: recompiled ${compiled.keySet().collect { '/css/' + it }.join(', ')}")
-                    } catch (de.larsgrefer.sass.embedded.SassCompilationFailedException e) {
-                        LOG.error("src/scss changed, but Sass failed (the preview keeps the last good CSS):\n" +
-                                e.compileFailure.formatted)
+                        LOG.lifecycle("src/scss changed: recompiled ${compiled.keySet().collect { url(it) }.join(', ')}")
+                    } catch (SassCompileException e) {
+                        LOG.error("src/scss changed, but Sass failed (the preview keeps the last good CSS):\n" + e.message)
                     }
                 }
             } catch (InterruptedException ignored) {
@@ -281,8 +258,9 @@ abstract class SassPreviewWatcher implements BuildService<Params>, AutoCloseable
     }
 }
 def sassPreviewWatcher = gradle.sharedServices.registerIfAbsent('sassPreviewWatcher', SassPreviewWatcher) {
-    parameters.sourceDir = sassSource
-    parameters.targetDir = new File(jbakeDestination, sassCssDir)
+    parameters.sourceDir = jbakeSite.scss.source
+    parameters.targetDir = siteCss
+    parameters.publishedDir = jbakeSite.scss.publishedDir
 }
 
 // Local preview, `./gradlew bakePreview` (T062, T100; the JBake plugin's task name since 2014, the one preview task
@@ -321,14 +299,13 @@ tasks.register('bakePreview', JavaExec) {
     configureJBake(it)
     classpath = configurations.jbake
     args jbakeSource.absolutePath, jbakeDestination.absolutePath, '-b', '-s'
-    // The CSS (T043, T134): compiled first and put in place before JBake starts (JBake never deletes it), then
-    // kept up to date by the SCSS watcher above.
-    dependsOn 'compileSass'
+    // The CSS (T043, T134): checked and compiled first and put in place before JBake starts (JBake never deletes
+    // it), then kept up to date by the SCSS watcher above.
+    dependsOn 'checkNoHandEditedCss', 'compileSass'
     usesService(sassPreviewWatcher)
     doFirst {
         checkPreviewPortFree()
-        checkNoHandEditedCss()
-        copyTree(sassOutput, jbakeDestination)
+        FileTrees.copy(themeCss.get().asFile.toPath(), siteCss.get().asFile.toPath())
         sassPreviewWatcher.get().start()
     }
     // Live reload (T064): templates see this as config.preview_livereload, and header.ftl then adds a small
@@ -411,7 +388,7 @@ tasks.register('reviewChanges', Exec) {
 }
 
 // `./gradlew check` (the standard verification task) runs the review, so a bake plus the review is one command
-// and the hand-edited-CSS guard (checkNoHandEditedCss, in bake) comes with it.
+// and the hand-edited-CSS guard (checkNoHandEditedCss, which bake runs first) comes with it.
 tasks.named('check') {
     dependsOn 'reviewChanges'
 }

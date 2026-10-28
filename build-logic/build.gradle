@@ -1,0 +1,53 @@
+// The `jbake-site` Gradle plugin: the site's build logic as Java classes with tests, applied by the root build.gradle
+// (docs/06-GRADLE-PLUGIN.md, M10). This file is the plugin's own build: what it is compiled with and tested by. The
+// site's dependency pins stay in the root build.gradle.
+plugins {
+    id 'java-gradle-plugin'
+}
+
+repositories {
+    mavenCentral()
+}
+
+// Compiled for Java 21 (the JDK .java-version falls back to) on whatever JDK runs Gradle, 21 or 25, so the build
+// never asks for a toolchain the machine may not have. `release` also keeps the code to the Java 21 API.
+tasks.withType(JavaCompile).configureEach {
+    options.release = 21
+    options.encoding = 'UTF-8'
+    // Every lint warning is an error. `classfile` is left out: the Sass host's class files mention annotation
+    // types (androidx, IntelliJ) that aren't on the classpath, which is about that jar, not this code.
+    options.compilerArgs.addAll(['-Xlint:all,-classfile', '-Werror'])
+}
+
+dependencies {
+    // Dart Sass through its Java host (T043, T124): the jar bundles the compiler for macOS, Linux and Windows.
+    // 4.6.1 is the version the freefair Sass plugin 9.8.2 used until T124; check a Dependabot update by comparing a
+    // bake against main, byte for byte.
+    implementation 'de.larsgrefer.sass:sass-embedded-host:4.6.1'
+
+    testImplementation platform('org.junit:junit-bom:6.1.3')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation gradleTestKit()   // one functional test runs the plugin in a real, temporary build
+}
+
+gradlePlugin {
+    plugins {
+        jbakeSite {
+            id = 'jbake-site'
+            implementationClass = 'com.mikemcgarr.jbakesite.JbakeSitePlugin'
+        }
+    }
+}
+
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+    testLogging.exceptionFormat = 'full'
+}
+
+tasks.withType(Javadoc).configureEach {
+    options.encoding = 'UTF-8'
+    // Every doclint check except "missing": Gradle creates the extensions and tasks through their implicit
+    // constructors, which doclint would otherwise want documented
+    options.addBooleanOption('Xdoclint:all,-missing', true)
+}
