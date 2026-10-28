@@ -43,7 +43,7 @@ public final class JbakeSitePlugin implements Plugin<Project> {
     /** The task that fails the build if hand-written CSS is back under the assets. */
     public static final String CHECK_NO_HAND_EDITED_CSS_TASK_NAME = "checkNoHandEditedCss";
 
-    /** The SCSS watcher's name in Gradle's shared build services. */
+    /** The SCSS watcher's name in Gradle's shared build services, qualified with the project path. */
     static final String SCSS_WATCHER_SERVICE_NAME = "sassPreviewWatcher";
 
     /** Where {@code compileSass} writes, under the build directory; the published directory is appended. */
@@ -64,9 +64,9 @@ public final class JbakeSitePlugin implements Plugin<Project> {
 
         Configuration jbake = JbakeClasspath.create(project.getConfigurations(), site.getClasspath());
         TaskProvider<CompileSassTask> compileSass = registerThemeCss(site, tasks, layout);
-        configureJbakeTasks(site, jbake, tasks, layout, project.getProviders());
-        registerBake(site, compileSass, tasks, layout);
-        registerBakePreview(site, compileSass, tasks, layout, project.getGradle().getSharedServices());
+        configureJbakeTasks(site, jbake, compileSass, tasks, layout, project.getProviders());
+        registerBake(site, tasks);
+        registerBakePreview(site, tasks, layout, project.getPath(), project.getGradle().getSharedServices());
     }
 
     private static void setDefaults(JbakeSiteExtension site, ProjectLayout layout) {
@@ -112,36 +112,38 @@ public final class JbakeSitePlugin implements Plugin<Project> {
     }
 
     /** What every JBake run shares ({@link JbakeTask}): the source, the classpath, the JVM flags, logging, jffi. */
-    private static void configureJbakeTasks(JbakeSiteExtension site, Configuration jbake, TaskContainer tasks,
-            ProjectLayout layout, ProviderFactory providers) {
+    private static void configureJbakeTasks(JbakeSiteExtension site, Configuration jbake,
+            TaskProvider<CompileSassTask> compileSass, TaskContainer tasks, ProjectLayout layout, ProviderFactory providers) {
         tasks.withType(JbakeTask.class).configureEach(task -> {
             task.getSource().set(site.getSource());
             task.getClasspath().from(jbake);
             task.getJvmArguments().convention(providers.provider(NewJdkJvmArgs::forCurrentJvm));
             task.getLogbackConfiguration().set(site.getLogbackConfiguration());
             task.getJffiDirectory().set(layout.getBuildDirectory().dir(JFFI_DIRECTORY));
-            // The theme CSS is checked first (T043): the guard is cheap and its message is clearer than a stale CSS
+            // The theme CSS (T043): checked first (the guard is cheap and its message is clearer than a stale CSS),
+            // compiled (the dependency on compileSass comes with its output), and copied into the site by the task
             task.dependsOn(CHECK_NO_HAND_EDITED_CSS_TASK_NAME);
+            task.getThemeCss().from(compileSass.flatMap(CompileSassTask::getDestinationDirectory));
+            task.getThemeCssPublishedDir().set(site.getScss().getPublishedDir());
         });
     }
 
-    private static void registerBake(JbakeSiteExtension site, TaskProvider<CompileSassTask> compileSass,
-            TaskContainer tasks, ProjectLayout layout) {
+    private static void registerBake(JbakeSiteExtension site, TaskContainer tasks) {
         tasks.register(BAKE_TASK_NAME, BakeTask.class, task -> {
             task.setGroup(JBAKE_GROUP);
-            task.setDescription("Bakes the site from " + ProjectPaths.relativize(layout.getProjectDirectory(), site.getSource().get().getAsFile())
-                    + " into " + ProjectPaths.relativize(layout.getProjectDirectory(), site.getDestination().get().getAsFile()) + " with JBake.");
+            task.setDescription("Bakes the site from src/jbake into build/jbake with JBake.");
             task.getDestination().set(site.getDestination());
-            task.getThemeCss().from(compileSass.flatMap(CompileSassTask::getDestinationDirectory));
-            task.getThemeCssPublishedDir().set(site.getScss().getPublishedDir());
             task.getCaseRedirects().set(site.getCaseRedirects());
         });
     }
 
-    private static void registerBakePreview(JbakeSiteExtension site, TaskProvider<CompileSassTask> compileSass,
-            TaskContainer tasks, ProjectLayout layout, BuildServiceRegistry services) {
+    private static void registerBakePreview(JbakeSiteExtension site, TaskContainer tasks, ProjectLayout layout,
+            String projectPath, BuildServiceRegistry services) {
         ScssExtension scss = site.getScss();
-        Provider<SassPreviewWatcher> watcher = services.registerIfAbsent(SCSS_WATCHER_SERVICE_NAME, SassPreviewWatcher.class, spec -> {
+        // One watcher per project the plugin is applied to: the service name carries the project path, so two site
+        // projects in one build would each get their own, with their own directories
+        String serviceName = SCSS_WATCHER_SERVICE_NAME + " (" + projectPath + ")";
+        Provider<SassPreviewWatcher> watcher = services.registerIfAbsent(serviceName, SassPreviewWatcher.class, spec -> {
             spec.getParameters().getSourceDir().set(scss.getSource());
             spec.getParameters().getTargetDir().set(site.getDestination().dir(scss.getPublishedDir()));
             spec.getParameters().getPublishedDir().set(scss.getPublishedDir());
@@ -152,8 +154,6 @@ public final class JbakeSitePlugin implements Plugin<Project> {
             task.setGroup(JBAKE_GROUP);
             task.setDescription("Bakes, serves http://localhost:8080, rebuilds on save, and reloads the open page (Ctrl+C to stop).");
             task.getDestination().set(site.getDestination());
-            task.getThemeCss().from(compileSass.flatMap(CompileSassTask::getDestinationDirectory));
-            task.getThemeCssPublishedDir().set(scss.getPublishedDir());
             task.getScssWatcher().set(watcher);
             task.usesService(watcher);
         });

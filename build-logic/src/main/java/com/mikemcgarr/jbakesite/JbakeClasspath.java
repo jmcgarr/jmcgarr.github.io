@@ -33,13 +33,13 @@ import org.gradle.api.artifacts.component.ModuleComponentSelector;
  * after the plugin is applied. More exclusions can also be added the Gradle way, with
  * {@code configurations.jbake { exclude group: '...' }}.
  */
-public final class JbakeClasspath {
+final class JbakeClasspath {
 
     /** The configuration's name, {@code jbake}: the JBake Gradle plugin's name for JBake's classpath. */
-    public static final String CONFIGURATION_NAME = "jbake";
+    static final String CONFIGURATION_NAME = "jbake";
 
     /** The groups left off the classpath by default: the engines this site doesn't use. */
-    public static final List<String> DEFAULT_EXCLUDED_GROUPS = List.of(
+    static final List<String> DEFAULT_EXCLUDED_GROUPS = List.of(
             "org.thymeleaf",         // Thymeleaf (*.thyme), with ognl, javassist, attoparser
             "io.pebbletemplates",    // Pebble (*.peb)
             "de.neuland-bfi",        // Jade4j (*.jade), with commons-jexl
@@ -47,7 +47,7 @@ public final class JbakeClasspath {
             "org.asciidoctor");      // AsciidoctorJ, with JRuby and its 20-odd libraries (gone since T102)
 
     /** The modules replaced by default: lz4-java by its maintained fork (T112). */
-    public static final Map<String, String> DEFAULT_SUBSTITUTIONS = Map.of("org.lz4:lz4-java", "at.yawk.lz4:lz4-java:1.12.0");
+    static final Map<String, String> DEFAULT_SUBSTITUTIONS = Map.of("org.lz4:lz4-java", "at.yawk.lz4:lz4-java:1.12.0");
 
     private static final String SUBSTITUTION_REASON = "unmaintained (T112); replaced through jbakeSite.classpath.substitutions";
 
@@ -63,11 +63,13 @@ public final class JbakeClasspath {
      * @param settings the {@code classpath { ... }} block, read when the configuration resolves
      * @return the configuration
      */
-    public static Configuration create(ConfigurationContainer configurations, JbakeClasspathExtension settings) {
+    static Configuration create(ConfigurationContainer configurations, JbakeClasspathExtension settings) {
         Configuration jbake = configurations.create(CONFIGURATION_NAME);
         jbake.setDescription("JBake and its libraries: the classpath the bake and the preview run "
                 + "(versions pinned in build.gradle's dependencies block).");
         jbake.setCanBeConsumed(false);
+        // Exclude rules are added just before the configuration resolves, not when the plugin is applied, so that the
+        // extension's list is read after build.gradle has had its say (there is no lazy exclude API)
         jbake.withDependencies(dependencies -> {
             for (String group : settings.getExcludedGroups().get()) {
                 jbake.exclude(Map.of("group", group));

@@ -16,10 +16,12 @@ import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.ProjectLayout;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.provider.ListProperty;
+import org.gradle.api.provider.Property;
 import org.gradle.api.tasks.Classpath;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.InputDirectory;
 import org.gradle.api.tasks.InputFile;
+import org.gradle.api.tasks.InputFiles;
 import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.Optional;
 import org.gradle.api.tasks.PathSensitive;
@@ -73,6 +75,24 @@ public abstract class JbakeTask extends DefaultTask {
      */
     @Classpath
     public abstract ConfigurableFileCollection getClasspath();
+
+    /**
+     * The compiled theme CSS, {@code compileSass}'s output (T043): the bake copies it into the site after JBake has
+     * run, the preview before JBake's server starts ({@link #copyThemeCssInto}).
+     *
+     * @return the directory of {@code .css} files
+     */
+    @InputFiles
+    @PathSensitive(PathSensitivity.RELATIVE)
+    public abstract ConfigurableFileCollection getThemeCss();
+
+    /**
+     * Where the theme CSS goes, relative to the site root ({@link ScssExtension#getPublishedDir()}).
+     *
+     * @return the directory, such as {@code css}
+     */
+    @Input
+    public abstract Property<String> getThemeCssPublishedDir();
 
     /**
      * The flags JBake's JVM starts with. Default: {@link NewJdkJvmArgs#forCurrentJvm()}.
@@ -147,6 +167,20 @@ public abstract class JbakeTask extends DefaultTask {
             systemProperties.forEach(spec::systemProperty);
             spec.args(arguments);
         });
+    }
+
+    /**
+     * Copies the compiled theme CSS into the site, at {@link #getThemeCssPublishedDir()} under the destination,
+     * replacing what is there; nothing JBake copies replaces it afterwards (the bake), or deletes it (the preview).
+     *
+     * @param destination the site
+     * @throws IOException if a file can't be copied
+     */
+    protected final void copyThemeCssInto(Path destination) throws IOException {
+        Path target = destination.resolve(getThemeCssPublishedDir().get());
+        for (File cssDirectory : getThemeCss().getFiles()) {
+            FileTrees.copy(cssDirectory.toPath(), target);
+        }
     }
 
     /**

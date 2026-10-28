@@ -24,7 +24,7 @@ class PreviewPortTest {
     void readsTheServerAddressFromJbakeProperties() throws IOException {
         Path properties = write("site.host=https://example.test\nserver.hostname = 127.0.0.1 \nserver.port= 8080\n");
 
-        InetSocketAddress address = PreviewPort.read(properties);
+        InetSocketAddress address = PreviewPort.read(properties, "jbake.properties");
 
         assertEquals("127.0.0.1", address.getHostString());
         assertEquals(8080, address.getPort());
@@ -32,7 +32,7 @@ class PreviewPortTest {
 
     @Test
     void usesJbakesDefaultsWhenTheKeysAreMissing() throws IOException {
-        InetSocketAddress address = PreviewPort.read(write("site.host=https://example.test\n"));
+        InetSocketAddress address = PreviewPort.read(write("site.host=https://example.test\n"), "jbake.properties");
 
         assertEquals(PreviewPort.DEFAULT_HOSTNAME, address.getHostString());
         assertEquals(PreviewPort.DEFAULT_PORT, address.getPort());
@@ -42,9 +42,10 @@ class PreviewPortTest {
     void aBadPortNamesTheFile() throws IOException {
         Path properties = write("server.port=eighty\n");
 
-        GradleException e = assertThrows(GradleException.class, () -> PreviewPort.read(properties));
+        GradleException e = assertThrows(GradleException.class, () -> PreviewPort.read(properties, "src/jbake/jbake.properties"));
 
-        assertEquals("server.port=eighty in " + properties + " is not a port number (1 to 65535).", e.getMessage());
+        assertEquals("server.port=eighty in src/jbake/jbake.properties is not a port number (1 to 65535).", e.getMessage(),
+                "the file as the README names it, not its absolute path");
     }
 
     @Test

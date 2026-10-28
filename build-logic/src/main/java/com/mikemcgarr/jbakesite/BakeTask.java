@@ -4,10 +4,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
-import org.gradle.api.file.ConfigurableFileCollection;
 import org.gradle.api.file.DirectoryProperty;
-import org.gradle.api.provider.Property;
-import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.InputFiles;
 import org.gradle.api.tasks.OutputDirectory;
 import org.gradle.api.tasks.PathSensitive;
@@ -38,23 +35,6 @@ public abstract class BakeTask extends JbakeTask {
     public abstract DirectoryProperty getDestination();
 
     /**
-     * The compiled theme CSS, {@code compileSass}'s output, copied into the site after JBake.
-     *
-     * @return the directory of {@code .css} files
-     */
-    @InputFiles
-    @PathSensitive(PathSensitivity.RELATIVE)
-    public abstract ConfigurableFileCollection getThemeCss();
-
-    /**
-     * Where the theme CSS goes, relative to the site root ({@link ScssExtension#getPublishedDir()}).
-     *
-     * @return the directory, such as {@code css}
-     */
-    @Input
-    public abstract Property<String> getThemeCssPublishedDir();
-
-    /**
      * The case-redirect stubs, copied into the site after JBake when the filesystem is case-sensitive. A missing
      * or empty directory means none.
      *
@@ -74,10 +54,7 @@ public abstract class BakeTask extends JbakeTask {
         Path destination = getDestination().get().getAsFile().toPath();
         runJbake(destination, List.of("-b"), Map.of());
 
-        // After JBake, so nothing JBake copies can replace it
-        for (var cssDirectory : getThemeCss().getFiles()) {
-            FileTrees.copy(cssDirectory.toPath(), destination.resolve(getThemeCssPublishedDir().get()));
-        }
+        copyThemeCssInto(destination);   // after JBake, so nothing JBake copies can replace it
 
         Path stubs = getCaseRedirects().get().getAsFile().toPath();
         if (CaseRedirects.copy(stubs, destination) == CaseRedirects.Outcome.SKIPPED) {

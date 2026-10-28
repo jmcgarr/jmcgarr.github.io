@@ -19,7 +19,7 @@ import org.gradle.api.GradleException;
  * Jetty does and fails with a message that names the fix when that doesn't work. T125/T126 moved this here from
  * {@code build.gradle}'s {@code checkPreviewPortFree} closure.
  */
-public final class PreviewPort {
+final class PreviewPort {
 
     static final String HOSTNAME_KEY = "server.hostname";
     static final String PORT_KEY = "server.port";
@@ -33,11 +33,12 @@ public final class PreviewPort {
      * Reads the server address from JBake's properties.
      *
      * @param jbakeProperties the {@code jbake.properties} file
+     * @param displayName the file as a message should name it, such as {@code src/jbake/jbake.properties}
      * @return the address
      * @throws IOException if the file can't be read
      * @throws GradleException if {@code server.port} isn't a port number, naming the file
      */
-    public static InetSocketAddress read(Path jbakeProperties) throws IOException {
+    static InetSocketAddress read(Path jbakeProperties, String displayName) throws IOException {
         Properties config = new Properties();
         try (Reader reader = Files.newBufferedReader(jbakeProperties, StandardCharsets.UTF_8)) {
             config.load(reader);
@@ -47,7 +48,7 @@ public final class PreviewPort {
         try {
             return new InetSocketAddress(host, Integer.parseInt(port));
         } catch (IllegalArgumentException e) {
-            throw new GradleException(PORT_KEY + "=" + port + " in " + jbakeProperties + " is not a port number (1 to 65535).", e);
+            throw new GradleException(PORT_KEY + "=" + port + " in " + displayName + " is not a port number (1 to 65535).", e);
         }
     }
 
@@ -56,17 +57,17 @@ public final class PreviewPort {
      * that just stopped doesn't count as "in use".
      *
      * @param address the address JBake's server will bind
-     * @param jbakeProperties the file the message tells the user to change, as it should read in the message
+     * @param displayName the file the message tells the user to change, as it should read in the message
      * @throws IOException if the socket can't be opened or closed for a reason other than the port being in use
      * @throws GradleException when the port is in use
      */
-    public static void checkFree(InetSocketAddress address, String jbakeProperties) throws IOException {
+    static void checkFree(InetSocketAddress address, String displayName) throws IOException {
         try (ServerSocket socket = new ServerSocket()) {
             socket.setReuseAddress(true);
             socket.bind(address);
         } catch (BindException e) {
             throw new GradleException("Port " + address.getPort() + " is already in use (is another bakePreview running?). "
-                    + "Stop it, or set " + PORT_KEY + " in " + jbakeProperties + ".", e);
+                    + "Stop it, or set " + PORT_KEY + " in " + displayName + ".", e);
         }
     }
 }

@@ -17,7 +17,7 @@ import java.util.List;
  * them the bake prints nothing extra on JDK 21 or 25. T125 moved this here from {@code build.gradle}, where it was
  * a {@code CommandLineArgumentProvider} of the same name.
  */
-public final class NewJdkJvmArgs {
+final class NewJdkJvmArgs {
 
     /** JEP 454: allows jffi's {@code System::load} without a warning. Final in JDK 22. */
     static final String ENABLE_NATIVE_ACCESS = "--enable-native-access=ALL-UNNAMED";
@@ -37,7 +37,7 @@ public final class NewJdkJvmArgs {
      * @param javaVersion the JDK's feature version, such as 21 or 25
      * @return the flags, in command-line order; none on JDK 21
      */
-    public static List<String> forJavaVersion(int javaVersion) {
+    static List<String> forJavaVersion(int javaVersion) {
         List<String> args = new ArrayList<>();
         if (javaVersion >= FIRST_JDK_WITH_NATIVE_ACCESS) {
             args.add(ENABLE_NATIVE_ACCESS);
@@ -54,7 +54,7 @@ public final class NewJdkJvmArgs {
      *
      * @return the flags
      */
-    public static List<String> forCurrentJvm() {
+    static List<String> forCurrentJvm() {
         return forJavaVersion(Runtime.version().feature());
     }
 }

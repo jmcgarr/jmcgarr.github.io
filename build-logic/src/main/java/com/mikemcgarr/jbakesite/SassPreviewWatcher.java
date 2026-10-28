@@ -68,8 +68,15 @@ public abstract class SassPreviewWatcher implements BuildService<SassPreviewWatc
     private volatile Thread thread;
     private volatile boolean stopping;
 
-    /** Starts watching, on a daemon thread of its own. The preview task calls this before JBake's server starts. */
-    public void start() {
+    /**
+     * Starts watching, on a daemon thread of its own. The preview task calls this before JBake's server starts.
+     *
+     * @throws IllegalStateException if the watcher is already running: one preview per build
+     */
+    public synchronized void start() {
+        if (thread != null) {
+            throw new IllegalStateException("The SCSS watcher is already running; one bakePreview per build.");
+        }
         Path sourceDir = getParameters().getSourceDir().get().getAsFile().toPath();
         Path targetDir = getParameters().getTargetDir().get().getAsFile().toPath();
         thread = new Thread(() -> watch(sourceDir, targetDir), "scss-preview-watcher");

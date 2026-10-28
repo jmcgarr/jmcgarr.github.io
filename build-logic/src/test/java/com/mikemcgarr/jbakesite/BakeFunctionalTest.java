@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.Objects;
 import java.util.stream.Stream;
 import org.gradle.testkit.runner.BuildResult;
 import org.gradle.testkit.runner.GradleRunner;
@@ -25,7 +26,8 @@ import org.junit.jupiter.api.io.TempDir;
  */
 class BakeFunctionalTest {
 
-    private static final Path FIXTURE = Path.of(System.getProperty("fixtures.dir"), "site");
+    private static final Path FIXTURE = Path.of(Objects.requireNonNull(System.getProperty("fixtures.dir"),
+            "fixtures.dir is set by build-logic/build.gradle; run the tests through Gradle"), "site");
 
     @TempDir
     Path projectDir;
@@ -87,6 +89,19 @@ class BakeFunctionalTest {
 
         assertEquals(TaskOutcome.SUCCESS, result.task(":bake").getOutcome());
         assertTrue(Files.readString(site("blog/first-post.html")).contains("<p>The first post, edited.</p>"));
+    }
+
+    @Test
+    void aJbakeErrorFailsTheBakeWithJbakesMessage() throws IOException {
+        Path template = projectDir.resolve("src/jbake/templates/page.ftl");
+        Files.writeString(template, Files.readString(template).replace("${content.title}", "${content.title"));
+
+        BuildResult result = runner("bake").buildAndFail();
+
+        assertEquals(TaskOutcome.FAILED, result.task(":bake").getOutcome());
+        assertTrue(result.getOutput().contains("ERROR"), "JBake's own message, from logback's console appender");
+        assertTrue(result.getOutput().contains("page.ftl"), result.getOutput());
+        assertTrue(result.getOutput().contains("finished with non-zero exit value"), "the task fails with the process's exit value");
     }
 
     @Test

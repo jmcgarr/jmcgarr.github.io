@@ -15,10 +15,10 @@ import java.util.stream.Stream;
  * moved this here from {@code build.gradle}, where the check was "does {@code INDEX.HTML} exist"; the probe below
  * doesn't depend on which pages the site renders.
  */
-public final class CaseRedirects {
+final class CaseRedirects {
 
     /** What happened to the stubs. */
-    public enum Outcome {
+    enum Outcome {
         /** The stubs directory is missing or empty: the site has none. */
         NONE,
         /** The destination is case-insensitive: the stubs were left out. */
@@ -40,7 +40,7 @@ public final class CaseRedirects {
      * @return what happened
      * @throws IOException if a file can't be read or written
      */
-    public static Outcome copy(Path stubs, Path site) throws IOException {
+    static Outcome copy(Path stubs, Path site) throws IOException {
         if (!hasFiles(stubs)) {
             return Outcome.NONE;
         }
@@ -59,7 +59,7 @@ public final class CaseRedirects {
      * @return true on a case-sensitive filesystem (Linux, usually), false on a case-insensitive one (macOS, Windows)
      * @throws IOException if the probe file can't be written
      */
-    public static boolean isCaseSensitive(Path directory) throws IOException {
+    static boolean isCaseSensitive(Path directory) throws IOException {
         Path probe = Files.createTempFile(directory, PROBE_PREFIX, ".tmp");
         try {
             Path twin = directory.resolve(probe.getFileName().toString().toUpperCase(Locale.ROOT));

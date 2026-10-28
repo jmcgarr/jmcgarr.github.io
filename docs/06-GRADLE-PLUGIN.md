@@ -298,7 +298,8 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
     a site that uses one of the engines can have it back; more exclusions still go in `configurations.jbake { exclude … }`
     as before), `JbakeTask` (what the bake and the preview share: JBake's launcher in a fresh JVM through
     `ExecOperations.javaexec`, in the project directory, on the `jbake` classpath, with `jvmArguments` defaulting to
-    `NewJdkJvmArgs.forCurrentJvm()`, jffi's temp dir under `build/tmp/jffi` and the logback configuration), `NewJdkJvmArgs`
+    `NewJdkJvmArgs.forCurrentJvm()`, jffi's temp dir under `build/tmp/jffi`, the logback configuration, and, since the
+    review, the compiled theme CSS and its copy into the site, `copyThemeCssInto`), `NewJdkJvmArgs`
     (JDK feature version → flags, a final helper now instead of a `CommandLineArgumentProvider`), `BakeTask` (`bake`: JBake
     `-b`, then the compiled CSS copied in, then the stubs), `CaseRedirects` (the probe and the copy: the probe writes a
     temporary file into the output and looks for its upper-case twin, instead of checking for `INDEX.HTML`, so it doesn't
@@ -315,8 +316,10 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
     the time of the bake, so the output isn't a function of the inputs and a cached copy would be a stale one. **Judgment
     calls:** `ExecOperations.javaexec` in a plain task rather than a `JavaExec` subclass, so the two tasks share one small
     base class and declare only the inputs they mean; no `JavaLauncher`/toolchain (none was set before: JBake runs on the
-    JVM running Gradle, and `NewJdkJvmArgs` reads that JVM's version); the `bake` description keeps its text by building
-    it from the extension's project-relative paths. **What stayed in `build.gradle` for this commit, until T126:**
+    JVM running Gradle, and `NewJdkJvmArgs` reads that JVM's version); the `bake` description is the literal text from
+    `main` (the review dropped a version built from the extension, the plugin's only eager extension read); the helpers
+    `JbakeClasspath`, `NewJdkJvmArgs`, `CaseRedirects` and `PreviewPort` are package-private (review), the plugin, the
+    extensions, the task types and the watcher public. **What stayed in `build.gradle` for this commit, until T126:**
     `bakePreview` as a `JavaExec` configured inline with the plugin's `NewJdkJvmArgs` and logback resource, the Groovy
     watcher and the port check. **Test passed:** the bake is byte-identical to the base commit's (`diff -rq`: only
     `feed.xml`; `cmp` of `css/clean-blog.css` and `css/code.css` identical); `./gradlew dependencies --configuration jbake`
@@ -345,7 +348,7 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
     that are moved into the served CSS directory atomically, keeps the last good CSS and prints Dart Sass's message on an
     error, and the same four log lines, the SCSS directory named through a `sourceName` parameter set to its
     project-relative path, `src/scss`) and `PreviewPort` (`server.hostname`/`server.port` from `jbake.properties`, JBake's
-    defaults `localhost`/8820, a bad port names the file; the probe socket binds with address reuse as Jetty does and fails
+    defaults `localhost`/8820, a bad port names the file as the README does, `src/jbake/jbake.properties`; the probe socket binds with address reuse as Jetty does and fails
     with the T101 message, which names `src/jbake/jbake.properties` through the task's `ProjectLayout`). `build.gradle`
     now holds the plugin application, the `jbakeSite { }` block, the `dependencies { jbake … }` pins with their comments
     and the three writing tasks (T127's), 174 lines; the Groovy watcher, the port check, the paths, `configureJBake` and
@@ -366,6 +369,23 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
     passes with 45 tests (T125's 39, `PreviewPortTest` and the preview's wiring); `check -Pbase=origin/main` 0 errors;
     `test ! -e build/jbake/docs` and `scripts/check-docs-not-published.sh` pass; no CR line endings. Not verified
     locally: the Linux bake (CI)._
+  - _2026-10-28 (review of the branch, "meets the bar", no must-fix; applied in the commit "Apply the review findings to
+    the bake and preview tasks"): the theme-CSS input, its published directory and the copy loop, declared twice, moved to
+    `JbakeTask` (`copyThemeCssInto`; only `destination` stays per task, output for the bake, internal for the preview) and
+    the plugin wires them once in `withType(JbakeTask)`; `JbakeClasspath`, `NewJdkJvmArgs`, `CaseRedirects` and `PreviewPort`
+    package-private; `PreviewPort.read` takes the display name too, so a bad `server.port` says "in
+    src/jbake/jbake.properties"; `BakeFunctionalTest` fails outside Gradle with "fixtures.dir is set by
+    build-logic/build.gradle; run the tests through Gradle" instead of an NPE, and gained a case for a JBake error (a
+    broken `page.ftl`: `:bake` FAILED, JBake's `ERROR` line naming `page.ftl`, and the task's "finished with non-zero exit
+    value"); the `bake` description is literal; a comment says why the exclude rules go in `withDependencies`; the watcher's
+    service name carries the project path and `start()` throws on a second call. 46 tests. **Re-run:** the bake is
+    byte-identical to a fresh bake of `origin/main` (only `feed.xml`; both CSS files `cmp` identical); `bake` twice:
+    "Reusing configuration cache." and `:bake UP-TO-DATE`; `./gradlew tasks` groups unchanged; `clean bakePreview` served
+    after 3 s with live reload, recompiled both entries 0.2 s after a saved partial, and Ctrl+C ended the client with 130
+    with no JBake JVM and nothing on 8080 a second later. **Observed** (asked by the review): switching `JAVA_HOME`
+    25 → 21 → 25 prints "configuration cache cannot be reused because JVM has changed", and JBake's command line (`--info`)
+    has `--enable-native-access`/`--sun-misc-unsafe-memory-access` on 25 and neither on 21, so the `jvmArguments`
+    convention follows the JVM; no code change needed._
 - [ ] T127 [IMP] **Move the script tasks.** One `ScriptTask` type (a single-file Java program run with the Gradle
   JVM's `java`, `-P` options passed as `--name=value`, exit codes mapped to one-line failures), registered from
   `jbakeSite.scripts { register(name, path) { options; dependsOn } }`; `newPost` and `reviewChanges` become two

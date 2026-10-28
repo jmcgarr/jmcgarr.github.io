@@ -5,14 +5,9 @@ import java.net.InetSocketAddress;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
-import org.gradle.api.file.ConfigurableFileCollection;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.provider.Property;
-import org.gradle.api.tasks.Input;
-import org.gradle.api.tasks.InputFiles;
 import org.gradle.api.tasks.Internal;
-import org.gradle.api.tasks.PathSensitive;
-import org.gradle.api.tasks.PathSensitivity;
 import org.gradle.api.tasks.TaskAction;
 
 /**
@@ -52,23 +47,6 @@ public abstract class BakePreviewTask extends JbakeTask {
     public abstract DirectoryProperty getDestination();
 
     /**
-     * The compiled theme CSS, {@code compileSass}'s output, put into the site before JBake starts.
-     *
-     * @return the directory of {@code .css} files
-     */
-    @InputFiles
-    @PathSensitive(PathSensitivity.RELATIVE)
-    public abstract ConfigurableFileCollection getThemeCss();
-
-    /**
-     * Where the theme CSS goes, relative to the site root ({@link ScssExtension#getPublishedDir()}).
-     *
-     * @return the directory, such as {@code css}
-     */
-    @Input
-    public abstract Property<String> getThemeCssPublishedDir();
-
-    /**
      * The SCSS watcher, a shared build service the plugin registers; the task declares that it uses it.
      *
      * @return the service
@@ -87,12 +65,11 @@ public abstract class BakePreviewTask extends JbakeTask {
         Path destination = getDestination().get().getAsFile().toPath();
         Path jbakeProperties = source.resolve(JBAKE_PROPERTIES);
 
-        InetSocketAddress address = PreviewPort.read(jbakeProperties);
-        PreviewPort.checkFree(address, projectRelative(jbakeProperties.toFile()));
+        String jbakePropertiesName = projectRelative(jbakeProperties.toFile());
+        InetSocketAddress address = PreviewPort.read(jbakeProperties, jbakePropertiesName);
+        PreviewPort.checkFree(address, jbakePropertiesName);
 
-        for (var cssDirectory : getThemeCss().getFiles()) {
-            FileTrees.copy(cssDirectory.toPath(), destination.resolve(getThemeCssPublishedDir().get()));
-        }
+        copyThemeCssInto(destination);   // before JBake starts; its server never deletes it
         getScssWatcher().get().start();
 
         runJbake(destination, List.of("-b", "-s"), Map.of(LIVE_RELOAD_PROPERTY, "true"));
