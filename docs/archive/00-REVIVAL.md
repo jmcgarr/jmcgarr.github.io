@@ -1,6 +1,6 @@
 # Site Revival Plan: mikemcgarr.com
 
-**Branch**: `docs/site-revival` | **Created**: 2026-10-04 | **Status**: Done (2026-10-18, with T102; the owner's own tasks continue in [`04-AUTHORS-DESK.md`](../04-AUTHORS-DESK.md))
+**Branch**: `docs/site-revival` | **Created**: 2026-10-04 | **Status**: Done (2026-10-18, with T102; the owner's own tasks continue in [`04-AUTHORS-DESK.md`](04-AUTHORS-DESK.md))
 **Input**: Repository review of 2026-10-03 (JBake 2.6 / Gradle 5.6.4 / Clean Blog theme)
 
 This plan brings the site back to a healthy state over eight milestones (M0–M7). Each milestone has one
@@ -72,7 +72,7 @@ du -sh build/jbake                                    # published site size
 - **M4 is a decision gate.** It should finish before **M5**, because M5 is template work for the current JBake platform and would be thrown away if the site migrates.
 - **M6** depends only on M0 and can be picked up at any time. It's good work for spare evenings.
 - **M7** comes after M4, because its tasks depend on the platform decision (made 2026-10-07: stay on JBake). T061 also needs T008 (M1). It doesn't depend on M5 or M6.
-- **The author's own tasks** (About and Talks, drafts, mastheads, alt text, fonts) were M8 until 2026-10-12. They now live in [`04-AUTHORS-DESK.md`](../04-AUTHORS-DESK.md), outside this plan (owner's request: they're the owner's own work, not shared work).
+- **The author's own tasks** (About and Talks, drafts, mastheads, alt text, fonts) were M8 until 2026-10-12. They now live in [`04-AUTHORS-DESK.md`](04-AUTHORS-DESK.md), outside this plan (owner's request: they're the owner's own work, not shared work).
 
 ### GitHub Issues
 
@@ -90,7 +90,7 @@ Open issues on [jmcgarr/jmcgarr.github.io](https://github.com/jmcgarr/jmcgarr.gi
 | [#11](https://github.com/jmcgarr/jmcgarr.github.io/issues/11) _(closed)_ | [Gradle] Live reload? | enhancement | T064 | M7 | `Closes #11` |
 | [#12](https://github.com/jmcgarr/jmcgarr.github.io/issues/12) _(closed by `docs/close-M7`)_ | [Gradle] Add toast messages when a build is complete | enhancement | T065 | M7 | `Closes #12` |
 | [#13](https://github.com/jmcgarr/jmcgarr.github.io/issues/13) | Add a tags page to browse by topics | enhancement | T057 | M5 | `Closes #13` |
-| [#14](https://github.com/jmcgarr/jmcgarr.github.io/issues/14) | Add mastheads for older posts | enhancement | T059 | [Author's Desk](../04-AUTHORS-DESK.md) | `Closes #14` |
+| [#14](https://github.com/jmcgarr/jmcgarr.github.io/issues/14) | Add mastheads for older posts | enhancement | T059 | [Author's Desk](04-AUTHORS-DESK.md) | `Closes #14` |
 | [#15](https://github.com/jmcgarr/jmcgarr.github.io/issues/15) | Fix the code snippet look and feel | bug, enhancement | T056 | M5 | `Closes #15` |
 | [#16](https://github.com/jmcgarr/jmcgarr.github.io/issues/16) | Masthead should be able to include remote images | bug | T037 | M5 | `Closes #16` |
 
@@ -489,14 +489,14 @@ Accessibility ≥ 95. Social preview validators show a title, description, and i
 
 ## M6: Content Care
 
-> **Status: done 2026-10-11.** All tasks and checkpoints CHK029, CHK031, CHK040 and CHK041 pass: every outbound link fixed or justified (T050), no broken images (T049), 0 HTML errors in post bodies (T108), every embed titled (T107), and LF line endings throughout (T051). The tasks only the author can do (About and Talks, drafts, alt text, mastheads) moved to [`04-AUTHORS-DESK.md`](../04-AUTHORS-DESK.md).
+> **Status: done 2026-10-11.** All tasks and checkpoints CHK029, CHK031, CHK040 and CHK041 pass: every outbound link fixed or justified (T050), no broken images (T049), 0 HTML errors in post bodies (T108), every embed titled (T107), and LF line endings throughout (T051). The tasks only the author can do (About and Talks, drafts, alt text, mastheads) moved to [`04-AUTHORS-DESK.md`](04-AUTHORS-DESK.md).
 
 **Goal**: The writing is accurate and easy to read, and every link and image still works.
 _(This milestone can be done at any time after M0.)_
 
 **Independent Test**: A full `lychee` run reports 0 broken links (or documents each exception), every
 image and embed works and has a text alternative or title, post bodies have no HTML errors, and all content files use LF
-line endings. _(2026-10-11: the About, Talks and Bio review moved out, with the other tasks only the owner can do; see [`04-AUTHORS-DESK.md`](../04-AUTHORS-DESK.md).)_
+line endings. _(2026-10-11: the About, Talks and Bio review moved out, with the other tasks only the owner can do; see [`04-AUTHORS-DESK.md`](04-AUTHORS-DESK.md).)_
 
 ### Bugs
 

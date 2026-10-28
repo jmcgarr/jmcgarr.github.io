@@ -14,7 +14,7 @@ a promise to the people who linked to it.
 - **Styles:** all of the site's own CSS (`clean-blog.css`, with the `@font-face` rules since T135, and `code.css`) is generated from `src/scss/` by Dart Sass inside Gradle (`compileSass`, T043, T134). **Edit the SCSS, never the CSS**: it isn't committed, and the build fails if a hand-written copy (or the old `extra.css` or `fonts.css`) reappears under `src/jbake/assets/css/`. See README, "To change the site's styles"
 - **Branches:** `main` holds the source (the default branch; renamed from `source` in T093). `master` is the **retired** publishing branch from before T027, frozen and preserved by tag `live-2026-10`. Don't push to it.
 - **Deploys:** GitHub Actions bakes, checks, and deploys to GitHub Pages (as an artifact, no commits) on **every push to `main`**. Merging to `main` *is* publishing. A manual "Run workflow" on `main` redeploys.
-- **Current work:** follows [`docs/05-REVIEW-FLOW.md`](docs/05-REVIEW-FLOW.md) (checking a change before it ships). Read it before starting any task. The 2026 revival plan is done and archived at [`docs/archive/00-REVIVAL.md`](docs/archive/00-REVIVAL.md); its task IDs, notes and GitHub Issues table remain the record of that work. The owner's own tasks (About page, drafts, mastheads, alt text) are in [`docs/04-AUTHORS-DESK.md`](docs/04-AUTHORS-DESK.md); agents may prepare material for them, but the owner decides.
+- **Current work:** follows [`docs/05-REVIEW-FLOW.md`](docs/05-REVIEW-FLOW.md) (checking a change before it ships). Read it before starting any task. The 2026 revival plan is done and archived at [`docs/archive/00-REVIVAL.md`](docs/archive/00-REVIVAL.md); its task IDs, notes and GitHub Issues table remain the record of that work. The owner's own task list was closed and archived at [`docs/archive/04-AUTHORS-DESK.md`](docs/archive/04-AUTHORS-DESK.md) on 2026-10-27 (T059 and T111 stayed open there); agents may prepare material for the owner's tasks, but the owner decides.
 
 ### Layout
 
@@ -171,7 +171,7 @@ Before you say a change is finished:
 - [ ] You checked the affected pages in `./gradlew clean bakePreview` (home, one post, About, Archive at minimum for template changes)
 - [ ] No URL was removed or changed without approval (Rule 1 check)
 - [ ] `docs/` content is not in `build/jbake` (`test ! -e build/jbake/docs`)
-- [ ] If the work came from a plan task, its checkbox is ticked in the plan that owns it (`docs/05-REVIEW-FLOW.md`, `docs/04-AUTHORS-DESK.md`) **on the same branch**, and its `Test:` line was actually run
+- [ ] If the work came from a plan task, its checkbox is ticked in the plan that owns it (`docs/05-REVIEW-FLOW.md`, `docs/06-GRADLE-PLUGIN.md`, `docs/08-SCRIPTS-MIGRATION.md`) **on the same branch**, and its `Test:` line was actually run
 - [ ] If the task has an `Issue:` line, the commit message (and PR description) carries the matching `Closes #N` / `Refs #N` line (Rule 5)
 - [ ] You report what you verified and what you didn't. Never claim a test passed if you didn't run it.
 - [ ] The branch is pushed and a PR against `main` is open (Rule 2). After it merges, `main` is pulled before the next task

@@ -22,7 +22,7 @@ same day. Nothing in the build or the CI gates could have caught it:
   about the site as a whole, not about what a change did to it.
 
 The same shape of defect sat on the live site for years: the three `\[… 2017\]` labels on Talks (noted under T048 in
-[`04-AUTHORS-DESK.md`](04-AUTHORS-DESK.md), made plain text in #142 on 2026-10-21). And the things a reviewer *would* check on a changed page have no
+[`archive/04-AUTHORS-DESK.md`](archive/04-AUTHORS-DESK.md), made plain text in #142 on 2026-10-21). And the things a reviewer *would* check on a changed page have no
 tool today: does every link on it still answer, does every image exist, did the page's `date=` move (it is the
 sitemap's `lastmod`), is a new tag spelled like an existing one, is a word misspelled.
 
@@ -271,7 +271,7 @@ codes. T120 and T122 are decisions, any time.
 - [ ] CHK043 The #139 defect is caught: `756245f` on a throwaway branch fails `./gradlew reviewChanges` locally
   and the CI check on a test PR, each naming `about.md` and the line (T117, T118)
 - [ ] CHK044 `./gradlew reviewChanges -Pall` on `main` has been run once, and every finding is either fixed, recorded
-  in [`04-AUTHORS-DESK.md`](04-AUTHORS-DESK.md) as the owner's, or suppressed with a reason on the line
+  in [`archive/04-AUTHORS-DESK.md`](archive/04-AUTHORS-DESK.md) as the owner's, or suppressed with a reason on the line
 - [ ] CHK045 README's "To review a change" and AGENTS.md's Definition of Done describe the command, and a PR opened
   with `./gradlew openPr` has merged
 - [ ] CHK046 `./gradlew clean bake` output is byte-identical to before M9 apart from `feed.xml`'s timestamps (the
@@ -280,7 +280,7 @@ codes. T120 and T122 are decisions, any time.
 ### GitHub Issues
 
 No open issue maps to this plan. The one open issue, [#14](https://github.com/jmcgarr/jmcgarr.github.io/issues/14)
-(mastheads for older posts), is T059 in [`04-AUTHORS-DESK.md`](04-AUTHORS-DESK.md). If the owner files an issue
+(mastheads for older posts), is T059 in [`archive/04-AUTHORS-DESK.md`](archive/04-AUTHORS-DESK.md). If the owner files an issue
 for the review flow, add its row here with the task and the `Closes #N` line, per AGENTS.md Rule 5.
 
 | Issue | Title | GitHub label | Task(s) | Milestone | Put in the resolving PR |
@@ -304,3 +304,6 @@ for the review flow, add its row here with the task and the `Closes #N` line, pe
 - _2026-10-25: `03-REVIVAL-CHANGELOG.md` moved to `docs/archive/` at the owner's request, now that its Status is Done
   (the "`03` stays" in item (7) above was the position on 2026-10-23). Its relative links were adjusted for the new
   location; the number stays 03._
+- _2026-10-27: `04-AUTHORS-DESK.md` moved to `docs/archive/` after the owner reviewed it and considered it closed
+  (Status: Done). Its relative links were adjusted; the number stays 04. T059 (#14, CHK039) and T111 were still
+  unticked and stay on record there; the owner decides whether they happen._

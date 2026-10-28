@@ -305,7 +305,7 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
 ### GitHub Issues
 
 No open issue maps to this plan. The one open issue, [#14](https://github.com/jmcgarr/jmcgarr.github.io/issues/14)
-(mastheads for older posts), is T059 in [`04-AUTHORS-DESK.md`](04-AUTHORS-DESK.md). If the owner files an issue
+(mastheads for older posts), is T059 in [`archive/04-AUTHORS-DESK.md`](archive/04-AUTHORS-DESK.md). If the owner files an issue
 for the plugin work, add its row here with the task and the `Closes #N` line, per AGENTS.md Rule 5.
 
 | Issue | Title | GitHub label | Task(s) | Milestone | Put in the resolving PR |
