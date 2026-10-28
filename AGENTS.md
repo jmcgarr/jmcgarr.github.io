@@ -9,7 +9,7 @@ published since 2009. Other sites, search engines, RSS readers, and slide decks 
 links pointing at it. **Treat it as a live publication, not a code project.** Every published URL is
 a promise to the people who linked to it.
 
-- **Generator:** JBake 2.7, run directly by a Gradle `JavaExec` task in `build.gradle` (no JBake plugin, T096). Gradle 9.8 wrapper (T097), JDK 25 via `.java-version` (T113; JDK 21 also works)
+- **Generator:** JBake 2.7, run in a fresh JVM by the site's own Gradle plugin, `jbake-site`, an included build in `build-logic/` written in Java with its own tests (`./gradlew :build-logic:check`; [`docs/06-GRADLE-PLUGIN.md`](docs/06-GRADLE-PLUGIN.md), 2026-10). `build.gradle` only applies it, configures it (`jbakeSite { }`) and pins JBake's versions (no JBake plugin since T096). Gradle 9.8 wrapper (T097), JDK 25 via `.java-version` (T113; JDK 21 also works)
 - **Theme:** Start Bootstrap "Clean Blog" (Bootstrap 4.1, jQuery 3.3) as FreeMarker templates. The footer and menu icons are inline SVGs from Font Awesome Free (T047, T135); no icon font is loaded, though the vendored Font Awesome 5.3.1 files stay published (Rule 1)
 - **Styles:** all of the site's own CSS (`clean-blog.css`, with the `@font-face` rules since T135, and `code.css`) is generated from `src/scss/` by Dart Sass inside Gradle (`compileSass`, T043, T134). **Edit the SCSS, never the CSS**: it isn't committed, and the build fails if a hand-written copy (or the old `extra.css` or `fonts.css`) reappears under `src/jbake/assets/css/`. See README, "To change the site's styles"
 - **Branches:** `main` holds the source (the default branch; renamed from `source` in T093). `master` is the **retired** publishing branch from before T027, frozen and preserved by tag `live-2026-10`. Don't push to it.
@@ -29,6 +29,9 @@ src/jbake/jbake.properties
 src/case-redirects/       Redirect stubs added to the site by the bake on Linux only (T055). Also published.
 src/scss/                 SCSS for the site's CSS (not published). Compiled to /css/clean-blog.css and /css/code.css on every build (T043, T134, T135)
 docs/                     Planning and internal docs. NEVER published (see "docs/ conventions")
+build.gradle              What the site is: the plugin applied, the jbakeSite { } block, JBake's version pins with their reasons
+build-logic/              How it is built: the jbake-site Gradle plugin (Java), every ./gradlew task below, its tests and fixture site (see README, "Where the build is defined")
+scripts/                  Shell only: the deploy checks CI runs (check-urls.sh, check-docs-not-published.sh; until T143), smoke-test.sh, and visual/ (screenshot and pixel-diff tools)
 build/jbake/              Generated output (git-ignored)
 ```
 
@@ -39,8 +42,10 @@ build/jbake/              Generated output (git-ignored)
 ./gradlew clean bakePreview   # build + serve at http://localhost:8080, rebuild on save, and reload the open page (drafts at /blog/drafts/<name>-draft.html)
 ./gradlew newPost -Ptitle="My Post"   # start a draft on a new post/<slug> branch (see README)
 ./gradlew reviewChanges       # check the pages this branch changed: Markdown links, local links and images, header (T117; see README)
-./gradlew check               # the standard Gradle verification task: bake + reviewChanges + the tag-redirect and masthead checks CI runs
+./gradlew check               # the standard Gradle verification task: bake + reviewChanges + checkTagRedirects + checkMastheadVariants (the checks CI runs)
 ./gradlew prepareImage -Pimage=src/jbake/assets/img/masthead/photo.png   # make a hand-added image fit the image rules (see README)
+./gradlew tagRedirects        # write the redirect stubs for old tag URLs; only after an approved tag rename (Rule 1; see README)
+./gradlew :build-logic:check  # the plugin's own tests, after any change under build-logic/
 ```
 
 **Publishing happens only through CI** after a change is merged to `main`. There's no local publish command.
@@ -93,7 +98,7 @@ makes them, or run `./gradlew prepareImage -Pimage=<image> -Pvariants` alone aft
 
 1. Leave a **redirect stub** at the old path: a small HTML page with `<meta http-equiv="refresh">` and `<link rel="canonical">` pointing at the new URL. (GitHub Pages has no server-side redirects.)
 2. Add any intentionally removed URL to `docs/baseline/expected-removals.txt`.
-3. Verify with `scripts/check-urls.sh` (once it exists, see revival task T006). Until then, compare the URL lists before and after:
+3. Verify with `scripts/check-urls.sh build/jbake` (T006; strict on Linux, where CI runs it), or compare the URL lists before and after:
    ```sh
    (cd build/jbake && find . -name '*.html' | sort) > /tmp/urls-before.txt
    # ...make the change, ./gradlew clean bake...

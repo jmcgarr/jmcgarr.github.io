@@ -490,12 +490,30 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
     (T121) is born as a plugin class. The move itself is T127's PR._
   - _2026-10-28: **done** in T127's PR: the four programs are task classes in `build-logic/`, and `scripts/` holds
     `smoke-test.sh`, the two shell checks (until T143) and `visual/`._
-- [ ] T131 [IMP] **Docs.** README "How the site is built and deployed" describes `build-logic/` (what is in the
+- [x] T131 [IMP] **Docs.** README "How the site is built and deployed" describes `build-logic/` (what is in the
   plugin, what is in `build.gradle`, how to run its tests); AGENTS.md's Generator line and Layout tree mention
   `build-logic/`; the T096/T112/T113 notes in the archived revival plan are left as history (`README.md`,
   `AGENTS.md`)
   - **Test:** a new reader can find, from the README alone, where `bake` is defined and how to run the plugin's
     tests. `scripts/check-docs-not-published.sh` still passes.
+  - _2026-10-28: **done** (same branch as T128). README: the "full description comes with the last slice" paragraph is
+    now a subsection, "Where the build is defined: `build.gradle` and `build-logic/`": the two halves and why they are
+    apart; `bake` is `BakeTask.java`, registered by `JbakeSitePlugin.java`; a table of the plugin's classes by package
+    and what each group does; `SiteToolTask` and the `ToolFailure` mapping; the logback resource; a table of every
+    `jbakeSite { }` property with its default and meaning; the `jbake` configuration, the exclusions and the
+    substitution and how to override them; how the preview's watcher works; the tests (`./gradlew :build-logic:check`,
+    what the unit and TestKit tests cover, the fixture site); a five-step "To add a build feature" recipe. The two
+    groupless tasks (`compileSass`, `checkNoHandEditedCss`) are named under the task table; "To preview" says the
+    fresh JVM is the plugin's, not `build.gradle`'s. AGENTS.md: the Generator line names the plugin and what
+    `build.gradle` still is; the Layout tree has `build.gradle`, `build-logic/` and what is left in `scripts/` (the two
+    shell checks until T143, `smoke-test.sh`, `visual/`); the Commands block adds `tagRedirects` and
+    `:build-logic:check` and spells out what `check` runs; Rule 1's "once it exists" about `check-urls.sh` (true since
+    T006) is a real command. Also the last `./gradlew preview` outside the archive, a comment in
+    `src/jbake/jbake.properties`, says `bakePreview` (CHK052). The archived revival plan's T096/T112/T113 notes are
+    untouched. **Test passed:** `grep -n 'BakeTask.java\|:build-logic:check' README.md` finds both in the new
+    subsection; `scripts/check-docs-not-published.sh build/jbake` OK and `test ! -e build/jbake/docs`; the bake after
+    the `jbake.properties` comment change is byte-identical to the base commit's (only `feed.xml`); no CR line
+    endings in the edited files._
 - [x] T133 [IMP] **Consolidate on the standard: one preview task, one configuration, two groups.** Apply the surface
   table in `build.gradle` as it is today, before any plugin exists: register the real preview task as `bakePreview`
   and drop `preview`; move the Jetty and commons-vfs2 pins into `jbake` and drop `jbakePreview` (the resolution
@@ -530,16 +548,39 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
 
 #### Checkpoint: M10
 
-- [ ] CHK047 A clean bake on `main` is byte-identical (apart from `feed.xml`'s timestamps) to the bake at the commit
+- [x] CHK047 A clean bake on `main` is byte-identical (apart from `feed.xml`'s timestamps) to the bake at the commit
   before T123, on macOS and on Linux (CI's `build/site`, compared through the `check-urls.sh` and link checks plus
   one manual `diff -r` of a downloaded artifact)
-- [ ] CHK048 `./gradlew bake` twice in a row prints "Reusing configuration cache"; `bakePreview`, `newPost` and
+  - _2026-10-28, macOS: `clean bake` of `chore/T128-T129-T131-shrink-tests-docs` (T123–T131 all in) against a `clean
+    bake` of 360bef7, the T133 merge and the last commit before T123, in a detached worktree: `diff -rq` prints only
+    `feed.xml`, 496 files each, `cmp` of `css/clean-blog.css` and `css/code.css` identical. Linux: CI's gates
+    (`check-urls.sh` strict, `checkTagRedirects`, lychee) ran green on every M10 PR; the manual `diff -r` of a
+    downloaded artifact was not done, so the Linux half rests on those checks._
+- [x] CHK048 `./gradlew bake` twice in a row prints "Reusing configuration cache"; `bakePreview`, `newPost` and
   `reviewChanges` run with no configuration-cache problems reported
-- [ ] CHK049 `./gradlew :build-logic:test` passes and runs in CI before the bake
-- [ ] CHK050 `wc -l build.gradle` is under 120, and `.github/dependabot.yml` has the `build-logic` entry
+  - _2026-10-28: `bake` twice: the second prints "Reusing configuration cache." and `:bake UP-TO-DATE`.
+    `bakePreview` served http://localhost:8080 after 2.6 s with the live-reload script, the watcher's "Watching
+    src/scss" line and no problem report; SIGINT ended the client with 130, and a second later no JBake JVM and
+    nothing on 8080. `reviewChanges`: 6 pages from 4 changed files (PR 171's templates), 0 errors, 0 warnings,
+    "Configuration cache entry stored", no problems. `newPost -Ptitle="CHK048 Test"` wrote
+    `drafts/chk048-test.md` on `post/chk048-test` from `main`, no problems; branch and file deleted after._
+- [x] CHK049 `./gradlew :build-logic:test` passes and runs in CI before the bake
+  - _2026-10-28: 145 tests pass locally (JDK 25); CI's "Bake with Gradle" step is `./gradlew :build-logic:check bake`,
+    so the tests and `validatePlugins` run before the bake on every PR and push (since T124's PR, #169). Not verified
+    here: this branch's own CI run (it is pushed for review before its PR opens)._
+- [x] CHK050 `wc -l build.gradle` is under 120, and `.github/dependabot.yml` has the `build-logic` entry
+  - _2026-10-28: 86 lines (T128); the `gradle` entry for `directory: /build-logic` (weekly, semver-major ignored,
+    group `build-logic`) has been in `.github/dependabot.yml` since T123._
 - [ ] CHK051 T130 and T132 each have a recorded decision
-- [ ] CHK052 `./gradlew tasks` lists exactly the surface table (groups `jbake` and `writing`), and `preview` and
+- [x] CHK052 `./gradlew tasks` lists exactly the surface table (groups `jbake` and `writing`), and `preview` and
   `jbakePreview` appear nowhere outside the archived docs (T133)
+  - _2026-10-28: `./gradlew tasks` shows Jbake (`bake`, `bakePreview`), Writing (`newPost`, `prepareImage`,
+    `reviewChanges`, `tagRedirects`) and Verification (`check`, `checkMastheadVariants`, `checkTagRedirects`; the group
+    the 2026-10-27 note added), nothing else of ours, and no `compileSass`. `grep -rn 'gradlew preview\|jbakePreview'`
+    outside `docs/archive` finds the two names only where they are the subject: this plan (the Context table, the
+    surface table, T133 and its notes) and the dated report `docs/reports/platform-check-2026-10-11.md`, which the
+    conventions say is not edited after the fact. The one stale use, a comment in `src/jbake/jbake.properties`, is
+    fixed in T131._
 
 ### GitHub Issues
 
