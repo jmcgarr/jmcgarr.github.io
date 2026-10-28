@@ -189,13 +189,24 @@ T140. Phase B (T141–T143) runs inside M10 after T127 and T129 exist. Decisions
     one of `origin/main` (496 files, every SHA-256 equal; `feed.xml` equal apart from its two build timestamps), and
     `scripts/check-docs-not-published.sh build/jbake` is OK. One correction to the Test line: `git ls-files scripts`
     lists **11** files, not 10 (17 − 6 deleted: 8 at the top level, 3 under `visual/`), none under `to-markdown/`._
-- [ ] T138 [IMP] **`PixelDiff.java`.** `scripts/visual/PixelDiff.java`, a single-file program with
+- [x] T138 [IMP] **`PixelDiff.java`.** `scripts/visual/PixelDiff.java`, a single-file program with
   `pixeldiff.py`'s interface (`<before> <after> [<diff_out>]`, same per-file line, exit 1 on a difference, the
   red-on-grey diff image); delete `pixeldiff.py`; the script headers of `screenshots.sh` and `phone-shots.mjs`
   name it; README "To change the site's styles" gives the Java command (`scripts/visual/`, `README.md`)
   - **Test:** on the `/tmp/css-before` and `/tmp/css-after` folders from the CSS review method (or two freshly
     shot folders), `java scripts/visual/PixelDiff.java` reports the same per-file counts and bounding boxes as
     `pixeldiff.py` did from a venv with Pillow, and exits 0 for identical folders, 1 otherwise.
+  - _2026-10-27: **done**. `scripts/visual/PixelDiff.java` (ImageIO, `getRGB`; about 120 lines with its header) keeps
+    `pixeldiff.py`'s interface, per-file lines and exit codes, and reproduces Pillow's numbers exactly: the bounding
+    box is of any-channel differences (`getbbox`), the count and the red mask use Pillow's luma rounding of the
+    difference (`convert("L")`), as its header explains. **Test passed** on two freshly shot folders of 6 pages (4 at
+    1280 px, 2 at 375 px, from a bake of `origin/main`) and a third folder with deliberate differences: on the identical
+    pair both programs print `identical (0 pixels differ)` six times and exit 0; on the differing pair both print the
+    same `missing in`, `size (375, 3743) vs (375, 2123)`, `1187667 pixels differ, bounding box (274, 175, 1005, 4111)`
+    and `944589 pixels differ, bounding box (0, 0, 1280, 2632)` lines and exit 1, and the two red-on-grey diff images
+    each wrote are pixel-identical to Pillow's (checked with PixelDiff itself). The Python ran as
+    `uv run --with pillow python3 -I scripts/visual/pixeldiff.py` before it was deleted. Not verified: the
+    `/tmp/css-before` and `/tmp/css-after` folders of the CSS review no longer existed; fresh shots were used._
 - [ ] T139 [IMP] **`TagRedirects.java`.** `scripts/TagRedirects.java` with both modes (`--check <site>` and write),
   the `RENAMES` map, the `?url_path`-compatible percent-encoder and `html.escape` equivalents; delete
   `tag-redirects.py`; CI line 92 becomes `java scripts/TagRedirects.java --check build/site`; update README (two

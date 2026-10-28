@@ -238,7 +238,16 @@ page reloads. A Sass error there is printed in the terminal, and the page keeps 
 A new rule goes in the partial that styles that part of the page (or a new partial, added to `clean-blog.scss` in
 cascade order); a new color or size goes in `_variables.scss`. To prove a refactor changed nothing visible, use the
 screenshot-and-pixel-diff method in [`docs/reports/css-review-2026-10-24.md`](docs/reports/css-review-2026-10-24.md),
-"How to verify".
+"How to verify": shoot the same pages from a bake of `main` and from the branch with `scripts/visual/screenshots.sh`
+(1280px, headless Chrome) and `scripts/visual/phone-shots.mjs` (a real 375px viewport, Node), then compare the two
+folders pixel by pixel with
+```
+java scripts/visual/PixelDiff.java /tmp/css-before /tmp/css-after /tmp/css-diff
+```
+It prints `identical (0 pixels differ)` per page and exits 0, or the count and bounding box of the differing pixels
+and exits 1, writing a red-on-grey image per differing page into the third folder. (The report, written on 2026-10-24,
+names the tools' old folder `scripts/to-markdown/` and a Python `pixeldiff.py`; they moved to `scripts/visual/` and the
+diff is Java since 2026-10-27, T137 and T138. Nothing to install.)
 
 **The compiler** is [Dart Sass](https://sass-lang.com/dart-sass/), the reference Sass implementation, run from
 Gradle by the [freefair Sass plugin](https://plugins.gradle.org/plugin/io.freefair.sass-base) through its

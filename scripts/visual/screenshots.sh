@@ -12,6 +12,7 @@
 # (The T102 batches before 2026-10-17 used such crops for their 375px pairs; the before/after comparisons
 # were still valid, since both sides had the same crop, but they didn't show the real phone layout.)
 # Each run is wrapped in gtimeout 45. A throwaway Chrome profile lives in <out_dir>/.chrome.
+# Compare two runs with PixelDiff.java: java scripts/visual/PixelDiff.java <before_dir> <after_dir> [<diff_out_dir>].
 OUT="$1"; shift
 PORT="${PORT:-8202}"
 CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"

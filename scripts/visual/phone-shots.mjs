@@ -9,7 +9,7 @@
 //             path ending in .html relative to the site root ("about.html", "blog/drafts/<name>-draft.html")
 // Writes <out_dir>/<slug>-375.png ("/" as "-", no ".html") and prints, per page, the document's scroll width against the viewport:
 // "fits" or "SIDEWAYS SCROLL" (a page that scrolls sideways on a phone is a bug; T046 fixed 253 of them).
-// Compare before/after directories with pixeldiff.py. Chrome is started on DevTools port 9333 with a
+// Compare before/after directories with PixelDiff.java (java scripts/visual/PixelDiff.java <before> <after>). Chrome is started on DevTools port 9333 with a
 // throwaway profile in <out_dir>/.chrome-cdp and stopped at the end. Node 21+ (22+ needs no flag).
 import { spawn } from "node:child_process";
 import fs from "node:fs";
