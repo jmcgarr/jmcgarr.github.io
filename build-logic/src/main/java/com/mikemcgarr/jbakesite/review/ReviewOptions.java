@@ -8,8 +8,8 @@ package com.mikemcgarr.jbakesite.review;
  * @param strict fail on warnings too ({@code -Pstrict})
  * @param online accepted and ignored until external links are checked (T119; {@code -Ponline})
  */
-public record ReviewOptions(String base, boolean all, boolean strict, boolean online) {
+record ReviewOptions(String base, boolean all, boolean strict, boolean online) {
 
     /** The defaults: the changes since the merge base with {@code main}, warnings listed but not failing. */
-    public static final ReviewOptions DEFAULTS = new ReviewOptions("main", false, false, false);
+    static final ReviewOptions DEFAULTS = new ReviewOptions("main", false, false, false);
 }

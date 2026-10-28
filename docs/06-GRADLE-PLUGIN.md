@@ -143,8 +143,8 @@ Two task groups, then: **`jbake`** for generating and previewing the site, **`wr
 commands. `./gradlew tasks` shows exactly those two groups' tasks and nothing else of ours. _2026-10-27: plus
 Gradle's standard **`verification`** group for the check tasks of Phase B, which `check` runs._
 
-The single-file scripts stay as they are in Phase 1. They keep working without Gradle (`java scripts/NewPost.java`),
-which the README promises, and moving them into the plugin is a separate decision (T130). _Decided 2026-10-27:
+The single-file scripts stay as they are in Phase 1. They kept working without Gradle (`java scripts/NewPost.java`),
+which the README promised, until T127; moving them into the plugin was a separate decision (T130). _Decided 2026-10-27:
 they move into the plugin as task classes (T130, done in T127's PR); the no-Gradle use goes with them._
 
 **Phase 2, sketched only: a standalone plugin** in its own repository, published to the Gradle Plugin Portal (or

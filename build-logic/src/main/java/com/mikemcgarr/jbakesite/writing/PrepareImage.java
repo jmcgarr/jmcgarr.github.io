@@ -2,6 +2,7 @@ package com.mikemcgarr.jbakesite.writing;
 
 import com.mikemcgarr.jbakesite.FileTrees;
 import com.mikemcgarr.jbakesite.internal.Git;
+import com.mikemcgarr.jbakesite.internal.ImageRules;
 import com.mikemcgarr.jbakesite.internal.SiteLayout;
 import com.mikemcgarr.jbakesite.internal.ToolFailure;
 import java.awt.image.BufferedImage;
@@ -49,10 +50,7 @@ import java.util.regex.Pattern;
  *
  * <p>Then run {@code ./gradlew reviewChanges} to confirm, and look at the result in {@code ./gradlew bakePreview}.
  */
-public final class PrepareImage {
-
-    /** The width cap for a masthead (T016; the review's E5 limit). */
-    static final int MASTHEAD_WIDTH = 1920;
+final class PrepareImage {
 
     /** The width cap for an inline image (T017): twice the widest in-post display width. */
     static final int INLINE_WIDTH = 1000;
@@ -70,7 +68,7 @@ public final class PrepareImage {
      * @param git the repository, asked whether a PNG is published ({@code main} or {@code origin/main})
      * @param out where the tool reports
      */
-    public PrepareImage(SiteLayout site, Git git, PrintStream out) {
+    PrepareImage(SiteLayout site, Git git, PrintStream out) {
         this.site = site;
         this.git = git;
         this.images = new Images(out);
@@ -87,7 +85,7 @@ public final class PrepareImage {
      * @throws InterruptedException if interrupted while asking git
      * @throws ToolFailure when no image was named, the options contradict each other, or an image couldn't be handled
      */
-    public void prepare(List<String> paths, PrepareImageOptions options) throws IOException, InterruptedException {
+    void prepare(List<String> paths, PrepareImageOptions options) throws IOException, InterruptedException {
         checkEnvironment(options);
         if (paths.isEmpty()) {
             throw ToolFailure.failed("Say which image: ./gradlew prepareImage -Pimage=" + site.display(site.mastheads()) + "/photo.png");
@@ -110,7 +108,7 @@ public final class PrepareImage {
      * @throws IOException if a file can't be read or written
      * @throws ToolFailure when no masthead was named, or one doesn't exist
      */
-    public void makeMissingVariants(List<String> paths, PrepareImageOptions options) throws IOException {
+    void makeMissingVariants(List<String> paths, PrepareImageOptions options) throws IOException {
         checkEnvironment(options);
         if (paths.isEmpty()) {
             throw ToolFailure.failed("Say which masthead: ./gradlew prepareImage -Pvariants -Pimage=" + site.display(site.mastheads()) + "/photo.jpg");
@@ -126,7 +124,7 @@ public final class PrepareImage {
 
     private void checkEnvironment(PrepareImageOptions options) {
         if (!Files.isDirectory(site.images()) || !Files.isDirectory(site.content())) {
-            throw ToolFailure.couldNotRun("run it from the repository root (" + site.display(site.images()) + " must exist).");
+            throw ToolFailure.couldNotRun("Run it from the repository root (" + site.display(site.images()) + " must exist).");
         }
         if (options.png() && options.jpeg()) {
             throw ToolFailure.failed("-Ppng and -Pjpeg contradict each other.");
@@ -208,7 +206,7 @@ public final class PrepareImage {
             return false;
         }
         boolean masthead = isMasthead(path);
-        int width = options.widthCap() != null ? options.widthCap() : masthead ? MASTHEAD_WIDTH : INLINE_WIDTH;
+        int width = options.widthCap() != null ? options.widthCap() : masthead ? ImageRules.MAX_WIDTH : INLINE_WIDTH;
         Images.Loaded src;
         try {
             src = images.load(path);

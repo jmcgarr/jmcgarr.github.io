@@ -8,9 +8,7 @@ import java.nio.file.Path;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.provider.MapProperty;
 import org.gradle.api.tasks.Input;
-import org.gradle.api.tasks.InputFiles;
-import org.gradle.api.tasks.PathSensitive;
-import org.gradle.api.tasks.PathSensitivity;
+import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.TaskAction;
 
 /**
@@ -35,12 +33,13 @@ public abstract class CheckTagRedirectsTask extends SiteToolTask {
     public abstract MapProperty<String, String> getTagRenames();
 
     /**
-     * The baked site to check: the bake's destination, or {@code -PsiteDir=<dir>}.
+     * The baked site to check: the bake's destination, or {@code -PsiteDir=<dir>}. {@code @Internal}, not an input:
+     * the task has no outputs, so it runs every time anyway, and fingerprinting the 500 baked files would only cost
+     * time (the same choice as {@code ReviewChangesTask}).
      *
      * @return the directory
      */
-    @InputFiles
-    @PathSensitive(PathSensitivity.RELATIVE)
+    @Internal
     public abstract DirectoryProperty getSite();
 
     /**

@@ -296,10 +296,10 @@ public final class TagRedirects {
         List<String> errors = new ArrayList<>();
         for (Map.Entry<String, String> e : renames.entrySet()) {
             if (tags.contains(e.getKey())) {
-                errors.add("RENAMES: '" + e.getKey() + "' is still used by a published post (its stub would replace the real page)");
+                errors.add("jbakeSite.tagRenames: '" + e.getKey() + "' is still used by a published post (its stub would replace the real page)");
             }
             if (!tags.contains(e.getValue())) {
-                errors.add("RENAMES: '" + e.getKey() + "' -> '" + e.getValue() + "', but no published post uses '" + e.getValue() + "'");
+                errors.add("jbakeSite.tagRenames: '" + e.getKey() + "' -> '" + e.getValue() + "', but no published post uses '" + e.getValue() + "'");
             }
         }
         for (OldUrl o : oldTagUrls()) {

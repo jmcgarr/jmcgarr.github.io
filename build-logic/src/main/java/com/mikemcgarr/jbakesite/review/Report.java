@@ -15,7 +15,7 @@ import java.util.Map;
  * running in GitHub Actions ({@code GITHUB_ACTIONS=true}), a workflow annotation per finding and the report
  * appended to the job's step summary ({@code GITHUB_STEP_SUMMARY}).
  */
-public final class Report {
+final class Report {
 
     private final PrintStream out;
     private final Map<String, String> env;
@@ -26,7 +26,7 @@ public final class Report {
      * @param out where the report goes
      * @param env the environment, read for {@code GITHUB_ACTIONS} and {@code GITHUB_STEP_SUMMARY}
      */
-    public Report(PrintStream out, Map<String, String> env) {
+    Report(PrintStream out, Map<String, String> env) {
         this.out = out;
         this.env = env;
     }
@@ -37,7 +37,7 @@ public final class Report {
      * @param result what the review found
      * @throws IOException if the step summary can't be written
      */
-    public void print(ReviewResult result) throws IOException {
+    void print(ReviewResult result) throws IOException {
         if (result.nothingToReview()) {
             return;
         }

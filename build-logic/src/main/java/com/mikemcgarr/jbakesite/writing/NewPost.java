@@ -32,7 +32,7 @@ import java.util.stream.Stream;
  * pull request titled "[WIP] &lt;title&gt;" with the GitHub CLI (gh). Pull requests never deploy (T008), so this
  * publishes nothing. A refusal is a {@link ToolFailure} with the program's message; {@link NewPostTask} runs it.
  */
-public final class NewPost {
+final class NewPost {
 
     /** The file extensions JBake would still render, so a slug in either is taken. */
     static final List<String> EXTENSIONS = List.of("md", "html");
@@ -54,7 +54,7 @@ public final class NewPost {
      * @param clock today's date for {@code date=}
      * @param out where the tool talks to the author
      */
-    public NewPost(SiteLayout site, String siteHost, Git git, CommandRunner runner, Clock clock, PrintStream out) {
+    NewPost(SiteLayout site, String siteHost, Git git, CommandRunner runner, Clock clock, PrintStream out) {
         this.site = site;
         this.siteHost = siteHost;
         this.git = git;
@@ -72,7 +72,7 @@ public final class NewPost {
      * @throws InterruptedException if interrupted while waiting for git or gh
      * @throws ToolFailure when the options or the repository's state don't allow it, with the reason
      */
-    public Path create(NewPostOptions options) throws IOException, InterruptedException {
+    Path create(NewPostOptions options) throws IOException, InterruptedException {
         String title = options.title() == null ? "" : options.title().strip();
         if (title.isEmpty()) {
             throw fail("A title is required: ./gradlew newPost -Ptitle=\"My Post Title\"");
@@ -219,7 +219,21 @@ public final class NewPost {
         List<String> push = List.of("git", "push", "--set-upstream", "origin", branchName);
         List<String> openPr = List.of("gh", "pr", "create", "--draft", "--repo", repo, "--base", "main",
                 "--head", branchName, "--title", prTitle, "--body-file", body.toString());
+        boolean retryNeedsBody = false;
+        try {
+            return commitPushAndOpenPr(shownFile, title, branchName, prTitle, push, openPr);
+        } catch (ToolFailure e) {
+            retryNeedsBody = true;   // its message tells the user to run gh pr create --body-file <body> next
+            throw e;
+        } finally {
+            if (!retryNeedsBody) {
+                Files.deleteIfExists(body);
+            }
+        }
+    }
 
+    private String commitPushAndOpenPr(String shownFile, String title, String branchName, String prTitle,
+            List<String> push, List<String> openPr) throws InterruptedException {
         List<String> add = List.of("git", "add", "--", shownFile);
         List<String> commit = List.of("git", "commit", "--quiet",
                 "-m", "Starting a draft post: " + title,
@@ -242,7 +256,6 @@ public final class NewPost {
             throw stopAfter(branchName + " is committed and pushed, but opening the pull request failed"
                     + (created == null ? " (gh didn't run)." : " (see the gh output above)."), List.of(openPr));
         }
-        Files.deleteIfExists(body);
         String url = created.output().lines().filter(l -> l.startsWith("https://")).reduce((a, b) -> b)
                 .orElse(created.output());
         out.println("Opened the draft pull request \"" + prTitle + "\": " + url);
@@ -273,7 +286,7 @@ public final class NewPost {
      * @param title the title
      * @return the slug
      */
-    public static String slugify(String title) {
+    static String slugify(String title) {
         String ascii = Normalizer.normalize(title, Normalizer.Form.NFD).replaceAll("\\p{M}", "");
         return ascii.toLowerCase(Locale.ROOT)
                 .replaceAll("['’]", "")

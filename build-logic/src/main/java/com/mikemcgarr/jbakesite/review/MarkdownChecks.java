@@ -10,7 +10,7 @@ import java.nio.file.Path;
 import java.time.Clock;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -136,23 +136,20 @@ final class MarkdownChecks {
             return;
         }
         String file = site.display(c.path());
-        Map<String, TreeSet<String>> spellings = new HashMap<>();
         Set<String> before = new HashSet<>();   // this file's tags at the merge base: those aren't new
         if (!all && (c.status() == 'M' || c.status() == 'R')) {
             before.addAll(Tags.split(FrontMatter.parse(changes.atMergeBase(c.removed())).get("tags")));
         }
+        List<Path> others = new ArrayList<>();   // every other post and draft
         for (Path dir : List.of(site.blog(), site.drafts())) {
             if (!Files.isDirectory(dir)) {
                 continue;
             }
             try (Stream<Path> files = Files.list(dir)) {
-                for (Path f : files.filter(p -> p.toString().endsWith(".md") && !p.equals(c.path())).toList()) {
-                    for (String t : Tags.split(FrontMatter.parse(Files.readString(f, StandardCharsets.UTF_8)).get("tags"))) {
-                        spellings.computeIfAbsent(t.toLowerCase(Locale.ROOT), k -> new TreeSet<>()).add(t);
-                    }
-                }
+                others.addAll(files.filter(p -> p.toString().endsWith(".md") && !p.equals(c.path())).toList());
             }
         }
+        Map<String, TreeSet<String>> spellings = Tags.spellingsIn(others);
         for (String tag : Tags.split(fm.get("tags"))) {
             TreeSet<String> existing = spellings.get(tag.toLowerCase(Locale.ROOT));
             if (existing == null) {

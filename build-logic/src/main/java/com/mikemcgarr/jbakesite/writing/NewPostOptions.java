@@ -14,7 +14,7 @@ package com.mikemcgarr.jbakesite.writing;
  * @param pr "", "true" or "false": whether to commit, push and open a draft pull request (T061)
  * @param format set when {@code -Pformat} was given; always refused
  */
-public record NewPostOptions(String title, String tags, String summary, String slug, String branch, String pr,
+record NewPostOptions(String title, String tags, String summary, String slug, String branch, String pr,
         String format) {
 
     /**
@@ -23,7 +23,7 @@ public record NewPostOptions(String title, String tags, String summary, String s
      * @param title the title
      * @return the options
      */
-    public static NewPostOptions withTitle(String title) {
+    static NewPostOptions withTitle(String title) {
         return new NewPostOptions(title, null, null, null, null, null, null);
     }
 }

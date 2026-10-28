@@ -1,6 +1,8 @@
 package com.mikemcgarr.jbakesite.review;
 
+import com.mikemcgarr.jbakesite.internal.ImageRules;
 import com.mikemcgarr.jbakesite.internal.SiteLayout;
+import com.mikemcgarr.jbakesite.writing.MastheadVariants;
 import java.awt.Dimension;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,10 +17,6 @@ import javax.imageio.stream.ImageInputStream;
 /** E5: the image rules (AGENTS.md Rule 4) for a changed image, and a masthead's 960/1440 variants (T071). */
 final class ImageChecks {
 
-    static final long MAX_IMAGE_BYTES = 400 * 1024;
-    static final int MAX_IMAGE_WIDTH = 1920;
-    static final int[] MASTHEAD_WIDTHS = {960, 1440};
-
     private final SiteLayout site;
     private final Findings findings;
 
@@ -31,14 +29,14 @@ final class ImageChecks {
         String file = site.display(image);
         try {
             long size = Files.size(image);
-            if (size > MAX_IMAGE_BYTES) {
+            if (size > ImageRules.MAX_BYTES) {
                 findings.add(true, "E5", file, 0, "The image is " + (size / 1024) + " KB; the target is 400 KB or less (AGENTS.md Rule 4).",
                         "Re-encode it (JPEG quality 80, sRGB, metadata stripped) before adding it.");
             }
             Dimension d = dimensions(image);
-            if (d != null && d.width > MAX_IMAGE_WIDTH) {
-                findings.add(true, "E5", file, 0, "The image is " + d.width + " px wide; the limit is " + MAX_IMAGE_WIDTH + " px (AGENTS.md Rule 4).",
-                        "Resize it to at most " + MAX_IMAGE_WIDTH + " px wide.");
+            if (d != null && d.width > ImageRules.MAX_WIDTH) {
+                findings.add(true, "E5", file, 0, "The image is " + d.width + " px wide; the limit is " + ImageRules.MAX_WIDTH + " px (AGENTS.md Rule 4).",
+                        "Resize it to at most " + ImageRules.MAX_WIDTH + " px wide.");
             }
         } catch (IOException e) {
             findings.add(true, "E5", file, 0, "Couldn't read the image: " + e.getMessage(), null);
@@ -50,11 +48,9 @@ final class ImageChecks {
 
     /** E5 when a masthead lacks a 960 or 1440 variant; {@code file} and {@code line} say where to report it. */
     void checkVariants(Path image, String file, int line) {
-        String s = image.toString();
-        int dot = s.lastIndexOf('.');
         List<String> missing = new ArrayList<>();
-        for (int w : MASTHEAD_WIDTHS) {
-            Path variant = Path.of(s.substring(0, dot) + "-" + w + s.substring(dot));
+        for (int w : MastheadVariants.WIDTHS) {
+            Path variant = MastheadVariants.variantPath(image, w);
             if (!Files.isRegularFile(variant)) {
                 missing.add(variant.getFileName().toString());
             }

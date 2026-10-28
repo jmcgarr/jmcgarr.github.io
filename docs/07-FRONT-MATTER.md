@@ -63,6 +63,10 @@ Any format change touches all of these:
 | `scripts/NewPost.java` | Writes the header of a new draft (the `"~~~~~~"` line) and stops reading tags at it |
 | `scripts/ReviewChanges.java` | `SEPARATOR = "~~~~~~"`; the E4 check reads the front matter and reports a missing separator or key |
 | `scripts/PrepareImage.java` | Finds mastheads with the regex `^masthead=(.+)$` and rewrites `^masthead=<old>$` to the new image name (the Python `masthead-variants.py` and `prepare-image.py` until T140, 2026-10-27) |
+
+_2026-10-28: the three programs are plugin classes in `build-logic/` since T127: `writing/NewPost`,
+`review/MarkdownChecks` (with the header parser in `internal/FrontMatter`, `SEPARATOR`) and `writing/PrepareImage`
+with `writing/MastheadVariants`, run as `./gradlew newPost`, `reviewChanges` and `prepareImage`._
 | `README.md`, `AGENTS.md` | Describe the format; AGENTS.md Rule 3: "Front matter is `key=value` lines ending with a `~~~~~~` separator" |
 | `src/jbake/content/` | 78 files carry the header: 75 published posts, 2 pages (`about.md`, `talks.md`), 1 draft |
 
@@ -102,7 +106,8 @@ Steps:
    grep -rl '^~~~~~~$' src/jbake/content | xargs sed -i '' 's/^~~~~~~$/<!-- end of header -->/'
    ```
 3. Put the same string in `scripts/NewPost.java` (the written header and the `startsWith` check) and
-   `scripts/ReviewChanges.java` (`SEPARATOR`).
+   `scripts/ReviewChanges.java` (`SEPARATOR`). _2026-10-28: now `internal/FrontMatter.SEPARATOR` in `build-logic/`,
+   which `NewPost` and the review share (T127)._
 4. Add `.markdownlint-cli2.jsonc` at the repo root that either disables MD041 or sets a `frontMatter` regex matching
    from the first line through the comment line, so the linter skips the header.
 5. Update README and AGENTS.md Rule 3 to name the new separator.
@@ -173,7 +178,9 @@ Steps:
 3. Convert all 78 files; prove it with the before/after bake `diff -r` (empty) and the URL list unchanged.
 4. Switch `bake` and `preview` in `build.gradle` to the launcher.
 5. Update `scripts/NewPost.java` (write YAML), `scripts/ReviewChanges.java` (E4 reads YAML), the `masthead=` regexes
-   in `scripts/PrepareImage.java` (now `masthead:`), README and AGENTS.md Rule 3.
+   in `scripts/PrepareImage.java` (now `masthead:`), README and AGENTS.md Rule 3. _2026-10-28: in `build-logic/`
+   since T127: `internal/FrontMatter`, `writing/NewPost`, `review/MarkdownChecks`, `writing/PrepareImage` and
+   `writing/MastheadVariants`._
 6. Add `.markdownlint-cli2.jsonc` if markdownlint still needs a `frontMatter` setting (its default already matches a
    `---` block).
 
@@ -202,7 +209,8 @@ Whichever option is chosen:
 - No published URL changes (Rule 1 is unaffected), but the change touches every content file, so it goes on its
   own branch and ships with the before/after bake proof, like T102.
 - `scripts/NewPost.java`, `scripts/ReviewChanges.java` and AGENTS.md Rule 3 change in the same PR as the content,
-  so a draft written after the merge has the right header and the review flow checks it.
+  so a draft written after the merge has the right header and the review flow checks it. _2026-10-28: those are
+  the plugin's `internal/FrontMatter`, `writing/NewPost` and `review/` classes in `build-logic/` since T127._
 - Option 3 adds a maintained piece of Java to the build. Every jbake-core bump then needs the before/after bake
   check, and the engine belongs in the future build plugin ([`06-GRADLE-PLUGIN.md`](06-GRADLE-PLUGIN.md)) when that
   work starts.

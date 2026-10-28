@@ -363,7 +363,7 @@ The link checker (lychee) runs in CI. To run it locally, install [lychee](https:
 "Check local links and assets" step in the workflow for its options.
 
 **Old tag URLs (T039, T055):** tag pages used to be published with spaces (`/tags/acceptance test.html`), and two
-tags had a capitalized twin (`/tags/DevOps.html`, `/tags/Groovy.html`). Those 50 URLs are now small redirect pages
+tags had a capitalized twin (`/tags/DevOps.html`, `/tags/Groovy.html`). Those 59 URLs (50 until the 2026-10-09 tag merges) are now small redirect pages
 (meta refresh, `rel=canonical`, `noindex`, and a visible link) to the new pages, made by `./gradlew tagRedirects`
 (the plugin's `TagRedirects` class in `build-logic/`; `scripts/TagRedirects.java` until T127, 2026-10-28, and
 `tag-redirects.py` until T139, 2026-10-27) from `docs/baseline/urls.txt` and committed: 48 in `src/jbake/assets/tags/`, and the 2 capitalized ones in
@@ -371,7 +371,7 @@ tags had a capitalized twin (`/tags/DevOps.html`, `/tags/Groovy.html`). Those 50
 **Merging or renaming a tag** (needs the owner's approval, AGENTS.md Rule 1): add `old → new` to `RENAMES` in
 `TagRedirects.java`, edit the posts' `tags=` lines, and run the task. It writes a stub at every old URL of the old tag: the
 baseline one and, for a tag with a space, the hyphenated page published since T039 (`tags/google-calender.html`).
-`--check` covers those hyphenated URLs too (derived from the baseline, which they aren't in). The 2026-10-09 merges
+`checkTagRedirects` covers those hyphenated URLs too (derived from the baseline, which they aren't in). The 2026-10-09 merges
 and typo fixes (report §H) added 9 stubs and repointed 3, for 59 in all.
 **macOS caveat:** macOS filesystems ignore case, so `tags/DevOps.html` and `tags/devops.html` are the same file
 there. `./gradlew bake` therefore adds `src/case-redirects/` only when `build/jbake` is case-sensitive (Linux, as

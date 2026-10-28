@@ -148,8 +148,8 @@ class TagRedirectsTest {
 
         assertEquals(ToolFailure.FAILED, e.exitCode());
         assertEquals("ERROR: can't work out where these old tag URLs should point:\n"
-                + "  RENAMES: 'build' is still used by a published post (its stub would replace the real page)\n"
-                + "  RENAMES: 'talks' -> 'presentations', but no published post uses 'presentations'", e.getMessage());
+                + "  jbakeSite.tagRenames: 'build' is still used by a published post (its stub would replace the real page)\n"
+                + "  jbakeSite.tagRenames: 'talks' -> 'presentations', but no published post uses 'presentations'", e.getMessage());
     }
 
     @Test

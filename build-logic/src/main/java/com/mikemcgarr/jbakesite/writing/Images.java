@@ -1,5 +1,6 @@
 package com.mikemcgarr.jbakesite.writing;
 
+import com.mikemcgarr.jbakesite.internal.ImageRules;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.Transparency;
@@ -50,9 +51,6 @@ import org.w3c.dom.Node;
  * </ul>
  */
 final class Images {
-
-    /** The byte target for a published image (AGENTS.md Rule 4; the review's E5). */
-    static final long MAX_BYTES = 400 * 1024;
 
     /** Don't shrink a masthead below this to meet the byte target; warn instead. */
     static final int MIN_WIDTH = 1200;
@@ -342,7 +340,7 @@ final class Images {
         }
     }
 
-    /** Writes im as a progressive sRGB JPEG of at most {@link #MAX_BYTES}, lowering quality then width. Returns a note. */
+    /** Writes im as a progressive sRGB JPEG of at most {@link ImageRules#MAX_BYTES}, lowering quality then width. Returns a note. */
     static String saveJpeg(BufferedImage im, Path target, int width) throws IOException {
         BufferedImage rgb = toRgb(im);
         int w = Math.min(width, rgb.getWidth());
@@ -353,7 +351,7 @@ final class Images {
             for (int quality : QUALITIES) {
                 bytes = encodeJpeg(sized, quality);
                 q = quality;
-                if (bytes.length <= MAX_BYTES) {
+                if (bytes.length <= ImageRules.MAX_BYTES) {
                     Files.write(target, bytes);
                     return sized.getWidth() + "x" + sized.getHeight() + " q" + q + " " + bytes.length / 1024 + "K";
                 }
@@ -361,7 +359,7 @@ final class Images {
             if (w - 200 < MIN_WIDTH) {
                 Files.write(target, bytes);
                 return sized.getWidth() + "x" + sized.getHeight() + " q" + q + " " + bytes.length / 1024
-                        + "K  WARNING: still over " + MAX_BYTES / 1024 + " KB";
+                        + "K  WARNING: still over " + ImageRules.MAX_BYTES / 1024 + " KB";
             }
             w -= 200;
         }

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.mikemcgarr.jbakesite.internal.ImageRules;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -63,7 +64,7 @@ class ImagesTest {
 
         String note = Images.saveJpeg(TestImages.photo(2400, 1600), target, 1920);
 
-        assertTrue(Files.size(target) <= Images.MAX_BYTES, note);
+        assertTrue(Files.size(target) <= ImageRules.MAX_BYTES, note);
         assertTrue(note.matches("1920x1280 q\\d\\d \\d+K"), note);
         assertTrue(TestImages.isProgressiveJpeg(target));
         assertFalse(TestImages.carriesMetadata(target));

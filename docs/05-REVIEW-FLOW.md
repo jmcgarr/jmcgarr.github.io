@@ -118,6 +118,8 @@ language, no dependencies beyond the JDK that the build already needs, runnable 
 and from Gradle. Everything an error check needs is in the JDK: `git` via `ProcessBuilder`, HTML parsing with a
 small tag scanner (the pages are our own templates' output, not arbitrary HTML), `ImageIO` for image dimensions,
 `java.net.http.HttpClient` for W1. The only external tool is codespell for W5, and it is optional.
+_2026-10-28: the program is now the plugin's `review` package in `build-logic/` (`Review`, one class per group of
+checks, `ReviewChangesTask`), run as `./gradlew reviewChanges`; there is no `java scripts/…` form any more (T127)._
 
 Options considered for the checks and rejected or deferred:
 
@@ -137,6 +139,7 @@ Options considered for the checks and rejected or deferred:
    `-Pall` (review every page, not just changed ones; for a baseline run and for template work).
 2. **CI**, a step after "Check local links and assets" in the `build` job, on `pull_request` only, with
    `fetch-depth: 0` so the merge base exists: `java scripts/ReviewChanges.java --base origin/$GITHUB_BASE_REF`.
+   _2026-10-28: the step runs `./gradlew reviewChanges -Pbase="origin/$GITHUB_BASE_REF"` since T127._
    Errors fail the job; the deploy job already needs `build` to pass, so on a push to `main` nothing changes (the
    step is skipped there: a push has no base to diff against, and the PR already ran it).
 3. **`./gradlew openPr`**: run `reviewChanges`, and only if it passes push the branch and open a **ready** (not

@@ -2,11 +2,16 @@ package com.mikemcgarr.jbakesite.internal;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintStream;
 import java.lang.ProcessBuilder.Redirect;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+import java.util.concurrent.FutureTask;
 
 /**
  * The {@link CommandRunner} that starts real processes, in a fixed working directory, with their standard input
@@ -43,16 +48,22 @@ public final class ProcessRunner implements CommandRunner {
         }
         try {
             Process process = builder.start();
-            byte[] errorBytes = stderr == Stderr.SHOW ? process.getErrorStream().readAllBytes() : new byte[0];
+            // Both pipes are drained at once: a child that fills one while this end waits on the other would hang.
+            Future<byte[]> errorBytes = stderr == Stderr.SHOW
+                    ? drain(process.getErrorStream())
+                    : CompletableFuture.completedFuture(new byte[0]);
             String output = new String(process.getInputStream().readAllBytes(), StandardCharsets.UTF_8).strip();
             int exit = process.waitFor();
-            if (errorBytes.length > 0) {
-                out.print(new String(errorBytes, StandardCharsets.UTF_8));
+            byte[] error = errorBytes.get();
+            if (error.length > 0) {
+                out.print(new String(error, StandardCharsets.UTF_8));
                 out.flush();
             }
             return new Result(exit, output);
         } catch (IOException e) {
             return null;
+        } catch (ExecutionException e) {
+            return null;   // the stderr pipe broke: the same as not being able to run the command
         }
     }
 
@@ -71,6 +82,15 @@ public final class ProcessRunner implements CommandRunner {
             err.println("couldn't run " + command.get(0) + ": " + e.getMessage());
             return false;
         }
+    }
+
+    /** Reads a stream to its end on a thread of its own. */
+    private static Future<byte[]> drain(InputStream stream) {
+        FutureTask<byte[]> task = new FutureTask<>(stream::readAllBytes);
+        Thread thread = new Thread(task, "process-stderr");
+        thread.setDaemon(true);
+        thread.start();
+        return task;
     }
 
     private ProcessBuilder builder(List<String> command) {

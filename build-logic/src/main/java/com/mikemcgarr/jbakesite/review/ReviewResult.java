@@ -13,7 +13,7 @@ import java.util.List;
  * @param all whether every page was reviewed rather than the changed ones
  * @param nothingToReview whether there was no change to review
  */
-public record ReviewResult(List<Finding> findings, int suppressed, List<String> reviewedPages, int changedFiles, boolean all,
+record ReviewResult(List<Finding> findings, int suppressed, List<String> reviewedPages, int changedFiles, boolean all,
         boolean nothingToReview) {
 
     static ReviewResult nothing() {
@@ -25,7 +25,7 @@ public record ReviewResult(List<Finding> findings, int suppressed, List<String> 
      *
      * @return the count
      */
-    public long errors() {
+    long errors() {
         return findings.stream().filter(Finding::error).count();
     }
 
@@ -34,7 +34,7 @@ public record ReviewResult(List<Finding> findings, int suppressed, List<String> 
      *
      * @return the count
      */
-    public long warnings() {
+    long warnings() {
         return findings.size() - errors();
     }
 
@@ -44,7 +44,7 @@ public record ReviewResult(List<Finding> findings, int suppressed, List<String> 
      * @param strict whether warnings fail the review too
      * @return true when the review failed
      */
-    public boolean failed(boolean strict) {
+    boolean failed(boolean strict) {
         return errors() > 0 || (strict && warnings() > 0);
     }
 }

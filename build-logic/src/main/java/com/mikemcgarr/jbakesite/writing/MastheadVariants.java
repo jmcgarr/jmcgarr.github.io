@@ -34,8 +34,8 @@ import java.util.regex.Pattern;
  */
 public final class MastheadVariants {
 
-    /** The widths served to phones and to tablets and small laptops. */
-    static final int[] WIDTHS = {960, 1440};
+    /** The widths served to phones and to tablets and small laptops ({@code masthead.ftl}; the review's E5 checks for both). */
+    public static final int[] WIDTHS = {960, 1440};
 
     /** The JPEG quality of a variant. */
     static final int QUALITY = 80;
@@ -66,7 +66,7 @@ public final class MastheadVariants {
      * @param width 960 or 1440
      * @return the variant's path
      */
-    static Path variantPath(Path source, int width) {
+    public static Path variantPath(Path source, int width) {
         String s = source.toString();
         int dot = s.lastIndexOf('.');
         return Path.of(s.substring(0, dot) + "-" + width + s.substring(dot));
@@ -179,8 +179,13 @@ public final class MastheadVariants {
      * @throws IOException if a file can't be read
      */
     public List<String> missing() throws IOException {
+        return missing(inUse());
+    }
+
+    /** {@link #missing()} for the given mastheads in use. */
+    private List<String> missing(List<String> inUse) {
         List<String> missing = new ArrayList<>();
-        for (String name : inUse()) {
+        for (String name : inUse) {
             Path source = source(name);
             if (!Files.isRegularFile(source)) {
                 missing.add(site.display(source) + " (the masthead itself is missing)");
@@ -203,11 +208,12 @@ public final class MastheadVariants {
      * @throws ToolFailure naming each missing file, when any is
      */
     public void check() throws IOException {
-        List<String> missing = missing();
+        List<String> inUse = inUse();
+        List<String> missing = missing(inUse);
         if (!missing.isEmpty()) {
             throw ToolFailure.failed("FAIL: missing masthead variants (run ./gradlew prepareImage -Pimage=<image> -Pvariants):\n  "
                     + String.join("\n  ", missing));
         }
-        out.println("OK: all " + inUse().size() + " mastheads in use have " + WIDTHS[0] + "/" + WIDTHS[1] + "px variants");
+        out.println("OK: all " + inUse.size() + " mastheads in use have " + WIDTHS[0] + "/" + WIDTHS[1] + "px variants");
     }
 }

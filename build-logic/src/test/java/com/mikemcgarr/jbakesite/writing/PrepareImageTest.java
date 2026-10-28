@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.mikemcgarr.jbakesite.internal.FakeRunner;
 import com.mikemcgarr.jbakesite.internal.Git;
+import com.mikemcgarr.jbakesite.internal.ImageRules;
 import com.mikemcgarr.jbakesite.internal.SiteLayout;
 import com.mikemcgarr.jbakesite.internal.ToolFailure;
 import java.awt.image.BufferedImage;
@@ -61,9 +62,9 @@ class PrepareImageTest {
 
         Path jpg = site.mastheads().resolve("sunset.jpg");
         assertFalse(Files.exists(png), "never published, so it goes");
-        assertTrue(Files.size(jpg) <= Images.MAX_BYTES);
+        assertTrue(Files.size(jpg) <= ImageRules.MAX_BYTES);
         BufferedImage back = ImageIO.read(jpg.toFile());
-        assertTrue(back.getWidth() <= PrepareImage.MASTHEAD_WIDTH);
+        assertTrue(back.getWidth() <= ImageRules.MAX_WIDTH);
         assertTrue(TestImages.isProgressiveJpeg(jpg));
         assertFalse(TestImages.carriesMetadata(jpg));
         assertEquals(960, ImageIO.read(site.mastheads().resolve("sunset-960.jpg").toFile()).getWidth());
@@ -163,7 +164,7 @@ class PrepareImageTest {
         tool.prepare(List.of("src/jbake/assets/img/masthead/hills.jpg"), DEFAULTS);
 
         assertTrue(Files.size(jpg) < before);
-        assertTrue(ImageIO.read(jpg.toFile()).getWidth() <= PrepareImage.MASTHEAD_WIDTH);
+        assertTrue(ImageIO.read(jpg.toFile()).getWidth() <= ImageRules.MAX_WIDTH);
         assertTrue(TestImages.isProgressiveJpeg(jpg));
         assertTrue(Files.exists(site.mastheads().resolve("hills-960.jpg")));
         assertTrue(printed().contains("  re-encoded in place: "), printed());
@@ -215,6 +216,6 @@ class PrepareImageTest {
         ToolFailure e = assertThrows(ToolFailure.class, () -> elsewhere.prepare(List.of("x.png"), DEFAULTS));
 
         assertEquals(ToolFailure.COULD_NOT_RUN, e.exitCode());
-        assertEquals("run it from the repository root (src/jbake/assets/img must exist).", e.getMessage());
+        assertEquals("Run it from the repository root (src/jbake/assets/img must exist).", e.getMessage());
     }
 }

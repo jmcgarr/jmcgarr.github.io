@@ -73,7 +73,9 @@ public abstract class ReviewChangesTask extends SiteToolTask {
     public abstract Property<String> getOnline();
 
     /**
-     * The baked site to review, {@code jbakeSite.destination}.
+     * The baked site to review, {@code jbakeSite.destination}. {@code @Internal}, not an input: the task has no
+     * outputs, so it runs every time anyway, and fingerprinting the 500 baked files would only cost time (the same
+     * choice as {@code CheckTagRedirectsTask}).
      *
      * @return the directory
      */

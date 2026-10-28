@@ -32,7 +32,7 @@ import java.util.Set;
  * wrong for one line is suppressed by an HTML comment on the line before it ({@link Suppressions}). It never changes
  * a file. {@link Report} prints what it found; {@link ReviewResult#failed} says whether the task fails.
  */
-public final class Review {
+final class Review {
 
     private final SiteLayout site;
     private final Path bakedSite;
@@ -51,7 +51,7 @@ public final class Review {
      * @param clock today, for the date fixes
      * @param out where the clean-tree message goes
      */
-    public Review(SiteLayout site, Path bakedSite, String siteHost, Git git, Clock clock, PrintStream out) {
+    Review(SiteLayout site, Path bakedSite, String siteHost, Git git, Clock clock, PrintStream out) {
         this.site = site;
         this.bakedSite = bakedSite;
         this.siteHost = siteHost;
@@ -69,7 +69,7 @@ public final class Review {
      * @throws InterruptedException if interrupted while asking git
      * @throws ToolFailure (exit 2) when the review can't run: no content, no bake, no git, no such base
      */
-    public ReviewResult run(ReviewOptions options) throws IOException, InterruptedException {
+    ReviewResult run(ReviewOptions options) throws IOException, InterruptedException {
         if (options.online()) {
             out.println("Note: external links aren't checked yet (task T119); -Ponline is accepted and ignored.");
         }
@@ -87,8 +87,8 @@ public final class Review {
         Changes changes = new Changes(site, git, options.base().strip());
         List<Change> changed = options.all() ? changes.everything() : changes.changed();
         if (changed.isEmpty()) {
-            out.println("Nothing to review: no changes under src/jbake or src/case-redirects since the merge base"
-                    + " with " + changes.base() + ".");
+            out.println("Nothing to review: no changes under " + site.display(site.source()) + " or "
+                    + site.display(site.caseRedirects()) + " since the merge base with " + changes.base() + ".");
             return ReviewResult.nothing();
         }
 
