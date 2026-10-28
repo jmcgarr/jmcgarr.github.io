@@ -28,7 +28,7 @@ dependencies {
     testImplementation platform('org.junit:junit-bom:6.1.3')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-    testImplementation gradleTestKit()   // one functional test runs the plugin in a real, temporary build
+    testImplementation gradleTestKit()   // the functional tests run the plugin in a real, temporary build
 }
 
 gradlePlugin {
@@ -43,6 +43,11 @@ gradlePlugin {
 tasks.withType(Test).configureEach {
     useJUnitPlatform()
     testLogging.exceptionFormat = 'full'
+    // The fixture site the functional tests bake (src/test/fixtures/site, T125): copied into a temporary build and
+    // run with Gradle TestKit, so a change to it reruns the tests
+    def fixtures = layout.projectDirectory.dir('src/test/fixtures')
+    inputs.dir(fixtures).withPropertyName('fixtures').withPathSensitivity(PathSensitivity.RELATIVE)
+    systemProperty 'fixtures.dir', fixtures.asFile.absolutePath
 }
 
 tasks.withType(Javadoc).configureEach {

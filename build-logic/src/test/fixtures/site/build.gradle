@@ -1,0 +1,16 @@
+plugins {
+    id 'jbake-site'
+}
+
+repositories {
+    mavenCentral()
+}
+
+// The site's pins, as the real build.gradle declares them: JBake, the two engines the plugin's defaults leave on
+// the classpath, and the launcher's CLI parser.
+dependencies {
+    jbake 'org.jbake:jbake-core:2.7.0'
+    jbake 'org.freemarker:freemarker:2.3.35'
+    jbake 'com.vladsch.flexmark:flexmark:0.64.8'
+    jbake 'info.picocli:picocli:4.7.7'
+}

@@ -283,7 +283,7 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
     partial (the watcher path) and stopped cleanly, and the next `clean bake` has no `livereload`; `check -Pbase=origin/main`
     0 errors; `test ! -e build/jbake/docs` and `scripts/check-docs-not-published.sh` pass; no CR line endings. Not
     verified locally: the Linux bake (CI). CI still runs no `:build-logic:test`; that step is T129's._
-- [ ] T125 [IMP] **Move the JBake run.** The `jbake` configuration (the only one after T133) with the engine exclusions and
+- [x] T125 [IMP] **Move the JBake run.** The `jbake` configuration (the only one after T133) with the engine exclusions and
   the lz4 substitution, `NewJdkJvmArgs`, the jffi and logback settings, the case-redirect copy with its
   case-sensitivity check, and the `bake` task, driven by `jbakeSite.source` and `jbakeSite.caseRedirects`. The
   `dependencies` block with the pins stays in `build.gradle` (`build-logic/`, `build.gradle`, `gradle/jbake-logback.xml`)
@@ -291,6 +291,45 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
     `src/case-redirects` are in the Linux bake and `scripts/check-urls.sh` passes there). On JDK 21 and JDK 25 a
     clean bake prints no JVM warning. `./gradlew dependencies --configuration jbake` lists the same resolved
     versions as on `main` (diff the two listings).
+  - _2026-10-28: **done** (`chore/T125-T126-plugin-bake-preview`, PR 3 of the owner's order, with T126). In the plugin,
+    package `com.mikemcgarr.jbakesite`: `JbakeClasspath` (creates the `jbake` configuration: declarable and resolvable, not
+    consumable; the five group exclusions and the lz4 substitution are applied as it resolves, read from
+    `jbakeSite.classpath { excludedGroups; substitutions }`, `JbakeClasspathExtension`, whose defaults are T112's lists, so
+    a site that uses one of the engines can have it back; more exclusions still go in `configurations.jbake { exclude … }`
+    as before), `JbakeTask` (what the bake and the preview share: JBake's launcher in a fresh JVM through
+    `ExecOperations.javaexec`, in the project directory, on the `jbake` classpath, with `jvmArguments` defaulting to
+    `NewJdkJvmArgs.forCurrentJvm()`, jffi's temp dir under `build/tmp/jffi` and the logback configuration), `NewJdkJvmArgs`
+    (JDK feature version → flags, a final helper now instead of a `CommandLineArgumentProvider`), `BakeTask` (`bake`: JBake
+    `-b`, then the compiled CSS copied in, then the stubs), `CaseRedirects` (the probe and the copy: the probe writes a
+    temporary file into the output and looks for its upper-case twin, instead of checking for `INDEX.HTML`, so it doesn't
+    depend on which pages a site renders; a missing or empty stubs directory means none, quietly) and `ProjectPaths` (the
+    project-relative paths the messages and the task descriptions use). **The extension** reads `jbakeSite { source;
+    destination; caseRedirects; logbackConfiguration; classpath { excludedGroups; substitutions } }` besides `scss`;
+    `destination` defaults to `build/jbake`, `caseRedirects` to `src/case-redirects`. **Logback:** `gradle/jbake-logback.xml`
+    moved unchanged into the plugin as a resource (`build-logic/src/main/resources/com/mikemcgarr/jbakesite/`), passed to
+    JBake's JVM as the resource's URL, which logback accepts like a path; `jbakeSite.logbackConfiguration` names a file
+    instead when a site wants its own. **Inputs and outputs:** `bake` declares the source directory, the stubs, the compiled
+    CSS, the classpath (`@Classpath`), the JVM flags and the optional logback file as inputs and the destination as its
+    output directory, so a second `bake` is UP-TO-DATE and the bake after a preview runs again (the preview rewrites the
+    output with the local host and the live-reload script). It is **not** `@CacheableTask`: JBake stamps `feed.xml` with
+    the time of the bake, so the output isn't a function of the inputs and a cached copy would be a stale one. **Judgment
+    calls:** `ExecOperations.javaexec` in a plain task rather than a `JavaExec` subclass, so the two tasks share one small
+    base class and declare only the inputs they mean; no `JavaLauncher`/toolchain (none was set before: JBake runs on the
+    JVM running Gradle, and `NewJdkJvmArgs` reads that JVM's version); the `bake` description keeps its text by building
+    it from the extension's project-relative paths. **What stayed in `build.gradle` for this commit, until T126:**
+    `bakePreview` as a `JavaExec` configured inline with the plugin's `NewJdkJvmArgs` and logback resource, the Groovy
+    watcher and the port check. **Test passed:** the bake is byte-identical to the base commit's (`diff -rq`: only
+    `feed.xml`; `cmp` of `css/clean-blog.css` and `css/code.css` identical); `./gradlew dependencies --configuration jbake`
+    before and after differ only in the configuration's new description line, every resolved module and version the same;
+    a clean bake on JDK 25.0.4 and on JDK 21.0.3 (`JAVA_HOME`) prints no JVM warning and is byte-identical too;
+    `./gradlew tasks` shows the Jbake and Writing groups as after T133; `:build-logic:check` passes with 39 tests: the
+    unit tests of `NewJdkJvmArgs`, `CaseRedirects` and `JbakeClasspath` (the exclusions are applied on resolve and the
+    extension overrides them), the plugin wiring, and the TestKit `BakeFunctionalTest` on the fixture site
+    (`build-logic/src/test/fixtures/site`: one post, one page, one SCSS entry with a partial, one stub; JBake really runs
+    under `--configuration-cache`: the pages render, the CSS is copied in, the stub is added only where the filesystem is
+    case-sensitive and the macOS message prints otherwise, a second run is UP-TO-DATE and reuses the configuration cache,
+    a changed post rebakes, and the `dependencies` report shows the lz4 substitution and none of the excluded groups).
+    Not verified locally: the Linux bake with the stubs and `scripts/check-urls.sh` (CI)._
 - [ ] T126 [IMP] **Move the preview.** `SassPreviewWatcher` as a Java build service, the port check (reading
   `server.hostname`/`server.port` from `jbake.properties`), the live-reload system property, and the `bakePreview`
   task (the only preview task after T133) (`build-logic/`, `build.gradle`)

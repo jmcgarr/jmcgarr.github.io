@@ -1,0 +1,4 @@
+// The fixture site the plugin's functional tests build (docs/06-GRADLE-PLUGIN.md, T125, T129): the smallest site
+// that exercises the bake, the CSS copy and the case-redirect stubs. The tests copy this directory into a temporary
+// build and run Gradle on it with the configuration cache on.
+rootProject.name = 'fixture-site'

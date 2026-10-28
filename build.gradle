@@ -1,5 +1,7 @@
 import com.mikemcgarr.jbakesite.CompileSassTask
 import com.mikemcgarr.jbakesite.FileTrees
+import com.mikemcgarr.jbakesite.JbakeTask
+import com.mikemcgarr.jbakesite.NewJdkJvmArgs
 import com.mikemcgarr.jbakesite.SassCompileException
 import com.mikemcgarr.jbakesite.SassCompiler
 import com.mikemcgarr.jbakesite.SassEntries
@@ -11,9 +13,19 @@ plugins {
     id 'jbake-site'
 }
 
-// What the site is; how it is built is the plugin's. Only the theme CSS so far (T124); the bake and the preview
-// follow (T125, T126).
+// What the site is; how it is built is the plugin's: the theme CSS (T124) and the bake (T125); the preview
+// follows (T126).
 jbakeSite {
+    // JBake's source and the baked site (what CI deploys, minus drafts). Both are the defaults, written out so the
+    // paths the README names are here.
+    source = file('src/jbake')                     // default
+    destination = layout.buildDirectory.dir('jbake')   // default
+    // Redirect stubs whose names differ from a real page only by letter case, tags/DevOps.html → tags/devops.html
+    // (T055, made by scripts/TagRedirects.java). They can't be JBake assets: on a case-insensitive filesystem (macOS)
+    // both names are one file, and JBake copies assets after rendering, so the stub would replace the real page.
+    // The plugin's bake adds them only when build/jbake is case-sensitive, as on Linux, where CI builds and GitHub
+    // Pages serves.
+    caseRedirects = file('src/case-redirects')     // default
     // The site's CSS (T043, issue #7; T134, T135). src/scss is the source of truth: the plugin's compileSass turns
     // every entry there (a .scss file whose name doesn't start with "_": clean-blog.scss, code.scss) into
     // build/generated/sass/css/<name>.css with Dart Sass, and the bake and the preview copy those into build/jbake,
@@ -34,44 +46,28 @@ jbakeSite {
                 '/css/clean-blog.css and /css/code.css are compiled from the entry of the same name, and extra.css ' +
                 'and fonts.css are part of clean-blog.css.'
     }
+    // JBake's classpath, the `jbake` configuration below: the plugin leaves out the template engines and parsers
+    // this site doesn't use (Thymeleaf, Pebble, Jade4j, Groovy templates, AsciidoctorJ) and replaces OrientDB's
+    // unmaintained lz4-java with its fork (T112; the why is in the plugin's JbakeClasspath). The defaults are right
+    // for this site; a site that uses one of those engines sets `classpath { excludedGroups = [...] }` here.
 }
 
 // JBake runs directly (T096) instead of through the Gradle plugin `org.jbake.site`. That plugin is unmaintained
 // (last release 5.5.0, 2021), can't run JBake 2.7, hid template errors behind a Groovy error (T095), and leaked
 // memory in the Gradle daemon on every bake until the 4th one failed with "Java heap space" (T099). Running
-// JBake's own launcher in a fresh JVM per bake fixes all of that. Dependabot proposes jbake-core updates.
+// JBake's own launcher in a fresh JVM per bake fixes all of that (the plugin's bake, T125). Dependabot proposes
+// jbake-core updates.
 repositories {
     mavenCentral()
 }
 
-configurations {
-    jbake {
-        // jbake-core 2.7.0 brings every template engine and content parser JBake supports. This site only uses
-        // FreeMarker (*.ftl) and Markdown (*.md, flexmark), so leave out the others and their libraries, some of
-        // which have advisories (T112). JBake only loads an engine whose classes are on the classpath, and skips
-        // the rest. Groovy is used by nothing else.
-        exclude group: 'org.thymeleaf'           // Thymeleaf (*.thyme), with ognl, javassist, attoparser
-        exclude group: 'io.pebbletemplates'      // Pebble (*.peb)
-        exclude group: 'de.neuland-bfi'          // Jade4j (*.jade), with commons-jexl
-        exclude group: 'org.codehaus.groovy'     // Groovy templates (*.gsp, *.tpl): groovy, -templates, -xml, -dateutil
-        // AsciiDoc (*.asciidoc, *.adoc) left with T102 (2026-10-18): every post and page is Markdown. AsciidoctorJ
-        // brought JRuby, its native jffi/jnr libraries, ASM, jcodings and joni, all of them gone with it.
-        exclude group: 'org.asciidoctor'         // AsciidoctorJ, with JRuby and its 20-odd libraries
-        // OrientDB (JBake's content store) depends on org.lz4:lz4-java, which is no longer maintained and has
-        // advisories. Use its maintained fork, at.yawk.lz4 (T112): same net.jpountz classes, so it's a drop-in
-        // replacement.
-        resolutionStrategy.dependencySubstitution {
-            substitute module('org.lz4:lz4-java') using module('at.yawk.lz4:lz4-java:1.12.0') because 'unmaintained (T112)'
-        }
-    }
-}
-
+// The versions on JBake's classpath. The configuration itself, `jbake`, is the plugin's (JbakeClasspath).
 dependencies {
     jbake 'org.jbake:jbake-core:2.7.0'
     // The engines and CLI parser this site uses, at newer versions than jbake-core asks for. jbake-core's Gradle
     // module metadata makes all its engines plain runtime dependencies (its Maven POM calls them optional), so
-    // the ones the site doesn't use are excluded above (T112). Dependabot keeps these current (minor/patch);
-    // check each update by comparing a bake against main.
+    // the ones the site doesn't use are left out by the plugin (jbakeSite.classpath, T112). Dependabot keeps these
+    // current (minor/patch); check each update by comparing a bake against main.
     jbake 'org.freemarker:freemarker:2.3.35'                         // templates (*.ftl)
     jbake 'com.vladsch.flexmark:flexmark:0.64.8'                     // *.md
     jbake 'com.vladsch.flexmark:flexmark-profile-pegdown:0.64.8'     // markdown.extensions in jbake.properties
@@ -98,92 +94,18 @@ dependencies {
         jbake 'org.yaml:snakeyaml:2.7'                               // 1.30: CVE-2022-1471 and others (*.yaml, data/)
         // Logback stays on 1.2: 1.3 and later need SLF4J 2, and JBake is built on SLF4J 1.7. 1.2.13 is the last
         // 1.2 release. Its remaining advisories have no 1.2 fix; they need a hostile logback config file (ours is
-        // gradle/jbake-logback.xml) or its network receivers, which JBake doesn't use. Dependabot is told to skip
-        // 1.3 and later (.github/dependabot.yml).
+        // the plugin's jbake-logback.xml) or its network receivers, which JBake doesn't use. Dependabot is told to
+        // skip 1.3 and later (.github/dependabot.yml).
         jbake 'ch.qos.logback:logback-classic:1.2.13'
         jbake 'ch.qos.logback:logback-core:1.2.13'
     }
 }
 
-// The bake and the preview both run JBake's own launcher in a fresh JVM (T096), with these settings.
-def jbakeSource = file('src/jbake')
-def jbakeDestination = layout.buildDirectory.dir('jbake').get().asFile
-// jffi (jnr-ffi, which OrientDB's jnr-posix brings; JRuby used to bring it too, until T102 removed AsciidoctorJ)
-// extracts its native library to a temporary file while loading (and removes it afterwards). Keep that under
-// build/tmp, which `clean` removes, instead of the project root (T024).
-def jffiDir = layout.buildDirectory.dir('tmp/jffi').get().asFile
-
-// Newer JDKs (T113): from JDK 24, JBake's JVM prints two warnings that the bake on 21 doesn't. OrientDB's
-// concurrentlinkedhashmap calls sun.misc.Unsafe::objectFieldOffset ("will be removed in a future release"), and
-// jffi (loaded by OrientDB's jnr-posix) calls System::load ("Restricted methods will be blocked in a future
-// release"). These flags allow both and silence the warnings; a bake without either still warns (checked on
-// JDK 25 after T102 removed JRuby). Each is added only on a JDK that knows it: JDK 21 refuses to start with
-// --sun-misc-unsafe-memory-access ("Unrecognized option"), which arrived in JDK 23 (JEP 471).
-// --enable-native-access is final from JDK 22 (JEP 454); 21 accepts it, but leaving it off keeps 21's command
-// line as it was. The version is that of the Java that runs JBake: the task's javaLauncher, which is the JVM
-// running Gradle (JAVA_HOME) because no toolchain is set. It is read lazily, and it's a task input.
-abstract class NewJdkJvmArgs implements CommandLineArgumentProvider {
-    @Input
-    abstract Property<Integer> getJavaVersion()
-
-    @Override
-    Iterable<String> asArguments() {
-        def version = javaVersion.get()
-        def args = []
-        if (version >= 22) { args << '--enable-native-access=ALL-UNNAMED' }
-        if (version >= 23) { args << '--sun-misc-unsafe-memory-access=allow' }
-        return args
-    }
-}
-
-def configureJBake = { JavaExec task ->
-    task.mainClass = 'org.jbake.launcher.Main'
-    // JDK 22+ and 23+ only (T113, see NewJdkJvmArgs above). The two --add-opens flags JRuby wanted went with
-    // AsciidoctorJ (T102): without them the bake prints nothing extra on JDK 21 or 25.
-    task.jvmArgumentProviders.add(objects.newInstance(NewJdkJvmArgs).tap {
-        javaVersion = task.javaLauncher.map { it.metadata.languageVersion.asInt() }
-    })
-    task.systemProperty 'jffi.extract.dir', jffiDir.absolutePath
-    task.systemProperty 'logback.configurationFile', file('gradle/jbake-logback.xml').absolutePath
-    task.doFirst { jffiDir.mkdirs() }
-}
-
-// Redirect stubs whose names differ from a real page only by letter case, such as tags/DevOps.html → tags/devops.html
-// (T055, made by scripts/TagRedirects.java). They can't be JBake assets: on a case-insensitive filesystem (macOS)
-// both names are one file, and JBake copies assets after rendering, so the stub would replace the real page. The
-// bake adds them only when build/jbake is case-sensitive, as on Linux, where CI builds and GitHub Pages serves.
-def caseRedirects = file('src/case-redirects')
-
 // The theme CSS, from the plugin (jbakeSite.scss above): compileSass writes it to build/generated/sass/css, and the
-// bake and the preview copy it into build/jbake/css after JBake has run, so nothing JBake copies can replace it
-// (FileTrees, also the plugin's, keeps relative paths and replaces files). Both run checkNoHandEditedCss first.
-// Providers, read when the tasks run: the extension can still change after this line.
+// preview copies it into build/jbake/css before JBake starts (the plugin's bake does the same after JBake has run).
+// Providers, read when the task runs: the extension can still change after this line.
 def themeCss = tasks.named('compileSass', CompileSassTask).flatMap { it.destinationDirectory }
-def siteCss = layout.buildDirectory.dir(jbakeSite.scss.publishedDir.map { "jbake/$it" })
-
-// Bakes src/jbake into build/jbake (drafts included, as <name>-draft.html; CI leaves them out of the deploy).
-tasks.register('bake', JavaExec) {
-    group = 'jbake'
-    description = 'Bakes the site from src/jbake into build/jbake with JBake.'
-    configureJBake(it)
-    dependsOn 'checkNoHandEditedCss'
-    inputs.dir(jbakeSource)
-    inputs.dir(caseRedirects)
-    inputs.files(themeCss).withPropertyName('themeCss')
-    outputs.dir(jbakeDestination)
-    classpath = configurations.jbake
-    args jbakeSource.absolutePath, jbakeDestination.absolutePath, '-b'
-    doLast {
-        // After JBake, so nothing JBake copies can replace it
-        FileTrees.copy(themeCss.get().asFile.toPath(), siteCss.get().asFile.toPath())
-        if (java.nio.file.Files.exists(jbakeDestination.toPath().resolve('INDEX.HTML'))) {
-            logger.lifecycle('Case-insensitive filesystem: left out the redirect stubs in src/case-redirects ' +
-                    '(they would replace the real pages with the same name in another case). CI adds them.')
-            return
-        }
-        FileTrees.copy(caseRedirects.toPath(), jbakeDestination.toPath())
-    }
-}
+def siteCss = jbakeSite.destination.dir(jbakeSite.scss.publishedDir)
 
 // Preview only (T043): recompiles the CSS straight into build/jbake while the preview runs, whenever a file in
 // src/scss changes (it checks every 0.5 s). Every entry is recompiled (T134), since a partial such as
@@ -277,10 +199,10 @@ def sassPreviewWatcher = gradle.sharedServices.registerIfAbsent('sassPreviewWatc
 // server" and exits with 4 (T101). So check first: bind the address JBake will use, the same way its Jetty does,
 // and fail with a clear message if that doesn't work. The address comes from server.hostname and server.port in
 // jbake.properties, where JBake reads it (JBake's own defaults are localhost and 8820).
-def jbakeProperties = new File(jbakeSource, 'jbake.properties')
+def jbakeProperties = jbakeSite.source.file('jbake.properties')
 def checkPreviewPortFree = {
     def config = new Properties()
-    jbakeProperties.withReader('UTF-8') { config.load(it) }
+    jbakeProperties.get().asFile.withReader('UTF-8') { config.load(it) }
     def host = config.getProperty('server.hostname', 'localhost').trim()
     def port = config.getProperty('server.port', '8820').trim() as int
     try {
@@ -293,18 +215,26 @@ def checkPreviewPortFree = {
                 'Stop it, or set server.port in src/jbake/jbake.properties.')
     }
 }
+// Until T126 moves it into the plugin, the preview runs JBake the way the plugin's bake does (JbakeTask): its
+// launcher in a fresh JVM on the `jbake` configuration, with the JDK 22+/23+ flags (NewJdkJvmArgs, T113), jffi's
+// temp dir under build/tmp (T024) and the plugin's bundled logback configuration (T096).
+def jffiDir = layout.buildDirectory.dir('tmp/jffi')
 tasks.register('bakePreview', JavaExec) {
     group = 'jbake'
     description = 'Bakes, serves http://localhost:8080, rebuilds on save, and reloads the open page (Ctrl+C to stop).'
-    configureJBake(it)
+    mainClass = 'org.jbake.launcher.Main'
     classpath = configurations.jbake
-    args jbakeSource.absolutePath, jbakeDestination.absolutePath, '-b', '-s'
+    jvmArgs NewJdkJvmArgs.forCurrentJvm()
+    systemProperty 'jffi.extract.dir', jffiDir.get().asFile.absolutePath
+    systemProperty 'logback.configurationFile', JbakeTask.getResource('jbake-logback.xml').toExternalForm()
+    args jbakeSite.source.get().asFile.absolutePath, jbakeSite.destination.get().asFile.absolutePath, '-b', '-s'
     // The CSS (T043, T134): checked and compiled first and put in place before JBake starts (JBake never deletes
     // it), then kept up to date by the SCSS watcher above.
     dependsOn 'checkNoHandEditedCss', 'compileSass'
     usesService(sassPreviewWatcher)
     doFirst {
         checkPreviewPortFree()
+        jffiDir.get().asFile.mkdirs()
         FileTrees.copy(themeCss.get().asFile.toPath(), siteCss.get().asFile.toPath())
         sassPreviewWatcher.get().start()
     }
