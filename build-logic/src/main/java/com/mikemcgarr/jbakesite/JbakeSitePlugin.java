@@ -1,7 +1,9 @@
 package com.mikemcgarr.jbakesite;
 
+import com.mikemcgarr.jbakesite.verification.CheckMastheadVariantsTask;
 import com.mikemcgarr.jbakesite.verification.CheckTagRedirectsTask;
 import com.mikemcgarr.jbakesite.writing.NewPostTask;
+import com.mikemcgarr.jbakesite.writing.PrepareImageTask;
 import com.mikemcgarr.jbakesite.writing.TagRedirects;
 import com.mikemcgarr.jbakesite.writing.TagRedirectsTask;
 import java.util.List;
@@ -28,9 +30,9 @@ import org.gradle.language.base.plugins.LifecycleBasePlugin;
  * ({@link CheckNoHandEditedCssTask}); T125 the {@code jbake} configuration ({@link JbakeClasspath}) and
  * {@code bake} ({@link BakeTask}); T126 {@code bakePreview} ({@link BakePreviewTask}) with its SCSS watcher
  * ({@link SassPreviewWatcher}); T127 (with the T130 decision) the four single-file programs of {@code scripts/} as
- * task classes, one commit each: so far the {@code writing} group's {@code newPost} ({@link NewPostTask}) and
- * {@code tagRedirects} ({@link TagRedirectsTask}), and the {@code verification} group's {@code checkTagRedirects}
- * ({@link CheckTagRedirectsTask}), which {@code check} runs.
+ * task classes: the {@code writing} group's {@code newPost} ({@link NewPostTask}), {@code reviewChanges},
+ * {@code prepareImage} and {@code tagRedirects}, and the {@code verification} group's {@code checkTagRedirects} and
+ * {@code checkMastheadVariants}, which {@code check} runs with the review.
  *
  * <p>The plugin applies Gradle's {@code base} plugin for {@code clean} and the {@code check} lifecycle task.
  */
@@ -57,8 +59,14 @@ public final class JbakeSitePlugin implements Plugin<Project> {
     /** The task that starts a draft post on a new branch. */
     public static final String NEW_POST_TASK_NAME = "newPost";
 
+    /** The task that makes a hand-added image fit the image rules. */
+    public static final String PREPARE_IMAGE_TASK_NAME = "prepareImage";
+
     /** The task that writes the redirect stubs for old tag URLs. */
     public static final String TAG_REDIRECTS_TASK_NAME = "tagRedirects";
+
+    /** The task that checks every masthead in use has its 960/1440 px variants. */
+    public static final String CHECK_MASTHEAD_VARIANTS_TASK_NAME = "checkMastheadVariants";
 
     /** The task that checks the old tag URLs in a baked site. */
     public static final String CHECK_TAG_REDIRECTS_TASK_NAME = "checkTagRedirects";
@@ -220,6 +228,17 @@ public final class JbakeSitePlugin implements Plugin<Project> {
             task.getPr().set(providers.gradleProperty("pr"));
             task.getFormat().set(providers.gradleProperty("format"));
         });
+        tasks.register(PREPARE_IMAGE_TASK_NAME, PrepareImageTask.class, task -> {
+            task.setGroup(WRITING_GROUP);
+            task.setDescription("Prepares a hand-added image for the site (sRGB, metadata, size, masthead variants): ./gradlew prepareImage -Pimage=<path>");
+            task.getImage().set(providers.gradleProperty("image"));
+            task.getDryRun().set(providers.gradleProperty("dryRun"));
+            task.getPng().set(providers.gradleProperty("png"));
+            task.getJpeg().set(providers.gradleProperty("jpeg"));
+            task.getWidth().set(providers.gradleProperty("width"));
+            task.getKeepSource().set(providers.gradleProperty("keepSource"));
+            task.getVariants().set(providers.gradleProperty("variants"));
+        });
         tasks.register(TAG_REDIRECTS_TASK_NAME, TagRedirectsTask.class, task -> {
             task.setGroup(WRITING_GROUP);
             task.setDescription("Writes any missing or outdated redirect stub for an old tag URL, never deleting one (on an approved tag rename).");
@@ -245,6 +264,11 @@ public final class JbakeSitePlugin implements Plugin<Project> {
                     task.getSite().set(siteToCheck);
                     task.getTagRenames().set(site.getTagRenames());
                 });
-        tasks.named(LifecycleBasePlugin.CHECK_TASK_NAME, check -> check.dependsOn(checkTagRedirects));
+        TaskProvider<CheckMastheadVariantsTask> checkMastheadVariants = tasks.register(CHECK_MASTHEAD_VARIANTS_TASK_NAME,
+                CheckMastheadVariantsTask.class, task -> {
+                    task.setGroup(VERIFICATION_GROUP);
+                    task.setDescription("Checks that every header image in use has its 960 and 1440px variants (run by CI).");
+                });
+        tasks.named(LifecycleBasePlugin.CHECK_TASK_NAME, check -> check.dependsOn(checkTagRedirects, checkMastheadVariants));
     }
 }

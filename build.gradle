@@ -94,27 +94,6 @@ dependencies {
     }
 }
 
-// Prepares an image added by hand under src/jbake/assets/img/ (sRGB, no camera metadata, the Rule 4 size and
-// weight, a photo PNG turned into a JPEG that the pages are pointed at, the 960/1440 masthead variants). The
-// logic is scripts/PrepareImage.java, a single-file Java program (T140), so it also runs without Gradle:
-// java scripts/PrepareImage.java <image>, --variants <image> (the variants alone), --check-variants (what CI runs).
-//   ./gradlew prepareImage -Pimage=src/jbake/assets/img/masthead/photo.png[,other.jpg] [-PdryRun] [-Ppng|-Pjpeg]
-//                          [-Pwidth=1000] [-PkeepSource]
-tasks.register('prepareImage', Exec) {
-    group = 'writing'
-    description = 'Prepares a hand-added image for the site (sRGB, metadata, size, masthead variants): ./gradlew prepareImage -Pimage=<path>'
-    executable = "${System.getProperty('java.home')}/bin/java"
-    def options = ['image', 'dryRun', 'png', 'jpeg', 'width', 'keepSource']
-            .collectEntries { [(it): providers.gradleProperty(it)] }
-    argumentProviders.add({
-        if (!options.image.isPresent()) {
-            throw new GradleException('Say which image: ./gradlew prepareImage -Pimage=src/jbake/assets/img/masthead/photo.png')
-        }
-        ['scripts/PrepareImage.java'] + options.findAll { name, value -> value.isPresent() }
-                .collect { name, value -> "--${name}=${value.get()}".toString() }
-    } as CommandLineArgumentProvider)
-}
-
 // Reviews the pages this branch changed (T117, docs/05-REVIEW-FLOW.md): Markdown link syntax, brackets left in the
 // rendered text, local links and images, the header, image rules (errors), and a changed page's date, tag spellings,
 // alt text, removed URLs and missing summaries (warnings). The logic is scripts/ReviewChanges.java, a single-file
