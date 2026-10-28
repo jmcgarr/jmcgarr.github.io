@@ -3,6 +3,7 @@ package com.mikemcgarr.jbakesite;
 import org.gradle.api.Action;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.RegularFileProperty;
+import org.gradle.api.provider.MapProperty;
 import org.gradle.api.tasks.Nested;
 
 /**
@@ -13,7 +14,7 @@ import org.gradle.api.tasks.Nested;
  * each slice adds what it needs (T124: {@link #getScss() scss} and {@link #getSource() source}; T125:
  * {@link #getDestination() destination}, {@link #getCaseRedirects() caseRedirects},
  * {@link #getLogbackConfiguration() logbackConfiguration} and {@link #getClasspath() classpath}; T127:
- * {@link #getPublishedUrls() publishedUrls}).
+ * {@link #getPublishedUrls() publishedUrls} and {@link #getTagRenames() tagRenames}).
  */
 public abstract class JbakeSiteExtension {
 
@@ -54,6 +55,17 @@ public abstract class JbakeSiteExtension {
      * @return the file
      */
     public abstract RegularFileProperty getPublishedUrls();
+
+    /**
+     * Tags merged into another tag or renamed on purpose, old to new, both as written in the posts' {@code tags=}
+     * lines: every old URL of the old tag gets a redirect stub to the new tag's page ({@code tagRedirects},
+     * {@code checkTagRedirects}). Default: this site's owner-approved list of 2026-10-09
+     * ({@code com.mikemcgarr.jbakesite.writing.TagRedirects#RENAMES}); a site with none sets {@code tagRenames = [:]}.
+     * Never remove an entry: its stubs are published URLs (Rule 1).
+     *
+     * @return the renames
+     */
+    public abstract MapProperty<String, String> getTagRenames();
 
     /**
      * A logback configuration for JBake's JVM, instead of the plugin's own ({@link JbakeTask}: JBake's summary,
