@@ -181,17 +181,28 @@ final class OpenPr {
         return pushAndOpen(branch, repo, title, body);
     }
 
-    /** Stages exactly the listed files and commits them with the message and the trailers. */
+    /**
+     * Stages exactly the listed files and commits them, and only them, with the message and the trailers. The
+     * {@code git add} makes untracked files known to git (the old path of a rename isn't added: it is gone from the
+     * index already, and git refuses a pathspec that matches nothing); {@code git commit --only -- <paths>} then commits
+     * those paths alone, both sides of a rename, so a change the author had staged outside {@link #COMMITTED_PATHS}
+     * (listed as not included) stays in the index instead of riding along (review of 2026-10-28).
+     */
     private void commit(WorkingTree tree, String message, String branch) throws InterruptedException {
         List<String> add = new ArrayList<>(List.of("git", "add", "--"));
-        add.addAll(tree.paths());
-        List<String> commit = new ArrayList<>(List.of("git", "commit", "--quiet", "-m", message));
+        add.addAll(tree.staged());
+        List<String> commit = new ArrayList<>(List.of("git", "commit", "--quiet", "--only", "-m", message));
         if (!commitTrailers.isEmpty()) {
             commit.add("-m");
             commit.add(String.join("\n", commitTrailers));
         }
-        if (!runner.runVisibly(add) || !runner.runVisibly(commit)) {
-            throw fail("Committing failed (see the git output above). Nothing was pushed; the files are as they were.");
+        commit.add("--");
+        commit.addAll(tree.paths());
+        if (!runner.runVisibly(add)) {
+            throw fail("Staging the files failed (see the git output above). Nothing was committed or pushed.");
+        }
+        if (!runner.runVisibly(commit)) {
+            throw fail("Committing failed (see the git output above). Nothing was pushed; the listed files are staged.");
         }
         int files = tree.included().size();
         out.println("Committed " + files + (files == 1 ? " file" : " files") + " on " + branch + ": " + message);
@@ -229,18 +240,24 @@ final class OpenPr {
 
     /**
      * The uncommitted work, from {@code git status}, split into what is committed from and what isn't. The porcelain
-     * v2 format is read because its lines never start with a space ({@code 1 }, {@code 2 }, {@code ? }), which the
-     * trimmed command output would lose; each entry is shown the way the short format reads it ({@code  M path},
+     * v2 format is read because its entries never start with a space ({@code 1 }, {@code 2 }, {@code ? }), which the
+     * trimmed command output would lose, and with {@code -z} (NUL between entries, and between a rename's new and old
+     * path) because without it git C-quotes a path with a space, a quote or a non-ASCII letter
+     * ({@code "src/jbake/content/caf\303\251.md"}), which would be misread and then handed to {@code git add} as the
+     * quoted literal (review of 2026-10-28). Each entry is shown the way the short format reads it ({@code  M path},
      * {@code ?? path}, {@code R  old -> new}).
+     *
+     * @throws ToolFailure when a merge is in progress: an unmerged file must be resolved by the author, not committed
+     *         with its conflict markers
      */
     private WorkingTree workingTree() throws IOException, InterruptedException {
         List<String> included = new ArrayList<>();
         List<String> notIncluded = new ArrayList<>();
         List<String> paths = new ArrayList<>();
-        for (String line : lines(git.output("status", "--porcelain=v2", "--untracked-files=all"))) {
-            StatusEntry entry = StatusEntry.parse(line);
-            if (entry == null) {
-                continue;
+        List<String> staged = new ArrayList<>();
+        for (StatusEntry entry : StatusEntry.parseAll(git.output("status", "--porcelain=v2", "-z", "--untracked-files=all"))) {
+            if (entry.unmerged()) {
+                throw fail("Resolve the merge conflicts first (git status shows them), then run ./gradlew openPr.");
             }
             if (isCommitted(entry.path())) {
                 included.add(entry.shown());
@@ -248,11 +265,12 @@ final class OpenPr {
                     paths.add(entry.original());
                 }
                 paths.add(entry.path());
+                staged.add(entry.path());
             } else {
                 notIncluded.add(entry.shown());
             }
         }
-        return new WorkingTree(included, notIncluded, paths);
+        return new WorkingTree(included, notIncluded, paths, staged);
     }
 
     /**
@@ -348,49 +366,62 @@ final class OpenPr {
     }
 
     /**
-     * One line of {@code git status --porcelain=v2}: an ordinary change ({@code 1 XY ... path}), a rename or copy
-     * ({@code 2 XY ... path<TAB>original}) or an untracked file ({@code ? path}); unmerged entries ({@code u}) are
-     * read like ordinary ones.
+     * One entry of {@code git status --porcelain=v2 -z}: an ordinary change ({@code 1 XY ... path}), a rename or copy
+     * ({@code 2 XY ... path NUL original}), an untracked file ({@code ? path}) or an unmerged file
+     * ({@code u XY ... path}).
      *
      * @param status the two-letter index and working-tree status, {@code ??} for an untracked file
      * @param path the path, the new one for a rename
      * @param original the old path of a rename, or null
+     * @param unmerged whether the file has merge conflicts (a {@code u} entry)
      */
-    record StatusEntry(String status, String path, String original) {
+    record StatusEntry(String status, String path, String original, boolean unmerged) {
 
         private static final int CHANGE_FIELDS = 8;     // "1 XY sub mH mI mW hH hI" then the path
-        private static final int RENAME_FIELDS = 9;     // "2 XY sub mH mI mW hH hI Xscore" then "path\toriginal"
+        private static final int RENAME_FIELDS = 9;     // "2 XY sub mH mI mW hH hI Xscore" then the path, NUL, the original
         private static final int UNMERGED_FIELDS = 10;  // "u XY sub m1 m2 m3 mW h1 h2 h3" then the path
 
         /**
-         * Parses a line.
+         * Parses the whole output.
          *
-         * @param line the line
-         * @return the entry, or null for a line that isn't one (a header, or a kind not listed)
+         * @param output the output of {@code git status --porcelain=v2 -z}, NUL-separated
+         * @return the entries, in git's order; a token that isn't one (a header, or a kind not listed) is skipped
          */
-        static StatusEntry parse(String line) {
-            if (line.startsWith("? ")) {
-                return new StatusEntry("??", line.substring(2), null);
+        static List<StatusEntry> parseAll(String output) {
+            List<StatusEntry> entries = new ArrayList<>();
+            String[] tokens = output.split("\0");
+            for (int i = 0; i < tokens.length; i++) {
+                String token = tokens[i];
+                if (token.isEmpty()) {
+                    continue;
+                }
+                if (token.startsWith("? ")) {
+                    entries.add(new StatusEntry("??", token.substring(2), null, false));
+                    continue;
+                }
+                int fields = switch (token.charAt(0)) {
+                    case '1' -> CHANGE_FIELDS;
+                    case '2' -> RENAME_FIELDS;
+                    case 'u' -> UNMERGED_FIELDS;
+                    default -> 0;
+                };
+                if (fields == 0) {
+                    continue;
+                }
+                String[] parts = token.split(" ", fields + 1);
+                if (parts.length <= fields) {
+                    continue;
+                }
+                String status = parts[1].replace('.', ' ');
+                String path = parts[fields];
+                if (fields == RENAME_FIELDS) {
+                    String original = i + 1 < tokens.length ? tokens[++i] : "";
+                    entries.add(new StatusEntry(status, path, original, false));
+                } else {
+                    entries.add(new StatusEntry(status, path, null, fields == UNMERGED_FIELDS));
+                }
             }
-            int fields = switch (line.isEmpty() ? ' ' : line.charAt(0)) {
-                case '1' -> CHANGE_FIELDS;
-                case '2' -> RENAME_FIELDS;
-                case 'u' -> UNMERGED_FIELDS;
-                default -> 0;
-            };
-            if (fields == 0) {
-                return null;
-            }
-            String[] parts = line.split(" ", fields + 1);
-            if (parts.length <= fields) {
-                return null;
-            }
-            String status = parts[1].replace('.', ' ');
-            String rest = parts[fields];
-            int tab = fields == RENAME_FIELDS ? rest.indexOf('\t') : -1;
-            return tab >= 0
-                    ? new StatusEntry(status, rest.substring(0, tab), rest.substring(tab + 1))
-                    : new StatusEntry(status, rest, null);
+            return entries;
         }
 
         /** The entry as {@code git status --short} shows it. */
@@ -404,9 +435,10 @@ final class OpenPr {
      *
      * @param included the {@code git status} lines of the files openPr commits
      * @param notIncluded the lines of the files it leaves alone
-     * @param paths the paths to stage for the included files (both sides of a rename)
+     * @param paths the paths to commit for the included files (both sides of a rename)
+     * @param staged the paths to stage first: the same without the old side of a rename
      */
-    record WorkingTree(List<String> included, List<String> notIncluded, List<String> paths) {
+    record WorkingTree(List<String> included, List<String> notIncluded, List<String> paths, List<String> staged) {
 
         void printNotIncluded(PrintStream out) {
             if (notIncluded.isEmpty()) {

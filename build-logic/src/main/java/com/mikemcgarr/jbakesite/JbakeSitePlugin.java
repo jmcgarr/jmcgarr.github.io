@@ -269,7 +269,7 @@ public final class JbakeSitePlugin implements Plugin<Project> {
         tasks.named(LifecycleBasePlugin.CHECK_TASK_NAME, check -> check.dependsOn(reviewChanges));
         tasks.register(OPEN_PR_TASK_NAME, OpenPrTask.class, task -> {
             task.setGroup(WRITING_GROUP);
-            task.setDescription("Reviews this branch's changes, then pushes it and opens a pull request against main: ./gradlew openPr [-Ptitle=\"...\"] [-Pmessage=\"...\"]");
+            task.setDescription("Reviews this branch's changes, then pushes it and opens a pull request against main: ./gradlew openPr [-Ptitle=\"...\"] [-Pmessage=\"...\"] [-Pcloses=N,M] [-Prefs=N] [-PdryRun] (README, \"To open a pull request\")");
             task.dependsOn(BAKE_TASK_NAME);
             task.getSite().set(site.getDestination());
             task.getTitle().set(providers.gradleProperty("title"));

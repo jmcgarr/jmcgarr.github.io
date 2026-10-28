@@ -210,19 +210,22 @@ When the change is ready, one command reviews it, pushes the branch and opens th
 ```
 ./gradlew openPr
 ```
-It refuses to run on `main` or `master` (AGENTS.md Rule 2: every change goes on its own branch). With uncommitted
-work it first prints the files it **would commit** (changed and untracked files under `src/`, `docs/`, `scripts/`,
-`build-logic/`, `.github/`, and `README.md`, `AGENTS.md`, `CLAUDE.md`, `build.gradle`, `settings.gradle`; anything
-else is listed as not included and left alone) and stops, so you see the list before anything is committed. Re-run
-with `-Pmessage="…"` to commit exactly those files with that message (plus the trailer lines in
-`jbakeSite.commitTrailers`, none by default). Then it bakes and runs the same review as `./gradlew reviewChanges`
-against `main`; on an error nothing is pushed and the report says what to fix. If the review passes it pushes the
-branch (`git push --set-upstream origin <branch>`) and opens a **ready** pull request against `main` with the
-[GitHub CLI](https://cli.github.com) (logged in, checked first), printing its URL. The title is `-Ptitle`, or the
-subject of the branch's first commit; the description lists the commits, carries the review's summary line
-("Reviewed 1 page (about.html) from 1 changed file. 0 errors, 0 warnings. …") and one `Closes #N` or `Refs #N` line
-per issue from `-Pcloses=3,16`, `-Prefs=14` and the commit messages (AGENTS.md Rule 5). `-PdryRun` does everything but
-commit, push and open, and prints the pull request it would open.
+It bakes first (`bake` is a dependency of the task, so the review below has a site to read). It refuses to run on
+`main` or `master` (AGENTS.md Rule 2: every change goes on its own branch), and in the middle of a merge with
+conflicts. With uncommitted work it prints the files it **would commit** (changed and untracked files under `src/`,
+`docs/`, `scripts/`, `build-logic/`, `.github/`, and `README.md`, `AGENTS.md`, `CLAUDE.md`, `build.gradle`,
+`settings.gradle`; anything else is listed as not included and left alone) and stops, so you see the list before
+anything is committed. Re-run with `-Pmessage="…"` to commit exactly those files with that message (plus the trailer
+lines in `jbakeSite.commitTrailers`, none by default): `git commit --only -- <the listed paths>`, so a change you had
+staged outside those paths stays staged and out of the commit. Then it runs the same review as `./gradlew
+reviewChanges` against `main`; on an error nothing is pushed and the report says what to fix. If the review passes it
+pushes the branch (`git push --set-upstream origin <branch>`) and opens a **ready** pull request against `main` with
+the [GitHub CLI](https://cli.github.com), printing its URL. The title is `-Ptitle`, or the subject of the branch's
+first commit; the description lists the commits, carries the review's summary line ("Reviewed 1 page (about.html)
+from 1 changed file. 0 errors, 0 warnings. …") and one `Closes #N` or `Refs #N` line per issue from `-Pcloses=3,16`,
+`-Prefs=14` and the commit messages (AGENTS.md Rule 5). `-PdryRun` does everything but commit, push and open, and
+prints the pull request it would open; it still needs `gh` installed and logged in, because the readiness checks
+(gh, `gh auth status`, the `origin` remote, `main` pushed) run before the commit, whether dry or not.
 
 To convert an old post to Markdown
 ==================================

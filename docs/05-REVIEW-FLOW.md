@@ -327,6 +327,26 @@ criteria. M9 is done when T121 and CHK045 are; CHK043, CHK044 and CHK046 passed 
     on its own branch off main, never on main itself (AGENTS.md, Rule 2). Run git switch -c
     <type>/<short-description>, then ./gradlew openPr." Never merged, so CHK045 still waits for a real PR opened with
     `openPr`: PR 6 itself could be._
+  - _2026-10-28 (review of the branch, "safe to merge with the fixes"; applied in the commit "Apply the review findings
+    to openPr"): three defects in the commit step, each confirmed with real git. (1) `git add -- <paths>` followed by a
+    bare `git commit` committed the whole index, so a file the author had pre-staged outside the committed paths (one
+    the tool had just listed as not included) rode along; the commit is now `git commit --quiet --only -m <message>
+    [-m <trailers>] -- <paths>`, which commits the listed paths alone (both sides of a rename; the rename's old path
+    is no longer passed to `git add`, which refuses a pathspec that matches nothing) and leaves the other staged
+    changes in the index. (2) `git status --porcelain=v2` without `-z` C-quotes a path with a space or a non-ASCII
+    letter (`? "src/jbake/content/caf\303\251.md"`), so such a file was listed as not included and would have been
+    handed to `git add` as the quoted literal; the status is now read with `-z` and split on NUL (a rename is `path NUL
+    original`). (3) An unmerged (`u`) entry was read like an ordinary change, so `openPr -Pmessage` mid-merge would
+    have committed conflict markers; it now refuses before anything is listed, staged or asked of gh: "Resolve the
+    merge conflicts first (git status shows them), then run ./gradlew openPr." Also: a failed `git commit` after a
+    successful `git add` now says "Nothing was pushed; the listed files are staged" (a failed `git add` says nothing was
+    committed or pushed); the README's section no longer says the bake runs after the commit (it is a task dependency,
+    so it runs first) and says `-PdryRun` still needs `gh` installed and logged in because the readiness checks run
+    first; the task's description names `-Pcloses`, `-Prefs` and `-PdryRun`. **Tests:** `OpenPrTest` gained the
+    `--only -- <paths>` assertion, the merge-in-progress refusal, the two failure messages, a non-ASCII name and a name
+    with a space in the real-tree listing, and a real-tree commit (real git, a bare `origin`, faked gh) with a
+    pre-staged file outside the paths that must stay staged and uncommitted, a rename, and both special names in the
+    commit; 182 → 185 tests, 0 failures._
 - [ ] T122 [IMP] _(Optional, later)_ **Grammar checking: Vale, LanguageTool, or neither.** Try Vale with the write-good
   and proselint styles on the 2026 posts and About; count true findings against noise. Record the decision here.
   If adopted, it becomes W7 in a later task, advisory only (`docs/05-REVIEW-FLOW.md`)

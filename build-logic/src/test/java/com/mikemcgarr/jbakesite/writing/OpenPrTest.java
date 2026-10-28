@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.mikemcgarr.jbakesite.internal.CommandRunner;
 import com.mikemcgarr.jbakesite.internal.FakeRunner;
 import com.mikemcgarr.jbakesite.internal.Git;
 import com.mikemcgarr.jbakesite.internal.ProcessRunner;
@@ -28,22 +29,28 @@ import org.junit.jupiter.api.io.TempDir;
 /**
  * Every branch of the openPr flow (docs/05-REVIEW-FLOW.md, T121) against a scripted git and gh: the refusals, the
  * uncommitted work with and without a message, the review stopping the push, the push and the pull request with
- * their exact arguments, a missing gh, the dry run, the title and the issue lines; and the listing of a real
- * working tree.
+ * their exact arguments, a missing gh, the dry run, the title and the issue lines; and, on a real working tree, the
+ * listing (with a non-ASCII name and a space) and a commit that leaves the author's other staged changes alone.
  */
 class OpenPrTest {
 
     private static final String SUMMARY = "Reviewed 1 page (about.html) from 1 changed file. 0 errors, 1 warning. External links not checked (T119).";
     private static final OpenPr.Reviewer PASSING = base -> new ReviewOutcome(true, SUMMARY);
-    /** A `git status --porcelain=v2` line for a file modified in the working tree, up to the path. */
+    /** A `git status --porcelain=v2 -z` entry for a file modified in the working tree, up to the path; entries end with NUL. */
     private static final String V2_MODIFIED = "1 .M N... 100644 100644 100644 1111111111111111111111111111111111111111 1111111111111111111111111111111111111111 ";
-    /** The same for a staged rename, up to "new\told". */
+    /** The same for a staged rename, up to "new NUL old". */
     private static final String V2_RENAMED = "2 R. N... 100644 100644 100644 2222222222222222222222222222222222222222 3333333333333333333333333333333333333333 R100 ";
+    /** The same for a file with merge conflicts, up to the path. */
+    private static final String V2_UNMERGED = "u UU N... 100644 100644 100644 100644 1111111111111111111111111111111111111111 2222222222222222222222222222222222222222 3333333333333333333333333333333333333333 ";
     private static final OpenPr.Reviewer FAILING = base -> new ReviewOutcome(false,
             "Reviewed 1 page (about.html) from 1 changed file. 1 error, 0 warnings. External links not checked (T119).");
 
     @TempDir
     Path root;
+
+    /** A bare repository that stands in for GitHub's, for the real push. */
+    @TempDir
+    Path origin;
 
     private SiteLayout site;
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -62,7 +69,7 @@ class OpenPrTest {
                 .answer("git rev-parse --is-inside-work-tree", 0, "true")
                 .answer("git branch --show-current", 0, "fix/thing")
                 .answer("git rev-parse --verify --quiet refs/heads/main", 0, "abc123")
-                .answer("git status --porcelain=v2 --untracked-files=all", 0, "")
+                .answer("git status --porcelain=v2 -z --untracked-files=all", 0, "")
                 .answer("git remote get-url origin", 0, "git@github.com:owner/site.git")
                 .answer("git rev-list --count refs/remotes/origin/main..refs/heads/main", 0, "0")
                 .answer("git var GIT_COMMITTER_IDENT", 0, "Test <test@example.test> 1 +0000")
@@ -122,9 +129,9 @@ class OpenPrTest {
 
     @Test
     void listsTheUncommittedWorkAndStopsWithoutAMessageBeforeAskingGh() {
-        FakeRunner runner = readyBranch().answer("git status --porcelain=v2 --untracked-files=all", 0,
-                V2_MODIFIED + "src/jbake/content/about.md\n? docs/notes.md\n? scratch.txt\n" + V2_RENAMED + "README-old.md\tREADME.md\n"
-                + V2_MODIFIED + "build.gradle\n");
+        FakeRunner runner = readyBranch().answer("git status --porcelain=v2 -z --untracked-files=all", 0,
+                V2_MODIFIED + "src/jbake/content/about.md\0? docs/notes.md\0? scratch.txt\0" + V2_RENAMED + "README-old.md\0README.md\0"
+                + V2_MODIFIED + "build.gradle\0");
 
         ToolFailure e = assertThrows(ToolFailure.class, () -> openPr(runner, PASSING, List.of()).open(OpenPrOptions.NONE));
 
@@ -139,19 +146,19 @@ class OpenPrTest {
 
     @Test
     void withAMessageItCommitsExactlyTheListedFilesWithTheTrailersThenGoesOn() throws IOException, InterruptedException {
-        FakeRunner runner = readyBranch().answer("git status --porcelain=v2 --untracked-files=all", 0,
-                V2_MODIFIED + "src/jbake/content/about.md\n? src/jbake/assets/img/new.jpg\n? scratch.txt\n" + V2_RENAMED + "docs/b.md\tdocs/a.md\n");
+        FakeRunner runner = readyBranch().answer("git status --porcelain=v2 -z --untracked-files=all", 0,
+                V2_MODIFIED + "src/jbake/content/about.md\0? src/jbake/assets/img/new.jpg\0? scratch.txt\0" + V2_RENAMED + "docs/b.md\0docs/a.md\0");
         List<String> trailers = List.of("Co-Authored-By: Pair <pair@example.test>", "Session: https://example.test/s/1");
 
         String url = openPr(runner, PASSING, trailers).open(new OpenPrOptions(null, "Edit the About page", null, null, false));
 
         assertEquals("https://github.com/owner/site/pull/42", url);
-        assertTrue(runner.calls().contains("git add -- src/jbake/content/about.md src/jbake/assets/img/new.jpg docs/a.md docs/b.md"),
-                "exactly the listed files, both sides of the rename, not -A: " + runner.calls());
-        assertTrue(runner.calls().contains("git commit --quiet -m Edit the About page -m Co-Authored-By: Pair <pair@example.test>\nSession: https://example.test/s/1"),
-                runner.calls().toString());
+        assertTrue(runner.calls().contains("git add -- src/jbake/content/about.md src/jbake/assets/img/new.jpg docs/b.md"),
+                "exactly the listed files, not -A; a rename's old path is gone from the index already: " + runner.calls());
+        assertTrue(runner.calls().contains("git commit --quiet --only -m Edit the About page -m Co-Authored-By: Pair <pair@example.test>\nSession: https://example.test/s/1 -- src/jbake/content/about.md src/jbake/assets/img/new.jpg docs/a.md docs/b.md"),
+                "both sides of the rename, and nothing the author staged outside the paths: " + runner.calls());
         assertTrue(printed().contains("Committed 3 files on fix/thing: Edit the About page\n"), printed());
-        int commit = runner.calls().indexOf("git commit --quiet -m Edit the About page -m Co-Authored-By: Pair <pair@example.test>\nSession: https://example.test/s/1");
+        int commit = runner.calls().indexOf("git commit --quiet --only -m Edit the About page -m Co-Authored-By: Pair <pair@example.test>\nSession: https://example.test/s/1 -- src/jbake/content/about.md src/jbake/assets/img/new.jpg docs/a.md docs/b.md");
         int committer = runner.calls().indexOf("git var GIT_COMMITTER_IDENT");
         int auth = runner.calls().indexOf("gh auth status");
         assertTrue(auth < commit && committer < commit, "readiness and the committer are checked before committing: " + runner.calls());
@@ -159,12 +166,44 @@ class OpenPrTest {
 
     @Test
     void withoutTrailersTheCommitHasTheMessageAlone() throws IOException, InterruptedException {
-        FakeRunner runner = readyBranch().answer("git status --porcelain=v2 --untracked-files=all", 0, V2_MODIFIED + "AGENTS.md\n");
+        FakeRunner runner = readyBranch().answer("git status --porcelain=v2 -z --untracked-files=all", 0, V2_MODIFIED + "AGENTS.md\0");
 
         openPr(runner, PASSING, List.of()).open(new OpenPrOptions(null, "Clarify Rule 2", null, null, false));
 
-        assertTrue(runner.calls().contains("git commit --quiet -m Clarify Rule 2"), runner.calls().toString());
+        assertTrue(runner.calls().contains("git commit --quiet --only -m Clarify Rule 2 -- AGENTS.md"), runner.calls().toString());
         assertTrue(printed().contains("Committed 1 file on fix/thing: Clarify Rule 2\n"), printed());
+    }
+
+    @Test
+    void aMergeInProgressIsRefusedBeforeAnythingIsStagedOrAsked() {
+        FakeRunner runner = readyBranch().answer("git status --porcelain=v2 -z --untracked-files=all", 0,
+                V2_MODIFIED + "README.md\0" + V2_UNMERGED + "src/jbake/content/about.md\0");
+
+        ToolFailure e = assertThrows(ToolFailure.class,
+                () -> openPr(runner, PASSING, List.of()).open(new OpenPrOptions(null, "Merge main", null, null, false)));
+
+        assertEquals(ToolFailure.FAILED, e.exitCode());
+        assertEquals("Resolve the merge conflicts first (git status shows them), then run ./gradlew openPr.", e.getMessage());
+        assertFalse(runner.calls().stream().anyMatch(c -> c.startsWith("gh ") || c.startsWith("git add") || c.startsWith("git commit")),
+                "a conflicted file is never committed with its markers: " + runner.calls());
+        assertEquals("", printed(), "no listing either");
+    }
+
+    @Test
+    void aFailedStageOrCommitSaysWhatStateTheFilesAreIn() {
+        FakeRunner addFails = readyBranch().answer("git status --porcelain=v2 -z --untracked-files=all", 0, V2_MODIFIED + "AGENTS.md\0")
+                .answer("git add", 128, "fatal: index locked");
+        ToolFailure e = assertThrows(ToolFailure.class,
+                () -> openPr(addFails, PASSING, List.of()).open(new OpenPrOptions(null, "Clarify", null, null, false)));
+        assertEquals("Staging the files failed (see the git output above). Nothing was committed or pushed.", e.getMessage());
+        assertFalse(addFails.calls().stream().anyMatch(c -> c.startsWith("git commit")), addFails.calls().toString());
+
+        FakeRunner commitFails = readyBranch().answer("git status --porcelain=v2 -z --untracked-files=all", 0, V2_MODIFIED + "AGENTS.md\0")
+                .answer("git commit", 1, "hook declined");
+        e = assertThrows(ToolFailure.class,
+                () -> openPr(commitFails, PASSING, List.of()).open(new OpenPrOptions(null, "Clarify", null, null, false)));
+        assertEquals("Committing failed (see the git output above). Nothing was pushed; the listed files are staged.", e.getMessage());
+        assertFalse(commitFails.calls().stream().anyMatch(c -> c.startsWith("git push")), commitFails.calls().toString());
     }
 
     @Test
@@ -257,7 +296,7 @@ class OpenPrTest {
 
     @Test
     void aDryRunPrintsThePullRequestAndChangesNothing() throws IOException, InterruptedException {
-        FakeRunner runner = readyBranch().answer("git status --porcelain=v2 --untracked-files=all", 0, V2_MODIFIED + "src/jbake/content/about.md\n")
+        FakeRunner runner = readyBranch().answer("git status --porcelain=v2 -z --untracked-files=all", 0, V2_MODIFIED + "src/jbake/content/about.md\0")
                 .answer("git log --reverse --format=%s base1..HEAD", 0, "");
 
         String url = openPr(runner, PASSING, List.of()).open(new OpenPrOptions(null, "Edit About", "16", "14", true));
@@ -314,6 +353,8 @@ class OpenPrTest {
         TestRepositories.git(root, "switch", "--quiet", "--create", "docs/readme");
         Files.writeString(root.resolve("README.md"), "# Site\n\nMore.\n");
         Files.writeString(site.content().resolve("new.md"), "title=New\n~~~~~~\n");
+        Files.writeString(site.content().resolve("caf\u00e9.md"), "title=Caf\u00e9\n~~~~~~\n");
+        Files.writeString(site.content().resolve("with space.md"), "title=Space\n~~~~~~\n");
         Files.writeString(root.resolve("scratch.txt"), "x\n");
         ProcessRunner runner = new ProcessRunner(root, printer, printer);
         OpenPr tool = new OpenPr(site, new Git(runner), runner, PASSING, List.of(), printer);
@@ -321,9 +362,60 @@ class OpenPrTest {
         ToolFailure e = assertThrows(ToolFailure.class, () -> tool.open(OpenPrOptions.NONE));
 
         assertTrue(e.getMessage().startsWith("Nothing was committed or pushed."), e.getMessage());
-        assertEquals("Would commit:\n   M README.md\n  ?? src/jbake/content/new.md\n"
-                + "Not included (outside the paths openPr commits; left as they are):\n  ?? scratch.txt\n", printed());
+        assertEquals("Would commit:\n   M README.md\n  ?? src/jbake/content/caf\u00e9.md\n  ?? src/jbake/content/new.md\n  ?? src/jbake/content/with space.md\n"
+                + "Not included (outside the paths openPr commits; left as they are):\n  ?? scratch.txt\n",
+                printed(), "paths with a non-ASCII letter or a space are read as they are, not C-quoted");
         assertEquals("Site", TestRepositories.git(root, "log", "-1", "--format=%s"), "nothing committed");
+    }
+
+    @Test
+    void onARealTreeItCommitsOnlyTheListedPathsAndLeavesOtherStagedChangesInTheIndex() throws IOException, InterruptedException {
+        Files.createDirectories(site.content());
+        Files.createDirectories(root.resolve("docs"));
+        Files.writeString(site.content().resolve("about.md"), "title=About\n~~~~~~\n");
+        Files.writeString(root.resolve("docs/a.md"), "# A\n");
+        Files.writeString(root.resolve("README.md"), "# Site\n");
+        TestRepositories.init(root);
+        TestRepositories.commitAll(root, "Site");
+        TestRepositories.git(origin, "init", "--quiet", "--bare", "--initial-branch=main");
+        TestRepositories.git(root, "remote", "add", "origin", origin.toString());
+        TestRepositories.git(root, "push", "--quiet", "origin", "main");
+        TestRepositories.git(root, "switch", "--quiet", "--create", "post/cafe");
+        Files.writeString(site.content().resolve("about.md"), "title=About\n~~~~~~\nEdited.\n");
+        Files.writeString(site.content().resolve("caf\u00e9.md"), "title=Caf\u00e9\n~~~~~~\n");
+        Files.writeString(site.content().resolve("with space.md"), "title=Space\n~~~~~~\n");
+        TestRepositories.git(root, "mv", "docs/a.md", "docs/b.md");
+        Files.writeString(root.resolve("scratch.txt"), "x\n");
+        TestRepositories.git(root, "add", "scratch.txt");   // staged by the author, outside the committed paths
+        ProcessRunner git = new ProcessRunner(root, printer, printer);
+        FakeRunner gh = new FakeRunner()
+                .answer("gh --version", 0, "gh version 2.80.0")
+                .answer("gh auth status", 0, "Logged in")
+                .answer("gh repo view", 0, "owner/site")
+                .answer("gh pr create", 0, "https://github.com/owner/site/pull/43");
+        CommandRunner runner = new CommandRunner() {
+            @Override
+            public CommandRunner.Result run(List<String> command, Stderr stderr) throws InterruptedException {
+                return command.get(0).equals("gh") ? gh.run(command, stderr) : git.run(command, stderr);
+            }
+
+            @Override
+            public boolean runVisibly(List<String> command) throws InterruptedException {
+                return command.get(0).equals("gh") ? gh.runVisibly(command) : git.runVisibly(command);
+            }
+        };
+        OpenPr tool = new OpenPr(site, new Git(runner), runner, PASSING, List.of("Co-Authored-By: Pair <pair@example.test>"), printer);
+
+        String url = tool.open(new OpenPrOptions(null, "Add the caf\u00e9 page", null, null, false));
+
+        assertEquals("https://github.com/owner/site/pull/43", url);
+        assertTrue(printed().contains("Committed 4 files on post/cafe: Add the caf\u00e9 page\n"), printed());
+        assertEquals("Add the caf\u00e9 page\n\nCo-Authored-By: Pair <pair@example.test>", TestRepositories.git(root, "log", "-1", "--format=%B"));
+        assertEquals("docs/a.md\ndocs/b.md\nsrc/jbake/content/about.md\nsrc/jbake/content/caf\u00e9.md\nsrc/jbake/content/with space.md",
+                TestRepositories.git(root, "-c", "core.quotePath=false", "show", "--name-only", "--no-renames", "--format=", "HEAD"),
+                "both sides of the rename, the edit and both special names, nothing else");
+        assertEquals("A  scratch.txt", TestRepositories.git(root, "status", "--porcelain"), "the author's staged file is still staged, not committed");
+        assertEquals("origin/post/cafe", TestRepositories.git(root, "rev-parse", "--abbrev-ref", "post/cafe@{upstream}"), "pushed with upstream");
     }
 
     private String printed() {
