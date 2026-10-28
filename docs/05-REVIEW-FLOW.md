@@ -188,6 +188,10 @@ right file and line; a clean `main` passes.
 **Order**: T117 first; T118 and T119 can follow in parallel; T121 last, since it depends on the review's exit
 codes. T120 and T122 are decisions, any time.
 
+_2026-10-27 (owner): T119 is **won't do**; T121 **will be built**, after T127 in [`06-GRADLE-PLUGIN.md`](06-GRADLE-PLUGIN.md)
+so it is born as a plugin script task; T120 and T122 are **optional improvements** for later, not part of M9's done
+criteria. M9 is done when T121 and CHK045 are; CHK043, CHK044 and CHK046 passed on 2026-10-27._
+
 #### Improvements
 
 - [x] T117 [IMP] **The review script and Gradle task.** `scripts/ReviewChanges.java` with the change scoping,
@@ -234,14 +238,17 @@ codes. T120 and T122 are decisions, any time.
     is empty). #147 closed, branch deleted. #146's own run (no content change) passed the step the same way. The
     "push to `main` runs no step" clause follows from the `if:` and is checked on the run that #146's merge
     triggers; it could not run before the merge._
-- [ ] T119 [P] [IMP] **External links on changed pages (W1).** `HttpClient` with the limits above, off by default
+- [x] T119 **Won't do (owner decision, 2026-10-27).** [P] [IMP] **External links on changed pages (W1).** `HttpClient` with the limits above, off by default
   and on with `--online` / `-Ponline`, the "not checkable" host list, and CI always running online
   (`scripts/ReviewChanges.java`, `.github/workflows/`)
   - **Test:** a throwaway change adding `[gone](https://www.mikemcgarr.com/no-such-page.html)` to a post reports
     W1 with `404` under `-Ponline` and still exits 0; without `-Ponline` the report has one line saying external
     links were not checked and how to turn them on. A SlideShare link in a changed
     post is listed as "not checkable", not as a failure. The whole W1 pass on a 30-link page takes under 60 s.
-- [ ] T120 [IMP] _(Decision, deferred)_ **Spelling (W5).** The design: run codespell on the changed `.md` files when
+  - _2026-10-27: **won't do** (owner). CI already checks every outbound link with lychee (T050), so a second, local
+    W1 pass was not worth its own implementation. `-Ponline` stays accepted and ignored, and the report's
+    "External links not checked (T119)" line stays as the pointer to this decision._
+- [ ] T120 [IMP] _(Optional, later)_ **Spelling (W5).** The design: run codespell on the changed `.md` files when
   it is installed, with a `.codespellrc` carrying the ignore list seeded from the names and terms in the current
   posts; CI installs it; the local report says how to install it when it is missing. **Deferred by the owner on
   2026-10-21**: not now; revisit once T117–T119 have run on a few PRs. If taken up, the test is: a throwaway
@@ -249,6 +256,8 @@ codes. T120 and T122 are decisions, any time.
   posts report no W5 hits on `-Pall`; with codespell uninstalled, the report has one "skipped" line and the exit
   code is unchanged (`scripts/ReviewChanges.java`, `.codespellrc`, `.github/workflows/`, `README.md`)
   - **Test:** a dated note under this task records the decision (take it up, or not) and why.
+  - _2026-10-27: made an **optional improvement** by the owner: not part of M9's done criteria, no decision due. If
+    taken up later, the design and test above stand._
 - [ ] T121 [IMP] **`./gradlew openPr`.** `scripts/OpenPr.java` as designed above: refuse on `main`; with
   uncommitted work, list the files and stop unless `-Pmessage` is given, then commit exactly those files; run the
   review; stop before the push on errors; else push and `gh pr create` (ready, not draft) with the title, body
@@ -260,22 +269,32 @@ codes. T120 and T122 are decisions, any time.
     `./gradlew openPr -Ptitle="Test PR"` pushes and opens a PR whose body contains "Reviewed 1 changed page",
     whose base is `main`, and for which `gh pr view --json isDraft` returns `false`. On `main`, it refuses with a
     one-line message naming Rule 2. The test PR is closed.
-- [ ] T122 [IMP] _(Decision)_ **Grammar checking: Vale, LanguageTool, or neither.** Try Vale with the write-good
+  - _2026-10-27: **confirmed by the owner, to be built.** Scheduled after T127 in
+    [`06-GRADLE-PLUGIN.md`](06-GRADLE-PLUGIN.md) (the plugin's `ScriptTask`), so `openPr` is written once, as a
+    plugin script task, instead of as a `build.gradle` Exec that T127 would then move. CHK045 waits with it._
+- [ ] T122 [IMP] _(Optional, later)_ **Grammar checking: Vale, LanguageTool, or neither.** Try Vale with the write-good
   and proselint styles on the 2026 posts and About; count true findings against noise. Record the decision here.
   If adopted, it becomes W7 in a later task, advisory only (`docs/05-REVIEW-FLOW.md`)
   - **Test:** a dated note under this task records the tool tried, the finding and noise counts on at least three
     pages, and the decision. If the decision is "neither", the note says what would change it.
+  - _2026-10-27: made an **optional improvement** by the owner, like T120: not part of M9's done criteria, no
+    experiment due now._
 
 #### Checkpoint: M9
 
-- [ ] CHK043 The #139 defect is caught: `756245f` on a throwaway branch fails `./gradlew reviewChanges` locally
+- [x] CHK043 The #139 defect is caught: `756245f` on a throwaway branch fails `./gradlew reviewChanges` locally
   and the CI check on a test PR, each naming `about.md` and the line (T117, T118)
-- [ ] CHK044 `./gradlew reviewChanges -Pall` on `main` has been run once, and every finding is either fixed, recorded
+  _(passed: T117's local test on 2026-10-22 and T118's test PR #147 the same day, both naming `about.md:14`; ticked 2026-10-27)_
+- [x] CHK044 `./gradlew reviewChanges -Pall` on `main` has been run once, and every finding is either fixed, recorded
   in [`archive/04-AUTHORS-DESK.md`](archive/04-AUTHORS-DESK.md) as the owner's, or suppressed with a reason on the line
+  _(passed 2026-10-27: `./gradlew reviewChanges -Pall` on `main` at 7b2aff9 reviewed 78 pages, 0 errors, 0 warnings;
+  the 8 W4 alt-text warnings of the first run on 2026-10-22 were resolved under T109)_
 - [ ] CHK045 README's "To review a change" and AGENTS.md's Definition of Done describe the command, and a PR opened
-  with `./gradlew openPr` has merged
-- [ ] CHK046 `./gradlew clean bake` output is byte-identical to before M9 apart from `feed.xml`'s timestamps (the
+  with `./gradlew openPr` has merged _(waits for T121)_
+- [x] CHK046 `./gradlew clean bake` output is byte-identical to before M9 apart from `feed.xml`'s timestamps (the
   review reads the site and never changes it)
+  _(passed: T117's test on 2026-10-22 compared the bake before and after the task; on 2026-10-27, at 7b2aff9, the
+  496 files of a clean bake (all but `feed.xml`) had identical SHA-256 sums before and after `reviewChanges -Pall`)_
 
 ### GitHub Issues
 
@@ -307,3 +326,9 @@ for the review flow, add its row here with the task and the `Closes #N` line, pe
 - _2026-10-27: `04-AUTHORS-DESK.md` moved to `docs/archive/` after the owner reviewed it and considered it closed
   (Status: Done). Its relative links were adjusted; the number stays 04. T059 (#14, CHK039) and T111 were still
   unticked and stay on record there; the owner decides whether they happen._
+- _2026-10-27: the owner settled the open M9 items. T119 (external links) is won't do: lychee in CI already covers
+  outbound links. T121 (`openPr`) will be built, but after T127 in `06-GRADLE-PLUGIN.md`, so it is written once as a
+  plugin script task. T120 (spelling) and T122 (grammar) become optional improvements outside M9's done criteria.
+  CHK043, CHK044 and CHK046 were verified and ticked the same day. The agreed order of work: close out this plan
+  (done with this note), then Phase A of `08-SCRIPTS-MIGRATION.md` (no Python), then M10 of `06-GRADLE-PLUGIN.md`
+  with T121 and Phase B inside it._
