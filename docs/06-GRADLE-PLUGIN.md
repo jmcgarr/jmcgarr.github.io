@@ -428,11 +428,24 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
     pages, 0/0) and the usage errors; `newPost -Ptitle="M10 Test"` writes the same draft on `post/m10-test`;
     `:build-logic:check` passes (140 tests, TestKit included); `./gradlew tasks` shows the groups jbake, writing and
     verification only._
-- [ ] T128 [IMP] **Shrink `build.gradle`.** Remove every helper, class and comment that moved; keep the dependency
+- [x] T128 [IMP] **Shrink `build.gradle`.** Remove every helper, class and comment that moved; keep the dependency
   pins and their advisory comments; add a short header comment pointing at `build-logic/` and this plan
   (`build.gradle`)
   - **Test:** `wc -l build.gradle` is under 120. The byte-identical check passes. `./gradlew tasks --group jbake`
     and `--group writing` list exactly the surface table's tasks, with the same descriptions as after T133.
+  - _2026-10-28: **done** (`chore/T128-T129-T131-shrink-tests-docs`, PR 5 of the owner's order, with T129 and T131).
+    After T127 the file was 95 lines and held nothing that had moved; what changed is the form: a five-line header
+    (what the file is, what `build-logic/` is, where the plan and the README are), `id 'base'` dropped (the plugin
+    applies Gradle's `base` plugin, so `clean` and `check` come with `jbake-site`; a comment on the plugin line says
+    so), the `jbakeSite` block's comments cut to what the site is (the stubs' and the guard's mechanics are the
+    plugin's Javadoc, `CaseRedirects` and `CheckNoHandEditedCssTask`), and the T096 history (why JBake runs from a
+    plain configuration and not the `org.jbake.site` plugin) kept in four lines above the pins, which it explains.
+    The pins and their advisory comments are unchanged line for line (`git diff` touches no `jbake '...'` line).
+    86 lines. **Test passed:** `wc -l build.gradle` 86; `clean bake` byte-identical to a bake of the base commit
+    (`diff -rq`: only `feed.xml`); `./gradlew tasks` shows Jbake (`bake`, `bakePreview`), Writing (`newPost`,
+    `prepareImage`, `reviewChanges`, `tagRedirects`) and Verification (`check`, `checkMastheadVariants`,
+    `checkTagRedirects`) with the descriptions of the T133 and T127 notes, `clean` still under Build, and no
+    `compileSass`._
 - [ ] T129 [IMP] **TestKit tests for the plugin.** A fixture site under `build-logic/src/test/fixtures/site` (two
   posts, one page, one tag, `clean-blog.scss` with one partial, one case-redirect stub) and `GradleRunner` tests,
   run with `--configuration-cache`: the bake renders the pages and copies the CSS; the stubs appear when the

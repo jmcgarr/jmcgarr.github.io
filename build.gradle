@@ -1,39 +1,32 @@
+// The site's build configuration: what the site is (where its sources are, what is published where, and the
+// versions on JBake's classpath). How it is built is the `jbake-site` plugin's: an included build in build-logic/,
+// written in Java with its own tests (`./gradlew :build-logic:check`), which defines the bake, the preview, the SCSS
+// compile and its guard, the writing tasks and the checks. The plan and its decisions: docs/06-GRADLE-PLUGIN.md;
+// the task list and how to add a build feature: README, "How the site is built and deployed".
 plugins {
-    id 'base'   // provides `clean`
-    // The site's build logic as a plugin (docs/06-GRADLE-PLUGIN.md, M10): the included build in build-logic/, written
-    // in Java with its own tests. It defines `bake`, `bakePreview`, `compileSass` and `checkNoHandEditedCss`, and the
-    // `jbake` configuration the versions below are declared on. Configured by the jbakeSite { } block.
-    id 'jbake-site'
+    id 'jbake-site'   // applies Gradle's `base` plugin too, for `clean` and `check`
 }
 
-// What the site is; how it is built is the plugin's.
 jbakeSite {
     // JBake's source and the baked site (what CI deploys, minus drafts). Both are the defaults, written out so the
     // paths the README names are here.
-    source = file('src/jbake')                     // default
+    source = file('src/jbake')                         // default
     destination = layout.buildDirectory.dir('jbake')   // default
     // Redirect stubs whose names differ from a real page only by letter case, tags/DevOps.html → tags/devops.html
-    // (T055, made by ./gradlew tagRedirects). They can't be JBake assets: on a case-insensitive filesystem (macOS)
-    // both names are one file, and JBake copies assets after rendering, so the stub would replace the real page.
-    // The plugin's bake adds them only when build/jbake is case-sensitive, as on Linux, where CI builds and GitHub
-    // Pages serves.
-    caseRedirects = file('src/case-redirects')     // default
-    // The site's CSS (T043, issue #7; T134, T135). src/scss is the source of truth: the plugin's compileSass turns
-    // every entry there (a .scss file whose name doesn't start with "_": clean-blog.scss, code.scss) into
-    // build/generated/sass/css/<name>.css with Dart Sass, and the bake and the preview copy those into build/jbake,
-    // so each is published at the same URL as before: /css/clean-blog.css, /css/code.css (the font rules are part
-    // of clean-blog.css since T135; /css/fonts.css is a removed URL, listed in docs/baseline/expected-removals.txt).
-    // The CSS is not committed, so it can't drift from the SCSS. Partials (_*.scss) are only compiled through the
-    // entries. A Sass error fails the build, and CI. While `./gradlew bakePreview` runs, a saved SCSS change is
-    // recompiled straight into build/jbake/css by the plugin's watcher.
+    // (T055; written by ./gradlew tagRedirects). The bake adds them only where the filesystem is case-sensitive
+    // (Linux: CI and GitHub Pages), never on a Mac, where both names are one file.
+    caseRedirects = file('src/case-redirects')         // default
+    // The site's CSS (T043, issue #7; T134, T135). src/scss is the source of truth: every entry there (a .scss file
+    // whose name doesn't start with "_": clean-blog.scss, code.scss) is compiled with Dart Sass and published at
+    // /css/<name>.css, as always; none of the CSS is committed. The font rules are part of clean-blog.css since
+    // T135 (/css/fonts.css is a removed URL, listed in docs/baseline/expected-removals.txt).
     scss {
         source = file('src/scss')   // default
         publishedDir = 'css'        // default: an entry <name>.scss is published at /css/<name>.css
-        // The CSS used to be hand-edited in src/jbake/assets/css/. The plugin's checkNoHandEditedCss stops a copy
-        // from coming back there, where JBake would publish it and it would silently go stale (the bake replaces it
-        // with the compiled one). Guarded: the compiled name of every entry, and these retired files: the old
+        // The CSS used to be hand-edited in src/jbake/assets/css/; the bake fails if a copy comes back there, where
+        // JBake would publish it and it would silently go stale. Guarded besides the entries' own names: the old
         // minified theme CSS, and the two stylesheets folded into clean-blog.scss's partials, extra.css (T134) and
-        // fonts.css (T135); their URLs are on docs/baseline/expected-removals.txt.
+        // fonts.css (T135).
         retiredCss = ['clean-blog.min.css', 'extra.css', 'fonts.css']
         handEditedCssExplanation = "the site's CSS is generated from src/scss now (T043, T134, T135): " +
                 '/css/clean-blog.css and /css/code.css are compiled from the entry of the same name, and extra.css ' +
@@ -45,16 +38,14 @@ jbakeSite {
     // for this site; a site that uses one of those engines sets `classpath { excludedGroups = [...] }` here.
 }
 
-// JBake runs directly (T096) instead of through the Gradle plugin `org.jbake.site`. That plugin is unmaintained
-// (last release 5.5.0, 2021), can't run JBake 2.7, hid template errors behind a Groovy error (T095), and leaked
-// memory in the Gradle daemon on every bake until the 4th one failed with "Java heap space" (T099). Running
-// JBake's own launcher in a fresh JVM per bake fixes all of that (the plugin's JbakeTask, T125). Dependabot
-// proposes jbake-core updates.
 repositories {
     mavenCentral()
 }
 
-// The versions on JBake's classpath. The configuration itself, `jbake`, is the plugin's (JbakeClasspath).
+// The versions on JBake's classpath. JBake's own launcher runs on it in a fresh JVM per bake (the plugin's JbakeTask)
+// since T096 replaced the unmaintained JBake Gradle plugin `org.jbake.site` (last release 5.5.0, 2021: it can't run
+// JBake 2.7, hid template errors behind a Groovy error, T095, and leaked memory in the daemon, T099). The
+// configuration itself, `jbake`, is the plugin's (JbakeClasspath); Dependabot proposes the updates.
 dependencies {
     jbake 'org.jbake:jbake-core:2.7.0'
     // The engines and CLI parser this site uses, at newer versions than jbake-core asks for. jbake-core's Gradle
