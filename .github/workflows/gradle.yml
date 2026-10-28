@@ -81,7 +81,7 @@ jobs:
 
     # Every header image in use needs its 960/1440px variants (T071), or phones get a blank header
     - name: Check masthead variants
-      run: java scripts/PrepareImage.java --check-variants
+      run: ./gradlew checkMastheadVariants
 
     # Quality gates (T031). On Linux check-urls.sh is strict (case-sensitive), so it catches what macOS bakes can't.
     - name: Check published URLs still exist
@@ -89,8 +89,9 @@ jobs:
 
     # Old tag URLs (with spaces, or capitalized twins) are redirect stubs (T039, T055). Each must point at a real
     # tag page. On Linux the 2 case-only stubs (src/case-redirects/) are added by the bake, and checked here too.
+    # The task checks the staged site (what is deployed), not the bake it depends on, which is up to date here.
     - name: Check old tag URLs redirect
-      run: java scripts/TagRedirects.java --check build/site
+      run: ./gradlew checkTagRedirects -PsiteDir=build/site
 
     - name: Validate feed and sitemap XML
       run: |
@@ -119,7 +120,7 @@ jobs:
     # against and the PR already ran it, so the step is skipped there.
     - name: Review changed pages
       if: github.event_name == 'pull_request'
-      run: java scripts/ReviewChanges.java --base="origin/$GITHUB_BASE_REF"
+      run: ./gradlew reviewChanges -Pbase="origin/$GITHUB_BASE_REF"
 
     # Package the staged site for GitHub Pages. include-hidden-files is required: the action drops files whose
     # names start with "." by default, and the site has published pages like that (tags/.NET.html, T067).

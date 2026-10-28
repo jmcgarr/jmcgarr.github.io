@@ -5,7 +5,7 @@
     Index, archive, and tag pages get their own fixed wording. At most 155 characters, cut at a word.
   - URLs are absolute, built from site.host without a trailing slash (the preview sets it to
     http://localhost:8080/ with one; production has none).
-  - og:image is the page's header image, as its 1440px variant (scripts/PrepareImage.java makes one for
+  - og:image is the page's header image, as its 1440px variant (./gradlew prepareImage makes one for
     every masthead in use). A remote masthead (http…) is used as it is, since it has no variants.
   - Every variable here starts with "meta" so it can't collide with masthead.ftl's (masthead, pageTitle, …).
 -->

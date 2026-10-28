@@ -294,6 +294,11 @@ superseded by the T130 decision there._
     (strict); deleting `build/jbake/about.html` before it fails `checkUrls` naming `about.html`; adding
     `build/jbake/docs/x.md` fails `checkDocsNotPublished`; moving a `-1440` variant aside fails
     `checkMastheadVariants`. `./gradlew :build-logic:test` covers each. The byte-identical check passes.
+  - _2026-10-28: `checkMastheadVariants` (the `--check-variants` mode of `PrepareImage`) and `checkTagRedirects`
+    (CI's `java scripts/TagRedirects.java --check` step) **shipped with T127**, each a `verification` task that
+    `check` runs, with TestKit tests on the fixture site; CI calls them. T141's scope is now `checkUrls`,
+    `checkDocsNotPublished` and the `checkSite` aggregate. For T143: the four Java programs are already gone, so
+    `smoke-test.sh` and `scripts/visual/` are what will be left._
 - [x] T142 **Superseded (2026-10-27).** [IMP] **Register the Java scripts through `jbakeSite.scripts`.** `prepareImage` (options `image`,
   `dryRun`, `png`, `jpeg`, `width`, `keepSource`) and `tagRedirects` (`check`, `dependsOn 'bake'`) join `newPost`
   and `reviewChanges`; the special-cased `Exec` from T140 goes; `06-GRADLE-PLUGIN.md`'s table (lines 29–30) and

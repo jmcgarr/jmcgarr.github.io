@@ -13,7 +13,7 @@ jbakeSite {
     source = file('src/jbake')                     // default
     destination = layout.buildDirectory.dir('jbake')   // default
     // Redirect stubs whose names differ from a real page only by letter case, tags/DevOps.html → tags/devops.html
-    // (T055, made by scripts/TagRedirects.java). They can't be JBake assets: on a case-insensitive filesystem (macOS)
+    // (T055, made by ./gradlew tagRedirects). They can't be JBake assets: on a case-insensitive filesystem (macOS)
     // both names are one file, and JBake copies assets after rendering, so the stub would replace the real page.
     // The plugin's bake adds them only when build/jbake is case-sensitive, as on Linux, where CI builds and GitHub
     // Pages serves.
