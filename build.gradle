@@ -94,27 +94,6 @@ dependencies {
     }
 }
 
-// Starts a new draft post on its own post/<slug> branch (T060, issue #8). The logic is scripts/NewPost.java,
-// a single-file Java program, so it can also run without Gradle: java scripts/NewPost.java --title="My Post".
-//   ./gradlew newPost -Ptitle="My Post Title" [-Ptags="a, b"] [-Psummary="..."] [-Pslug=my-post]
-//                     [-Pbranch=false] [-Ppr]
-// -Ppr (T061) also commits the draft, pushes the branch, and opens a draft "[WIP] <title>" PR with gh.
-// The draft is Markdown; the -Pformat=asciidoc option left with AsciiDoc (T102, 2026-10-18).
-tasks.register('newPost', Exec) {
-    group = 'writing'
-    description = 'Starts a draft post on a new post/<slug> branch: ./gradlew newPost -Ptitle="My Post Title"'
-    executable = "${System.getProperty('java.home')}/bin/java"
-    // The providers are made here, while configuring, and only read when the task runs. The configuration cache
-    // (T114) can't run code that reaches the build script (`providers`) at that point.
-    // 'format' is passed on only so that a -Pformat=asciidoc from habit gets NewPost's clear refusal (T102).
-    def options = ['title', 'tags', 'summary', 'slug', 'branch', 'pr', 'format']
-            .collectEntries { [(it): providers.gradleProperty(it)] }
-    argumentProviders.add({
-        ['scripts/NewPost.java'] + options.findAll { name, value -> value.isPresent() }
-                .collect { name, value -> "--${name}=${value.get()}".toString() }
-    } as CommandLineArgumentProvider)
-}
-
 // Prepares an image added by hand under src/jbake/assets/img/ (sRGB, no camera metadata, the Rule 4 size and
 // weight, a photo PNG turned into a JPEG that the pages are pointed at, the 960/1440 masthead variants). The
 // logic is scripts/PrepareImage.java, a single-file Java program (T140), so it also runs without Gradle:

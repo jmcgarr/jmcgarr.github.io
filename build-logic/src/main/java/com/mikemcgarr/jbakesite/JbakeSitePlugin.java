@@ -1,11 +1,13 @@
 package com.mikemcgarr.jbakesite;
 
+import com.mikemcgarr.jbakesite.writing.NewPostTask;
 import java.util.List;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.file.Directory;
 import org.gradle.api.file.ProjectLayout;
+import org.gradle.api.plugins.BasePlugin;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.provider.ProviderFactory;
 import org.gradle.api.services.BuildServiceRegistry;
@@ -21,7 +23,10 @@ import org.gradle.api.tasks.TaskProvider;
  * theme CSS: {@code compileSass} ({@link CompileSassTask}) and {@code checkNoHandEditedCss}
  * ({@link CheckNoHandEditedCssTask}); T125 the {@code jbake} configuration ({@link JbakeClasspath}) and
  * {@code bake} ({@link BakeTask}); T126 {@code bakePreview} ({@link BakePreviewTask}) with its SCSS watcher
- * ({@link SassPreviewWatcher}).
+ * ({@link SassPreviewWatcher}); T127 (with the T130 decision) the four single-file programs of {@code scripts/} as
+ * task classes, one commit each: so far the {@code writing} group's {@code newPost} ({@link NewPostTask}).
+ *
+ * <p>The plugin applies Gradle's {@code base} plugin for {@code clean} and the {@code check} lifecycle task.
  */
 public final class JbakeSitePlugin implements Plugin<Project> {
 
@@ -36,6 +41,12 @@ public final class JbakeSitePlugin implements Plugin<Project> {
 
     /** The task that bakes, serves and rebuilds on save. */
     public static final String BAKE_PREVIEW_TASK_NAME = "bakePreview";
+
+    /** The task group of the author's commands: {@code newPost}, {@code reviewChanges}, {@code prepareImage}, {@code tagRedirects}. */
+    public static final String WRITING_GROUP = "writing";
+
+    /** The task that starts a draft post on a new branch. */
+    public static final String NEW_POST_TASK_NAME = "newPost";
 
     /** The task that compiles the SCSS entries. No group: an implementation detail of the bake and the preview. */
     public static final String COMPILE_SASS_TASK_NAME = "compileSass";
@@ -57,16 +68,20 @@ public final class JbakeSitePlugin implements Plugin<Project> {
 
     @Override
     public void apply(Project project) {
+        project.getPluginManager().apply(BasePlugin.class);
         JbakeSiteExtension site = project.getExtensions().create(EXTENSION_NAME, JbakeSiteExtension.class);
         ProjectLayout layout = project.getLayout();
         TaskContainer tasks = project.getTasks();
+        ProviderFactory providers = project.getProviders();
         setDefaults(site, layout);
 
         Configuration jbake = JbakeClasspath.create(project.getConfigurations(), site.getClasspath());
         TaskProvider<CompileSassTask> compileSass = registerThemeCss(site, tasks, layout);
-        configureJbakeTasks(site, jbake, compileSass, tasks, layout, project.getProviders());
+        configureJbakeTasks(site, jbake, compileSass, tasks, layout, providers);
         registerBake(site, tasks);
         registerBakePreview(site, tasks, layout, project.getPath(), project.getGradle().getSharedServices());
+        configureSiteToolTasks(site, tasks);
+        registerWritingTasks(tasks, providers);
     }
 
     private static void setDefaults(JbakeSiteExtension site, ProjectLayout layout) {
@@ -74,6 +89,7 @@ public final class JbakeSitePlugin implements Plugin<Project> {
         site.getSource().convention(projectDirectory.dir("src/jbake"));
         site.getDestination().convention(layout.getBuildDirectory().dir("jbake"));
         site.getCaseRedirects().convention(projectDirectory.dir("src/case-redirects"));
+        site.getPublishedUrls().convention(projectDirectory.file("docs/baseline/urls.txt"));
 
         ScssExtension scss = site.getScss();
         scss.getSource().convention(projectDirectory.dir("src/scss"));
@@ -156,6 +172,33 @@ public final class JbakeSitePlugin implements Plugin<Project> {
             task.getDestination().set(site.getDestination());
             task.getScssWatcher().set(watcher);
             task.usesService(watcher);
+        });
+    }
+
+    /** What every writing and verification task shares ({@link SiteToolTask}): where the site's sources are. */
+    private static void configureSiteToolTasks(JbakeSiteExtension site, TaskContainer tasks) {
+        tasks.withType(SiteToolTask.class).configureEach(task -> {
+            task.getSource().set(site.getSource());
+            task.getCaseRedirects().set(site.getCaseRedirects());
+            task.getPublishedUrls().set(site.getPublishedUrls());
+        });
+    }
+
+    /**
+     * The author's commands. Each {@code -P} option is read as a Gradle property, lazily, so the configuration cache
+     * (T114) holds the provider and the task reads the value when it runs.
+     */
+    private static void registerWritingTasks(TaskContainer tasks, ProviderFactory providers) {
+        tasks.register(NEW_POST_TASK_NAME, NewPostTask.class, task -> {
+            task.setGroup(WRITING_GROUP);
+            task.setDescription("Starts a draft post on a new post/<slug> branch: ./gradlew newPost -Ptitle=\"My Post Title\"");
+            task.getTitle().set(providers.gradleProperty("title"));
+            task.getTags().set(providers.gradleProperty("tags"));
+            task.getSummary().set(providers.gradleProperty("summary"));
+            task.getSlug().set(providers.gradleProperty("slug"));
+            task.getBranch().set(providers.gradleProperty("branch"));
+            task.getPr().set(providers.gradleProperty("pr"));
+            task.getFormat().set(providers.gradleProperty("format"));
         });
     }
 }

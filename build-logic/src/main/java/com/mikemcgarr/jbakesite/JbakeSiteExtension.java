@@ -12,7 +12,8 @@ import org.gradle.api.tasks.Nested;
  * Gradle creates it with managed properties; {@link JbakeSitePlugin} sets the defaults. T123 created it empty;
  * each slice adds what it needs (T124: {@link #getScss() scss} and {@link #getSource() source}; T125:
  * {@link #getDestination() destination}, {@link #getCaseRedirects() caseRedirects},
- * {@link #getLogbackConfiguration() logbackConfiguration} and {@link #getClasspath() classpath}).
+ * {@link #getLogbackConfiguration() logbackConfiguration} and {@link #getClasspath() classpath}; T127:
+ * {@link #getPublishedUrls() publishedUrls}).
  */
 public abstract class JbakeSiteExtension {
 
@@ -42,6 +43,17 @@ public abstract class JbakeSiteExtension {
      * @return the directory
      */
     public abstract DirectoryProperty getCaseRedirects();
+
+    /**
+     * The baseline of the site's published URLs, one site-relative path per line ({@code blog/alm.html}), a snapshot
+     * of the live site that only changes at a milestone checkpoint (AGENTS.md Rule 1). The writing tools read it:
+     * {@code newPost} refuses a slug that was once published, the review accepts a link to a URL in it that only a
+     * Linux bake has (the case-redirect stubs), and the tag redirects are derived from its tag URLs. Default
+     * {@code docs/baseline/urls.txt}.
+     *
+     * @return the file
+     */
+    public abstract RegularFileProperty getPublishedUrls();
 
     /**
      * A logback configuration for JBake's JVM, instead of the plugin's own ({@link JbakeTask}: JBake's summary,
