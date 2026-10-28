@@ -1,0 +1,5 @@
+@use 'variables';
+
+a {
+  color: variables.$brand;
+}
