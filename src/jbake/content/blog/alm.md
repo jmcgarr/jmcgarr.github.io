@@ -16,3 +16,5 @@ Last week, I was asked to give my opinion on Application Lifecycle Management or
 </div>
 
 My thoughts were somewhat off the cuff and could likely be more comprehensive given time, but I still found them valuable.  I would to hear what you think of this answer and if you have differing opinions.  Enjoy!
+
+<!-- openPr test (throwaway) -->
