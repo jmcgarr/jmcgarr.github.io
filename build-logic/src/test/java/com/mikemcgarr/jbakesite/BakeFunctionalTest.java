@@ -2,6 +2,7 @@ package com.mikemcgarr.jbakesite;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
@@ -18,12 +19,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /**
- * Gradle TestKit: {@code bake} end to end on the fixture site ({@code src/test/fixtures/site}: one post, one page,
- * one SCSS entry with a partial, one case-redirect stub, two tag pages and a tag redirect stub), with the configuration
- * cache on, as the site runs it.
- * JBake really runs, in a fresh JVM on the {@code jbake} configuration the fixture's {@code build.gradle} pins, so
- * the first run downloads JBake's libraries into TestKit's own Gradle home. Covers what {@link BakeTask} and
- * {@link JbakeClasspath} document (T125); T129 owns the rest of the functional tests.
+ * Gradle TestKit: {@code bake} end to end on the fixture site ({@code src/test/fixtures/site}: two posts sharing a
+ * tag, one page, {@code clean-blog.scss} with one partial, one case-redirect stub, two tag pages and a tag redirect
+ * stub; T129), with the configuration cache on, as the site runs it. JBake really runs, in a fresh JVM on the
+ * {@code jbake} configuration the fixture's {@code build.gradle} pins, so the first run downloads JBake's libraries
+ * into TestKit's own Gradle home. Covers what {@link BakeTask}, {@link JbakeClasspath} and
+ * {@link CheckNoHandEditedCssTask} document (T125): the pages, the CSS copied in, the stubs where the filesystem
+ * allows them, the guard, up-to-date checks and the configuration cache, a JBake error.
  */
 class BakeFunctionalTest {
 
@@ -54,12 +56,19 @@ class BakeFunctionalTest {
         assertEquals(TaskOutcome.SUCCESS, result.task(":compileSass").getOutcome());
         assertEquals(TaskOutcome.SUCCESS, result.task(":checkNoHandEditedCss").getOutcome());
         assertEquals(TaskOutcome.SUCCESS, result.task(":bake").getOutcome());
-        assertTrue(result.getOutput().contains("Baked 5 items"), "index, two pages, two tag pages: " + result.getOutput());
-        assertTrue(Files.readString(site("index.html")).contains("<a href=\"blog/first-post.html\">First Post</a>"));
+        assertTrue(result.getOutput().contains("Baked 6 items"), "index, two posts, one page, two tag pages: " + result.getOutput());
+        String index = Files.readString(site("index.html"));
+        assertTrue(index.contains("<a href=\"blog/first-post.html\">First Post</a>"), index);
+        assertTrue(index.contains("<a href=\"blog/second-post.html\">Second Post</a>"), index);
+        assertTrue(index.contains("<link rel=\"stylesheet\" href=\"css/clean-blog.css\">"), index);
         assertTrue(Files.readString(site("blog/first-post.html")).contains("<p>The first post.</p>"));
+        assertTrue(Files.readString(site("blog/second-post.html")).contains("<p>The second post.</p>"));
+        String tagPage = Files.readString(site("tags/fixture.html"));
+        assertTrue(tagPage.contains("<h1>Tag: fixture</h1>"), tagPage);
+        assertTrue(tagPage.contains("First Post") && tagPage.contains("Second Post"), "both posts carry the tag: " + tagPage);
         assertTrue(Files.readString(site("about.html")).contains("<h1>About</h1>"), "the real page, never the stub");
         assertEquals("User-agent: *\nAllow: /\n", Files.readString(site("robots.txt")), "JBake's assets");
-        assertEquals("a {\n  color: #0085a1;\n}", Files.readString(site("css/site.css")), "compileSass's CSS, copied in after JBake");
+        assertEquals("a {\n  color: #0085a1;\n}", Files.readString(site("css/clean-blog.css")), "compileSass's CSS, copied in after JBake");
 
         if (CaseRedirects.isCaseSensitive(site(""))) {
             assertTrue(Files.readString(site("About.html")).contains("http-equiv=\"refresh\""), "the stub, beside the real page");
@@ -90,6 +99,25 @@ class BakeFunctionalTest {
 
         assertEquals(TaskOutcome.SUCCESS, result.task(":bake").getOutcome());
         assertTrue(Files.readString(site("blog/first-post.html")).contains("<p>The first post, edited.</p>"));
+    }
+
+    @Test
+    void aHandEditedCssUnderTheAssetsFailsTheBakeBeforeJbakeRuns() throws IOException {
+        Path assetsCss = projectDir.resolve("src/jbake/assets/css");
+        Files.createDirectories(assetsCss);
+        Files.writeString(assetsCss.resolve("clean-blog.css"), "a { color: red; }\n");
+
+        BuildResult result = runner("bake").buildAndFail();
+
+        assertEquals(TaskOutcome.FAILED, result.task(":checkNoHandEditedCss").getOutcome());
+        assertNull(result.task(":bake"), "the guard runs first, so the bake never starts");
+        assertTrue(result.getOutput().contains("src/jbake/assets/css/clean-blog.css: the site's CSS is compiled from the SCSS in src/scss; "
+                + "JBake would publish this copy, and it would go stale. Move any change into the SCSS, then delete this file."),
+                "the default explanation, naming the SCSS directory (the real site sets its own): " + result.getOutput());
+        assertTrue(Files.notExists(site("index.html")), "nothing was baked");
+
+        Files.delete(assetsCss.resolve("clean-blog.css"));
+        assertEquals(TaskOutcome.SUCCESS, runner("bake").build().task(":bake").getOutcome(), "deleting the file restores the bake");
     }
 
     @Test
