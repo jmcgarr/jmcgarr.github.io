@@ -288,7 +288,7 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
   `AGENTS.md`)
   - **Test:** a new reader can find, from the README alone, where `bake` is defined and how to run the plugin's
     tests. `scripts/check-docs-not-published.sh` still passes.
-- [ ] T133 [IMP] **Consolidate on the standard: one preview task, one configuration, two groups.** Apply the surface
+- [x] T133 [IMP] **Consolidate on the standard: one preview task, one configuration, two groups.** Apply the surface
   table in `build.gradle` as it is today, before any plugin exists: register the real preview task as `bakePreview`
   and drop `preview`; move the Jetty and commons-vfs2 pins into `jbake` and drop `jbakePreview` (the resolution
   strategy then applies once); put `bake` and `bakePreview` in group `jbake`, leave `newPost` and `reviewChanges` in
@@ -302,6 +302,18 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
     `./gradlew preview` fails with Gradle's "task 'preview' not found". `./gradlew tasks` shows a `Jbake tasks`
     group with `bake` and `bakePreview`, a `Writing tasks` group with `newPost` and `reviewChanges`, and no
     `compileSass`. `grep -rn 'gradlew preview\|jbakePreview' README.md AGENTS.md .github build.gradle` is empty.
+  - _2026-10-27: **done** (`chore/T133-consolidate-names`). `bakePreview` is the real preview task and `preview` is gone;
+    the Jetty and commons-vfs2 pins are direct `jbake` dependencies (the two constraints that repeated them went too) and
+    `jbakePreview` is gone; the lz4 substitution sits inside the `jbake` configuration; `bake` and `bakePreview` are in
+    group `jbake`, `newPost`, `reviewChanges` and `prepareImage` (T140, added after this table) in `writing`,
+    `compileSass` has no group. README: the two `./gradlew preview` sentences and a new task table under "How the site
+    is built and deployed"; the CI live-reload comment. **Test passed:** the bake is byte-identical to main's (only
+    `feed.xml`'s timestamps; `diff -rq` is the unambiguous form of the check); `--configuration jbake` resolves the same 77
+    artifacts and versions `jbakePreview` did on `main`; `clean bakePreview` served :8080 with the live-reload script,
+    recompiled both entries on a saved partial and left no process after Ctrl+C, and the next `clean bake` has no
+    `livereload`; `./gradlew preview` says "Task 'preview' not found"; `./gradlew tasks` shows exactly the Jbake and
+    Writing groups; the grep is empty; a second `bake` reuses the configuration cache; `check -Pbase=origin/main` 0
+    errors. Not verified locally: the Linux bake (CI)._
 - [ ] T132 [IMP] _(Decision)_ **Phase 2: standalone plugin, or not yet.** After Phase 1 has run for a while, check
   the triggers above (a second site, a wish to share, three quiet months) and decide. If yes, a new numbered doc
   plans the extraction: repository, publishing (Plugin Portal or GitHub Packages), what becomes generic, and how
