@@ -3,6 +3,7 @@ package com.mikemcgarr.jbakesite;
 import org.gradle.api.Action;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.RegularFileProperty;
+import org.gradle.api.provider.MapProperty;
 import org.gradle.api.tasks.Nested;
 
 /**
@@ -12,7 +13,8 @@ import org.gradle.api.tasks.Nested;
  * Gradle creates it with managed properties; {@link JbakeSitePlugin} sets the defaults. T123 created it empty;
  * each slice adds what it needs (T124: {@link #getScss() scss} and {@link #getSource() source}; T125:
  * {@link #getDestination() destination}, {@link #getCaseRedirects() caseRedirects},
- * {@link #getLogbackConfiguration() logbackConfiguration} and {@link #getClasspath() classpath}).
+ * {@link #getLogbackConfiguration() logbackConfiguration} and {@link #getClasspath() classpath}; T127:
+ * {@link #getPublishedUrls() publishedUrls} and {@link #getTagRenames() tagRenames}).
  */
 public abstract class JbakeSiteExtension {
 
@@ -42,6 +44,28 @@ public abstract class JbakeSiteExtension {
      * @return the directory
      */
     public abstract DirectoryProperty getCaseRedirects();
+
+    /**
+     * The baseline of the site's published URLs, one site-relative path per line ({@code blog/alm.html}), a snapshot
+     * of the live site that only changes at a milestone checkpoint (AGENTS.md Rule 1). The writing tools read it:
+     * {@code newPost} refuses a slug that was once published, the review accepts a link to a URL in it that only a
+     * Linux bake has (the case-redirect stubs), and the tag redirects are derived from its tag URLs. Default
+     * {@code docs/baseline/urls.txt}.
+     *
+     * @return the file
+     */
+    public abstract RegularFileProperty getPublishedUrls();
+
+    /**
+     * Tags merged into another tag or renamed on purpose, old to new, both as written in the posts' {@code tags=}
+     * lines: every old URL of the old tag gets a redirect stub to the new tag's page ({@code tagRedirects},
+     * {@code checkTagRedirects}). Default: this site's owner-approved list of 2026-10-09
+     * ({@code com.mikemcgarr.jbakesite.writing.TagRedirects#RENAMES}); a site with none sets {@code tagRenames = [:]}.
+     * Never remove an entry: its stubs are published URLs (Rule 1).
+     *
+     * @return the renames
+     */
+    public abstract MapProperty<String, String> getTagRenames();
 
     /**
      * A logback configuration for JBake's JVM, instead of the plugin's own ({@link JbakeTask}: JBake's summary,

@@ -39,7 +39,7 @@ build/jbake/              Generated output (git-ignored)
 ./gradlew clean bakePreview   # build + serve at http://localhost:8080, rebuild on save, and reload the open page (drafts at /blog/drafts/<name>-draft.html)
 ./gradlew newPost -Ptitle="My Post"   # start a draft on a new post/<slug> branch (see README)
 ./gradlew reviewChanges       # check the pages this branch changed: Markdown links, local links and images, header (T117; see README)
-./gradlew check               # the standard Gradle verification task: bake + reviewChanges
+./gradlew check               # the standard Gradle verification task: bake + reviewChanges + the tag-redirect and masthead checks CI runs
 ./gradlew prepareImage -Pimage=src/jbake/assets/img/masthead/photo.png   # make a hand-added image fit the image rules (see README)
 ```
 
@@ -66,7 +66,7 @@ that specific change.
 
 **Tags:** keep a tag's spelling and casing the same in every post (lowercase unless it's a name). `DevOps` and
 `devops` make two tag pages that each list only some posts. The old tag URLs with spaces, and `tags/DevOps.html`
-and `tags/Groovy.html`, are redirect stubs made by `scripts/TagRedirects.java` (see README). They are published
+and `tags/Groovy.html`, are redirect stubs made by `./gradlew tagRedirects` (see README). They are published
 URLs: never delete one.
 
 So all of the following **change or remove a published URL**, and each needs explicit approval:
@@ -83,10 +83,11 @@ name stay the same, because the output is still `<name>.html`.
 image, re-encode a JPEG in place under the same name. For a photo saved as PNG, add a new `<name>.jpg`,
 point the pages at it, and replace `<name>.png` with a small fallback copy. Convert to sRGB before
 dropping the color profile, and strip camera metadata. See T016 in the revival plan for the exact method.
-`./gradlew prepareImage -Pimage=<path>` (`scripts/PrepareImage.java`) does all of this for an image added by
+`./gradlew prepareImage -Pimage=<path>` does all of this for an image added by
 hand; a PNG that is already in `main` keeps its URL as the fallback.
 **Header (masthead) images** also need 960px and 1440px variants for phones and tablets: `prepareImage`
-makes them, or run `java scripts/PrepareImage.java --variants <image>` alone after adding one. CI fails without them.
+makes them, or run `./gradlew prepareImage -Pimage=<image> -Pvariants` alone after adding one. CI fails without them
+(`./gradlew checkMastheadVariants`).
 
 ### When a URL change is approved
 

@@ -11,7 +11,8 @@ Requirements
   JDK 21 still builds the site identically, if you need it.
 - Nothing else: `./gradlew` downloads the right Gradle version, and Gradle downloads the Sass compiler (see
   [To change the site's styles](#to-change-the-sites-styles)). No Node or Ruby, and nothing to install for the
-  tools under `scripts/`: they are single-file Java programs (`java scripts/<Name>.java`) and shell.
+  site's own tools: they are tasks of the build plugin in `build-logic/` (T127, 2026-10-28), and the deploy checks
+  under `scripts/` are shell.
 
 To preview
 ==========
@@ -158,10 +159,11 @@ If you use a new header image (`masthead=`), put it in `src/jbake/assets/img/mas
 ```
 (or `.jpg`). It converts the image to sRGB, strips the camera metadata, resizes it to ≤ 1920px and ≤ 400 KB, turns a
 photo PNG into a `.jpg` and points the post at it, and creates the phone and tablet sizes
-(`java scripts/PrepareImage.java --variants <image>` does that last step alone, and never overwrites a variant). The
+(`./gradlew prepareImage -Pimage=<image> -Pvariants` does that last step alone, and never overwrites a variant). The
 same command prepares an in-post image, capped at 1000px; add `-Ppng` to keep a screenshot or graphic as PNG,
-`-PdryRun` to see what it would do, `-Pwidth=N` for another cap. The work is `scripts/PrepareImage.java`, a single-file
-Java program like `newPost`'s (T140, 2026-10-27; before that a script that needed an image library installed), so nothing is installed. It
+`-PdryRun` to see what it would do, `-Pwidth=N` for another cap. The work is the plugin's `PrepareImage` class in
+`build-logic/` (a single-file Java program from T140, 2026-10-27, until T127, 2026-10-28; before that a script that
+needed an image library installed), so nothing is installed. It
 refuses a photo PNG that is already published (its URL must keep a PNG, and the JDK has no colour quantizer for the
 small fallback): convert such a one by hand, as T016 did.
 `masthead=` also takes a full `https://` URL (a remote image, used as-is at every width, so pick one around
@@ -187,8 +189,8 @@ published URL (W6, AGENTS.md Rule 1), an existing post without a summary (W7). E
 line, and the fix when it's mechanical. With no changes under `src/jbake`, it says so and passes.
 
 Options: `-Pbase=<branch>` diffs against another branch, `-Pall` reviews every page (a baseline), `-Pstrict`
-fails on warnings too. Without Gradle, after a bake: `java scripts/ReviewChanges.java`. A finding that's right in
-general but wrong for one line is suppressed by a comment on the line before it, and the report counts those:
+fails on warnings too. A finding that's right in general but wrong for one line is suppressed by a comment on the
+line before it, and the report counts those:
 ```
 <!-- review: ignore E2, the brackets are intended -->
 ```
@@ -293,16 +295,16 @@ Everything happens in one workflow, [`.github/workflows/gradle.yml`](.github/wor
 | Drafts are not published | Unfinished `*-draft.html` posts going live |
 | Live reload is not published | The preview's live-reload script (marker `livereload`) going live |
 | Docs are not published | Anything from `docs/` (planning notes) going live |
-| Masthead variants | A header image missing its 960/1440px sizes (phones would get a blank header) |
+| Masthead variants (`./gradlew checkMastheadVariants`) | A header image missing its 960/1440px sizes (phones would get a blank header) |
 | Published URLs still exist (`scripts/check-urls.sh`) | Removing or renaming any page that's live (strict on CI's Linux runner) |
-| Old tag URLs redirect (`scripts/TagRedirects.java --check`) | An old tag URL that's missing, or whose redirect stub points at a page that isn't there; a tag page that shows its tag differently from the posts |
+| Old tag URLs redirect (`./gradlew checkTagRedirects`) | An old tag URL that's missing, or whose redirect stub points at a page that isn't there; a tag page that shows its tag differently from the posts |
 | Feed and sitemap XML | A broken `feed.xml` or `sitemap.xml` |
 | Local links and assets (lychee) | Broken internal links, or missing images, CSS, JS, or fonts |
 
-**The Gradle tasks** (`./gradlew tasks` lists them in two groups, T133). `bake` and `bakePreview` are the JBake Gradle
-plugin's names, kept since 2014 ([`docs/06-GRADLE-PLUGIN.md`](docs/06-GRADLE-PLUGIN.md), "The public surface"); the
-`writing` tasks are this site's own. All of JBake's libraries are on one Gradle configuration, `jbake`, where
-`build.gradle` pins their versions.
+**The Gradle tasks** (`./gradlew tasks` lists them in three groups, T133, T127). `bake` and `bakePreview` are the JBake
+Gradle plugin's names, kept since 2014 ([`docs/06-GRADLE-PLUGIN.md`](docs/06-GRADLE-PLUGIN.md), "The public surface");
+the `writing` tasks are this site's own, and the `verification` group (Gradle's name) holds the checks CI runs. All of
+JBake's libraries are on one Gradle configuration, `jbake`, where `build.gradle` pins their versions.
 
 | Task | Group | What it does |
 |---|---|---|
@@ -310,19 +312,23 @@ plugin's names, kept since 2014 ([`docs/06-GRADLE-PLUGIN.md`](docs/06-GRADLE-PLU
 | `bakePreview` | `jbake` | Bakes, serves http://localhost:8080, rebuilds on save, and reloads the open page |
 | `newPost` | `writing` | Starts a draft post on a new `post/<slug>` branch: `./gradlew newPost -Ptitle="My Post"` |
 | `reviewChanges` | `writing` | Reviews the pages this branch changed: Markdown, links, images, header (runs `bake` first) |
-| `prepareImage` | `writing` | Prepares a hand-added image: sRGB, metadata, size, masthead variants (`-Pimage=<path>`) |
+| `prepareImage` | `writing` | Prepares a hand-added image: sRGB, metadata, size, masthead variants (`-Pimage=<path>`; `-Pvariants` for the variants alone) |
+| `tagRedirects` | `writing` | Writes any missing or outdated redirect stub for an old tag URL, never deleting one (on an approved tag rename) |
+| `checkTagRedirects` | `verification` | Checks that every old tag URL in the baked site is a tag page or a redirect stub to one (CI: `-PsiteDir=build/site`) |
+| `checkMastheadVariants` | `verification` | Checks that every header image in use has its 960 and 1440px variants |
 
 `compileSass` (the SCSS to CSS step) has no group: it runs as part of `bake` and `bakePreview`, so `./gradlew tasks`
-doesn't list it. `clean` and `check` are Gradle's own; `check` runs `bake` and `reviewChanges`.
+doesn't list it. `clean` and `check` are Gradle's own; `check` runs `bake`, `reviewChanges`, `checkTagRedirects` and
+`checkMastheadVariants`.
 
 **Where the tasks are defined** (since 2026-10-27, [`docs/06-GRADLE-PLUGIN.md`](docs/06-GRADLE-PLUGIN.md)): the
 build logic is moving out of `build.gradle` into the site's own Gradle plugin, `jbake-site`, in **`build-logic/`**,
 an included build written in Java with its own tests (`./gradlew :build-logic:build` compiles and tests it). The
 plugin defines `bake` and `bakePreview` (JBake's launcher in a fresh JVM, the CSS and case-redirect copies, the port
-check and the SCSS watcher), `compileSass` and the hand-edited-CSS guard `checkNoHandEditedCss`, and the `jbake`
-configuration; all of it configured by the `jbakeSite { ... }` block at the top of `build.gradle`, where the JBake
-version pins also stay. The `writing` tasks are still in `build.gradle` until their slice moves. The full description
-comes with the last slice.
+check and the SCSS watcher), `compileSass` and the hand-edited-CSS guard `checkNoHandEditedCss`, the `jbake`
+configuration, and, since T127 (2026-10-28), the `writing` tasks and the two checks above, which were single-file
+Java programs under `scripts/` before; all of it configured by the `jbakeSite { ... }` block at the top of
+`build.gradle`, where the JBake version pins also stay. The full description comes with the last slice.
 
 **GitHub settings and DNS this depends on:**
 - **Settings → Pages → Build and deployment → Source: "GitHub Actions".**
@@ -349,22 +355,23 @@ Gradle. Each runs the same build and checks, and never deploys.
 rm -rf build/site && rsync -a --prune-empty-dirs --exclude '*-draft.html' build/jbake/ build/site/
 scripts/check-docs-not-published.sh build/site   # docs/ must never reach the site
 scripts/check-urls.sh build/site                 # no published URL may disappear
-java scripts/TagRedirects.java --check build/site   # old tag URLs are tag pages or working redirects
-java scripts/PrepareImage.java --check-variants  # header images have their phone/tablet sizes
+./gradlew checkTagRedirects -PsiteDir=build/site   # old tag URLs are tag pages or working redirects
+./gradlew checkMastheadVariants                   # header images have their phone/tablet sizes
 xmllint --noout build/site/feed.xml build/site/sitemap.xml
 ```
 The link checker (lychee) runs in CI. To run it locally, install [lychee](https://lychee.cli.rs) and see the
 "Check local links and assets" step in the workflow for its options.
 
 **Old tag URLs (T039, T055):** tag pages used to be published with spaces (`/tags/acceptance test.html`), and two
-tags had a capitalized twin (`/tags/DevOps.html`, `/tags/Groovy.html`). Those 50 URLs are now small redirect pages
-(meta refresh, `rel=canonical`, `noindex`, and a visible link) to the new pages, made by `scripts/TagRedirects.java`
-(`java scripts/TagRedirects.java`, nothing to install; `tag-redirects.py` until T139, 2026-10-27) from `docs/baseline/urls.txt` and committed: 48 in `src/jbake/assets/tags/`, and the 2 capitalized ones in
-`src/case-redirects/tags/`. Run the program again if a tag in that list stops being used, and keep its stubs.
-**Merging or renaming a tag** (needs the owner's approval, AGENTS.md Rule 1): add `old → new` to `RENAMES` in the
-program, edit the posts' `tags=` lines, and run it. It writes a stub at every old URL of the old tag: the
+tags had a capitalized twin (`/tags/DevOps.html`, `/tags/Groovy.html`). Those 59 URLs (50 until the 2026-10-09 tag merges) are now small redirect pages
+(meta refresh, `rel=canonical`, `noindex`, and a visible link) to the new pages, made by `./gradlew tagRedirects`
+(the plugin's `TagRedirects` class in `build-logic/`; `scripts/TagRedirects.java` until T127, 2026-10-28, and
+`tag-redirects.py` until T139, 2026-10-27) from `docs/baseline/urls.txt` and committed: 48 in `src/jbake/assets/tags/`, and the 2 capitalized ones in
+`src/case-redirects/tags/`. Run the task again if a tag in that list stops being used, and keep its stubs.
+**Merging or renaming a tag** (needs the owner's approval, AGENTS.md Rule 1): add `old → new` to `RENAMES` in
+`TagRedirects.java`, edit the posts' `tags=` lines, and run the task. It writes a stub at every old URL of the old tag: the
 baseline one and, for a tag with a space, the hyphenated page published since T039 (`tags/google-calender.html`).
-`--check` covers those hyphenated URLs too (derived from the baseline, which they aren't in). The 2026-10-09 merges
+`checkTagRedirects` covers those hyphenated URLs too (derived from the baseline, which they aren't in). The 2026-10-09 merges
 and typo fixes (report §H) added 9 stubs and repointed 3, for 59 in all.
 **macOS caveat:** macOS filesystems ignore case, so `tags/DevOps.html` and `tags/devops.html` are the same file
 there. `./gradlew bake` therefore adds `src/case-redirects/` only when `build/jbake` is case-sensitive (Linux, as

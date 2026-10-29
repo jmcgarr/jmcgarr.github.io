@@ -7,7 +7,7 @@
 
   JBake doesn't keep the original, so a hyphen is turned back into a space unless the tag is listed below: tags whose
   hyphens were written by the author (key: the tag as JBake gives it; value: the tag as written in the posts).
-  A new tag with a hyphen of its own goes here. `java scripts/TagRedirects.java --check` (run by CI) compares every tag
+  A new tag with a hyphen of its own goes here. `./gradlew checkTagRedirects` (run by CI) compares every tag
   page with the posts' tags and names any tag that is shown wrong.
 -->
 <#assign tagNamesAsWritten = {"apt-get": "apt-get", "oh-my-zsh": "oh-my-zsh", "shell-fu": "shell-fu"}>

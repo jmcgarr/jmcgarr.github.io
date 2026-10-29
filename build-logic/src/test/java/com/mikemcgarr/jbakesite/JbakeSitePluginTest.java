@@ -5,6 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.mikemcgarr.jbakesite.review.ReviewChangesTask;
+import com.mikemcgarr.jbakesite.verification.CheckMastheadVariantsTask;
+import com.mikemcgarr.jbakesite.verification.CheckTagRedirectsTask;
+import com.mikemcgarr.jbakesite.writing.NewPostTask;
+import com.mikemcgarr.jbakesite.writing.PrepareImageTask;
+import com.mikemcgarr.jbakesite.writing.TagRedirects;
+import com.mikemcgarr.jbakesite.writing.TagRedirectsTask;
 import java.io.File;
 import java.util.List;
 import java.util.Set;
@@ -35,6 +42,8 @@ class JbakeSitePluginTest {
         assertEquals(projectFile("src/jbake"), site.getSource().get().getAsFile());
         assertEquals(projectFile("build/jbake"), site.getDestination().get().getAsFile());
         assertEquals(projectFile("src/case-redirects"), site.getCaseRedirects().get().getAsFile());
+        assertEquals(projectFile("docs/baseline/urls.txt"), site.getPublishedUrls().get().getAsFile());
+        assertEquals(TagRedirects.RENAMES, site.getTagRenames().get(), "the owner-approved renames of 2026-10-09");
         assertFalse(site.getLogbackConfiguration().isPresent(), "unset: the bundled configuration");
         assertEquals(projectFile("src/scss"), site.getScss().getSource().get().getAsFile());
         assertEquals("css", site.getScss().getPublishedDir().get());
@@ -127,6 +136,55 @@ class JbakeSitePluginTest {
         assertEquals(projectFile("out"), preview.getDestination().get().getAsFile());
         assertEquals(projectFile("out/assets/styles"), preview.getScssWatcher().get().getParameters().getTargetDir().get().getAsFile());
         assertEquals("styles", preview.getScssWatcher().get().getParameters().getSourceName().get());
+    }
+
+    @Test
+    void registersTheWritingTasksWithTheSiteAndTheirProperties() {
+        NewPostTask newPost = (NewPostTask) project.getTasks().getByName(JbakeSitePlugin.NEW_POST_TASK_NAME);
+        ReviewChangesTask review = (ReviewChangesTask) project.getTasks().getByName(JbakeSitePlugin.REVIEW_CHANGES_TASK_NAME);
+        PrepareImageTask prepareImage = (PrepareImageTask) project.getTasks().getByName(JbakeSitePlugin.PREPARE_IMAGE_TASK_NAME);
+        TagRedirectsTask tagRedirects = (TagRedirectsTask) project.getTasks().getByName(JbakeSitePlugin.TAG_REDIRECTS_TASK_NAME);
+
+        for (SiteToolTask task : List.of(newPost, review, prepareImage, tagRedirects)) {
+            assertEquals(JbakeSitePlugin.WRITING_GROUP, task.getGroup(), task.getName());
+            assertEquals(projectFile("src/jbake"), task.getSource().get().getAsFile(), task.getName());
+            assertEquals(projectFile("src/case-redirects"), task.getCaseRedirects().get().getAsFile(), task.getName());
+            assertEquals(projectFile("docs/baseline/urls.txt"), task.getPublishedUrls().get().getAsFile(), task.getName());
+            assertTrue(task.getOutputs().getFiles().isEmpty(), task.getName() + " has no outputs: it runs every time");
+        }
+        assertEquals("Starts a draft post on a new post/<slug> branch: ./gradlew newPost -Ptitle=\"My Post Title\"", newPost.getDescription());
+        assertFalse(newPost.getTitle().isPresent(), "no -Ptitle on this project");
+        assertEquals("Reviews the pages this branch changed for broken Markdown, links and images: ./gradlew reviewChanges [-Pall]",
+                review.getDescription());
+        assertEquals(Set.of(JbakeSitePlugin.BAKE_TASK_NAME), dependenciesOf(review), "reviewed after a bake");
+        assertEquals(projectFile("build/jbake"), review.getSite().get().getAsFile());
+        assertEquals("Prepares a hand-added image for the site (sRGB, metadata, size, masthead variants): ./gradlew prepareImage -Pimage=<path>",
+                prepareImage.getDescription());
+        assertEquals(TagRedirects.RENAMES, tagRedirects.getTagRenames().get());
+    }
+
+    @Test
+    void registersTheChecksInTheVerificationGroupAndCheckRunsThemWithTheReview() {
+        CheckTagRedirectsTask tagRedirects = (CheckTagRedirectsTask) project.getTasks().getByName(JbakeSitePlugin.CHECK_TAG_REDIRECTS_TASK_NAME);
+        CheckMastheadVariantsTask mastheads = (CheckMastheadVariantsTask) project.getTasks().getByName(JbakeSitePlugin.CHECK_MASTHEAD_VARIANTS_TASK_NAME);
+        Task check = project.getTasks().getByName("check");
+
+        assertEquals(JbakeSitePlugin.VERIFICATION_GROUP, tagRedirects.getGroup());
+        assertEquals(JbakeSitePlugin.VERIFICATION_GROUP, mastheads.getGroup());
+        assertEquals(Set.of(JbakeSitePlugin.BAKE_TASK_NAME), dependenciesOf(tagRedirects));
+        assertEquals(projectFile("build/jbake"), tagRedirects.getSite().get().getAsFile(), "the bake, unless -PsiteDir says otherwise");
+        assertEquals(TagRedirects.RENAMES, tagRedirects.getTagRenames().get());
+        assertEquals(Set.of(), dependenciesOf(mastheads), "reads the source tree only");
+        assertEquals(Set.of(JbakeSitePlugin.REVIEW_CHANGES_TASK_NAME, JbakeSitePlugin.CHECK_TAG_REDIRECTS_TASK_NAME,
+                JbakeSitePlugin.CHECK_MASTHEAD_VARIANTS_TASK_NAME), dependenciesOf(check));
+    }
+
+    @Test
+    void onlyTheJbakeWritingAndVerificationGroupsShowInTheTaskList() {
+        Set<String> groups = project.getTasks().stream().map(Task::getGroup).filter(g -> g != null).collect(Collectors.toSet());
+
+        assertEquals(Set.of(JbakeSitePlugin.JBAKE_GROUP, JbakeSitePlugin.WRITING_GROUP, JbakeSitePlugin.VERIFICATION_GROUP, "build"),
+                groups, "ours, plus the base plugin's clean and assemble");
     }
 
     private Set<String> dependenciesOf(Task task) {

@@ -14,3 +14,8 @@ dependencies {
     jbake 'com.vladsch.flexmark:flexmark:0.64.8'
     jbake 'info.picocli:picocli:4.7.7'
 }
+
+jbakeSite {
+    // The real site's owner-approved tag renames (TagRedirects.RENAMES) name tags this fixture doesn't have.
+    tagRenames = [:]
+}

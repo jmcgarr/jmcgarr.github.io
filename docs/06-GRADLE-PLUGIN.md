@@ -143,8 +143,8 @@ Two task groups, then: **`jbake`** for generating and previewing the site, **`wr
 commands. `./gradlew tasks` shows exactly those two groups' tasks and nothing else of ours. _2026-10-27: plus
 Gradle's standard **`verification`** group for the check tasks of Phase B, which `check` runs._
 
-The single-file scripts stay as they are in Phase 1. They keep working without Gradle (`java scripts/NewPost.java`),
-which the README promises, and moving them into the plugin is a separate decision (T130). _Decided 2026-10-27:
+The single-file scripts stay as they are in Phase 1. They kept working without Gradle (`java scripts/NewPost.java`),
+which the README promised, until T127; moving them into the plugin was a separate decision (T130). _Decided 2026-10-27:
 they move into the plugin as task classes (T130, done in T127's PR); the no-Gradle use goes with them._
 
 **Phase 2, sketched only: a standalone plugin** in its own repository, published to the Gradle Plugin Portal (or
@@ -386,7 +386,7 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
     25 → 21 → 25 prints "configuration cache cannot be reused because JVM has changed", and JBake's command line (`--info`)
     has `--enable-native-access`/`--sun-misc-unsafe-memory-access` on 25 and neither on 21, so the `jvmArguments`
     convention follows the JVM; no code change needed._
-- [ ] T127 [IMP] **Move the script tasks.** One `ScriptTask` type (a single-file Java program run with the Gradle
+- [x] T127 [IMP] **Move the script tasks.** One `ScriptTask` type (a single-file Java program run with the Gradle
   JVM's `java`, `-P` options passed as `--name=value`, exit codes mapped to one-line failures), registered from
   `jbakeSite.scripts { register(name, path) { options; dependsOn } }`; `newPost` and `reviewChanges` become two
   entries (`build-logic/`, `build.gradle`; `scripts/*.java` unchanged)
@@ -398,6 +398,36 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
     `TagRedirects`) into `build-logic/` as task classes with shared helpers and unit tests, instead of wrapping them
     as `Exec`s; the `-P` option passing and the exit-code mapping stay as described. CI's
     `java scripts/ReviewChanges.java` and `java scripts/TagRedirects.java --check` steps become Gradle tasks._
+  - _2026-10-28: **done** (branch `chore/T127-T130-scripts-into-plugin`). The four programs are task classes in
+    `build-logic/`, each a plain logic class with the paths, git, the clock and the output injected, run by a thin
+    managed task: `writing` (`NewPost`/`NewPostTask`, `PrepareImage` + `Images` + `MastheadVariants`/`PrepareImageTask`,
+    `TagRedirects`/`TagRedirectsTask`), `review` (the design doc's structure: `Changes`, `Pages`, `MarkdownChecks`,
+    `ImageChecks`, `RemovalChecks`, `PageChecks`, `HtmlTags`, `Suppressions`, `Findings`, `Report`, `Review`,
+    `ReviewChangesTask`), `verification` (`CheckTagRedirectsTask`, `CheckMastheadVariantsTask`: the programs' `--check`
+    modes, so **T141 in `08` now covers only `checkUrls`, `checkDocsNotPublished` and the `checkSite` aggregate**) and
+    `internal` (`Git`, `ProcessRunner`, `ToolFailure`, `FrontMatter`, `Tags`, `SiteLayout`, `JbakeProperties`, once).
+    `SiteToolTask` is their base. `build.gradle` is down to the plugin application, the `jbakeSite { }` block and the
+    pins (95 lines); the four Exec blocks and `scripts/{NewPost,ReviewChanges,PrepareImage,TagRedirects}.java` are gone,
+    and CI's three `java scripts/…` steps are `./gradlew reviewChanges -Pbase=…`, `checkTagRedirects -PsiteDir=build/site`
+    and `checkMastheadVariants`. **Strings that changed on purpose:** the `newPost:`/`reviewChanges:`/`PrepareImage:`
+    prefixes (Gradle names the task); `--all`/`--base=`/`--online`/`--keep-source` read `-Pall`/`-Pbase=`/`-Ponline`/
+    `-PkeepSource` in messages; the E5 hints and the masthead FAIL line say `./gradlew prepareImage -Pimage=<image>
+    -Pvariants` (the new spelling of `--variants`); `prepareImage` fails with "Not every image could be prepared (see
+    above)." where the program exited 1 silently. **Judgment calls:** `-Pvariants` added; `site.host` read from
+    `jbake.properties` instead of a constant (byte-identical here); `jbakeSite.publishedUrls` and `jbakeSite.tagRenames`
+    (default: the owner's `RENAMES`) so the fixture site can differ; the W3 check skips a missing `blog/drafts/`
+    instead of crashing. **Tests passed:** the bake is byte-identical to `main`'s (feed.xml's timestamp aside); on a
+    clean tree `tagRedirects` writes nothing (59 stubs, `git status` clean) and regenerates a deleted stub byte for
+    byte; `checkTagRedirects` prints the program's counts (176 tag pages, 229 old URLs: 170 real, 57 stubs, 2 not
+    checkable on macOS) and fails on a copy with a stub missing ("missing from the build") or edited ("redirects
+    to"); `checkMastheadVariants` passes (15) and names a variant moved aside; `prepareImage` on the Maui PNG
+    (scratch commit) dry-runs clean and writes a 1920x691 q82 130K progressive JPEG with no Exif/ICC/XMP bytes, the
+    variants, the repointed post, and removes the PNG, 28 committed variants untouched; `hawaii.png -Pjpeg` is
+    refused with the D2 message; `reviewChanges` matches the program's output line for line on a clean tree, the
+    #139 About file (3 findings, with `-Pstrict`, and with the GitHub annotations and step summary), `-Pall` (78
+    pages, 0/0) and the usage errors; `newPost -Ptitle="M10 Test"` writes the same draft on `post/m10-test`;
+    `:build-logic:check` passes (140 tests, TestKit included); `./gradlew tasks` shows the groups jbake, writing and
+    verification only._
 - [ ] T128 [IMP] **Shrink `build.gradle`.** Remove every helper, class and comment that moved; keep the dependency
   pins and their advisory comments; add a short header comment pointing at `build-logic/` and this plan
   (`build.gradle`)
@@ -422,6 +452,8 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
     `08`), each copying the same helpers, and `OpenPr` would be a fifth. Consequences: `java scripts/X.java` without
     Gradle stops working and the README promise goes (T131); the helpers exist once, with unit tests; `OpenPr`
     (T121) is born as a plugin class. The move itself is T127's PR._
+  - _2026-10-28: **done** in T127's PR: the four programs are task classes in `build-logic/`, and `scripts/` holds
+    `smoke-test.sh`, the two shell checks (until T143) and `visual/`._
 - [ ] T131 [IMP] **Docs.** README "How the site is built and deployed" describes `build-logic/` (what is in the
   plugin, what is in `build.gradle`, how to run its tests); AGENTS.md's Generator line and Layout tree mention
   `build-logic/`; the T096/T112/T113 notes in the archived revival plan are left as history (`README.md`,

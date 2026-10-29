@@ -1,16 +1,25 @@
 package com.mikemcgarr.jbakesite;
 
+import com.mikemcgarr.jbakesite.review.ReviewChangesTask;
+import com.mikemcgarr.jbakesite.verification.CheckMastheadVariantsTask;
+import com.mikemcgarr.jbakesite.verification.CheckTagRedirectsTask;
+import com.mikemcgarr.jbakesite.writing.NewPostTask;
+import com.mikemcgarr.jbakesite.writing.PrepareImageTask;
+import com.mikemcgarr.jbakesite.writing.TagRedirects;
+import com.mikemcgarr.jbakesite.writing.TagRedirectsTask;
 import java.util.List;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.file.Directory;
 import org.gradle.api.file.ProjectLayout;
+import org.gradle.api.plugins.BasePlugin;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.provider.ProviderFactory;
 import org.gradle.api.services.BuildServiceRegistry;
 import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.TaskProvider;
+import org.gradle.language.base.plugins.LifecycleBasePlugin;
 
 /**
  * The {@code jbake-site} plugin: how the site is built, as Java classes with tests, applied by the root
@@ -21,7 +30,14 @@ import org.gradle.api.tasks.TaskProvider;
  * theme CSS: {@code compileSass} ({@link CompileSassTask}) and {@code checkNoHandEditedCss}
  * ({@link CheckNoHandEditedCssTask}); T125 the {@code jbake} configuration ({@link JbakeClasspath}) and
  * {@code bake} ({@link BakeTask}); T126 {@code bakePreview} ({@link BakePreviewTask}) with its SCSS watcher
- * ({@link SassPreviewWatcher}).
+ * ({@link SassPreviewWatcher}); T127 (with the T130 decision) the four single-file programs of {@code scripts/} as
+ * task classes: the {@code writing} group's {@code newPost} ({@link NewPostTask}), {@code reviewChanges}
+ * ({@link ReviewChangesTask}), {@code prepareImage} ({@link PrepareImageTask}) and {@code tagRedirects}
+ * ({@link TagRedirectsTask}), and the {@code verification} group's {@code checkTagRedirects}
+ * ({@link CheckTagRedirectsTask}) and {@code checkMastheadVariants} ({@link CheckMastheadVariantsTask}), which
+ * {@code check} runs with the review.
+ *
+ * <p>The plugin applies Gradle's {@code base} plugin for {@code clean} and the {@code check} lifecycle task.
  */
 public final class JbakeSitePlugin implements Plugin<Project> {
 
@@ -36,6 +52,33 @@ public final class JbakeSitePlugin implements Plugin<Project> {
 
     /** The task that bakes, serves and rebuilds on save. */
     public static final String BAKE_PREVIEW_TASK_NAME = "bakePreview";
+
+    /** The task group of the author's commands: {@code newPost}, {@code reviewChanges}, {@code prepareImage}, {@code tagRedirects}. */
+    public static final String WRITING_GROUP = "writing";
+
+    /** The task group of the checks {@code check} runs: Gradle's own {@code verification}. */
+    public static final String VERIFICATION_GROUP = LifecycleBasePlugin.VERIFICATION_GROUP;
+
+    /** The task that starts a draft post on a new branch. */
+    public static final String NEW_POST_TASK_NAME = "newPost";
+
+    /** The task that reviews the pages a branch changed. */
+    public static final String REVIEW_CHANGES_TASK_NAME = "reviewChanges";
+
+    /** The task that makes a hand-added image fit the image rules. */
+    public static final String PREPARE_IMAGE_TASK_NAME = "prepareImage";
+
+    /** The task that writes the redirect stubs for old tag URLs. */
+    public static final String TAG_REDIRECTS_TASK_NAME = "tagRedirects";
+
+    /** The task that checks every masthead in use has its 960/1440 px variants. */
+    public static final String CHECK_MASTHEAD_VARIANTS_TASK_NAME = "checkMastheadVariants";
+
+    /** The task that checks the old tag URLs in a baked site. */
+    public static final String CHECK_TAG_REDIRECTS_TASK_NAME = "checkTagRedirects";
+
+    /** The Gradle property that points the check tasks at another baked site, such as CI's staged {@code build/site}. */
+    public static final String SITE_DIR_PROPERTY = "siteDir";
 
     /** The task that compiles the SCSS entries. No group: an implementation detail of the bake and the preview. */
     public static final String COMPILE_SASS_TASK_NAME = "compileSass";
@@ -57,16 +100,21 @@ public final class JbakeSitePlugin implements Plugin<Project> {
 
     @Override
     public void apply(Project project) {
+        project.getPluginManager().apply(BasePlugin.class);
         JbakeSiteExtension site = project.getExtensions().create(EXTENSION_NAME, JbakeSiteExtension.class);
         ProjectLayout layout = project.getLayout();
         TaskContainer tasks = project.getTasks();
+        ProviderFactory providers = project.getProviders();
         setDefaults(site, layout);
 
         Configuration jbake = JbakeClasspath.create(project.getConfigurations(), site.getClasspath());
         TaskProvider<CompileSassTask> compileSass = registerThemeCss(site, tasks, layout);
-        configureJbakeTasks(site, jbake, compileSass, tasks, layout, project.getProviders());
+        configureJbakeTasks(site, jbake, compileSass, tasks, layout, providers);
         registerBake(site, tasks);
         registerBakePreview(site, tasks, layout, project.getPath(), project.getGradle().getSharedServices());
+        configureSiteToolTasks(site, tasks);
+        registerWritingTasks(site, tasks, providers);
+        registerVerificationTasks(site, tasks, layout, providers);
     }
 
     private static void setDefaults(JbakeSiteExtension site, ProjectLayout layout) {
@@ -74,6 +122,8 @@ public final class JbakeSitePlugin implements Plugin<Project> {
         site.getSource().convention(projectDirectory.dir("src/jbake"));
         site.getDestination().convention(layout.getBuildDirectory().dir("jbake"));
         site.getCaseRedirects().convention(projectDirectory.dir("src/case-redirects"));
+        site.getPublishedUrls().convention(projectDirectory.file("docs/baseline/urls.txt"));
+        site.getTagRenames().convention(TagRedirects.RENAMES);
 
         ScssExtension scss = site.getScss();
         scss.getSource().convention(projectDirectory.dir("src/scss"));
@@ -157,5 +207,87 @@ public final class JbakeSitePlugin implements Plugin<Project> {
             task.getScssWatcher().set(watcher);
             task.usesService(watcher);
         });
+    }
+
+    /** What every writing and verification task shares ({@link SiteToolTask}): where the site's sources are. */
+    private static void configureSiteToolTasks(JbakeSiteExtension site, TaskContainer tasks) {
+        tasks.withType(SiteToolTask.class).configureEach(task -> {
+            task.getSource().set(site.getSource());
+            task.getCaseRedirects().set(site.getCaseRedirects());
+            task.getPublishedUrls().set(site.getPublishedUrls());
+        });
+    }
+
+    /**
+     * The author's commands. Each {@code -P} option is read as a Gradle property, lazily, so the configuration cache
+     * (T114) holds the provider and the task reads the value when it runs.
+     */
+    private static void registerWritingTasks(JbakeSiteExtension site, TaskContainer tasks, ProviderFactory providers) {
+        tasks.register(NEW_POST_TASK_NAME, NewPostTask.class, task -> {
+            task.setGroup(WRITING_GROUP);
+            task.setDescription("Starts a draft post on a new post/<slug> branch: ./gradlew newPost -Ptitle=\"My Post Title\"");
+            task.getTitle().set(providers.gradleProperty("title"));
+            task.getTags().set(providers.gradleProperty("tags"));
+            task.getSummary().set(providers.gradleProperty("summary"));
+            task.getSlug().set(providers.gradleProperty("slug"));
+            task.getBranch().set(providers.gradleProperty("branch"));
+            task.getPr().set(providers.gradleProperty("pr"));
+            task.getFormat().set(providers.gradleProperty("format"));
+        });
+        TaskProvider<ReviewChangesTask> reviewChanges = tasks.register(REVIEW_CHANGES_TASK_NAME, ReviewChangesTask.class, task -> {
+            task.setGroup(WRITING_GROUP);
+            task.setDescription("Reviews the pages this branch changed for broken Markdown, links and images: ./gradlew reviewChanges [-Pall]");
+            task.dependsOn(BAKE_TASK_NAME);
+            task.getSite().set(site.getDestination());
+            task.getBase().set(providers.gradleProperty("base"));
+            task.getAll().set(providers.gradleProperty("all"));
+            task.getStrict().set(providers.gradleProperty("strict"));
+            task.getOnline().set(providers.gradleProperty("online"));
+        });
+        // `./gradlew check` (the standard verification task) runs the review, so a bake plus the review is one command
+        // and the hand-edited-CSS guard (checkNoHandEditedCss, which bake runs first) comes with it.
+        tasks.named(LifecycleBasePlugin.CHECK_TASK_NAME, check -> check.dependsOn(reviewChanges));
+        tasks.register(PREPARE_IMAGE_TASK_NAME, PrepareImageTask.class, task -> {
+            task.setGroup(WRITING_GROUP);
+            task.setDescription("Prepares a hand-added image for the site (sRGB, metadata, size, masthead variants): ./gradlew prepareImage -Pimage=<path>");
+            task.getImage().set(providers.gradleProperty("image"));
+            task.getDryRun().set(providers.gradleProperty("dryRun"));
+            task.getPng().set(providers.gradleProperty("png"));
+            task.getJpeg().set(providers.gradleProperty("jpeg"));
+            task.getWidth().set(providers.gradleProperty("width"));
+            task.getKeepSource().set(providers.gradleProperty("keepSource"));
+            task.getVariants().set(providers.gradleProperty("variants"));
+        });
+        tasks.register(TAG_REDIRECTS_TASK_NAME, TagRedirectsTask.class, task -> {
+            task.setGroup(WRITING_GROUP);
+            task.setDescription("Writes any missing or outdated redirect stub for an old tag URL, never deleting one (on an approved tag rename).");
+            task.getTagRenames().set(site.getTagRenames());
+        });
+    }
+
+    /**
+     * The checks {@code check} runs besides the review (Gradle's {@code verification} group). Each reads the baked
+     * site, {@code jbakeSite.destination} after a {@code bake}, or the directory {@code -PsiteDir} names: CI stages
+     * the site without drafts into {@code build/site} and checks that.
+     */
+    private static void registerVerificationTasks(JbakeSiteExtension site, TaskContainer tasks, ProjectLayout layout,
+            ProviderFactory providers) {
+        Provider<Directory> siteToCheck = providers.gradleProperty(SITE_DIR_PROPERTY)
+                .map(dir -> layout.getProjectDirectory().dir(dir))
+                .orElse(site.getDestination());
+        TaskProvider<CheckTagRedirectsTask> checkTagRedirects = tasks.register(CHECK_TAG_REDIRECTS_TASK_NAME,
+                CheckTagRedirectsTask.class, task -> {
+                    task.setGroup(VERIFICATION_GROUP);
+                    task.setDescription("Checks that every old tag URL in the baked site is a tag page or a redirect stub to one (run by CI).");
+                    task.dependsOn(BAKE_TASK_NAME);
+                    task.getSite().set(siteToCheck);
+                    task.getTagRenames().set(site.getTagRenames());
+                });
+        TaskProvider<CheckMastheadVariantsTask> checkMastheadVariants = tasks.register(CHECK_MASTHEAD_VARIANTS_TASK_NAME,
+                CheckMastheadVariantsTask.class, task -> {
+                    task.setGroup(VERIFICATION_GROUP);
+                    task.setDescription("Checks that every header image in use has its 960 and 1440px variants (run by CI).");
+                });
+        tasks.named(LifecycleBasePlugin.CHECK_TASK_NAME, check -> check.dependsOn(checkTagRedirects, checkMastheadVariants));
     }
 }

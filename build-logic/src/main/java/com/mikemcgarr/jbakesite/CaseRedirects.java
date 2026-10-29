@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 /**
  * Redirect stubs whose names differ from a real page only by letter case, such as {@code tags/DevOps.html} next to
- * {@code tags/devops.html} (T055, made by {@code scripts/TagRedirects.java}). They can't be JBake assets: on a
+ * {@code tags/devops.html} (T055, made by {@code tagRedirects}: {@link com.mikemcgarr.jbakesite.writing.TagRedirects}). They can't be JBake assets: on a
  * case-insensitive filesystem (macOS) both names are one file, and JBake copies assets after rendering, so the stub
  * would replace the real page with a redirect to itself (reproduced on APFS). The bake adds them after JBake has
  * run, and only when its destination is case-sensitive, as on Linux, where CI builds and GitHub Pages serves. T125
