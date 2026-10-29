@@ -186,8 +186,13 @@ class SiteToolsFunctionalTest {
         BuildResult allowed = runner("checkUrls", "-PsiteDir=build/site").build();
 
         assertEquals(TaskOutcome.SUCCESS, allowed.task(":checkUrls").getOutcome());
-        assertTrue(allowed.getOutput().contains("Expected removals (1):\n  - about.html\nNew URLs (1):\n  + tags/acceptance-test.html\n"
-                + "OK: all 6 baseline URLs accounted for in build/site\n"), "the hyphenated tag page is new since T039: " + allowed.getOutput());
+        // The hyphenated tag page is new since T039 everywhere. On a case-sensitive filesystem (Linux, CI) the bake
+        // also publishes the case-redirect stub About.html, which the baseline doesn't list, so it is new there too.
+        String newUrls = CaseRedirects.isCaseSensitive(projectDir)
+                ? "New URLs (2):\n  + About.html\n  + tags/acceptance-test.html\n"
+                : "New URLs (1):\n  + tags/acceptance-test.html\n";
+        assertTrue(allowed.getOutput().contains("Expected removals (1):\n  - about.html\n" + newUrls
+                + "OK: all 6 baseline URLs accounted for in build/site\n"), allowed.getOutput());
     }
 
     @Test
