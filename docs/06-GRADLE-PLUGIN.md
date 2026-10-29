@@ -553,7 +553,7 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
 
 #### Checkpoint: M10
 
-- [ ] CHK047 A clean bake on `main` is byte-identical (apart from `feed.xml`'s timestamps) to the bake at the commit
+- [x] CHK047 A clean bake on `main` is byte-identical (apart from `feed.xml`'s timestamps) to the bake at the commit
   before T123, on macOS and on Linux (CI's `build/site`, compared through the `check-urls.sh` (`./gradlew checkUrls`
   since T143) and link checks plus one manual `diff -r` of a downloaded artifact)
   - _Partially verified 2026-10-28, on the branch `chore/T128-T129-T131-shrink-tests-docs` (T123–T131 all in, not
@@ -562,6 +562,16 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
     of `css/clean-blog.css` and `css/code.css` identical. Linux: CI's gates (`check-urls.sh` strict,
     `checkTagRedirects`, lychee) ran green on every M10 PR, but the manual `diff -r` of a downloaded artifact is not
     done yet; it is done after this PR merges, against `main`, and ticks the box._
+  - _Verified 2026-10-29, after PR #174 (M10's last) merged as 2f43289. Linux: the Pages artifacts of the `main`
+    deploys at 360bef7 (the T133 merge, before T123; run 40703004035) and at 2f43289 (run 40803541310) were
+    downloaded and compared entry by entry (`tar -xO` + `cmp`): 497 entries each, identical lists, only `feed.xml`
+    differs, in its `pubDate` and `lastBuildDate` lines. macOS: a clean bake of `main` at 2f43289 is byte-identical
+    to the bake at 2f3e9f4 (`main` before T137, which precedes T123; see CHK054 in 08) apart from `feed.xml`. Between
+    the macOS bake and the Linux artifact the differences are environment only: the feed's dates carry the runner's
+    `+0000` against the Mac's `-0700`/`-0800`, and `archive.html`, `sitemap.xml`, `feed.xml` and `tags/devops.html`
+    list posts that share a date in a different order (same lines; `diff <(sort a) <(sort b)` is empty). Since
+    both platforms' outputs are unchanged across M10, that ordering difference predates it; it is a JBake tie on
+    equal dates, not a plugin effect, and is left as a note for the owner._
 - [x] CHK048 `./gradlew bake` twice in a row prints "Reusing configuration cache"; `bakePreview`, `newPost` and
   `reviewChanges` run with no configuration-cache problems reported
   - _2026-10-28: `bake` twice: the second prints "Reusing configuration cache." and `:bake UP-TO-DATE`.
