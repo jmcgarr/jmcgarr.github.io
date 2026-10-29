@@ -37,8 +37,9 @@ This is JBake's own server and watcher (`jbake -b -s`), so in the preview the fe
 at `http://localhost:8080`; a normal `./gradlew bake` uses the real address again. Restart the preview after changing
 `jbake.properties`, or after deleting or renaming a file (its old page stays in `build/jbake` until `clean`).
 
-`./gradlew bake` runs JBake 2.7 directly in its own JVM (`build.gradle`). If a template or post has an error, the
-build fails and prints JBake's message with the file and line.
+`./gradlew bake` runs JBake 2.7 directly in its own JVM (the site's build plugin in `build-logic/`, see [How the
+site is built and deployed](#how-the-site-is-built-and-deployed)). If a template or post has an error, the build
+fails and prints JBake's message with the file and line.
 
 Gradle's configuration cache is on (`gradle.properties`, T114), so a command's first run ends with "Configuration
 cache entry stored" and later runs start with "Reusing configuration cache". Both are normal. Edits to posts,
@@ -317,18 +318,110 @@ JBake's libraries are on one Gradle configuration, `jbake`, where `build.gradle`
 | `checkTagRedirects` | `verification` | Checks that every old tag URL in the baked site is a tag page or a redirect stub to one (CI: `-PsiteDir=build/site`) |
 | `checkMastheadVariants` | `verification` | Checks that every header image in use has its 960 and 1440px variants |
 
-`compileSass` (the SCSS to CSS step) has no group: it runs as part of `bake` and `bakePreview`, so `./gradlew tasks`
-doesn't list it. `clean` and `check` are Gradle's own; `check` runs `bake`, `reviewChanges`, `checkTagRedirects` and
-`checkMastheadVariants`.
+Two tasks have no group, so `./gradlew tasks` doesn't list them: `compileSass` (the SCSS to CSS step) and
+`checkNoHandEditedCss` (the guard that fails the build if a hand-written copy of the generated CSS is back under
+`src/jbake/assets/css/`). Both run as part of `bake` and `bakePreview`. `clean` and `check` are Gradle's own;
+`check` runs `bake`, `reviewChanges`, `checkTagRedirects` and `checkMastheadVariants`.
 
-**Where the tasks are defined** (since 2026-10-27, [`docs/06-GRADLE-PLUGIN.md`](docs/06-GRADLE-PLUGIN.md)): the
-build logic is moving out of `build.gradle` into the site's own Gradle plugin, `jbake-site`, in **`build-logic/`**,
-an included build written in Java with its own tests (`./gradlew :build-logic:build` compiles and tests it). The
-plugin defines `bake` and `bakePreview` (JBake's launcher in a fresh JVM, the CSS and case-redirect copies, the port
-check and the SCSS watcher), `compileSass` and the hand-edited-CSS guard `checkNoHandEditedCss`, the `jbake`
-configuration, and, since T127 (2026-10-28), the `writing` tasks and the two checks above, which were single-file
-Java programs under `scripts/` before; all of it configured by the `jbakeSite { ... }` block at the top of
-`build.gradle`, where the JBake version pins also stay. The full description comes with the last slice.
+### Where the build is defined: `build.gradle` and `build-logic/`
+
+The build is two things, kept apart on purpose ([`docs/06-GRADLE-PLUGIN.md`](docs/06-GRADLE-PLUGIN.md), done in
+October 2026, M10):
+
+- **`build.gradle`** (about 90 lines) says **what the site is**: it applies the plugin, configures it in a
+  `jbakeSite { ... }` block (the directories, the published CSS path, the guard's list of retired stylesheets), and
+  declares **the versions on JBake's classpath** in `dependencies { jbake ... }`, with a comment on every pin saying
+  why it is there (the engines the site uses, the preview's Jetty and commons-vfs2, and the advisories T112 raised
+  the transitive versions for). Dependabot proposes updates to these; check one by comparing a bake against `main`.
+- **`build-logic/`** says **how it is built**: the site's own Gradle plugin, **`jbake-site`**, an *included build*
+  (`settings.gradle`: `pluginManagement { includeBuild 'build-logic' }`) written in Java 21 with its own tests. Every
+  task in the table above is a class there, so **`bake` is defined in
+  `build-logic/src/main/java/com/mikemcgarr/jbakesite/BakeTask.java`**, registered by `JbakeSitePlugin.java` in the
+  same package. Gradle builds the plugin like any other project it includes: its compiled classes live in
+  `build-logic/build/` and are reused by every later invocation, across daemons, until a source under `build-logic/`
+  changes; then that one build recompiles the plugin (a few seconds) before the site's tasks run.
+
+**What is in the plugin** (`build-logic/src/main/java/com/mikemcgarr/jbakesite/`, by package; every class, with the
+`review` package's helpers summed up):
+
+| Package | Classes | What they do |
+|---|---|---|
+| `jbakesite` | `JbakeSitePlugin`, `JbakeSiteExtension`, `ScssExtension`, `JbakeClasspathExtension` | Registers every task and the `jbake` configuration; the `jbakeSite { }` block and its defaults |
+| | `JbakeTask`, `BakeTask`, `BakePreviewTask`, `JbakeClasspath`, `NewJdkJvmArgs`, `CaseRedirects`, `PreviewPort`, `ProjectPaths` | The `jbake` group: JBake's launcher in a fresh JVM (the JVM flags newer JDKs need, jffi's temp dir, logback), the bake with the CSS and case-redirect copies, the preview with its port check |
+| | `CompileSassTask`, `SassCompiler`, `SassEntries`, `SassCompileException`, `SassPreviewWatcher`, `CheckNoHandEditedCssTask`, `FileTrees` | The theme CSS: Dart Sass through its Java host, the entry convention, the preview's SCSS watcher, the guard |
+| `writing` | `NewPostTask`/`NewPost`/`NewPostOptions`, `PrepareImageTask`/`PrepareImage`/`PrepareImageOptions`/`Images`/`MastheadVariants`, `TagRedirectsTask`/`TagRedirects` | The `writing` group: each task is a thin class that reads its `-P` options and runs a plain logic class |
+| `review` | `ReviewChangesTask`, `Review`, `Changes`, `Pages`, `MarkdownChecks`, `PageChecks`, `ImageChecks`, `RemovalChecks`, `Report`, and the helpers `Change`, `Finding`, `Findings`, `HtmlTags`, `Suppressions`, `ReviewOptions`, `ReviewResult` | `reviewChanges`: one class per group of checks, as [docs/05-REVIEW-FLOW.md](docs/05-REVIEW-FLOW.md) lays them out |
+| `verification` | `CheckTagRedirectsTask`, `CheckMastheadVariantsTask` | The `verification` group: the checks `check` and CI run |
+| `internal` | `Git`, `ProcessRunner`, `CommandRunner`, `ToolFailure`, `FrontMatter`, `Tags`, `SiteLayout`, `JbakeProperties`, `ImageRules` | Shared by the writing and verification tools: running git and gh, reading a post's header, the site's paths, the image limits |
+
+`SiteToolTask` (package `jbakesite`) is the base of the writing and verification tasks: it hands each tool the
+site's layout and turns the tool's `ToolFailure` (the one-line message the old single-file programs printed before
+exiting 1 or 2) into a build failure with that message, so a refusal reads the same as before and never shows a
+stack trace. The plugin's one resource, `src/main/resources/com/mikemcgarr/jbakesite/jbake-logback.xml`, is the
+logback configuration JBake's JVM runs with (JBake's start and finish lines, every warning and error, OrientDB's
+noise silenced); `jbakeSite.logbackConfiguration` points at a file of your own instead.
+
+**The `jbakeSite { }` block.** Every property has a default, and `build.gradle` writes the ones the README names
+out anyway, so the paths are in one place:
+
+| Property | Default | What it means |
+|---|---|---|
+| `source` | `src/jbake` | JBake's source: `content/`, `templates/`, `assets/`, `jbake.properties` |
+| `destination` | `build/jbake` | Where the bake writes and what the preview serves; CI deploys it minus drafts |
+| `caseRedirects` | `src/case-redirects` | Redirect stubs that differ from a real page only by letter case, copied in after JBake, on a case-sensitive filesystem only (T055); an empty or missing directory means none |
+| `publishedUrls` | `docs/baseline/urls.txt` | The baseline of published URLs the writing tools read (`newPost` refuses a published slug; the review and the tag redirects use it) |
+| `tagRenames` | the owner's list of 2026-10-09 | Old tag to new, as written in the posts; every old URL of the old tag gets a redirect stub (Rule 1: never remove one) |
+| `logbackConfiguration` | unset (the bundled file) | A logback configuration for JBake's JVM |
+| `scss.source` | `src/scss` | The SCSS; each `<name>.scss` not starting with `_` is an entry |
+| `scss.publishedDir` | `css` | An entry `<name>.scss` is published at `/<publishedDir>/<name>.css`; the same folder under the assets is the one the guard watches |
+| `scss.retiredCss` | none | Hand-written stylesheets that are gone and must not come back under the assets either (`extra.css`, `fonts.css`, the old minified theme CSS) |
+| `scss.handEditedCssExplanation` | a sentence naming `scss.source` | What the guard's message says after the offending path |
+| `classpath.excludedGroups` | Thymeleaf, Pebble, Jade4j, the Groovy templates, AsciidoctorJ | Maven groups left off JBake's classpath: the engines the site doesn't use (T112). A site that uses one sets the list without it |
+| `classpath.substitutions` | `org.lz4:lz4-java` → `at.yawk.lz4:lz4-java:1.12.0` | Modules replaced on the classpath by a maintained fork with the same classes (T112) |
+
+**The `jbake` configuration** is the plugin's (`JbakeClasspath`): one classpath for the bake and the preview, named
+as the JBake Gradle plugin named it in 2014. `build.gradle` declares the versions on it; the plugin applies the
+exclusions and the substitution when it resolves, so `jbakeSite { classpath { ... } }` can change them after the
+plugin is applied, and `configurations.jbake { exclude group: '...' }` still works the Gradle way for more.
+`./gradlew dependencies --configuration jbake` shows the result (the lz4 line reads `org.lz4:lz4-java:1.4.0 ->
+at.yawk.lz4:lz4-java:1.12.0`).
+
+**The preview's watcher** (`SassPreviewWatcher`, a Gradle build service `bakePreview` starts before JBake's
+server): a daemon thread checks the SCSS files' timestamps every 0.5 s and, on a change, compiles every entry (a
+partial can feed any of them) with the same compiler and options as `compileSass`, each into a temporary file moved
+into `build/jbake/css/` atomically, so the browser never reads a half-written file. A Sass error prints Dart Sass's
+message and keeps the last good CSS. JBake's own watcher covers `src/jbake/`; this one covers `src/scss/`.
+
+**The plugin's tests** (`build-logic/src/test/`):
+```
+./gradlew :build-logic:check        # unit tests, TestKit tests and Gradle's plugin validation; CI runs this before the bake
+./gradlew :build-logic:test --tests '*BakeFunctionalTest'   # one class
+```
+The unit tests (JUnit 6) use `ProjectBuilder` for the plugin's wiring and the real Dart Sass, git and ImageIO for the
+tools. The TestKit tests (`*FunctionalTest`) copy the fixture site under `build-logic/src/test/fixtures/site` (two
+posts, one page, `clean-blog.scss` with a partial, one case-redirect stub, one tag redirect stub) into a temporary
+build and run Gradle on it with the configuration cache on, as the site runs it: the pages render and the CSS is
+copied in, the stubs appear on a case-sensitive filesystem and are skipped with the message on a Mac, the guard
+fails the bake, `newPost` passes its `-P` options through and maps a refusal to a failure, the review and the checks
+pass and fail as they should, and a second run reuses the configuration cache. The first run downloads JBake's
+libraries into TestKit's own Gradle home, so it takes a minute. `./gradlew :build-logic:javadoc` runs doclint on
+the Javadoc.
+
+**To add a build feature:**
+1. Decide what it is. A **task** goes in the package of its group (`writing`, `verification`, or `jbakesite` for the
+   bake and preview); a **site setting** it needs goes on `JbakeSiteExtension` (or `ScssExtension`,
+   `JbakeClasspathExtension`) with a default set in `JbakeSitePlugin.setDefaults`.
+2. Write the task class: `abstract`, extending `SiteToolTask` (a tool that reads the source tree and talks to the
+   author) or `DefaultTask`, with managed `Property`/`DirectoryProperty` inputs annotated `@Input`, `@InputFiles`,
+   `@OutputDirectory` or `@Internal`, and a `@TaskAction`. Read `-P` options as `providers.gradleProperty("name")`
+   in the plugin, never `project.property` in the task, so the configuration cache keeps working. Keep the logic in
+   a plain class the task calls, with the paths and the output injected, so a unit test needs no Gradle.
+3. Register it in `JbakeSitePlugin` with its group and a one-line description (the text `./gradlew tasks` shows);
+   wire it into `check` if CI should run it.
+4. Test it: a unit test of the logic class, a case in `JbakeSitePluginTest` for the wiring, and, if it changes what
+   a build does, a TestKit case on the fixture site. `./gradlew :build-logic:check` must pass, and a `clean bake`
+   must stay byte-identical to a bake of `main` (`diff -rq`, apart from `feed.xml`'s timestamps).
+5. Document it: the task table above, AGENTS.md's Commands block, and the section of this README it belongs to.
 
 **GitHub settings and DNS this depends on:**
 - **Settings → Pages → Build and deployment → Source: "GitHub Actions".**

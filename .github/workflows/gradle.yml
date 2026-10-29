@@ -34,7 +34,9 @@ jobs:
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@3f5f9adaf7d9fecd50b5935e54106014257a94e6 # v6.4.0
 
-    # :build-logic:check first: the build plugin's unit tests and Gradle's plugin validation (docs/06-GRADLE-PLUGIN.md)
+    # :build-logic:check first: the build plugin's unit tests, its TestKit tests (the fixture site under
+    # build-logic/src/test/fixtures baked with the configuration cache on) and Gradle's plugin validation, so a plugin
+    # regression fails here, before the bake (docs/06-GRADLE-PLUGIN.md, T129)
     - name: Bake with Gradle
       run: ./gradlew :build-logic:check bake --info --stacktrace
 
