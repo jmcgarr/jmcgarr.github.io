@@ -125,7 +125,8 @@ makes them, or run `./gradlew prepareImage -Pimage=<image> -Pvariants` alone aft
   leave finished work as local commits. Each PR is based on `main` and shows only its own changes: never stack a
   branch on another unmerged PR. If two changes touch the same file, open the second PR only after the first merges.
 - **After a PR merges, pull `main` before starting anything else** (`git switch main && git pull --ff-only`), and
-  start the next branch from that updated `main`. Delete the merged local branch.
+  start the next branch from that updated `main`. Delete the merged local branch. In Claude Code, `/cleanup` does this
+  (`.claude/skills/cleanup/SKILL.md`): it pulls, deletes the merged branches, prunes worktrees and reports.
 
 ### Branch names
 
