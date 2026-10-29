@@ -364,11 +364,17 @@ criteria. M9 is done when T121 and CHK045 are; CHK043, CHK044 and CHK046 passed 
   in [`archive/04-AUTHORS-DESK.md`](archive/04-AUTHORS-DESK.md) as the owner's, or suppressed with a reason on the line
   _(passed 2026-10-27: `./gradlew reviewChanges -Pall` on `main` at 7b2aff9 reviewed 78 pages, 0 errors, 0 warnings;
   the 8 W4 alt-text warnings of the first run on 2026-10-22 were resolved under T109)_
-- [ ] CHK045 README's "To review a change" and AGENTS.md's Definition of Done describe the command, and a PR opened
-  with `./gradlew openPr` has merged _(waits for T121)_
+- [x] CHK045 README's "To review a change" and AGENTS.md's Definition of Done describe the command, and a PR opened
+  with `./gradlew openPr` has merged
   _(2026-10-28: the first half holds: README "To review a change" and the new "To open a pull request", AGENTS.md's
   Rule 2 and Commands block describe `reviewChanges` and `openPr`. The second waits for a real pull request opened
   with `./gradlew openPr` to merge; T121's test PR #172 was closed, not merged, by design. M10's PR 6 can be that PR)_
+  _(2026-10-29: it was. PR #174, "Finish M10: checkUrls, checkDocsNotPublished, checkSite, and openPr (T141, T143,
+  T121)", was opened on 2026-10-28 with `./gradlew openPr -Ptitle=…` from the branch
+  `chore/T141-T143-T121-checks-openpr`: the task listed one untracked path outside its commit set and left it,
+  reported "Nothing to review" (no content changed), pushed, and opened the PR ready against `main`; the detailed
+  body was appended by hand afterwards. It merged on 2026-10-29 as 2f43289. With T121 done, M9 is complete; T120 and
+  T122 stay optional)_
 - [x] CHK046 `./gradlew clean bake` output is byte-identical to before M9 apart from `feed.xml`'s timestamps (the
   review reads the site and never changes it)
   _(passed: T117's test on 2026-10-22 compared the bake before and after the task; on 2026-10-27, at 7b2aff9, the

@@ -380,11 +380,22 @@ superseded by the T130 decision there._
 
 - [x] CHK053 `git ls-files '*.py'` is empty, and `grep -rni 'python\|pillow\|uv run' build.gradle .github README.md AGENTS.md` is empty
   _(passed: both commands empty on `main` after #166 merged; confirmed by the owner on 2026-10-27)_
-- [ ] CHK054 A clean bake on `main` is byte-identical (apart from `feed.xml`'s timestamps) to the bake at the commit before T137; the 59 tag stubs and the 28 masthead variants are unchanged in git since then
-- [ ] CHK055 CI runs no script outside `scripts/*.java`, `scripts/smoke-test.sh` and Gradle tasks, and is green on Linux
+- [x] CHK054 A clean bake on `main` is byte-identical (apart from `feed.xml`'s timestamps) to the bake at the commit before T137; the 59 tag stubs and the 28 masthead variants are unchanged in git since then
+  _(2026-10-29: a clean macOS bake of `main` at 2f43289 (after PR #174, the end of Phase B) against the bake at
+  2f3e9f4 (`main` before T137: the first parent of PR #166's merge, baked in a detached worktree): `diff -rq` prints
+  only `feed.xml`. `git diff --stat 2f3e9f4 main -- src/jbake/assets/tags src/case-redirects` and the `-960`/`-1440`
+  masthead files is empty: the 59 stubs (57 under `assets/tags` plus the two case-redirect stubs) and the 28 variants
+  are unchanged. CHK047 in 06 adds the Linux half: the deployed artifacts before and after M10 are identical apart
+  from the feed's timestamps)_
+- [x] CHK055 CI runs no script outside `scripts/*.java`, `scripts/smoke-test.sh` and Gradle tasks, and is green on Linux
   _(2026-10-28: the first half holds since T143: `.github/workflows/gradle.yml` runs Gradle tasks, inline shell (the
   D3 steps: drafts, CR line endings, live reload, xmllint), lychee and `scripts/smoke-test.sh`, and `scripts/*.java`
   no longer exists outside `visual/`. The Linux run is pending this PR's CI; the owner ticks after it is green)_
+  _(2026-10-29: green on Linux. PR #174's CI (run 40803018355, after one test fix: the `checkUrls` TestKit case now
+  expects the fixture's case-redirect stub among the new URLs on a case-sensitive filesystem) and the `main` deploy
+  at 2f43289 (run 40803541310) both passed, with the single `checkSite` step printing the four OK lines, 185 plugin
+  tests, and the smoke test seeing all 19 live URLs. Ticked with the merge, on the owner's instruction to update the
+  environment after it)_
 - [x] CHK056 D1–D4 each have a dated decision in the Notes
   _(2026-10-27: D1 and D2 recorded with Phase A, D3 and D4 decided by the owner the same day; see Blockers and Notes)_
 
