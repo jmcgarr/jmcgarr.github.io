@@ -84,7 +84,7 @@ Each check has an ID so a task, a report line and a suppression can name it.
 | W3 | **A tag is spelled or cased unlike an existing tag** (`DevOps` next to `devops`), or is new | changed `.md` files | The same check `newPost` makes (`NewPost.warnAboutTagSpellings`); a new tag makes a new `/tags/` page and is worth a second look |
 | W4 | **An `<img>` has no `alt`, or `alt` is a file name** | changed `.md` files | T109 wording is the owner's; the check only points |
 | W5 | **Spelling** _(deferred by the owner 2026-10-21, see T120)_. Words that are known misspellings (`grammer`, `teh`, `recieve`), from the codespell dictionary of common mistakes, minus a project ignore list for names (`McGarr`, `Kaanapali`, `Lana'i`, `Gradle`…) | changed `.md` files, by line | Only if `codespell` is installed; otherwise one line says it was skipped and how to install it. A dictionary of *mistakes* fits a blog: it never flags a name it doesn't know, unlike a full-dictionary checker. It would not have flagged "routed" (a real word) or "Housing and Development" (a fact), and this plan does not promise to |
-| W6 | **A published URL would change.** A changed file under `src/jbake/content/` or `src/jbake/assets/` that is a rename or a delete (Rule 1) | the diff | `scripts/check-urls.sh` already fails CI for this; here it is a warning before the push, with the Rule 1 wording |
+| W6 | **A published URL would change.** A changed file under `src/jbake/content/` or `src/jbake/assets/` that is a rename or a delete (Rule 1) | the diff | `scripts/check-urls.sh` (`./gradlew checkUrls` since T143, 2026-10-28) already fails CI for this; here it is a warning before the push, with the Rule 1 wording |
 | W7 | **An existing published post has no `summary=`** | changed `type=post` files that already exist on `main` | The feed and share cards use it. Adding one is the author's call; a new post without one is E4 |
 
 Grammar is **not** in scope. Vale with the write-good style is a one-binary option, LanguageTool is better and far
@@ -261,7 +261,7 @@ criteria. M9 is done when T121 and CHK045 are; CHK043, CHK044 and CHK046 passed 
   - **Test:** a dated note under this task records the decision (take it up, or not) and why.
   - _2026-10-27: made an **optional improvement** by the owner: not part of M9's done criteria, no decision due. If
     taken up later, the design and test above stand._
-- [ ] T121 [IMP] **`./gradlew openPr`.** `scripts/OpenPr.java` as designed above: refuse on `main`; with
+- [x] T121 [IMP] **`./gradlew openPr`.** `scripts/OpenPr.java` as designed above: refuse on `main`; with
   uncommitted work, list the files and stop unless `-Pmessage` is given, then commit exactly those files; run the
   review; stop before the push on errors; else push and `gh pr create` (ready, not draft) with the title, body
   template, `Closes` lines and the review summary (`scripts/OpenPr.java`, `build.gradle`, `README.md`)
@@ -275,6 +275,78 @@ criteria. M9 is done when T121 and CHK045 are; CHK043, CHK044 and CHK046 passed 
   - _2026-10-27: **confirmed by the owner, to be built.** Scheduled after T127 in
     [`06-GRADLE-PLUGIN.md`](06-GRADLE-PLUGIN.md) (the plugin's `ScriptTask`), so `openPr` is written once, as a
     plugin script task, instead of as a `build.gradle` Exec that T127 would then move. CHK045 waits with it._
+  - _2026-10-28: **done** (`chore/T141-T143-T121-checks-openpr`, PR 6 of M10's order in `06-GRADLE-PLUGIN.md`). Born as a
+    plugin class, not `scripts/OpenPr.java`: package `writing`, `OpenPr` (the flow), `OpenPrOptions` (`-Ptitle`,
+    `-Pmessage`, `-Pcloses`, `-Prefs`, `-PdryRun`) and `OpenPrTask` (`openPr`, group `writing`, `dependsOn bake`),
+    following `NewPost`'s structure; `GitHubCli` holds the gh readiness checks and the stop-and-explain helpers that
+    `NewPost.checkReadyToOpenPr` and `commitPushAndOpenPr` had, now shared (`NewPost`'s messages are unchanged). The
+    review runs in-process through the `review` package's new public entry point, `ReviewRunner` (with
+    `ReviewOutcome`: passed, and the report's summary line), which `reviewChanges` now goes through too; nothing else
+    of the package became public. **The flow, as designed:** refuses on `main` and `master` with one line naming Rule
+    2 (and refuses a detached HEAD); lists the uncommitted work as `git status --porcelain` prints it under "Would
+    commit:" (files under `src/`, `docs/`, `scripts/`, `.github/`, `README.md`, `AGENTS.md`, `build.gradle`, and, added
+    for M10, `build-logic/`, `settings.gradle`, `CLAUDE.md`), the rest under "Not included (… left as they are)", and
+    stops there without `-Pmessage`, before gh is even asked; with `-Pmessage` it runs the readiness checks (gh
+    installed and logged in, origin, the repository, the committer, `main` pushed), then `git add -- <the listed
+    paths>` (never `-A`; both sides of a rename) and `git commit --quiet -m <message>`, plus a second `-m` with the
+    lines of the new `jbakeSite.commitTrailers` (default none: the tool is the owner's, so no attribution is built in;
+    a session that wants `Co-Authored-By:` lines sets them in `build.gradle`); runs the review against `main`, the
+    same scope as `reviewChanges`, and stops before the push on errors; pushes with `--set-upstream origin <branch>`
+    and runs `gh pr create --repo <owner/name> --base main --head <branch> --title … --body-file …` (ready, not
+    draft), printing the URL. **Title:** `-Ptitle`, else the subject of the branch's first commit after the merge
+    base with `main` (for a one-commit branch, that commit's). **Description** (the template, fixed here since the
+    design left it open): "## What changed" with a bullet per commit subject; "## Review" with the summary line
+    ("Reviewed 1 page (about.html) from 1 changed file. 0 errors, 1 warning. …", or the clean-tree sentence) and a
+    line saying `openPr` ran `reviewChanges` and CI runs it again; then one `Closes #N`/`Refs #N` line per issue from
+    `-Pcloses`, `-Prefs` and every such line in the commit messages, each once (Rule 5). A failed push or `gh pr
+    create` says what is in place and the commands that finish, as `newPost -Ppr` does. `-PdryRun` does everything
+    but commit, push and open, and prints the pull request it would open. **Tests:** `OpenPrTest` with a scripted git
+    and gh for every branch of the flow (main and master; no checkout, detached, no main; the listing and the stop
+    without a message, before any gh call; with a message, `git add` of exactly the listed files and the commit with
+    and without trailers, after the readiness checks; review errors stop before the push; the push and `gh pr create`
+    with their arguments and order; the title; nothing to open; gh missing, logged out, no origin, unpushed main;
+    failed push and failed PR; the dry run; the issue lines; the description; the committed paths), one case on a real
+    working tree, `ReviewRunnerTest`, the plugin wiring, and TestKit on the fixture: `openPr` on `main` refuses
+    naming Rule 2, and on a branch with an edited page and a scratch file prints the two lists and commits nothing.
+    **Test passed** on a throwaway branch `test/T121-openpr` of this repository, 2026-10-28, with the #139 About file
+    (`git show 756245f:src/jbake/content/about.md`, committed; a cherry-pick would conflict with #140's fix): `./gradlew
+    openPr` exited 1 with the two E1 findings and the E2 on `about.md:14` and "The review found errors (listed above),
+    so nothing was pushed", and `git status -sb` showed `## test/T121-openpr` with no upstream. An uncommitted comment
+    line in `blog/alm.md` and no `-Pmessage`: "Would commit:" / " M src/jbake/content/blog/alm.md", exit 1, `git status`
+    still showed the file modified and `git log -1` the previous commit; with `-Pmessage="Edit"`: "Committed 1 file on
+    test/T121-openpr: Edit", `git log -1 --stat` one commit, "Edit", `src/jbake/content/blog/alm.md | 2 ++` only, then
+    the review stopped it again (About still broken), nothing pushed. With the link fixed, `./gradlew openPr
+    -Ptitle="Test PR"` pushed (`branch 'test/T121-openpr' set up to track 'origin/test/T121-openpr'`) and opened
+    **#172**: `gh pr view` gave `isDraft: false`, `baseRefName: main`, title "Test PR", and a description whose Review
+    section read "Reviewed 7 pages (about.html, blog/alm.html, index.html, archive.html, tags/index.html,
+    blog/reviving-my-website-with-claude.html, …) from 6 changed files. 0 errors, 0 warnings. External links not
+    checked (T119)." (7 pages, not 1: the branch sat on PR 5's unmerged template changes, so the sample pages were in
+    scope too; its "What changed" list likewise carried every commit since the merge base with `main`). #172 was
+    closed at once with `gh pr close 172 --delete-branch`; the remote and local test branches are gone. On a branch
+    named `main` (a scratch clone, so the real checkout was untouched) it refused: "You're on main: every change goes
+    on its own branch off main, never on main itself (AGENTS.md, Rule 2). Run git switch -c
+    <type>/<short-description>, then ./gradlew openPr." Never merged, so CHK045 still waits for a real PR opened with
+    `openPr`: PR 6 itself could be._
+  - _2026-10-28 (review of the branch, "safe to merge with the fixes"; applied in the commit "Apply the review findings
+    to openPr"): three defects in the commit step, each confirmed with real git. (1) `git add -- <paths>` followed by a
+    bare `git commit` committed the whole index, so a file the author had pre-staged outside the committed paths (one
+    the tool had just listed as not included) rode along; the commit is now `git commit --quiet --only -m <message>
+    [-m <trailers>] -- <paths>`, which commits the listed paths alone (both sides of a rename; the rename's old path
+    is no longer passed to `git add`, which refuses a pathspec that matches nothing) and leaves the other staged
+    changes in the index. (2) `git status --porcelain=v2` without `-z` C-quotes a path with a space or a non-ASCII
+    letter (`? "src/jbake/content/caf\303\251.md"`), so such a file was listed as not included and would have been
+    handed to `git add` as the quoted literal; the status is now read with `-z` and split on NUL (a rename is `path NUL
+    original`). (3) An unmerged (`u`) entry was read like an ordinary change, so `openPr -Pmessage` mid-merge would
+    have committed conflict markers; it now refuses before anything is listed, staged or asked of gh: "Resolve the
+    merge conflicts first (git status shows them), then run ./gradlew openPr." Also: a failed `git commit` after a
+    successful `git add` now says "Nothing was pushed; the listed files are staged" (a failed `git add` says nothing was
+    committed or pushed); the README's section no longer says the bake runs after the commit (it is a task dependency,
+    so it runs first) and says `-PdryRun` still needs `gh` installed and logged in because the readiness checks run
+    first; the task's description names `-Pcloses`, `-Prefs` and `-PdryRun`. **Tests:** `OpenPrTest` gained the
+    `--only -- <paths>` assertion, the merge-in-progress refusal, the two failure messages, a non-ASCII name and a name
+    with a space in the real-tree listing, and a real-tree commit (real git, a bare `origin`, faked gh) with a
+    pre-staged file outside the paths that must stay staged and uncommitted, a rename, and both special names in the
+    commit; 182 → 185 tests, 0 failures._
 - [ ] T122 [IMP] _(Optional, later)_ **Grammar checking: Vale, LanguageTool, or neither.** Try Vale with the write-good
   and proselint styles on the 2026 posts and About; count true findings against noise. Record the decision here.
   If adopted, it becomes W7 in a later task, advisory only (`docs/05-REVIEW-FLOW.md`)
@@ -294,6 +366,9 @@ criteria. M9 is done when T121 and CHK045 are; CHK043, CHK044 and CHK046 passed 
   the 8 W4 alt-text warnings of the first run on 2026-10-22 were resolved under T109)_
 - [ ] CHK045 README's "To review a change" and AGENTS.md's Definition of Done describe the command, and a PR opened
   with `./gradlew openPr` has merged _(waits for T121)_
+  _(2026-10-28: the first half holds: README "To review a change" and the new "To open a pull request", AGENTS.md's
+  Rule 2 and Commands block describe `reviewChanges` and `openPr`. The second waits for a real pull request opened
+  with `./gradlew openPr` to merge; T121's test PR #172 was closed, not merged, by design. M10's PR 6 can be that PR)_
 - [x] CHK046 `./gradlew clean bake` output is byte-identical to before M9 apart from `feed.xml`'s timestamps (the
   review reads the site and never changes it)
   _(passed: T117's test on 2026-10-22 compared the bake before and after the task; on 2026-10-27, at 7b2aff9, the

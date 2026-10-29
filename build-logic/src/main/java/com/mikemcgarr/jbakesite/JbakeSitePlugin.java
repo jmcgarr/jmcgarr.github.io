@@ -1,15 +1,19 @@
 package com.mikemcgarr.jbakesite;
 
 import com.mikemcgarr.jbakesite.review.ReviewChangesTask;
+import com.mikemcgarr.jbakesite.verification.CheckDocsNotPublishedTask;
 import com.mikemcgarr.jbakesite.verification.CheckMastheadVariantsTask;
 import com.mikemcgarr.jbakesite.verification.CheckTagRedirectsTask;
+import com.mikemcgarr.jbakesite.verification.CheckUrlsTask;
 import com.mikemcgarr.jbakesite.writing.NewPostTask;
+import com.mikemcgarr.jbakesite.writing.OpenPrTask;
 import com.mikemcgarr.jbakesite.writing.PrepareImageTask;
 import com.mikemcgarr.jbakesite.writing.TagRedirects;
 import com.mikemcgarr.jbakesite.writing.TagRedirectsTask;
 import java.util.List;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
+import org.gradle.api.Task;
 import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.file.Directory;
 import org.gradle.api.file.ProjectLayout;
@@ -34,8 +38,10 @@ import org.gradle.language.base.plugins.LifecycleBasePlugin;
  * task classes: the {@code writing} group's {@code newPost} ({@link NewPostTask}), {@code reviewChanges}
  * ({@link ReviewChangesTask}), {@code prepareImage} ({@link PrepareImageTask}) and {@code tagRedirects}
  * ({@link TagRedirectsTask}), and the {@code verification} group's {@code checkTagRedirects}
- * ({@link CheckTagRedirectsTask}) and {@code checkMastheadVariants} ({@link CheckMastheadVariantsTask}), which
- * {@code check} runs with the review.
+ * ({@link CheckTagRedirectsTask}) and {@code checkMastheadVariants} ({@link CheckMastheadVariantsTask}); T141 the
+ * shell checks CI ran as {@code checkUrls} ({@link CheckUrlsTask}) and {@code checkDocsNotPublished}
+ * ({@link CheckDocsNotPublishedTask}), with {@code checkSite} gathering the four site checks, which {@code check}
+ * runs with the review; T121 (docs/05-REVIEW-FLOW.md) {@code openPr} ({@link OpenPrTask}), the review before a push.
  *
  * <p>The plugin applies Gradle's {@code base} plugin for {@code clean} and the {@code check} lifecycle task.
  */
@@ -53,7 +59,7 @@ public final class JbakeSitePlugin implements Plugin<Project> {
     /** The task that bakes, serves and rebuilds on save. */
     public static final String BAKE_PREVIEW_TASK_NAME = "bakePreview";
 
-    /** The task group of the author's commands: {@code newPost}, {@code reviewChanges}, {@code prepareImage}, {@code tagRedirects}. */
+    /** The task group of the author's commands: {@code newPost}, {@code reviewChanges}, {@code openPr}, {@code prepareImage}, {@code tagRedirects}. */
     public static final String WRITING_GROUP = "writing";
 
     /** The task group of the checks {@code check} runs: Gradle's own {@code verification}. */
@@ -64,6 +70,9 @@ public final class JbakeSitePlugin implements Plugin<Project> {
 
     /** The task that reviews the pages a branch changed. */
     public static final String REVIEW_CHANGES_TASK_NAME = "reviewChanges";
+
+    /** The task that reviews, pushes and opens a pull request. */
+    public static final String OPEN_PR_TASK_NAME = "openPr";
 
     /** The task that makes a hand-added image fit the image rules. */
     public static final String PREPARE_IMAGE_TASK_NAME = "prepareImage";
@@ -76,6 +85,15 @@ public final class JbakeSitePlugin implements Plugin<Project> {
 
     /** The task that checks the old tag URLs in a baked site. */
     public static final String CHECK_TAG_REDIRECTS_TASK_NAME = "checkTagRedirects";
+
+    /** The task that checks every published URL is still in the baked site (Rule 1). */
+    public static final String CHECK_URLS_TASK_NAME = "checkUrls";
+
+    /** The task that checks nothing from {@code docs/} is in the baked site (Rule 4). */
+    public static final String CHECK_DOCS_NOT_PUBLISHED_TASK_NAME = "checkDocsNotPublished";
+
+    /** The lifecycle task that runs every check of the baked site: what CI runs on the staged site. */
+    public static final String CHECK_SITE_TASK_NAME = "checkSite";
 
     /** The Gradle property that points the check tasks at another baked site, such as CI's staged {@code build/site}. */
     public static final String SITE_DIR_PROPERTY = "siteDir";
@@ -123,7 +141,9 @@ public final class JbakeSitePlugin implements Plugin<Project> {
         site.getDestination().convention(layout.getBuildDirectory().dir("jbake"));
         site.getCaseRedirects().convention(projectDirectory.dir("src/case-redirects"));
         site.getPublishedUrls().convention(projectDirectory.file("docs/baseline/urls.txt"));
+        site.getExpectedRemovals().convention(projectDirectory.file("docs/baseline/expected-removals.txt"));
         site.getTagRenames().convention(TagRedirects.RENAMES);
+        site.getCommitTrailers().convention(List.of());
 
         ScssExtension scss = site.getScss();
         scss.getSource().convention(projectDirectory.dir("src/scss"));
@@ -247,6 +267,18 @@ public final class JbakeSitePlugin implements Plugin<Project> {
         // `./gradlew check` (the standard verification task) runs the review, so a bake plus the review is one command
         // and the hand-edited-CSS guard (checkNoHandEditedCss, which bake runs first) comes with it.
         tasks.named(LifecycleBasePlugin.CHECK_TASK_NAME, check -> check.dependsOn(reviewChanges));
+        tasks.register(OPEN_PR_TASK_NAME, OpenPrTask.class, task -> {
+            task.setGroup(WRITING_GROUP);
+            task.setDescription("Reviews this branch's changes, then pushes it and opens a pull request against main: ./gradlew openPr [-Ptitle=\"...\"] [-Pmessage=\"...\"] [-Pcloses=N,M] [-Prefs=N] [-PdryRun] (README, \"To open a pull request\")");
+            task.dependsOn(BAKE_TASK_NAME);
+            task.getSite().set(site.getDestination());
+            task.getTitle().set(providers.gradleProperty("title"));
+            task.getMessage().set(providers.gradleProperty("message"));
+            task.getCloses().set(providers.gradleProperty("closes"));
+            task.getRefs().set(providers.gradleProperty("refs"));
+            task.getDryRun().set(providers.gradleProperty("dryRun"));
+            task.getCommitTrailers().set(site.getCommitTrailers());
+        });
         tasks.register(PREPARE_IMAGE_TASK_NAME, PrepareImageTask.class, task -> {
             task.setGroup(WRITING_GROUP);
             task.setDescription("Prepares a hand-added image for the site (sRGB, metadata, size, masthead variants): ./gradlew prepareImage -Pimage=<path>");
@@ -266,9 +298,11 @@ public final class JbakeSitePlugin implements Plugin<Project> {
     }
 
     /**
-     * The checks {@code check} runs besides the review (Gradle's {@code verification} group). Each reads the baked
-     * site, {@code jbakeSite.destination} after a {@code bake}, or the directory {@code -PsiteDir} names: CI stages
-     * the site without drafts into {@code build/site} and checks that.
+     * The checks of the baked site (Gradle's {@code verification} group), gathered by {@code checkSite}, which
+     * {@code check} runs beside the review. Each reads the baked site, {@code jbakeSite.destination} after a
+     * {@code bake}, or the directory {@code -PsiteDir} names: CI stages the site without drafts into
+     * {@code build/site} and runs {@code checkSite} on that. The review stays a direct dependency of {@code check}:
+     * it is about the change, not the site, and CI runs it as its own step, on pull requests only.
      */
     private static void registerVerificationTasks(JbakeSiteExtension site, TaskContainer tasks, ProjectLayout layout,
             ProviderFactory providers) {
@@ -288,6 +322,26 @@ public final class JbakeSitePlugin implements Plugin<Project> {
                     task.setGroup(VERIFICATION_GROUP);
                     task.setDescription("Checks that every header image in use has its 960 and 1440px variants (run by CI).");
                 });
-        tasks.named(LifecycleBasePlugin.CHECK_TASK_NAME, check -> check.dependsOn(checkTagRedirects, checkMastheadVariants));
+        TaskProvider<CheckUrlsTask> checkUrls = tasks.register(CHECK_URLS_TASK_NAME, CheckUrlsTask.class, task -> {
+            task.setGroup(VERIFICATION_GROUP);
+            task.setDescription("Checks that every published URL (docs/baseline/urls.txt) is still in the baked site, Rule 1 (run by CI).");
+            task.dependsOn(BAKE_TASK_NAME);
+            task.getSite().set(siteToCheck);
+            task.getExpectedRemovals().set(site.getExpectedRemovals());
+            task.getStrict().set(providers.gradleProperty("strict"));
+        });
+        TaskProvider<CheckDocsNotPublishedTask> checkDocsNotPublished = tasks.register(CHECK_DOCS_NOT_PUBLISHED_TASK_NAME,
+                CheckDocsNotPublishedTask.class, task -> {
+                    task.setGroup(VERIFICATION_GROUP);
+                    task.setDescription("Checks that nothing from docs/ is in the baked site, Rule 4 (run by CI).");
+                    task.dependsOn(BAKE_TASK_NAME);
+                    task.getSite().set(siteToCheck);
+                });
+        TaskProvider<Task> checkSite = tasks.register(CHECK_SITE_TASK_NAME, task -> {
+            task.setGroup(VERIFICATION_GROUP);
+            task.setDescription("Runs every check of the baked site: checkUrls, checkDocsNotPublished, checkTagRedirects, checkMastheadVariants (CI: -PsiteDir=build/site).");
+            task.dependsOn(checkUrls, checkDocsNotPublished, checkTagRedirects, checkMastheadVariants);
+        });
+        tasks.named(LifecycleBasePlugin.CHECK_TASK_NAME, check -> check.dependsOn(checkSite));
     }
 }

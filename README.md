@@ -203,6 +203,30 @@ CI runs the same review on every pull request (T118, the "Review changed pages" 
 job and appears as an annotation on the line in the PR's Files tab; the whole report is in the job summary. A push
 to `main` skips the step: the PR already ran it.
 
+To open a pull request
+======================
+When the change is ready, one command reviews it, pushes the branch and opens the pull request (T121, design in
+[docs/05-REVIEW-FLOW.md](docs/05-REVIEW-FLOW.md), "The three entry points"):
+```
+./gradlew openPr
+```
+It bakes first (`bake` is a dependency of the task, so the review below has a site to read). It refuses to run on
+`main` or `master` (AGENTS.md Rule 2: every change goes on its own branch), and in the middle of a merge with
+conflicts. With uncommitted work it prints the files it **would commit** (changed and untracked files under `src/`,
+`docs/`, `scripts/`, `build-logic/`, `.github/`, and `README.md`, `AGENTS.md`, `CLAUDE.md`, `build.gradle`,
+`settings.gradle`; anything else is listed as not included and left alone) and stops, so you see the list before
+anything is committed. Re-run with `-Pmessage="…"` to commit exactly those files with that message (plus the trailer
+lines in `jbakeSite.commitTrailers`, none by default): `git commit --only -- <the listed paths>`, so a change you had
+staged outside those paths stays staged and out of the commit. Then it runs the same review as `./gradlew
+reviewChanges` against `main`; on an error nothing is pushed and the report says what to fix. If the review passes it
+pushes the branch (`git push --set-upstream origin <branch>`) and opens a **ready** pull request against `main` with
+the [GitHub CLI](https://cli.github.com), printing its URL. The title is `-Ptitle`, or the subject of the branch's
+first commit; the description lists the commits, carries the review's summary line ("Reviewed 1 page (about.html)
+from 1 changed file. 0 errors, 0 warnings. …") and one `Closes #N` or `Refs #N` line per issue from `-Pcloses=3,16`,
+`-Prefs=14` and the commit messages (AGENTS.md Rule 5). `-PdryRun` does everything but commit, push and open, and
+prints the pull request it would open; it still needs `gh` installed and logged in, because the readiness checks
+(gh, `gh auth status`, the `origin` remote, `main` pushed) run before the commit, whether dry or not.
+
 To convert an old post to Markdown
 ==================================
 There is nothing to convert: every file under `src/jbake/content/` has been Markdown since 2026-10-18, and the build
@@ -266,7 +290,7 @@ the freefair Sass plugin's dependency until T124).
 
 To publish
 ==========
-There is no manual publish step. Open a pull request against `main`. When it's merged,
+There is no manual publish step. Open a pull request against `main` (`./gradlew openPr` does, after the review). When it's merged,
 [GitHub Actions](.github/workflows/gradle.yml) bakes the site, runs the checks, and **deploys it to GitHub Pages**.
 Pull requests run the same build and checks but never deploy. To redeploy (for example, to roll back by
 re-running an older run), use **Actions → Java CI with Gradle → Run workflow** on `main`.
@@ -280,7 +304,8 @@ Everything happens in one workflow, [`.github/workflows/gradle.yml`](.github/wor
    `src/jbake/` into `build/jbake/` with JBake (JDK 25). Drafts are rendered too, as `<name>-draft.html`, but only
    so you can preview them locally. A Sass, template, or post error fails the build here.
 2. **Stage:** `build/jbake/` is copied to **`build/site/` without drafts**. `build/site/` is exactly what goes live.
-3. **Check:** every check below runs on `build/site/`, so what's checked is what ships.
+3. **Check:** every check below runs on `build/site/`, so what's checked is what ships. The four plugin checks are
+   one step, `./gradlew checkSite -PsiteDir=build/site`.
 4. **Upload:** `build/site/` is packaged as the GitHub Pages artifact (pushes and manual runs on `main` only).
 5. **Deploy:** a separate `deploy` job publishes the artifact to GitHub Pages (pushes and manual runs on
    `main` only, never two at once).
@@ -295,10 +320,10 @@ Everything happens in one workflow, [`.github/workflows/gradle.yml`](.github/wor
 |---|---|
 | Drafts are not published | Unfinished `*-draft.html` posts going live |
 | Live reload is not published | The preview's live-reload script (marker `livereload`) going live |
-| Docs are not published | Anything from `docs/` (planning notes) going live |
-| Masthead variants (`./gradlew checkMastheadVariants`) | A header image missing its 960/1440px sizes (phones would get a blank header) |
-| Published URLs still exist (`scripts/check-urls.sh`) | Removing or renaming any page that's live (strict on CI's Linux runner) |
+| Published URLs still exist (`./gradlew checkUrls`) | Removing or renaming any page that's live (strict on CI's Linux runner) |
+| Docs are not published (`./gradlew checkDocsNotPublished`) | Anything from `docs/` (planning notes) going live |
 | Old tag URLs redirect (`./gradlew checkTagRedirects`) | An old tag URL that's missing, or whose redirect stub points at a page that isn't there; a tag page that shows its tag differently from the posts |
+| Masthead variants (`./gradlew checkMastheadVariants`) | A header image missing its 960/1440px sizes (phones would get a blank header) |
 | Feed and sitemap XML | A broken `feed.xml` or `sitemap.xml` |
 | Local links and assets (lychee) | Broken internal links, or missing images, CSS, JS, or fonts |
 
@@ -313,15 +338,20 @@ JBake's libraries are on one Gradle configuration, `jbake`, where `build.gradle`
 | `bakePreview` | `jbake` | Bakes, serves http://localhost:8080, rebuilds on save, and reloads the open page |
 | `newPost` | `writing` | Starts a draft post on a new `post/<slug>` branch: `./gradlew newPost -Ptitle="My Post"` |
 | `reviewChanges` | `writing` | Reviews the pages this branch changed: Markdown, links, images, header (runs `bake` first) |
+| `openPr` | `writing` | Reviews this branch's changes, then pushes it and opens a pull request against `main` (`-Ptitle`, `-Pmessage` for uncommitted work, `-Pcloses`, `-Prefs`, `-PdryRun`) |
 | `prepareImage` | `writing` | Prepares a hand-added image: sRGB, metadata, size, masthead variants (`-Pimage=<path>`; `-Pvariants` for the variants alone) |
 | `tagRedirects` | `writing` | Writes any missing or outdated redirect stub for an old tag URL, never deleting one (on an approved tag rename) |
-| `checkTagRedirects` | `verification` | Checks that every old tag URL in the baked site is a tag page or a redirect stub to one (CI: `-PsiteDir=build/site`) |
+| `checkSite` | `verification` | Runs the four checks below, what CI runs on the staged site (CI: `-PsiteDir=build/site`) |
+| `checkUrls` | `verification` | Checks that every published URL in `docs/baseline/urls.txt` is still a page in the baked site, or an approved removal in `docs/baseline/expected-removals.txt` (AGENTS.md Rule 1); `-Pstrict` fails on the case-only twins a Mac can't bake |
+| `checkDocsNotPublished` | `verification` | Checks that nothing from `docs/` is in the baked site: no `docs/`, no Markdown outside `vendor/`, no `REVIVAL` marker (Rule 4) |
+| `checkTagRedirects` | `verification` | Checks that every old tag URL in the baked site is a tag page or a redirect stub to one |
 | `checkMastheadVariants` | `verification` | Checks that every header image in use has its 960 and 1440px variants |
 
 Two tasks have no group, so `./gradlew tasks` doesn't list them: `compileSass` (the SCSS to CSS step) and
 `checkNoHandEditedCss` (the guard that fails the build if a hand-written copy of the generated CSS is back under
 `src/jbake/assets/css/`). Both run as part of `bake` and `bakePreview`. `clean` and `check` are Gradle's own;
-`check` runs `bake`, `reviewChanges`, `checkTagRedirects` and `checkMastheadVariants`.
+`check` runs `bake`, `reviewChanges` and `checkSite` (the review is about the change, `checkSite` about the site, so
+CI can run `checkSite` on every push and the review on pull requests only, where there is a base to diff against).
 
 ### Where the build is defined: `build.gradle` and `build-logic/`
 
@@ -349,9 +379,9 @@ October 2026, M10):
 | `jbakesite` | `JbakeSitePlugin`, `JbakeSiteExtension`, `ScssExtension`, `JbakeClasspathExtension` | Registers every task and the `jbake` configuration; the `jbakeSite { }` block and its defaults |
 | | `JbakeTask`, `BakeTask`, `BakePreviewTask`, `JbakeClasspath`, `NewJdkJvmArgs`, `CaseRedirects`, `PreviewPort`, `ProjectPaths` | The `jbake` group: JBake's launcher in a fresh JVM (the JVM flags newer JDKs need, jffi's temp dir, logback), the bake with the CSS and case-redirect copies, the preview with its port check |
 | | `CompileSassTask`, `SassCompiler`, `SassEntries`, `SassCompileException`, `SassPreviewWatcher`, `CheckNoHandEditedCssTask`, `FileTrees` | The theme CSS: Dart Sass through its Java host, the entry convention, the preview's SCSS watcher, the guard |
-| `writing` | `NewPostTask`/`NewPost`/`NewPostOptions`, `PrepareImageTask`/`PrepareImage`/`PrepareImageOptions`/`Images`/`MastheadVariants`, `TagRedirectsTask`/`TagRedirects` | The `writing` group: each task is a thin class that reads its `-P` options and runs a plain logic class |
-| `review` | `ReviewChangesTask`, `Review`, `Changes`, `Pages`, `MarkdownChecks`, `PageChecks`, `ImageChecks`, `RemovalChecks`, `Report`, and the helpers `Change`, `Finding`, `Findings`, `HtmlTags`, `Suppressions`, `ReviewOptions`, `ReviewResult` | `reviewChanges`: one class per group of checks, as [docs/05-REVIEW-FLOW.md](docs/05-REVIEW-FLOW.md) lays them out |
-| `verification` | `CheckTagRedirectsTask`, `CheckMastheadVariantsTask` | The `verification` group: the checks `check` and CI run |
+| `writing` | `NewPostTask`/`NewPost`/`NewPostOptions`, `OpenPrTask`/`OpenPr`/`OpenPrOptions`, `GitHubCli` (the gh readiness checks both share), `PrepareImageTask`/`PrepareImage`/`PrepareImageOptions`/`Images`/`MastheadVariants`, `TagRedirectsTask`/`TagRedirects` | The `writing` group: each task is a thin class that reads its `-P` options and runs a plain logic class |
+| `review` | `ReviewChangesTask`, `ReviewRunner`/`ReviewOutcome` (the entry point `reviewChanges` and `openPr` call), `Review`, `Changes`, `Pages`, `MarkdownChecks`, `PageChecks`, `ImageChecks`, `RemovalChecks`, `Report`, and the helpers `Change`, `Finding`, `Findings`, `HtmlTags`, `Suppressions`, `ReviewOptions`, `ReviewResult` | `reviewChanges`: one class per group of checks, as [docs/05-REVIEW-FLOW.md](docs/05-REVIEW-FLOW.md) lays them out |
+| `verification` | `CheckUrlsTask`/`UrlCheck`, `CheckDocsNotPublishedTask`/`DocsNotPublishedCheck`, `CheckTagRedirectsTask`, `CheckMastheadVariantsTask` | The `verification` group: the checks `checkSite`, `check` and CI run (the first two were shell scripts until T141/T143) |
 | `internal` | `Git`, `ProcessRunner`, `CommandRunner`, `ToolFailure`, `FrontMatter`, `Tags`, `SiteLayout`, `JbakeProperties`, `ImageRules` | Shared by the writing and verification tools: running git and gh, reading a post's header, the site's paths, the image limits |
 
 `SiteToolTask` (package `jbakesite`) is the base of the writing and verification tasks: it hands each tool the
@@ -369,8 +399,10 @@ out anyway, so the paths are in one place:
 | `source` | `src/jbake` | JBake's source: `content/`, `templates/`, `assets/`, `jbake.properties` |
 | `destination` | `build/jbake` | Where the bake writes and what the preview serves; CI deploys it minus drafts |
 | `caseRedirects` | `src/case-redirects` | Redirect stubs that differ from a real page only by letter case, copied in after JBake, on a case-sensitive filesystem only (T055); an empty or missing directory means none |
-| `publishedUrls` | `docs/baseline/urls.txt` | The baseline of published URLs the writing tools read (`newPost` refuses a published slug; the review and the tag redirects use it) |
+| `publishedUrls` | `docs/baseline/urls.txt` | The baseline of published URLs: `checkUrls` fails when one is missing from the bake; the writing tools read it too (`newPost` refuses a published slug; the review and the tag redirects use it) |
+| `expectedRemovals` | `docs/baseline/expected-removals.txt` | Published URLs removed on purpose, with the owner's approval (Rule 1); `checkUrls` accepts a missing URL only when it is listed here. A missing file means none |
 | `tagRenames` | the owner's list of 2026-10-09 | Old tag to new, as written in the posts; every old URL of the old tag gets a redirect stub (Rule 1: never remove one) |
+| `commitTrailers` | none | Lines `openPr` appends, after a blank line, to the commit it makes from uncommitted work with `-Pmessage` (`Co-Authored-By: …`); the message itself is the author's |
 | `logbackConfiguration` | unset (the bundled file) | A logback configuration for JBake's JVM |
 | `scss.source` | `src/scss` | The SCSS; each `<name>.scss` not starting with `_` is an entry |
 | `scss.publishedDir` | `css` | An entry `<name>.scss` is published at `/<publishedDir>/<name>.css`; the same folder under the assets is the one the guard watches |
@@ -444,16 +476,21 @@ Gradle. Each runs the same build and checks, and never deploys.
 
 **Run the same checks locally:**
 ```
-./gradlew clean bake
+./gradlew clean checkSite
+```
+It bakes and runs the four plugin checks on `build/jbake`: `checkUrls` (no published URL may disappear),
+`checkDocsNotPublished` (docs/ must never reach the site), `checkTagRedirects` (old tag URLs are tag pages or
+working redirects) and `checkMastheadVariants` (header images have their phone/tablet sizes). `./gradlew check` runs
+them too, plus `reviewChanges`. To check exactly what CI deploys, stage the bake without drafts first and point the
+checks at it, as the workflow does:
+```
 rm -rf build/site && rsync -a --prune-empty-dirs --exclude '*-draft.html' build/jbake/ build/site/
-scripts/check-docs-not-published.sh build/site   # docs/ must never reach the site
-scripts/check-urls.sh build/site                 # no published URL may disappear
-./gradlew checkTagRedirects -PsiteDir=build/site   # old tag URLs are tag pages or working redirects
-./gradlew checkMastheadVariants                   # header images have their phone/tablet sizes
+./gradlew checkSite -PsiteDir=build/site
 xmllint --noout build/site/feed.xml build/site/sitemap.xml
 ```
 The link checker (lychee) runs in CI. To run it locally, install [lychee](https://lychee.cli.rs) and see the
-"Check local links and assets" step in the workflow for its options.
+"Check local links and assets" step in the workflow for its options. Until T143 (2026-10-28) the URL and docs checks
+were two shell scripts under `scripts/`; the tasks print the same lines.
 
 **Old tag URLs (T039, T055):** tag pages used to be published with spaces (`/tags/acceptance test.html`), and two
 tags had a capitalized twin (`/tags/DevOps.html`, `/tags/Groovy.html`). Those 59 URLs (50 until the 2026-10-09 tag merges) are now small redirect pages
@@ -469,7 +506,7 @@ and typo fixes (report §H) added 9 stubs and repointed 3, for 59 in all.
 **macOS caveat:** macOS filesystems ignore case, so `tags/DevOps.html` and `tags/devops.html` are the same file
 there. `./gradlew bake` therefore adds `src/case-redirects/` only when `build/jbake` is case-sensitive (Linux, as
 in CI and on GitHub Pages) and says so when it skips them. A local bake on a Mac has the real `devops` and `groovy`
-pages but not those 2 stubs, and `check-urls.sh` and `TagRedirects.java --check` report them as "can't check here".
+pages but not those 2 stubs, and `checkUrls` and `checkTagRedirects` report them as "can't check here".
 They're not JBake assets on purpose: JBake copies assets after rendering, so on a Mac the stub would overwrite the
 real page and redirect to itself.
 

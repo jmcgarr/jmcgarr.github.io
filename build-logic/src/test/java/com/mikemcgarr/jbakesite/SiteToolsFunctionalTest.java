@@ -2,6 +2,7 @@ package com.mikemcgarr.jbakesite;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.mikemcgarr.jbakesite.internal.TestRepositories;
@@ -24,8 +25,9 @@ import org.junit.jupiter.api.io.TempDir;
  * Gradle TestKit: the tasks that moved in from {@code scripts/} in T127, on the fixture site with the configuration
  * cache on: {@code newPost} (the {@code -P} options passed through, and a refusal mapped to a build failure),
  * {@code reviewChanges} (clean tree, then a broken page), {@code checkTagRedirects}, {@code tagRedirects} and
- * {@code checkMastheadVariants}. The fixture is copied into a temporary directory and made a git repository with
- * one commit on {@code main}, as the review and {@code newPost} need (T129).
+ * {@code checkMastheadVariants}; since T141 {@code checkUrls}, {@code checkDocsNotPublished} and the {@code checkSite}
+ * aggregate; since T121 {@code openPr} as far as it goes without GitHub. The fixture is copied into a temporary directory and made a git repository with one commit on
+ * {@code main}, as the review and {@code newPost} need (T129).
  */
 class SiteToolsFunctionalTest {
 
@@ -132,18 +134,7 @@ class SiteToolsFunctionalTest {
 
     @Test
     void checkTagRedirectsFailsWhenAStubIsMissingFromTheSiteItIsPointedAt() throws IOException {
-        runner("bake").build();
-        Path staged = projectDir.resolve("build/site");
-        try (Stream<Path> paths = Files.walk(projectDir.resolve("build/jbake"))) {
-            for (Path path : paths.toList()) {
-                Path target = staged.resolve(projectDir.resolve("build/jbake").relativize(path).toString());
-                if (Files.isDirectory(path)) {
-                    Files.createDirectories(target);
-                } else {
-                    Files.copy(path, target);
-                }
-            }
-        }
+        Path staged = stageTheBake();
         Files.delete(staged.resolve("tags/acceptance test.html"));
 
         BuildResult result = runner("checkTagRedirects", "-PsiteDir=build/site").buildAndFail();
@@ -175,14 +166,121 @@ class SiteToolsFunctionalTest {
     }
 
     @Test
-    void checkRunsTheReviewAndBothChecks() {
-        BuildResult result = runner("check").build();
+    void checkUrlsPassesOnTheBakeAndFailsNamingAMissingPageUnlessItIsAnExpectedRemoval() throws IOException {
+        BuildResult ok = runner("checkUrls").build();
+
+        assertEquals(TaskOutcome.SUCCESS, ok.task(":bake").getOutcome(), "checks the bake it depends on");
+        assertEquals(TaskOutcome.SUCCESS, ok.task(":checkUrls").getOutcome());
+        assertTrue(ok.getOutput().contains("OK: all 6 baseline URLs accounted for in build/jbake\n"), ok.getOutput());
+
+        Path staged = stageTheBake();
+        Files.delete(staged.resolve("about.html"));
+        BuildResult missing = runner("checkUrls", "-PsiteDir=build/site").buildAndFail();
+
+        assertEquals(TaskOutcome.FAILED, missing.task(":checkUrls").getOutcome());
+        assertTrue(missing.getOutput().contains("FAIL: published URLs missing from the build (1):\n  ! about.html\n"), missing.getOutput());
+        assertTrue(missing.getOutput().contains("> Restore them, add redirect stubs, or (with approval) list them in docs/baseline/expected-removals.txt."),
+                missing.getOutput());
+
+        Files.writeString(projectDir.resolve("docs/baseline/expected-removals.txt"), "# approved by the owner\nabout.html\n");
+        BuildResult allowed = runner("checkUrls", "-PsiteDir=build/site").build();
+
+        assertEquals(TaskOutcome.SUCCESS, allowed.task(":checkUrls").getOutcome());
+        // The hyphenated tag page is new since T039 everywhere. On a case-sensitive filesystem (Linux, CI) the bake
+        // also publishes the case-redirect stub About.html, which the baseline doesn't list, so it is new there too.
+        String newUrls = CaseRedirects.isCaseSensitive(projectDir)
+                ? "New URLs (2):\n  + About.html\n  + tags/acceptance-test.html\n"
+                : "New URLs (1):\n  + tags/acceptance-test.html\n";
+        assertTrue(allowed.getOutput().contains("Expected removals (1):\n  - about.html\n" + newUrls
+                + "OK: all 6 baseline URLs accounted for in build/site\n"), allowed.getOutput());
+    }
+
+    @Test
+    void checkDocsNotPublishedPassesOnTheBakeAndFailsOnALeakedDoc() throws IOException {
+        BuildResult ok = runner("checkDocsNotPublished").build();
+
+        assertEquals(TaskOutcome.SUCCESS, ok.task(":checkDocsNotPublished").getOutcome());
+        assertTrue(ok.getOutput().contains("OK: no docs/ content in build/jbake\n"), ok.getOutput());
+
+        Path staged = stageTheBake();
+        Files.createDirectories(staged.resolve("docs"));
+        Files.writeString(staged.resolve("docs/x.md"), "# REVIVAL plan\n");
+        BuildResult leaked = runner("checkDocsNotPublished", "-PsiteDir=build/site").buildAndFail();
+
+        assertEquals(TaskOutcome.FAILED, leaked.task(":checkDocsNotPublished").getOutcome());
+        String output = leaked.getOutput();
+        assertTrue(output.contains("FAIL: 'build/site/docs' exists.\nFAIL: Markdown files found in the site:\n  build/site/docs/x.md\n"
+                + "FAIL: planning-doc marker 'REVIVAL' found in:\n  build/site/docs/x.md\n"), output);
+        assertTrue(output.contains("> docs/ content must never be published. See AGENTS.md (Rule 4)."), output);
+    }
+
+    @Test
+    void checkSiteRunsTheFourChecksOfTheBakedSite() {
+        BuildResult result = runner("checkSite").build();
 
         assertEquals(TaskOutcome.SUCCESS, result.task(":bake").getOutcome());
-        assertEquals(TaskOutcome.SUCCESS, result.task(":reviewChanges").getOutcome());
-        assertEquals(TaskOutcome.SUCCESS, result.task(":checkTagRedirects").getOutcome());
-        assertEquals(TaskOutcome.SUCCESS, result.task(":checkMastheadVariants").getOutcome());
-        assertEquals(TaskOutcome.SUCCESS, result.task(":check").getOutcome());
+        for (String task : new String[] {":checkUrls", ":checkDocsNotPublished", ":checkTagRedirects", ":checkMastheadVariants", ":checkSite"}) {
+            assertEquals(TaskOutcome.SUCCESS, result.task(task).getOutcome(), task);
+        }
+        assertNull(result.task(":reviewChanges"), "the review is check's, not checkSite's");
+    }
+
+    @Test
+    void checkRunsTheReviewAndEveryCheck() {
+        BuildResult result = runner("check").build();
+
+        for (String task : new String[] {":bake", ":reviewChanges", ":checkUrls", ":checkDocsNotPublished", ":checkTagRedirects",
+                ":checkMastheadVariants", ":checkSite", ":check"}) {
+            assertEquals(TaskOutcome.SUCCESS, result.task(task).getOutcome(), task);
+        }
+    }
+
+    @Test
+    void openPrRefusesOnMainNamingRuleTwo() {
+        BuildResult result = runner("openPr").buildAndFail();
+
+        assertEquals(TaskOutcome.FAILED, result.task(":openPr").getOutcome());
+        assertTrue(result.getOutput().contains("> You're on main: every change goes on its own branch off main, never on main itself"
+                + " (AGENTS.md, Rule 2). Run git switch -c <type>/<short-description>, then ./gradlew openPr."), result.getOutput());
+        assertFalse(result.getOutput().contains("ToolFailure"), result.getOutput());
+    }
+
+    @Test
+    void openPrListsTheUncommittedWorkAndStopsWithoutAMessage() throws IOException, InterruptedException {
+        TestRepositories.git(projectDir, "switch", "--quiet", "--create", "post/edit");
+        Path about = projectDir.resolve("src/jbake/content/about.md");
+        Files.writeString(about, Files.readString(about) + "\nAn edit.\n");
+        Files.writeString(projectDir.resolve("notes.txt"), "scratch\n");
+
+        BuildResult result = runner("openPr").buildAndFail();
+
+        assertEquals(TaskOutcome.FAILED, result.task(":openPr").getOutcome());
+        String output = result.getOutput();
+        assertTrue(output.contains("Would commit:\n   M src/jbake/content/about.md\n"
+                + "Not included (outside the paths openPr commits; left as they are):\n  ?? notes.txt\n"), output);
+        assertTrue(output.contains("> Nothing was committed or pushed. Re-run with -Pmessage=\"<what and why>\" to commit the files listed above"
+                + " with that message, or commit them yourself first."), output);
+        assertEquals("M src/jbake/content/about.md\n?? notes.txt", TestRepositories.git(projectDir, "status", "--porcelain"),
+                "nothing committed (the helper trims git's output, hence the missing leading space)");
+        assertEquals("the fixture site", TestRepositories.git(projectDir, "log", "-1", "--format=%s"));
+    }
+
+    /** Bakes and copies the bake to {@code build/site}, as CI stages it, so a test can break the copy. */
+    private Path stageTheBake() throws IOException {
+        runner("bake").build();
+        Path bake = projectDir.resolve("build/jbake");
+        Path staged = projectDir.resolve("build/site");
+        try (Stream<Path> paths = Files.walk(bake)) {
+            for (Path path : paths.toList()) {
+                Path target = staged.resolve(bake.relativize(path).toString());
+                if (Files.isDirectory(path)) {
+                    Files.createDirectories(target);
+                } else {
+                    Files.copy(path, target);
+                }
+            }
+        }
+        return staged;
     }
 
     private GradleRunner runner(String... arguments) {

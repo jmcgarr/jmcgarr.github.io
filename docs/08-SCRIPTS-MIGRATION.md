@@ -282,7 +282,7 @@ T140. Phase B (T141–T143) runs inside M10 after T127 and T129 exist. Decisions
 _2026-10-27: Phase B is PR (6) in M10's order (`06-GRADLE-PLUGIN.md`), together with T121 `openPr`; T142 is
 superseded by the T130 decision there._
 
-- [ ] T141 [IMP] **Verification tasks in the plugin.** `checkDocsNotPublished`, `checkUrls` (inputs: site dir,
+- [x] T141 [IMP] **Verification tasks in the plugin.** `checkDocsNotPublished`, `checkUrls` (inputs: site dir,
   baseline file, expected-removals file; the macOS case-collision warning kept) and `checkMastheadVariants`
   (content and template roots, masthead dir) as Java tasks in `build-logic/`, each with a TestKit test in the
   fixture site; an aggregate `checkSite` task that stages `build/jbake` minus drafts into `build/site` and runs
@@ -299,6 +299,46 @@ superseded by the T130 decision there._
     `check` runs, with TestKit tests on the fixture site; CI calls them. T141's scope is now `checkUrls`,
     `checkDocsNotPublished` and the `checkSite` aggregate. For T143: the four Java programs are already gone, so
     `smoke-test.sh` and `scripts/visual/` are what will be left._
+  - _2026-10-28: **done** (`chore/T141-T143-T121-checks-openpr`, PR 6 of M10's order, with T143 and T121). In the
+    plugin's `verification` package: `UrlCheck` (the port of `check-urls.sh`: the `.html` pages of the site against
+    the baseline minus the expected removals; missing fails, new is information, a baseline URL that matches a built
+    page case-insensitively is the macOS warning when the home page's `INDEX.HTML` twin exists, as the script tested)
+    with `CheckUrlsTask` (`checkUrls`: `-PsiteDir`, the baseline from `jbakeSite.publishedUrls`, the removals from the
+    new `jbakeSite.expectedRemovals`, default `docs/baseline/expected-removals.txt`, and `-Pstrict`, which reports a
+    case collision as missing even on a Mac; the script had no flag, Linux made it strict); `DocsNotPublishedCheck`
+    (the port of `check-docs-not-published.sh`: a `docs` entry, Markdown outside `vendor/`, the `REVIVAL` marker in a
+    text file, where a NUL byte in the first 32 KiB means binary, as `grep -I`) with `CheckDocsNotPublishedTask`
+    (`checkDocsNotPublished`, `-PsiteDir`); and the lifecycle task `checkSite`, which depends on `checkUrls`,
+    `checkDocsNotPublished`, `checkTagRedirects` and `checkMastheadVariants`. `check` depends on `checkSite` and,
+    directly as before, on `reviewChanges`: the review is about the change and CI runs it on pull requests only (a
+    push to `main` has no base), `checkSite` is about the site and runs on every push, so the two stay apart
+    (**decision**, recorded here). The `-P` flag reading moved from `ReviewChangesTask` to `SiteToolTask.flag`, shared.
+    Every message is the script's, line for line; what a script wrote to standard error (the exit-2 `ERROR:` lines,
+    the Rule 1 and Rule 4 sentences after a `FAIL`) is the task's failure message, so it reads under "What went
+    wrong". **D3:** the inline CI steps (drafts, CR line endings, live reload) stay shell. **CI:** the four steps
+    (docs, masthead variants, URLs, tag redirects) are one step, `./gradlew checkSite -PsiteDir=build/site`, strict on
+    Linux as before. **Equivalence (Rule 1 gate), shell against Java on the same macOS bake, 2026-10-28:** on
+    `build/jbake` both print the same 11 expected removals, 56 new URLs, the WARNING for `tags/DevOps.html` and
+    `tags/Groovy.html`, and `OK: all 272 baseline URLs accounted for in build/jbake`, exit 0; on a copy with
+    `about.html` deleted both print the same lists then `FAIL: published URLs missing from the build (1):`, `  !
+    about.html`, `Restore them, add redirect stubs, or (with approval) list them in docs/baseline/expected-removals.txt.`,
+    exit 1; on a copy with `blog/brand-new-page.html` added both list 57 new URLs with it and pass; the docs check
+    prints `OK: no docs/ content in build/jbake` on the bake and, on the copy with `docs/x.md` holding the marker,
+    the same three `FAIL:` lines naming `build/eq-c/docs` and `build/eq-c/docs/x.md` twice, then `docs/ content must
+    never be published. See AGENTS.md (Rule 4).`, exit 1. `diff` of the shell output against the task's lines was
+    empty in every case apart from Gradle's own lines (JBake's four bake lines when `bake` reran, and "Get more help").
+    The Linux half of the comparison is this PR's CI run, where `checkSite` is strict and the 2 case-only stubs are in
+    the bake. **Tests:** `UrlCheckTest` (the comparison, the removals file with comments and blanks, the pages of a
+    bake, pass with removals and new URLs, fail with the Rule 1 sentence, the case-collision warning or failure by
+    filesystem, the two exit-2 cases), `DocsNotPublishedCheckTest` (clean, the three failures at once with the Rule 4
+    sentence, binary files, no site), the plugin wiring (`checkSite`'s and `check`'s dependencies, the extension's two
+    new properties), and in `SiteToolsFunctionalTest`: `checkUrls` passes on the fixture (6 baseline URLs), fails on a
+    staged copy without `about.html` naming it, passes when `about.html` is in `expected-removals.txt`;
+    `checkDocsNotPublished` passes and fails on a leaked `docs/x.md`; `checkSite` runs the four and not the review;
+    `check` runs the review and every check. 160 tests (145 before). **Test passed** as written, apart from the
+    masthead case, which T127 covered: `./gradlew checkSite` passes on macOS with the case warning; deleting
+    `about.html` from a copy fails `checkUrls` naming `about.html`; `docs/x.md` fails `checkDocsNotPublished`; the bake
+    is byte-identical to the base commit's (`diff -rq`: only `feed.xml`, 496 files). Not verified locally: CI (Linux)._
 - [x] T142 **Superseded (2026-10-27).** [IMP] **Register the Java scripts through `jbakeSite.scripts`.** `prepareImage` (options `image`,
   `dryRun`, `png`, `jpeg`, `width`, `keepSource`) and `tagRedirects` (`check`, `dependsOn 'bake'`) join `newPost`
   and `reviewChanges`; the special-cased `Exec` from T140 goes; `06-GRADLE-PLUGIN.md`'s table (lines 29–30) and
@@ -309,7 +349,7 @@ superseded by the T130 decision there._
   - _2026-10-27: **superseded** by T130's decision in `06-GRADLE-PLUGIN.md`: the four programs move into the plugin
     as task classes (T127), so there is nothing to register and no `jbakeSite.scripts` block. The surface rows went
     into `06`'s table the same day._
-- [ ] T143 [IMP] **Remove the shell checks and finish the docs.** After T141 has run green in CI for at least one
+- [x] T143 [IMP] **Remove the shell checks and finish the docs.** After T141 has run green in CI for at least one
   merged content PR: delete `check-docs-not-published.sh` and `check-urls.sh` (D4), point AGENTS.md Rule 1 step 3
   (line 95) and the design doc's T125 test (line 229) at `./gradlew checkUrls`, and make README "Run the same
   checks locally" one command; `smoke-test.sh`, `scripts/visual/` and the four Java programs are what's left
@@ -317,6 +357,24 @@ superseded by the T130 decision there._
   - **Test:** `git ls-files scripts` lists `NewPost.java`, `ReviewChanges.java`, `PrepareImage.java`,
     `TagRedirects.java`, `smoke-test.sh` and `visual/{PixelDiff.java,screenshots.sh,phone-shots.mjs}` and nothing
     else; `grep -rn 'check-urls.sh\|check-docs-not-published.sh' README.md AGENTS.md docs/0*.md .github` is empty.
+  - _2026-10-28: **done** (same branch as T141, the next commit; D4, the owner's decision of 2026-10-27, "go": one
+    implementation per check). The "after T141 has run green in CI for at least one merged content PR" wait was
+    replaced, with the coordinator's instruction, by the equivalence check recorded under T141 (shell against Java on
+    the same bake, on a bake with a page removed and on one with a page added, identical output and exit codes), since
+    the two implementations would otherwise have shared one PR's CI run anyway. `scripts/check-urls.sh` and
+    `scripts/check-docs-not-published.sh` are deleted (`git rm`); `git ls-files scripts` is `smoke-test.sh` and
+    `visual/{PixelDiff.java,phone-shots.mjs,screenshots.sh}`, the four Java programs having moved into the plugin in
+    T127. AGENTS.md: Rule 1 step 3 is `./gradlew checkUrls`, with what it compares and when it warns rather than
+    fails; the Layout tree's `scripts/` line and the Commands block (`checkSite`). README: "Run the same checks
+    locally" is `./gradlew clean checkSite`, with the staged-site variant CI uses; the check table and the macOS
+    caveat name the tasks. `06-GRADLE-PLUGIN.md`: dated notes under T125's Test line and CHK047 instead of rewrites;
+    `05-REVIEW-FLOW.md`'s W6 row likewise. The review's W6 finding ends "CI's checkUrls fails otherwise." instead of
+    naming the script (a deliberate string change; `ReviewTest` follows). **Test:** `git ls-files scripts` as above
+    (the Test line's list predates T127's move of the Java programs); the grep over README.md, AGENTS.md and `.github`
+    is empty; in `docs/0*.md` the two names remain only where they are the subject: this plan's findings, table and
+    notes, and the dated notes added by this task. `docs/baseline/expected-removals.txt`'s comments still say
+    "check-urls.sh doesn't track it" about non-HTML URLs; a baseline file changes only at a milestone checkpoint,
+    and the sentence stays true of the task._
 
 #### Checkpoint: M11
 
@@ -324,6 +382,9 @@ superseded by the T130 decision there._
   _(passed: both commands empty on `main` after #166 merged; confirmed by the owner on 2026-10-27)_
 - [ ] CHK054 A clean bake on `main` is byte-identical (apart from `feed.xml`'s timestamps) to the bake at the commit before T137; the 59 tag stubs and the 28 masthead variants are unchanged in git since then
 - [ ] CHK055 CI runs no script outside `scripts/*.java`, `scripts/smoke-test.sh` and Gradle tasks, and is green on Linux
+  _(2026-10-28: the first half holds since T143: `.github/workflows/gradle.yml` runs Gradle tasks, inline shell (the
+  D3 steps: drafts, CR line endings, live reload, xmllint), lychee and `scripts/smoke-test.sh`, and `scripts/*.java`
+  no longer exists outside `visual/`. The Linux run is pending this PR's CI; the owner ticks after it is green)_
 - [x] CHK056 D1–D4 each have a dated decision in the Notes
   _(2026-10-27: D1 and D2 recorded with Phase A, D3 and D4 decided by the owner the same day; see Blockers and Notes)_
 

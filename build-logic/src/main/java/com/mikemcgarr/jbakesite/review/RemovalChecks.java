@@ -39,7 +39,7 @@ final class RemovalChecks {
             }
             findings.add(false, "W6", site.display(old), 0, (c.status() == 'R' ? "Renaming" : "Deleting") + " this file removes the published URL "
                     + what + ". Published URLs are permanent (AGENTS.md Rule 1): this needs the owner's approval, a redirect stub at"
-                    + " the old path, and a line in docs/baseline/expected-removals.txt. CI's check-urls.sh fails otherwise.", null);
+                    + " the old path, and a line in docs/baseline/expected-removals.txt. CI's checkUrls fails otherwise.", null);
         }
     }
 }

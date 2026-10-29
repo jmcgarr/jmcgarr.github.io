@@ -6,9 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.mikemcgarr.jbakesite.review.ReviewChangesTask;
+import com.mikemcgarr.jbakesite.verification.CheckDocsNotPublishedTask;
 import com.mikemcgarr.jbakesite.verification.CheckMastheadVariantsTask;
 import com.mikemcgarr.jbakesite.verification.CheckTagRedirectsTask;
+import com.mikemcgarr.jbakesite.verification.CheckUrlsTask;
 import com.mikemcgarr.jbakesite.writing.NewPostTask;
+import com.mikemcgarr.jbakesite.writing.OpenPrTask;
 import com.mikemcgarr.jbakesite.writing.PrepareImageTask;
 import com.mikemcgarr.jbakesite.writing.TagRedirects;
 import com.mikemcgarr.jbakesite.writing.TagRedirectsTask;
@@ -43,7 +46,9 @@ class JbakeSitePluginTest {
         assertEquals(projectFile("build/jbake"), site.getDestination().get().getAsFile());
         assertEquals(projectFile("src/case-redirects"), site.getCaseRedirects().get().getAsFile());
         assertEquals(projectFile("docs/baseline/urls.txt"), site.getPublishedUrls().get().getAsFile());
+        assertEquals(projectFile("docs/baseline/expected-removals.txt"), site.getExpectedRemovals().get().getAsFile());
         assertEquals(TagRedirects.RENAMES, site.getTagRenames().get(), "the owner-approved renames of 2026-10-09");
+        assertEquals(List.of(), site.getCommitTrailers().get(), "openPr adds no trailer unless the site says so");
         assertFalse(site.getLogbackConfiguration().isPresent(), "unset: the bundled configuration");
         assertEquals(projectFile("src/scss"), site.getScss().getSource().get().getAsFile());
         assertEquals("css", site.getScss().getPublishedDir().get());
@@ -144,8 +149,9 @@ class JbakeSitePluginTest {
         ReviewChangesTask review = (ReviewChangesTask) project.getTasks().getByName(JbakeSitePlugin.REVIEW_CHANGES_TASK_NAME);
         PrepareImageTask prepareImage = (PrepareImageTask) project.getTasks().getByName(JbakeSitePlugin.PREPARE_IMAGE_TASK_NAME);
         TagRedirectsTask tagRedirects = (TagRedirectsTask) project.getTasks().getByName(JbakeSitePlugin.TAG_REDIRECTS_TASK_NAME);
+        OpenPrTask openPr = (OpenPrTask) project.getTasks().getByName(JbakeSitePlugin.OPEN_PR_TASK_NAME);
 
-        for (SiteToolTask task : List.of(newPost, review, prepareImage, tagRedirects)) {
+        for (SiteToolTask task : List.of(newPost, review, prepareImage, tagRedirects, openPr)) {
             assertEquals(JbakeSitePlugin.WRITING_GROUP, task.getGroup(), task.getName());
             assertEquals(projectFile("src/jbake"), task.getSource().get().getAsFile(), task.getName());
             assertEquals(projectFile("src/case-redirects"), task.getCaseRedirects().get().getAsFile(), task.getName());
@@ -161,22 +167,61 @@ class JbakeSitePluginTest {
         assertEquals("Prepares a hand-added image for the site (sRGB, metadata, size, masthead variants): ./gradlew prepareImage -Pimage=<path>",
                 prepareImage.getDescription());
         assertEquals(TagRedirects.RENAMES, tagRedirects.getTagRenames().get());
+        assertEquals(Set.of(JbakeSitePlugin.BAKE_TASK_NAME), dependenciesOf(openPr), "the review it runs reads the bake");
+        assertEquals(projectFile("build/jbake"), openPr.getSite().get().getAsFile());
+        assertEquals(List.of(), openPr.getCommitTrailers().get());
+        assertFalse(openPr.getMessage().isPresent(), "no -Pmessage on this project");
     }
 
     @Test
-    void registersTheChecksInTheVerificationGroupAndCheckRunsThemWithTheReview() {
+    void theOpenPrTaskFollowsTheExtensionsCommitTrailers() {
+        site.getCommitTrailers().set(List.of("Co-Authored-By: Pair <pair@example.test>"));
+
+        OpenPrTask openPr = (OpenPrTask) project.getTasks().getByName(JbakeSitePlugin.OPEN_PR_TASK_NAME);
+
+        assertEquals(List.of("Co-Authored-By: Pair <pair@example.test>"), openPr.getCommitTrailers().get());
+    }
+
+    @Test
+    void registersTheChecksInTheVerificationGroupUnderCheckSiteWhichCheckRunsWithTheReview() {
         CheckTagRedirectsTask tagRedirects = (CheckTagRedirectsTask) project.getTasks().getByName(JbakeSitePlugin.CHECK_TAG_REDIRECTS_TASK_NAME);
         CheckMastheadVariantsTask mastheads = (CheckMastheadVariantsTask) project.getTasks().getByName(JbakeSitePlugin.CHECK_MASTHEAD_VARIANTS_TASK_NAME);
+        CheckUrlsTask urls = (CheckUrlsTask) project.getTasks().getByName(JbakeSitePlugin.CHECK_URLS_TASK_NAME);
+        CheckDocsNotPublishedTask docs = (CheckDocsNotPublishedTask) project.getTasks().getByName(JbakeSitePlugin.CHECK_DOCS_NOT_PUBLISHED_TASK_NAME);
+        Task checkSite = project.getTasks().getByName(JbakeSitePlugin.CHECK_SITE_TASK_NAME);
         Task check = project.getTasks().getByName("check");
 
-        assertEquals(JbakeSitePlugin.VERIFICATION_GROUP, tagRedirects.getGroup());
-        assertEquals(JbakeSitePlugin.VERIFICATION_GROUP, mastheads.getGroup());
+        for (Task task : List.of(tagRedirects, mastheads, urls, docs, checkSite)) {
+            assertEquals(JbakeSitePlugin.VERIFICATION_GROUP, task.getGroup(), task.getName());
+            assertTrue(task.getOutputs().getFiles().isEmpty(), task.getName() + " has no outputs: it runs every time");
+        }
         assertEquals(Set.of(JbakeSitePlugin.BAKE_TASK_NAME), dependenciesOf(tagRedirects));
         assertEquals(projectFile("build/jbake"), tagRedirects.getSite().get().getAsFile(), "the bake, unless -PsiteDir says otherwise");
         assertEquals(TagRedirects.RENAMES, tagRedirects.getTagRenames().get());
         assertEquals(Set.of(), dependenciesOf(mastheads), "reads the source tree only");
-        assertEquals(Set.of(JbakeSitePlugin.REVIEW_CHANGES_TASK_NAME, JbakeSitePlugin.CHECK_TAG_REDIRECTS_TASK_NAME,
-                JbakeSitePlugin.CHECK_MASTHEAD_VARIANTS_TASK_NAME), dependenciesOf(check));
+        assertEquals(Set.of(JbakeSitePlugin.BAKE_TASK_NAME), dependenciesOf(urls));
+        assertEquals(projectFile("build/jbake"), urls.getSite().get().getAsFile());
+        assertEquals(projectFile("docs/baseline/urls.txt"), urls.getPublishedUrls().get().getAsFile(), "the baseline");
+        assertEquals(projectFile("docs/baseline/expected-removals.txt"), urls.getExpectedRemovals().get().getAsFile());
+        assertFalse(urls.getStrict().isPresent(), "no -Pstrict on this project");
+        assertEquals(Set.of(JbakeSitePlugin.BAKE_TASK_NAME), dependenciesOf(docs));
+        assertEquals(projectFile("build/jbake"), docs.getSite().get().getAsFile());
+        assertEquals(Set.of(JbakeSitePlugin.CHECK_URLS_TASK_NAME, JbakeSitePlugin.CHECK_DOCS_NOT_PUBLISHED_TASK_NAME,
+                JbakeSitePlugin.CHECK_TAG_REDIRECTS_TASK_NAME, JbakeSitePlugin.CHECK_MASTHEAD_VARIANTS_TASK_NAME),
+                dependenciesOf(checkSite), "what CI runs on the staged site");
+        assertEquals(Set.of(JbakeSitePlugin.REVIEW_CHANGES_TASK_NAME, JbakeSitePlugin.CHECK_SITE_TASK_NAME), dependenciesOf(check),
+                "the review is about the change, checkSite about the site");
+    }
+
+    @Test
+    void theCheckUrlsTaskFollowsTheExtensionsBaselineAndExpectedRemovals() {
+        site.getPublishedUrls().set(projectFile("live-urls.txt"));
+        site.getExpectedRemovals().set(projectFile("gone.txt"));
+
+        CheckUrlsTask urls = (CheckUrlsTask) project.getTasks().getByName(JbakeSitePlugin.CHECK_URLS_TASK_NAME);
+
+        assertEquals(projectFile("live-urls.txt"), urls.getPublishedUrls().get().getAsFile());
+        assertEquals(projectFile("gone.txt"), urls.getExpectedRemovals().get().getAsFile());
     }
 
     @Test
