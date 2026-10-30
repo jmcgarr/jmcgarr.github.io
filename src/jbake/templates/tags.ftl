@@ -1,4 +1,5 @@
 <#include "header.ftl">
+<#include "newest-first.ftl">
 
 	<#include "menu.ftl">
 	<#assign pageTitle = "Tag: ${tagName(tag)}"><#-- the tag as written, with its spaces (tag-names.ftl, T057) -->
@@ -12,7 +13,7 @@
 
 				<#-- One <li> per month, holding its heading and its list of posts (T104) -->
 				<ul class="archive-months">
-					<#list tag_posts as post>
+					<#list newestFirst(tag_posts) as post>
 					<#if (last_month)??>
 						<#if post.date?string("MMMM yyyy") != last_month>
 							</ul>

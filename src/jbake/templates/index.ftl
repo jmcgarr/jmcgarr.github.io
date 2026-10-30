@@ -1,4 +1,5 @@
 <#include "header.ftl">
+<#include "newest-first.ftl">
 
 	<#include "menu.ftl">
 
@@ -14,7 +15,7 @@
 			<div class="col-lg-8 col-md-10 mx-auto">
 
 		  		<#-- The 6 newest published posts. [0..*6] stops early if there are fewer. -->
-		  		<#list published_posts[0..*6] as post>
+		  		<#list newestFirst(published_posts)[0..*6] as post>
 						<div class="post-preview">
 			  			<a href="${post.uri}"><h2 class="post-title"><#escape x as x?xml>${post.title}</#escape></h2></a>
 			  			<p class="post-meta">${post.date?string("MMMM dd, yyyy")}</p>
