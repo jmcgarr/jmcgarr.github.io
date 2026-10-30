@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<#include "newest-first.ftl">
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Mike McGarr</title>
@@ -9,7 +10,7 @@
     <pubDate>${published_date?string("EEE, d MMM yyyy HH:mm:ss Z")}</pubDate>
     <lastBuildDate>${published_date?string("EEE, d MMM yyyy HH:mm:ss Z")}</lastBuildDate>
 
-    <#list published_posts as post>
+    <#list newestFirst(published_posts) as post>
     <item>
       <title><#escape x as x?xml>${post.title}</#escape></title>
       <link>${config.site_host}/${post.uri}</link>
