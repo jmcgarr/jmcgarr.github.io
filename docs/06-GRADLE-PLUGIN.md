@@ -550,6 +550,29 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
   plans the extraction: repository, publishing (Plugin Portal or GitHub Packages), what becomes generic, and how
   this repository consumes a published version (`docs/`)
   - **Test:** a dated note under this task records the decision and the trigger that fired, or that none did.
+- [ ] T144 [IMP] **Apply the whole-codebase review's findings** (`build-logic/`). The review in
+  [`reports/plugin-architecture-review-2026-10-30.md`](reports/plugin-architecture-review-2026-10-30.md) (the first
+  end-to-end read after the six M10 PRs; no correctness bugs, seams between the slices) names five changes to make
+  first, in its order: (1) remove `PrepareImageTask`'s private lenient `flag()` so every `-P` flag goes through
+  `SiteToolTask.flag` (today `-Pjpeg=flase` is silently on), and add the missing TestKit cases for `prepareImage`'s
+  `-P` options and for `tagRedirects` writing a stub; (2) make `ProcessRunner.run` throw `IOException` when a command
+  cannot start instead of returning null, drop the null checks in `Git` and `FakeRunner`, and make `FakeRunner` throw
+  on an unscripted command; (3) consolidate the duplicated helpers: one line-ending normalisation (`Tags`,
+  `TagRedirects`, `PageChecks`, `MarkdownChecks`), one UTF-8 reading policy, `FileTrees.regularFilesUnder` instead of
+  repeated `Files.list`/`walk`, path defaults in one place (`SiteLayout.standard` and `JbakeSitePlugin.setDefaults`
+  drift today), and the "last https line of gh output" idiom in `GitHubCli`; (4) extract the scanner state out of
+  `PageChecks.checkPage` (127 lines, seven mutable depth/ignore variables) into a small private class, with
+  `ReviewTest` as the safety net; (5) make the root-package helpers that only the root package uses package-private
+  (`SassEntries`, `SassCompiler`, `SassCompileException`, `CaseRedirects`, `NewJdkJvmArgs`, `PreviewPort`,
+  `ProjectPaths`) and trim the T-number history from class Javadoc, keeping the reasons. The report's "Consider" and
+  "Nits" items are the implementer's call; say in the done note which were taken. Behaviour-neutral apart from (1)
+  and (2), which are stricter failures, not new features. Added 2026-10-30 at the owner's request
+  - **Test:** `./gradlew :build-logic:check` passes with more tests than 185 (the new TestKit cases), and a TestKit
+    run of `prepareImage -Pjpeg=flase` fails with the `-Pjpeg takes no value (or true/false)` message. The
+    byte-identical check passes (`diff -rq` against a bake of `main`: only `feed.xml`). `./gradlew tasks` is
+    unchanged. `grep -rn 'public class\|public final class\|public record' build-logic/src/main/java/com/mikemcgarr/jbakesite/*.java`
+    lists none of the seven classes above. `grep -c 'Files\.list\|Files\.walk' -r build-logic/src/main/java` is at
+    most the one call inside `FileTrees`. `PageChecks.checkPage` is under 40 lines.
 
 #### Checkpoint: M10
 
