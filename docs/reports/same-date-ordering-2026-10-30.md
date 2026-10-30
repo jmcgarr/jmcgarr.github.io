@@ -1,8 +1,8 @@
 # Same-date post ordering: design report
 
-**Branch**: `fix/same-date-ordering` | **Created**: 2026-10-30 | **Status**: Report
+**Branch**: `fix/same-date-ordering` | **Created**: 2026-10-30 | **Status**: Done (point-in-time report)
 
-**Mode:** implementation plan (with a short option evaluation). **Date:** 2026-10-30. Read-only work in a detached worktree of `origin/main` (`9b7b731`); nothing in the repo was edited.
+**Mode:** implementation plan (with a short option evaluation). **Date:** 2026-10-30. Designed read-only against `origin/main` (`9b7b731`); the implementation on this branch follows it, see section 6.
 
 **Recommendation (option b):** one new include, `src/jbake/templates/newest-first.ftl`, defining `newestFirst(docs)` = `docs?sort_by("uri")?reverse?sort_by("date")?reverse`, called from the five templates that list content. Verified on a scratch copy: the bake becomes identical on 1, 4 and 12 OrientDB clusters, and it reproduces today's live order for every tied post group. The only visible change is two sitemap lines (`about.html`/`talks.html` swap). Index pagination is deterministic today (no tie in the top 6) but is only protected by this fix.
 
@@ -46,7 +46,7 @@ Document map keys (`org.jbake.model.ModelAttributes`): `uri`, `file`, `title`, `
 | 2013-02-15 | 20, 21 | `boyds-law-of-iteration`, `build-script-best-practice` | reversed | no |
 | 2026-10-21 (pages) | - | `talks.html`, `about.html` (sitemap lines 4/8) | same as live | n/a |
 
-Live evidence: run 40909296876 (`gh run download --name github-pages`), `archive.html` lines 227-233, `sitemap.xml` lines 80-92, `feed.xml` `<link>` lines 904/922/949/969, `tags/devops.html` (read with `tar -xOf`; the extracted directory collapses `devops.html`/`DevOps.html` on APFS).
+Live evidence: run 40909296876 (`gh run download --name github-pages`; Pages artifacts expire after about a day, so later readers compare against https://www.mikemcgarr.com instead, which the review of this branch did), `archive.html` lines 227-233, `sitemap.xml` lines 80-92, `feed.xml` `<link>` lines 904/922/949/969, `tags/devops.html` (read with `tar -xOf`; the extracted directory collapses `devops.html`/`DevOps.html` on APFS).
 
 **Key choice:** `uri` ascending reproduces the live order for both post groups (every reordered file). `title` fails ("Book Review..." < "DC Tech..."). No key reproduces the pages' live order too (`talks` before `about` is Z-A), so the sitemap's two page entries swap. Acceptable: sitemap order carries no meaning, and the current order is itself a cluster-scan accident.
 
