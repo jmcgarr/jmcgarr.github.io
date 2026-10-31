@@ -10,9 +10,10 @@ import java.nio.file.Path;
  * own.
  *
  * <p><b>Files the author writes</b> (content, templates) are read with {@link #read}: UTF-8, with a malformed byte
- * replaced by U+FFFD rather than thrown. The tools exist to report what is wrong with such a file (the review's E4,
- * the tag checks), and a stray byte in a 2009 export must not stop them before they can say so. <b>Files the build
- * writes</b> (the baked site, the redirect stubs, the baseline of published URLs) are read with
+ * replaced by U+FFFD rather than thrown. A stray non-UTF-8 byte in a post (a 2009 export, a pasted character) no
+ * longer stops the review or {@code newPost} with a {@code MalformedInputException}: the byte is replaced and the
+ * rest of the file is still checked. Nothing reports the replaced byte itself; that would be a check of its own.
+ * <b>Files the build writes</b> (the baked site, the redirect stubs, the baseline of published URLs) are read with
  * {@link Files#readString(Path, java.nio.charset.Charset) Files.readString} and
  * {@link Files#readAllLines(Path, java.nio.charset.Charset) Files.readAllLines}, which fail on a malformed byte:
  * there it is a bug worth a stack trace, not a finding. One exception: {@code prepareImage} reads content and

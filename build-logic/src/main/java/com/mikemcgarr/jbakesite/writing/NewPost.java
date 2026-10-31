@@ -85,12 +85,8 @@ final class NewPost {
         }
         List<String> tags = Tags.split(options.tags() == null ? "" : options.tags());
         String summary = options.summary() == null ? "" : options.summary().strip();
-        boolean branch = !"false".equalsIgnoreCase(options.branch() == null ? "true" : options.branch());
-        boolean pr = switch ((options.pr() == null ? "false" : options.pr()).strip().toLowerCase(Locale.ROOT)) {
-            case "", "true" -> true;
-            case "false" -> false;
-            default -> throw fail("-Ppr takes no value (or true/false), not '" + options.pr() + "'.");
-        };
+        boolean branch = flag("branch", options.branch(), true);
+        boolean pr = flag("pr", options.pr(), false);
         if (pr && !branch) {
             throw fail("-Ppr opens a pull request from the post/<slug> branch, so it can't be combined with "
                     + "-Pbranch=false.");
@@ -104,7 +100,8 @@ final class NewPost {
         warnAboutTagSpellings(tags);
 
         String branchName = "post/" + slug;
-        String repo = pr ? checkReadyToOpenPr() : null;
+        GitHubCli gh = pr ? new GitHubCli(git, runner, "-Ppr") : null;
+        String repo = pr ? checkReadyToOpenPr(gh) : null;
         if (branch) {
             if (!git.output("rev-parse", "--verify", "--quiet", "refs/heads/" + branchName).isEmpty()
                     || !git.output("rev-parse", "--verify", "--quiet", "refs/remotes/origin/" + branchName).isEmpty()) {
@@ -138,7 +135,7 @@ final class NewPost {
         if (branch) {
             out.println("Switched to the new branch " + branchName + " (from main)");
         }
-        String prUrl = pr ? commitPushAndOpenPr(file, title, slug, branchName, repo) : null;
+        String prUrl = pr ? commitPushAndOpenPr(file, title, slug, branchName, repo, gh) : null;
 
         out.println();
         out.println("Next:");
@@ -158,13 +155,24 @@ final class NewPost {
         return file;
     }
 
+    /** A {@code -P} flag's value: on when given alone or as true, off as false, anything else a usage error. */
+    private static boolean flag(String name, String value, boolean whenAbsent) {
+        if (value == null) {
+            return whenAbsent;
+        }
+        return switch (value.strip().toLowerCase(Locale.ROOT)) {
+            case "", "true" -> true;
+            case "false" -> false;
+            default -> throw fail("-P" + name + " takes no value (or true/false), not '" + value + "'.");
+        };
+    }
+
     /**
      * Checks everything -Ppr needs before anything is created ({@link GitHubCli}): gh is installed and logged in,
      * there's an origin to push to, gh can find the GitHub repository, git knows who is committing, and main has
      * nothing unpushed (it would ride along in the post's PR). Returns the repository as owner/name.
      */
-    private String checkReadyToOpenPr() throws IOException, InterruptedException {
-        GitHubCli gh = new GitHubCli(git, runner, "-Ppr");
+    private String checkReadyToOpenPr(GitHubCli gh) throws IOException, InterruptedException {
         String repo = gh.repository("the post branch");
         gh.committerKnown("the draft");
         gh.mainIsPushed("the post's pull request");
@@ -175,7 +183,7 @@ final class NewPost {
      * Commits the new draft, pushes the branch, and opens a draft PR. If a step fails, it says what happened and
      * what to run next, and stops without undoing anything. Returns the PR's URL.
      */
-    private String commitPushAndOpenPr(Path file, String title, String slug, String branchName, String repo)
+    private String commitPushAndOpenPr(Path file, String title, String slug, String branchName, String repo, GitHubCli gh)
             throws IOException, InterruptedException {
         String shownFile = site.display(file);
         String prTitle = "[WIP] " + title;
@@ -197,7 +205,7 @@ final class NewPost {
                 "--head", branchName, "--title", prTitle, "--body-file", body.toString());
         boolean retryNeedsBody = false;
         try {
-            return commitPushAndOpenPr(shownFile, title, branchName, prTitle, push, openPr);
+            return commitPushAndOpenPr(shownFile, title, branchName, prTitle, push, openPr, gh);
         } catch (ToolFailure e) {
             retryNeedsBody = true;   // its message tells the user to run gh pr create --body-file <body> next
             throw e;
@@ -209,7 +217,7 @@ final class NewPost {
     }
 
     private String commitPushAndOpenPr(String shownFile, String title, String branchName, String prTitle,
-            List<String> push, List<String> openPr) throws IOException, InterruptedException {
+            List<String> push, List<String> openPr, GitHubCli gh) throws IOException, InterruptedException {
         List<String> add = List.of("git", "add", "--", shownFile);
         List<String> commit = List.of("git", "commit", "--quiet",
                 "-m", "Starting a draft post: " + title,
@@ -227,7 +235,7 @@ final class NewPost {
         }
         out.println("Pushed " + branchName + " to origin");
 
-        String url = new GitHubCli(git, runner, "-Ppr").createPullRequest(openPr, branchName + " is committed and pushed");
+        String url = gh.createPullRequest(openPr, branchName + " is committed and pushed");
         out.println("Opened the draft pull request \"" + prTitle + "\": " + url);
         return url;
     }

@@ -601,8 +601,9 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
     `ReviewRunnerTest` (3) pass unchanged and `./gradlew reviewChanges -Pall` prints the same line before and after
     (78 pages, 0 errors, 0 warnings). (5) `SassEntries`, `SassCompiler` and `SassCompileException` are package-private
     (the other four already were); the class Javadoc of 35 classes lost the "moved here from build.gradle in T125" and
-    "an Exec of scripts/X until T127" narration (T096, T123 to T127, T130, T133, T139 to T141, T143 no longer appear
-    in `build-logic/src/main`); a task ID stays where the plan note is the only explanation (T055, T099, T113, T016,
+    "an Exec of scripts/X until T127" narration (T123 to T127, T130, T133, T139 to T141 and T143 no longer appear
+    in the Java sources under `build-logic/src/main`, nor does T096 apart from the comment in the bundled
+    `jbake-logback.xml`); a task ID stays where the plan note is the only explanation (T055, T099, T113, T016,
     T039, T043, T112, T119 and the like). **Consider items taken:** 7 (the `-P` options of `newPost`, `openPr`,
     `prepareImage`, `tagRedirects`, `reviewChanges` and `checkUrls -Pstrict` are `@Internal`, with the reason in each
     class's Javadoc; the `OptionalFlags` bundle not, as the report said), 8 (`java.awt.headless` is set only when
@@ -619,7 +620,15 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
     `diff -rq` lists only `feed.xml`; `./gradlew tasks` identical before and after; the public-class grep lists only
     `FileTrees` and `JbakeSitePlugin`; `Files.list|walk` count is 1, in `FileTrees`; `checkPage` 31 lines; a second
     `bake` reuses the configuration cache; `:build-logic:javadoc --rerun` has no warnings; no CR line endings. Not
-    verified locally: the Linux bake (CI)._
+    verified locally: the Linux bake (CI). Reporting a replaced non-UTF-8 byte would be a separate E-check, if ever
+    wanted; `Text.read` only keeps such a byte from stopping the tools._
+  - _2026-10-31: review of the branch applied (safe to merge, no must-fix): `Text`'s Javadoc reworded to what is true
+    (a stray byte no longer stops the review or `newPost`; nothing reports it), `-Pbranch` read with the same strict
+    rule as `-Ppr` (+1 `NewPostTest` case: `-Pbranch=flase` fails with "-Pbranch takes no value (or true/false), not
+    'flase'."; absent still means a branch), the `GitHubCli` handle from the readiness checks passed through to the
+    pull request step instead of a second one, the T096 sentence above corrected. Left as the review allowed:
+    `FileTrees.regularFilesIn` walks the subtree and filters (trivial at this size), the `String[]` component of
+    `PageChecks.Page`, `ToolFailure.exitCode`._
 
 #### Checkpoint: M10
 
