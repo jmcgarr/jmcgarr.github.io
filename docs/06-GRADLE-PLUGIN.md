@@ -550,7 +550,7 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
   plans the extraction: repository, publishing (Plugin Portal or GitHub Packages), what becomes generic, and how
   this repository consumes a published version (`docs/`)
   - **Test:** a dated note under this task records the decision and the trigger that fired, or that none did.
-- [ ] T144 [IMP] **Apply the whole-codebase review's findings** (`build-logic/`). The review in
+- [x] T144 [IMP] **Apply the whole-codebase review's findings** (`build-logic/`). The review in
   [`reports/plugin-architecture-review-2026-10-30.md`](reports/plugin-architecture-review-2026-10-30.md) (the first
   end-to-end read after the six M10 PRs; no correctness bugs, seams between the slices) names five changes to make
   first, in its order: (1) remove `PrepareImageTask`'s private lenient `flag()` so every `-P` flag goes through
@@ -573,6 +573,53 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
     unchanged. `grep -rn 'public class\|public final class\|public record' build-logic/src/main/java/com/mikemcgarr/jbakesite/*.java`
     lists none of the seven classes above. `grep -c 'Files\.list\|Files\.walk' -r build-logic/src/main/java` is at
     most the one call inside `FileTrees`. `PageChecks.checkPage` is under 40 lines.
+  - _2026-10-31: **done** (`chore/T144-review-findings`), one commit per change. (1) `PrepareImageTask` lost its private
+    `flag(Property)` and reads `dryRun`, `png`, `jpeg`, `keepSource` and `variants` through `SiteToolTask.flag(property,
+    name)`; `SiteToolsFunctionalTest` gained four TestKit cases: `prepareImage` passing `-Pimage`, `-PdryRun`, `-Pwidth`,
+    `-Ppng`, `-Pjpeg`, `-PkeepSource` through to the tool, `-Pvariants` making the missing 960/1440 variants and never
+    overwriting one, `-Pjpeg=flase` failing with the message and no stack trace, and `tagRedirects` writing the stub for
+    a renamed tag that `checkTagRedirects` then accepts (the fixture is unchanged; the rename happens in the test's copy).
+    (2) `CommandRunner.run` declares `IOException`; `ProcessRunner.run` lets `ProcessBuilder.start`'s exception through
+    (a broken stderr pipe becomes one too) and the null checks in `Git`, `GitHubCli`, `NewPost` and `OpenPr` are gone;
+    `Git` rethrows as "git isn't installed or isn't on the PATH." with the cause kept, `GitHubCli` keeps its "needs the
+    GitHub CLI" message, and a `gh pr create` that doesn't start still ends in "(gh didn't run)" with the commands to
+    finish by hand; `FakeRunner` throws `IOException` for an unscripted captured command (so the "gh is missing" tests
+    still script nothing for gh) and `IllegalStateException` for an unscripted visible one. (3) New `internal/Text`:
+    `read` (UTF-8, a malformed byte becomes U+FFFD; the policy for the author's files, with the strict
+    `Files.readString`/`readAllLines` kept for files the build writes, documented in its Javadoc), `lf` and `lines`
+    (CRLF/CR to LF); `FrontMatter.parse`, `Tags`, `TagRedirects` (its `readLenient` is gone), `PageChecks`,
+    `MarkdownChecks`, `Pages` and `MastheadVariants` use it; `PrepareImage` keeps its strict read on purpose (it writes
+    the text back) and says so in a comment. `FileTrees.regularFilesUnder` is the plugin's only `Files.walk`;
+    `regularFilesIn` (a directory's own files) serves `SassEntries`, `Pages`, `MarkdownChecks`, `NewPost` and
+    `TagRedirects`, `regularFilesUnder` serves `CaseRedirects`, `SassPreviewWatcher` and `FileTrees.copy`.
+    `SiteLayout.SOURCE`, `CASE_REDIRECTS` and `PUBLISHED_URLS` are spelled once and used by both `SiteLayout.standard`
+    and `JbakeSitePlugin.setDefaults`. `GitHubCli.createPullRequest` runs `gh pr create`, explains a gh that fails or
+    can't start, and returns `pullRequestUrl(output)`, the last `https://` line; `NewPost` and `OpenPr` call it. Tests:
+    `TextTest`, a `regularFilesIn` case in `FileTreesTest`. (4) `PageChecks.checkPage` is 31 lines: the scanner's six
+    locals became the private `PageScan` class (`skipping`, `ignored`, `comment`, `close`, `ignoreFor`, `enter`), the
+    page's facts the private `Page` record, and the branches `checkTag` and `checkText`; `ReviewTest` (18) and
+    `ReviewRunnerTest` (3) pass unchanged and `./gradlew reviewChanges -Pall` prints the same line before and after
+    (78 pages, 0 errors, 0 warnings). (5) `SassEntries`, `SassCompiler` and `SassCompileException` are package-private
+    (the other four already were); the class Javadoc of 35 classes lost the "moved here from build.gradle in T125" and
+    "an Exec of scripts/X until T127" narration (T096, T123 to T127, T130, T133, T139 to T141, T143 no longer appear
+    in `build-logic/src/main`); a task ID stays where the plan note is the only explanation (T055, T099, T113, T016,
+    T039, T043, T112, T119 and the like). **Consider items taken:** 7 (the `-P` options of `newPost`, `openPr`,
+    `prepareImage`, `tagRedirects`, `reviewChanges` and `checkUrls -Pstrict` are `@Internal`, with the reason in each
+    class's Javadoc; the `OptionalFlags` bundle not, as the report said), 8 (`java.awt.headless` is set only when
+    unset), 9 (the Javadoc trim; the `gradleProp` helper not: plain repetition, and `registerWritingTasks` reads fine),
+    10 (README names `bakePreview` and the watcher as the manual check), 11 (`reviewChanges` passes `Report` a map of
+    the GitHub variables that are set, no nulls). **Nits left, with the reason:** `ToolFailure.exitCode` stays (the tool
+    tests assert exit 1 against exit 2, and the two are different messages); `ImageRules` stays in `internal` (folding
+    it into `writing.Images` would make `review` depend on `writing`, a package cycle); `MARKER` already has the one-line
+    comment on the constant; `OptionalInt` for `widthCap` not (a record component that is `Optional` is the pattern the
+    JDK advises against; the nullable `Integer` is documented); the Windows null-device branch, the polling watcher and
+    `OpenPr.COMMITTED_PATHS` are untouched (site policy and harmless; T132 territory). **Tests passed:** 185 before, 192
+    after (`:build-logic:check`, BUILD SUCCESSFUL); the TestKit case `prepareImageRejectsAMisspelledFlagInsteadOfReadingItAsOn`
+    sees "-Pjpeg takes no value (or true/false), not 'flase'."; `clean bake` against the bake of `main` at 476007c:
+    `diff -rq` lists only `feed.xml`; `./gradlew tasks` identical before and after; the public-class grep lists only
+    `FileTrees` and `JbakeSitePlugin`; `Files.list|walk` count is 1, in `FileTrees`; `checkPage` 31 lines; a second
+    `bake` reuses the configuration cache; `:build-logic:javadoc --rerun` has no warnings; no CR line endings. Not
+    verified locally: the Linux bake (CI)._
 
 #### Checkpoint: M10
 
