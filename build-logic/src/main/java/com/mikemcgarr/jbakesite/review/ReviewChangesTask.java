@@ -18,7 +18,7 @@ import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.TaskAction;
 
 /**
- * {@code reviewChanges}: reviews the pages this branch changed, after a bake (T117, docs/05-REVIEW-FLOW.md).
+ * {@code reviewChanges}: reviews the pages this branch changed, after a bake (T117, docs/archive/05-REVIEW-FLOW.md).
  * {@code check} runs it.
  *
  * <pre>

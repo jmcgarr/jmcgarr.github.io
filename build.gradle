@@ -1,7 +1,7 @@
 // The site's build configuration: what the site is (where its sources are, what is published where, and the
 // versions on JBake's classpath). How it is built is the `jbake-site` plugin's: an included build in build-logic/,
 // written in Java with its own tests (`./gradlew :build-logic:check`), which defines the bake, the preview, the SCSS
-// compile and its guard, the writing tasks and the checks. The plan and its decisions: docs/06-GRADLE-PLUGIN.md;
+// compile and its guard, the writing tasks and the checks. The plan and its decisions: docs/archive/06-GRADLE-PLUGIN.md;
 // the task list and how to add a build feature: README, "How the site is built and deployed".
 plugins {
     id 'jbake-site'   // applies Gradle's `base` plugin too, for `clean` and `check`

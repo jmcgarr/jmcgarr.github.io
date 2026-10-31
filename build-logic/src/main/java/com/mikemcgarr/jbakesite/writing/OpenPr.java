@@ -19,7 +19,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Opens a pull request for the current branch once the review passes (task T121 of docs/05-REVIEW-FLOW.md, "The
+ * Opens a pull request for the current branch once the review passes (task T121 of docs/archive/05-REVIEW-FLOW.md, "The
  * three entry points"). In order: it refuses to run on {@code main} or {@code master} (AGENTS.md Rule 2); it lists
  * the uncommitted work it would commit (changed and untracked files under the repository's sources,
  * {@link #COMMITTED_PATHS}; anything else is listed as not included and left alone) and stops there unless

@@ -36,7 +36,7 @@ jobs:
 
     # :build-logic:check first: the build plugin's unit tests, its TestKit tests (the fixture site under
     # build-logic/src/test/fixtures baked with the configuration cache on) and Gradle's plugin validation, so a plugin
-    # regression fails here, before the bake (docs/06-GRADLE-PLUGIN.md, T129)
+    # regression fails here, before the bake (docs/archive/06-GRADLE-PLUGIN.md, T129)
     - name: Bake with Gradle
       run: ./gradlew :build-logic:check bake --info --stacktrace
 
@@ -78,7 +78,7 @@ jobs:
         echo "OK: no live-reload script in the deploy contents"
 
     # The plugin's checks of the staged site (what is deployed), not of the bake they depend on, which is up to date
-    # here (docs/08-SCRIPTS-MIGRATION.md, T141; the same as `./gradlew checkSite` locally):
+    # here (docs/archive/08-SCRIPTS-MIGRATION.md, T141; the same as `./gradlew checkSite` locally):
     #   checkUrls              every published URL (docs/baseline/urls.txt) is still a page, or an approved removal
     #                          (T006, Rule 1). Linux is case-sensitive, so this is strict here and catches what a
     #                          macOS bake can't: the 2 case-only tag stubs
@@ -111,7 +111,7 @@ jobs:
 
     # Reviews only the pages this PR changed, from the sources: Markdown links written wrong, brackets left in the
     # rendered text, links and images that point at nothing, the header, image sizes (T118; design in
-    # docs/05-REVIEW-FLOW.md). The same check as `./gradlew reviewChanges` locally. Errors fail the job and show as
+    # docs/archive/05-REVIEW-FLOW.md). The same check as `./gradlew reviewChanges` locally. Errors fail the job and show as
     # annotations on the PR's Files tab; the report is in the job summary. A push to main has no base to diff
     # against and the PR already ran it, so the step is skipped there.
     - name: Review changed pages

@@ -10,7 +10,7 @@ import org.gradle.api.tasks.Nested;
 /**
  * The {@code jbakeSite { ... }} block of {@code build.gradle}: what the site is (where its sources are, what is
  * published where), as opposed to how it is built, which is the plugin's. Modelled on the JBake Gradle plugin's
- * {@code jbake { srcDirName; destDirName }}, typed as directories (docs/06-GRADLE-PLUGIN.md, "The public surface").
+ * {@code jbake { srcDirName; destDirName }}, typed as directories (docs/archive/06-GRADLE-PLUGIN.md, "The public surface").
  * Gradle creates it with managed properties; {@link JbakeSitePlugin} sets the defaults.
  */
 public abstract class JbakeSiteExtension {

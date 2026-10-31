@@ -180,7 +180,7 @@ Before opening a pull request, check the pages you changed:
 ./gradlew reviewChanges
 ```
 (`./gradlew check`, Gradle's standard verification task, runs the same review.) It bakes the site, lists every file that differs from `main` (committed or not), and reviews the Markdown and the
-rendered pages (T117, design in [docs/05-REVIEW-FLOW.md](docs/05-REVIEW-FLOW.md)). **Errors** fail the command:
+rendered pages (T117, design in [docs/archive/05-REVIEW-FLOW.md](docs/archive/05-REVIEW-FLOW.md)). **Errors** fail the command:
 a `[link]` followed by a bare URL or with a space before its `(` (E1), brackets left in the rendered text (E2), a
 link or image that points at nothing in the baked site (E3), an incomplete header, a CR line ending or a new post
 without a `summary=` (E4), an image over 400 KB or 1920 px, or a masthead without its 960 and 1440 variants (E5).
@@ -206,7 +206,7 @@ to `main` skips the step: the PR already ran it.
 To open a pull request
 ======================
 When the change is ready, one command reviews it, pushes the branch and opens the pull request (T121, design in
-[docs/05-REVIEW-FLOW.md](docs/05-REVIEW-FLOW.md), "The three entry points"):
+[docs/archive/05-REVIEW-FLOW.md](docs/archive/05-REVIEW-FLOW.md), "The three entry points"):
 ```
 ./gradlew openPr
 ```
@@ -234,7 +234,7 @@ renders nothing else (revival task T102, the owner's decision of 2026-10-12), af
 the 11 AsciiDoc posts, the 3 AsciiDoc pages and the drafts were converted in batches, each proved against a bake of
 `main` so that no published page changed. The converters (`convert.py`, `asciidoc-convert.py`), their proof
 (`verify.py`) and the flexmark probe (`render.sh`, `Render.java`) were one-off tools in `scripts/to-markdown/`, retired
-on 2026-10-27 (T137 in [docs/08-SCRIPTS-MIGRATION.md](docs/08-SCRIPTS-MIGRATION.md)) because a page in another format
+on 2026-10-27 (T137 in [docs/archive/08-SCRIPTS-MIGRATION.md](docs/archive/08-SCRIPTS-MIGRATION.md)) because a page in another format
 can't come back without first re-adding an engine; `git log -- scripts/to-markdown` has them, and the T102 notes in
 [docs/archive/00-REVIVAL.md](docs/archive/00-REVIVAL.md) record each batch. The screenshot tools that came with them
 (`screenshots.sh`, `phone-shots.mjs` and the pixel diff) are still used to prove a style change moved no pixels, and
@@ -328,7 +328,7 @@ Everything happens in one workflow, [`.github/workflows/gradle.yml`](.github/wor
 | Local links and assets (lychee) | Broken internal links, or missing images, CSS, JS, or fonts |
 
 **The Gradle tasks** (`./gradlew tasks` lists them in three groups, T133, T127). `bake` and `bakePreview` are the JBake
-Gradle plugin's names, kept since 2014 ([`docs/06-GRADLE-PLUGIN.md`](docs/06-GRADLE-PLUGIN.md), "The public surface");
+Gradle plugin's names, kept since 2014 ([`docs/archive/06-GRADLE-PLUGIN.md`](docs/archive/06-GRADLE-PLUGIN.md), "The public surface");
 the `writing` tasks are this site's own, and the `verification` group (Gradle's name) holds the checks CI runs. All of
 JBake's libraries are on one Gradle configuration, `jbake`, where `build.gradle` pins their versions.
 
@@ -355,7 +355,7 @@ CI can run `checkSite` on every push and the review on pull requests only, where
 
 ### Where the build is defined: `build.gradle` and `build-logic/`
 
-The build is two things, kept apart on purpose ([`docs/06-GRADLE-PLUGIN.md`](docs/06-GRADLE-PLUGIN.md), done in
+The build is two things, kept apart on purpose ([`docs/archive/06-GRADLE-PLUGIN.md`](docs/archive/06-GRADLE-PLUGIN.md), done in
 October 2026, M10):
 
 - **`build.gradle`** (about 90 lines) says **what the site is**: it applies the plugin, configures it in a
@@ -380,7 +380,7 @@ October 2026, M10):
 | | `JbakeTask`, `BakeTask`, `BakePreviewTask`, `JbakeClasspath`, `NewJdkJvmArgs`, `CaseRedirects`, `PreviewPort`, `ProjectPaths` | The `jbake` group: JBake's launcher in a fresh JVM (the JVM flags newer JDKs need, jffi's temp dir, logback), the bake with the CSS and case-redirect copies, the preview with its port check |
 | | `CompileSassTask`, `SassCompiler`, `SassEntries`, `SassCompileException`, `SassPreviewWatcher`, `CheckNoHandEditedCssTask`, `FileTrees` | The theme CSS: Dart Sass through its Java host, the entry convention, the preview's SCSS watcher, the guard |
 | `writing` | `NewPostTask`/`NewPost`/`NewPostOptions`, `OpenPrTask`/`OpenPr`/`OpenPrOptions`, `GitHubCli` (the gh readiness checks both share), `PrepareImageTask`/`PrepareImage`/`PrepareImageOptions`/`Images`/`MastheadVariants`, `TagRedirectsTask`/`TagRedirects` | The `writing` group: each task is a thin class that reads its `-P` options and runs a plain logic class |
-| `review` | `ReviewChangesTask`, `ReviewRunner`/`ReviewOutcome` (the entry point `reviewChanges` and `openPr` call), `Review`, `Changes`, `Pages`, `MarkdownChecks`, `PageChecks`, `ImageChecks`, `RemovalChecks`, `Report`, and the helpers `Change`, `Finding`, `Findings`, `HtmlTags`, `Suppressions`, `ReviewOptions`, `ReviewResult` | `reviewChanges`: one class per group of checks, as [docs/05-REVIEW-FLOW.md](docs/05-REVIEW-FLOW.md) lays them out |
+| `review` | `ReviewChangesTask`, `ReviewRunner`/`ReviewOutcome` (the entry point `reviewChanges` and `openPr` call), `Review`, `Changes`, `Pages`, `MarkdownChecks`, `PageChecks`, `ImageChecks`, `RemovalChecks`, `Report`, and the helpers `Change`, `Finding`, `Findings`, `HtmlTags`, `Suppressions`, `ReviewOptions`, `ReviewResult` | `reviewChanges`: one class per group of checks, as [docs/archive/05-REVIEW-FLOW.md](docs/archive/05-REVIEW-FLOW.md) lays them out |
 | `verification` | `CheckUrlsTask`/`UrlCheck`, `CheckDocsNotPublishedTask`/`DocsNotPublishedCheck`, `CheckTagRedirectsTask`, `CheckMastheadVariantsTask` | The `verification` group: the checks `checkSite`, `check` and CI run (the first two were shell scripts until T141/T143) |
 | `internal` | `Git`, `ProcessRunner`, `CommandRunner`, `ToolFailure`, `FrontMatter`, `Tags`, `Text`, `SiteLayout`, `JbakeProperties`, `ImageRules` | Shared by the writing and verification tools: running git and gh, reading a post's header and its text (one UTF-8 policy, any line ending), the site's paths and their defaults, the image limits |
 
@@ -517,7 +517,9 @@ real page and redirect to itself.
 More
 ====
 - [AGENTS.md](AGENTS.md): working rules for this repo (URLs, branches, drafts, issues)
-- [docs/05-REVIEW-FLOW.md](docs/05-REVIEW-FLOW.md): the current plan (checking a change before it ships)
+- [docs/archive/05-REVIEW-FLOW.md](docs/archive/05-REVIEW-FLOW.md): the review flow (checking a change before it ships), done and archived 2026-10-31
+- [docs/archive/06-GRADLE-PLUGIN.md](docs/archive/06-GRADLE-PLUGIN.md): the build plugin plan (`build-logic/`), done and archived 2026-10-31
+- [docs/archive/08-SCRIPTS-MIGRATION.md](docs/archive/08-SCRIPTS-MIGRATION.md): the scripts into the plugin, and no Python, done and archived 2026-10-31
 - [docs/archive/04-AUTHORS-DESK.md](docs/archive/04-AUTHORS-DESK.md): the owner's own to-do list, closed and archived 2026-10-27
 - [docs/07-FRONT-MATTER.md](docs/07-FRONT-MATTER.md): front matter for VS Code authoring, three options (Draft, owner to choose)
 - [docs/archive/00-REVIVAL.md](docs/archive/00-REVIVAL.md): the 2026 revival plan, done (its changelog: [docs/archive/03-REVIVAL-CHANGELOG.md](docs/archive/03-REVIVAL-CHANGELOG.md))

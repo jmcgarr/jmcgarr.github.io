@@ -119,7 +119,7 @@ class PrepareImageTest {
         assertTrue(Files.readString(site.blog().resolve("sunset.md")).contains("masthead=sunset.png"));
         assertTrue(printed().endsWith("  a photo, but this PNG is published (it is in main), so a PNG must stay at its URL (AGENTS.md Rule 1,"
                 + " option B) and this program has no colour quantizer for the fallback: convert it by hand or add"
-                + " the quantizer (D2 in docs/08-SCRIPTS-MIGRATION.md). Nothing changed.\n"), printed());
+                + " the quantizer (D2 in docs/archive/08-SCRIPTS-MIGRATION.md). Nothing changed.\n"), printed());
     }
 
     @Test

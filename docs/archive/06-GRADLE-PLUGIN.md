@@ -1,19 +1,27 @@
 # Build logic as a Gradle plugin
 
-**Branch**: `docs/T123-gradle-plugin-plan` | **Created**: 2026-10-22 | **Status**: Accepted (owner, 2026-10-27; decisions in [Notes](#notes))
+**Branch**: `docs/T123-gradle-plugin-plan` | **Created**: 2026-10-22 | **Status**: Done (2026-10-31; T132/CHK051 carried to #182)
+
+> **Update, 2026-10-31: done and archived.** All verifiable work is done and merged: M10's six PRs, #168 (T133),
+> #169 (T123, T124), #170 (T125, T126), #171 (T127, T130), #173 (T128, T129, T131) and #174 (T141, T143, T121; its merge
+> on 2026-10-29 ended M10), the checkpoints verified after #174 (#175), the whole-codebase review (#177) and T144, which
+> applied it (#179, 2026-10-31). The one item the owner is intentionally delaying, T132 (Phase 2: a standalone plugin,
+> or not yet), is GitHub issue [#182](https://github.com/jmcgarr/jmcgarr.github.io/issues/182) now, and CHK051 waits with it; both stay unticked below, as the record.
+> The doc moved to `docs/archive/`, where finished numbered docs live, unchanged apart from its relative links and
+> this note. It keeps its number, 06.
 
 A backlog plan to move the custom build logic out of `build.gradle` into a Gradle plugin: first one that lives in
 this repository (an included build under `build-logic/`), later, once its shape has settled, a standalone plugin
 in its own repository. **Backlog, not scheduled** (owner's request, 2026-10-22): it comes after the Review Flow
 plan ([`05-REVIEW-FLOW.md`](05-REVIEW-FLOW.md)) and starts when the owner says so (it did: accepted and started on 2026-10-27, see [Notes](#notes)). It uses the same conventions
-([`AGENTS.md`](../AGENTS.md), "Tasks and checklists"); task IDs continue from T123 and checkpoints from CHK047.
+([`AGENTS.md`](../../AGENTS.md), "Tasks and checklists"); task IDs continue from T123 and checkpoints from CHK047.
 The plugin's public surface, the names a user types, follows the JBake Gradle plugin's conventions where they
 exist ([the standard](#the-public-surface-the-standard), T133).
 
 ## Context
 
 `build.gradle` is 383 lines (431 on 2026-10-27, after T140 added the `prepareImage` task). In 2026-10 it was a 30-line application of the JBake plugin. The revival plan
-([`archive/00-REVIVAL.md`](archive/00-REVIVAL.md)) replaced that plugin and then kept adding, one task at a
+([`00-REVIVAL.md`](00-REVIVAL.md)) replaced that plugin and then kept adding, one task at a
 time, each piece justified on its own:
 
 | Lines (2026-10-22) | What | From |
@@ -172,7 +180,7 @@ build the same way, a wish to share it, or the `build-logic/` folder going three
 - **A second Gradle project to understand.** `build-logic/` has its own `build.gradle` (Java, `java-gradle-plugin`,
   the Sass host as an implementation dependency, JUnit and TestKit for tests) and its own build directory. The
   README's "How the site is built" section explains it.
-- **Not a platform change.** The site stays on JBake ([`01-PLATFORM-DECISION.md`](archive/01-PLATFORM-DECISION.md)). The
+- **Not a platform change.** The site stays on JBake ([`01-PLATFORM-DECISION.md`](01-PLATFORM-DECISION.md)). The
   plugin wraps the way JBake is run today; it does not re-open how the site is generated.
 - **Two names go away**: the `preview` task and the `jbakePreview` configuration (T133). Neither is a published URL
   or a documented command beyond two README sentences and a CI comment, which T133 updates. `./gradlew bakePreview`,
@@ -182,7 +190,7 @@ build the same way, a wish to share it, or the `build-logic/` folder going three
 
 ## Tasks
 
-Task format and ticking rules: [`AGENTS.md`](../AGENTS.md), "Tasks and checklists". IDs continue the plan
+Task format and ticking rules: [`AGENTS.md`](../../AGENTS.md), "Tasks and checklists". IDs continue the plan
 numbering (T122 and CHK046 were the last used, in `05-REVIEW-FLOW.md`).
 
 ### M10: Build logic as a plugin
@@ -550,8 +558,9 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
   plans the extraction: repository, publishing (Plugin Portal or GitHub Packages), what becomes generic, and how
   this repository consumes a published version (`docs/`)
   - **Test:** a dated note under this task records the decision and the trigger that fired, or that none did.
+  - _2026-10-31: carried over to GitHub issue #182 when this spec was archived; the task text above stays as the record._
 - [x] T144 [IMP] **Apply the whole-codebase review's findings** (`build-logic/`). The review in
-  [`reports/plugin-architecture-review-2026-10-30.md`](reports/plugin-architecture-review-2026-10-30.md) (the first
+  [`reports/plugin-architecture-review-2026-10-30.md`](../reports/plugin-architecture-review-2026-10-30.md) (the first
   end-to-end read after the six M10 PRs; no correctness bugs, seams between the slices) names five changes to make
   first, in its order: (1) remove `PrepareImageTask`'s private lenient `flag()` so every `-P` flag goes through
   `SiteToolTask.flag` (today `-Pjpeg=flase` is silently on), and add the missing TestKit cases for `prepareImage`'s
@@ -629,6 +638,8 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
     pull request step instead of a second one, the T096 sentence above corrected. Left as the review allowed:
     `FileTrees.regularFilesIn` walks the subtree and filters (trivial at this size), the `String[]` component of
     `PageChecks.Page`, `ToolFailure.exitCode`._
+  - _2026-10-31 (owner): the separate E-check for a replaced non-UTF-8 byte (U+FFFD), left open in the done note
+    above, is dropped: not an issue, not a task. `Text.read` stays as it is._
 
 #### Checkpoint: M10
 
@@ -651,7 +662,7 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
     list posts that share a date in a different order (same lines; `diff <(sort a) <(sort b)` is empty). Since
     both platforms' outputs are unchanged across M10, that ordering difference predates it; it is a JBake tie on
     equal dates, not a plugin effect, and is left as a note for the owner._
-  - _2026-10-30: root cause and fix in [reports/same-date-ordering-2026-10-30.md](reports/same-date-ordering-2026-10-30.md):
+  - _2026-10-30: root cause and fix in [reports/same-date-ordering-2026-10-30.md](../reports/same-date-ordering-2026-10-30.md):
     the tie order follows the baking machine's CPU-core count (OrientDB clusters), not the filesystem; the templates
     now break ties by URL._
 - [x] CHK048 `./gradlew bake` twice in a row prints "Reusing configuration cache"; `bakePreview`, `newPost` and
@@ -670,6 +681,8 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
   - _2026-10-28: 86 lines (T128); the `gradle` entry for `directory: /build-logic` (weekly, semver-major ignored,
     group `build-logic`) has been in `.github/dependabot.yml` since T123._
 - [ ] CHK051 T130 and T132 each have a recorded decision
+  - _2026-10-31: T130 is decided (move, 2026-10-27); T132 is carried over to GitHub issue #182 when this spec was
+    archived, and this checkpoint stays open with it; the text above stays as the record._
 - [x] CHK052 `./gradlew tasks` lists exactly the surface table (groups `jbake` and `writing`), and `preview` and
   `jbakePreview` appear nowhere outside the archived docs (T133)
   - _2026-10-28: `./gradlew tasks` shows Jbake (`bake`, `bakePreview`), Writing (`newPost`, `prepareImage`,
@@ -682,13 +695,13 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
 
 ### GitHub Issues
 
-No open issue maps to this plan. The one open issue, [#14](https://github.com/jmcgarr/jmcgarr.github.io/issues/14)
-(mastheads for older posts), is T059 in [`archive/04-AUTHORS-DESK.md`](archive/04-AUTHORS-DESK.md). If the owner files an issue
-for the plugin work, add its row here with the task and the `Closes #N` line, per AGENTS.md Rule 5.
+While the plan was active no open issue mapped to it; the one open issue, [#14](https://github.com/jmcgarr/jmcgarr.github.io/issues/14)
+(mastheads for older posts), is T059 in [`04-AUTHORS-DESK.md`](04-AUTHORS-DESK.md). On 2026-10-31, when the plan
+was archived, the owner filed one issue for the item left open here, so the backlog carries it (AGENTS.md Rule 5).
 
 | Issue | Title | GitHub label | Task(s) | Milestone | Put in the resolving PR |
 |---|---|---|---|---|---|
-| _none yet_ | | | | | |
+| [#182](https://github.com/jmcgarr/jmcgarr.github.io/issues/182) | Decide on Phase 2 of the Gradle plugin: standalone, or not yet (T132) | question | T132, CHK051 | M10 (decision, carried over 2026-10-31) | `Closes #182` |
 
 ## Notes
 
@@ -709,3 +722,6 @@ for the plugin work, add its row here with the task and the `Closes #N` line, pe
   few larger PRs in the order given under M10; the check tasks of Phase B of `08-SCRIPTS-MIGRATION.md` take Gradle's
   `verification` group and run under `check`; T121 (`openPr`, `05-REVIEW-FLOW.md`) is built here after T127. The
   owner's bar for the plugin: "solid, well organized clean Java code". T133 started first, on its own branch._
+- _2026-10-31: moved to `docs/archive/` (Status: Done): M10 had been complete since PR #174 merged on 2026-10-29 and
+  T144 merged in #179 on 2026-10-31; the owner filed #182 for T132 (with CHK051) rather than keep the plan open for a
+  decision that is months away. Relative links were adjusted for the move; the number stays 06._

@@ -1,7 +1,7 @@
 package com.mikemcgarr.jbakesite.review;
 
 /**
- * One thing to fix or look at (docs/05-REVIEW-FLOW.md, T117).
+ * One thing to fix or look at (docs/archive/05-REVIEW-FLOW.md, T117).
  *
  * @param error an error (E1 to E5), which fails the review, rather than a warning (W2 to W7), which is listed
  * @param id the check's code, such as {@code E1}

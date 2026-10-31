@@ -5,7 +5,7 @@
 A decision record on the header at the top of every post and page. The owner has started writing posts in
 VS Code, and JBake's header format breaks the Markdown preview there. This doc records the problem, what JBake 2.7
 allows, and three ways out. **No option is chosen yet.** Once one is, its steps become tasks in
-[`05-REVIEW-FLOW.md`](05-REVIEW-FLOW.md); this doc then moves to `Accepted`.
+[`05-REVIEW-FLOW.md`](archive/05-REVIEW-FLOW.md); this doc then moves to `Accepted`.
 
 ## Context
 
@@ -200,7 +200,7 @@ bake is empty and `./gradlew check` passes; the VS Code preview of a post render
 - **Option 2** on its own, or as a first step before either of the others.
 
 When an option is chosen: record the choice and date here, set the Status to `Accepted`, and add the steps as
-tasks (with `Test:` lines) to [`05-REVIEW-FLOW.md`](05-REVIEW-FLOW.md).
+tasks (with `Test:` lines) to [`05-REVIEW-FLOW.md`](archive/05-REVIEW-FLOW.md).
 
 ## Consequences
 
@@ -212,7 +212,7 @@ Whichever option is chosen:
   so a draft written after the merge has the right header and the review flow checks it. _2026-10-28: those are
   the plugin's `internal/FrontMatter`, `writing/NewPost` and `review/` classes in `build-logic/` since T127._
 - Option 3 adds a maintained piece of Java to the build. Every jbake-core bump then needs the before/after bake
-  check, and the engine belongs in the future build plugin ([`06-GRADLE-PLUGIN.md`](06-GRADLE-PLUGIN.md)) when that
+  check, and the engine belongs in the future build plugin ([`06-GRADLE-PLUGIN.md`](archive/06-GRADLE-PLUGIN.md)) when that
   work starts.
 - Option 2 alone leaves the preview broken; the owner keeps using another preview (the `./gradlew bakePreview`
   site at http://localhost:8080) to see a post rendered.

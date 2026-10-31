@@ -1,13 +1,20 @@
 # Review Flow: check a change before it ships
 
-**Branch**: `docs/review-flow-spec` | **Created**: 2026-10-21 | **Status**: Accepted (owner, 2026-10-21; decisions in [Notes](#notes))
+**Branch**: `docs/review-flow-spec` | **Created**: 2026-10-21 | **Status**: Done (2026-10-31; T120 and T122 carried to #180/#181)
+
+> **Update, 2026-10-31: done and archived.** All verifiable work is done and merged: T117 (#144) and T118 (#146)
+> on 2026-10-22, and T121 (`openPr`) on 2026-10-29 with PR #174, which completed M9 (CHK043–CHK046 are ticked). The two
+> items the owner is intentionally delaying are GitHub issues now: T120 (spelling) is
+> [#180](https://github.com/jmcgarr/jmcgarr.github.io/issues/180) and T122 (grammar) is [#181](https://github.com/jmcgarr/jmcgarr.github.io/issues/181); they stay unticked below, as the record. The
+> doc moved to `docs/archive/`, where finished numbered docs live, unchanged apart from its relative links and
+> this note. It keeps its number, 05.
 
 A plan to add one command, `./gradlew reviewChanges`, that reviews **the pages a branch changed** for broken
 Markdown, missing links and images, stale front matter, and (as advice, never as a failure) spelling. The same
 check runs in CI on every pull request, so a PR with a defect turns red before the owner merges it, and a later
 `./gradlew openPr` runs it before anything is pushed. It continues the revival plan
-([`archive/00-REVIVAL.md`](archive/00-REVIVAL.md), done 2026-10-18) and uses its conventions: task IDs
-continue from T117 and checkpoints from CHK043; the format is in [`AGENTS.md`](../AGENTS.md), "Tasks and checklists".
+([`00-REVIVAL.md`](00-REVIVAL.md), done 2026-10-18) and uses its conventions: task IDs
+continue from T117 and checkpoints from CHK043; the format is in [`AGENTS.md`](../../AGENTS.md), "Tasks and checklists".
 
 ## Context
 
@@ -22,7 +29,7 @@ same day. Nothing in the build or the CI gates could have caught it:
   about the site as a whole, not about what a change did to it.
 
 The same shape of defect sat on the live site for years: the three `\[… 2017\]` labels on Talks (noted under T048 in
-[`archive/04-AUTHORS-DESK.md`](archive/04-AUTHORS-DESK.md), made plain text in #142 on 2026-10-21). And the things a reviewer *would* check on a changed page have no
+[`04-AUTHORS-DESK.md`](04-AUTHORS-DESK.md), made plain text in #142 on 2026-10-21). And the things a reviewer *would* check on a changed page have no
 tool today: does every link on it still answer, does every image exist, did the page's `date=` move (it is the
 sitemap's `lastmod`), is a new tag spelled like an existing one, is a word misspelled.
 
@@ -177,7 +184,7 @@ visible. There is no global off switch for an error check; a check that is wrong
 
 ## Tasks
 
-Task format and ticking rules: [`AGENTS.md`](../AGENTS.md), "Tasks and checklists". IDs continue the revival
+Task format and ticking rules: [`AGENTS.md`](../../AGENTS.md), "Tasks and checklists". IDs continue the revival
 plan's numbering (T116 and CHK042 were the last used).
 
 ### M9: Review Flow
@@ -261,6 +268,7 @@ criteria. M9 is done when T121 and CHK045 are; CHK043, CHK044 and CHK046 passed 
   - **Test:** a dated note under this task records the decision (take it up, or not) and why.
   - _2026-10-27: made an **optional improvement** by the owner: not part of M9's done criteria, no decision due. If
     taken up later, the design and test above stand._
+  - _2026-10-31: carried over to GitHub issue #180 when this spec was archived; the task text above stays as the record._
 - [x] T121 [IMP] **`./gradlew openPr`.** `scripts/OpenPr.java` as designed above: refuse on `main`; with
   uncommitted work, list the files and stop unless `-Pmessage` is given, then commit exactly those files; run the
   review; stop before the push on errors; else push and `gh pr create` (ready, not draft) with the title, body
@@ -354,6 +362,7 @@ criteria. M9 is done when T121 and CHK045 are; CHK043, CHK044 and CHK046 passed 
     pages, and the decision. If the decision is "neither", the note says what would change it.
   - _2026-10-27: made an **optional improvement** by the owner, like T120: not part of M9's done criteria, no
     experiment due now._
+  - _2026-10-31: carried over to GitHub issue #181 when this spec was archived; the task text above stays as the record._
 
 #### Checkpoint: M9
 
@@ -361,7 +370,7 @@ criteria. M9 is done when T121 and CHK045 are; CHK043, CHK044 and CHK046 passed 
   and the CI check on a test PR, each naming `about.md` and the line (T117, T118)
   _(passed: T117's local test on 2026-10-22 and T118's test PR #147 the same day, both naming `about.md:14`; ticked 2026-10-27)_
 - [x] CHK044 `./gradlew reviewChanges -Pall` on `main` has been run once, and every finding is either fixed, recorded
-  in [`archive/04-AUTHORS-DESK.md`](archive/04-AUTHORS-DESK.md) as the owner's, or suppressed with a reason on the line
+  in [`04-AUTHORS-DESK.md`](04-AUTHORS-DESK.md) as the owner's, or suppressed with a reason on the line
   _(passed 2026-10-27: `./gradlew reviewChanges -Pall` on `main` at 7b2aff9 reviewed 78 pages, 0 errors, 0 warnings;
   the 8 W4 alt-text warnings of the first run on 2026-10-22 were resolved under T109)_
 - [x] CHK045 README's "To review a change" and AGENTS.md's Definition of Done describe the command, and a PR opened
@@ -382,13 +391,14 @@ criteria. M9 is done when T121 and CHK045 are; CHK043, CHK044 and CHK046 passed 
 
 ### GitHub Issues
 
-No open issue maps to this plan. The one open issue, [#14](https://github.com/jmcgarr/jmcgarr.github.io/issues/14)
-(mastheads for older posts), is T059 in [`archive/04-AUTHORS-DESK.md`](archive/04-AUTHORS-DESK.md). If the owner files an issue
-for the review flow, add its row here with the task and the `Closes #N` line, per AGENTS.md Rule 5.
+While the plan was active no open issue mapped to it; the one open issue, [#14](https://github.com/jmcgarr/jmcgarr.github.io/issues/14)
+(mastheads for older posts), is T059 in [`04-AUTHORS-DESK.md`](04-AUTHORS-DESK.md). On 2026-10-31, when the plan
+was archived, the owner filed one issue for each item left open here, so the backlog carries them (AGENTS.md Rule 5).
 
 | Issue | Title | GitHub label | Task(s) | Milestone | Put in the resolving PR |
 |---|---|---|---|---|---|
-| _none yet_ | | | | | |
+| [#180](https://github.com/jmcgarr/jmcgarr.github.io/issues/180) | Spelling check in the review (codespell, W5) | enhancement | T120 | M9 (optional, carried over 2026-10-31) | `Closes #180` |
+| [#181](https://github.com/jmcgarr/jmcgarr.github.io/issues/181) | Grammar checking experiment: Vale, LanguageTool, or neither | enhancement | T122 | M9 (optional, carried over 2026-10-31) | `Closes #181` |
 
 ## Notes
 
@@ -416,3 +426,6 @@ for the review flow, add its row here with the task and the `Closes #N` line, pe
   CHK043, CHK044 and CHK046 were verified and ticked the same day. The agreed order of work: close out this plan
   (done with this note), then Phase A of `08-SCRIPTS-MIGRATION.md` (no Python), then M10 of `06-GRADLE-PLUGIN.md`
   with T121 and Phase B inside it._
+- _2026-10-31: moved to `docs/archive/` (Status: Done): M9 had been complete since PR #174 merged on 2026-10-29, and
+  the owner filed #180 (T120) and #181 (T122) for the two optional items rather than keep the plan open for them.
+  Relative links were adjusted for the move; the number stays 05._

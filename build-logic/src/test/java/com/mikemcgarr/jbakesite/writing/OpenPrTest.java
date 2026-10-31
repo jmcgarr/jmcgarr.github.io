@@ -27,7 +27,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /**
- * Every branch of the openPr flow (docs/05-REVIEW-FLOW.md, T121) against a scripted git and gh: the refusals, the
+ * Every branch of the openPr flow (docs/archive/05-REVIEW-FLOW.md, T121) against a scripted git and gh: the refusals, the
  * uncommitted work with and without a message, the review stopping the push, the push and the pull request with
  * their exact arguments, a missing gh, the dry run, the title and the issue lines; and, on a real working tree, the
  * listing (with a non-ASCII name and a space) and a commit that leaves the author's other staged changes alone.
@@ -334,7 +334,7 @@ class OpenPrTest {
 
     @Test
     void onlyTheRepositorysSourcesAreCommitted() {
-        for (String path : List.of("src/jbake/content/about.md", "docs/05-REVIEW-FLOW.md", "scripts/smoke-test.sh", "build-logic/build.gradle",
+        for (String path : List.of("src/jbake/content/about.md", "docs/archive/05-REVIEW-FLOW.md", "scripts/smoke-test.sh", "build-logic/build.gradle",
                 ".github/workflows/gradle.yml", "README.md", "AGENTS.md", "CLAUDE.md", "build.gradle", "settings.gradle")) {
             assertTrue(OpenPr.isCommitted(path), path);
         }
