@@ -1,5 +1,7 @@
 .gradle/
 build/
+# Eclipse-style class output written by IDE Java tooling (seen under build-logic/ on 2026-10-31)
+bin/
 .DS_Store
 *.ipr
 *.iml
