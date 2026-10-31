@@ -1,5 +1,6 @@
 package com.mikemcgarr.jbakesite.internal;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -28,11 +29,11 @@ public interface CommandRunner {
      *
      * @param command the program and its arguments
      * @param stderr where the standard error goes
-     * @return the exit code and the captured output, or null if the program couldn't be started (not installed, not
-     *         on the PATH)
+     * @return the exit code and the captured output
+     * @throws IOException if the program couldn't be started (not installed, not on the PATH)
      * @throws InterruptedException if interrupted while waiting for the command
      */
-    Result run(List<String> command, Stderr stderr) throws InterruptedException;
+    Result run(List<String> command, Stderr stderr) throws IOException, InterruptedException;
 
     /**
      * Runs a command with its output shown to the user, as a step the user would have typed.

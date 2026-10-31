@@ -43,8 +43,9 @@ final class GitHubCli {
      * @throws ToolFailure when a check fails, saying what to do
      */
     String repository(String whatIsPushed) throws IOException, InterruptedException {
-        Result version = runner.run(List.of("gh", "--version"), Stderr.MERGE);
-        if (version == null) {
+        try {
+            runner.run(List.of("gh", "--version"), Stderr.MERGE);
+        } catch (IOException e) {
             throw ToolFailure.failed(who + " needs the GitHub CLI (gh), and it isn't installed or isn't on the PATH. "
                     + "Install it (https://cli.github.com), run gh auth login, then try again.");
         }

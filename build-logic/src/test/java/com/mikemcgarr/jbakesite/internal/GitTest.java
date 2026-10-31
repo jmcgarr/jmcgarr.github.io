@@ -60,17 +60,20 @@ class GitTest {
     }
 
     @Test
-    void aMissingProgramIsNullFromTheRunnerAndAnErrorFromGit() throws InterruptedException {
-        assertEquals(null, runner.run(List.of("no-such-program-xyz", "--version"), CommandRunner.Stderr.MERGE));
-        assertFalse(runner.runVisibly(List.of("no-such-program-xyz")));
+    void aMissingProgramIsAnIOExceptionFromTheRunnerAndGitSaysSoInItsOwnWords() throws InterruptedException {
+        IOException notRun = assertThrows(IOException.class,
+                () -> runner.run(List.of("no-such-program-xyz", "--version"), CommandRunner.Stderr.MERGE));
+        assertTrue(notRun.getMessage().contains("no-such-program-xyz"), notRun.getMessage());
+        assertFalse(runner.runVisibly(List.of("no-such-program-xyz")), "a visible run reports it and returns false instead");
         assertTrue(out.toString(StandardCharsets.UTF_8).startsWith("couldn't run no-such-program-xyz: "));
 
         IOException e = assertThrows(IOException.class, () -> new Git(new FakeRunner()).output("status"));
         assertEquals("git isn't installed or isn't on the PATH.", e.getMessage());
+        assertTrue(e.getCause() instanceof IOException, "the runner's reason is kept as the cause");
     }
 
     @Test
-    void stderrIsMergedDiscardedOrShownAsAsked() throws InterruptedException {
+    void stderrIsMergedDiscardedOrShownAsAsked() throws IOException, InterruptedException {
         List<String> failing = List.of("git", "rev-parse", "--verify", "refs/heads/no-such-branch");
 
         CommandRunner.Result merged = runner.run(failing, CommandRunner.Stderr.MERGE);

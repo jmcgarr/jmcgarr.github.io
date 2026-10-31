@@ -211,7 +211,7 @@ final class NewPost {
     }
 
     private String commitPushAndOpenPr(String shownFile, String title, String branchName, String prTitle,
-            List<String> push, List<String> openPr) throws InterruptedException {
+            List<String> push, List<String> openPr) throws IOException, InterruptedException {
         List<String> add = List.of("git", "add", "--", shownFile);
         List<String> commit = List.of("git", "commit", "--quiet",
                 "-m", "Starting a draft post: " + title,
@@ -229,10 +229,15 @@ final class NewPost {
         }
         out.println("Pushed " + branchName + " to origin");
 
-        Result created = runner.run(openPr, Stderr.SHOW);
-        if (created == null || created.exit() != 0) {
-            throw GitHubCli.stopAfter(branchName + " is committed and pushed, but opening the pull request failed"
-                    + (created == null ? " (gh didn't run)." : " (see the gh output above)."), List.of(openPr));
+        Result created;
+        try {
+            created = runner.run(openPr, Stderr.SHOW);
+        } catch (IOException e) {
+            throw GitHubCli.stopAfter(branchName + " is committed and pushed, but opening the pull request failed (gh didn't run).", List.of(openPr));
+        }
+        if (created.exit() != 0) {
+            throw GitHubCli.stopAfter(branchName + " is committed and pushed, but opening the pull request failed (see the gh output above).",
+                    List.of(openPr));
         }
         String url = created.output().lines().filter(l -> l.startsWith("https://")).reduce((a, b) -> b)
                 .orElse(created.output());

@@ -1,5 +1,6 @@
 package com.mikemcgarr.jbakesite.internal;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -8,8 +9,11 @@ import java.util.Map;
 
 /**
  * A {@link CommandRunner} for tests: answers each command from a script keyed by the command's start ("gh auth
- * status"; the longest matching start wins), records what was asked, and reports a program as not installed when
- * nothing matches. A visible run succeeds when its scripted exit is 0.
+ * status"; the longest matching start wins) and records what was asked. A command nothing matches fails loudly: a
+ * captured run throws the {@link IOException} the real runner throws for a program that isn't installed (so a test
+ * can script "gh is missing" by scripting nothing for gh), and a visible run throws {@link IllegalStateException},
+ * since a tool only runs a command visibly after checking the program is there, so an unscripted one is a test's
+ * mistake. A visible run succeeds when its scripted exit is 0.
  */
 public final class FakeRunner implements CommandRunner {
 
@@ -49,21 +53,23 @@ public final class FakeRunner implements CommandRunner {
     }
 
     @Override
-    public Result run(List<String> command, Stderr stderr) {
+    public Result run(List<String> command, Stderr stderr) throws IOException {
         String joined = String.join(" ", command);
         calls.add(joined);
         return script.entrySet().stream()
                 .filter(e -> joined.startsWith(e.getKey()))
                 .max(Comparator.comparingInt(e -> e.getKey().length()))
                 .map(Map.Entry::getValue)
-                .orElse(null);
+                .orElseThrow(() -> new IOException("Cannot run program \"" + command.get(0) + "\": nothing scripted for '" + joined + "'"));
     }
 
     @Override
     public boolean runVisibly(List<String> command) {
-        Result result = run(command, Stderr.MERGE);
-        if (result == null) {
-            return false;
+        Result result;
+        try {
+            result = run(command, Stderr.MERGE);
+        } catch (IOException e) {
+            throw new IllegalStateException("A visible command the test didn't script: " + e.getMessage(), e);
         }
         shown.append(result.output());
         return result.exit() == 0;

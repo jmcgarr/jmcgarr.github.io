@@ -222,11 +222,16 @@ final class OpenPr {
                 throw GitHubCli.stopAfter("Pushing " + branch + " to origin failed (see the git output above).", List.of(push, create));
             }
             out.println("Pushed " + branch + " to origin");
-            Result created = runner.run(create, Stderr.SHOW);
-            if (created == null || created.exit() != 0) {
+            Result created;
+            try {
+                created = runner.run(create, Stderr.SHOW);
+            } catch (IOException e) {
                 keepBody = true;
-                throw GitHubCli.stopAfter(branch + " is pushed, but opening the pull request failed"
-                        + (created == null ? " (gh didn't run)." : " (see the gh output above)."), List.of(create));
+                throw GitHubCli.stopAfter(branch + " is pushed, but opening the pull request failed (gh didn't run).", List.of(create));
+            }
+            if (created.exit() != 0) {
+                keepBody = true;
+                throw GitHubCli.stopAfter(branch + " is pushed, but opening the pull request failed (see the gh output above).", List.of(create));
             }
             String url = created.output().lines().filter(l -> l.startsWith("https://")).reduce((a, b) -> b).orElse(created.output());
             out.println("Opened the pull request \"" + title + "\": " + url);

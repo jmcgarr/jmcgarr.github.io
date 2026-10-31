@@ -39,32 +39,31 @@ public final class ProcessRunner implements CommandRunner {
     }
 
     @Override
-    public Result run(List<String> command, Stderr stderr) throws InterruptedException {
+    public Result run(List<String> command, Stderr stderr) throws IOException, InterruptedException {
         ProcessBuilder builder = builder(command);
         switch (stderr) {
             case MERGE -> builder.redirectErrorStream(true);
             case DISCARD -> builder.redirectError(Redirect.DISCARD);
             case SHOW -> builder.redirectError(Redirect.PIPE);
         }
+        Process process = builder.start();
+        // Both pipes are drained at once: a child that fills one while this end waits on the other would hang.
+        Future<byte[]> errorBytes = stderr == Stderr.SHOW
+                ? drain(process.getErrorStream())
+                : CompletableFuture.completedFuture(new byte[0]);
+        String output = new String(process.getInputStream().readAllBytes(), StandardCharsets.UTF_8).strip();
+        int exit = process.waitFor();
+        byte[] error;
         try {
-            Process process = builder.start();
-            // Both pipes are drained at once: a child that fills one while this end waits on the other would hang.
-            Future<byte[]> errorBytes = stderr == Stderr.SHOW
-                    ? drain(process.getErrorStream())
-                    : CompletableFuture.completedFuture(new byte[0]);
-            String output = new String(process.getInputStream().readAllBytes(), StandardCharsets.UTF_8).strip();
-            int exit = process.waitFor();
-            byte[] error = errorBytes.get();
-            if (error.length > 0) {
-                out.print(new String(error, StandardCharsets.UTF_8));
-                out.flush();
-            }
-            return new Result(exit, output);
-        } catch (IOException e) {
-            return null;
+            error = errorBytes.get();
         } catch (ExecutionException e) {
-            return null;   // the stderr pipe broke: the same as not being able to run the command
+            throw new IOException("couldn't read what " + command.get(0) + " wrote to its standard error", e.getCause());
         }
+        if (error.length > 0) {
+            out.print(new String(error, StandardCharsets.UTF_8));
+            out.flush();
+        }
+        return new Result(exit, output);
     }
 
     @Override
