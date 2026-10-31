@@ -70,7 +70,7 @@ Live evidence: run 40909296876 (`gh run download --name github-pages`; Pages art
    ```
 2. `index.ftl`, `archive.ftl`, `tags.ftl`: add `<#include "newest-first.ftl">` after `<#include "header.ftl">`; wrap the list: `newestFirst(published_posts)[0..*6]`, `newestFirst(published_posts)`, `newestFirst(tag_posts)`.
 3. `feed.ftl`, `sitemap.ftl`: add the include on line 2 (after the `<?xml ...?>` line; FreeMarker strips the tag-only line, so the declaration stays byte 0, verified); wrap `published_posts` and, in the sitemap, `published_pages`.
-4. Report: `docs/reports/same-date-ordering-2026-10-30.md` (point-in-time; the root cause, the tables above, before/after diffs). No plan task exists; if the owner wants one, add it to `docs/05-REVIEW-FLOW.md` with `Test: diff -rq` against the artifact.
+4. Report: `docs/reports/same-date-ordering-2026-10-30.md` (point-in-time; the root cause, the tables above, before/after diffs). No plan task exists; if the owner wants one, add it to `docs/archive/05-REVIEW-FLOW.md` with `Test: diff -rq` against the artifact.
 5. Optional follow-up (not in this PR): a `build-logic` fixture test with two same-date posts asserting order; and a one-line note in README's template list.
 
 ## 5. Verification

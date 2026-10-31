@@ -1,5 +1,5 @@
 // The `jbake-site` Gradle plugin: the site's build logic as Java classes with tests, applied by the root build.gradle
-// (docs/06-GRADLE-PLUGIN.md, M10). This file is the plugin's own build: what it is compiled with and tested by. The
+// (docs/archive/06-GRADLE-PLUGIN.md, M10). This file is the plugin's own build: what it is compiled with and tested by. The
 // site's dependency pins stay in the root build.gradle.
 plugins {
     id 'java-gradle-plugin'

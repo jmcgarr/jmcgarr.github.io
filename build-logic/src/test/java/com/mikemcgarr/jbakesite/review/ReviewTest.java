@@ -31,7 +31,7 @@ import org.junit.jupiter.api.io.TempDir;
 /**
  * The review on a small site in a real git repository, with the baked pages written by hand: one case for each
  * check (E1 to E5, W2 to W7), the suppressions, {@code -Pall}, and what stops it running (T117's design in
- * docs/05-REVIEW-FLOW.md).
+ * docs/archive/05-REVIEW-FLOW.md).
  */
 class ReviewTest {
 

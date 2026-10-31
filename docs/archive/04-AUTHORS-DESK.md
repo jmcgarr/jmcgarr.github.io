@@ -6,7 +6,7 @@
 > closed, so it moved to `docs/archive/`, where finished numbered docs live, unchanged apart from its relative links
 > and this note. It keeps its number, 04. Two tasks were still unticked and stay on record here: T059 (mastheads for
 > older posts, issue #14, with CHK039) and T111 (verify `mikemcgarr.com` for GitHub Pages). T059's tooling is T140 in
-> [`08-SCRIPTS-MIGRATION.md`](../08-SCRIPTS-MIGRATION.md); whether to do either task is the owner's call.
+> [`08-SCRIPTS-MIGRATION.md`](08-SCRIPTS-MIGRATION.md); whether to do either task is the owner's call.
 
 The owner's own to-do list for the site: everything only the author can write, choose or click. These tasks
 were milestone M8 of the [revival plan](00-REVIVAL.md). On 2026-10-12 the owner moved them into this doc,
@@ -74,7 +74,7 @@ meaningful image has alt text the owner approved; and issue #14 is closed.
   - _2026-10-28: the variants command is `./gradlew prepareImage -Pimage=<image> -Pvariants` (T127; `masthead-variants.py` went in T140)._
   - **Issue:** Closes #14
   - **Test:** `grep -L '^masthead=' src/jbake/content/blog/*.md | wc -l` returns `0` (baseline: 65). No newly added image in `src/jbake/assets/img/masthead/` is over 400 KB. Every new masthead has a `mastheadCredit=`. `python3 scripts/masthead-variants.py --check` exits 0.
-  - _2026-10-27: the variants command is now `java scripts/PrepareImage.java --variants <image>` (and the check `java scripts/PrepareImage.java --check-variants`); `masthead-variants.py` was retired in T140 of `../08-SCRIPTS-MIGRATION.md`._
+  - _2026-10-27: the variants command is now `java scripts/PrepareImage.java --variants <image>` (and the check `java scripts/PrepareImage.java --check-variants`); `masthead-variants.py` was retired in T140 of `08-SCRIPTS-MIGRATION.md`._
   - _2026-10-11: moved from M6 to M8 (owner's request: the tasks only the owner can do go last)._
   - _2026-10-18: the posts are all Markdown with LF line endings now (T102, T051), so the Test lost its `tr '\r' '\n'` and the task its "keep each file's line endings" caution; the count is unchanged at 65. T037 (done 2026-10-08) made the remote-URL option real, and the variants step comes from T071._
 - [x] T109 [P] [IMP] Alt text in the author's words for the 34 images whose `alt` is empty, a file name, or "Profile" (report [§F](../reports/content-2026-10-09.md#f-alt-text-accessibility--owner-approves-wording): proposed wording for each, F1–F34). Found by T046 (M5). The owner approves or rewrites each one; logos next to text that names the organization may get `alt=""` instead. F5 is moot (C3 removed that image) (`src/jbake/content/`)
@@ -90,6 +90,7 @@ meaningful image has alt text the owner approved; and issue #14 is closed.
   - _2026-10-22: **done** (owner). Both `<br />` tags removed; the Test's grep lists nothing, and each page lost only the blank line above its code block._
 - [ ] T111 [IMP] Verify `mikemcgarr.com` for GitHub Pages, so nobody else can claim the domain on GitHub Pages. GitHub account → Settings → Pages → Add a domain, then add the DNS `TXT` record it shows at GoDaddy (`domaincontrol.com`). Optional; came up during T068 and the owner deferred it (2026-10-05) (no repository change)
   - **Test:** GitHub's Pages settings list `mikemcgarr.com` as **Verified**, and `dig +short TXT _github-pages-challenge-jmcgarr.mikemcgarr.com` returns the record.
+  - _2026-10-31: carried over to GitHub issue #183 when the last active plans (05, 06, 08) were archived; the task text above stays as the record._
 
 ### Checkpoint
 

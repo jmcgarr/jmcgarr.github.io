@@ -40,7 +40,7 @@ import org.gradle.language.base.plugins.LifecycleBasePlugin;
  * {@code checkMastheadVariants}, {@link CheckMastheadVariantsTask}; {@code checkUrls}, {@link CheckUrlsTask};
  * {@code checkDocsNotPublished}, {@link CheckDocsNotPublishedTask}), which {@code checkSite} gathers and {@code check}
  * runs with the review. The build logic came here from {@code build.gradle} and the single-file programs of
- * {@code scripts/} one slice at a time; docs/06-GRADLE-PLUGIN.md and docs/08-SCRIPTS-MIGRATION.md keep that record.
+ * {@code scripts/} one slice at a time; docs/archive/06-GRADLE-PLUGIN.md and docs/archive/08-SCRIPTS-MIGRATION.md keep that record.
  *
  * <p>The plugin applies Gradle's {@code base} plugin for {@code clean} and the {@code check} lifecycle task.
  */

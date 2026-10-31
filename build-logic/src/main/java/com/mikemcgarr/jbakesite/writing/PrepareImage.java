@@ -40,7 +40,7 @@ import java.util.regex.Pattern;
  * the content and templates is pointed at the JPEG. A PNG that was never published (not in {@code main}) is then
  * removed ({@code -PkeepSource} keeps it). A PNG that <em>is</em> published must keep a PNG at its URL (option B: a
  * small 256-colour fallback), and the JDK has no colour quantizer, so this refuses it and changes nothing: convert
- * it by hand, or add the quantizer (decision D2 in docs/08-SCRIPTS-MIGRATION.md). The four published PNG mastheads
+ * it by hand, or add the quantizer (decision D2 in docs/archive/08-SCRIPTS-MIGRATION.md). The four published PNG mastheads
  * already have their fallbacks from T016.</li>
  * <li>A PNG that is a graphic (or {@code -Ppng}) stays a PNG: resized, deflate level 9, transparency kept.</li>
  * <li>A masthead also gets its 960 and 1440 px variants; stale variants of the same image are replaced.</li>
@@ -239,7 +239,7 @@ final class PrepareImage {
             if (published(path)) {
                 out.println("  a photo, but this PNG is published (it is in main), so a PNG must stay at its URL (AGENTS.md Rule 1,"
                         + " option B) and this program has no colour quantizer for the fallback: convert it by hand or add"
-                        + " the quantizer (D2 in docs/08-SCRIPTS-MIGRATION.md). Nothing changed.");
+                        + " the quantizer (D2 in docs/archive/08-SCRIPTS-MIGRATION.md). Nothing changed.");
                 return false;
             }
             out.println("  a photo: writing " + site.display(finalPath) + " (the PNG was never published, so it goes)");

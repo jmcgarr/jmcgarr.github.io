@@ -3,7 +3,7 @@
 **Branch**: `docs/T022-css-review` | **Created**: 2026-10-24 | **Status**: Awaiting owner approval
 
 A review of every stylesheet the site serves, with recommendations that keep the look and feel. Written for
-[T022](../04-AUTHORS-DESK.md) after the owner said (2026-10-24) they have no font changes in mind but are open to
+[T022](../archive/04-AUTHORS-DESK.md) after the owner said (2026-10-24) they have no font changes in mind but are open to
 suggestions, and want the CSS "cleaned up, simplified and a bit more standardized" without breaking the look.
 Also covers the owner's request of the same day to modernize the code blocks. **Nothing in this PR changes the
 site**: no stylesheet, template or build file is touched. The owner picks what to implement; each item says whether

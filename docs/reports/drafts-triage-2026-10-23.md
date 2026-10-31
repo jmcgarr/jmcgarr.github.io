@@ -3,7 +3,7 @@
 **Branch**: `post/T053-drafts-triage` | **Created**: 2026-10-23 | **Status**: Done
 
 The owner's decision on each of the 12 drafts that sat under `src/jbake/content/blog/drafts/`, for task T053 in
-[`04-AUTHORS-DESK.md`](../04-AUTHORS-DESK.md). What each draft contained is in [`content-2026-10-09.md`](content-2026-10-09.md),
+[`04-AUTHORS-DESK.md`](../archive/04-AUTHORS-DESK.md). What each draft contained is in [`content-2026-10-09.md`](content-2026-10-09.md),
 §I.2. Drafts are never published (T009), so deleting one changes no URL; their 12 preview paths stay listed in
 `docs/baseline/expected-removals.txt` as the record of T009. The deleted files remain in git history (last present
 at `5752024`, the parent of this change).

@@ -1,12 +1,19 @@
 # Scripts: into the Gradle plugin, and no Python
 
-**Branch**: `docs/08-scripts-migration` | **Created**: 2026-10-25 | **Status**: Draft
+**Branch**: `docs/08-scripts-migration` | **Created**: 2026-10-25 | **Status**: Done (2026-10-31)
+
+> **Update, 2026-10-31: done and archived.** All work is done and merged: Phase A (T137–T140, no Python) in #166 and
+> Phase B (T141, T143; T142 superseded) in #174 on 2026-10-29, as the last PR of M10 in
+> [`06-GRADLE-PLUGIN.md`](06-GRADLE-PLUGIN.md); CHK053–CHK056 are ticked. The two follow-ups the decisions had left
+> open, D2's quantizer and D3's inline CI steps, are dropped (owner, 2026-10-31), not issues; the dated lines under D2
+> and D3 say so. The doc moved to `docs/archive/`, where finished numbered docs live, unchanged apart from its relative
+> links and this note. It keeps its number, 08.
 
 A plan for the 17 tracked files under `scripts/`: which of them belong in the pending Gradle plugin
 ([`06-GRADLE-PLUGIN.md`](06-GRADLE-PLUGIN.md)), and how to get to **no Python in the repository**, the owner's
 stated end state (2026-10-25). Research only so far; the owner decides ([Decisions needed](#blockers-and-owner-decisions)).
-Conventions as in [`AGENTS.md`](../AGENTS.md), "Tasks and checklists"; task IDs continue from T136
-([`archive/04-AUTHORS-DESK.md`](archive/04-AUTHORS-DESK.md)) and checkpoints from CHK052 ([`06-GRADLE-PLUGIN.md`](06-GRADLE-PLUGIN.md)).
+Conventions as in [`AGENTS.md`](../../AGENTS.md), "Tasks and checklists"; task IDs continue from T136
+([`04-AUTHORS-DESK.md`](04-AUTHORS-DESK.md)) and checkpoints from CHK052 ([`06-GRADLE-PLUGIN.md`](06-GRADLE-PLUGIN.md)).
 
 ## Context
 
@@ -93,7 +100,7 @@ format" (README) cannot happen without first re-adding an engine. Nothing invoke
 (their design notes live in their docstrings; git history keeps them). `render.sh` + `Render.java`: a flexmark
 probe with a machine-specific classpath file; retire with them. `pixeldiff.py` (51 lines, Pillow): compares two
 screenshot folders pixel by pixel. **Still in use**: the CSS review method
-([`reports/css-review-2026-10-24.md`](reports/css-review-2026-10-24.md), "How to verify") and the pending CSS
+([`reports/css-review-2026-10-24.md`](../reports/css-review-2026-10-24.md), "How to verify") and the pending CSS
 tasks T135/T136 rely on it. **Port to Java** (`ImageIO` reads PNG, `getRGB` compares, writes the red-on-grey
 diff; about the same length). `screenshots.sh` (headless Chrome) and `phone-shots.mjs` (Node, DevTools
 protocol): the other half of that method; shell and Node, not Python; keep, moved next to `PixelDiff.java` in a
@@ -419,12 +426,16 @@ Nothing blocks the "no Python" goal technically. Four decisions shape it:
   - _2026-10-27: **(d)**, taken on the plan's recommendation to start Phase A (T140); the owner can overrule.
     `PrepareImage.java` refuses a photo PNG that is in `main` ("convert it by hand or add the quantizer") and removes
     a never-published one after conversion, as before. (a) stays the answer if the case ever arises._
+  - _2026-10-31 (owner): the quantizer, option (a), is dropped, not carried to an issue. A published photo PNG that
+    needs a new fallback is converted by hand; `prepareImage` keeps refusing it with the message above._
 - **D3: scope of `checkSite`.** Only the three scripted checks (T141 as written), or also the inline CI steps
   (drafts, CR line endings, live-reload marker) so CI is `./gradlew bake checkSite` plus lychee and xmllint.
   The inline steps are five lines of shell each and already run on `build/site`; moving them is tidy, not
   necessary.
   - _2026-10-27: **the three scripted checks first** (owner, on the recommendation): T141 as written; the inline CI
     steps may follow later if it turns out tidy._
+  - _2026-10-31 (owner): the follow-up, inlining the CI steps (drafts, CR line endings, live-reload marker) into
+    `checkSite`, is dropped, not carried to an issue. They stay shell in `.github/workflows/gradle.yml`._
 - **D4: keep shell twins.** Whether `check-urls.sh` and `check-docs-not-published.sh` stay after T141 as a
   Gradle-free fallback, or go (T143). Recommendation: go, once a content PR has merged green with the plugin tasks;
   two implementations of the Rule 1 gate would drift.
@@ -457,3 +468,7 @@ Test uses working.
 - _2026-10-27 (later): Phase A merged (#166); CHK053 confirmed by the owner. D3 (scripted checks first) and D4 (delete
   the shell twins) decided by the owner; T142 superseded, since the programs move into the plugin as classes
   (`06-GRADLE-PLUGIN.md`, T130). Phase B runs as the last PR of M10._
+- _2026-10-31: moved to `docs/archive/` (Status: Done): Phase B merged with PR #174 on 2026-10-29 and every checkpoint
+  is ticked; nothing stays open here, since the owner dropped the D2 and D3 follow-ups the same day. #14 stays the
+  one issue this plan touched, and it belongs to T059 in [`04-AUTHORS-DESK.md`](04-AUTHORS-DESK.md). Relative links
+  were adjusted for the move; the number stays 08._

@@ -9,12 +9,12 @@ published since 2009. Other sites, search engines, RSS readers, and slide decks 
 links pointing at it. **Treat it as a live publication, not a code project.** Every published URL is
 a promise to the people who linked to it.
 
-- **Generator:** JBake 2.7, run in a fresh JVM by the site's own Gradle plugin, `jbake-site`, an included build in `build-logic/` written in Java with its own tests (`./gradlew :build-logic:check`; [`docs/06-GRADLE-PLUGIN.md`](docs/06-GRADLE-PLUGIN.md), 2026-10). `build.gradle` only applies it, configures it (`jbakeSite { }`) and pins JBake's versions (no JBake plugin since T096). Gradle 9.8 wrapper (T097), JDK 25 via `.java-version` (T113; JDK 21 also works)
+- **Generator:** JBake 2.7, run in a fresh JVM by the site's own Gradle plugin, `jbake-site`, an included build in `build-logic/` written in Java with its own tests (`./gradlew :build-logic:check`; [`docs/archive/06-GRADLE-PLUGIN.md`](docs/archive/06-GRADLE-PLUGIN.md), 2026-10). `build.gradle` only applies it, configures it (`jbakeSite { }`) and pins JBake's versions (no JBake plugin since T096). Gradle 9.8 wrapper (T097), JDK 25 via `.java-version` (T113; JDK 21 also works)
 - **Theme:** Start Bootstrap "Clean Blog" (Bootstrap 4.1, jQuery 3.3) as FreeMarker templates. The footer and menu icons are inline SVGs from Font Awesome Free (T047, T135); no icon font is loaded, though the vendored Font Awesome 5.3.1 files stay published (Rule 1)
 - **Styles:** all of the site's own CSS (`clean-blog.css`, with the `@font-face` rules since T135, and `code.css`) is generated from `src/scss/` by Dart Sass inside Gradle (`compileSass`, T043, T134). **Edit the SCSS, never the CSS**: it isn't committed, and the build fails if a hand-written copy (or the old `extra.css` or `fonts.css`) reappears under `src/jbake/assets/css/`. See README, "To change the site's styles"
 - **Branches:** `main` holds the source (the default branch; renamed from `source` in T093). `master` is the **retired** publishing branch from before T027, frozen and preserved by tag `live-2026-10`. Don't push to it.
 - **Deploys:** GitHub Actions bakes, checks, and deploys to GitHub Pages (as an artifact, no commits) on **every push to `main`**. Merging to `main` *is* publishing. A manual "Run workflow" on `main` redeploys.
-- **Current work:** follows [`docs/05-REVIEW-FLOW.md`](docs/05-REVIEW-FLOW.md) (checking a change before it ships). Read it before starting any task. The 2026 revival plan is done and archived at [`docs/archive/00-REVIVAL.md`](docs/archive/00-REVIVAL.md); its task IDs, notes and GitHub Issues table remain the record of that work. The owner's own task list was closed and archived at [`docs/archive/04-AUTHORS-DESK.md`](docs/archive/04-AUTHORS-DESK.md) on 2026-10-27 (T059 and T111 stayed open there); agents may prepare material for the owner's tasks, but the owner decides.
+- **Current work:** there is no active plan. The backlog is the repo's [GitHub issues](https://github.com/jmcgarr/jmcgarr.github.io/issues) (Rule 5). The finished plans are archived under `docs/archive/` and remain the record of the work and the reasons: the 2026 revival ([`00-REVIVAL.md`](docs/archive/00-REVIVAL.md)), the owner's Author's Desk ([`04-AUTHORS-DESK.md`](docs/archive/04-AUTHORS-DESK.md)), the review flow ([`05-REVIEW-FLOW.md`](docs/archive/05-REVIEW-FLOW.md)), the Gradle plugin ([`06-GRADLE-PLUGIN.md`](docs/archive/06-GRADLE-PLUGIN.md)) and the scripts migration ([`08-SCRIPTS-MIGRATION.md`](docs/archive/08-SCRIPTS-MIGRATION.md)); their task IDs are still cited in code comments and notes, and the items they left open are issues now (#14, #180–#183). A new numbered doc under `docs/` is written only when a piece of work needs a plan (several tasks, decisions, or checkpoints); then it becomes the current plan and this line names it. Agents may prepare material for the owner's tasks, but the owner decides.
 
 ### Layout
 
@@ -158,11 +158,15 @@ makes them, or run `./gradlew prepareImage -Pimage=<image> -Pvariants` alone aft
 
 ## Rule 5: Link work to GitHub issues
 
-The repo's [GitHub issues](https://github.com/jmcgarr/jmcgarr.github.io/issues) are mapped to plan tasks in the
-GitHub Issues table of the plan that owns the task ([`docs/05-REVIEW-FLOW.md`](docs/05-REVIEW-FLOW.md#github-issues) for current work; the archived [revival plan](docs/archive/00-REVIVAL.md#github-issues) for the 2026 revival). A task that resolves an issue has an `Issue:` line.
+The repo's [GitHub issues](https://github.com/jmcgarr/jmcgarr.github.io/issues) are the backlog. When a plan is active, its GitHub Issues table maps
+the issues it resolves to its tasks, and a task that resolves an issue has an `Issue:` line (the archived plans keep their
+tables: the [revival plan](docs/archive/00-REVIVAL.md#github-issues) for the 2026 revival; the [review flow](docs/archive/05-REVIEW-FLOW.md#github-issues)
+and the [Gradle plugin](docs/archive/06-GRADLE-PLUGIN.md#github-issues) for the items they carried over to issues). Without an active plan,
+an issue is worked directly, on its own branch, and its PR says `Closes #N`; a task is written only when the issue
+needs a plan (several tasks, decisions, or checkpoints), and then the new plan's table maps it.
 
-- **Before starting work,** run `gh issue list`. If an open issue isn't in the map, add a task and a map row for it first, on a `docs/` branch.
-- **When a change completes a task with `Issue: Closes #N`,** put `Closes #N` on its own line in the commit message **and** the PR description. Use one keyword per issue (`Closes #3` and `Closes #16` on separate lines). `Closes #3, #16` closes only #3.
+- **Before starting work,** run `gh issue list`: it is the backlog, and it says whether an issue already covers the change.
+- **When a change completes an issue** (a task with `Issue: Closes #N`, or the issue worked directly), put `Closes #N` on its own line in the commit message **and** the PR description. Use one keyword per issue (`Closes #3` and `Closes #16` on separate lines). `Closes #3, #16` closes only #3.
 - **For partial work,** use `Refs #N`. It links the issue without closing it.
 - **Issues close only when the change merges into `main`,** the default branch. Pushing a feature branch or opening a PR closes nothing, which is intended: an issue is done when the fix is live.
 - Don't close, reopen, comment on, label, or create GitHub issues unless asked.
@@ -187,7 +191,7 @@ Before you say a change is finished:
 - [ ] You checked the affected pages in `./gradlew clean bakePreview` (home, one post, About, Archive at minimum for template changes)
 - [ ] No URL was removed or changed without approval (Rule 1 check)
 - [ ] `docs/` content is not in `build/jbake` (`test ! -e build/jbake/docs`)
-- [ ] If the work came from a plan task, its checkbox is ticked in the plan that owns it (`docs/05-REVIEW-FLOW.md`, `docs/06-GRADLE-PLUGIN.md`, `docs/08-SCRIPTS-MIGRATION.md`) **on the same branch**, and its `Test:` line was actually run
+- [ ] If the work came from a plan task, its checkbox is ticked in the plan that owns it **on the same branch**, and its `Test:` line was actually run; if it came from a GitHub issue, the PR carries the `Closes #N` line (Rule 5)
 - [ ] If the task has an `Issue:` line, the commit message (and PR description) carries the matching `Closes #N` / `Refs #N` line (Rule 5)
 - [ ] You report what you verified and what you didn't. Never claim a test passed if you didn't run it.
 - [ ] The branch is pushed and a PR against `main` is open (Rule 2). After it merges, `main` is pulled before the next task
@@ -209,7 +213,7 @@ Before you say a change is finished:
 
 - Top-level docs are numbered: **`NN-SHORT-NAME.md`**, with a two-digit sequence and an UPPER-KEBAB-CASE name (for example `00-REVIVAL.md`, `01-PLATFORM-DECISION.md`).
 - Numbers are assigned in creation order and **never reused or renumbered**. If a doc is replaced, mark it superseded rather than deleting it.
-- **`docs/archive/`** (named `docs/completed/` until 2026-10-23) holds numbered docs that are finished: plans whose Status is **Done**, and decision records the owner has settled. They move there unchanged apart from their relative links and a dated update (the revival plan on 2026-10-21; the platform decision and the Roq migration plan on 2026-10-23, when the owner decided to stay on JBake). A doc keeps its number there, and that number stays taken. An archived decision record is still in force unless its Status says Superseded.
+- **`docs/archive/`** (named `docs/completed/` until 2026-10-23) holds numbered docs that are finished: plans whose Status is **Done**, and decision records the owner has settled. They move there unchanged apart from their relative links and a dated update (the revival plan on 2026-10-21; the platform decision and the Roq migration plan on 2026-10-23, when the owner decided to stay on JBake; the revival changelog on 2026-10-25; the Author's Desk on 2026-10-27; the review flow, Gradle plugin and scripts migration plans on 2026-10-31, when their work had merged and the owner had filed issues for the items still open). A doc keeps its number there, and that number stays taken. An archived decision record is still in force unless its Status says Superseded.
 - Subdirectories:
   - `docs/baseline/`: snapshots of the live site (`urls.txt`, `metrics.md`, `expected-removals.txt`). Only update them at a milestone checkpoint, and say so in the commit message.
   - `docs/reports/`: generated, point-in-time reports named `<topic>-YYYY-MM-DD.md` (for example `links-2026-10-15.md`). Don't edit them after creating them; make a new dated one instead.
@@ -251,5 +255,5 @@ Platform and architecture decisions (for example `01-PLATFORM-DECISION.md`) use 
 
 ### Style
 
-- Use GitHub-flavored Markdown with relative links between docs (`[plan](05-REVIEW-FLOW.md)`, `[revival](archive/00-REVIVAL.md)`).
+- Use GitHub-flavored Markdown with relative links between docs (`[front matter](07-FRONT-MATTER.md)`, `[revival](archive/00-REVIVAL.md)`).
 - Use real file paths and runnable commands. Keep prose short.

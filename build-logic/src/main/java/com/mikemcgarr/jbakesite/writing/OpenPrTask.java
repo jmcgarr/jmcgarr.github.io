@@ -18,7 +18,7 @@ import org.gradle.api.tasks.UntrackedTask;
 
 /**
  * {@code openPr}: reviews the branch's changes and, if they pass, pushes the branch and opens a ready pull request
- * against {@code main} (T121, docs/05-REVIEW-FLOW.md). Depends on {@code bake}, which the review reads. The
+ * against {@code main} (T121, docs/archive/05-REVIEW-FLOW.md). Depends on {@code bake}, which the review reads. The
  * {@code -P} options are the task's properties, wired from the Gradle properties of the same names, and
  * {@link OpenPr} does the work:
  *
