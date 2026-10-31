@@ -595,6 +595,9 @@ diff -r /tmp/bake-main build/jbake | grep -v 'feed.xml'     # must print nothing
     list posts that share a date in a different order (same lines; `diff <(sort a) <(sort b)` is empty). Since
     both platforms' outputs are unchanged across M10, that ordering difference predates it; it is a JBake tie on
     equal dates, not a plugin effect, and is left as a note for the owner._
+  - _2026-10-30: root cause and fix in [reports/same-date-ordering-2026-10-30.md](reports/same-date-ordering-2026-10-30.md):
+    the tie order follows the baking machine's CPU-core count (OrientDB clusters), not the filesystem; the templates
+    now break ties by URL._
 - [x] CHK048 `./gradlew bake` twice in a row prints "Reusing configuration cache"; `bakePreview`, `newPost` and
   `reviewChanges` run with no configuration-cache problems reported
   - _2026-10-28: `bake` twice: the second prints "Reusing configuration cache." and `:bake UP-TO-DATE`.
