@@ -18,8 +18,9 @@ import org.gradle.api.tasks.UntrackedTask;
 /**
  * {@code prepareImage}: makes a hand-added image fit the image rules, and a masthead's variants (T140; in the plugin
  * since T127, before that an {@code Exec} of {@code scripts/PrepareImage.java}). The {@code -P} options are the
- * task's properties, read as the program read its {@code --name=value} arguments: a flag is on unless its value is
- * {@code false}, {@code -Pimage} takes a comma-separated list, {@code -Pwidth} a number. {@link PrepareImage} does
+ * task's properties: a flag is on when given alone or as {@code true}, off as {@code false}, and anything else is a
+ * usage error ({@link SiteToolTask#flag}, the rule every task's flags follow); {@code -Pimage} takes a
+ * comma-separated list, {@code -Pwidth} a number. {@link PrepareImage} does
  * the work:
  *
  * <pre>
@@ -109,24 +110,15 @@ public abstract class PrepareImageTask extends SiteToolTask {
         List<String> images = images();
         Git git = new Git(new ProcessRunner(site.root(), System.out, System.err));
         runTool(() -> {
-            PrepareImageOptions options = new PrepareImageOptions(flag(getDryRun()), flag(getPng()), flag(getJpeg()),
-                    flag(getKeepSource()), width());
+            PrepareImageOptions options = new PrepareImageOptions(flag(getDryRun(), "dryRun"), flag(getPng(), "png"),
+                    flag(getJpeg(), "jpeg"), flag(getKeepSource(), "keepSource"), width());
             PrepareImage tool = new PrepareImage(site, git, System.out);
-            if (flag(getVariants())) {
+            if (flag(getVariants(), "variants")) {
                 tool.makeMissingVariants(images, options);
             } else {
                 tool.prepare(images, options);
             }
         });
-    }
-
-    /** A flag is on when given, unless its value is "false" (the program's reading of {@code --name=value}). */
-    private static boolean flag(Property<String> property) {
-        if (!property.isPresent()) {
-            return false;
-        }
-        String value = property.get();
-        return value.isEmpty() || !value.equalsIgnoreCase("false");
     }
 
     private List<String> images() {
