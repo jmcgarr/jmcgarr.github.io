@@ -96,6 +96,39 @@ final class GitHubCli {
     }
 
     /**
+     * Runs {@code gh pr create} and returns the pull request's URL: the last {@code https://} line of gh's output
+     * (gh may print a note before it), or the whole output if there is no such line.
+     *
+     * @param create the {@code gh pr create} command, with its arguments
+     * @param inPlace what is done and stays done, for the message: "post/x is committed and pushed", "fix/y is pushed"
+     * @return the URL
+     * @throws InterruptedException if interrupted while waiting for gh
+     * @throws ToolFailure when gh fails or can't start, with the command to run by hand
+     */
+    String createPullRequest(List<String> create, String inPlace) throws InterruptedException {
+        Result created;
+        try {
+            created = runner.run(create, Stderr.SHOW);
+        } catch (IOException e) {
+            throw stopAfter(inPlace + ", but opening the pull request failed (gh didn't run).", List.of(create));
+        }
+        if (created.exit() != 0) {
+            throw stopAfter(inPlace + ", but opening the pull request failed (see the gh output above).", List.of(create));
+        }
+        return pullRequestUrl(created.output());
+    }
+
+    /**
+     * The pull request's URL in {@code gh pr create}'s output: its last {@code https://} line.
+     *
+     * @param output gh's output
+     * @return the URL, or the whole output when no line is one
+     */
+    static String pullRequestUrl(String output) {
+        return output.lines().filter(l -> l.startsWith("https://")).reduce((a, b) -> b).orElse(output);
+    }
+
+    /**
      * Explains a failed step and lists the commands that finish the job by hand. Nothing is undone.
      *
      * @param what what happened, and what is in place

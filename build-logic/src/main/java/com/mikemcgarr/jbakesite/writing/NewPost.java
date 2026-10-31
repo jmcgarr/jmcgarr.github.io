@@ -1,8 +1,7 @@
 package com.mikemcgarr.jbakesite.writing;
 
+import com.mikemcgarr.jbakesite.FileTrees;
 import com.mikemcgarr.jbakesite.internal.CommandRunner;
-import com.mikemcgarr.jbakesite.internal.CommandRunner.Result;
-import com.mikemcgarr.jbakesite.internal.CommandRunner.Stderr;
 import com.mikemcgarr.jbakesite.internal.Git;
 import com.mikemcgarr.jbakesite.internal.SiteLayout;
 import com.mikemcgarr.jbakesite.internal.Tags;
@@ -19,7 +18,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TreeSet;
-import java.util.stream.Stream;
 
 /**
  * Starts a new draft post (revival tasks T060 and T061, issue #8; {@code scripts/NewPost.java} until T127). It
@@ -229,18 +227,7 @@ final class NewPost {
         }
         out.println("Pushed " + branchName + " to origin");
 
-        Result created;
-        try {
-            created = runner.run(openPr, Stderr.SHOW);
-        } catch (IOException e) {
-            throw GitHubCli.stopAfter(branchName + " is committed and pushed, but opening the pull request failed (gh didn't run).", List.of(openPr));
-        }
-        if (created.exit() != 0) {
-            throw GitHubCli.stopAfter(branchName + " is committed and pushed, but opening the pull request failed (see the gh output above).",
-                    List.of(openPr));
-        }
-        String url = created.output().lines().filter(l -> l.startsWith("https://")).reduce((a, b) -> b)
-                .orElse(created.output());
+        String url = new GitHubCli(git, runner, "-Ppr").createPullRequest(openPr, branchName + " is committed and pushed");
         out.println("Opened the draft pull request \"" + prTitle + "\": " + url);
         return url;
     }
@@ -270,7 +257,7 @@ final class NewPost {
             }
         }
         Path publishedUrls = site.publishedUrls();
-        if (Files.exists(publishedUrls) && Files.readAllLines(publishedUrls).contains("blog/" + slug + ".html")) {
+        if (Files.exists(publishedUrls) && Files.readAllLines(publishedUrls, StandardCharsets.UTF_8).contains("blog/" + slug + ".html")) {
             throw fail("/blog/" + slug + ".html was already published (" + site.display(publishedUrls) + "). Published URLs are "
                     + "permanent, so pick another title or pass -Pslug=<other-slug>.");
         }
@@ -281,11 +268,7 @@ final class NewPost {
         if (tags.isEmpty()) {
             return;
         }
-        List<Path> posts;
-        try (Stream<Path> files = Files.list(site.blog())) {
-            posts = files.filter(Files::isRegularFile).toList();
-        }
-        Map<String, TreeSet<String>> spellings = Tags.spellingsIn(posts);
+        Map<String, TreeSet<String>> spellings = Tags.spellingsIn(FileTrees.regularFilesIn(site.blog()));
         for (String tag : tags) {
             TreeSet<String> existing = spellings.get(tag.toLowerCase(Locale.ROOT));
             if (existing == null) {

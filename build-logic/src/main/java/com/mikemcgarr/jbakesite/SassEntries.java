@@ -1,10 +1,8 @@
 package com.mikemcgarr.jbakesite;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * The convention for which SCSS files are compiled (T043, T134): every {@code <name>.scss} directly in the SCSS
@@ -31,15 +29,9 @@ public final class SassEntries {
      * @throws IOException if the directory can't be read
      */
     public static List<Path> in(Path source) throws IOException {
-        if (!Files.isDirectory(source)) {
-            return List.of();
-        }
-        try (Stream<Path> files = Files.list(source)) {
-            return files.filter(Files::isRegularFile)
-                    .filter(file -> isEntry(file.getFileName().toString()))
-                    .sorted()
-                    .toList();
-        }
+        return FileTrees.regularFilesIn(source).stream()
+                .filter(file -> isEntry(file.getFileName().toString()))
+                .toList();
     }
 
     /**

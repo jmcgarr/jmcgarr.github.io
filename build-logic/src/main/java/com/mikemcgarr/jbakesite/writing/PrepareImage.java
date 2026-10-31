@@ -169,6 +169,8 @@ final class PrepareImage {
             for (Path p : FileTrees.regularFilesUnder(root)) {
                 String text;
                 try {
+                    // Strict on purpose, unlike Text.read: the text is written back, and a byte that can't be
+                    // decoded must not come back as U+FFFD. A file that isn't UTF-8 text is left alone.
                     text = Files.readString(p, StandardCharsets.UTF_8);
                 } catch (CharacterCodingException e) {
                     continue;

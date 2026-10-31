@@ -1,10 +1,11 @@
 package com.mikemcgarr.jbakesite.review;
 
+import com.mikemcgarr.jbakesite.FileTrees;
 import com.mikemcgarr.jbakesite.internal.FrontMatter;
 import com.mikemcgarr.jbakesite.internal.SiteLayout;
 import com.mikemcgarr.jbakesite.internal.Tags;
+import com.mikemcgarr.jbakesite.internal.Text;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Clock;
@@ -19,7 +20,6 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
 /**
  * The checks on a changed content file's source: E4 (the header), E1 (Markdown link syntax) and W4 (alt text) on
@@ -65,12 +65,12 @@ final class MarkdownChecks {
     /** Checks a content file; returns its header, or null when the page can't be expected in the bake. */
     FrontMatter check(Change c) throws IOException, InterruptedException {
         String file = site.display(c.path());
-        byte[] bytes = Files.readAllBytes(c.path());
-        String text = new String(bytes, StandardCharsets.UTF_8);
+        String text = Text.read(c.path());
         if (text.indexOf('\r') >= 0) {
             findings.add(true, "E4", file, 1 + (int) text.substring(0, text.indexOf('\r')).chars().filter(ch -> ch == '\n').count(),
                     "The file has a CR line ending. Content is LF only (AGENTS.md Rule 3; CI fails on this).",
                     "Convert the line endings: perl -pi -e 's/\\r\\n?/\\n/g' " + file);
+            text = Text.lf(text);   // reported once; the other checks then see the lines as JBake would after the fix
         }
         FrontMatter fm = FrontMatter.parse(text);
         if (!fm.separated()) {
@@ -142,11 +142,10 @@ final class MarkdownChecks {
         }
         List<Path> others = new ArrayList<>();   // every other post and draft
         for (Path dir : List.of(site.blog(), site.drafts())) {
-            if (!Files.isDirectory(dir)) {
-                continue;
-            }
-            try (Stream<Path> files = Files.list(dir)) {
-                others.addAll(files.filter(p -> p.toString().endsWith(".md") && !p.equals(c.path())).toList());
+            for (Path p : FileTrees.regularFilesIn(dir)) {
+                if (p.toString().endsWith(".md") && !p.equals(c.path())) {
+                    others.add(p);
+                }
             }
         }
         Map<String, TreeSet<String>> spellings = Tags.spellingsIn(others);

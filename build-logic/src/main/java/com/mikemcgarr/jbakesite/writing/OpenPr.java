@@ -1,8 +1,6 @@
 package com.mikemcgarr.jbakesite.writing;
 
 import com.mikemcgarr.jbakesite.internal.CommandRunner;
-import com.mikemcgarr.jbakesite.internal.CommandRunner.Result;
-import com.mikemcgarr.jbakesite.internal.CommandRunner.Stderr;
 import com.mikemcgarr.jbakesite.internal.Git;
 import com.mikemcgarr.jbakesite.internal.SiteLayout;
 import com.mikemcgarr.jbakesite.internal.ToolFailure;
@@ -178,7 +176,7 @@ final class OpenPr {
             out.println(GitHubCli.indent(body));
             return null;
         }
-        return pushAndOpen(branch, repo, title, body);
+        return pushAndOpen(gh, branch, repo, title, body);
     }
 
     /**
@@ -209,7 +207,7 @@ final class OpenPr {
     }
 
     /** Pushes the branch and opens the pull request; a failed step says what is in place and what to run next. */
-    private String pushAndOpen(String branch, String repo, String title, String body) throws IOException, InterruptedException {
+    private String pushAndOpen(GitHubCli gh, String branch, String repo, String title, String body) throws IOException, InterruptedException {
         Path bodyFile = Files.createTempFile("openpr-body-", ".md");
         Files.writeString(bodyFile, body, StandardCharsets.UTF_8);
         List<String> push = List.of("git", "push", "--set-upstream", "origin", branch);
@@ -218,27 +216,18 @@ final class OpenPr {
         boolean keepBody = false;
         try {
             if (!runner.runVisibly(push)) {
-                keepBody = true;
                 throw GitHubCli.stopAfter("Pushing " + branch + " to origin failed (see the git output above).", List.of(push, create));
             }
             out.println("Pushed " + branch + " to origin");
-            Result created;
-            try {
-                created = runner.run(create, Stderr.SHOW);
-            } catch (IOException e) {
-                keepBody = true;
-                throw GitHubCli.stopAfter(branch + " is pushed, but opening the pull request failed (gh didn't run).", List.of(create));
-            }
-            if (created.exit() != 0) {
-                keepBody = true;
-                throw GitHubCli.stopAfter(branch + " is pushed, but opening the pull request failed (see the gh output above).", List.of(create));
-            }
-            String url = created.output().lines().filter(l -> l.startsWith("https://")).reduce((a, b) -> b).orElse(created.output());
+            String url = gh.createPullRequest(create, branch + " is pushed");
             out.println("Opened the pull request \"" + title + "\": " + url);
             return url;
+        } catch (ToolFailure e) {
+            keepBody = true;   // its message says to run gh pr create --body-file <it>
+            throw e;
         } finally {
             if (!keepBody) {
-                Files.deleteIfExists(bodyFile);   // kept otherwise: the message says to run gh pr create --body-file <it>
+                Files.deleteIfExists(bodyFile);
             }
         }
     }

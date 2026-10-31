@@ -4,10 +4,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.logging.Logger;
 import org.gradle.api.logging.Logging;
@@ -137,15 +135,12 @@ public abstract class SassPreviewWatcher implements BuildService<SassPreviewWatc
 
     /** Every file's path, modification time and size: a change to any of them changes the stamp. */
     private static String stamp(Path sourceDir) throws IOException {
-        try (Stream<Path> paths = Files.walk(sourceDir)) {
-            List<Path> files = paths.filter(Files::isRegularFile).sorted().toList();
-            StringBuilder stamp = new StringBuilder();
-            for (Path file : files) {
-                stamp.append(file).append(' ').append(Files.getLastModifiedTime(file).toMillis()).append(' ')
-                        .append(Files.size(file)).append('\n');
-            }
-            return stamp.toString();
+        StringBuilder stamp = new StringBuilder();
+        for (Path file : FileTrees.regularFilesUnder(sourceDir)) {
+            stamp.append(file).append(' ').append(Files.getLastModifiedTime(file).toMillis()).append(' ')
+                    .append(Files.size(file)).append('\n');
         }
+        return stamp.toString();
     }
 
     private String url(String cssName) {

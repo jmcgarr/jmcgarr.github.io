@@ -1,8 +1,6 @@
 package com.mikemcgarr.jbakesite.internal;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -48,8 +46,7 @@ public final class Tags {
     public static Map<String, TreeSet<String>> spellingsIn(Collection<Path> files) throws IOException {
         Map<String, TreeSet<String>> spellings = new HashMap<>();
         for (Path file : files) {
-            String text = Files.readString(file, StandardCharsets.UTF_8).replace("\r\n", "\n").replace('\r', '\n');
-            for (String tag : split(FrontMatter.parse(text).get("tags"))) {
+            for (String tag : split(FrontMatter.parse(Text.read(file)).get("tags"))) {
                 spellings.computeIfAbsent(tag.toLowerCase(Locale.ROOT), k -> new TreeSet<>()).add(tag);
             }
         }

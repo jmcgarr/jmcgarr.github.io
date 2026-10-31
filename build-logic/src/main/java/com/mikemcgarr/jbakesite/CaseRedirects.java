@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Locale;
-import java.util.stream.Stream;
 
 /**
  * Redirect stubs whose names differ from a real page only by letter case, such as {@code tags/DevOps.html} next to
@@ -70,11 +69,6 @@ final class CaseRedirects {
     }
 
     private static boolean hasFiles(Path directory) throws IOException {
-        if (!Files.isDirectory(directory)) {
-            return false;
-        }
-        try (Stream<Path> files = Files.walk(directory)) {
-            return files.anyMatch(Files::isRegularFile);
-        }
+        return !FileTrees.regularFilesUnder(directory).isEmpty();
     }
 }

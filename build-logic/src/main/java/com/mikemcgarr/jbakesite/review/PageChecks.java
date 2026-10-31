@@ -1,6 +1,7 @@
 package com.mikemcgarr.jbakesite.review;
 
 import com.mikemcgarr.jbakesite.internal.SiteLayout;
+import com.mikemcgarr.jbakesite.internal.Text;
 import com.mikemcgarr.jbakesite.review.HtmlTags.Tag;
 import java.io.IOException;
 import java.net.URLDecoder;
@@ -76,8 +77,7 @@ final class PageChecks {
         // reported as E2 (found in T134, when deleting an asset pulled in such a page), and a finding couldn't
         // point at its source line.
         Path sourcePath = source != null ? source.path() : pages.sourceOf(page);
-        String[] sourceLines = sourcePath == null ? new String[0]
-                : Files.readString(sourcePath, StandardCharsets.UTF_8).split("\n", -1);
+        String[] sourceLines = sourcePath == null ? new String[0] : Text.lines(Text.read(sourcePath));
         String sourceFile = sourcePath == null ? null : site.display(sourcePath);
         // Links in a draft are resolved from where the post will live when published (blog/), not from blog/drafts/
         String pageDir = page.contains("/") ? page.substring(0, page.lastIndexOf('/') + 1) : "";

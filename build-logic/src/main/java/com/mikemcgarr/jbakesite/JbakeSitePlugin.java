@@ -1,5 +1,6 @@
 package com.mikemcgarr.jbakesite;
 
+import com.mikemcgarr.jbakesite.internal.SiteLayout;
 import com.mikemcgarr.jbakesite.review.ReviewChangesTask;
 import com.mikemcgarr.jbakesite.verification.CheckDocsNotPublishedTask;
 import com.mikemcgarr.jbakesite.verification.CheckMastheadVariantsTask;
@@ -137,10 +138,10 @@ public final class JbakeSitePlugin implements Plugin<Project> {
 
     private static void setDefaults(JbakeSiteExtension site, ProjectLayout layout) {
         Directory projectDirectory = layout.getProjectDirectory();
-        site.getSource().convention(projectDirectory.dir("src/jbake"));
+        site.getSource().convention(projectDirectory.dir(SiteLayout.SOURCE));
         site.getDestination().convention(layout.getBuildDirectory().dir("jbake"));
-        site.getCaseRedirects().convention(projectDirectory.dir("src/case-redirects"));
-        site.getPublishedUrls().convention(projectDirectory.file("docs/baseline/urls.txt"));
+        site.getCaseRedirects().convention(projectDirectory.dir(SiteLayout.CASE_REDIRECTS));
+        site.getPublishedUrls().convention(projectDirectory.file(SiteLayout.PUBLISHED_URLS));
         site.getExpectedRemovals().convention(projectDirectory.file("docs/baseline/expected-removals.txt"));
         site.getTagRenames().convention(TagRedirects.RENAMES);
         site.getCommitTrailers().convention(List.of());

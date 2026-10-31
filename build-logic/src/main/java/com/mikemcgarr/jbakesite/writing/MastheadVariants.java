@@ -2,11 +2,11 @@ package com.mikemcgarr.jbakesite.writing;
 
 import com.mikemcgarr.jbakesite.FileTrees;
 import com.mikemcgarr.jbakesite.internal.SiteLayout;
+import com.mikemcgarr.jbakesite.internal.Text;
 import com.mikemcgarr.jbakesite.internal.ToolFailure;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
@@ -146,7 +146,7 @@ public final class MastheadVariants {
         TreeSet<String> names = new TreeSet<>();
         for (Path root : List.of(site.content(), site.templates())) {
             for (Path p : FileTrees.regularFilesUnder(root)) {
-                String text = new String(Files.readAllBytes(p), StandardCharsets.UTF_8).replace("\r", "\n");
+                String text = Text.lf(Text.read(p));
                 Matcher m = MASTHEAD_LINE.matcher(text);
                 while (m.find()) {
                     names.add(m.group(1).strip());

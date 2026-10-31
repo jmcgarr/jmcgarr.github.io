@@ -6,6 +6,7 @@ import com.mikemcgarr.jbakesite.internal.SiteLayout;
 import com.mikemcgarr.jbakesite.internal.ToolFailure;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Clock;
@@ -93,7 +94,7 @@ final class Review {
         }
         Set<String> publishedUrls = Set.of();
         if (Files.exists(site.publishedUrls())) {
-            publishedUrls = new HashSet<>(Files.readAllLines(site.publishedUrls()));
+            publishedUrls = new HashSet<>(Files.readAllLines(site.publishedUrls(), StandardCharsets.UTF_8));
         }
 
         Changes changes = new Changes(site, git, options.base().strip());
