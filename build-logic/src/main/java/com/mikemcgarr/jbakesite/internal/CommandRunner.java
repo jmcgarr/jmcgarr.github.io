@@ -1,11 +1,11 @@
 package com.mikemcgarr.jbakesite.internal;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
- * Runs an external command ({@code git}, {@code gh}) for the writing tools, in the project directory. The
- * single-file programs each had their own {@code run} helper around {@link ProcessBuilder}; this is the one the
- * plugin's tools share (T127), and the seam a test replaces with a fake. {@link ProcessRunner} is the real one.
+ * Runs an external command ({@code git}, {@code gh}) for the writing tools, in the project directory: the one
+ * runner the plugin's tools share, and the seam a test replaces with a fake. {@link ProcessRunner} is the real one.
  */
 public interface CommandRunner {
 
@@ -28,11 +28,11 @@ public interface CommandRunner {
      *
      * @param command the program and its arguments
      * @param stderr where the standard error goes
-     * @return the exit code and the captured output, or null if the program couldn't be started (not installed, not
-     *         on the PATH)
+     * @return the exit code and the captured output
+     * @throws IOException if the program couldn't be started (not installed, not on the PATH)
      * @throws InterruptedException if interrupted while waiting for the command
      */
-    Result run(List<String> command, Stderr stderr) throws InterruptedException;
+    Result run(List<String> command, Stderr stderr) throws IOException, InterruptedException;
 
     /**
      * Runs a command with its output shown to the user, as a step the user would have typed.

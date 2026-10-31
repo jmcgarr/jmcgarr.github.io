@@ -111,6 +111,12 @@ class NewPostTest {
     }
 
     @Test
+    void refusesAMisspelledBranchFlagInsteadOfReadingItAsOn() {
+        assertEquals("-Pbranch takes no value (or true/false), not 'flase'.",
+                failure(new NewPostOptions("T", null, null, null, "flase", null, null)));
+    }
+
+    @Test
     void refusesASlugThatExistsAsAPostADraftOrAPublishedUrl() throws IOException {
         assertEquals("src/jbake/content/blog/alm.md already exists. Pick another title or pass -Pslug=<other-slug>.",
                 failure(NewPostOptions.withTitle("ALM")));

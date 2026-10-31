@@ -20,7 +20,7 @@ public record FrontMatter(Map<String, String> values, Map<String, Integer> lines
     public static final String SEPARATOR = "~~~~~~";
 
     /**
-     * Reads the header of a file's text.
+     * Reads the header of a file's text; line endings of any kind are accepted ({@link Text#lines}).
      *
      * @param text the whole file
      * @return the header
@@ -28,7 +28,7 @@ public record FrontMatter(Map<String, String> values, Map<String, Integer> lines
     public static FrontMatter parse(String text) {
         Map<String, String> values = new LinkedHashMap<>();
         Map<String, Integer> lines = new HashMap<>();
-        String[] all = text.split("\n", -1);
+        String[] all = Text.lines(text);
         for (int i = 0; i < all.length; i++) {
             String line = all[i].strip();
             if (line.startsWith(SEPARATOR)) {

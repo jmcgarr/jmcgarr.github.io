@@ -382,7 +382,7 @@ October 2026, M10):
 | `writing` | `NewPostTask`/`NewPost`/`NewPostOptions`, `OpenPrTask`/`OpenPr`/`OpenPrOptions`, `GitHubCli` (the gh readiness checks both share), `PrepareImageTask`/`PrepareImage`/`PrepareImageOptions`/`Images`/`MastheadVariants`, `TagRedirectsTask`/`TagRedirects` | The `writing` group: each task is a thin class that reads its `-P` options and runs a plain logic class |
 | `review` | `ReviewChangesTask`, `ReviewRunner`/`ReviewOutcome` (the entry point `reviewChanges` and `openPr` call), `Review`, `Changes`, `Pages`, `MarkdownChecks`, `PageChecks`, `ImageChecks`, `RemovalChecks`, `Report`, and the helpers `Change`, `Finding`, `Findings`, `HtmlTags`, `Suppressions`, `ReviewOptions`, `ReviewResult` | `reviewChanges`: one class per group of checks, as [docs/05-REVIEW-FLOW.md](docs/05-REVIEW-FLOW.md) lays them out |
 | `verification` | `CheckUrlsTask`/`UrlCheck`, `CheckDocsNotPublishedTask`/`DocsNotPublishedCheck`, `CheckTagRedirectsTask`, `CheckMastheadVariantsTask` | The `verification` group: the checks `checkSite`, `check` and CI run (the first two were shell scripts until T141/T143) |
-| `internal` | `Git`, `ProcessRunner`, `CommandRunner`, `ToolFailure`, `FrontMatter`, `Tags`, `SiteLayout`, `JbakeProperties`, `ImageRules` | Shared by the writing and verification tools: running git and gh, reading a post's header, the site's paths, the image limits |
+| `internal` | `Git`, `ProcessRunner`, `CommandRunner`, `ToolFailure`, `FrontMatter`, `Tags`, `Text`, `SiteLayout`, `JbakeProperties`, `ImageRules` | Shared by the writing and verification tools: running git and gh, reading a post's header and its text (one UTF-8 policy, any line ending), the site's paths and their defaults, the image limits |
 
 `SiteToolTask` (package `jbakesite`) is the base of the writing and verification tasks: it hands each tool the
 site's layout and turns the tool's `ToolFailure` (the one-line message the old single-file programs printed before
@@ -434,10 +434,14 @@ tools. The TestKit tests (`*FunctionalTest`) copy the fixture site under `build-
 posts, one page, `clean-blog.scss` with a partial, one case-redirect stub, one tag redirect stub) into a temporary
 build and run Gradle on it with the configuration cache on, as the site runs it: the pages render and the CSS is
 copied in, the stubs appear on a case-sensitive filesystem and are skipped with the message on a Mac, the guard
-fails the bake, `newPost` passes its `-P` options through and maps a refusal to a failure, the review and the checks
-pass and fail as they should, and a second run reuses the configuration cache. The first run downloads JBake's
-libraries into TestKit's own Gradle home, so it takes a minute. `./gradlew :build-logic:javadoc` runs doclint on
-the Javadoc.
+fails the bake, `newPost` and `prepareImage` pass their `-P` options through and map a refusal to a failure (a
+misspelled flag such as `-Pjpeg=flase` fails with the message, not a stack trace), `tagRedirects` writes the stub for
+a renamed tag and `checkTagRedirects` accepts it, the review and the checks pass and fail as they should, and a
+second run reuses the configuration cache. The first run downloads JBake's libraries into TestKit's own Gradle home,
+so it takes a minute. `./gradlew :build-logic:javadoc` runs doclint on the Javadoc. **Not covered by any test:**
+`bakePreview`'s server and the watcher's thread (the task blocks until Ctrl+C). After a change to `BakePreviewTask`
+or `SassPreviewWatcher`, check by hand: `./gradlew clean bakePreview`, save a partial under `src/scss/`, see the
+page's CSS change within a second, then Ctrl+C and confirm no `dart-sass` process is left (`pgrep -fl sass`).
 
 **To add a build feature:**
 1. Decide what it is. A **task** goes in the package of its group (`writing`, `verification`, or `jbakesite` for the

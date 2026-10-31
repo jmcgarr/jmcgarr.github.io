@@ -395,7 +395,7 @@ class OpenPrTest {
                 .answer("gh pr create", 0, "https://github.com/owner/site/pull/43");
         CommandRunner runner = new CommandRunner() {
             @Override
-            public CommandRunner.Result run(List<String> command, Stderr stderr) throws InterruptedException {
+            public CommandRunner.Result run(List<String> command, Stderr stderr) throws IOException, InterruptedException {
                 return command.get(0).equals("gh") ? gh.run(command, stderr) : git.run(command, stderr);
             }
 

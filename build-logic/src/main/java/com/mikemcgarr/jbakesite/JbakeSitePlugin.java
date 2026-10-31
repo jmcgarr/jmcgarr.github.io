@@ -1,5 +1,6 @@
 package com.mikemcgarr.jbakesite;
 
+import com.mikemcgarr.jbakesite.internal.SiteLayout;
 import com.mikemcgarr.jbakesite.review.ReviewChangesTask;
 import com.mikemcgarr.jbakesite.verification.CheckDocsNotPublishedTask;
 import com.mikemcgarr.jbakesite.verification.CheckMastheadVariantsTask;
@@ -29,19 +30,17 @@ import org.gradle.language.base.plugins.LifecycleBasePlugin;
  * The {@code jbake-site} plugin: how the site is built, as Java classes with tests, applied by the root
  * {@code build.gradle} and configured through the {@link JbakeSiteExtension} ({@code jbakeSite { ... }}).
  *
- * <p>The build logic moves in from {@code build.gradle} one slice at a time (docs/06-GRADLE-PLUGIN.md, M10); this
- * class registers each slice's tasks with the names the site has used since 2014. T123 created it; T124 added the
- * theme CSS: {@code compileSass} ({@link CompileSassTask}) and {@code checkNoHandEditedCss}
- * ({@link CheckNoHandEditedCssTask}); T125 the {@code jbake} configuration ({@link JbakeClasspath}) and
- * {@code bake} ({@link BakeTask}); T126 {@code bakePreview} ({@link BakePreviewTask}) with its SCSS watcher
- * ({@link SassPreviewWatcher}); T127 (with the T130 decision) the four single-file programs of {@code scripts/} as
- * task classes: the {@code writing} group's {@code newPost} ({@link NewPostTask}), {@code reviewChanges}
- * ({@link ReviewChangesTask}), {@code prepareImage} ({@link PrepareImageTask}) and {@code tagRedirects}
- * ({@link TagRedirectsTask}), and the {@code verification} group's {@code checkTagRedirects}
- * ({@link CheckTagRedirectsTask}) and {@code checkMastheadVariants} ({@link CheckMastheadVariantsTask}); T141 the
- * shell checks CI ran as {@code checkUrls} ({@link CheckUrlsTask}) and {@code checkDocsNotPublished}
- * ({@link CheckDocsNotPublishedTask}), with {@code checkSite} gathering the four site checks, which {@code check}
- * runs with the review; T121 (docs/05-REVIEW-FLOW.md) {@code openPr} ({@link OpenPrTask}), the review before a push.
+ * <p>It registers the tasks with the names the site has used since 2014, a class each: the build ({@code compileSass},
+ * {@link CompileSassTask}; {@code checkNoHandEditedCss}, {@link CheckNoHandEditedCssTask}; the {@code jbake}
+ * configuration, {@link JbakeClasspath}; {@code bake}, {@link BakeTask}; {@code bakePreview}, {@link BakePreviewTask},
+ * with its SCSS watcher, {@link SassPreviewWatcher}); the {@code writing} group ({@code newPost}, {@link NewPostTask};
+ * {@code reviewChanges}, {@link ReviewChangesTask}; {@code prepareImage}, {@link PrepareImageTask};
+ * {@code tagRedirects}, {@link TagRedirectsTask}; {@code openPr}, {@link OpenPrTask}, the review before a push); and
+ * the {@code verification} group ({@code checkTagRedirects}, {@link CheckTagRedirectsTask};
+ * {@code checkMastheadVariants}, {@link CheckMastheadVariantsTask}; {@code checkUrls}, {@link CheckUrlsTask};
+ * {@code checkDocsNotPublished}, {@link CheckDocsNotPublishedTask}), which {@code checkSite} gathers and {@code check}
+ * runs with the review. The build logic came here from {@code build.gradle} and the single-file programs of
+ * {@code scripts/} one slice at a time; docs/06-GRADLE-PLUGIN.md and docs/08-SCRIPTS-MIGRATION.md keep that record.
  *
  * <p>The plugin applies Gradle's {@code base} plugin for {@code clean} and the {@code check} lifecycle task.
  */
@@ -137,10 +136,10 @@ public final class JbakeSitePlugin implements Plugin<Project> {
 
     private static void setDefaults(JbakeSiteExtension site, ProjectLayout layout) {
         Directory projectDirectory = layout.getProjectDirectory();
-        site.getSource().convention(projectDirectory.dir("src/jbake"));
+        site.getSource().convention(projectDirectory.dir(SiteLayout.SOURCE));
         site.getDestination().convention(layout.getBuildDirectory().dir("jbake"));
-        site.getCaseRedirects().convention(projectDirectory.dir("src/case-redirects"));
-        site.getPublishedUrls().convention(projectDirectory.file("docs/baseline/urls.txt"));
+        site.getCaseRedirects().convention(projectDirectory.dir(SiteLayout.CASE_REDIRECTS));
+        site.getPublishedUrls().convention(projectDirectory.file(SiteLayout.PUBLISHED_URLS));
         site.getExpectedRemovals().convention(projectDirectory.file("docs/baseline/expected-removals.txt"));
         site.getTagRenames().convention(TagRedirects.RENAMES);
         site.getCommitTrailers().convention(List.of());

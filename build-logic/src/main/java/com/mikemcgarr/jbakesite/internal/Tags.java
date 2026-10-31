@@ -1,8 +1,6 @@
 package com.mikemcgarr.jbakesite.internal;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,7 +13,7 @@ import java.util.TreeSet;
 /**
  * The {@code tags=} line: a comma-separated list, each tag stripped. Tags that differ only by case make separate tag
  * pages that each list only some posts (T055), so {@code newPost} and the review (W3) both compare a new tag with
- * the spellings in use; this is that comparison's data, which the two programs built separately until T127.
+ * the spellings in use; this is that comparison's data.
  */
 public final class Tags {
 
@@ -48,8 +46,7 @@ public final class Tags {
     public static Map<String, TreeSet<String>> spellingsIn(Collection<Path> files) throws IOException {
         Map<String, TreeSet<String>> spellings = new HashMap<>();
         for (Path file : files) {
-            String text = Files.readString(file, StandardCharsets.UTF_8).replace("\r\n", "\n").replace('\r', '\n');
-            for (String tag : split(FrontMatter.parse(text).get("tags"))) {
+            for (String tag : split(FrontMatter.parse(Text.read(file)).get("tags"))) {
                 spellings.computeIfAbsent(tag.toLowerCase(Locale.ROOT), k -> new TreeSet<>()).add(tag);
             }
         }

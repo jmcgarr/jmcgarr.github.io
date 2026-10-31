@@ -2,11 +2,11 @@ package com.mikemcgarr.jbakesite.writing;
 
 import com.mikemcgarr.jbakesite.FileTrees;
 import com.mikemcgarr.jbakesite.internal.SiteLayout;
+import com.mikemcgarr.jbakesite.internal.Text;
 import com.mikemcgarr.jbakesite.internal.ToolFailure;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
@@ -17,9 +17,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * The 960 and 1440 px variants of a header image that {@code masthead.ftl} serves by screen width (T071;
- * {@code scripts/masthead-variants.py} with Pillow until T140, then part of {@code scripts/PrepareImage.java}, in the
- * plugin since T127). A variant is a progressive JPEG at quality 80 with no metadata, {@code <name>-960.jpg} beside
+ * The 960 and 1440 px variants of a header image that {@code masthead.ftl} serves by screen width (T071). A
+ * variant is a progressive JPEG at quality 80 with no metadata, {@code <name>-960.jpg} beside
  * its source; a source narrower than the variant is copied as it is.
  *
  * <ul>
@@ -146,7 +145,7 @@ public final class MastheadVariants {
         TreeSet<String> names = new TreeSet<>();
         for (Path root : List.of(site.content(), site.templates())) {
             for (Path p : FileTrees.regularFilesUnder(root)) {
-                String text = new String(Files.readAllBytes(p), StandardCharsets.UTF_8).replace("\r", "\n");
+                String text = Text.lf(Text.read(p));
                 Matcher m = MASTHEAD_LINE.matcher(text);
                 while (m.find()) {
                     names.add(m.group(1).strip());

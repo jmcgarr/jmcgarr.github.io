@@ -1,7 +1,7 @@
 package com.mikemcgarr.jbakesite.writing;
 
 /**
- * What {@code ./gradlew prepareImage} is given besides the images (T140, T127).
+ * What {@code ./gradlew prepareImage} is given besides the images.
  *
  * @param dryRun say what would happen, change nothing ({@code -PdryRun})
  * @param png keep a PNG as PNG: a graphic, a screenshot, a logo ({@code -Ppng})

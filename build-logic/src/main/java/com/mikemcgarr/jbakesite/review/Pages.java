@@ -3,6 +3,7 @@ package com.mikemcgarr.jbakesite.review;
 import com.mikemcgarr.jbakesite.FileTrees;
 import com.mikemcgarr.jbakesite.internal.FrontMatter;
 import com.mikemcgarr.jbakesite.internal.SiteLayout;
+import com.mikemcgarr.jbakesite.internal.Text;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -10,7 +11,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
-import java.util.stream.Stream;
 
 /** Which baked page a content file renders to, and back; and which pages a change pulls into the review. */
 final class Pages {
@@ -47,12 +47,13 @@ final class Pages {
     List<String> samplePages() throws IOException {
         List<String> pages = new ArrayList<>(List.of("index.html", "archive.html", "tags/index.html", "about.html"));
         TreeMap<String, String> byDate = new TreeMap<>();
-        try (Stream<Path> files = Files.list(site.blog())) {
-            for (Path p : files.filter(f -> f.toString().endsWith(".md")).toList()) {
-                FrontMatter fm = FrontMatter.parse(Files.readString(p, StandardCharsets.UTF_8));
-                if (fm.get("status").equals("published") && fm.get("type").equals("post")) {
-                    byDate.put(fm.get("date") + " " + p.getFileName(), pageFor(p, fm));
-                }
+        for (Path p : FileTrees.regularFilesIn(site.blog())) {
+            if (!p.toString().endsWith(".md")) {
+                continue;
+            }
+            FrontMatter fm = FrontMatter.parse(Text.read(p));
+            if (fm.get("status").equals("published") && fm.get("type").equals("post")) {
+                byDate.put(fm.get("date") + " " + p.getFileName(), pageFor(p, fm));
             }
         }
         if (!byDate.isEmpty()) {

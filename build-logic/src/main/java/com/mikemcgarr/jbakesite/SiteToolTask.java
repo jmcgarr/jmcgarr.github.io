@@ -16,7 +16,7 @@ import org.gradle.api.provider.Property;
 import org.gradle.api.tasks.Internal;
 
 /**
- * What the writing and verification tasks share (T127): where the site's sources are, as the {@code jbakeSite}
+ * What the writing and verification tasks share: where the site's sources are, as the {@code jbakeSite}
  * extension says ({@link JbakeSitePlugin} wires every subclass), handed to the tool as a {@link SiteLayout}; the
  * site's published address from {@code jbake.properties}; the reading of a {@code -P} flag ({@link #flag}); and the
  * mapping of a tool's {@link ToolFailure} (the message the single-file program printed before exiting) to a build

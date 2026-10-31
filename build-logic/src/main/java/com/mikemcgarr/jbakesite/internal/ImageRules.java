@@ -2,8 +2,7 @@ package com.mikemcgarr.jbakesite.internal;
 
 /**
  * The size rules for a published image (AGENTS.md Rule 4, revival task T016): what {@code prepareImage} makes an
- * image fit and what the review's E5 checks it against. One place for both since the review of T127, so the two
- * can't drift apart.
+ * image fit and what the review's E5 checks it against. One place for both, so the two can't drift apart.
  */
 public final class ImageRules {
 

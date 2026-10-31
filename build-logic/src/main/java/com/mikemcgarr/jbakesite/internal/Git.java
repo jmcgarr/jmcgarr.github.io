@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Runs {@code git} in the project directory for the writing tools: the {@code git} helper that {@code NewPost.java},
- * {@code ReviewChanges.java} and {@code PrepareImage.java} each carried, once (T127, the T130 decision). A command
+ * Runs {@code git} in the project directory for the writing tools. A command
  * that exits non-zero is not an error here (the tools ask git questions: "does this branch exist?") and yields an
  * empty answer; git being absent is.
  */
@@ -34,10 +33,7 @@ public final class Git {
      * @throws InterruptedException if interrupted while waiting for git
      */
     public String output(String... args) throws IOException, InterruptedException {
-        CommandRunner.Result result = runner.run(command(args), CommandRunner.Stderr.DISCARD);
-        if (result == null) {
-            throw new IOException(NOT_INSTALLED);
-        }
+        CommandRunner.Result result = run(args);
         return result.exit() == 0 ? result.output() : "";
     }
 
@@ -50,11 +46,7 @@ public final class Git {
      * @throws InterruptedException if interrupted while waiting for git
      */
     public boolean succeeds(String... args) throws IOException, InterruptedException {
-        CommandRunner.Result result = runner.run(command(args), CommandRunner.Stderr.DISCARD);
-        if (result == null) {
-            throw new IOException(NOT_INSTALLED);
-        }
-        return result.exit() == 0;
+        return run(args).exit() == 0;
     }
 
     /**
@@ -66,6 +58,15 @@ public final class Git {
      */
     public boolean runVisibly(String... args) throws InterruptedException {
         return runner.runVisibly(command(args));
+    }
+
+    /** Runs git with its standard error discarded; a git that can't start is reported in the tools' words. */
+    private CommandRunner.Result run(String... args) throws IOException, InterruptedException {
+        try {
+            return runner.run(command(args), CommandRunner.Stderr.DISCARD);
+        } catch (IOException e) {
+            throw new IOException(NOT_INSTALLED, e);
+        }
     }
 
     private static List<String> command(String... args) {

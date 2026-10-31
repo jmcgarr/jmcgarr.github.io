@@ -4,10 +4,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.logging.Logger;
 import org.gradle.api.logging.Logging;
@@ -16,7 +14,7 @@ import org.gradle.api.services.BuildService;
 import org.gradle.api.services.BuildServiceParameters;
 
 /**
- * The preview's SCSS watcher (T043, T134; a Java build service since T126): while {@code bakePreview} runs, it
+ * The preview's SCSS watcher (T043, T134; a Gradle build service): while {@code bakePreview} runs, it
  * recompiles the CSS straight into the served site whenever a file in the SCSS directory changes (it checks every
  * 0.5 s). Every entry is recompiled, since a partial such as {@code _mixins.scss} can feed any of them. JBake's own
  * watcher only covers its source directory. The page's live reload notices the new CSS and reloads.
@@ -137,15 +135,12 @@ public abstract class SassPreviewWatcher implements BuildService<SassPreviewWatc
 
     /** Every file's path, modification time and size: a change to any of them changes the stamp. */
     private static String stamp(Path sourceDir) throws IOException {
-        try (Stream<Path> paths = Files.walk(sourceDir)) {
-            List<Path> files = paths.filter(Files::isRegularFile).sorted().toList();
-            StringBuilder stamp = new StringBuilder();
-            for (Path file : files) {
-                stamp.append(file).append(' ').append(Files.getLastModifiedTime(file).toMillis()).append(' ')
-                        .append(Files.size(file)).append('\n');
-            }
-            return stamp.toString();
+        StringBuilder stamp = new StringBuilder();
+        for (Path file : FileTrees.regularFilesUnder(sourceDir)) {
+            stamp.append(file).append(' ').append(Files.getLastModifiedTime(file).toMillis()).append(' ')
+                    .append(Files.size(file)).append('\n');
         }
+        return stamp.toString();
     }
 
     private String url(String cssName) {

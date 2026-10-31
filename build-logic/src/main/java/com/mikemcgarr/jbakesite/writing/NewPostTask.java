@@ -7,14 +7,12 @@ import com.mikemcgarr.jbakesite.internal.SiteLayout;
 import java.io.IOException;
 import java.time.Clock;
 import org.gradle.api.provider.Property;
-import org.gradle.api.tasks.Input;
-import org.gradle.api.tasks.Optional;
+import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.TaskAction;
 import org.gradle.api.tasks.UntrackedTask;
 
 /**
- * {@code newPost}: starts a draft post on a new {@code post/<slug>} branch (T060, T061; in the plugin since T127,
- * before that an {@code Exec} of {@code scripts/NewPost.java} in {@code build.gradle}). The {@code -P} options are
+ * {@code newPost}: starts a draft post on a new {@code post/<slug>} branch (T060, T061). The {@code -P} options are
  * the task's properties, wired from the Gradle properties of the same names, and {@link NewPost} does the work:
  *
  * <pre>
@@ -22,7 +20,8 @@ import org.gradle.api.tasks.UntrackedTask;
  * </pre>
  *
  * <p>Untracked: the task writes into the source tree and switches branches, so Gradle has nothing to keep up to
- * date; it runs every time it is asked.
+ * date; it runs every time it is asked. The options are {@code @Internal}, not inputs, for the same reason: there is
+ * nothing an input could keep up to date, and plugin validation wants an annotation that says so.
  */
 @UntrackedTask(because = "it creates a draft in the source tree and a git branch; there is nothing to be up to date")
 public abstract class NewPostTask extends SiteToolTask {
@@ -32,8 +31,7 @@ public abstract class NewPostTask extends SiteToolTask {
      *
      * @return the title
      */
-    @Input
-    @Optional
+    @Internal
     public abstract Property<String> getTitle();
 
     /**
@@ -41,8 +39,7 @@ public abstract class NewPostTask extends SiteToolTask {
      *
      * @return the tags
      */
-    @Input
-    @Optional
+    @Internal
     public abstract Property<String> getTags();
 
     /**
@@ -50,8 +47,7 @@ public abstract class NewPostTask extends SiteToolTask {
      *
      * @return the summary
      */
-    @Input
-    @Optional
+    @Internal
     public abstract Property<String> getSummary();
 
     /**
@@ -59,8 +55,7 @@ public abstract class NewPostTask extends SiteToolTask {
      *
      * @return the slug
      */
-    @Input
-    @Optional
+    @Internal
     public abstract Property<String> getSlug();
 
     /**
@@ -68,8 +63,7 @@ public abstract class NewPostTask extends SiteToolTask {
      *
      * @return the value
      */
-    @Input
-    @Optional
+    @Internal
     public abstract Property<String> getBranch();
 
     /**
@@ -77,8 +71,7 @@ public abstract class NewPostTask extends SiteToolTask {
      *
      * @return the value
      */
-    @Input
-    @Optional
+    @Internal
     public abstract Property<String> getPr();
 
     /**
@@ -87,8 +80,7 @@ public abstract class NewPostTask extends SiteToolTask {
      *
      * @return the value
      */
-    @Input
-    @Optional
+    @Internal
     public abstract Property<String> getFormat();
 
     /**

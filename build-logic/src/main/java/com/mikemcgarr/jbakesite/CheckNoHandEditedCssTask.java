@@ -20,8 +20,8 @@ import org.gradle.api.tasks.PathSensitivity;
 import org.gradle.api.tasks.TaskAction;
 
 /**
- * {@code checkNoHandEditedCss}, the guard the bake and the preview run first (T043, T134, T135; in the plugin since
- * T124). The site's CSS used to be hand-edited under JBake's assets, and the bake would still publish a copy that
+ * {@code checkNoHandEditedCss}, the guard the bake and the preview run first (T043, T134, T135). The site's CSS
+ * used to be hand-edited under JBake's assets, and the bake would still publish a copy that
  * came back there, silently going stale (the bake replaces it with the compiled one). So the task fails when a
  * {@code .css} file directly in the assets' CSS folder (not in a subfolder, as the guard in {@code build.gradle}
  * checked) has the name of an entry's CSS ({@link SassEntries#cssName}) or of a retired stylesheet, and says what

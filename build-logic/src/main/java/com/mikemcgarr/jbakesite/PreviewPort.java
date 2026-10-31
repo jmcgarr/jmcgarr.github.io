@@ -16,8 +16,7 @@ import org.gradle.api.GradleException;
  * {@code server.hostname} and {@code server.port} in {@code jbake.properties} say (its own defaults are
  * {@code localhost} and 8820). If the port is taken, say by a preview in another terminal or clone, JBake only says
  * "unable to start the server" and exits with 4. So the preview checks first: it binds the address the way JBake's
- * Jetty does and fails with a message that names the fix when that doesn't work. T125/T126 moved this here from
- * {@code build.gradle}'s {@code checkPreviewPortFree} closure.
+ * Jetty does and fails with a message that names the fix when that doesn't work.
  */
 final class PreviewPort {
 

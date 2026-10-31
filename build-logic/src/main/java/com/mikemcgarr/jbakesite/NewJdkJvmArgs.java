@@ -14,8 +14,7 @@ import java.util.List;
  * {@code --sun-misc-unsafe-memory-access} ("Unrecognized option"), which arrived in JDK 23 (JEP 471).
  * {@code --enable-native-access} is final from JDK 22 (JEP 454); 21 accepts it, but leaving it off keeps 21's
  * command line as it was. The two {@code --add-opens} flags JRuby wanted went with AsciidoctorJ (T102): without
- * them the bake prints nothing extra on JDK 21 or 25. T125 moved this here from {@code build.gradle}, where it was
- * a {@code CommandLineArgumentProvider} of the same name.
+ * them the bake prints nothing extra on JDK 21 or 25.
  */
 final class NewJdkJvmArgs {
 

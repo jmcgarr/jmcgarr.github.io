@@ -4,6 +4,7 @@ import com.mikemcgarr.jbakesite.FileTrees;
 import com.mikemcgarr.jbakesite.internal.FrontMatter;
 import com.mikemcgarr.jbakesite.internal.SiteLayout;
 import com.mikemcgarr.jbakesite.internal.Tags;
+import com.mikemcgarr.jbakesite.internal.Text;
 import com.mikemcgarr.jbakesite.internal.ToolFailure;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -23,11 +24,9 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
 /**
- * Redirect stubs that keep the site's old tag page URLs working (T039, T055; {@code scripts/tag-redirects.py},
- * then {@code scripts/TagRedirects.java} since T139, in the plugin since T127). Two modes: {@link #write()} writes
+ * Redirect stubs that keep the site's old tag page URLs working (T039, T055). Two modes: {@link #write()} writes
  * any missing or outdated stub and never deletes one ({@code tagRedirects}); {@link #check(Path)} checks a baked
  * site ({@code checkTagRedirects}, which CI runs on {@code build/site}).
  *
@@ -213,16 +212,11 @@ public final class TagRedirects {
         return "[" + String.join(", ", parts) + "]";
     }
 
-    /** Reads a file as UTF-8, replacing malformed bytes (errors="replace"). */
-    private static String readLenient(Path p) throws IOException {
-        return new String(Files.readAllBytes(p), StandardCharsets.UTF_8);
-    }
-
     /** Every tag of every published page, as written in its front matter (spaces kept). */
     Set<String> writtenTags() throws IOException {
         Set<String> tags = new LinkedHashSet<>();
         for (Path f : FileTrees.regularFilesUnder(site.content())) {
-            FrontMatter header = FrontMatter.parse(readLenient(f).replace("\r\n", "\n").replace("\r", "\n"));
+            FrontMatter header = FrontMatter.parse(Text.read(f));
             if (header.isPublished()) {
                 tags.addAll(Tags.split(header.get("tags")));
             }
@@ -383,7 +377,7 @@ public final class TagRedirects {
         }
         for (Path d : List.of(site.assets(), site.caseRedirects())) {
             for (Path p : FileTrees.regularFilesUnder(d.resolve("tags"))) {
-                if (readLenient(p).contains(MARKER) && !expected.contains(p)) {
+                if (Text.read(p).contains(MARKER) && !expected.contains(p)) {
                     out.println("NOTE: " + site.display(p) + " is a stub this script no longer makes. It's a published URL: keep it unless approved.");
                 }
             }
@@ -395,12 +389,11 @@ public final class TagRedirects {
     private static boolean existsExactly(Path site, String rel) throws IOException {
         Path p = site.resolve(rel);
         Path dir = p.getParent();
-        if (dir == null || !Files.isDirectory(dir)) {
+        if (dir == null) {
             return false;
         }
-        try (Stream<Path> s = Files.list(dir)) {
-            return s.anyMatch(x -> x.getFileName().toString().equals(p.getFileName().toString()));
-        }
+        String name = p.getFileName().toString();
+        return FileTrees.regularFilesIn(dir).stream().anyMatch(x -> x.getFileName().toString().equals(name));
     }
 
     /** urljoin(base, ref) for the path-only URLs in a stub: an absolute ref is kept, a relative one joins base's folder. */
@@ -423,9 +416,7 @@ public final class TagRedirects {
     }
 
     private static List<String> tagFiles(Path site) throws IOException {
-        try (Stream<Path> s = Files.list(site.resolve("tags"))) {
-            return s.map(p -> p.getFileName().toString()).sorted().toList();
-        }
+        return FileTrees.regularFilesIn(site.resolve("tags")).stream().map(p -> p.getFileName().toString()).sorted().toList();
     }
 
     /**

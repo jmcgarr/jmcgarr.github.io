@@ -14,14 +14,12 @@ import org.gradle.api.GradleException;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.provider.Property;
 import org.gradle.api.provider.ProviderFactory;
-import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.Internal;
-import org.gradle.api.tasks.Optional;
 import org.gradle.api.tasks.TaskAction;
 
 /**
- * {@code reviewChanges}: reviews the pages this branch changed, after a bake (T117, docs/05-REVIEW-FLOW.md; an
- * {@code Exec} of {@code scripts/ReviewChanges.java} until T127). {@code check} runs it.
+ * {@code reviewChanges}: reviews the pages this branch changed, after a bake (T117, docs/05-REVIEW-FLOW.md).
+ * {@code check} runs it.
  *
  * <pre>
  *   ./gradlew reviewChanges [-Pbase=main] [-Pall] [-Pstrict]
@@ -30,7 +28,8 @@ import org.gradle.api.tasks.TaskAction;
  * <p>{@code -Pbase} is the branch to diff against (default main); {@code -Pall} reviews every page; {@code -Pstrict}
  * fails on warnings too. Errors fail the task with one line that says so; a review that couldn't run (no bake, no
  * such base) fails with the reason. In GitHub Actions the findings also become annotations and a step summary
- * ({@link Report}). The task has no outputs, so it runs on every build.
+ * ({@link Report}). The task has no outputs, so it runs on every build, and its options are {@code @Internal} like
+ * the site: there is nothing an input could keep up to date.
  */
 public abstract class ReviewChangesTask extends SiteToolTask {
 
@@ -39,8 +38,7 @@ public abstract class ReviewChangesTask extends SiteToolTask {
      *
      * @return the ref
      */
-    @Input
-    @Optional
+    @Internal
     public abstract Property<String> getBase();
 
     /**
@@ -48,8 +46,7 @@ public abstract class ReviewChangesTask extends SiteToolTask {
      *
      * @return the value
      */
-    @Input
-    @Optional
+    @Internal
     public abstract Property<String> getAll();
 
     /**
@@ -57,8 +54,7 @@ public abstract class ReviewChangesTask extends SiteToolTask {
      *
      * @return the value
      */
-    @Input
-    @Optional
+    @Internal
     public abstract Property<String> getStrict();
 
     /**
@@ -66,8 +62,7 @@ public abstract class ReviewChangesTask extends SiteToolTask {
      *
      * @return the value
      */
-    @Input
-    @Optional
+    @Internal
     public abstract Property<String> getOnline();
 
     /**
@@ -98,9 +93,12 @@ public abstract class ReviewChangesTask extends SiteToolTask {
     public void review() throws IOException, InterruptedException {
         SiteLayout site = siteLayout();
         Path bakedSite = getSite().get().getAsFile().toPath();
-        Map<String, String> env = new HashMap<>();
+        Map<String, String> env = new HashMap<>();   // the variables that are set; Report asks with get(name)
         for (String name : new String[] {"GITHUB_ACTIONS", "GITHUB_STEP_SUMMARY"}) {
-            env.put(name, getProviders().environmentVariable(name).getOrNull());
+            String value = getProviders().environmentVariable(name).getOrNull();
+            if (value != null) {
+                env.put(name, value);
+            }
         }
         Git git = new Git(new ProcessRunner(site.root(), System.out, System.err));
         runTool(() -> {

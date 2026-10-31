@@ -20,8 +20,7 @@ import org.gradle.api.tasks.TaskAction;
  * {@code compileSass}: compiles every entry in the SCSS directory ({@link SassEntries}) into
  * {@code <destinationDirectory>/<name>.css} with Dart Sass ({@link SassCompiler}). The bake and the preview copy
  * that directory into the site, so each entry is published at the same URL as before the SCSS (T043, T134). A Sass
- * error fails the build, and CI, with Dart Sass's message. T124 moved it here from {@code build.gradle}, where it
- * was the freefair Sass plugin's task with the same options.
+ * error fails the build, and CI, with Dart Sass's message.
  *
  * <p>All entries are compiled before anything is written, and the destination holds exactly the entries' CSS
  * afterwards: a renamed or removed entry leaves no stale file behind. The output is the same for the same sources,

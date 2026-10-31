@@ -11,12 +11,7 @@ import org.gradle.api.tasks.Nested;
  * The {@code jbakeSite { ... }} block of {@code build.gradle}: what the site is (where its sources are, what is
  * published where), as opposed to how it is built, which is the plugin's. Modelled on the JBake Gradle plugin's
  * {@code jbake { srcDirName; destDirName }}, typed as directories (docs/06-GRADLE-PLUGIN.md, "The public surface").
- * Gradle creates it with managed properties; {@link JbakeSitePlugin} sets the defaults. T123 created it empty;
- * each slice adds what it needs (T124: {@link #getScss() scss} and {@link #getSource() source}; T125:
- * {@link #getDestination() destination}, {@link #getCaseRedirects() caseRedirects},
- * {@link #getLogbackConfiguration() logbackConfiguration} and {@link #getClasspath() classpath}; T127:
- * {@link #getPublishedUrls() publishedUrls} and {@link #getTagRenames() tagRenames}; T141:
- * {@link #getExpectedRemovals() expectedRemovals}; T121: {@link #getCommitTrailers() commitTrailers}).
+ * Gradle creates it with managed properties; {@link JbakeSitePlugin} sets the defaults.
  */
 public abstract class JbakeSiteExtension {
 
@@ -97,7 +92,7 @@ public abstract class JbakeSiteExtension {
     public abstract RegularFileProperty getLogbackConfiguration();
 
     /**
-     * The theme CSS: the SCSS entries and where they are published (T124).
+     * The theme CSS: the SCSS entries and where they are published.
      *
      * @return the {@code scss { ... }} block
      */
@@ -115,7 +110,7 @@ public abstract class JbakeSiteExtension {
 
     /**
      * JBake's classpath, the {@code jbake} configuration: which libraries are left off it and which are replaced
-     * (T125). The versions themselves are declared in {@code build.gradle}'s {@code dependencies} block.
+     * The versions themselves are declared in {@code build.gradle}'s {@code dependencies} block.
      *
      * @return the {@code classpath { ... }} block
      */

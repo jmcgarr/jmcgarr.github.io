@@ -17,16 +17,26 @@ import java.nio.file.Path;
  */
 public record SiteLayout(Path root, Path source, Path caseRedirects, Path publishedUrls) {
 
+    /** Where JBake's source directory is by default, relative to the project: the {@code jbakeSite.source} convention. */
+    public static final String SOURCE = "src/jbake";
+
+    /** Where the case-redirect stubs are by default: the {@code jbakeSite.caseRedirects} convention. */
+    public static final String CASE_REDIRECTS = "src/case-redirects";
+
+    /** Where the baseline of published URLs is by default: the {@code jbakeSite.publishedUrls} convention. */
+    public static final String PUBLISHED_URLS = "docs/baseline/urls.txt";
+
     /**
-     * The layout the repository uses: {@code src/jbake}, {@code src/case-redirects}, {@code docs/baseline/urls.txt}.
+     * The layout the repository uses, and the plugin's defaults: {@link #SOURCE}, {@link #CASE_REDIRECTS},
+     * {@link #PUBLISHED_URLS} under the root. Tests build their sites with it, so they test the paths the plugin
+     * really defaults to.
      *
      * @param root the project directory
      * @return the layout
      */
     public static SiteLayout standard(Path root) {
         Path absolute = root.toAbsolutePath().normalize();
-        return new SiteLayout(absolute, absolute.resolve("src/jbake"), absolute.resolve("src/case-redirects"),
-                absolute.resolve("docs/baseline/urls.txt"));
+        return new SiteLayout(absolute, absolute.resolve(SOURCE), absolute.resolve(CASE_REDIRECTS), absolute.resolve(PUBLISHED_URLS));
     }
 
     /**

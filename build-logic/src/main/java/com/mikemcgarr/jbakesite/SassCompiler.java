@@ -19,10 +19,9 @@ import org.slf4j.Logger;
  * <p>The compiler runs through its Java host ({@code de.larsgrefer.sass:sass-embedded-host}). No Node or Ruby: the
  * host's jar bundles Dart Sass for macOS, Linux and Windows, unpacks the one for this machine into a temp folder on
  * first use, and talks to it over stdin/stdout. {@link CompileSassTask} and the preview's SCSS watcher both compile
- * through this class, so the preview's CSS is byte for byte what the bake publishes. T124 moved it here from
- * {@code build.gradle}, where the freefair Sass plugin's task and the watcher each set the same options.
+ * through this class, so the preview's CSS is byte for byte what the bake publishes.
  */
-public final class SassCompiler implements AutoCloseable {
+final class SassCompiler implements AutoCloseable {
 
     private final de.larsgrefer.sass.embedded.SassCompiler host;
 

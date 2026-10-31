@@ -29,9 +29,8 @@ import org.gradle.api.tasks.PathSensitivity;
 import org.gradle.process.ExecOperations;
 
 /**
- * What the bake and the preview share: JBake's own launcher, run in a fresh JVM per task (T096) on the
- * {@code jbake} configuration ({@link JbakeClasspath}), with the settings {@code build.gradle} used to pass through
- * its {@code configureJBake} closure until T125:
+ * What the bake and the preview share: JBake's own launcher, run in a fresh JVM per task on the {@code jbake}
+ * configuration ({@link JbakeClasspath}), with these settings:
  *
  * <ul>
  * <li>a <b>fresh JVM</b>, because the JBake Gradle plugin ran JBake inside the Gradle daemon and leaked memory on
@@ -43,7 +42,7 @@ import org.gradle.process.ExecOperations;
  * extracts its native library to a temporary file while loading and removes it afterwards; keeping that under
  * {@code build/tmp}, which {@code clean} removes, keeps it out of the project root;</li>
  * <li><b>logback's configuration</b>: jbake-core ships logback without one, which logs everything at DEBUG. The
- * plugin's bundled {@code jbake-logback.xml} (the file that was {@code gradle/jbake-logback.xml} until T125) keeps
+ * plugin's bundled {@code jbake-logback.xml} keeps
  * JBake's start/finish summary and every warning or error from JBake and the templates, and silences known noise
  * from the embedded OrientDB and from JBake's parser registry; {@code jbakeSite.logbackConfiguration} replaces
  * it.</li>
