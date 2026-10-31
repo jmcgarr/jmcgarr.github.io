@@ -37,8 +37,7 @@ import org.w3c.dom.Node;
 
 /**
  * The pixels: reading an image with what it carries besides them, converting to sRGB, resizing, the photo test, and
- * writing a JPEG or PNG that carries nothing but pixels (T016, T017, T140; the imaging half of
- * {@code scripts/PrepareImage.java}, split out in T127). Plain {@code javax.imageio} and Java2D, no library:
+ * writing a JPEG or PNG that carries nothing but pixels (T016, T017). Plain {@code javax.imageio} and Java2D, no library:
  *
  * <ul>
  * <li>sRGB from the embedded colour profile with {@link ColorConvertOp} (the JDK's colour engine is LittleCMS, as

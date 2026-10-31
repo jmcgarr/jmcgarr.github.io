@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.TreeSet;
 
 /**
- * Starts a new draft post (revival tasks T060 and T061, issue #8; {@code scripts/NewPost.java} until T127). It
+ * Starts a new draft post (revival tasks T060 and T061, issue #8). It
  * creates {@code content/blog/drafts/<slug>.md} (Markdown, the site's only format since T102) with the JBake header
  * filled in and {@code status=draft}, on a new branch {@code post/<slug>} made from {@code main}. Drafts render for
  * local preview only and are never published (T009). It refuses to reuse a slug that exists as a draft, a post, or

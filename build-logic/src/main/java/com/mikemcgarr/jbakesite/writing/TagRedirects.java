@@ -26,8 +26,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Redirect stubs that keep the site's old tag page URLs working (T039, T055; {@code scripts/tag-redirects.py},
- * then {@code scripts/TagRedirects.java} since T139, in the plugin since T127). Two modes: {@link #write()} writes
+ * Redirect stubs that keep the site's old tag page URLs working (T039, T055). Two modes: {@link #write()} writes
  * any missing or outdated stub and never deletes one ({@code tagRedirects}); {@link #check(Path)} checks a baked
  * site ({@code checkTagRedirects}, which CI runs on {@code build/site}).
  *

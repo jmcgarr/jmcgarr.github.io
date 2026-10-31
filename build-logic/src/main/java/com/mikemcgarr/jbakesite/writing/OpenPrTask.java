@@ -12,9 +12,7 @@ import java.util.Map;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.provider.ListProperty;
 import org.gradle.api.provider.Property;
-import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.Internal;
-import org.gradle.api.tasks.Optional;
 import org.gradle.api.tasks.TaskAction;
 import org.gradle.api.tasks.UntrackedTask;
 
@@ -29,7 +27,7 @@ import org.gradle.api.tasks.UntrackedTask;
  * </pre>
  *
  * <p>Untracked: the task commits, pushes and talks to GitHub, so Gradle has nothing to keep up to date; it runs every
- * time it is asked.
+ * time it is asked. The options and the trailers are {@code @Internal}, not inputs, for the same reason.
  */
 @UntrackedTask(because = "it commits, pushes and opens a pull request; there is nothing to be up to date")
 public abstract class OpenPrTask extends SiteToolTask {
@@ -39,8 +37,7 @@ public abstract class OpenPrTask extends SiteToolTask {
      *
      * @return the title
      */
-    @Input
-    @Optional
+    @Internal
     public abstract Property<String> getTitle();
 
     /**
@@ -48,8 +45,7 @@ public abstract class OpenPrTask extends SiteToolTask {
      *
      * @return the message
      */
-    @Input
-    @Optional
+    @Internal
     public abstract Property<String> getMessage();
 
     /**
@@ -57,8 +53,7 @@ public abstract class OpenPrTask extends SiteToolTask {
      *
      * @return the numbers
      */
-    @Input
-    @Optional
+    @Internal
     public abstract Property<String> getCloses();
 
     /**
@@ -66,8 +61,7 @@ public abstract class OpenPrTask extends SiteToolTask {
      *
      * @return the numbers
      */
-    @Input
-    @Optional
+    @Internal
     public abstract Property<String> getRefs();
 
     /**
@@ -75,8 +69,7 @@ public abstract class OpenPrTask extends SiteToolTask {
      *
      * @return the value
      */
-    @Input
-    @Optional
+    @Internal
     public abstract Property<String> getDryRun();
 
     /**
@@ -84,7 +77,7 @@ public abstract class OpenPrTask extends SiteToolTask {
      *
      * @return the lines
      */
-    @Input
+    @Internal
     public abstract ListProperty<String> getCommitTrailers();
 
     /**

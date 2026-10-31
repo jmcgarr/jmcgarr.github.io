@@ -1,9 +1,8 @@
 package com.mikemcgarr.jbakesite.internal;
 
 /**
- * What a writing or verification tool says when it stops: the message the single-file programs under
- * {@code scripts/} printed before {@code System.exit} (T127 moved them into the plugin), with the exit code they
- * used. A task turns it into a build failure with the same message; a test reads it directly. Exit 1 means the
+ * What a writing or verification tool says when it stops: a message for the author and an exit code, as the
+ * single-file programs under {@code scripts/} printed one before {@code System.exit}. A task turns it into a build failure with the same message; a test reads it directly. Exit 1 means the
  * tool ran and found something wrong (the review's errors, a check's problems, a refused option); exit 2 means it
  * couldn't run at all (no baked site, not a git checkout).
  */

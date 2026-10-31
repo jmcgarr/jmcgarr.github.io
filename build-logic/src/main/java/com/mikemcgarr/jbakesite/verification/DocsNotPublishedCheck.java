@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * Fails if anything from {@code docs/} (planning and internal docs) has leaked into the baked site (AGENTS.md Rule
- * 4; revival task T004, {@code scripts/check-docs-not-published.sh} until T143): a {@code docs} entry at the site
+ * 4; revival task T004): a {@code docs} entry at the site
  * root, a Markdown file anywhere but under {@code vendor/} (third-party packages ship their own README.md), or the
  * marker word {@code REVIVAL} from the planning docs in a text file. The messages are the shell script's; what it
  * wrote to standard error is the {@link ToolFailure}'s message.

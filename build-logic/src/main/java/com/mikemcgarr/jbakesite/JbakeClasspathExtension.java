@@ -5,7 +5,7 @@ import org.gradle.api.provider.MapProperty;
 
 /**
  * The {@code classpath { ... }} block of {@code jbakeSite}: what the plugin does to the {@code jbake} configuration
- * beyond the versions {@code build.gradle} declares on it (T125; the settings themselves are T112's). The defaults
+ * beyond the versions {@code build.gradle} declares on it (the settings are T112's). The defaults
  * are {@link JbakeClasspath}'s; a site that uses one of the excluded engines, or wants a library back as JBake
  * asks for it, overrides them here.
  */

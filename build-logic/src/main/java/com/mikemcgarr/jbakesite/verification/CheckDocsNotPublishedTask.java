@@ -10,8 +10,7 @@ import org.gradle.api.tasks.TaskAction;
 
 /**
  * {@code checkDocsNotPublished}: nothing from {@code docs/} (planning and internal docs) is in the baked site
- * ({@link DocsNotPublishedCheck}; AGENTS.md Rule 4; T004, T141, {@code scripts/check-docs-not-published.sh} until
- * T143). CI runs it on {@code build/site}, the staged copy without drafts ({@code -PsiteDir=build/site}); by default
+ * ({@link DocsNotPublishedCheck}; AGENTS.md Rule 4; T004). CI runs it on {@code build/site}, the staged copy without drafts ({@code -PsiteDir=build/site}); by default
  * it checks the bake it depends on.
  *
  * <p>The task has no outputs, so it runs on every build.

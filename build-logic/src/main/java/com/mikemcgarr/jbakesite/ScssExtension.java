@@ -6,7 +6,7 @@ import org.gradle.api.provider.Property;
 
 /**
  * The {@code scss { ... }} block of {@code jbakeSite}: where the site's SCSS is and where its CSS is published
- * (T043, T134; in the plugin since T124).
+ * (T043, T134).
  *
  * <p>Every {@code <name>.scss} directly under {@link #getSource() source} whose name doesn't start with {@code _} is
  * an <em>entry</em> ({@link SassEntries}): {@code compileSass} compiles it with Dart Sass, and the bake publishes it

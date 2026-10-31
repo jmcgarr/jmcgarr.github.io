@@ -17,9 +17,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * The 960 and 1440 px variants of a header image that {@code masthead.ftl} serves by screen width (T071;
- * {@code scripts/masthead-variants.py} with Pillow until T140, then part of {@code scripts/PrepareImage.java}, in the
- * plugin since T127). A variant is a progressive JPEG at quality 80 with no metadata, {@code <name>-960.jpg} beside
+ * The 960 and 1440 px variants of a header image that {@code masthead.ftl} serves by screen width (T071). A
+ * variant is a progressive JPEG at quality 80 with no metadata, {@code <name>-960.jpg} beside
  * its source; a source narrower than the variant is copied as it is.
  *
  * <ul>

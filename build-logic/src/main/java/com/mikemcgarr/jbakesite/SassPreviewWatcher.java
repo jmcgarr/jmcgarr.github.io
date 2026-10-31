@@ -14,7 +14,7 @@ import org.gradle.api.services.BuildService;
 import org.gradle.api.services.BuildServiceParameters;
 
 /**
- * The preview's SCSS watcher (T043, T134; a Java build service since T126): while {@code bakePreview} runs, it
+ * The preview's SCSS watcher (T043, T134; a Gradle build service): while {@code bakePreview} runs, it
  * recompiles the CSS straight into the served site whenever a file in the SCSS directory changes (it checks every
  * 0.5 s). Every entry is recompiled, since a partial such as {@code _mixins.scss} can feed any of them. JBake's own
  * watcher only covers its source directory. The page's live reload notices the new CSS and reloads.

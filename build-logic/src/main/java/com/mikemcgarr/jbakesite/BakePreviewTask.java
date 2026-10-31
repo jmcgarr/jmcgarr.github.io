@@ -11,8 +11,8 @@ import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.TaskAction;
 
 /**
- * {@code bakePreview}, the local preview (T062, T100; the JBake Gradle plugin's task name since 2014, the one
- * preview task since T133, in the plugin since T126): {@code jbake -b -s} bakes into the destination, serves it
+ * {@code bakePreview}, the local preview (the JBake Gradle plugin's task name since 2014): {@code jbake -b -s}
+ * bakes into the destination, serves it
  * with Jetty at the address in {@code jbake.properties} (127.0.0.1 only; {@link PreviewPort}), drafts included,
  * and watches content, templates and assets: a save is live in about 1 s (it polls every second, then rebakes
  * everything, or copies a changed asset). In this mode JBake sets {@code site.host} to the local address, so feed,

@@ -14,11 +14,9 @@ import org.gradle.api.tasks.TaskAction;
 /**
  * {@code checkTagRedirects}: every old tag URL in the baked site is a tag page or a redirect stub whose target is
  * a real tag page with the right canonical, and every tag page shows its tag as the posts write it
- * ({@link TagRedirects#check}; T039, T055, T057, T139). CI runs it on {@code build/site}, the staged copy without
+ * ({@link TagRedirects#check}; T039, T055, T057). CI runs it on {@code build/site}, the staged copy without
  * drafts ({@code -PsiteDir=build/site}); by default it checks the bake it depends on. On macOS the two case-only
- * stubs are "not checkable here" and the task still passes; Linux, where CI builds, checks them too. In the plugin
- * since T127 (listed under T141 in docs/08-SCRIPTS-MIGRATION.md, moved forward because CI's
- * {@code java scripts/TagRedirects.java --check} step went with the program).
+ * stubs are "not checkable here" and the task still passes; Linux, where CI builds, checks them too.
  *
  * <p>The task has no outputs, so it runs on every build.
  */

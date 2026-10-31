@@ -4,9 +4,8 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Runs an external command ({@code git}, {@code gh}) for the writing tools, in the project directory. The
- * single-file programs each had their own {@code run} helper around {@link ProcessBuilder}; this is the one the
- * plugin's tools share (T127), and the seam a test replaces with a fake. {@link ProcessRunner} is the real one.
+ * Runs an external command ({@code git}, {@code gh}) for the writing tools, in the project directory: the one
+ * runner the plugin's tools share, and the seam a test replaces with a fake. {@link ProcessRunner} is the real one.
  */
 public interface CommandRunner {
 

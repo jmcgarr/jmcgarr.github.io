@@ -10,15 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
 import org.gradle.api.provider.Property;
-import org.gradle.api.tasks.Input;
-import org.gradle.api.tasks.Optional;
+import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.TaskAction;
 import org.gradle.api.tasks.UntrackedTask;
 
 /**
- * {@code prepareImage}: makes a hand-added image fit the image rules, and a masthead's variants (T140; in the plugin
- * since T127, before that an {@code Exec} of {@code scripts/PrepareImage.java}). The {@code -P} options are the
- * task's properties: a flag is on when given alone or as {@code true}, off as {@code false}, and anything else is a
+ * {@code prepareImage}: makes a hand-added image fit the image rules, and a masthead's variants. The {@code -P}
+ * options are the task's properties: a flag is on when given alone or as {@code true}, off as {@code false}, and anything else is a
  * usage error ({@link SiteToolTask#flag}, the rule every task's flags follow); {@code -Pimage} takes a
  * comma-separated list, {@code -Pwidth} a number. {@link PrepareImage} does
  * the work:
@@ -28,7 +26,8 @@ import org.gradle.api.tasks.UntrackedTask;
  * ./gradlew prepareImage -Pimage=src/jbake/assets/img/masthead/photo.jpg -Pvariants    the missing 960/1440 variants alone
  * </pre>
  *
- * <p>Untracked: the task rewrites files in the source tree, so Gradle has nothing to keep up to date.
+ * <p>Untracked: the task rewrites files in the source tree, so Gradle has nothing to keep up to date; the options
+ * are {@code @Internal}, not inputs, for the same reason.
  */
 @UntrackedTask(because = "it rewrites images and their references in the source tree; there is nothing to be up to date")
 public abstract class PrepareImageTask extends SiteToolTask {
@@ -38,8 +37,7 @@ public abstract class PrepareImageTask extends SiteToolTask {
      *
      * @return the paths
      */
-    @Input
-    @Optional
+    @Internal
     public abstract Property<String> getImage();
 
     /**
@@ -47,8 +45,7 @@ public abstract class PrepareImageTask extends SiteToolTask {
      *
      * @return the value
      */
-    @Input
-    @Optional
+    @Internal
     public abstract Property<String> getDryRun();
 
     /**
@@ -56,8 +53,7 @@ public abstract class PrepareImageTask extends SiteToolTask {
      *
      * @return the value
      */
-    @Input
-    @Optional
+    @Internal
     public abstract Property<String> getPng();
 
     /**
@@ -65,8 +61,7 @@ public abstract class PrepareImageTask extends SiteToolTask {
      *
      * @return the value
      */
-    @Input
-    @Optional
+    @Internal
     public abstract Property<String> getJpeg();
 
     /**
@@ -74,8 +69,7 @@ public abstract class PrepareImageTask extends SiteToolTask {
      *
      * @return the value
      */
-    @Input
-    @Optional
+    @Internal
     public abstract Property<String> getWidth();
 
     /**
@@ -83,8 +77,7 @@ public abstract class PrepareImageTask extends SiteToolTask {
      *
      * @return the value
      */
-    @Input
-    @Optional
+    @Internal
     public abstract Property<String> getKeepSource();
 
     /**
@@ -92,8 +85,7 @@ public abstract class PrepareImageTask extends SiteToolTask {
      *
      * @return the value
      */
-    @Input
-    @Optional
+    @Internal
     public abstract Property<String> getVariants();
 
     /**
@@ -104,7 +96,9 @@ public abstract class PrepareImageTask extends SiteToolTask {
      */
     @TaskAction
     public void prepare() throws IOException, InterruptedException {
-        System.setProperty("java.awt.headless", "true");
+        if (System.getProperty("java.awt.headless") == null) {
+            System.setProperty("java.awt.headless", "true");   // the daemon's JVM is shared: never override a choice already made
+        }
         ImageIO.setUseCache(false);
         SiteLayout site = siteLayout();
         List<String> images = images();

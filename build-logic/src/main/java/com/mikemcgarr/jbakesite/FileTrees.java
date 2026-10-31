@@ -11,9 +11,8 @@ import java.util.stream.Stream;
  * Copies a directory tree into another: every regular file, keeping relative paths, replacing what is there. The
  * bake uses it after JBake has run, to put the compiled CSS (T043) and, on Linux, the case-redirect stubs (T055)
  * into {@code build/jbake}, where a Gradle {@code Copy} task can't go: {@code bake} owns that directory as its
- * output, and a second task writing into it would make both tasks' up-to-date checks wrong. T124 moved it here from
- * {@code build.gradle}'s {@code copyTree} closure; T127 added {@link #regularFilesUnder}, the file walk the image and
- * tag tools shared.
+ * output, and a second task writing into it would make both tasks' up-to-date checks wrong. It also holds the
+ * plugin's one file walk ({@link #regularFilesUnder}, {@link #regularFilesIn}), which every tool lists files with.
  */
 public final class FileTrees {
 

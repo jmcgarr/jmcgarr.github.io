@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Runs {@code git} in the project directory for the writing tools: the {@code git} helper that {@code NewPost.java},
- * {@code ReviewChanges.java} and {@code PrepareImage.java} each carried, once (T127, the T130 decision). A command
+ * Runs {@code git} in the project directory for the writing tools. A command
  * that exits non-zero is not an error here (the tools ask git questions: "does this branch exist?") and yields an
  * empty answer; git being absent is.
  */

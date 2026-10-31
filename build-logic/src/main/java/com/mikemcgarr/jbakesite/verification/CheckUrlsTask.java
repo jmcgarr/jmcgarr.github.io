@@ -7,20 +7,19 @@ import java.nio.file.Path;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.provider.Property;
-import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.Internal;
-import org.gradle.api.tasks.Optional;
 import org.gradle.api.tasks.TaskAction;
 
 /**
  * {@code checkUrls}: every URL in the baseline of published URLs ({@code jbakeSite.publishedUrls}) is still a page in
  * the baked site, or is listed in the expected removals ({@code jbakeSite.expectedRemovals}); the Rule 1 gate
- * ({@link UrlCheck}; T006, T141, {@code scripts/check-urls.sh} until T143). CI runs it on {@code build/site}, the
+ * ({@link UrlCheck}; T006). CI runs it on {@code build/site}, the
  * staged copy without drafts ({@code -PsiteDir=build/site}); by default it checks the bake it depends on. On macOS
  * the pages that differ from a built page only by case are warned about, not failed, unless {@code -Pstrict} is
  * given; Linux, where CI builds, is strict by nature.
  *
- * <p>The task has no outputs, so it runs on every build.
+ * <p>The task has no outputs, so it runs on every build; {@code -Pstrict} is {@code @Internal} like the site, since
+ * there is nothing an input could keep up to date.
  */
 public abstract class CheckUrlsTask extends SiteToolTask {
 
@@ -37,8 +36,7 @@ public abstract class CheckUrlsTask extends SiteToolTask {
      *
      * @return the value
      */
-    @Input
-    @Optional
+    @Internal
     public abstract Property<String> getStrict();
 
     /**

@@ -18,8 +18,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Reviews the pages a change touched (task T117 of docs/05-REVIEW-FLOW.md; {@code scripts/ReviewChanges.java} until
- * T127). It lists every file that differs from the merge base with the base branch (committed or not, plus untracked
+ * Reviews the pages a change touched (task T117 of docs/05-REVIEW-FLOW.md). It lists every file that differs from the merge base with the base branch (committed or not, plus untracked
  * files under {@code src/jbake}), maps each to the page it renders, and checks the source and the rendered page:
  *
  * <pre>

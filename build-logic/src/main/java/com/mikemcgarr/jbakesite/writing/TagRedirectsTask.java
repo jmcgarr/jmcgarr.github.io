@@ -4,15 +4,16 @@ import com.mikemcgarr.jbakesite.SiteToolTask;
 import com.mikemcgarr.jbakesite.internal.SiteLayout;
 import java.io.IOException;
 import org.gradle.api.provider.MapProperty;
-import org.gradle.api.tasks.Input;
+import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.TaskAction;
 import org.gradle.api.tasks.UntrackedTask;
 
 /**
  * {@code tagRedirects}: writes any missing or outdated redirect stub for an old tag URL into the source tree, and
- * never deletes one ({@link TagRedirects#write()}; T039, T055, T139; a task since T127). Run only on an
+ * never deletes one ({@link TagRedirects#write()}; T039, T055). Run only on an
  * owner-approved tag rename or merge (AGENTS.md Rule 1): add the pair to {@code RENAMES}, change the posts, then
  * {@code ./gradlew tagRedirects}. On a clean tree it writes nothing: every committed stub regenerates byte for byte.
+ * Untracked, so the renames are {@code @Internal}, not an input: there is nothing an input could keep up to date.
  */
 @UntrackedTask(because = "it writes redirect stubs into the source tree; there is nothing to be up to date")
 public abstract class TagRedirectsTask extends SiteToolTask {
@@ -22,7 +23,7 @@ public abstract class TagRedirectsTask extends SiteToolTask {
      *
      * @return the renames
      */
-    @Input
+    @Internal
     public abstract MapProperty<String, String> getTagRenames();
 
     /**

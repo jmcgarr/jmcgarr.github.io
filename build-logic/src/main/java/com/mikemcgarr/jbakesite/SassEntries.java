@@ -11,7 +11,7 @@ import java.util.List;
  * so are files in subdirectories. {@link CompileSassTask} and the preview's SCSS watcher share this, so both
  * compile the same files.
  */
-public final class SassEntries {
+final class SassEntries {
 
     private static final String ENTRY_SUFFIX = ".scss";
     private static final String CSS_SUFFIX = ".css";

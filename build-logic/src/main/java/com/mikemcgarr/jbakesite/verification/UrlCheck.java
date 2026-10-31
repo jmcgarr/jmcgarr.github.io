@@ -16,7 +16,7 @@ import java.util.TreeSet;
 
 /**
  * Compares the HTML pages in a baked site against the inventory of the live site's URLs, so a change can't silently
- * remove a published URL (AGENTS.md Rule 1; revival task T006, {@code scripts/check-urls.sh} until T143):
+ * remove a published URL (AGENTS.md Rule 1; revival task T006):
  *
  * <pre>
  *   missing = in the baseline, not in the build, not an expected removal  -&gt; FAIL

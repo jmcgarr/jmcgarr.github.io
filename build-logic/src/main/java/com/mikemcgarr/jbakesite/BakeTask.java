@@ -15,8 +15,7 @@ import org.gradle.api.tasks.TaskAction;
  * {@code bake}: renders the site with JBake ({@code jbake <source> <destination> -b}), drafts included as
  * {@code <name>-draft.html} (CI leaves them out of the deploy), then puts two things into the output that JBake
  * must not get to replace: the compiled theme CSS ({@code compileSass}, T043) and, on a case-sensitive filesystem
- * only, the case-redirect stubs ({@link CaseRedirects}, T055). The JBake Gradle plugin's task name, kept since 2014
- * (T096); T125 moved the task here from {@code build.gradle}.
+ * only, the case-redirect stubs ({@link CaseRedirects}, T055). The JBake Gradle plugin's task name, kept since 2014.
  *
  * <p>The task is up to date when its inputs (the source, the stubs, the compiled CSS, JBake's classpath and JVM
  * flags) and its output directory haven't changed since the last bake, so a second {@code ./gradlew bake} does

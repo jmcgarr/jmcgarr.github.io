@@ -13,7 +13,7 @@ import java.util.TreeSet;
 /**
  * The {@code tags=} line: a comma-separated list, each tag stripped. Tags that differ only by case make separate tag
  * pages that each list only some posts (T055), so {@code newPost} and the review (W3) both compare a new tag with
- * the spellings in use; this is that comparison's data, which the two programs built separately until T127.
+ * the spellings in use; this is that comparison's data.
  */
 public final class Tags {
 

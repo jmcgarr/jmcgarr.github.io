@@ -21,9 +21,7 @@ import java.util.regex.Pattern;
 /**
  * Prepares an image added by hand under the assets' {@code img/} so it passes the site's image rules (revival tasks
  * T016 and T017, AGENTS.md Rule 1 "Images" and Rule 4), and makes the 960/1440 px header-image variants
- * ({@link MastheadVariants}, T071). Java since T140 (docs/08-SCRIPTS-MIGRATION.md); before that
- * {@code scripts/prepare-image.py} and {@code scripts/masthead-variants.py} with Pillow; in the plugin since T127.
- * {@link PrepareImageTask} runs it:
+ * ({@link MastheadVariants}, T071). {@link PrepareImageTask} runs it:
  *
  * <pre>
  * ./gradlew prepareImage -Pimage=src/jbake/assets/img/masthead/photo.png[,other.jpg] [-PdryRun] [-Ppng|-Pjpeg] [-Pwidth=1000] [-PkeepSource]

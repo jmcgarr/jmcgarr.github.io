@@ -9,8 +9,7 @@ import org.gradle.api.artifacts.component.ModuleComponentSelector;
 
 /**
  * The {@code jbake} configuration: JBake and its libraries, the classpath the bake and the preview run in a fresh
- * JVM. The name is the JBake Gradle plugin's, in use here since 2014; since T096 JBake's own launcher runs on it
- * directly, since T133 it is the only configuration, and T125 moved its setup here from {@code build.gradle}. The
+ * JVM. The name is the JBake Gradle plugin's, in use here since 2014; JBake's own launcher runs on it directly. The
  * versions stay in {@code build.gradle}'s {@code dependencies { jbake ... } } block, with the advisory comments
  * that explain each pin; this class holds what is about <em>how JBake is run</em>, overridable through
  * {@code jbakeSite { classpath { ... } }} ({@link JbakeClasspathExtension}):
