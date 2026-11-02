@@ -1,12 +1,13 @@
-title=Thank you Netflix
-date=2018-09-09
-type=post
-tags=general
-status=published
-summary=It wasn’t an easy decision, voluntarily choosing to leave Netflix after 4 and a half years. It was a decision I mulled over for months. I mulled over this decision because Netflix is the MOST AMAZING place I’ve ever worked. I know that I will compare all future employers to the Netflix culture and the experiences I've had here. I am forever grateful for being able to experience Netflix for as long as I did. For this, I give thanks.
-masthead=Los-Gatos_02.jpg
-mastheadCredit=Netflix Media Center
-~~~~~~
+---
+title: Thank you Netflix
+date: 2018-09-09
+type: post
+tags: [general]
+status: published
+summary: It wasn’t an easy decision, voluntarily choosing to leave Netflix after 4 and a half years. It was a decision I mulled over for months. I mulled over this decision because Netflix is the MOST AMAZING place I’ve ever worked. I know that I will compare all future employers to the Netflix culture and the experiences I've had here. I am forever grateful for being able to experience Netflix for as long as I did. For this, I give thanks.
+masthead: Los-Gatos_02.jpg
+mastheadCredit: Netflix Media Center
+---
 It wasn’t an easy decision, voluntarily choosing to leave Netflix after 4 and a half years. It was a decision I mulled over for months. I mulled over this decision because Netflix is the MOST AMAZING place I’ve ever worked. I know that I will compare all future employers to the Netflix culture and the experiences I’ve had here. I am forever grateful for being able to experience Netflix for as long as I did. For this, I give thanks.
 
 *Thank you Netflix, for taking a bet on me and the giving me the opportunity to join **the Engineering Tools team**.*

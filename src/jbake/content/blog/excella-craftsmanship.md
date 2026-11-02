@@ -1,10 +1,11 @@
-title=Dojos, Katas and Software Craftsmanship at Excella
-date=2011-04-21
-type=post
-tags=.NET, code katas, coding dojo, Excella Consulting, groovy, Java, pair programming, ping pong, Scala, software craftsmanship, tdd
-status=published
-summary=The Software Craftsmanship movement is creating quite a stir in the software development community, with experts on both sides of the fence arguing its value.
-~~~~~~
+---
+title: Dojos, Katas and Software Craftsmanship at Excella
+date: 2011-04-21
+type: post
+tags: [.NET, code katas, coding dojo, Excella Consulting, groovy, Java, pair programming, ping pong, Scala, software craftsmanship, tdd]
+status: published
+summary: The Software Craftsmanship movement is creating quite a stir in the software development community, with experts on both sides of the fence arguing its value.
+---
 <img class="alignright" title="Clean Code Logo" src="/img/clean-code-badge.png" alt="Clean Code" width="200" height="200" />The [Software Craftsmanship movement](https://manifesto.softwarecraftsmanship.org/ "Manifest for Software Craftsmanship") is creating quite a [stir](https://www.infoq.com/news/2011/02/north-craftsmanship-manifesto "Software Craftsmanship criticisms") in the software development community, with experts on both sides of the fence arguing its value.   At [Excella Consulting](https://www.excella.com/ "Excella Consulting"), we have embraced the Software Craftsmanship movement and feel that the benefits of writing [clean code](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882 "Clean Code, the book") does not conflict with the needs of our customers.  Our desire to continuously learn and improve how we write code has led us to gather regularly for [Coding Dojos](https://codingdojo.org/ "What is a Code Dojo?").
 
 A coding dojo is a gathering of developers to work together to learn how best to solve a problem.  The purpose of a dojo is not to produce a product, rather to learn how to write code better.  A coding dojo can take on numerous formats but at Excella we have decided to focus on conducting [code katas](http://codekata.pragprog.com/2007/01/code_kata_backg.html#more "Code Kata").  Code katas are predefined exercises or problems that the dojo members attempt to solve.  Katas are written to be domain problems that are simple and should be familiar to the developers, like [Uncle Bob](https://x.com/unclebobmartin "Uncle Bob at Twitter.com")'s [Bowling Game](http://butunclebob.com/ArticleS.UncleBob.TheBowlingGameKata "Bowling Game Kata").  Katas are intended to be repeated over and over again.  The code resulting from the kata is disposable, as the process of solving the problem is considered more significant.

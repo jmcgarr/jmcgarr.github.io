@@ -1,8 +1,9 @@
-title=Second Post
-date=2026-01-03
-type=post
-tags=fixture
-status=published
-~~~~~~
+---
+title: Second Post
+date: 2026-01-03
+type: post
+tags: [fixture]
+status: published
+---
 
 The second post.

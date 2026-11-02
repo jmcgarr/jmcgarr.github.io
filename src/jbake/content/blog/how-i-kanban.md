@@ -1,12 +1,13 @@
-title=How I Kanban (with Trello)
-date=2014-10-26
-type=post
-tags=agile,kanban,productivity,trello
-status=published
-summary=For years I have been trying to find the perfect personal task management process that is easy, intuitive and effective.  My friends and colleagues have witnessed the various techniques I have adopted over the years.  “Hey Mike, why are carrying a stack of notecards?” they would ask.  I have tried various GTD (Getting Things Done) apps, to stacks of notecards, to Scrum boards at home, to giant lists...all of them failed.
-masthead=toyota-factory.jpg
-mastheadCredit=https://flic.kr/p/ewnpoM
-~~~~~~
+---
+title: How I Kanban (with Trello)
+date: 2014-10-26
+type: post
+tags: [agile, kanban, productivity, trello]
+status: published
+summary: For years I have been trying to find the perfect personal task management process that is easy, intuitive and effective.  My friends and colleagues have witnessed the various techniques I have adopted over the years.  “Hey Mike, why are carrying a stack of notecards?” they would ask.  I have tried various GTD (Getting Things Done) apps, to stacks of notecards, to Scrum boards at home, to giant lists...all of them failed.
+masthead: toyota-factory.jpg
+mastheadCredit: https://flic.kr/p/ewnpoM
+---
 For years I have been trying to find the perfect personal task management process that is easy, intuitive and effective.  My friends and colleagues have witnessed the various techniques I have adopted over the years.  “Hey Mike, why are carrying a stack of notecards?” they would ask.  I have tried various [GTD (Getting Things Done)](https://gettingthingsdone.com/) apps, to stacks of notecards, to Scrum boards at home, to giant lists…all of them failed.
 
 Eventually, I settled on an implementation of [Personal Kanban](https://www.personalkanban.com/pk/) using [Trello](https://trello.com/).  The beauty of this approach is it’s simple, free and easy to take with you.

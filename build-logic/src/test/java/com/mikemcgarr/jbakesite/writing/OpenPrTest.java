@@ -346,15 +346,15 @@ class OpenPrTest {
     @Test
     void readsARealWorkingTreeAsGitPrintsIt() throws IOException, InterruptedException {
         Files.createDirectories(site.content());
-        Files.writeString(site.content().resolve("about.md"), "title=About\n~~~~~~\n");
+        Files.writeString(site.content().resolve("about.md"), "---\ntitle: About\n---\n");
         Files.writeString(root.resolve("README.md"), "# Site\n");
         TestRepositories.init(root);
         TestRepositories.commitAll(root, "Site");
         TestRepositories.git(root, "switch", "--quiet", "--create", "docs/readme");
         Files.writeString(root.resolve("README.md"), "# Site\n\nMore.\n");
-        Files.writeString(site.content().resolve("new.md"), "title=New\n~~~~~~\n");
-        Files.writeString(site.content().resolve("caf\u00e9.md"), "title=Caf\u00e9\n~~~~~~\n");
-        Files.writeString(site.content().resolve("with space.md"), "title=Space\n~~~~~~\n");
+        Files.writeString(site.content().resolve("new.md"), "---\ntitle: New\n---\n");
+        Files.writeString(site.content().resolve("caf\u00e9.md"), "---\ntitle: Caf\u00e9\n---\n");
+        Files.writeString(site.content().resolve("with space.md"), "---\ntitle: Space\n---\n");
         Files.writeString(root.resolve("scratch.txt"), "x\n");
         ProcessRunner runner = new ProcessRunner(root, printer, printer);
         OpenPr tool = new OpenPr(site, new Git(runner), runner, PASSING, List.of(), printer);
@@ -372,7 +372,7 @@ class OpenPrTest {
     void onARealTreeItCommitsOnlyTheListedPathsAndLeavesOtherStagedChangesInTheIndex() throws IOException, InterruptedException {
         Files.createDirectories(site.content());
         Files.createDirectories(root.resolve("docs"));
-        Files.writeString(site.content().resolve("about.md"), "title=About\n~~~~~~\n");
+        Files.writeString(site.content().resolve("about.md"), "---\ntitle: About\n---\n");
         Files.writeString(root.resolve("docs/a.md"), "# A\n");
         Files.writeString(root.resolve("README.md"), "# Site\n");
         TestRepositories.init(root);
@@ -381,9 +381,9 @@ class OpenPrTest {
         TestRepositories.git(root, "remote", "add", "origin", origin.toString());
         TestRepositories.git(root, "push", "--quiet", "origin", "main");
         TestRepositories.git(root, "switch", "--quiet", "--create", "post/cafe");
-        Files.writeString(site.content().resolve("about.md"), "title=About\n~~~~~~\nEdited.\n");
-        Files.writeString(site.content().resolve("caf\u00e9.md"), "title=Caf\u00e9\n~~~~~~\n");
-        Files.writeString(site.content().resolve("with space.md"), "title=Space\n~~~~~~\n");
+        Files.writeString(site.content().resolve("about.md"), "---\ntitle: About\n---\nEdited.\n");
+        Files.writeString(site.content().resolve("caf\u00e9.md"), "---\ntitle: Caf\u00e9\n---\n");
+        Files.writeString(site.content().resolve("with space.md"), "---\ntitle: Space\n---\n");
         TestRepositories.git(root, "mv", "docs/a.md", "docs/b.md");
         Files.writeString(root.resolve("scratch.txt"), "x\n");
         TestRepositories.git(root, "add", "scratch.txt");   // staged by the author, outside the committed paths

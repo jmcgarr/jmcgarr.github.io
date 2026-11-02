@@ -1,10 +1,11 @@
-title=Justifying Dual Monitors
-date=2009-12-04
-tags=productivity
-status=published
-summary=When I asked my management for dual monitors for our development team, I was promptly asked to provide justification for the request.  I hope the research I used for to support my case is helpful to others who may find themselves in the same boat.
-type=post
-~~~~~~
+---
+title: Justifying Dual Monitors
+date: 2009-12-04
+tags: [productivity]
+status: published
+summary: When I asked my management for dual monitors for our development team, I was promptly asked to provide justification for the request.  I hope the research I used for to support my case is helpful to others who may find themselves in the same boat.
+type: post
+---
 When I asked my management for dual monitors for our development team, I was promptly asked to provide justification for the request.  I hope the research I used for to support my case is helpful to others who may find themselves in the same boat.
 
 Numerous studies have proven that providing staff with a multiple monitor setup is a cheap means of increasing productivity.  The results of the studies vary in the specific numbers, but overall, teams can expect anywhere from a [10 - 50% increase](https://web.archive.org/web/20091209080640/http://research.microsoft.com:80/en-us/news/features/vibe.aspx) in an individual's productivity, which results in a simple return on investment.  It is estimated that the cost of the hardware necessary to setup dual monitors for an individual would pay for itself in a matter of weeks.

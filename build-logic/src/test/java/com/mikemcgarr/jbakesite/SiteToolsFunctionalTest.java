@@ -67,10 +67,10 @@ class SiteToolsFunctionalTest {
         Path draft = projectDir.resolve("src/jbake/content/blog/drafts/a-third-post.md");
         String header = Files.readString(draft);
         // The date is today's by the task's own clock; a regex, so a run that straddles midnight can't fail on it
-        assertTrue(header.matches("(?s)title=A Third Post\ndate=\\d{4}-\\d{2}-\\d{2}\ntype=post\ntags=fixture, testing\n"
-                + "status=draft\nsummary=A teaser.\n~~~~~~\n\n"), "every -P option in the header: " + header);
+        assertTrue(header.matches("(?s)---\ntitle: A Third Post\ndate: \\d{4}-\\d{2}-\\d{2}\ntype: post\ntags: \\[fixture, testing\\]\n"
+                + "status: draft\nsummary: A teaser.\n---\n\n"), "every -P option in the header: " + header);
         String output = result.getOutput();
-        assertTrue(output.contains("Created src/jbake/content/blog/drafts/a-third-post.md (status=draft, never published)"), output);
+        assertTrue(output.contains("Created src/jbake/content/blog/drafts/a-third-post.md (status: draft, never published)"), output);
         assertFalse(output.contains("Switched to the new branch"), "-Pbranch=false stays on main: " + output);
         assertTrue(output.contains("It will live at https://fixture.example/blog/a-third-post.html (permanent)."),
                 "site.host from the fixture's jbake.properties: " + output);
@@ -107,8 +107,8 @@ class SiteToolsFunctionalTest {
 
         assertEquals(TaskOutcome.FAILED, broken.task(":reviewChanges").getOutcome());
         String output = broken.getOutput();
-        assertTrue(output.contains("ERROR E1 src/jbake/content/about.md:9\n"), output);
-        assertTrue(output.contains("ERROR E2 src/jbake/content/about.md:9\n"), "the baked page shows the brackets: " + output);
+        assertTrue(output.contains("ERROR E1 src/jbake/content/about.md:10\n"), output);
+        assertTrue(output.contains("ERROR E2 src/jbake/content/about.md:10\n"), "the baked page shows the brackets: " + output);
         assertTrue(output.contains("Reviewed 1 page (about.html) from 1 changed file. 2 errors, 1 warning. External links not checked (T119)."), "W2: the page changed but its date did not. " + output);
         assertTrue(output.contains("The review found errors (listed above). Fix them, or suppress one with <!-- review: ignore E2, why --> on the line before it."), output);
 
@@ -139,7 +139,7 @@ class SiteToolsFunctionalTest {
         // The owner renames the tag "fixture" to "fixtures" in every post and lists the rename, as the README says to
         for (String post : new String[] {"first-post.md", "second-post.md"}) {
             Path file = projectDir.resolve("src/jbake/content/blog").resolve(post);
-            Files.writeString(file, Files.readString(file).replace("tags=fixture", "tags=fixtures"));
+            Files.writeString(file, Files.readString(file).replace("tags: [fixture", "tags: [fixtures"));
         }
         Path buildFile = projectDir.resolve("build.gradle");
         Files.writeString(buildFile, Files.readString(buildFile).replace("tagRenames = [:]", "tagRenames = ['fixture': 'fixtures']"));
@@ -181,7 +181,7 @@ class SiteToolsFunctionalTest {
             ImageIO.write(new BufferedImage(8, 4, BufferedImage.TYPE_INT_RGB), "jpeg", mastheads.resolve(name).toFile());
         }
         Path about = projectDir.resolve("src/jbake/content/about.md");
-        Files.writeString(about, Files.readString(about).replace("type=page\n", "type=page\nmasthead=hero.jpg\n"));
+        Files.writeString(about, Files.readString(about).replace("type: page\n", "type: page\nmasthead: hero.jpg\n"));
 
         BuildResult ok = runner("checkMastheadVariants").build();
         assertEquals(TaskOutcome.SUCCESS, ok.task(":checkMastheadVariants").getOutcome());

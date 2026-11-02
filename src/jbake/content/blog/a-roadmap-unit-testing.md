@@ -1,10 +1,11 @@
-title=A roadmap for unit testing
-date=2012-12-04
-type=post
-tags=bdd, code katas, goos, junit, legacy code, mocking, mockito, powermock, unit testing
-status=published
-summary=I was recently asked by an old friend how they can get started writing unit tests on their existing application.  He was looking for guidance and more or less a roadmap of how to get started.  I decided to share what I sent him here.
-~~~~~~
+---
+title: A roadmap for unit testing
+date: 2012-12-04
+type: post
+tags: [bdd, code katas, goos, junit, legacy code, mocking, mockito, powermock, unit testing]
+status: published
+summary: I was recently asked by an old friend how they can get started writing unit tests on their existing application.  He was looking for guidance and more or less a roadmap of how to get started.  I decided to share what I sent him here.
+---
 I was recently asked by an old friend how they can get started writing unit tests on their existing application.  He was looking for guidance and more or less a roadmap of how to get started.  I decided to share what I sent him here.
 
 So, if there is already code written for an application that you want to add unit tests to, this is harder, but not impossible.  Essentially, the problem you will run into is the code you are trying to unit test isn't testable.

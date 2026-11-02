@@ -15,7 +15,9 @@
   <logger name="com.orientechnologies" level="ERROR"/>
   <!-- JBake registers a parser for every extension it knows and warns once, at startup, that it can't load
        one for [ad, adoc, asciidoc]: AsciidoctorJ left the classpath with T102 (build.gradle), and no content
-       uses those extensions. Errors still show, and a page that fails to render fails CI's URL check. -->
+       uses those extensions. It warns the same way when the plugin's launcher replaces its Markdown engine
+       with the front matter engine for [.md] (T145). Errors still show, and a page that fails to render
+       fails CI's URL check. -->
   <logger name="org.jbake.parser.Engines" level="ERROR"/>
   <root level="WARN">
     <appender-ref ref="CONSOLE"/>

@@ -73,15 +73,31 @@ final class MarkdownChecks {
             text = Text.lf(text);   // reported once; the other checks then see the lines as JBake would after the fix
         }
         FrontMatter fm = FrontMatter.parse(text);
+        if (fm.legacy() && fm.separated()) {
+            findings.add(true, "E4", file, 1, "The header is in the key=value form that ended with " + FrontMatter.LEGACY_SEPARATOR
+                    + " (the format before T145). Every post and page has YAML front matter now.",
+                    "Write it as key: value lines between two " + FrontMatter.DELIMITER + " lines (README, \"To write a post\").");
+            return null;
+        }
+        if (fm.legacy()) {
+            findings.add(true, "E4", file, 1, "The file doesn't start with " + FrontMatter.DELIMITER + ", so it has no front matter and JBake won't render it.",
+                    "Start the file with " + FrontMatter.DELIMITER + ", the key: value lines, and a closing " + FrontMatter.DELIMITER + " line.");
+            return null;
+        }
         if (!fm.separated()) {
-            findings.add(true, "E4", file, 1, "No " + FrontMatter.SEPARATOR + " line ends the header, so JBake won't render this file.",
-                    "Put " + FrontMatter.SEPARATOR + " on its own line after the key=value lines.");
+            findings.add(true, "E4", file, 1, "No " + FrontMatter.DELIMITER + " line closes the front matter, so JBake won't render this file.",
+                    "Put " + FrontMatter.DELIMITER + " on its own line after the key: value lines.");
+            return null;
+        }
+        if (fm.error() != null) {
+            findings.add(true, "E4", file, fm.errorLine(), "The front matter isn't YAML JBake can use: " + fm.error(),
+                    "Quote a value that has a colon and a space in it: title: \"Maven Tip: Disabling Profiles\".");
             return null;
         }
         boolean ok = true;
         for (String key : List.of("title", "date", "type", "status")) {
             if (fm.get(key).isEmpty()) {
-                findings.add(true, "E4", file, 1, "The header has no " + key + "=.", "Add " + key + "= above the " + FrontMatter.SEPARATOR + " line.");
+                findings.add(true, "E4", file, 1, "The front matter has no " + key + ".", "Add a " + key + ": line between the " + FrontMatter.DELIMITER + " lines.");
                 ok = false;
             }
         }
@@ -90,38 +106,38 @@ final class MarkdownChecks {
             try {
                 LocalDate.parse(fm.get("date"));
             } catch (DateTimeParseException e) {
-                findings.add(true, "E4", file, fm.lines().get("date"), "date=" + fm.get("date") + " isn't a date of the form YYYY-MM-DD.",
-                        "date=" + today);
+                findings.add(true, "E4", file, fm.lines().get("date"), "date: " + fm.get("date") + " isn't a date of the form YYYY-MM-DD.",
+                        "date: " + today);
                 ok = false;
             }
         }
         if (!fm.get("type").isEmpty() && !List.of("post", "page").contains(fm.get("type"))) {
-            findings.add(true, "E4", file, fm.lines().get("type"), "type=" + fm.get("type") + " isn't post or page.", "type=post");
+            findings.add(true, "E4", file, fm.lines().get("type"), "type: " + fm.get("type") + " isn't post or page.", "type: post");
             ok = false;
         }
         if (!fm.get("status").isEmpty() && !List.of("draft", "published").contains(fm.get("status"))) {
-            findings.add(true, "E4", file, fm.lines().get("status"), "status=" + fm.get("status") + " isn't draft or published.",
-                    "status=draft");
+            findings.add(true, "E4", file, fm.lines().get("status"), "status: " + fm.get("status") + " isn't draft or published.",
+                    "status: draft");
             ok = false;
         }
         boolean post = fm.get("type").equals("post");
         if (post && fm.get("summary").isEmpty()) {
             if (c.isNew()) {
                 findings.add(true, "E4", file, fm.lines().getOrDefault("summary", 1),
-                        "A new post needs a summary=: it's the teaser on the home page, in the feed and on share cards.",
-                        "summary=One sentence that says what the post is about.");
+                        "A new post needs a summary: it's the teaser on the home page, in the feed and on share cards.",
+                        "summary: One sentence that says what the post is about.");
             } else if (!all && fm.get("status").equals("published")) {
                 findings.add(false, "W7", file, fm.lines().getOrDefault("summary", 1),
-                        "This post has no summary=. The home page, the feed and share cards use it. Adding one is your call.",
+                        "This post has no summary. The home page, the feed and share cards use it. Adding one is your call.",
                         null);
             }
         }
         if (c.status() == 'M' && fm.get("type").equals("page") && !all) {
             FrontMatter before = FrontMatter.parse(changes.atMergeBase(c.path()));
             if (!before.get("date").isEmpty() && before.get("date").equals(fm.get("date"))) {
-                findings.add(false, "W2", file, fm.lines().get("date"), "This page changed but date=" + fm.get("date")
+                findings.add(false, "W2", file, fm.lines().get("date"), "This page changed but date: " + fm.get("date")
                         + " did not. The sitemap reports it as lastmod. Today is " + today + ".",
-                        "date=" + today);
+                        "date: " + today);
             }
         }
         checkTags(c, fm);
@@ -172,7 +188,7 @@ final class MarkdownChecks {
         }
         Path image = name.startsWith("/") ? site.assets().resolve(name.substring(1)) : site.mastheads().resolve(name);
         if (!Files.isRegularFile(image)) {
-            findings.add(true, "E5", site.display(c.path()), fm.lines().get("masthead"), "masthead=" + name + " isn't in "
+            findings.add(true, "E5", site.display(c.path()), fm.lines().get("masthead"), "masthead: " + name + " isn't in "
                     + site.display(image.getParent()) + ".", "Add the image there, then run " + ImageChecks.variantsCommand("<image>"));
             return;
         }

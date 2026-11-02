@@ -1,10 +1,11 @@
-title=Mastering Jenkins: Making Bulk Updates to Jobs
-date=2013-03-11
-type=post
-tags=jenkins, groovy
-status=published
-summary=I recently needed to make the same update to a large number of Jenkins jobs.  Essentially, we decided to change our naming convention for our jobs.  A simple change.  In order to achieve this, I took advantage of the Jenkins Script Console.
-~~~~~~
+---
+title: "Mastering Jenkins: Making Bulk Updates to Jobs"
+date: 2013-03-11
+type: post
+tags: [jenkins, groovy]
+status: published
+summary: I recently needed to make the same update to a large number of Jenkins jobs.  Essentially, we decided to change our naming convention for our jobs.  A simple change.  In order to achieve this, I took advantage of the Jenkins Script Console.
+---
 I recently needed to make the same update to a large number of Jenkins jobs.  Essentially, we decided to change our naming convention for our jobs.  A simple change.  In order to achieve this, I took advantage of the Jenkins Script Console.
 
 The Jenkins Script Console allows you to run Groovy code against Jenkins to execute a task.  The Script Console provides access to Jenkins' underlying API's, which allows you to conduct almost any task.  The Script Console is available to any running Jenkins instance at '/script' or through the menus by navigating to 'Manage Jenkins > Script Console'.  In order to effectively use the Script Console, you will likely need to become familiar with [Jenkins' API's](https://javadoc.jenkins-ci.org/ "Jenkins JavaDocs").

@@ -1,10 +1,11 @@
-title=2013 Six Month Check-point
-date=2013-07-01
-type=post
-tags=goals
-status=published
-summary=It has been far too long since I last blogged.  There have been a number of reasons, most notably work, family and golf (yeah golf!).  But too much has happened since I last blogged…so I need to get back into it.
-~~~~~~
+---
+title: 2013 Six Month Check-point
+date: 2013-07-01
+type: post
+tags: [goals]
+status: published
+summary: It has been far too long since I last blogged.  There have been a number of reasons, most notably work, family and golf (yeah golf!).  But too much has happened since I last blogged…so I need to get back into it.
+---
 It has been far too long since <a href="/blog/improving-my-shell-fu-oh-my-zsh.html" target="_blank">I last blogged</a>.  There have been a number of reasons, most notably work, family and golf (yeah golf!).  But too much has happened since I last blogged…so I need to get back into it.
 
 Before I go into all the fun things I have been doing, I figured I would do a quick status check on <a title="Goals for 2013" href="/blog/goals-for-2013.html" target="_blank">the goals I set at the beginning of the year</a>.  Let's go through them one by one:

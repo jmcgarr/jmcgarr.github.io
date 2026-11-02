@@ -1,11 +1,12 @@
-title=About Me
-subtitle=...for those who don't know
-date=2026-10-21
-type=page
-status=published
-masthead=hawaii.jpg
-mastheadCredit=Me, Lana'i from Kaanapali
-~~~~~~
+---
+title: About Me
+subtitle: ...for those who don't know
+date: 2026-10-21
+type: page
+status: published
+masthead: hawaii.jpg
+mastheadCredit: Me, Lana'i from Kaanapali
+---
 
 <p><img src="img/me_qcon_panel_sq.jpg" alt="Mike McGarr speaking on a panel at QCon" width="300" height="300" class="float-right ml-3 mb-3"></p>
 

@@ -1,9 +1,10 @@
-title=Talks
-date=2026-10-21
-type=page
-status=published
-masthead=/img/qcon_crowd.jpg
-~~~~~~
+---
+title: Talks
+date: 2026-10-21
+type: page
+status: published
+masthead: /img/qcon_crowd.jpg
+---
 
 ## Cultures, Microcultures and Finding your Way (2019)
 

@@ -25,8 +25,8 @@ class TagsTest {
 
     @Test
     void collectsEverySpellingOfATagAcrossFilesWhateverTheLineEndings() throws IOException {
-        Path a = Files.writeString(dir.resolve("a.md"), "title=A\ntags=DevOps, java\nstatus=published\n~~~~~~\ntags=notheader\n");
-        Path b = Files.writeString(dir.resolve("b.md"), "title=B\r\ntags=devops, Java\r\n~~~~~~\r\n");
+        Path a = Files.writeString(dir.resolve("a.md"), "---\ntitle: A\ntags: [DevOps, java]\nstatus: published\n---\ntags: notheader\n");
+        Path b = Files.writeString(dir.resolve("b.md"), "---\r\ntitle: B\r\ntags: [devops, Java]\r\n---\r\n");
 
         Map<String, TreeSet<String>> spellings = Tags.spellingsIn(List.of(a, b));
 

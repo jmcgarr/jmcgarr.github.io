@@ -43,7 +43,7 @@ class PrepareImageTest {
         Files.createDirectories(site.blog());
         Files.createDirectories(site.templates());
         Files.createDirectories(site.mastheads());
-        Files.writeString(site.blog().resolve("sunset.md"), "title=Sunset\nmasthead=sunset.png\nstatus=published\n~~~~~~\n\n"
+        Files.writeString(site.blog().resolve("sunset.md"), "---\ntitle: Sunset\nmasthead: sunset.png\nstatus: published\n---\n\n"
                 + "![The beach](/img/beach.png)\n");
         Files.writeString(site.templates().resolve("index.ftl"), "<#assign masthead = \"sunset.png\">\n<img src=\"/img/beach.png\">\n");
         git.answer("git cat-file -e main:", 128, "").answer("git cat-file -e origin/main:", 128, "");
@@ -69,7 +69,7 @@ class PrepareImageTest {
         assertFalse(TestImages.carriesMetadata(jpg));
         assertEquals(960, ImageIO.read(site.mastheads().resolve("sunset-960.jpg").toFile()).getWidth());
         assertEquals(1440, ImageIO.read(site.mastheads().resolve("sunset-1440.jpg").toFile()).getWidth());
-        assertTrue(Files.readString(site.blog().resolve("sunset.md")).contains("\nmasthead=sunset.jpg\n"));
+        assertTrue(Files.readString(site.blog().resolve("sunset.md")).contains("\nmasthead: sunset.jpg\n"));
         assertTrue(Files.readString(site.templates().resolve("index.ftl")).startsWith("<#assign masthead = \"sunset.jpg\">"));
         assertEquals(List.of("git cat-file -e main:src/jbake/assets/img/masthead/sunset.png",
                 "git cat-file -e origin/main:src/jbake/assets/img/masthead/sunset.png"), git.calls());
@@ -116,7 +116,7 @@ class PrepareImageTest {
         assertEquals(ToolFailure.FAILED, e.exitCode());
         assertArrayEquals(before, Files.readAllBytes(png));
         assertFalse(Files.exists(site.mastheads().resolve("sunset.jpg")));
-        assertTrue(Files.readString(site.blog().resolve("sunset.md")).contains("masthead=sunset.png"));
+        assertTrue(Files.readString(site.blog().resolve("sunset.md")).contains("masthead: sunset.png"));
         assertTrue(printed().endsWith("  a photo, but this PNG is published (it is in main), so a PNG must stay at its URL (AGENTS.md Rule 1,"
                 + " option B) and this program has no colour quantizer for the fallback: convert it by hand or add"
                 + " the quantizer (D2 in docs/archive/08-SCRIPTS-MIGRATION.md). Nothing changed.\n"), printed());

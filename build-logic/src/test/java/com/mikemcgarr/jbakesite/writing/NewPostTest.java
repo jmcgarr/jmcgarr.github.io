@@ -45,7 +45,7 @@ class NewPostTest {
         printer = new PrintStream(out, true, StandardCharsets.UTF_8);
         Files.createDirectories(site.drafts());
         Files.createDirectories(site.publishedUrls().getParent());
-        Files.writeString(site.blog().resolve("alm.md"), "title=ALM\ndate=2010-01-01\ntype=post\ntags=DevOps, java\nstatus=published\n~~~~~~\n");
+        Files.writeString(site.blog().resolve("alm.md"), "---\ntitle: ALM\ndate: 2010-01-01\ntype: post\ntags: [DevOps, java]\nstatus: published\n---\n");
         Files.writeString(site.publishedUrls(), "index.html\nblog/alm.html\nblog/old-post.html\n");
         TestRepositories.init(root);
         TestRepositories.commitAll(root, "Site");
@@ -64,16 +64,16 @@ class NewPostTest {
         Path file = newPost().create(new NewPostOptions("M10 Test", "DevOps, management", "A teaser.", null, null, null, null));
 
         assertEquals(site.drafts().resolve("m10-test.md"), file);
-        assertEquals("title=M10 Test\ndate=2026-10-28\ntype=post\ntags=DevOps, management\nstatus=draft\nsummary=A teaser.\n~~~~~~\n\n",
+        assertEquals("---\ntitle: M10 Test\ndate: 2026-10-28\ntype: post\ntags: [DevOps, management]\nstatus: draft\nsummary: A teaser.\n---\n\n",
                 Files.readString(file));
         assertEquals("post/m10-test", TestRepositories.git(root, "branch", "--show-current"));
         String printed = out.toString(StandardCharsets.UTF_8);
-        assertTrue(printed.contains("\nCreated src/jbake/content/blog/drafts/m10-test.md (status=draft, never published)\n"
+        assertTrue(printed.contains("\nCreated src/jbake/content/blog/drafts/m10-test.md (status: draft, never published)\n"
                 + "Switched to the new branch post/m10-test (from main)\n"), printed);
         assertTrue(printed.contains("    http://localhost:8080/blog/drafts/m10-test-draft.html\n"), printed);
-        assertTrue(printed.contains("  To publish: set status=published, move the file to src/jbake/content/blog/, and open a PR.\n"
+        assertTrue(printed.contains("  To publish: set status: published, move the file to src/jbake/content/blog/, and open a PR.\n"
                 + "    It will live at " + HOST + "/blog/m10-test.html (permanent).\n"), printed);
-        assertFalse(printed.contains("Fill in summary="), "a summary was given");
+        assertFalse(printed.contains("Fill in summary:"), "a summary was given");
         assertTrue(printed.contains("Note: 'management' is a new tag, so publishing creates /tags/management.html."), printed);
         assertFalse(printed.contains("WARNING"), "DevOps is spelled as the existing post spells it");
     }
@@ -85,7 +85,7 @@ class NewPostTest {
         String printed = out.toString(StandardCharsets.UTF_8);
         assertTrue(printed.contains("WARNING: the tag 'devops' is already used as [DevOps]. A different capitalization makes a separate"
                 + " tag page. Use the existing spelling."), printed);
-        assertTrue(printed.contains("  Fill in summary= (optional): it's the teaser under the title on the home page.\n"), printed);
+        assertTrue(printed.contains("  Fill in summary: (optional): it's the teaser under the title on the home page.\n"), printed);
         assertEquals("main", TestRepositories.git(root, "branch", "--show-current"), "-Pbranch=false stays put");
         assertFalse(printed.contains("Switched to"), printed);
     }
@@ -164,7 +164,7 @@ class NewPostTest {
                 + "Pushed post/pr-post to origin\n"
                 + "Opened the draft pull request \"[WIP] PR Post\": https://github.com/owner/site/pull/7\n"), printed);
         assertTrue(printed.contains("  Commit and push to post/pr-post as you go; the draft PR picks it up.\n"
-                + "  To publish: set status=published, move the file to src/jbake/content/blog/, drop [WIP] from\n"
+                + "  To publish: set status: published, move the file to src/jbake/content/blog/, drop [WIP] from\n"
                 + "    the PR title, mark it ready (gh pr ready), and merge.\n"), printed);
         assertTrue(gh.calls().contains("git add -- src/jbake/content/blog/drafts/pr-post.md"), gh.calls().toString());
         assertTrue(gh.calls().stream().anyMatch(c -> c.startsWith("gh pr create --draft --repo owner/site --base main --head post/pr-post"

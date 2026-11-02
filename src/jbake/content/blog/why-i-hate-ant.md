@@ -1,10 +1,11 @@
-title=Why I Hate Ant
-date=2010-02-15
-type=post
-tags=ant, Java, maven
-status=published
-summary=OK, let me address the title of this blog before the whole Java open source community jumps down my throat.  I do not really hate Ant, in fact Ant is a great and invaluable tool.
-~~~~~~
+---
+title: Why I Hate Ant
+date: 2010-02-15
+type: post
+tags: [ant, Java, maven]
+status: published
+summary: OK, let me address the title of this blog before the whole Java open source community jumps down my throat.  I do not really hate Ant, in fact Ant is a great and invaluable tool.
+---
 OK, let me address the title of this blog before the whole Java open source community jumps down my throat.  I do not really hate Ant, in fact Ant is a great and invaluable tool.  Ant helps simplify building and deploying Java applications.  It is extremely powerful and flexible and allows you to do pretty much anything you want as part of your build process.  Ant's flexibility is what has helped it gain popularity in the Java community, and this flexibility is at the core of my Ant critique.
 
 I came to this realization recently when I recommended to a colleague that I help him convert his open source project from Ant to Maven.  I have spent the last three years evangelizing the tenants of Maven over Ant and how it solves many of Ant's problems (conventions over convenience, dependency management).  I also enumerated some of the issues I have experienced with using Maven, such as dependency bloat, steeper learning curve, and decreased build transparency to name a few.  In spite of this, I still felt that Maven was a better solution for most open source projects and can help projects integrate quicker.

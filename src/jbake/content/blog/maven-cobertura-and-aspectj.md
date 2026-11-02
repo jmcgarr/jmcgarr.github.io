@@ -1,10 +1,11 @@
-title=Maven, Cobertura and AspectJ
-date=2010-01-04
-type=post
-tags=aspectj, cobertura, Java, maven
-status=published
-summary=I recently ran into an issue running Cobertura code coverage reports on my Maven2 project.  It appears that Cobertura is not being run, since the code coverage reports always showed 0% code coverage in spite of the existence of numerous unit tests.
-~~~~~~
+---
+title: Maven, Cobertura and AspectJ
+date: 2010-01-04
+type: post
+tags: [aspectj, cobertura, Java, maven]
+status: published
+summary: I recently ran into an issue running Cobertura code coverage reports on my Maven2 project.  It appears that Cobertura is not being run, since the code coverage reports always showed 0% code coverage in spite of the existence of numerous unit tests.
+---
 I recently ran into an issue running Cobertura code coverage reports on my Maven2 project.  It appears that Cobertura is not being run, since the code coverage reports always showed 0% code coverage in spite of the existence of numerous unit tests.  This problem had appeared early in the project and seemed to disappear magically, so I wrote it off.  Now that it is back, I was determined to find the answer, and I have.
 
 Cobertura is a code coverage tool that measures the amount of code exercised by your unit tests.  Cobertura works by instrumenting your application's byte code, which occurs after compilation.  When the instrumented code is called by your unit tests, Cobertura records which packages, files, lines, methods and even conditions are covered by your unit tests.

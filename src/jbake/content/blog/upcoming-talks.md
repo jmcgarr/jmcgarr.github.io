@@ -1,10 +1,11 @@
-title=Upcoming Talks
-date=2012-10-22
-type=post
-tags=agile richmond, agiledc, continuous delivery, Excella Consulting, tdd
-status=published
-summary=I haven't posted in a while, but I wanted to share some upcoming talks I will be giving before the end of the new year.
-~~~~~~
+---
+title: Upcoming Talks
+date: 2012-10-22
+type: post
+tags: [agile richmond, agiledc, continuous delivery, Excella Consulting, tdd]
+status: published
+summary: I haven't posted in a while, but I wanted to share some upcoming talks I will be giving before the end of the new year.
+---
 I haven't posted in a while, but I wanted to share some upcoming talks I will be giving before the end of the new year.
 
 <img align="right" title="agiledc" alt="I'm speaking at AgileDC, October 23, 2012" src="/img/agiledc.png" height="100" width="242" />Tomorrow I will closing the day at [AgileDC](https://web.archive.org/web/20121013074043/http://agiledc.org:80/ "AgileDC") with my [Continuous Delivery Applied](https://www.slideshare.net/slideshow/continuous-delivery-applied/14204775 "Continuous Delivery Applied presenation") presentation.  This will be my first time attending AgileDC and I am very excited to be ask to present.  I've made some updates and improvements to my talk, so come out and see it again.  I am looking forward to it and I hope to see everybody there.

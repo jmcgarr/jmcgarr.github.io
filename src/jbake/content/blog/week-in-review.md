@@ -1,12 +1,13 @@
-title=How I share information with my team
-date=2016-11-14
-type=post
-tags=management, leadership, productivity, writing
-status=published
-summary=As an engineering manager at Netflix, I spend most of my time in meetings and one-on-ones. During these meetings, I collect a lot of information that’s valuable to the members of my engineering team. When my team was only four people, disseminating information was easy. It usually involved a quick hallway chat or was covered during a regular one-on-one. But late last year my team doubled in size. With the larger team, I struggled to keep everybody informed in a timely way. It became obvious that I wasn’t effectively scaling team communication and I needed to make a change.
-masthead=chantilly-library.jpg
-mastheadCredit=https://flic.kr/p/8Fxgv3
-~~~~~~
+---
+title: How I share information with my team
+date: 2016-11-14
+type: post
+tags: [management, leadership, productivity, writing]
+status: published
+summary: As an engineering manager at Netflix, I spend most of my time in meetings and one-on-ones. During these meetings, I collect a lot of information that’s valuable to the members of my engineering team. When my team was only four people, disseminating information was easy. It usually involved a quick hallway chat or was covered during a regular one-on-one. But late last year my team doubled in size. With the larger team, I struggled to keep everybody informed in a timely way. It became obvious that I wasn’t effectively scaling team communication and I needed to make a change.
+masthead: chantilly-library.jpg
+mastheadCredit: https://flic.kr/p/8Fxgv3
+---
 As an engineering manager at [Netflix](https://www.netflix.com), I spend most of my time in meetings and one-on-ones. During these meetings, I collect a lot of information that’s valuable to the members of my engineering team. When my team was only four people, disseminating information was easy. It usually involved a quick hallway chat or was covered during a regular one-on-one. But late last year my team doubled in size. With the larger team, I struggled to keep everybody informed in a timely way. It became obvious that I wasn’t effectively scaling team communication and I needed to make a change.
 
 My first instinct was to establish a weekly team meeting to share my notes and info collected from the week prior. But I was reticent to establish a weekly ceremony just to have my team sit and listen to me. I felt it would not be an effective use of both my time and theirs. I shared my dilemma with [Andy Glover](https://x.com/aglover), who manages another Netflix engineering team of a similar size. Andy told me that each week he sends his team a Week-in-Review: a document containing relevant meeting notes from the week prior. I decided to give it a try.
