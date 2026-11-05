@@ -1,10 +1,11 @@
-title=Improving my Shell-fu: Oh My Zsh
-date=2013-03-19
-type=post
-tags=bash, oh-my-zsh, shell-fu, zsh
-status=published
-summary=I have been recently diving head first into the wonderful world of the shell.  Having spent a fair amount of my career on Windows machines at work (even though I have been using Mac's at home for 6+ years), it's only in the past year that I have made the full switch to 100% Mac for work and home.
-~~~~~~
+---
+title: "Improving my Shell-fu: Oh My Zsh"
+date: 2013-03-19
+type: post
+tags: [bash, oh-my-zsh, shell-fu, zsh]
+status: published
+summary: I have been recently diving head first into the wonderful world of the shell.  Having spent a fair amount of my career on Windows machines at work (even though I have been using Mac's at home for 6+ years), it's only in the past year that I have made the full switch to 100% Mac for work and home.
+---
 I have been recently diving head first into the wonderful world of the shell.  Having spent a fair amount of my career on Windows machines at work (even though I have been using Mac's at home for 6+ years), it's only in the past year that I have made the full switch to 100% Mac for work and home.  I have found that this has enabled me to focus on learning more about the shell.  (no more cmd for me!)
 
 As part of this experience, I have also picked up a bunch of tips and tools from a bunch of my co-workers here at [Blackboard](https://www.blackboard.com/ "Blackboard").  I also have been picking up some tips from various other sources, most notably the [Changelog podcast](https://changelog.com/podcast "Changelog podcast").  I wanted to start sharing of these tools, setups and experiences since I am excited about them.  Rather than one giant blog, I will release them in a series of blogs called <a title="Shell-fu series of blogs" href="/tags/shell-fu.html" target="_blank">Shell-fu</a>.  The first Shell-fu blog is on [Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh "Oh my Zsh") (OMZ).

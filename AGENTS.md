@@ -9,19 +9,19 @@ published since 2009. Other sites, search engines, RSS readers, and slide decks 
 links pointing at it. **Treat it as a live publication, not a code project.** Every published URL is
 a promise to the people who linked to it.
 
-- **Generator:** JBake 2.7, run in a fresh JVM by the site's own Gradle plugin, `jbake-site`, an included build in `build-logic/` written in Java with its own tests (`./gradlew :build-logic:check`; [`docs/archive/06-GRADLE-PLUGIN.md`](docs/archive/06-GRADLE-PLUGIN.md), 2026-10). `build.gradle` only applies it, configures it (`jbakeSite { }`) and pins JBake's versions (no JBake plugin since T096). Gradle 9.8 wrapper (T097), JDK 25 via `.java-version` (T113; JDK 21 also works)
+- **Generator:** JBake 2.7, run in a fresh JVM, with the plugin's own parser engine for the YAML front matter (T145), by the site's own Gradle plugin, `jbake-site`, an included build in `build-logic/` written in Java with its own tests (`./gradlew :build-logic:check`; [`docs/archive/06-GRADLE-PLUGIN.md`](docs/archive/06-GRADLE-PLUGIN.md), 2026-10). `build.gradle` only applies it, configures it (`jbakeSite { }`) and pins JBake's versions (no JBake plugin since T096). Gradle 9.8 wrapper (T097), JDK 25 via `.java-version` (T113; JDK 21 also works)
 - **Theme:** Start Bootstrap "Clean Blog" (Bootstrap 4.1, jQuery 3.3) as FreeMarker templates. The footer and menu icons are inline SVGs from Font Awesome Free (T047, T135); no icon font is loaded, though the vendored Font Awesome 5.3.1 files stay published (Rule 1)
 - **Styles:** all of the site's own CSS (`clean-blog.css`, with the `@font-face` rules since T135, and `code.css`) is generated from `src/scss/` by Dart Sass inside Gradle (`compileSass`, T043, T134). **Edit the SCSS, never the CSS**: it isn't committed, and the build fails if a hand-written copy (or the old `extra.css` or `fonts.css`) reappears under `src/jbake/assets/css/`. See README, "To change the site's styles"
 - **Branches:** `main` holds the source (the default branch; renamed from `source` in T093). `master` is the **retired** publishing branch from before T027, frozen and preserved by tag `live-2026-10`. Don't push to it.
 - **Deploys:** GitHub Actions bakes, checks, and deploys to GitHub Pages (as an artifact, no commits) on **every push to `main`**. Merging to `main` *is* publishing. A manual "Run workflow" on `main` redeploys.
-- **Current work:** there is no active plan. The backlog is the repo's [GitHub issues](https://github.com/jmcgarr/jmcgarr.github.io/issues) (Rule 5). The finished plans are archived under `docs/archive/` and remain the record of the work and the reasons: the 2026 revival ([`00-REVIVAL.md`](docs/archive/00-REVIVAL.md)), the owner's Author's Desk ([`04-AUTHORS-DESK.md`](docs/archive/04-AUTHORS-DESK.md)), the review flow ([`05-REVIEW-FLOW.md`](docs/archive/05-REVIEW-FLOW.md)), the Gradle plugin ([`06-GRADLE-PLUGIN.md`](docs/archive/06-GRADLE-PLUGIN.md)) and the scripts migration ([`08-SCRIPTS-MIGRATION.md`](docs/archive/08-SCRIPTS-MIGRATION.md)); their task IDs are still cited in code comments and notes, and the items they left open are issues now (#14, #180–#183). A new numbered doc under `docs/` is written only when a piece of work needs a plan (several tasks, decisions, or checkpoints); then it becomes the current plan and this line names it. Agents may prepare material for the owner's tasks, but the owner decides.
+- **Current work:** there is no active plan. The backlog is the repo's [GitHub issues](https://github.com/jmcgarr/jmcgarr.github.io/issues) (Rule 5). The finished plans are archived under `docs/archive/` and remain the record of the work and the reasons: the 2026 revival ([`00-REVIVAL.md`](docs/archive/00-REVIVAL.md)), the owner's Author's Desk ([`04-AUTHORS-DESK.md`](docs/archive/04-AUTHORS-DESK.md)), the review flow ([`05-REVIEW-FLOW.md`](docs/archive/05-REVIEW-FLOW.md)), the Gradle plugin ([`06-GRADLE-PLUGIN.md`](docs/archive/06-GRADLE-PLUGIN.md)) and the scripts migration ([`08-SCRIPTS-MIGRATION.md`](docs/archive/08-SCRIPTS-MIGRATION.md)); their task IDs are still cited in code comments and notes, and the items they left open are issues now (#14, #180–#183). The one numbered doc still at the top level is the front matter decision record ([`07-FRONT-MATTER.md`](docs/07-FRONT-MATTER.md), accepted 2026-11-02 and implemented as T145–T148). A new numbered doc under `docs/` is written only when a piece of work needs a plan (several tasks, decisions, or checkpoints); then it becomes the current plan and this line names it. Agents may prepare material for the owner's tasks, but the owner decides.
 
 ### Layout
 
 ```
 src/jbake/content/        Pages and posts → published as HTML (see "URLs are permanent")
   blog/                   Posts (.md; every post and page is Markdown since T102, 2026-10-18)
-  blog/drafts/            Draft posts (status=draft): rendered for local preview, never published
+  blog/drafts/            Draft posts (status: draft): rendered for local preview, never published
 src/jbake/templates/      FreeMarker templates (*.ftl)
   archived-comments/      Read-only Disqus comments, generated in T045 from the Disqus export (the script is retired, in git history; don't edit by hand)
 src/jbake/assets/         Copied to the site root as-is. EVERYTHING here is published.
@@ -65,8 +65,8 @@ that specific change.
 | Source | Published URL |
 |---|---|
 | `src/jbake/content/<dir>/<name>.md` (the build renders Markdown only, T102) | `/<dir>/<name>.html` |
-| `src/jbake/content/blog/drafts/<name>.*` (`status=draft`) | **Not published.** Preview only, at `http://localhost:8080/blog/drafts/<name>-draft.html` |
-| `tags=a, b` in front matter | `/tags/a.html`, `/tags/b.html`; spaces become hyphens (`tags=unit testing` → `/tags/unit-testing.html`, `tag.sanitize=true`, T039) and capitals are kept |
+| `src/jbake/content/blog/drafts/<name>.*` (`status: draft`) | **Not published.** Preview only, at `http://localhost:8080/blog/drafts/<name>-draft.html` |
+| `tags: [a, b]` in front matter | `/tags/a.html`, `/tags/b.html`; spaces become hyphens (`tags: [unit testing]` → `/tags/unit-testing.html`, `tag.sanitize=true`, T039) and capitals are kept |
 | `src/jbake/assets/<path>` | `/<path>` (images, CSS, JS, `CNAME`, `favicon.ico`) |
 | `src/case-redirects/<path>` | `/<path>`, but only on Linux (CI): redirect stubs whose names differ from a real page only by case (T055) |
 | Templates | `/index.html`, `/archive.html`, `/feed.xml`, `/sitemap.xml`, `/tags/index.html` (Topics, linked as `/tags/`, T057) |
@@ -79,7 +79,7 @@ URLs: never delete one.
 So all of the following **change or remove a published URL**, and each needs explicit approval:
 
 - Renaming or moving a file under `src/jbake/content/` (including fixing a typo in a slug like `relections-and-projections-2019`)
-- Removing or renaming a tag in a post's `tags=` front matter (that can delete a `/tags/*.html` page)
+- Removing or renaming a tag in a post's `tags:` front matter (that can delete a `/tags/*.html` page)
 - Renaming, moving, or deleting anything under `src/jbake/assets/`, especially `img/` (other sites may hotlink these images)
 - Changing `site.host`, the feed or archive file names, or JBake settings that affect output paths (for example tag sanitizing)
 
@@ -144,9 +144,9 @@ makes them, or run `./gradlew prepareImage -Pimage=<image> -Pvariants` alone aft
 ## Rule 3: Respect the author's content
 
 - Posts are the author's voice. **Don't rewrite, reword, or "improve" published prose** unless asked.
-- Don't change a post's `date=`. It controls ordering, the archive, the feed, and the sitemap.
-- Don't change `status=` (draft ↔ published) unless asked. Publishing is the author's decision.
-- Front matter is `key=value` lines ending with a `~~~~~~` separator. Keep that format.
+- Don't change a post's `date:`. It controls ordering, the archive, the feed, and the sitemap.
+- Don't change `status:` (draft ↔ published) unless asked. Publishing is the author's decision.
+- Front matter is YAML: `key: value` lines between two `---` lines, `tags` as a list (`[a, b]`), a value with a colon and a space in it quoted (T145, 2026-11-02; [`docs/07-FRONT-MATTER.md`](docs/07-FRONT-MATTER.md)). Keep that format: the review's E4 refuses the `key=value` header that ended with `~~~~~~` (JBake's own, used until then), even though the bake would still render it.
 - All content uses **LF** line endings. The 63 legacy WordPress posts were converted from old Mac CR-only line breaks in revival task T051, so diffs stay line-by-line on GitHub. CI fails if a CR line ending comes back.
 
 ## Rule 4: Nothing private gets published

@@ -1,10 +1,11 @@
-title=A Hack to Syncing Multiple Google Calenders with your iPhone
-date=2009-09-24
-type=post
-tags=google calendar, iphone
-status=published
-summary=As a proud iPhone owner, I have tried to integrate my phone with just about every aspect of my life, which of course includes all my calendars.  I also have been using Google Calendar for a long time and I love how easy it is to create multiple calendars and share them with friends and family.
-~~~~~~
+---
+title: A Hack to Syncing Multiple Google Calenders with your iPhone
+date: 2009-09-24
+type: post
+tags: [google calendar, iphone]
+status: published
+summary: As a proud iPhone owner, I have tried to integrate my phone with just about every aspect of my life, which of course includes all my calendars.  I also have been using Google Calendar for a long time and I love how easy it is to create multiple calendars and share them with friends and family.
+---
 As a proud iPhone owner, I have tried to integrate my phone with just about every aspect of my life, which of course includes all my calendars.  I also have been using Google Calendar for a long time and I love how easy it is to create multiple calendars and share them with friends and family.  I also have my work Outlook calendar I want to synchronize with my iPhone.  This sounds simple enough, right?
 
 The problem is most guides I have found online only provided directions on how to sync your Google Calendar as the primary calender on your phone.  Since my primary calender is my work Outlook calender, I can't do this.  Google Sync looks very useful, but I haven't hooked it up since it uses Outlook's ActiveSync, and we all know that the iPhone can only have one ActiveSync account enabled at a time.  Google also provides a simple CalDav based solution for syncing your iPhone with your Google Calender.  If you only have Google Calender, then this solution works great and it is simple to setup.  I, however, want to see all of my multiple Google Calender show up on my iPhone, color coordinated by calendar.

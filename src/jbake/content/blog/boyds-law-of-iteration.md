@@ -1,10 +1,11 @@
-title=Boyds Law of Iteration
-date=2013-02-15
-type=post
-tags=boyd's law, continuous delivery, devops
-status=published
-summary=My boss Steve asked me the other day why I have never posted anything about Boyd's Law of Iteration.
-~~~~~~
+---
+title: Boyds Law of Iteration
+date: 2013-02-15
+type: post
+tags: [boyd's law, continuous delivery, devops]
+status: published
+summary: My boss Steve asked me the other day why I have never posted anything about Boyd's Law of Iteration.
+---
 My boss [Steve](https://x.com/PerfForensics "Steve Feldman") asked me the other day why I have never posted anything about Boyd's Law of Iteration.  "Your blog's name is 'Early and Often', right?".  He's right, I have no excuse.
 
 Boyd's Law is the basis for most popular software development approaches.  [Lean](https://en.wikipedia.org/wiki/Lean_manufacturing "Lean"), [Agile](https://agilemanifesto.org/ "Agile"), [Continuous Delivery](https://continuousdelivery.com/ "Continuous Delivery"), [DevOps](https://en.wikipedia.org/wiki/DevOps "DevOps"), [Lean Startup](https://theleanstartup.com/ "Lean Startup")...all have their foundation in the concept that you release changes faster and more frequently.  In other words, you must iterate quickly.  Furthermore, the speed you can iterate is more important than the quality of iteration.

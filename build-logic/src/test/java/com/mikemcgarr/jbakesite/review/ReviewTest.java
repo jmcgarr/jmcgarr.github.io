@@ -36,9 +36,9 @@ import org.junit.jupiter.api.io.TempDir;
 class ReviewTest {
 
     private static final Clock TODAY = Clock.fixed(Instant.parse("2026-10-28T12:00:00Z"), ZoneOffset.UTC);
-    private static final String POST = "title=A Post\ndate=2026-01-02\ntype=post\ntags=testing, java\nstatus=published\nsummary=A summary.\n~~~~~~\n\nThe body.\n";
-    private static final String OTHER = "title=Other\ndate=2025-05-05\ntype=post\ntags=testing\nstatus=published\nsummary=Yes.\n~~~~~~\n\nOther.\n";
-    private static final String ABOUT = "title=About\ndate=2026-01-01\ntype=page\nstatus=published\n~~~~~~\n\nAbout me.\n";
+    private static final String POST = "---\ntitle: A Post\ndate: 2026-01-02\ntype: post\ntags: [testing, java]\nstatus: published\nsummary: A summary.\n---\n\nThe body.\n";
+    private static final String OTHER = "---\ntitle: Other\ndate: 2025-05-05\ntype: post\ntags: [testing]\nstatus: published\nsummary: Yes.\n---\n\nOther.\n";
+    private static final String ABOUT = "---\ntitle: About\ndate: 2026-01-01\ntype: page\nstatus: published\n---\n\nAbout me.\n";
 
     @TempDir
     Path root;
@@ -116,7 +116,7 @@ class ReviewTest {
         assertEquals(List.of("E1", "E1", "E1", "E1", "E1", "E1"), ids(result));
         Finding first = result.findings().get(0);
         assertEquals("src/jbake/content/blog/a-post.md", first.file());
-        assertEquals(10, first.line());
+        assertEquals(11, first.line());
         assertEquals("Link text \"[Booz Allen]\" is followed by \"https://www.boozallen.com/\" with no \"(\": it renders as literal brackets.", first.message());
         assertEquals("[Booz Allen](https://www.boozallen.com/)", first.fix());
         List<String> messages = result.findings().stream().map(Finding::message).toList();
@@ -139,7 +139,7 @@ class ReviewTest {
 
         assertEquals("E2", f.id());
         assertEquals("src/jbake/content/blog/a-post.md", f.file());
-        assertEquals(10, f.line());
+        assertEquals(11, f.line());
         assertEquals("The page shows \"Worked at [Acme] for years.\" with the brackets as text. A Markdown link didn't form (see E1),"
                 + " or a bracket needs escaping as \\[.", f.message());
     }
@@ -175,34 +175,34 @@ class ReviewTest {
         List<String> messages = result.findings().stream().map(f -> f.id() + " " + f.file() + ":" + f.line() + " " + f.message()).toList();
         assertEquals(List.of(
                 "E3 blog/a-post.html:1 <img srcset=\"/img/old-2x.png\">: nothing at /img/old-2x.png in the baked site. (On blog/a-post.html.)",
-                "E3 src/jbake/content/blog/a-post.md:10 <a href=\"missing.html\">: nothing at /blog/missing.html in the baked site.",
-                "E3 src/jbake/content/blog/a-post.md:10 <a href=\"/about.html#nowhere\">: /about.html has no id=\"nowhere\" to jump to.",
-                "E3 src/jbake/content/blog/a-post.md:10 <a href=\"/img/gone.png\">: nothing at /img/gone.png in src/jbake/assets any more"
+                "E3 src/jbake/content/blog/a-post.md:11 <a href=\"missing.html\">: nothing at /blog/missing.html in the baked site.",
+                "E3 src/jbake/content/blog/a-post.md:11 <a href=\"/about.html#nowhere\">: /about.html has no id=\"nowhere\" to jump to.",
+                "E3 src/jbake/content/blog/a-post.md:11 <a href=\"/img/gone.png\">: nothing at /img/gone.png in src/jbake/assets any more"
                         + " (the copy in build/jbake is left over from an earlier bake)."),
                 messages, "sorted by file: a finding with no source line names the page");
     }
 
     @Test
     void e4TheHeader() throws IOException, InterruptedException {
-        edit("src/jbake/content/blog/a-post.md", "title=Bad\ndate=yesterday\ntype=essay\nstatus=live\n~~~~~~\n\nBody.\r\n");
-        edit("src/jbake/content/blog/new-post.md", "title=New\ndate=2026-10-28\ntype=post\nstatus=draft\n~~~~~~\n\nNo summary.\n");
-        edit("src/jbake/content/blog/no-separator.md", "title=Broken\ndate=2026-10-28\ntype=post\nstatus=draft\n\nBody\n");
+        edit("src/jbake/content/blog/a-post.md", "---\ntitle: Bad\ndate: yesterday\ntype: essay\nstatus: live\n---\n\nBody.\r\n");
+        edit("src/jbake/content/blog/new-post.md", "---\ntitle: New\ndate: 2026-10-28\ntype: post\nstatus: draft\n---\n\nNo summary.\n");
+        edit("src/jbake/content/blog/no-separator.md", "---\ntitle: Broken\ndate: 2026-10-28\ntype: post\nstatus: draft\n\nBody\n");
 
         ReviewResult result = run();
 
         List<String> messages = result.findings().stream().map(f -> f.id() + " " + f.file() + ":" + f.line() + " " + f.message()
                 + (f.fix() == null ? "" : " | " + f.fix())).toList();
         assertEquals(List.of(
-                "E4 src/jbake/content/blog/a-post.md:2 date=yesterday isn't a date of the form YYYY-MM-DD. | date=2026-10-28",
-                "E4 src/jbake/content/blog/a-post.md:3 type=essay isn't post or page. | type=post",
-                "E4 src/jbake/content/blog/a-post.md:4 status=live isn't draft or published. | status=draft",
-                "E4 src/jbake/content/blog/a-post.md:7 The file has a CR line ending. Content is LF only (AGENTS.md Rule 3; CI fails on this)."
+                "E4 src/jbake/content/blog/a-post.md:3 date: yesterday isn't a date of the form YYYY-MM-DD. | date: 2026-10-28",
+                "E4 src/jbake/content/blog/a-post.md:4 type: essay isn't post or page. | type: post",
+                "E4 src/jbake/content/blog/a-post.md:5 status: live isn't draft or published. | status: draft",
+                "E4 src/jbake/content/blog/a-post.md:8 The file has a CR line ending. Content is LF only (AGENTS.md Rule 3; CI fails on this)."
                         + " | Convert the line endings: perl -pi -e 's/\\r\\n?/\\n/g' src/jbake/content/blog/a-post.md",
-                "E4 src/jbake/content/blog/new-post.md:1 A new post needs a summary=: it's the teaser on the home page, in the feed and on share cards."
-                        + " | summary=One sentence that says what the post is about.",
+                "E4 src/jbake/content/blog/new-post.md:1 A new post needs a summary: it's the teaser on the home page, in the feed and on share cards."
+                        + " | summary: One sentence that says what the post is about.",
                 "E4 src/jbake/content/blog/new-post.md:1 JBake produced no page blog/new-post-draft.html in build/jbake. Check the header, then ./gradlew bake.",
-                "E4 src/jbake/content/blog/no-separator.md:1 No ~~~~~~ line ends the header, so JBake won't render this file."
-                        + " | Put ~~~~~~ on its own line after the key=value lines."),
+                "E4 src/jbake/content/blog/no-separator.md:1 No --- line closes the front matter, so JBake won't render this file."
+                        + " | Put --- on its own line after the key: value lines."),
                 messages);
         assertEquals(List.of(), result.reviewedPages(), "a page with a broken header isn't expected in the bake; a missing summary doesn't stop the page check");
     }
@@ -225,8 +225,8 @@ class ReviewTest {
         byte[] heavy = new byte[500 * 1024];
         new Random(1).nextBytes(heavy);
         Files.write(site.images().resolve("heavy.png"), heavy);
-        edit("src/jbake/content/blog/a-post.md", POST.replace("type=post\n", "type=post\nmasthead=nowhere.jpg\n"));
-        edit("src/jbake/content/about.md", ABOUT.replace("type=page\n", "type=page\nmasthead=wide.jpg\n"));
+        edit("src/jbake/content/blog/a-post.md", POST.replace("type: post\n", "type: post\nmasthead: nowhere.jpg\n"));
+        edit("src/jbake/content/about.md", ABOUT.replace("type: page\n", "type: page\nmasthead: wide.jpg\n"));
 
         ReviewResult result = run();
 
@@ -238,9 +238,9 @@ class ReviewTest {
                 "E5 src/jbake/assets/img/masthead/wide.jpg:0 The image is 2000 px wide; the limit is 1920 px (AGENTS.md Rule 4). | Resize it to at most 1920 px wide.",
                 "E5 src/jbake/assets/img/masthead/wide.jpg:0 The masthead wide.jpg has no wide-960.jpg or wide-1440.jpg variant for phones and tablets"
                         + " (CI fails without them). | ./gradlew prepareImage -Pimage=src/jbake/assets/img/masthead/wide.jpg -Pvariants",
-                "E5 src/jbake/content/about.md:4 The masthead wide.jpg has no wide-960.jpg or wide-1440.jpg variant for phones and tablets"
+                "E5 src/jbake/content/about.md:5 The masthead wide.jpg has no wide-960.jpg or wide-1440.jpg variant for phones and tablets"
                         + " (CI fails without them). | ./gradlew prepareImage -Pimage=src/jbake/assets/img/masthead/wide.jpg -Pvariants",
-                "E5 src/jbake/content/blog/a-post.md:4 masthead=nowhere.jpg isn't in src/jbake/assets/img/masthead."
+                "E5 src/jbake/content/blog/a-post.md:5 masthead: nowhere.jpg isn't in src/jbake/assets/img/masthead."
                         + " | Add the image there, then run ./gradlew prepareImage -Pimage=<image> -Pvariants"),
                 messages);
     }
@@ -254,21 +254,21 @@ class ReviewTest {
         assertEquals("W2", f.id());
         assertFalse(f.error());
         assertEquals("src/jbake/content/about.md", f.file());
-        assertEquals(2, f.line());
-        assertEquals("This page changed but date=2026-01-01 did not. The sitemap reports it as lastmod. Today is 2026-10-28.", f.message());
-        assertEquals("date=2026-10-28", f.fix());
+        assertEquals(3, f.line());
+        assertEquals("This page changed but date: 2026-01-01 did not. The sitemap reports it as lastmod. Today is 2026-10-28.", f.message());
+        assertEquals("date: 2026-10-28", f.fix());
     }
 
     @Test
     void w3TagSpellingsAndNewTags() throws IOException, InterruptedException {
-        edit("src/jbake/content/blog/a-post.md", POST.replace("tags=testing, java", "tags=Testing, java, brand-new"));
+        edit("src/jbake/content/blog/a-post.md", POST.replace("tags: [testing, java]", "tags: [Testing, java, brand-new]"));
 
         ReviewResult result = run();
 
         List<String> messages = result.findings().stream().map(f -> f.id() + ":" + f.line() + " " + f.message() + " | " + f.fix()).toList();
         assertEquals(List.of(
-                "W3:4 The tag 'Testing' is already used as [testing]. A different spelling or capitalization makes a separate tag page. | Use testing",
-                "W3:4 'brand-new' is a new tag, so publishing makes /tags/brand-new.html. Fine if intended; check the Topics page for a close match. | null"),
+                "W3:5 The tag 'Testing' is already used as [testing]. A different spelling or capitalization makes a separate tag page. | Use testing",
+                "W3:5 'brand-new' is a new tag, so publishing makes /tags/brand-new.html. Fine if intended; check the Topics page for a close match. | null"),
                 messages, "java was there at the merge base, so it isn't new");
     }
 
@@ -281,9 +281,9 @@ class ReviewTest {
         ReviewResult result = run();
 
         assertEquals(List.of(
-                "W4:10 This <img> has no alt text. Say what the image shows, or alt=\"\" if it's decorative.",
-                "W4:11 alt=\"old.png\" is the image's file name. Say what the image shows.",
-                "W4:12 This image has empty alt text. Say what it shows: ![what it shows](…)."),
+                "W4:11 This <img> has no alt text. Say what the image shows, or alt=\"\" if it's decorative.",
+                "W4:12 alt=\"old.png\" is the image's file name. Say what the image shows.",
+                "W4:13 This image has empty alt text. Say what it shows: ![what it shows](…)."),
                 result.findings().stream().map(f -> f.id() + ":" + f.line() + " " + f.message()).toList());
     }
 
@@ -310,13 +310,13 @@ class ReviewTest {
 
     @Test
     void w7AnExistingPostWithoutASummary() throws IOException, InterruptedException {
-        edit("src/jbake/content/blog/a-post.md", POST.replace("summary=A summary.\n", ""));
+        edit("src/jbake/content/blog/a-post.md", POST.replace("summary: A summary.\n", ""));
 
         Finding f = only(run());
 
         assertEquals("W7", f.id());
         assertEquals(1, f.line());
-        assertEquals("This post has no summary=. The home page, the feed and share cards use it. Adding one is your call.", f.message());
+        assertEquals("This post has no summary. The home page, the feed and share cards use it. Adding one is your call.", f.message());
         assertNull(f.fix());
     }
 
@@ -333,7 +333,7 @@ class ReviewTest {
 
     @Test
     void allReviewsEveryPageAndKeepsTheDiffOnlyWarningsQuiet() throws IOException, InterruptedException {
-        edit("src/jbake/content/blog/a-post.md", POST.replace("summary=A summary.\n", "").replace("tags=testing, java", "tags=Testing, new-one"));
+        edit("src/jbake/content/blog/a-post.md", POST.replace("summary: A summary.\n", "").replace("tags: [testing, java]", "tags: [Testing, new-one]"));
 
         ReviewResult result = review.run(new ReviewOptions("main", true, false, false));
 

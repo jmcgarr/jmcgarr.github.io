@@ -11,7 +11,11 @@ import com.mikemcgarr.jbakesite.writing.OpenPrTask;
 import com.mikemcgarr.jbakesite.writing.PrepareImageTask;
 import com.mikemcgarr.jbakesite.writing.TagRedirects;
 import com.mikemcgarr.jbakesite.writing.TagRedirectsTask;
+import java.io.File;
+import java.net.URISyntaxException;
+import java.security.CodeSource;
 import java.util.List;
+import org.gradle.api.GradleException;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.Task;
@@ -185,7 +189,9 @@ public final class JbakeSitePlugin implements Plugin<Project> {
             TaskProvider<CompileSassTask> compileSass, TaskContainer tasks, ProjectLayout layout, ProviderFactory providers) {
         tasks.withType(JbakeTask.class).configureEach(task -> {
             task.getSource().set(site.getSource());
-            task.getClasspath().from(jbake);
+            // JBake's libraries, and the plugin's own jar for the launcher and the front matter engine (T145), which
+            // compile against them and run only there
+            task.getClasspath().from(jbake, pluginClasses());
             task.getJvmArguments().convention(providers.provider(NewJdkJvmArgs::forCurrentJvm));
             task.getLogbackConfiguration().set(site.getLogbackConfiguration());
             task.getJffiDirectory().set(layout.getBuildDirectory().dir(JFFI_DIRECTORY));
@@ -195,6 +201,22 @@ public final class JbakeSitePlugin implements Plugin<Project> {
             task.getThemeCss().from(compileSass.flatMap(CompileSassTask::getDestinationDirectory));
             task.getThemeCssPublishedDir().set(site.getScss().getPublishedDir());
         });
+    }
+
+    /**
+     * Where the plugin's classes are: its jar in the site's build (the included build's output), or its class
+     * directory in the plugin's own functional tests. On JBake's classpath for the {@code engine} package.
+     */
+    private static File pluginClasses() {
+        CodeSource source = JbakeSitePlugin.class.getProtectionDomain().getCodeSource();
+        if (source == null || source.getLocation() == null) {
+            throw new GradleException("The jbake-site plugin can't find its own jar to put the front matter engine on JBake's classpath.");
+        }
+        try {
+            return new File(source.getLocation().toURI());
+        } catch (URISyntaxException e) {
+            throw new GradleException("The jbake-site plugin's own location isn't a file: " + source.getLocation(), e);
+        }
     }
 
     private static void registerBake(JbakeSiteExtension site, TaskContainer tasks) {

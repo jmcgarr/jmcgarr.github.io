@@ -1,12 +1,13 @@
-title=Three horizons
-date=2020-01-03
-type=post
-tags=management
-status=published
-summary=In a prior post, I shared an approach I use for visualizing a team’s roadmap. Visual roadmaps have proven extremely useful for alignment, both within the team as well as with partners and customers. It’s a simple way to answer the question, “what are we going to work on”? But I have found that it lacked insight into the evolution of the products themselves, and how they were evolving.
-masthead=three-hills.jpg
-mastheadCredit=https://flic.kr/p/rFRzzj
-~~~~~~
+---
+title: Three horizons
+date: 2020-01-03
+type: post
+tags: [management]
+status: published
+summary: In a prior post, I shared an approach I use for visualizing a team’s roadmap. Visual roadmaps have proven extremely useful for alignment, both within the team as well as with partners and customers. It’s a simple way to answer the question, “what are we going to work on”? But I have found that it lacked insight into the evolution of the products themselves, and how they were evolving.
+masthead: three-hills.jpg
+mastheadCredit: https://flic.kr/p/rFRzzj
+---
 *Note: This is the first post in a two-part exploration of the Three Horizon model.*
 
 ---

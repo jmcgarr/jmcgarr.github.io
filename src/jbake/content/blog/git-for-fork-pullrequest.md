@@ -1,10 +1,11 @@
-title=Git commands for a 'forked' up world
-date=2014-04-17
-type=post
-tags=git
-status=published
-summary=If you are working on a team or open source project that uses Git, it is likely that you have been introduced to the fork/pull-request model of collaboration for Git (and Mercurial).
-~~~~~~
+---
+title: Git commands for a 'forked' up world
+date: 2014-04-17
+type: post
+tags: [git]
+status: published
+summary: If you are working on a team or open source project that uses Git, it is likely that you have been introduced to the fork/pull-request model of collaboration for Git (and Mercurial).
+---
 If you are working on a team or open source project that uses Git, it is likely that you have been introduced to the fork/pull-request model of collaboration for Git (and Mercurial).  The [fork/pull-request](https://docs.github.com/en/pull-requests/reference/pull-requests) concepts are not a part of git, but were popularized by Github.  You find most DVCS server products incorporate some variation of them.
 
 If you find yourself forking a repository and contributing back, I found the following git commands useful.  Before we dive each of them, let’s define a few terms:

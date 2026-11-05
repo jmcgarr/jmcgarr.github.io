@@ -36,7 +36,7 @@ import java.util.regex.Pattern;
  * <li>A JPEG is re-encoded in place under the same name: progressive, quality stepping down from 82 until the file
  * is 400 KB or less (then the width, down to 1200 px, if quality 62 is still too big).</li>
  * <li>A PNG that is a photo (more than 50,000 distinct colours and no transparency, or {@code -Pjpeg}) becomes
- * {@code <name>.jpg} next to it, and every {@code masthead=}, Markdown image and {@code src=} that named the PNG in
+ * {@code <name>.jpg} next to it, and every {@code masthead:}, Markdown image and {@code src=} that named the PNG in
  * the content and templates is pointed at the JPEG. A PNG that was never published (not in {@code main}) is then
  * removed ({@code -PkeepSource} keeps it). A PNG that <em>is</em> published must keep a PNG at its URL (option B: a
  * small 256-colour fallback), and the JDK has no colour quantizer, so this refuses it and changes nothing: convert
@@ -155,13 +155,13 @@ final class PrepareImage {
         return false;
     }
 
-    /** Points every masthead=, Markdown image and src= at the renamed file. Returns the files changed. */
+    /** Points every masthead:, Markdown image and src= at the renamed file. Returns the files changed. */
     List<Path> references(Path oldName, Path newName, boolean dryRun) throws IOException {
         String oldBase = oldName.getFileName().toString();
         String newBase = newName.getFileName().toString();
         String siteOld = "/" + SiteLayout.relativePath(site.assets(), oldName);
         String siteNew = "/" + SiteLayout.relativePath(site.assets(), newName);
-        Pattern mastheadLine = Pattern.compile("(?m)^(masthead=)" + Pattern.quote(oldBase) + "$");
+        Pattern mastheadLine = Pattern.compile("(?m)^(masthead:[ \\t]*[\"']?)" + Pattern.quote(oldBase) + "([\"']?[ \\t]*)$");
         List<Path> changed = new ArrayList<>();
         for (Path root : List.of(site.content(), site.templates())) {
             for (Path p : FileTrees.regularFilesUnder(root)) {
@@ -175,7 +175,7 @@ final class PrepareImage {
                 }
                 String updated = text.replace(siteOld, siteNew);
                 if (isMasthead(oldName)) {
-                    updated = mastheadLine.matcher(updated).replaceAll("$1" + Matcher.quoteReplacement(newBase));
+                    updated = mastheadLine.matcher(updated).replaceAll("$1" + Matcher.quoteReplacement(newBase) + "$2");
                     updated = updated.replace("<#assign masthead = \"" + oldBase + "\">", "<#assign masthead = \"" + newBase + "\">");
                 }
                 if (!updated.equals(text)) {

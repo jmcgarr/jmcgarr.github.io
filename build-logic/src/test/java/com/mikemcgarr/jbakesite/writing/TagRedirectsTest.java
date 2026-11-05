@@ -59,10 +59,10 @@ class TagRedirectsTest {
         site = SiteLayout.standard(root);
         Files.createDirectories(site.blog());
         Files.createDirectories(site.publishedUrls().getParent());
-        Files.writeString(site.blog().resolve("a.md"), "title=A\ntype=post\ntags=acceptance test, boyd's law, devops, build automation\n"
-                + "status=published\n~~~~~~\n");
-        Files.writeString(site.blog().resolve("b.md"), "title=B\ntype=post\ntags=presentations, .NET\nstatus=published\n~~~~~~\n");
-        Files.writeString(site.blog().resolve("draft.md"), "title=D\ntype=post\ntags=DevOps, build\nstatus=draft\n~~~~~~\n");
+        Files.writeString(site.blog().resolve("a.md"), "---\ntitle: A\ntype: post\ntags: [acceptance test, boyd's law, devops, build automation]\n"
+                + "status: published\n---\n");
+        Files.writeString(site.blog().resolve("b.md"), "---\ntitle: B\ntype: post\ntags: [presentations, .NET]\nstatus: published\n---\n");
+        Files.writeString(site.blog().resolve("draft.md"), "---\ntitle: D\ntype: post\ntags: [DevOps, build]\nstatus: draft\n---\n");
         Files.writeString(site.publishedUrls(), "index.html\ntags/acceptance test.html\ntags/boyd's law.html\ntags/DevOps.html\n"
                 + "tags/devops.html\ntags/build.html\ntags/talks.html\ntags/.NET.html\n");
         Map<String, String> renames = new LinkedHashMap<>();
@@ -142,7 +142,7 @@ class TagRedirectsTest {
 
     @Test
     void aRenameToATagNoPostUsesOrFromOneStillInUseIsAnError() throws IOException {
-        Files.writeString(site.blog().resolve("b.md"), "title=B\ntype=post\ntags=.NET, build\nstatus=published\n~~~~~~\n");
+        Files.writeString(site.blog().resolve("b.md"), "---\ntitle: B\ntype: post\ntags: [.NET, build]\nstatus: published\n---\n");
 
         ToolFailure e = assertThrows(ToolFailure.class, tool::write);
 
@@ -155,8 +155,8 @@ class TagRedirectsTest {
     @Test
     void anOldTagUrlWithNoMatchingTagIsAnError() throws IOException {
         Files.writeString(site.publishedUrls(), "tags/gone.html\ntags/DevOps.html\n");
-        Files.writeString(site.blog().resolve("b.md"), "title=B\ntype=post\ntags=presentations, build automation, devops, DEVOPS\nstatus=published\n~~~~~~\n");
-        Files.writeString(site.blog().resolve("a.md"), "title=A\ntype=post\ntags=devops\nstatus=published\n~~~~~~\n");
+        Files.writeString(site.blog().resolve("b.md"), "---\ntitle: B\ntype: post\ntags: [presentations, build automation, devops, DEVOPS]\nstatus: published\n---\n");
+        Files.writeString(site.blog().resolve("a.md"), "---\ntitle: A\ntype: post\ntags: [devops]\nstatus: published\n---\n");
 
         ToolFailure e = assertThrows(ToolFailure.class, tool::write);
 

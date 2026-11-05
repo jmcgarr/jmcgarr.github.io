@@ -28,8 +28,8 @@ import java.util.regex.Pattern;
  * <li>{@link #check()}: fails naming every masthead in use that lacks one ({@code checkMastheadVariants}; CI runs it).</li>
  * </ul>
  *
- * <p>A masthead in use is named by {@code masthead=} in a content file or {@code <#assign masthead = "...">} in a
- * template; a remote one ({@code http...}) has no variants.
+ * <p>A masthead in use is named by {@code masthead:} in a content file's front matter or
+ * {@code <#assign masthead = "...">} in a template; a remote one ({@code http...}) has no variants.
  */
 public final class MastheadVariants {
 
@@ -39,7 +39,8 @@ public final class MastheadVariants {
     /** The JPEG quality of a variant. */
     static final int QUALITY = 80;
 
-    private static final Pattern MASTHEAD_LINE = Pattern.compile("(?m)^masthead=(.+)$");
+    /** The {@code masthead:} line of a front matter, its value plain or quoted ({@code FrontMatter.yaml} quotes only when it must). */
+    private static final Pattern MASTHEAD_LINE = Pattern.compile("(?m)^masthead:[ \\t]*(?:\"([^\"]*)\"|'([^']*)'|(.+?))[ \\t]*$");
     private static final Pattern MASTHEAD_ASSIGN = Pattern.compile("<#assign masthead = \"([^\"]+)\">");
 
     private final SiteLayout site;
@@ -136,7 +137,7 @@ public final class MastheadVariants {
     }
 
     /**
-     * Every local masthead named by {@code masthead=} in content or {@code <#assign masthead = "...">} in a template.
+     * Every local masthead named by {@code masthead:} in content or {@code <#assign masthead = "...">} in a template.
      *
      * @return the names as written, sorted, without remote ones
      * @throws IOException if a file can't be read
@@ -148,7 +149,7 @@ public final class MastheadVariants {
                 String text = Text.lf(Text.read(p));
                 Matcher m = MASTHEAD_LINE.matcher(text);
                 while (m.find()) {
-                    names.add(m.group(1).strip());
+                    names.add(mastheadName(m));
                 }
                 m = MASTHEAD_ASSIGN.matcher(text);
                 while (m.find()) {
@@ -158,6 +159,17 @@ public final class MastheadVariants {
         }
         names.removeIf(n -> n.startsWith("http"));
         return new ArrayList<>(names);
+    }
+
+    /** The name a {@link #MASTHEAD_LINE} match gives: the quoted value, or the plain one stripped. */
+    static String mastheadName(Matcher m) {
+        if (m.group(1) != null) {
+            return m.group(1);
+        }
+        if (m.group(2) != null) {
+            return m.group(2);
+        }
+        return m.group(3).strip();
     }
 
     /**

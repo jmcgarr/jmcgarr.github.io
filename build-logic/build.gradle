@@ -24,6 +24,15 @@ dependencies {
     // 4.6.1 is the version the freefair Sass plugin 9.8.2 used until T124; check a Dependabot update by comparing a
     // bake against main, byte for byte.
     implementation 'de.larsgrefer.sass:sass-embedded-host:4.6.1'
+    // The YAML front matter of every post and page (T145, docs/07-FRONT-MATTER.md): read here by the review and the
+    // writing tools (internal.FrontMatter), and inside JBake's JVM by the plugin's own parser engine (package
+    // `engine`), where the jbake configuration's snakeyaml (pinned in the root build.gradle) serves the same classes.
+    implementation 'org.yaml:snakeyaml:2.7'
+    // The engine extends JBake's Markdown engine, so it compiles against jbake-core and flexmark at the versions the
+    // root build.gradle puts on JBake's classpath (keep the three pins equal). Compile only: the engine runs on that
+    // classpath, never in Gradle's JVM.
+    compileOnly 'org.jbake:jbake-core:2.7.0'
+    compileOnly 'com.vladsch.flexmark:flexmark:0.64.8'
 
     testImplementation platform('org.junit:junit-bom:6.1.3')
     testImplementation 'org.junit.jupiter:junit-jupiter'

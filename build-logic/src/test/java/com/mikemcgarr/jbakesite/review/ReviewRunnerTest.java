@@ -40,7 +40,7 @@ class ReviewRunnerTest {
         Path baked = root.resolve("build/jbake");
         Files.createDirectories(site.content());
         Files.createDirectories(baked);
-        Files.writeString(site.content().resolve("about.md"), "title=About\ndate=2026-01-01\ntype=page\nstatus=published\n~~~~~~\n\nAbout me.\n");
+        Files.writeString(site.content().resolve("about.md"), "---\ntitle: About\ndate: 2026-01-01\ntype: page\nstatus: published\n---\n\nAbout me.\n");
         Files.writeString(baked.resolve("index.html"), "<html><body>Home</body></html>\n");
         Files.writeString(baked.resolve("about.html"), "<html><body><p>About me.</p></body></html>\n");
         Files.writeString(root.resolve(".gitignore"), "build/\n");
@@ -71,7 +71,7 @@ class ReviewRunnerTest {
         assertEquals("Reviewed 1 page (about.html) from 1 changed file. 1 error, 1 warning. External links not checked (T119).", outcome.summary(),
                 "E1 for the link, W2 for the page's date");
         String printed = out.toString(StandardCharsets.UTF_8);
-        assertTrue(printed.startsWith("ERROR E1 src/jbake/content/about.md:8\n"), printed);
+        assertTrue(printed.startsWith("ERROR E1 src/jbake/content/about.md:9\n"), printed);
         assertTrue(printed.endsWith(outcome.summary() + "\n"), printed);
     }
 

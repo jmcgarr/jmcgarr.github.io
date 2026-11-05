@@ -45,7 +45,7 @@ Gradle's configuration cache is on (`gradle.properties`, T114), so a command's f
 cache entry stored" and later runs start with "Reusing configuration cache". Both are normal. Edits to posts,
 templates, SCSS, and `jbake.properties` are always picked up; `--no-configuration-cache` turns it off for one run.
 
-Drafts (posts with `status=draft`) are rendered for preview only, at
+Drafts (posts with `status: draft`) are rendered for preview only, at
 `http://localhost:8080/blog/drafts/<name>-draft.html`. They are never published.
 
 To write a post
@@ -54,7 +54,7 @@ Start a draft with one command, from a clean working tree:
 ```
 ./gradlew newPost -Ptitle="My Post Title" -Ptags="management, leadership" -Psummary="A short teaser."
 ```
-It creates `src/jbake/content/blog/drafts/my-post-title.md` with the header below filled in (`status=draft`,
+It creates `src/jbake/content/blog/drafts/my-post-title.md` with the front matter below filled in (`status: draft`,
 today's date) and switches to a new branch `post/my-post-title` made from `main`. Options: `-Pslug=...` to
 choose the URL slug yourself, and `-Pbranch=false` to stay on the current branch.
 It refuses a slug that's already a draft, a post, or a published URL, and warns when a tag differs only by
@@ -70,21 +70,29 @@ creates anything. Pull requests never deploy, so the PR is safe to push to as yo
 PR step fails, nothing is undone and the error lists the commands to finish by hand. `-Ppr` can't be combined
 with `-Pbranch=false`.
 
-To create one by hand instead, make `src/jbake/content/blog/drafts/<slug>.md`, starting with a header like this.
-It's JBake's `key=value` format ending in `~~~~~~`, not YAML front matter. Every post and page on the site is
-Markdown (since T102, 2026-10-18), and Markdown is the only format the build renders:
+To create one by hand instead, make `src/jbake/content/blog/drafts/<slug>.md`, starting with YAML front matter
+like this (since T145, 2026-11-02, [docs/07-FRONT-MATTER.md](docs/07-FRONT-MATTER.md); until then the header was
+JBake's own `key=value` lines ending in `~~~~~~`). Every post and page on the site is Markdown (since T102,
+2026-10-18), and Markdown is the only format the build renders:
 
 ```
-title=My Post Title
-date=2026-10-05
-type=post
-tags=management, leadership
-status=draft
-summary=A short teaser shown on the home page.
-masthead=three-hills.jpg
-mastheadCredit=https://flic.kr/p/rFRzzj
-~~~~~~
+---
+title: My Post Title
+date: 2026-10-05
+type: post
+tags: [management, leadership]
+status: draft
+summary: A short teaser shown on the home page.
+masthead: three-hills.jpg
+mastheadCredit: https://flic.kr/p/rFRzzj
+---
 ```
+
+Quote a value that has a colon followed by a space in it (`title: "Maven Tip: Disabling Profiles"`); `newPost`
+does that for you. Every value reaches JBake as the text you wrote (`date` as `YYYY-MM-DD`, never a parsed date), and
+`tags` is a list, `[a, b]` or one `- a` line per tag. VS Code's preview, markdownlint and GitHub's file view all
+understand this front matter; stock JBake doesn't, so the bake runs with the plugin's own parser engine, which hands
+JBake each file with its header translated (see "Where the build is defined", package `engine`).
 
 `summary` is optional but recommended: it's the teaser under the title on the home page.
 
@@ -167,10 +175,10 @@ same command prepares an in-post image, capped at 1000px; add `-Ppng` to keep a 
 needed an image library installed), so nothing is installed. It
 refuses a photo PNG that is already published (its URL must keep a PNG, and the JDK has no colour quantizer for the
 small fallback): convert such a one by hand, as T016 did.
-`masthead=` also takes a full `https://` URL (a remote image, used as-is at every width, so pick one around
+`masthead:` also takes a full `https://` URL (a remote image, used as-is at every width, so pick one around
 1920px wide), or a site path such as `/img/qcon_crowd.jpg` for an image elsewhere under `src/jbake/assets/`.
 
-When it's ready, set `status=published` and move it to `src/jbake/content/blog/`. Its URL will be
+When it's ready, set `status: published` and move it to `src/jbake/content/blog/`. Its URL will be
 `/blog/<slug>.html`. Published URLs are permanent, so pick the slug carefully (see [AGENTS.md](AGENTS.md)).
 
 To review a change
@@ -184,7 +192,7 @@ rendered pages (T117, design in [docs/archive/05-REVIEW-FLOW.md](docs/archive/05
 a `[link]` followed by a bare URL or with a space before its `(` (E1), brackets left in the rendered text (E2), a
 link or image that points at nothing in the baked site (E3), an incomplete header, a CR line ending or a new post
 without a `summary=` (E4), an image over 400 KB or 1920 px, or a masthead without its 960 and 1440 variants (E5).
-**Warnings** are listed and never fail: a changed page whose `date=` did not move (W2; it's the sitemap's
+**Warnings** are listed and never fail: a changed page whose `date:` did not move (W2; it's the sitemap's
 `lastmod`), a tag spelled unlike an existing one (W3), an image without alt text (W4), a deleted or renamed
 published URL (W6, AGENTS.md Rule 1), an existing post without a summary (W7). Each finding names the file and
 line, and the fix when it's mechanical. With no changes under `src/jbake`, it says so and passes.
@@ -377,12 +385,13 @@ October 2026, M10):
 | Package | Classes | What they do |
 |---|---|---|
 | `jbakesite` | `JbakeSitePlugin`, `JbakeSiteExtension`, `ScssExtension`, `JbakeClasspathExtension` | Registers every task and the `jbake` configuration; the `jbakeSite { }` block and its defaults |
+| `engine` | `JbakeLauncher`, `FrontMatterEngine` | Run inside JBake's JVM, never Gradle's: the launcher the bake and the preview start instead of JBake's own, which registers the engine that reads a file's YAML front matter and hands JBake the same file with its header in JBake's form (T145). Compiled against jbake-core and flexmark (`compileOnly`, pinned at the root `build.gradle`'s versions); the plugin's own jar is on JBake's classpath for them |
 | | `JbakeTask`, `BakeTask`, `BakePreviewTask`, `JbakeClasspath`, `NewJdkJvmArgs`, `CaseRedirects`, `PreviewPort`, `ProjectPaths` | The `jbake` group: JBake's launcher in a fresh JVM (the JVM flags newer JDKs need, jffi's temp dir, logback), the bake with the CSS and case-redirect copies, the preview with its port check |
 | | `CompileSassTask`, `SassCompiler`, `SassEntries`, `SassCompileException`, `SassPreviewWatcher`, `CheckNoHandEditedCssTask`, `FileTrees` | The theme CSS: Dart Sass through its Java host, the entry convention, the preview's SCSS watcher, the guard |
 | `writing` | `NewPostTask`/`NewPost`/`NewPostOptions`, `OpenPrTask`/`OpenPr`/`OpenPrOptions`, `GitHubCli` (the gh readiness checks both share), `PrepareImageTask`/`PrepareImage`/`PrepareImageOptions`/`Images`/`MastheadVariants`, `TagRedirectsTask`/`TagRedirects` | The `writing` group: each task is a thin class that reads its `-P` options and runs a plain logic class |
 | `review` | `ReviewChangesTask`, `ReviewRunner`/`ReviewOutcome` (the entry point `reviewChanges` and `openPr` call), `Review`, `Changes`, `Pages`, `MarkdownChecks`, `PageChecks`, `ImageChecks`, `RemovalChecks`, `Report`, and the helpers `Change`, `Finding`, `Findings`, `HtmlTags`, `Suppressions`, `ReviewOptions`, `ReviewResult` | `reviewChanges`: one class per group of checks, as [docs/archive/05-REVIEW-FLOW.md](docs/archive/05-REVIEW-FLOW.md) lays them out |
 | `verification` | `CheckUrlsTask`/`UrlCheck`, `CheckDocsNotPublishedTask`/`DocsNotPublishedCheck`, `CheckTagRedirectsTask`, `CheckMastheadVariantsTask` | The `verification` group: the checks `checkSite`, `check` and CI run (the first two were shell scripts until T141/T143) |
-| `internal` | `Git`, `ProcessRunner`, `CommandRunner`, `ToolFailure`, `FrontMatter`, `Tags`, `Text`, `SiteLayout`, `JbakeProperties`, `ImageRules` | Shared by the writing and verification tools: running git and gh, reading a post's header and its text (one UTF-8 policy, any line ending), the site's paths and their defaults, the image limits |
+| `internal` | `Git`, `ProcessRunner`, `CommandRunner`, `ToolFailure`, `FrontMatter`, `Tags`, `Text`, `SiteLayout`, `JbakeProperties`, `ImageRules` | Shared by the writing and verification tools: running git and gh, reading and writing a post's front matter (YAML since T145; the old `key=value` header is still read) and its text (one UTF-8 policy, any line ending), the site's paths and their defaults, the image limits |
 
 `SiteToolTask` (package `jbakesite`) is the base of the writing and verification tasks: it hands each tool the
 site's layout and turns the tool's `ToolFailure` (the one-line message the old single-file programs printed before
@@ -503,7 +512,7 @@ tags had a capitalized twin (`/tags/DevOps.html`, `/tags/Groovy.html`). Those 59
 `tag-redirects.py` until T139, 2026-10-27) from `docs/baseline/urls.txt` and committed: 48 in `src/jbake/assets/tags/`, and the 2 capitalized ones in
 `src/case-redirects/tags/`. Run the task again if a tag in that list stops being used, and keep its stubs.
 **Merging or renaming a tag** (needs the owner's approval, AGENTS.md Rule 1): add `old → new` to `RENAMES` in
-`TagRedirects.java`, edit the posts' `tags=` lines, and run the task. It writes a stub at every old URL of the old tag: the
+`TagRedirects.java`, edit the posts' `tags:` lines, and run the task. It writes a stub at every old URL of the old tag: the
 baseline one and, for a tag with a space, the hyphenated page published since T039 (`tags/google-calender.html`).
 `checkTagRedirects` covers those hyphenated URLs too (derived from the baseline, which they aren't in). The 2026-10-09 merges
 and typo fixes (report §H) added 9 stubs and repointed 3, for 59 in all.
@@ -521,7 +530,7 @@ More
 - [docs/archive/06-GRADLE-PLUGIN.md](docs/archive/06-GRADLE-PLUGIN.md): the build plugin plan (`build-logic/`), done and archived 2026-10-31
 - [docs/archive/08-SCRIPTS-MIGRATION.md](docs/archive/08-SCRIPTS-MIGRATION.md): the scripts into the plugin, and no Python, done and archived 2026-10-31
 - [docs/archive/04-AUTHORS-DESK.md](docs/archive/04-AUTHORS-DESK.md): the owner's own to-do list, closed and archived 2026-10-27
-- [docs/07-FRONT-MATTER.md](docs/07-FRONT-MATTER.md): front matter for VS Code authoring, three options (Draft, owner to choose)
+- [docs/07-FRONT-MATTER.md](docs/07-FRONT-MATTER.md): front matter for VS Code authoring: the decision record behind the YAML front matter (option 3, accepted 2026-11-02 and done as T145–T148)
 - [docs/archive/00-REVIVAL.md](docs/archive/00-REVIVAL.md): the 2026 revival plan, done (its changelog: [docs/archive/03-REVIVAL-CHANGELOG.md](docs/archive/03-REVIVAL-CHANGELOG.md))
 
 Optional mastheads

@@ -1,12 +1,13 @@
-title=Discovering culture through artifacts
-date=2018-11-05
-type=post
-tags=general
-status=published
-summary=In a previous post, I shared my approach to visualizing and understanding the culture of an organization. Assuming you agree with my approach to understanding culture, you might find yourself asking the question, "Great! How do I get started?" In my experience, I tend to look for an organization's cultural artifacts as a starting point for understanding their culture. So what are cultural artifacts and why are they useful?
-masthead=egypt.jpg
-mastheadCredit=https://flic.kr/p/pNB7hX
-~~~~~~
+---
+title: Discovering culture through artifacts
+date: 2018-11-05
+type: post
+tags: [general]
+status: published
+summary: In a previous post, I shared my approach to visualizing and understanding the culture of an organization. Assuming you agree with my approach to understanding culture, you might find yourself asking the question, "Great! How do I get started?" In my experience, I tend to look for an organization's cultural artifacts as a starting point for understanding their culture. So what are cultural artifacts and why are they useful?
+masthead: egypt.jpg
+mastheadCredit: https://flic.kr/p/pNB7hX
+---
 In a previous post, I shared my approach to [visualizing and understanding the culture of an organization](/blog/understanding-culture.html). Assuming you agree with my approach to understanding culture, you might find yourself asking the question, "Great! How do I get started?" In my experience, I tend to look for an organization’s **cultural artifacts** as a starting point for understanding their culture. So what are cultural artifacts and why are they useful?
 
 A **cultural artifact** is something that a team creates, shares and/or somehow emits outside their team that can be observed. You can use these artifacts to gain insight into the culture of a team or organization. Cultural artifacts can provide you with insight into the potential culture of a team. Similar to archaeological artifacts one might find in an ancient Egyptian pyramid, cultural artifacts provide you with clues to what a team might expect from you. Identifying cultural artifacts can be a quick way to understanding how a team works and what they believe.

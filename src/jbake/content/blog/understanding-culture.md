@@ -1,12 +1,13 @@
-title=Understanding culture
-date=2015-03-28
-type=post
-tags=change management, culture, understanding culture, devops
-status=published
-summary=In my review of the Phoenix Project, I mentioned that the organizational change that Parts Unlimited experienced seemed magically.  Many of my own attempts to lead organization-wide change have not been as successful that quickly.  I would encounter resistance throughout the organization I found success couldn’t be achieved overnight.  It was always frustrating to find the obviously better solution get shot down time and time again.
-masthead=festival.jpg
-mastheadCredit=https://flic.kr/p/aSmuPk
-~~~~~~
+---
+title: Understanding culture
+date: 2015-03-28
+type: post
+tags: [change management, culture, understanding culture, devops]
+status: published
+summary: In my review of the Phoenix Project, I mentioned that the organizational change that Parts Unlimited experienced seemed magically.  Many of my own attempts to lead organization-wide change have not been as successful that quickly.  I would encounter resistance throughout the organization I found success couldn’t be achieved overnight.  It was always frustrating to find the obviously better solution get shot down time and time again.
+masthead: festival.jpg
+mastheadCredit: https://flic.kr/p/aSmuPk
+---
 
 In my [review of the Phoenix Project](/blog/the-phoenix-project.html), I mentioned that the organizational change that Parts Unlimited experienced seemed magical.  Many of my own attempts to lead organization-wide change had not been successful.  I had encountered resistance throughout the organization. I found success couldn’t be achieved overnight.  It was always frustrating to find the obviously better solution get shot down time and time again.
 

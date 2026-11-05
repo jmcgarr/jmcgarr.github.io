@@ -1,10 +1,11 @@
-title=On acceptance test architecture, lifecycles and responsibilities
-date=2013-12-18
-type=post
-tags=acceptance test, atdd, cucumber, fitnesse, gherkin, SUT, tdd, test automation, test fixture
-status=published
-summary=I was recently in a conversation with testers about how acceptance tests should be structured.   As we revisit how Blackboard conducts test automation, we were looking at patterns and practices to employ.  I shared my following perspective on how to think about the architecture of your acceptance test infrastructure, the lifecycle of a specification, as well as who should conduct which step.
-~~~~~~
+---
+title: On acceptance test architecture, lifecycles and responsibilities
+date: 2013-12-18
+type: post
+tags: [acceptance test, atdd, cucumber, fitnesse, gherkin, SUT, tdd, test automation, test fixture]
+status: published
+summary: I was recently in a conversation with testers about how acceptance tests should be structured.   As we revisit how Blackboard conducts test automation, we were looking at patterns and practices to employ.  I shared my following perspective on how to think about the architecture of your acceptance test infrastructure, the lifecycle of a specification, as well as who should conduct which step.
+---
 I was recently in a conversation with testers about how acceptance tests should be structured.   As we revisit how Blackboard conducts test automation, we were looking at patterns and practices to employ.  I shared my following perspective on how to think about the architecture of your acceptance test infrastructure, the lifecycle of a specification, as well as who should conduct which step.  This post is really a teaser post, as I am merely smearing pretty pictures on the web, without much background.  Isn't that what follow-up blogs are for?
 
 # Acceptance Test Composition

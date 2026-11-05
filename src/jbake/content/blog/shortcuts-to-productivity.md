@@ -1,10 +1,11 @@
-title=Shortcuts to Productivity
-date=2010-11-02
-type=post
-tags=eclipse, mac osx, productivity, vim
-status=published
-summary=Earlier this year, I read Neal Ford's book, The Productive Programmer.  It is a great book and a short read as well, so I highly recommend it.
-~~~~~~
+---
+title: Shortcuts to Productivity
+date: 2010-11-02
+type: post
+tags: [eclipse, mac osx, productivity, vim]
+status: published
+summary: Earlier this year, I read Neal Ford's book, The Productive Programmer.  It is a great book and a short read as well, so I highly recommend it.
+---
 Earlier this year, I read [Neal Ford](https://www.nealford.com/)'s book, [The Productive Programmer](http://oreilly.com/catalog/9780596519544).  It is a great book and a short read as well, so I highly recommend it.  In this book, Ford talks about ways to make yourself more productive and the book contains a wealth of useful tips.  This inspirational text got me thinking how I could increase my own productivity.  As a result, I made a few changes; one that has been extremely helpful is expanding my use of keyboard shortcuts, also known as hotkeys.
 
 For my non-technical friends, hotkeys are key strokes that you can use to execute functions you might otherwise use a mouse to access through a menu.  Most computer savvy people are already familiar with some hotkeys, like **_Ctrl-C_** to copy and **_Ctrl-V_** to paste.  If you're a UNIX guy, then you have likely mastered the art of the keyboard already and may think that I am stating the obvious.

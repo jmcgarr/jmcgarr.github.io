@@ -1,10 +1,11 @@
-title=Looking back on 2012
-date=2013-02-04
-type=post
-tags=continuous delivery, Excella Consulting
-status=published
-summary=2012 has been an exciting year, full of change and merriment. Here's my retrospective.
-~~~~~~
+---
+title: Looking back on 2012
+date: 2013-02-04
+type: post
+tags: [continuous delivery, Excella Consulting]
+status: published
+summary: 2012 has been an exciting year, full of change and merriment. Here's my retrospective.
+---
 2012 has been an exciting year, full of change and merriment. Here's my retrospective.
 
 ## Excella Consulting<img align="right" alt="Excella Consulting logo" src="/img/excella.png" width="150" height="150" />

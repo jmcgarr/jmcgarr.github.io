@@ -1,10 +1,11 @@
-title=Scrum Boards: Physical or Virtual
-date=2010-12-07
-type=post
-tags=agile, jira, scrum, scrum walls
-status=published
-summary=I'm lucky enough to have spent the last two years immersed in a culture that strongly endorses Agile Software Development.  Not only does my employer, Excella Consulting, strongly believe in Agile, we also have a number of strong Agile experts who are significant contributors to both the local and national Agile community.
-~~~~~~
+---
+title: "Scrum Boards: Physical or Virtual"
+date: 2010-12-07
+type: post
+tags: [agile, jira, scrum, scrum walls]
+status: published
+summary: I'm lucky enough to have spent the last two years immersed in a culture that strongly endorses Agile Software Development.  Not only does my employer, Excella Consulting, strongly believe in Agile, we also have a number of strong Agile experts who are significant contributors to both the local and national Agile community.
+---
 <div>
 
 I'm lucky enough to have spent the last two years immersed in a culture that strongly endorses [Agile Software Development](https://agilemanifesto.org/ "Manifesto for Agile Software Development").  Not only does my employer, [Excella Consulting](https://www.excella.com/ "Excella Consulting"), strongly believe in Agile, we also have a number of strong Agile experts who are significant contributors to both the local and national Agile community.  Most project teams at Excella implement some variation of Agile and the project I currently work on is no exception.

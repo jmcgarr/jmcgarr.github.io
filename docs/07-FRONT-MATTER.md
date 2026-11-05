@@ -1,11 +1,11 @@
 # Front matter for VS Code authoring
 
-**Branch**: `docs/07-front-matter-options` | **Created**: 2026-10-25 | **Status**: Draft
+**Branch**: `docs/07-front-matter-options` | **Created**: 2026-10-25 | **Status**: Accepted (option 3, 2026-11-02; implemented as T145–T148 on `feat/T145-yaml-front-matter`)
 
 A decision record on the header at the top of every post and page. The owner has started writing posts in
 VS Code, and JBake's header format breaks the Markdown preview there. This doc records the problem, what JBake 2.7
-allows, and three ways out. **No option is chosen yet.** Once one is, its steps become tasks in
-[`05-REVIEW-FLOW.md`](archive/05-REVIEW-FLOW.md); this doc then moves to `Accepted`.
+allows, and three ways out. **The owner chose option 3 on 2026-11-02** (see "Decision"); the tasks that carried it
+out are under "Implementation", since the review flow plan this doc meant to add them to was archived first.
 
 ## Context
 
@@ -190,34 +190,77 @@ bake is empty and `./gradlew check` passes; the VS Code preview of a post render
 
 ## Decision
 
-**Open.** The owner decides between:
+**Option 3, YAML front matter with a custom parser engine. Chosen by the owner on 2026-11-02.** The options were:
 
 - **Option 1** for quick relief: a one-line change per file, no new code, and a visible header paragraph in the
   preview.
 - **Option 3** if the owner will author in VS Code for the long run: the format every Markdown tool expects, at the
-  cost of a small custom parser engine to maintain across jbake-core upgrades. This is the recommended option in
-  that case, and a working prototype comes before the conversion.
+  cost of a small custom parser engine to maintain across jbake-core upgrades. This was the recommended option in
+  that case, with a working prototype before the conversion.
 - **Option 2** on its own, or as a first step before either of the others.
 
-When an option is chosen: record the choice and date here, set the Status to `Accepted`, and add the steps as
-tasks (with `Test:` lines) to [`05-REVIEW-FLOW.md`](archive/05-REVIEW-FLOW.md).
+Two details the owner left to the implementation, decided the same day: `tags` is written as a YAML flow list,
+`tags: [a, b]` (a block list, one `- a` line per tag, reads the same), and the whole change ships as one PR with
+the before/after bake proof, like T102.
+
+### How the engine works
+
+The prototype answered the private-method question without copying JBake's parse flow. The engine,
+`build-logic/src/main/java/com/mikemcgarr/jbakesite/engine/FrontMatterEngine.java`, extends JBake's
+`MarkdownEngine` and overrides only `parse(JBakeConfiguration, File)`: it reads the front matter
+(`internal/FrontMatter`, SnakeYAML's `compose`, so every scalar is kept as the text written), writes the same file
+with that header in JBake's `key=value` form and JBake's own `header.separator` to a temporary file, and calls the
+stock `parse` on that. The date, the tags (and `tag.sanitize`), JSON values and the Markdown body all go through
+JBake's unchanged code; the temporary file is deleted as soon as JBake has read it. A file that doesn't start with
+`---` is handed to JBake as it is. The engine is registered by `engine/JbakeLauncher`, the main class the bake and
+the preview now start (`JbakeTask`), which calls `Engines.register("md", ...)` and then JBake's own `Main`. Both
+classes live in the plugin, compiled against jbake-core and flexmark (`compileOnly`), and the plugin puts its own
+jar on JBake's classpath (`JbakeSitePlugin.pluginClasses`). The preview's rebuild-on-save is untouched, because
+JBake still watches `src/jbake` itself.
+
+A jbake-core upgrade can break two things: `MarkupEngine.parse(JBakeConfiguration, File)` as the overridable entry
+point, and the header format the translation writes. The plugin's functional tests bake the fixture site (now in
+YAML) on every `./gradlew :build-logic:check`, and a Dependabot bump of jbake-core is checked, as always, by
+comparing a bake against `main`.
+
+## Implementation
+
+All four tasks shipped in one PR on `feat/T145-yaml-front-matter` (2026-11-02). Task IDs continue the archived
+plans' sequence.
+
+- [x] T145 [IMP] The parser engine and launcher in the plugin (`build-logic/src/main/java/com/mikemcgarr/jbakesite/engine/`), `JbakeTask` starting the launcher, the plugin's jar on JBake's classpath, the pins in `build-logic/build.gradle`
+  - **Test:** `./gradlew :build-logic:check` passes (`BakeFunctionalTest` bakes the fixture site, whose content is YAML now); `./gradlew clean bake` of the converted site, `diff -r` against a bake of `main`, differs only in `feed.xml`'s build timestamps. _Run 2026-11-02: 315 pages both, no other difference._
+- [x] T146 [IMP] The tools read and write the new format: `internal/FrontMatter` (YAML, with the old header still read so the review can compare with `main`), `newPost` writes YAML, the review's E4 checks it and refuses the old header, `prepareImage` and `checkMastheadVariants` read `masthead:` (`build-logic/`)
+  - **Test:** `FrontMatterTest`, `NewPostTest`, `ReviewTest`, `MastheadVariantsTest`, `PrepareImageTest`, `TagRedirectsTest` and `SiteToolsFunctionalTest` pass in `./gradlew :build-logic:check`; `./gradlew newPost` writes a `---` header (the functional test checks it).
+- [x] T147 [IMP] Convert the 78 content files and the 3 fixture files: a one-off program (in the PR description, not committed) that reads each old header with `FrontMatter.parse` and writes it back with `FrontMatter.yaml`, the body byte for byte (`src/jbake/content/`, `build-logic/src/test/fixtures/`)
+  - **Test:** the bake diff of T145; the URL list is unchanged; `./gradlew check` passes on the branch; `grep -rL '^---$' src/jbake/content` finds no file.
+- [x] T148 [IMP] Docs: README ("To write a post", the plugin's package table), AGENTS.md (Rule 3, the URL table, the generator line), this decision record, `jbake-logback.xml`'s comment
+  - **Test:** `grep -n '~~~~~~' README.md AGENTS.md` shows only the sentences that name the old format as history.
+- [x] CHK057 The owner's check: open a post in VS Code. The preview shows the body rendered, the front matter as a table (or hidden), and markdownlint reports nothing about the header. _Done by the owner on 2026-11-05: VS Code recognizes the files as proper Markdown. The site's own preview was checked at http://localhost:8080 (`./gradlew bakePreview`: home, a post with a quoted title, a draft, About with its subtitle, Archive, and a save picked up); VS Code's own preview needs the owner's editor._
 
 ## Consequences
 
-Whichever option is chosen:
+With option 3 in place:
 
 - No published URL changes (Rule 1 is unaffected), but the change touches every content file, so it goes on its
   own branch and ships with the before/after bake proof, like T102.
 - `scripts/NewPost.java`, `scripts/ReviewChanges.java` and AGENTS.md Rule 3 change in the same PR as the content,
   so a draft written after the merge has the right header and the review flow checks it. _2026-10-28: those are
   the plugin's `internal/FrontMatter`, `writing/NewPost` and `review/` classes in `build-logic/` since T127._
-- Option 3 adds a maintained piece of Java to the build. Every jbake-core bump then needs the before/after bake
-  check, and the engine belongs in the future build plugin ([`06-GRADLE-PLUGIN.md`](archive/06-GRADLE-PLUGIN.md)) when that
-  work starts.
-- Option 2 alone leaves the preview broken; the owner keeps using another preview (the `./gradlew bakePreview`
-  site at http://localhost:8080) to see a post rendered.
+- Option 3 adds a maintained piece of Java to the build: the `engine` package of the plugin
+  ([`06-GRADLE-PLUGIN.md`](archive/06-GRADLE-PLUGIN.md) was done before this, so it went straight there). Every
+  jbake-core bump needs the before/after bake check, and `build-logic/build.gradle`'s `compileOnly` pins of
+  jbake-core and flexmark must match the root `build.gradle`'s.
+- The old `key=value` header is still read by the tools and still rendered by the bake (the engine hands such a
+  file to JBake unchanged), but the review's E4 refuses it, so a stale branch or a hand-copied header is caught
+  before it merges.
+- `header.separator` stays at JBake's default; nothing in `jbake.properties` changed.
 
 ## Notes
 
 - _2026-10-25: written after the owner moved to VS Code for authoring and found the preview showing the whole post
   as a code block. The JBake constraints above were checked against jbake-core 2.7.0's source the same day._
+- _2026-11-05: the owner opened a post in VS Code and confirmed it is recognized as proper Markdown (CHK057). Every task and check of this record is done._
+- _2026-11-02: the owner chose option 3. Prototyped, converted and documented the same day (T145–T148); the
+  "What else knows the separator" table above describes the code as it was when the options were written, and the
+  2026-10-28 notes under it say where each piece is in the plugin._

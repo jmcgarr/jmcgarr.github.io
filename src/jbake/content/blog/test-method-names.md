@@ -1,10 +1,11 @@
-title=Exploring Test Method Names
-date=2011-11-10
-type=post
-tags=agiledox, art of unit testing, bdd, groovy, Java, junit, testing, unit testing
-status=published
-summary=When coaching individuals on how to name unit test methods, I have struggled to come up with a standard that I like.  I have read numerous posts and books on the subject with a wide variety of results and standards.
-~~~~~~
+---
+title: Exploring Test Method Names
+date: 2011-11-10
+type: post
+tags: [agiledox, art of unit testing, bdd, groovy, Java, junit, testing, unit testing]
+status: published
+summary: When coaching individuals on how to name unit test methods, I have struggled to come up with a standard that I like.  I have read numerous posts and books on the subject with a wide variety of results and standards.
+---
 When coaching individuals on how to name unit test methods, I have struggled to come up with a standard that I like.  I have read numerous posts and books on the subject with a wide variety of results and standards.  In this blog I will explore the various standards for naming unit test methods and present my perspective on the subject.
 
 Prior to discussing unit test methods, I want to mention that the naming conventions for unit test *classes* are fairly well solidified.  I will assume that everybody will using the following naming convention for their unit test classes:

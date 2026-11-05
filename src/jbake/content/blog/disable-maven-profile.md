@@ -1,10 +1,11 @@
-title=Maven Tip: Disabling Profiles when a Property Does Not Exist
-date=2011-02-09
-type=post
-tags=build automation, Java, liquibase, maven, maven profiles, unit testing
-status=published
-summary=I wanted to share a method for enabling a Maven Build Profile in the absense of a system property.  I did not see this approach documented in the current version of the Maven Build Profile documentation, so I thought I would share it.
-~~~~~~
+---
+title: "Maven Tip: Disabling Profiles when a Property Does Not Exist"
+date: 2011-02-09
+type: post
+tags: [build automation, Java, liquibase, maven, maven profiles, unit testing]
+status: published
+summary: I wanted to share a method for enabling a Maven Build Profile in the absense of a system property.  I did not see this approach documented in the current version of the Maven Build Profile documentation, so I thought I would share it.
+---
 I wanted to share a method for enabling a [Maven](https://maven.apache.org/ "Maven") [Build Profile](https://maven.apache.org/guides/introduction/introduction-to-profiles.html "Maven Profiles") in the absense of a system property.  I did not see this approach documented in the current version of the Maven Build Profile documentation, so I thought I would share it.
 
 I find this approach particularly useful for turning off build features whenever you are disabling tests.  In Maven, there are two properties that will [skip the execution of all tests](https://maven.apache.org/surefire/maven-surefire-plugin/examples/skipping-tests.html "Skipping tests"), but I prefer the "skipTests" property.

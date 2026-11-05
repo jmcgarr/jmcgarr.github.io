@@ -36,9 +36,9 @@ class MastheadVariantsTest {
         Files.createDirectories(site.blog());
         Files.createDirectories(site.templates());
         Files.createDirectories(site.mastheads());
-        Files.writeString(site.blog().resolve("a.md"), "title=A\nmasthead=  wide.jpg \nstatus=published\n~~~~~~\n");
-        Files.writeString(site.blog().resolve("b.md"), "title=B\nmasthead=https://example.com/remote.jpg\nstatus=published\n~~~~~~\n");
-        Files.writeString(site.content().resolve("about.md"), "title=About\nmasthead=/img/about.jpg\n~~~~~~\n");
+        Files.writeString(site.blog().resolve("a.md"), "---\ntitle: A\nmasthead:   wide.jpg \nstatus: published\n---\n");
+        Files.writeString(site.blog().resolve("b.md"), "---\ntitle: B\nmasthead: https://example.com/remote.jpg\nstatus: published\n---\n");
+        Files.writeString(site.content().resolve("about.md"), "---\ntitle: About\nmasthead: /img/about.jpg\n---\n");
         Files.writeString(site.templates().resolve("index.ftl"), "<#assign masthead = \"home.jpg\">\n<#include \"masthead.ftl\">\n");
         TestImages.write(TestImages.photo(2000, 800), site.mastheads().resolve("wide.jpg"), "jpeg");
         TestImages.write(TestImages.photo(2000, 800), site.mastheads().resolve("wide-960.jpg"), "jpeg");

@@ -29,10 +29,12 @@ import org.gradle.api.tasks.PathSensitivity;
 import org.gradle.process.ExecOperations;
 
 /**
- * What the bake and the preview share: JBake's own launcher, run in a fresh JVM per task on the {@code jbake}
- * configuration ({@link JbakeClasspath}), with these settings:
+ * What the bake and the preview share: JBake's launcher, run in a fresh JVM per task on the {@code jbake}
+ * configuration ({@link JbakeClasspath}) plus the plugin itself, with these settings:
  *
  * <ul>
+ * <li>the <b>plugin's own launcher</b> as the main class, which registers the YAML front matter engine and then
+ * runs JBake's launcher (T145; package {@code engine}); the plugin's jar is on the classpath for it;</li>
  * <li>a <b>fresh JVM</b>, because the JBake Gradle plugin ran JBake inside the Gradle daemon and leaked memory on
  * every bake until the fourth failed with "Java heap space" (T099), and because its own exit code and log are then
  * JBake's;</li>
@@ -53,8 +55,12 @@ import org.gradle.process.ExecOperations;
  */
 public abstract class JbakeTask extends DefaultTask {
 
-    /** JBake's command-line launcher. */
-    static final String MAIN_CLASS = "org.jbake.launcher.Main";
+    /**
+     * The plugin's launcher ({@code engine.JbakeLauncher}): JBake's own command-line launcher with the front matter
+     * engine registered first (T145). Named, not referenced: the class compiles against jbake-core and loads only on
+     * JBake's classpath, where {@link JbakeSitePlugin} puts the plugin's own jar for it.
+     */
+    static final String MAIN_CLASS = "com.mikemcgarr.jbakesite.engine.JbakeLauncher";
 
     private static final String BUNDLED_LOGBACK_CONFIGURATION = "jbake-logback.xml";
 

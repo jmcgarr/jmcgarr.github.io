@@ -1,12 +1,13 @@
-title=How I Roadmap
-date=2018-11-11
-type=post
-tags=general
-status=published
-summary=A few years back, I took over an engineering team that was failing to meet the needs of their customers. One of the many complaints leveled was that the team did not effectively communicate their plans. It became apparent to me that I needed to find a way to share the work the team planned to do over the short and long term. I began searching for examples that were simple and effective. This is when I began experimenting with visual roadmaps.
-masthead=roadmap.jpg
-mastheadCredit=https://flic.kr/p/9r9JTj
-~~~~~~
+---
+title: How I Roadmap
+date: 2018-11-11
+type: post
+tags: [general]
+status: published
+summary: A few years back, I took over an engineering team that was failing to meet the needs of their customers. One of the many complaints leveled was that the team did not effectively communicate their plans. It became apparent to me that I needed to find a way to share the work the team planned to do over the short and long term. I began searching for examples that were simple and effective. This is when I began experimenting with visual roadmaps.
+masthead: roadmap.jpg
+mastheadCredit: https://flic.kr/p/9r9JTj
+---
 A few years back, I took over an engineering team that was failing to meet the needs of their customers. One of the many complaints leveled was that the team did not effectively communicate their plans. It became apparent to me that I needed to find a way to share the work the team planned to do over the short and long term. I began searching for examples that were simple and effective. This is when I began experimenting with **visual roadmaps**.
 
 There are likely many approaches to visualizing a product or team’s roadmap. What I want to share with you is an approach that I have taken over the past few years that has worked for me. I have tweaked my approach over the years, incorporating feedback from friends and peers, experimenting along the way.

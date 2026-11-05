@@ -1,10 +1,11 @@
-title=That's right. That's right.
-date=2015-11-09
-type=post
-tags=culture, netflix
-status=published
-summary=Two simple words, repeated. I have come to appreciate how powerful these words are. They don't come naturally to me, but then again they aren't my words. Delivered correctly and with the appropriate tone, these two words encourage the recipient to continue asking questions. These words validating and yet they also encourage the recipient to be vulnerable, and to feel that it is okay to be uncertain. These words create a fertile environment for collaboration.
-~~~~~~
+---
+title: That's right. That's right.
+date: 2015-11-09
+type: post
+tags: [culture, netflix]
+status: published
+summary: Two simple words, repeated. I have come to appreciate how powerful these words are. They don't come naturally to me, but then again they aren't my words. Delivered correctly and with the appropriate tone, these two words encourage the recipient to continue asking questions. These words validating and yet they also encourage the recipient to be vulnerable, and to feel that it is okay to be uncertain. These words create a fertile environment for collaboration.
+---
 > **"That’s right. That’s right."**
 
 Two simple words, repeated. I have come to appreciate how powerful these words are. They don’t come naturally to me, but then again they aren’t my words. Delivered correctly and with the appropriate tone, these two words encourage the recipient to continue asking questions. These words validating and yet they also encourage the recipient to be vulnerable, and to feel that it is okay to be uncertain. These words create a fertile environment for collaboration.

@@ -1,10 +1,11 @@
-title=Follow the Leaders
-date=2010-04-19
-type=post
-tags=facebook, rss, twitter
-status=published
-summary=Do you want to get smarter on technology topics?  Me too!  In fact, in the software industry, there is way too much to learn and I am constantly adding to my "Learn This" list.
-~~~~~~
+---
+title: Follow the Leaders
+date: 2010-04-19
+type: post
+tags: [facebook, rss, twitter]
+status: published
+summary: Do you want to get smarter on technology topics?  Me too!  In fact, in the software industry, there is way too much to learn and I am constantly adding to my "Learn This" list.
+---
 Do you want to get smarter on technology topics?  Me too!  In fact, in the software industry, there is way too much to learn and I am constantly adding to my "Learn This" list.  This list is useful (and sometimes daunting), and I try to work hard to widdle it down.  But my "Learn This" list is subjects and topics that I am aware of.  What about areas of software innovation that I am unaware of that might be useful for me to learn...how does one find out about the new and exciting?
 
 What I have found that works is to simply **Follow the Leaders**.  Most industries have thought leaders (established and emerging) who push the boundaries of the establishment to redefine what we already know to be true, or define something we don't yet know.  Some of these leaders are world renown and some of them are only known in very small circles.  Most all of them, however, take full advantage of Web 2.0 technologies and use simple and cheap tools like blogs, micro-blogging and other social media tools to share their knowledge, and this can be a huge advantage for the rest of us!

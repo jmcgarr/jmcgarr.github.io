@@ -2,6 +2,7 @@ package com.mikemcgarr.jbakesite.writing;
 
 import com.mikemcgarr.jbakesite.FileTrees;
 import com.mikemcgarr.jbakesite.internal.CommandRunner;
+import com.mikemcgarr.jbakesite.internal.FrontMatter;
 import com.mikemcgarr.jbakesite.internal.Git;
 import com.mikemcgarr.jbakesite.internal.SiteLayout;
 import com.mikemcgarr.jbakesite.internal.Tags;
@@ -14,6 +15,7 @@ import java.nio.file.Path;
 import java.text.Normalizer;
 import java.time.Clock;
 import java.time.LocalDate;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -21,8 +23,8 @@ import java.util.TreeSet;
 
 /**
  * Starts a new draft post (revival tasks T060 and T061, issue #8). It
- * creates {@code content/blog/drafts/<slug>.md} (Markdown, the site's only format since T102) with the JBake header
- * filled in and {@code status=draft}, on a new branch {@code post/<slug>} made from {@code main}. Drafts render for
+ * creates {@code content/blog/drafts/<slug>.md} (Markdown, the site's only format since T102) with the front matter
+ * filled in ({@link FrontMatter#yaml}) and {@code status: draft}, on a new branch {@code post/<slug>} made from {@code main}. Drafts render for
  * local preview only and are never published (T009). It refuses to reuse a slug that exists as a draft, a post, or
  * a published URL, because published URLs are permanent (AGENTS.md, Rule 1).
  *
@@ -118,20 +120,17 @@ final class NewPost {
         }
 
         Path file = drafts.resolve(slug + ".md");
-        String header = String.join("\n",
-                "title=" + title,
-                "date=" + LocalDate.now(clock),
-                "type=post",
-                "tags=" + String.join(", ", tags),
-                "status=draft",
-                "summary=" + summary,
-                "~~~~~~",
-                "",
-                "");
-        Files.writeString(file, header, StandardCharsets.UTF_8);
+        Map<String, Object> header = new LinkedHashMap<>();
+        header.put("title", title);
+        header.put("date", LocalDate.now(clock).toString());
+        header.put("type", "post");
+        header.put("tags", tags);
+        header.put("status", "draft");
+        header.put("summary", summary);
+        Files.writeString(file, FrontMatter.yaml(header) + "\n", StandardCharsets.UTF_8);
 
         out.println();
-        out.println("Created " + site.display(file) + " (status=draft, never published)");
+        out.println("Created " + site.display(file) + " (status: draft, never published)");
         if (branch) {
             out.println("Switched to the new branch " + branchName + " (from main)");
         }
@@ -142,14 +141,14 @@ final class NewPost {
         out.println("  Write the post, then preview it:  ./gradlew bakePreview");
         out.println("    http://localhost:8080/blog/drafts/" + slug + "-draft.html");
         if (summary.isEmpty()) {
-            out.println("  Fill in summary= (optional): it's the teaser under the title on the home page.");
+            out.println("  Fill in summary: (optional): it's the teaser under the title on the home page.");
         }
         if (prUrl != null) {
             out.println("  Commit and push to " + branchName + " as you go; the draft PR picks it up.");
-            out.println("  To publish: set status=published, move the file to " + site.display(site.blog()) + "/, drop [WIP] from");
+            out.println("  To publish: set status: published, move the file to " + site.display(site.blog()) + "/, drop [WIP] from");
             out.println("    the PR title, mark it ready (gh pr ready), and merge.");
         } else {
-            out.println("  To publish: set status=published, move the file to " + site.display(site.blog()) + "/, and open a PR.");
+            out.println("  To publish: set status: published, move the file to " + site.display(site.blog()) + "/, and open a PR.");
         }
         out.println("    It will live at " + siteHost + "/blog/" + slug + ".html (permanent).");
         return file;
@@ -191,12 +190,12 @@ final class NewPost {
         Files.writeString(body, String.join("\n",
                 "Draft post: **" + title + "**",
                 "",
-                "- File: `" + shownFile + "` (`status=draft`)",
+                "- File: `" + shownFile + "` (`status: draft`)",
                 "- Preview: `./gradlew bakePreview`, then http://localhost:8080/blog/drafts/" + slug + "-draft.html",
                 "- Once published, it will live at " + siteHost + "/blog/" + slug + ".html",
                 "",
                 "Work in progress, started with `./gradlew newPost -Ppr`. Drafts are never deployed, and pull "
-                        + "requests never deploy, so nothing here is live yet. To publish: set `status=published`, "
+                        + "requests never deploy, so nothing here is live yet. To publish: set `status: published`, "
                         + "move the file to `" + site.display(site.blog()) + "/`, drop `[WIP]` from the title, mark the PR ready for "
                         + "review, and merge.",
                 ""), StandardCharsets.UTF_8);
@@ -221,7 +220,7 @@ final class NewPost {
         List<String> add = List.of("git", "add", "--", shownFile);
         List<String> commit = List.of("git", "commit", "--quiet",
                 "-m", "Starting a draft post: " + title,
-                "-m", "Created with ./gradlew newPost -Ppr. It has status=draft, so it renders for local preview "
+                "-m", "Created with ./gradlew newPost -Ppr. It has status: draft, so it renders for local preview "
                         + "only and isn't published.");
         if (!runner.runVisibly(add) || !runner.runVisibly(commit)) {
             throw GitHubCli.stopAfter("Committing the draft failed (see the git output above). The draft file is in place on "

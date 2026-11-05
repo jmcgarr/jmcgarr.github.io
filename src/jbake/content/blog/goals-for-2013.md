@@ -1,10 +1,11 @@
-title=Goals for 2013
-date=2013-02-05
-type=post
-tags=goals
-status=published
-summary=Yes, while it is already February 2013, I decided that I should provide myself a commitment device for the year.
-~~~~~~
+---
+title: Goals for 2013
+date: 2013-02-05
+type: post
+tags: [goals]
+status: published
+summary: Yes, while it is already February 2013, I decided that I should provide myself a commitment device for the year.
+---
 Yes, while it is already February 2013, I decided that I should provide myself a commitment device for the year.
 
 ## Reading List
