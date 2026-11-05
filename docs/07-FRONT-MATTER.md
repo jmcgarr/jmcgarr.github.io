@@ -236,7 +236,7 @@ plans' sequence.
   - **Test:** the bake diff of T145; the URL list is unchanged; `./gradlew check` passes on the branch; `grep -rL '^---$' src/jbake/content` finds no file.
 - [x] T148 [IMP] Docs: README ("To write a post", the plugin's package table), AGENTS.md (Rule 3, the URL table, the generator line), this decision record, `jbake-logback.xml`'s comment
   - **Test:** `grep -n '~~~~~~' README.md AGENTS.md` shows only the sentences that name the old format as history.
-- [ ] CHK057 The owner's check: open a post in VS Code. The preview shows the body rendered, the front matter as a table (or hidden), and markdownlint reports nothing about the header. _The preview itself was checked at http://localhost:8080 (`./gradlew bakePreview`: home, a post with a quoted title, a draft, About with its subtitle, Archive, and a save picked up); VS Code's own preview needs the owner's editor._
+- [x] CHK057 The owner's check: open a post in VS Code. The preview shows the body rendered, the front matter as a table (or hidden), and markdownlint reports nothing about the header. _Done by the owner on 2026-11-05: VS Code recognizes the files as proper Markdown. The site's own preview was checked at http://localhost:8080 (`./gradlew bakePreview`: home, a post with a quoted title, a draft, About with its subtitle, Archive, and a save picked up); VS Code's own preview needs the owner's editor._
 
 ## Consequences
 
@@ -260,6 +260,7 @@ With option 3 in place:
 
 - _2026-10-25: written after the owner moved to VS Code for authoring and found the preview showing the whole post
   as a code block. The JBake constraints above were checked against jbake-core 2.7.0's source the same day._
+- _2026-11-05: the owner opened a post in VS Code and confirmed it is recognized as proper Markdown (CHK057). Every task and check of this record is done._
 - _2026-11-02: the owner chose option 3. Prototyped, converted and documented the same day (T145–T148); the
   "What else knows the separator" table above describes the code as it was when the options were written, and the
   2026-10-28 notes under it say where each piece is in the plugin._
