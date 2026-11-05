@@ -71,7 +71,7 @@ PR step fails, nothing is undone and the error lists the commands to finish by h
 with `-Pbranch=false`.
 
 To create one by hand instead, make `src/jbake/content/blog/drafts/<slug>.md`, starting with YAML front matter
-like this (since T145, 2026-11-02, [docs/07-FRONT-MATTER.md](docs/07-FRONT-MATTER.md); until then the header was
+like this (since T145, 2026-11-02, [docs/archive/07-FRONT-MATTER.md](docs/archive/07-FRONT-MATTER.md); until then the header was
 JBake's own `key=value` lines ending in `~~~~~~`). Every post and page on the site is Markdown (since T102,
 2026-10-18), and Markdown is the only format the build renders:
 
@@ -530,7 +530,7 @@ More
 - [docs/archive/06-GRADLE-PLUGIN.md](docs/archive/06-GRADLE-PLUGIN.md): the build plugin plan (`build-logic/`), done and archived 2026-10-31
 - [docs/archive/08-SCRIPTS-MIGRATION.md](docs/archive/08-SCRIPTS-MIGRATION.md): the scripts into the plugin, and no Python, done and archived 2026-10-31
 - [docs/archive/04-AUTHORS-DESK.md](docs/archive/04-AUTHORS-DESK.md): the owner's own to-do list, closed and archived 2026-10-27
-- [docs/07-FRONT-MATTER.md](docs/07-FRONT-MATTER.md): front matter for VS Code authoring: the decision record behind the YAML front matter (option 3, accepted 2026-11-02 and done as T145–T148)
+- [docs/archive/07-FRONT-MATTER.md](docs/archive/07-FRONT-MATTER.md): front matter for VS Code authoring: the decision record behind the YAML front matter (option 3, accepted 2026-11-02, done as T145–T148, archived 2026-11-05)
 - [docs/archive/00-REVIVAL.md](docs/archive/00-REVIVAL.md): the 2026 revival plan, done (its changelog: [docs/archive/03-REVIVAL-CHANGELOG.md](docs/archive/03-REVIVAL-CHANGELOG.md))
 
 Optional mastheads

@@ -19,7 +19,7 @@ import org.yaml.snakeyaml.nodes.SequenceNode;
 
 /**
  * The header of a content file: YAML front matter, a block of {@code key: value} lines between two {@code ---}
- * lines at the top of the file (AGENTS.md Rule 3; T145, docs/07-FRONT-MATTER.md), each key with its line number.
+ * lines at the top of the file (AGENTS.md Rule 3; T145, docs/archive/07-FRONT-MATTER.md), each key with its line number.
  * The review checks it (E4), the tag tools read {@code tags} and {@code status} from it, {@code newPost}
  * {@linkplain #yaml writes one}, and the plugin's parser engine translates it for JBake inside the bake.
  *

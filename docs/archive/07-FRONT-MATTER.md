@@ -2,6 +2,12 @@
 
 **Branch**: `docs/07-front-matter-options` | **Created**: 2026-10-25 | **Status**: Accepted (option 3, 2026-11-02; implemented as T145–T148 on `feat/T145-yaml-front-matter`)
 
+> **Update, 2026-11-05: settled and archived.** The owner chose option 3 on 2026-11-02, the four tasks merged the same
+> week with PR #186, and on 2026-11-05 the owner opened a post in VS Code and confirmed it is recognized as proper
+> Markdown (CHK057). The doc moved to `docs/archive/`, where finished numbered docs live, unchanged apart from its
+> relative links and this note. It keeps its number, 07, and the decision stays in force: every post and page has
+> YAML front matter (AGENTS.md Rule 3).
+
 A decision record on the header at the top of every post and page. The owner has started writing posts in
 VS Code, and JBake's header format breaks the Markdown preview there. This doc records the problem, what JBake 2.7
 allows, and three ways out. **The owner chose option 3 on 2026-11-02** (see "Decision"); the tasks that carried it
@@ -72,7 +78,7 @@ with `writing/MastheadVariants`, run as `./gradlew newPost`, `reviewChanges` and
 
 A format change never changes a URL: the output path comes from the file name, not the header, so Rule 1 is
 unaffected. But it must be proven the way the T102 Markdown conversion was proven
-([`archive/00-REVIVAL.md`](archive/00-REVIVAL.md), T102): bake before and after, and show the HTML identical.
+([`00-REVIVAL.md`](00-REVIVAL.md), T102): bake before and after, and show the HTML identical.
 
 ```sh
 ./gradlew clean bake && cp -R build/jbake /tmp/bake-before
@@ -248,7 +254,7 @@ With option 3 in place:
   so a draft written after the merge has the right header and the review flow checks it. _2026-10-28: those are
   the plugin's `internal/FrontMatter`, `writing/NewPost` and `review/` classes in `build-logic/` since T127._
 - Option 3 adds a maintained piece of Java to the build: the `engine` package of the plugin
-  ([`06-GRADLE-PLUGIN.md`](archive/06-GRADLE-PLUGIN.md) was done before this, so it went straight there). Every
+  ([`06-GRADLE-PLUGIN.md`](06-GRADLE-PLUGIN.md) was done before this, so it went straight there). Every
   jbake-core bump needs the before/after bake check, and `build-logic/build.gradle`'s `compileOnly` pins of
   jbake-core and flexmark must match the root `build.gradle`'s.
 - The old `key=value` header is still read by the tools and still rendered by the bake (the engine hands such a

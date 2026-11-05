@@ -13,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * JBake's Markdown engine for files with YAML front matter (T145, docs/07-FRONT-MATTER.md). Stock JBake reads
+ * JBake's Markdown engine for files with YAML front matter (T145, docs/archive/07-FRONT-MATTER.md). Stock JBake reads
  * only its own header, {@code key=value} lines ending with the {@code header.separator} line ({@code ~~~~~~} by
  * default), and skips a file that starts with {@code ---}. This engine reads the front matter
  * ({@link FrontMatter#parse}), writes the same file with that header in JBake's form ({@link FrontMatter#jbake})
