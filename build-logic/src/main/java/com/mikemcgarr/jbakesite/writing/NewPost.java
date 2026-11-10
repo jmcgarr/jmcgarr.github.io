@@ -23,9 +23,12 @@ import java.util.TreeSet;
 
 /**
  * Starts a new draft post (revival tasks T060 and T061, issue #8). It
- * creates {@code content/blog/drafts/<slug>.md} (Markdown, the site's only format since T102) with the front matter
- * filled in ({@link FrontMatter#yaml}) and {@code status: draft}, on a new branch {@code post/<slug>} made from {@code main}. Drafts render for
- * local preview only and are never published (T009). It refuses to reuse a slug that exists as a draft, a post, or
+ * creates {@code content/blog/<slug>.md} (Markdown, the site's only format since T102) with the front matter
+ * filled in ({@link FrontMatter#yaml}) and {@code status: draft}, on a new branch {@code post/<slug>} made from {@code main}. A draft
+ * renders for local preview only, as {@code blog/<slug>-draft.html}, and is never published (T009: CI stages the site
+ * without {@code *-draft.html}). The file goes straight into {@code blog/}, where the post will live, so publishing is
+ * only a change of {@code status} (owner's request, 2026-11-09; until then the draft went under {@code blog/drafts/}
+ * and had to be moved as well). It refuses to reuse a slug that exists as a draft, a post, or
  * a published URL, because published URLs are permanent (AGENTS.md, Rule 1).
  *
  * <p>With {@code -Ppr} (T061) it also commits the draft, pushes {@code post/<slug>} to origin, and opens a draft
@@ -94,9 +97,9 @@ final class NewPost {
                     + "-Pbranch=false.");
         }
 
-        Path drafts = site.drafts();
-        if (!Files.isDirectory(drafts)) {
-            throw fail("Run this from the repository root (no " + site.display(drafts) + " here).");
+        Path blog = site.blog();
+        if (!Files.isDirectory(blog)) {
+            throw fail("Run this from the repository root (no " + site.display(blog) + " here).");
         }
         refuseExistingSlug(slug);
         warnAboutTagSpellings(tags);
@@ -119,7 +122,7 @@ final class NewPost {
             gitOrFail("switch", "--quiet", "--create", branchName, "main");
         }
 
-        Path file = drafts.resolve(slug + ".md");
+        Path file = blog.resolve(slug + ".md");
         Map<String, Object> header = new LinkedHashMap<>();
         header.put("title", title);
         header.put("date", LocalDate.now(clock).toString());
@@ -139,16 +142,16 @@ final class NewPost {
         out.println();
         out.println("Next:");
         out.println("  Write the post, then preview it:  ./gradlew bakePreview");
-        out.println("    http://localhost:8080/blog/drafts/" + slug + "-draft.html");
+        out.println("    http://localhost:8080/blog/" + slug + "-draft.html");
         if (summary.isEmpty()) {
             out.println("  Fill in summary: (optional): it's the teaser under the title on the home page.");
         }
         if (prUrl != null) {
             out.println("  Commit and push to " + branchName + " as you go; the draft PR picks it up.");
-            out.println("  To publish: set status: published, move the file to " + site.display(site.blog()) + "/, drop [WIP] from");
-            out.println("    the PR title, mark it ready (gh pr ready), and merge.");
+            out.println("  To publish: set status: published, drop [WIP] from the PR title, mark it ready (gh pr ready),");
+            out.println("    and merge.");
         } else {
-            out.println("  To publish: set status: published, move the file to " + site.display(site.blog()) + "/, and open a PR.");
+            out.println("  To publish: set status: published and open a PR.");
         }
         out.println("    It will live at " + siteHost + "/blog/" + slug + ".html (permanent).");
         return file;
@@ -191,13 +194,12 @@ final class NewPost {
                 "Draft post: **" + title + "**",
                 "",
                 "- File: `" + shownFile + "` (`status: draft`)",
-                "- Preview: `./gradlew bakePreview`, then http://localhost:8080/blog/drafts/" + slug + "-draft.html",
+                "- Preview: `./gradlew bakePreview`, then http://localhost:8080/blog/" + slug + "-draft.html",
                 "- Once published, it will live at " + siteHost + "/blog/" + slug + ".html",
                 "",
                 "Work in progress, started with `./gradlew newPost -Ppr`. Drafts are never deployed, and pull "
                         + "requests never deploy, so nothing here is live yet. To publish: set `status: published`, "
-                        + "move the file to `" + site.display(site.blog()) + "/`, drop `[WIP]` from the title, mark the PR ready for "
-                        + "review, and merge.",
+                        + "drop `[WIP]` from the title, mark the PR ready for review, and merge.",
                 ""), StandardCharsets.UTF_8);
         List<String> push = List.of("git", "push", "--set-upstream", "origin", branchName);
         List<String> openPr = List.of("gh", "pr", "create", "--draft", "--repo", repo, "--base", "main",

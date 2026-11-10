@@ -20,8 +20,8 @@ a promise to the people who linked to it.
 
 ```
 src/jbake/content/        Pages and posts → published as HTML (see "URLs are permanent")
-  blog/                   Posts (.md; every post and page is Markdown since T102, 2026-10-18)
-  blog/drafts/            Draft posts (status: draft): rendered for local preview, never published
+  blog/                   Posts (.md; every post and page is Markdown since T102, 2026-10-18). A draft (status: draft) sits here too, where it will live: newPost puts it here (2026-11-09); rendered for local preview as <name>-draft.html, never published
+  blog/drafts/            Older drafts (status: draft) kept apart: the same rule, rendered for local preview, never published
 src/jbake/templates/      FreeMarker templates (*.ftl)
   archived-comments/      Read-only Disqus comments, generated in T045 from the Disqus export (the script is retired, in git history; don't edit by hand)
 src/jbake/assets/         Copied to the site root as-is. EVERYTHING here is published.
@@ -39,7 +39,7 @@ build/jbake/              Generated output (git-ignored)
 
 ```sh
 ./gradlew clean bake          # build the site into build/jbake
-./gradlew clean bakePreview   # build + serve at http://localhost:8080, rebuild on save, and reload the open page (drafts at /blog/drafts/<name>-draft.html)
+./gradlew clean bakePreview   # build + serve at http://localhost:8080, rebuild on save, and reload the open page (drafts at /blog/<name>-draft.html)
 ./gradlew newPost -Ptitle="My Post"   # start a draft on a new post/<slug> branch (see README)
 ./gradlew reviewChanges       # check the pages this branch changed: Markdown links, local links and images, header (T117; see README)
 ./gradlew openPr              # review, then push the branch and open a ready PR against main; refuses on main (T121; see README)
@@ -65,7 +65,7 @@ that specific change.
 | Source | Published URL |
 |---|---|
 | `src/jbake/content/<dir>/<name>.md` (the build renders Markdown only, T102) | `/<dir>/<name>.html` |
-| `src/jbake/content/blog/drafts/<name>.*` (`status: draft`) | **Not published.** Preview only, at `http://localhost:8080/blog/drafts/<name>-draft.html` |
+| `src/jbake/content/<dir>/<name>.md` with `status: draft` (`newPost` makes it in `blog/`) | **Not published.** Preview only, at `http://localhost:8080/<dir>/<name>-draft.html`; CI stages the site without `*-draft.html` |
 | `tags: [a, b]` in front matter | `/tags/a.html`, `/tags/b.html`; spaces become hyphens (`tags: [unit testing]` → `/tags/unit-testing.html`, `tag.sanitize=true`, T039) and capitals are kept |
 | `src/jbake/assets/<path>` | `/<path>` (images, CSS, JS, `CNAME`, `favicon.ico`) |
 | `src/case-redirects/<path>` | `/<path>`, but only on Linux (CI): redirect stubs whose names differ from a real page only by case (T055) |

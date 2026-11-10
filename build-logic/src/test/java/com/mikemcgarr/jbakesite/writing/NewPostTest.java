@@ -25,7 +25,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-/** The draft, its branch and the refusals, in a real temporary repository; the -Ppr flow against a scripted gh. */
+/**
+ * The draft (in blog/, where the post will live, since 2026-11-09), its branch and the refusals, in a real temporary
+ * repository; the -Ppr flow against a scripted gh.
+ */
 class NewPostTest {
 
     private static final String HOST = "https://www.example.test";
@@ -63,15 +66,15 @@ class NewPostTest {
     void createsTheDraftWithTheHeaderOnANewBranchFromMain() throws IOException, InterruptedException {
         Path file = newPost().create(new NewPostOptions("M10 Test", "DevOps, management", "A teaser.", null, null, null, null));
 
-        assertEquals(site.drafts().resolve("m10-test.md"), file);
+        assertEquals(site.blog().resolve("m10-test.md"), file);
         assertEquals("---\ntitle: M10 Test\ndate: 2026-10-28\ntype: post\ntags: [DevOps, management]\nstatus: draft\nsummary: A teaser.\n---\n\n",
                 Files.readString(file));
         assertEquals("post/m10-test", TestRepositories.git(root, "branch", "--show-current"));
         String printed = out.toString(StandardCharsets.UTF_8);
-        assertTrue(printed.contains("\nCreated src/jbake/content/blog/drafts/m10-test.md (status: draft, never published)\n"
+        assertTrue(printed.contains("\nCreated src/jbake/content/blog/m10-test.md (status: draft, never published)\n"
                 + "Switched to the new branch post/m10-test (from main)\n"), printed);
-        assertTrue(printed.contains("    http://localhost:8080/blog/drafts/m10-test-draft.html\n"), printed);
-        assertTrue(printed.contains("  To publish: set status: published, move the file to src/jbake/content/blog/, and open a PR.\n"
+        assertTrue(printed.contains("    http://localhost:8080/blog/m10-test-draft.html\n"), printed);
+        assertTrue(printed.contains("  To publish: set status: published and open a PR.\n"
                 + "    It will live at " + HOST + "/blog/m10-test.html (permanent).\n"), printed);
         assertFalse(printed.contains("Fill in summary:"), "a summary was given");
         assertTrue(printed.contains("Note: 'management' is a new tag, so publishing creates /tags/management.html."), printed);
@@ -160,13 +163,13 @@ class NewPostTest {
         new NewPost(site, HOST, new Git(gh), gh, TODAY, printer).create(new NewPostOptions("PR Post", null, null, null, null, "", null));
 
         String printed = out.toString(StandardCharsets.UTF_8);
-        assertTrue(printed.contains("Committed src/jbake/content/blog/drafts/pr-post.md on post/pr-post\n"
+        assertTrue(printed.contains("Committed src/jbake/content/blog/pr-post.md on post/pr-post\n"
                 + "Pushed post/pr-post to origin\n"
                 + "Opened the draft pull request \"[WIP] PR Post\": https://github.com/owner/site/pull/7\n"), printed);
         assertTrue(printed.contains("  Commit and push to post/pr-post as you go; the draft PR picks it up.\n"
-                + "  To publish: set status: published, move the file to src/jbake/content/blog/, drop [WIP] from\n"
-                + "    the PR title, mark it ready (gh pr ready), and merge.\n"), printed);
-        assertTrue(gh.calls().contains("git add -- src/jbake/content/blog/drafts/pr-post.md"), gh.calls().toString());
+                + "  To publish: set status: published, drop [WIP] from the PR title, mark it ready (gh pr ready),\n"
+                + "    and merge.\n"), printed);
+        assertTrue(gh.calls().contains("git add -- src/jbake/content/blog/pr-post.md"), gh.calls().toString());
         assertTrue(gh.calls().stream().anyMatch(c -> c.startsWith("gh pr create --draft --repo owner/site --base main --head post/pr-post"
                 + " --title [WIP] PR Post --body-file ")), gh.calls().toString());
         assertTrue(gh.shown().contains("set up to track"), "git's output is shown to the author");
@@ -179,7 +182,7 @@ class NewPostTest {
         ToolFailure e = assertThrows(ToolFailure.class, () -> tool.create(new NewPostOptions("T", null, null, null, null, "true", null)));
         assertEquals("-Ppr needs the GitHub CLI (gh), and it isn't installed or isn't on the PATH. Install it (https://cli.github.com),"
                 + " run gh auth login, then try again.", e.getMessage());
-        assertFalse(Files.exists(site.drafts().resolve("t.md")));
+        assertFalse(Files.exists(site.blog().resolve("t.md")));
 
         FakeRunner loggedOut = new FakeRunner().answer("gh --version", 0, "gh").answer("gh auth status", 1, "You are not logged in");
         NewPost tool2 = new NewPost(site, HOST, new Git(loggedOut), loggedOut, TODAY, printer);
