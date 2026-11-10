@@ -23,7 +23,7 @@ dependencies {
     // Dart Sass through its Java host (T043, T124): the jar bundles the compiler for macOS, Linux and Windows.
     // 4.6.1 is the version the freefair Sass plugin 9.8.2 used until T124; check a Dependabot update by comparing a
     // bake against main, byte for byte.
-    implementation 'de.larsgrefer.sass:sass-embedded-host:4.6.1'
+    implementation 'de.larsgrefer.sass:sass-embedded-host:4.7.0'
     // The YAML front matter of every post and page (T145, docs/archive/07-FRONT-MATTER.md): read here by the review and the
     // writing tools (internal.FrontMatter), and inside JBake's JVM by the plugin's own parser engine (package
     // `engine`), where the jbake configuration's snakeyaml (pinned in the root build.gradle) serves the same classes.
