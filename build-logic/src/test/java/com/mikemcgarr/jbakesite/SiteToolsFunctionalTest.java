@@ -58,19 +58,17 @@ class SiteToolsFunctionalTest {
 
     @Test
     void newPostPassesItsOptionsThroughAndWritesTheDraft() throws IOException {
-        Files.createDirectories(projectDir.resolve("src/jbake/content/blog/drafts"));
-
         BuildResult result = runner("newPost", "-Ptitle=A Third Post", "-Ptags=fixture, testing", "-Psummary=A teaser.",
                 "-Pbranch=false").build();
 
         assertEquals(TaskOutcome.SUCCESS, result.task(":newPost").getOutcome());
-        Path draft = projectDir.resolve("src/jbake/content/blog/drafts/a-third-post.md");
+        Path draft = projectDir.resolve("src/jbake/content/blog/a-third-post.md");   // next to the posts, where it will live
         String header = Files.readString(draft);
         // The date is today's by the task's own clock; a regex, so a run that straddles midnight can't fail on it
         assertTrue(header.matches("(?s)---\ntitle: A Third Post\ndate: \\d{4}-\\d{2}-\\d{2}\ntype: post\ntags: \\[fixture, testing\\]\n"
                 + "status: draft\nsummary: A teaser.\n---\n\n"), "every -P option in the header: " + header);
         String output = result.getOutput();
-        assertTrue(output.contains("Created src/jbake/content/blog/drafts/a-third-post.md (status: draft, never published)"), output);
+        assertTrue(output.contains("Created src/jbake/content/blog/a-third-post.md (status: draft, never published)"), output);
         assertFalse(output.contains("Switched to the new branch"), "-Pbranch=false stays on main: " + output);
         assertTrue(output.contains("It will live at https://fixture.example/blog/a-third-post.html (permanent)."),
                 "site.host from the fixture's jbake.properties: " + output);
@@ -78,8 +76,11 @@ class SiteToolsFunctionalTest {
 
     @Test
     void newPostWithoutATitleFailsWithTheToolsMessageAndNoStackTrace() throws IOException {
-        Path drafts = projectDir.resolve("src/jbake/content/blog/drafts");
-        Files.createDirectories(drafts);
+        Path blog = projectDir.resolve("src/jbake/content/blog");
+        long postsBefore;
+        try (Stream<Path> files = Files.list(blog)) {
+            postsBefore = files.count();
+        }
 
         BuildResult result = runner("newPost").buildAndFail();
 
@@ -87,8 +88,8 @@ class SiteToolsFunctionalTest {
         String output = result.getOutput();
         assertTrue(output.contains("> A title is required: ./gradlew newPost -Ptitle=\"My Post Title\""), output);
         assertFalse(output.contains("ToolFailure"), "the message, not the exception: " + output);
-        try (Stream<Path> files = Files.list(drafts)) {
-            assertEquals(0, files.count(), "nothing written");
+        try (Stream<Path> files = Files.list(blog)) {
+            assertEquals(postsBefore, files.count(), "nothing written");
         }
     }
 

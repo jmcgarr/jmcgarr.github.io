@@ -45,8 +45,9 @@ Gradle's configuration cache is on (`gradle.properties`, T114), so a command's f
 cache entry stored" and later runs start with "Reusing configuration cache". Both are normal. Edits to posts,
 templates, SCSS, and `jbake.properties` are always picked up; `--no-configuration-cache` turns it off for one run.
 
-Drafts (posts with `status: draft`) are rendered for preview only, at
-`http://localhost:8080/blog/drafts/<name>-draft.html`. They are never published.
+Drafts (posts with `status: draft`) are rendered for preview only, as `<name>-draft.html` next to where the post
+will live: `http://localhost:8080/blog/<name>-draft.html` (a draft kept under `blog/drafts/` previews at
+`/blog/drafts/<name>-draft.html`). They are never published.
 
 To write a post
 ===============
@@ -54,8 +55,9 @@ Start a draft with one command, from a clean working tree:
 ```
 ./gradlew newPost -Ptitle="My Post Title" -Ptags="management, leadership" -Psummary="A short teaser."
 ```
-It creates `src/jbake/content/blog/drafts/my-post-title.md` with the front matter below filled in (`status: draft`,
-today's date) and switches to a new branch `post/my-post-title` made from `main`. Options: `-Pslug=...` to
+It creates `src/jbake/content/blog/my-post-title.md`, where the post will live, with the front matter below filled in
+(`status: draft`, today's date) and switches to a new branch `post/my-post-title` made from `main`. (Until 2026-11-09
+the draft went under `blog/drafts/` and publishing meant moving it too; a draft still works there.) Options: `-Pslug=...` to
 choose the URL slug yourself, and `-Pbranch=false` to stay on the current branch.
 It refuses a slug that's already a draft, a post, or a published URL, and warns when a tag differs only by
 capitalization from an existing one (that would make a second tag page).
@@ -70,7 +72,7 @@ creates anything. Pull requests never deploy, so the PR is safe to push to as yo
 PR step fails, nothing is undone and the error lists the commands to finish by hand. `-Ppr` can't be combined
 with `-Pbranch=false`.
 
-To create one by hand instead, make `src/jbake/content/blog/drafts/<slug>.md`, starting with YAML front matter
+To create one by hand instead, make `src/jbake/content/blog/<slug>.md`, starting with YAML front matter
 like this (since T145, 2026-11-02, [docs/archive/07-FRONT-MATTER.md](docs/archive/07-FRONT-MATTER.md); until then the header was
 JBake's own `key=value` lines ending in `~~~~~~`). Every post and page on the site is Markdown (since T102,
 2026-10-18), and Markdown is the only format the build renders:
@@ -178,8 +180,8 @@ small fallback): convert such a one by hand, as T016 did.
 `masthead:` also takes a full `https://` URL (a remote image, used as-is at every width, so pick one around
 1920px wide), or a site path such as `/img/qcon_crowd.jpg` for an image elsewhere under `src/jbake/assets/`.
 
-When it's ready, set `status: published` and move it to `src/jbake/content/blog/`. Its URL will be
-`/blog/<slug>.html`. Published URLs are permanent, so pick the slug carefully (see [AGENTS.md](AGENTS.md)).
+When it's ready, set `status: published` (and, for a draft kept under `blog/drafts/`, move it to
+`src/jbake/content/blog/`). Its URL will be `/blog/<slug>.html`. Published URLs are permanent, so pick the slug carefully (see [AGENTS.md](AGENTS.md)).
 
 To review a change
 ==================
