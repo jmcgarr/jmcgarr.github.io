@@ -23,7 +23,7 @@ final class Pages {
         this.bakedSite = bakedSite;
     }
 
-    /** The site-relative page a content file renders to: blog/x.md -> blog/x.html, a draft -> blog/drafts/x-draft.html. */
+    /** The site-relative page a content file renders to: blog/x.md -> blog/x.html, a draft -> blog/x-draft.html. */
     String pageFor(Path source, FrontMatter fm) {
         String rel = SiteLayout.relativePath(site.content(), source);
         String stem = rel.substring(0, rel.length() - ".md".length());
@@ -36,10 +36,11 @@ final class Pages {
             return null;
         }
         String stem = page.substring(0, page.length() - ".html".length());
-        if (stem.startsWith("blog/drafts/") && stem.endsWith("-draft")) {
-            stem = stem.substring(0, stem.length() - "-draft".length());
-        }
         Path source = site.content().resolve(stem + ".md");
+        if (!Files.isRegularFile(source) && stem.endsWith("-draft")) {
+            // a draft is baked next to its source, wherever that is: blog/x-draft.html from blog/x.md
+            source = site.content().resolve(stem.substring(0, stem.length() - "-draft".length()) + ".md");
+        }
         return Files.isRegularFile(source) ? source : null;
     }
 
